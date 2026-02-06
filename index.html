@@ -570,19 +570,15 @@
       background:
         radial-gradient(520px 260px at 18% 20%, rgba(255,59,111,.22), transparent 60%),
         radial-gradient(520px 260px at 82% 25%, rgba(24,245,255,.14), transparent 62%),
-        linear-gradient(180deg, rgba(7,7,10,.25), rgba(7,7,10,.82)),
+    
         var(--img);
       background-size: cover;
       background-position: center;
       box-shadow: var(--shadow2);
       position:relative;
     }
-    .dropMedia:after{
-      content:"";
-      position:absolute; inset:0;
-      background: linear-gradient(180deg, rgba(0,0,0,.05), rgba(0,0,0,.55));
-      pointer-events:none;
-    }
+   .dropMedia:after{ display:none; }
+
 
     /* Portfolio */
     .portfolioCard{padding:0; overflow:hidden}
@@ -592,21 +588,16 @@
       border-bottom:3px solid rgba(255,255,255,.12);
       position:relative;
     }
-    .thumb img{
-      width:100%; height:100%; object-fit:cover;
-      opacity:.92;
-      filter:saturate(1.05) contrast(1.18);
-      transform:scale(1.04);
+   .thumb img{
+  width:100%; height:100%; object-fit:cover;
+  opacity:1;
+  filter:none;
+  transform:none;
+}
+
     }
-    .thumb:after{
-      content:"";
-      position:absolute; inset:0;
-      background:
-        radial-gradient(420px 240px at 18% 20%, rgba(255,59,111,.26), transparent 60%),
-        radial-gradient(420px 240px at 80% 20%, rgba(24,245,255,.2), transparent 60%),
-        linear-gradient(180deg, rgba(7,7,10,.05), rgba(7,7,10,.85));
-      opacity:1;
-    }
+   .thumb:after{ display:none; }
+
     .meta{padding:16px 18px 18px}
     .meta .k{
       color:rgba(255,255,255,.66);
@@ -1353,58 +1344,7 @@
       </div>
     </section>
 
-    <!-- CONTACT -->
-    <section class="section" id="contact">
-      <div class="headRow">
-        <h2 class="h2 reveal">Zakaži poziv</h2>
-        <div class="desc reveal">
-          Počinjemo od cilja. Ako nema cilja — ne krećemo.
-        </div>
-      </div>
-
-      <div class="splitRow">
-        <div class="card reveal">
-          <div class="top">
-            <h3>Brzi kontakt</h3>
-            <span class="tag">30 min</span>
-          </div>
-          <p>
-            Na pozivu prolazimo: cilj, budžet, rok i predlog paketa. Poslije toga dobijaš tačan plan sljedećih koraka.
-          </p>
-          <div class="pillRow" style="margin-top:14px">
-            <span>Meta/Google</span><span>SEO osnove</span><span>Content</span><span>Activation</span>
-          </div>
-          <div style="height:14px"></div>
-          <a class="btn primary" href="javascript:void(0)"><span class="dot"></span> Zakaži poziv</a>
-        </div>
-
-        <div class="card reveal">
-          <div class="top">
-            <h3>Upit (forma)</h3>
-            <span class="tag">brzo</span>
-          </div>
-
-          <form class="form" onsubmit="event.preventDefault(); alert('Forma je demo. Poveži je sa backendom ili Google Formom.');">
-            <div class="field">
-              <label>Ime i firma</label>
-              <input required placeholder="npr. Marko / Brand X" />
-            </div>
-            <div class="field">
-              <label>Email / telefon</label>
-              <input required placeholder="npr. marko@email.com / +382..." />
-            </div>
-            <div class="field">
-              <label>Cilj</label>
-              <input required placeholder="npr. više leadova / više posjeta / event launch" />
-            </div>
-            <div class="field">
-              <label>Poruka</label>
-              <textarea placeholder="Kratko: rok, budžet (okvirno), šta već imate."></textarea>
-            </div>
-            <button class="btn primary" type="submit"><span class="dot"></span> Pošalji upit</button>
-          </form>
-        </div>
-      </div>
+  
 
       <footer>
         <div>© <span id="year"></span> Sindikat — Performance & Activation Studio</div>
@@ -1579,6 +1519,22 @@
       });
     });
 
+// DROPS accordion (details.drop): kad se jedan otvori, ostali se zatvaraju
+const drops = Array.from(document.querySelectorAll('details.drop'));
+
+drops.forEach((d) => {
+  d.addEventListener('toggle', () => {
+    if (!d.open) return; // reagujemo samo kad se otvara
+    drops.forEach((other) => {
+      if (other !== d) other.open = false;
+    });
+  });
+});
+
+
+
+
+    
     // Parallax + blobs
     const heroBg = document.getElementById('heroBg');
     const b1 = document.getElementById('blob1');
