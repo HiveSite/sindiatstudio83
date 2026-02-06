@@ -1,0 +1,1447 @@
+<!DOCTYPE html>
+<html lang="sr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sindikat — Paketi</title>
+  <meta name="description" content="Paketi (ponude) koje klijent razumije. Performance, content i activations u jednom sistemu." />
+
+  <!-- Anime.js -->
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+
+  <style>
+    :root{
+      --bg:#05010D;
+      --bg2:#12011F;
+      --text:#FFFFFF;
+      --muted:rgba(255,255,255,.78);
+      --muted2:rgba(255,255,255,.62);
+      --border:rgba(255,255,255,.14);
+      --border2:rgba(255,255,255,.10);
+      --accent:#FF3B6F;
+      --accent2:#FFB000;
+
+      --shadow: 0 22px 75px rgba(0,0,0,.68);
+      --shadow2: 0 14px 38px rgba(0,0,0,.48);
+
+      --r2:14px;
+      --r3:18px;
+
+      --max:1120px;
+      --ease: cubic-bezier(.2,.9,.2,1);
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      background:
+        radial-gradient(820px 520px at 12% 10%, rgba(255,59,111,.22), transparent 60%),
+        radial-gradient(900px 520px at 88% 8%, rgba(24,245,255,.14), transparent 58%),
+        radial-gradient(760px 520px at 70% 28%, rgba(162,76,255,.12), transparent 60%),
+        radial-gradient(680px 480px at 20% 70%, rgba(255,176,0,.10), transparent 62%),
+        linear-gradient(180deg, var(--bg), var(--bg2));
+      color:var(--text);
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      letter-spacing:.2px;
+      overflow-x:hidden;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* Subtle grain */
+    body:before{
+      content:"";
+      position:fixed; inset:0;
+      pointer-events:none;
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23n)' opacity='.23'/%3E%3C/svg%3E");
+      opacity:.06;
+      mix-blend-mode:overlay;
+      z-index:0;
+    }
+
+    a{color:inherit; text-decoration:none}
+    img{max-width:100%; display:block}
+    .wrap{max-width:var(--max); margin:0 auto; padding:22px 18px 120px; position:relative; z-index:2}
+
+    /* Backdrop glow */
+    .heroBg{
+      position:fixed;
+      inset:0;
+      z-index:1;
+      pointer-events:none;
+      overflow:hidden;
+      background:
+        radial-gradient(900px 540px at 20% 20%, rgba(255,59,111,.14), transparent 60%),
+        radial-gradient(900px 540px at 80% 10%, rgba(24,245,255,.10), transparent 60%),
+        radial-gradient(720px 520px at 68% 55%, rgba(162,76,255,.12), transparent 60%);
+    }
+    .heroBg:after{
+      content:"";
+      position:absolute; inset:0;
+      background:
+        radial-gradient(700px 420px at 18% 20%, rgba(255,59,111,.18), transparent 60%),
+        radial-gradient(900px 520px at 70% 12%, rgba(24,245,255,.14), transparent 58%),
+        linear-gradient(180deg, rgba(0,0,0,.18), rgba(6,1,13,.86) 62%, rgba(6,1,13,.96));
+    }
+
+    /* Subtle animated blobs */
+    .blob{
+      position:fixed;
+      z-index:1;
+      pointer-events:none;
+      width:520px; height:520px;
+      border-radius:999px;
+      background: radial-gradient(circle at 35% 30%, rgba(255,59,111,.18), transparent 58%);
+      filter: blur(18px);
+      opacity:.55;
+      mix-blend-mode: screen;
+      transform: translate3d(0,0,0);
+    }
+    .blob.b2{
+      width:420px; height:420px;
+      background: radial-gradient(circle at 40% 35%, rgba(24,245,255,.14), transparent 60%);
+      opacity:.45;
+    }
+
+    /* Topbar (bottom) */
+    .topbar{
+      position:fixed;
+      bottom:0;
+      left:0;
+      right:0;
+      z-index:50;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      background: rgba(5,7,12,.88);
+      border-top:3px solid rgba(255,255,255,.12);
+    }
+    .topbarInner{
+      max-width:var(--max);
+      margin:0 auto;
+      padding:12px 18px;
+      display:flex; align-items:center; gap:12px;
+    }
+    .ctaCenter{margin:0 auto;}
+    .navWrap{
+      margin-left:auto;
+      display:flex; align-items:center; gap:12px;
+    }
+    .brand{
+      display:flex; align-items:center; gap:12px;
+      font-weight:750;
+      letter-spacing:.9px;
+      text-transform:uppercase;
+      font-size:13px;
+    }
+    .mark{
+      width:34px; height:34px; border-radius:10px;
+      background:
+        radial-gradient(14px 14px at 35% 35%, rgba(24,245,255,.55), transparent 60%),
+        linear-gradient(145deg, rgba(255,59,111,.28), rgba(255,59,111,.10));
+      border:3px solid rgba(255,59,111,.58);
+      box-shadow:0 14px 28px rgba(0,0,0,.45), 0 0 0 3px rgba(0,0,0,.45) inset;
+      transform: rotate(-2deg);
+    }
+
+    nav{
+      display:flex; gap:10px; flex-wrap:wrap;
+      color:var(--muted);
+      font-size:13px;
+      align-items:center;
+    }
+    nav a{
+      padding:9px 10px;
+      border-radius:10px;
+      border:2px solid transparent;
+      transition: background .2s var(--ease), color .2s var(--ease), transform .2s var(--ease), border-color .2s var(--ease);
+      transform: translateY(0);
+    }
+    nav a:hover{background:rgba(255,255,255,.05); color:var(--text); transform: translateY(-1px); border-color:rgba(24,245,255,.35)}
+
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center;
+      gap:10px;
+      border-radius:10px;
+      padding:12px 16px;
+      font-size:13px;
+      border:3px solid rgba(255,255,255,.16);
+      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+      color:var(--text);
+      transition:transform .18s var(--ease), box-shadow .18s var(--ease), border-color .18s var(--ease), background .18s var(--ease);
+      white-space:nowrap;
+      box-shadow: 0 12px 30px rgba(0,0,0,.28);
+      cursor:pointer;
+    }
+    .btn:hover{transform:translateY(-3px); box-shadow:var(--shadow2); border-color:rgba(255,59,111,.5)}
+    .btn.primary{
+      background: linear-gradient(180deg, rgba(255,59,111,.35), rgba(255,59,111,.14));
+      border-color:rgba(255,59,111,.6);
+      box-shadow: 0 20px 60px rgba(255,59,111,.20), 0 10px 28px rgba(0,0,0,.28);
+    }
+    .dot{
+      width:8px; height:8px; border-radius:2px;
+      background:var(--accent);
+      box-shadow:0 0 0 5px rgba(255,59,111,.22), 0 0 24px rgba(255,59,111,.42);
+      transform: rotate(8deg);
+    }
+
+    /* Mobile nav */
+    .hamburger{
+      display:none;
+      width:44px; height:44px;
+      border-radius:10px;
+      border:3px solid rgba(255,255,255,.16);
+      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+      align-items:center; justify-content:center;
+      gap:5px;
+      flex-direction:column;
+      cursor:pointer;
+    }
+    .hamburger span{
+      width:18px; height:2px; background:rgba(255,255,255,.8);
+      border-radius:3px;
+      display:block;
+    }
+    .mobileMenu{
+      display:none;
+      position:absolute;
+      left:0;
+      right:0;
+      bottom:100%;
+      border-bottom:3px solid rgba(255,255,255,.10);
+      background:rgba(5,7,12,.95);
+    }
+    .mobileMenuInner{
+      max-width:var(--max);
+      margin:0 auto;
+      padding:12px 18px 16px;
+      display:grid;
+      gap:8px;
+    }
+    .mobileMenuInner a{
+      padding:12px 12px;
+      border:3px solid rgba(255,255,255,.12);
+      border-radius:10px;
+      background: linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
+      color:var(--text);
+    }
+
+    /* Sections */
+    .section{
+      padding:58px 0;
+      border-top:3px solid rgba(255,255,255,.08);
+    }
+    .headRow{
+      display:flex; align-items:flex-end; justify-content:space-between;
+      gap:16px; flex-wrap:wrap;
+      margin-bottom:22px;
+    }
+    .h2{
+      font-size:22px;
+      letter-spacing:-.2px;
+      margin:0;
+    }
+    .desc{
+      color:rgba(255,255,255,.70);
+      font-size:13px;
+      line-height:1.65;
+      max-width:72ch;
+    }
+
+    /* HERO (compact) */
+    .hero{
+      padding:40px 0 22px;
+    }
+    .kicker{
+      display:flex; align-items:center; gap:10px;
+      color:var(--muted);
+      font-size:12px;
+      text-transform:uppercase;
+      letter-spacing:1.1px;
+      margin-bottom:14px;
+    }
+    h1{
+      margin:0;
+      font-size:46px;
+      line-height:1.05;
+      letter-spacing:-.8px;
+      max-width:22ch;
+    }
+    .heroTitle span{display:inline-block; will-change: transform, opacity;}
+    .sub{
+      margin-top:14px;
+      color:rgba(255,255,255,.80);
+      font-size:15px;
+      line-height:1.65;
+      max-width:72ch;
+      text-shadow: 0 10px 40px rgba(0,0,0,.35);
+    }
+    .heroActions{display:flex; gap:12px; flex-wrap:wrap; margin-top:18px}
+    .miniRow{
+      margin-top:18px;
+      display:flex; gap:12px; flex-wrap:wrap;
+      color:rgba(255,255,255,.70);
+      font-size:12px;
+    }
+    .miniRow span{
+      padding:8px 10px;
+      border:2px solid rgba(255,255,255,.12);
+      border-radius:10px;
+      background: rgba(10,12,18,.70);
+      box-shadow: 0 10px 24px rgba(0,0,0,.22);
+    }
+
+    /* Cards */
+    .grid2{display:grid; grid-template-columns:repeat(2,1fr); gap:16px;}
+    .card{
+      border:3px solid rgba(255,255,255,.14);
+      border-radius:var(--r2);
+      background: linear-gradient(180deg, rgba(14,16,26,.92), rgba(7,8,19,.92));
+      padding:18px;
+      box-shadow: var(--shadow2);
+      transition: transform .18s var(--ease), border-color .18s var(--ease), box-shadow .18s var(--ease), filter .18s var(--ease);
+      will-change: transform;
+      position:relative;
+      overflow:hidden;
+    }
+    .card:before{
+      content:"";
+      position:absolute;
+      inset:-35%;
+      background:
+        radial-gradient(circle at 25% 25%, rgba(255,59,111,.18), transparent 60%),
+        radial-gradient(circle at 80% 30%, rgba(24,245,255,.12), transparent 60%);
+      opacity:.5;
+      transform: rotate(8deg);
+      pointer-events:none;
+    }
+    .card:after{
+      content:"";
+      position:absolute;
+      inset:0;
+      border:1px solid rgba(255,59,111,.18);
+      opacity:.45;
+      pointer-events:none;
+    }
+    .card:hover{
+      transform:translateY(-6px);
+      border-color:rgba(255,59,111,.5);
+      box-shadow:var(--shadow);
+      filter: brightness(1.04);
+    }
+    .card .top{
+      display:flex; align-items:center; justify-content:space-between;
+      gap:12px;
+      margin-bottom:10px;
+      position:relative;
+      z-index:2;
+    }
+    .tag{
+      font-size:11px;
+      color:rgba(255,176,0,.98);
+      border:2px solid rgba(255,176,0,.32);
+      padding:6px 10px;
+      border-radius:10px;
+      background:rgba(255,176,0,.14);
+      white-space:nowrap;
+    }
+    .card h3{margin:0; font-size:16px; letter-spacing:-.2px; position:relative; z-index:2}
+    .card p{margin-top:10px; color:rgba(255,255,255,.72); font-size:13px; line-height:1.65; position:relative; z-index:2}
+    .pillRow{
+      margin-top:12px;
+      display:flex; flex-wrap:wrap; gap:10px;
+      color:rgba(255,255,255,.66);
+      font-size:12px;
+      position:relative; z-index:2;
+    }
+    .pillRow span{
+      border:2px solid rgba(255,255,255,.12);
+      background: rgba(8,10,16,.65);
+      padding:6px 10px;
+      border-radius:10px;
+    }
+    .bullets{
+      margin-top:12px;
+      padding-left:18px;
+      color:rgba(255,255,255,.72);
+      font-size:13px;
+      line-height:1.65;
+      position:relative; z-index:2;
+    }
+    .bullets li{margin:6px 0}
+
+    /* CTA photo semi-box */
+    .ctaPhoto{
+      border:3px solid rgba(255,255,255,.14);
+      border-radius:var(--r3);
+      overflow:hidden;
+      box-shadow: var(--shadow);
+      position:relative;
+      min-height:220px;
+    }
+    .ctaPhoto .bg{
+      position:absolute; inset:0;
+      background-image:
+        linear-gradient(180deg, rgba(7,7,10,.18), rgba(7,7,10,.84)),
+        radial-gradient(520px 220px at 18% 25%, rgba(255,59,111,.18), transparent 62%),
+        radial-gradient(520px 220px at 82% 30%, rgba(24,245,255,.12), transparent 62%),
+        url("https://images.unsplash.com/photo-1524368535928-5b5e00ddc76b?auto=format&fit=crop&w=2000&q=80");
+      background-size: cover;
+      background-position: center;
+      filter: saturate(1.05) contrast(1.1);
+      transform: scale(1.05);
+    }
+    .ctaPhoto .content{
+      position:relative;
+      z-index:2;
+      padding:22px;
+      display:flex;
+      align-items:flex-end;
+      justify-content:space-between;
+      gap:16px;
+      min-height:220px;
+    }
+    .ctaPhoto .left{
+      max-width:72ch;
+    }
+    .ctaPhoto .left .h2{font-size:20px; margin:0}
+    .ctaPhoto .left .desc{margin-top:8px}
+    .ctaPhoto .right{
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+      align-items:center;
+      justify-content:flex-end;
+    }
+
+    /* Blog horizontal scroller */
+    .blogRail{
+      border:3px solid rgba(255,255,255,.14);
+      border-radius:var(--r3);
+      background: linear-gradient(180deg, rgba(14,16,26,.88), rgba(7,8,19,.88));
+      box-shadow: var(--shadow2);
+      overflow:hidden;
+      position:relative;
+    }
+    .blogHeader{
+      padding:16px 18px 0;
+      display:flex;
+      justify-content:space-between;
+      align-items:flex-end;
+      gap:16px;
+    }
+    .blogHeader .hint{
+      color:rgba(255,255,255,.62);
+      font-size:12px;
+      border:2px solid rgba(255,255,255,.12);
+      background: rgba(8,10,16,.55);
+      padding:6px 10px;
+      border-radius:10px;
+      white-space:nowrap;
+    }
+    .blogScroll{
+      display:flex;
+      gap:14px;
+      padding:14px 18px 18px;
+      overflow-x:auto;
+      scroll-snap-type:x mandatory;
+      -webkit-overflow-scrolling: touch;
+    }
+    .blogScroll::-webkit-scrollbar{height:10px}
+    .blogScroll::-webkit-scrollbar-thumb{
+      background: rgba(255,255,255,.14);
+      border-radius: 999px;
+      border:2px solid rgba(0,0,0,.18);
+    }
+    .blogCard{
+      flex:0 0 320px;
+      scroll-snap-align:start;
+      border:3px solid rgba(255,255,255,.12);
+      border-radius:var(--r2);
+      overflow:hidden;
+      background: rgba(8,10,16,.60);
+      box-shadow: var(--shadow2);
+      position:relative;
+      will-change: transform;
+      transition: transform .18s var(--ease), border-color .18s var(--ease), filter .18s var(--ease);
+    }
+    .blogCard:hover{
+      transform: translateY(-5px);
+      border-color: rgba(255,59,111,.45);
+      filter: brightness(1.03);
+    }
+    .blogThumb{
+      height:140px;
+      background:#0a0b12;
+      border-bottom:3px solid rgba(255,255,255,.10);
+      position:relative;
+    }
+    .blogThumb img{
+      width:100%; height:100%;
+      object-fit:cover;
+      opacity:.92;
+      filter:saturate(1.05) contrast(1.15);
+      transform:scale(1.04);
+    }
+    .blogThumb:after{
+      content:"";
+      position:absolute; inset:0;
+      background:
+        radial-gradient(380px 220px at 18% 20%, rgba(255,59,111,.18), transparent 60%),
+        radial-gradient(380px 220px at 82% 20%, rgba(24,245,255,.12), transparent 60%),
+        linear-gradient(180deg, rgba(7,7,10,.05), rgba(7,7,10,.82));
+    }
+    .blogMeta{
+      padding:14px 14px 16px;
+    }
+    .blogMeta h3{
+      margin:0;
+      font-size:14px;
+      letter-spacing:-.15px;
+      line-height:1.25;
+    }
+    .blogMeta p{
+      margin-top:8px;
+      color:rgba(255,255,255,.70);
+      font-size:12.5px;
+      line-height:1.55;
+    }
+    .blogMeta .k{
+      margin-top:10px;
+      display:flex; gap:10px; flex-wrap:wrap;
+      color:rgba(255,255,255,.65);
+      font-size:12px;
+    }
+    .blogMeta .k span{
+      border:2px solid rgba(255,255,255,.12);
+      background: rgba(8,10,16,.55);
+      padding:5px 9px;
+      border-radius:10px;
+    }
+
+    /* Reveal */
+    .reveal{opacity:0; transform:translateY(18px); will-change: transform, opacity;}
+
+    footer{
+      border-top:3px solid rgba(255,255,255,.10);
+      padding:28px 0 8px;
+      color:rgba(255,255,255,.62);
+      font-size:12px;
+      display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap;
+    }
+
+    /* Modal */
+    .modal{
+      position:fixed;
+      inset:0;
+      z-index:90;
+      display:none;
+      align-items:center;
+      justify-content:center;
+      padding:18px;
+    }
+    .modal.open{display:flex;}
+    .modalBackdrop{
+      position:absolute;
+      inset:0;
+      background: rgba(0,0,0,.62);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+    .modalPanel{
+      position:relative;
+      width:min(920px, 100%);
+      max-height:min(84vh, 820px);
+      overflow:auto;
+      border-radius:var(--r3);
+      border:3px solid rgba(255,255,255,.14);
+      background:
+        radial-gradient(520px 260px at 20% 18%, rgba(255,59,111,.18), transparent 62%),
+        radial-gradient(520px 260px at 76% 22%, rgba(24,245,255,.12), transparent 62%),
+        linear-gradient(180deg, rgba(14,16,26,.96), rgba(7,8,19,.96));
+      box-shadow: var(--shadow);
+      padding:18px;
+    }
+    .modalTop{
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:12px;
+      padding-bottom:12px;
+      border-bottom:3px solid rgba(255,255,255,.08);
+      margin-bottom:12px;
+    }
+    .modalTitle{margin:0; font-size:18px; letter-spacing:-.2px;}
+    .modalClose{
+      width:44px; height:44px;
+      border-radius:12px;
+      border:3px solid rgba(255,255,255,.14);
+      background: rgba(8,10,16,.60);
+      color:#fff;
+      cursor:pointer;
+      display:flex; align-items:center; justify-content:center;
+      font-size:18px;
+      line-height:1;
+      transition: transform .18s var(--ease), border-color .18s var(--ease), box-shadow .18s var(--ease);
+      box-shadow: 0 12px 30px rgba(0,0,0,.28);
+    }
+    .modalClose:hover{
+      transform: translateY(-2px);
+      border-color: rgba(255,59,111,.55);
+      box-shadow: var(--shadow2);
+    }
+    .modalBody{
+      color:rgba(255,255,255,.78);
+      font-size:13px;
+      line-height:1.7;
+    }
+    .modalGrid{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:16px;
+      margin-top:12px;
+    }
+    .modalBlock{
+      border:2px solid rgba(255,255,255,.12);
+      border-radius:var(--r2);
+      padding:14px;
+      background: rgba(8,10,16,.60);
+      box-shadow: var(--shadow2);
+    }
+    .modalBlock h4{
+      margin:0 0 8px;
+      font-size:13px;
+      letter-spacing:-.1px;
+      color:#fff;
+    }
+    .modalActions{
+      margin-top:14px;
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+      align-items:center;
+      justify-content:flex-start;
+    }
+
+    @media (max-width: 980px){
+      h1{font-size:40px}
+      .grid2{grid-template-columns:1fr}
+      nav{display:none}
+      .hamburger{display:flex}
+      .ctaPhoto .content{flex-direction:column; align-items:flex-start}
+      .blogCard{flex-basis:280px}
+      .modalGrid{grid-template-columns:1fr}
+    }
+    @media (max-width: 520px){
+      .wrap{padding:16px 14px 72px}
+      h1{font-size:34px}
+      .heroActions{gap:10px}
+      .heroActions .btn{width:100%}
+      .topbarInner{padding:12px 14px}
+      .mobileMenuInner{padding:12px 14px 16px}
+      .blogCard{flex-basis:260px}
+    }
+
+    /* Modal blocks with image background */
+    .modalBlock.hasImage{
+      position: relative;
+      overflow: hidden;
+      padding: 0;
+    }
+    .modalBlock.hasImage .imgBg{
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(180deg, rgba(7,7,10,.35), rgba(7,7,10,.88)),
+        var(--bgimg);
+      background-size: cover;
+      background-position: center;
+      filter: saturate(1.05) contrast(1.1);
+      transform: scale(1.06);
+    }
+    .modalBlock.hasImage .content{
+      position: relative;
+      z-index: 2;
+      padding: 14px;
+    }
+
+    /* ===== ADDED: PARTNERS (marquee) ===== */
+    .marquee{
+      border:3px solid rgba(255,255,255,.14);
+      background: linear-gradient(180deg, rgba(14,16,26,.88), rgba(7,8,19,.88));
+      border-radius:var(--r3);
+      overflow:hidden;
+      position:relative;
+      box-shadow: var(--shadow2);
+    }
+    .marqueeTrack{
+      display:flex;
+      gap:28px;
+      padding:16px 18px;
+      white-space:nowrap;
+      will-change:transform;
+    }
+    .logo{
+      color:rgba(255,255,255,.88);
+      font-size:12px;
+      letter-spacing:.9px;
+      text-transform:uppercase;
+      border:2px solid rgba(255,255,255,.14);
+      background: rgba(8,10,16,.70);
+      padding:10px 12px;
+      border-radius:10px;
+      position:relative;
+    }
+    .logo:after{
+      content:"";
+      position:absolute;
+      inset:-2px;
+      border:1px solid rgba(255,59,111,.3);
+      border-radius:10px;
+      opacity:.5;
+      pointer-events:none;
+    }
+    /* ===== END ADDED ===== */
+  </style>
+</head>
+
+<body>
+  <div class="heroBg" id="heroBg" aria-hidden="true"></div>
+  <div class="blob" id="blob1" aria-hidden="true"></div>
+  <div class="blob b2" id="blob2" aria-hidden="true"></div>
+
+  <!-- Topbar -->
+  <header class="topbar">
+    <div class="topbarInner reveal">
+      <div class="brand">
+        <div class="mark" aria-hidden="true"></div>
+        <div>SINDIKAT</div>
+      </div>
+
+      <a class="btn primary ctaCenter" href="#contact"><span class="dot"></span> Zakaži 30 min poziv</a>
+
+      <div class="navWrap">
+        <nav aria-label="Primary">
+          <a href="#products">Paketi</a>
+          <a href="#partners">Partneri</a>
+          <a href="#insights">Blog</a>
+          <a href="#contact">Kontakt</a>
+        </nav>
+
+        <button class="hamburger" id="hamburger" aria-label="Open menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+
+    <div class="mobileMenu" id="mobileMenu">
+      <div class="mobileMenuInner">
+        <a href="#products">Paketi</a>
+        <a href="#partners">Partneri</a>
+        <a href="#insights">Blog</a>
+        <a href="#contact">Kontakt</a>
+      </div>
+    </div>
+  </header>
+
+  <div class="wrap">
+    <!-- HERO (simple) -->
+    <section class="hero" id="top">
+      <div class="kicker reveal"><span class="dot"></span> Paketi (ponude) koje klijent razumije</div>
+
+      <!-- CHANGED: naslov -->
+      <h1 class="heroTitle reveal" id="heroTitle">Naši proizvodi.</h1>
+
+      <p class="sub reveal">
+        Meta/Google kampanje, sadržaj za ads, SEO osnove i terenske aktivacije — u jednom sistemu.
+        Ne prodajemo “usluge”. Prodajemo ishod: leadove, posjete i prodaju.
+      </p>
+
+      <div class="heroActions reveal">
+        <a class="btn primary" href="#contact"><span class="dot"></span> Zakaži 30 min poziv</a>
+        <a class="btn" href="#products">Pogledaj pakete</a>
+      </div>
+
+      <div class="miniRow reveal">
+        <span>Jedan owner po projektu</span>
+        <span>Scope zaključan prije starta</span>
+        <span>Mjeri se rezultat</span>
+        <span>Teren kao pojačivač (kad ima smisla)</span>
+      </div>
+    </section>
+
+    <!-- PRODUCTS -->
+    <section class="section" id="products">
+      <div class="headRow">
+        <h2 class="h2 reveal">Paketi</h2>
+        <div class="desc reveal">
+          Četiri proizvoda. Svaki ima jasan ishod, zaključan scope i logičnu ulogu u sistemu.
+        </div>
+      </div>
+
+      <div class="grid2">
+        <div class="card reveal">
+          <div class="top">
+            <h3>Strategy Day</h3>
+            <span class="tag">Konsultacije / Plan</span>
+          </div>
+          <p>Jedan dan, jasan plan: cilj → kanali → budžet → prioriteti.</p>
+          <div class="pillRow"><span>1 dan</span><span>1-page plan</span><span>checklista</span></div>
+          <div style="height:14px"></div>
+          <button class="btn primary" data-modal="modal-strategy"><span class="dot"></span> Detaljnije</button>
+        </div>
+
+        <div class="card reveal">
+          <div class="top">
+            <h3>Monthly Performance</h3>
+            <span class="tag">Kampanje / Optimizacija</span>
+          </div>
+          <p>Kampanje koje rade — i koje se svakog dana poboljšavaju.</p>
+          <div class="pillRow"><span>Meta</span><span>Google</span><span>retarget</span><span>report</span></div>
+          <div style="height:14px"></div>
+          <button class="btn primary" data-modal="modal-monthly"><span class="dot"></span> Detaljnije</button>
+        </div>
+
+        <div class="card reveal">
+          <div class="top">
+            <h3>Content Sprint</h3>
+            <span class="tag">Ads-ready content</span>
+          </div>
+          <p>Sadržaj napravljen da pretvara budžet u rezultat (ne samo da “izgleda”).</p>
+          <div class="pillRow"><span>7–10 dana</span><span>varijante</span><span>library</span></div>
+          <div style="height:14px"></div>
+          <button class="btn primary" data-modal="modal-content"><span class="dot"></span> Detaljnije</button>
+        </div>
+
+        <div class="card reveal">
+          <div class="top">
+            <h3>Activation Booster</h3>
+            <span class="tag">Digital → teren</span>
+          </div>
+          <p>Aktivacija koja pojača kampanju, a ne pojede budžet.</p>
+          <div class="pillRow"><span>promo</span><span>sampling</span><span>lead capture</span></div>
+          <div style="height:14px"></div>
+          <button class="btn primary" data-modal="modal-activation"><span class="dot"></span> Detaljnije</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== ADDED: PARTNERS ===== -->
+    <section class="section" id="partners">
+      <div class="headRow">
+        <h2 class="h2 reveal">Partneri</h2>
+        <div class="desc reveal">Placeholder “vibe” sekcija. Kasnije ubaciš stvarne logoe 1:1.</div>
+      </div>
+
+      <div class="marquee reveal">
+        <div class="marqueeTrack" id="marqueeTrack">
+          <div class="logo">Jägermeister</div>
+          <div class="logo">Coca-Cola</div>
+          <div class="logo">Jack Daniel’s</div>
+          <div class="logo">G3 Spirits</div>
+          <div class="logo">Nikšićko</div>
+          <div class="logo">Partner</div>
+
+          <!-- duplicate for seamless loop -->
+          <div class="logo">Jägermeister</div>
+          <div class="logo">Coca-Cola</div>
+          <div class="logo">Jack Daniel’s</div>
+          <div class="logo">G3 Spirits</div>
+          <div class="logo">Nikšićko</div>
+          <div class="logo">Partner</div>
+        </div>
+      </div>
+    </section>
+    <!-- ===== END ADDED ===== -->
+
+    <!-- BLOG / INSIGHTS (horizontal, scrollable) -->
+    <section class="section" id="insights">
+      <div class="headRow">
+        <h2 class="h2 reveal">Blog (Insights)</h2>
+        <div class="desc reveal">Kratko, praktično, primjenjivo. Scrollaj horizontalno.</div>
+      </div>
+
+      <div class="blogRail reveal">
+        <div class="blogHeader">
+          <div class="desc" style="max-width:none;margin:0">6–7 tema koje direktno pomažu prodaji i kampanjama.</div>
+          <div class="hint">Swipe / Shift+scroll</div>
+        </div>
+
+        <div class="blogScroll" id="blogScroll" aria-label="Insights scroller">
+          <!-- 1 -->
+          <a class="blogCard" href="javascript:void(0)">
+            <div class="blogThumb">
+              <img alt="" src="https://images.unsplash.com/photo-1541532713592-79a0317b6b77?auto=format&fit=crop&w=1600&q=80">
+            </div>
+            <div class="blogMeta">
+              <h3>Zašto “više budžeta” ne rješava loš funnel</h3>
+              <p>Kako da prepoznaš gdje curi i šta prvo popravljaš prije skaliranja.</p>
+              <div class="k"><span>strategija</span><span>funnel</span></div>
+            </div>
+          </a>
+
+          <!-- 2 -->
+          <a class="blogCard" href="javascript:void(0)">
+            <div class="blogThumb">
+              <img alt="" src="https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=1600&q=80">
+            </div>
+            <div class="blogMeta">
+              <h3>Content koji radi u ads: hook → poruka → CTA</h3>
+              <p>Pravilo koje pravi razliku između “lijepo” i “prodaje”.</p>
+              <div class="k"><span>content</span><span>ads</span></div>
+            </div>
+          </a>
+
+          <!-- 3 -->
+          <a class="blogCard" href="javascript:void(0)">
+            <div class="blogThumb">
+              <img alt="" src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1600&q=80">
+            </div>
+            <div class="blogMeta">
+              <h3>Landing stranica: 7 sekcija koje dižu konverziju</h3>
+              <p>Struktura koja radi i za retail i za usluge (bez balasta).</p>
+              <div class="k"><span>landing</span><span>copy</span></div>
+            </div>
+          </a>
+
+          <!-- 4 -->
+          <a class="blogCard" href="javascript:void(0)">
+            <div class="blogThumb">
+              <img alt="" src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1600&q=80">
+            </div>
+            <div class="blogMeta">
+              <h3>Retarget koji ne smara: 3 layer-a poruka</h3>
+              <p>Kako da “topli” korisnici dobiju pravu poruku u pravo vrijeme.</p>
+              <div class="k"><span>retarget</span><span>meta</span></div>
+            </div>
+          </a>
+
+          <!-- 5 -->
+          <a class="blogCard" href="javascript:void(0)">
+            <div class="blogThumb">
+              <img alt="" src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&w=1600&q=80">
+            </div>
+            <div class="blogMeta">
+              <h3>Event bez kampanje ostaje prazan</h3>
+              <p>Kako “teren” postaje pojačivač digitala, a ne trošak.</p>
+              <div class="k"><span>activation</span><span>plan</span></div>
+            </div>
+          </a>
+
+          <!-- 6 -->
+          <a class="blogCard" href="javascript:void(0)">
+            <div class="blogThumb">
+              <img alt="" src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1600&q=80">
+            </div>
+            <div class="blogMeta">
+              <h3>Scope “zaključan” = brži delivery (i manje haosa)</h3>
+              <p>Zašto projekti pucaju kad se “još samo ovo” ponavlja svaki dan.</p>
+              <div class="k"><span>process</span><span>delivery</span></div>
+            </div>
+          </a>
+
+          <!-- 7 -->
+          <a class="blogCard" href="javascript:void(0)">
+            <div class="blogThumb">
+              <img alt="" src="https://images.unsplash.com/photo-1553877522-43269d4ea984?auto=format&fit=crop&w=1600&q=80">
+            </div>
+            <div class="blogMeta">
+              <h3>Kako postaviti KPI koji je stvarno mjerljiv</h3>
+              <p>Bez “utiska”. Samo brojevi koji vode odluke i optimizaciju.</p>
+              <div class="k"><span>kpi</span><span>report</span></div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== ADDED: CONTACT (original contact section) ===== -->
+    <section class="section" id="contact">
+      <div class="headRow">
+        <h2 class="h2 reveal">Zakaži poziv</h2>
+        <div class="desc reveal">
+          Počinjemo od cilja. Ako nema cilja — ne krećemo.
+        </div>
+      </div>
+
+      <div class="splitRow">
+        <div class="card reveal">
+          <div class="top">
+            <h3>Brzi kontakt</h3>
+            <span class="tag">30 min</span>
+          </div>
+          <p>
+            Na pozivu prolazimo: cilj, budžet, rok i predlog paketa. Poslije toga dobijaš tačan plan sljedećih koraka.
+          </p>
+          <div class="pillRow" style="margin-top:14px">
+            <span>Meta/Google</span><span>SEO osnove</span><span>Content</span><span>Activation</span>
+          </div>
+          <div style="height:14px"></div>
+          <a class="btn primary" href="javascript:void(0)"><span class="dot"></span> Zakaži poziv</a>
+        </div>
+
+        <div class="card reveal">
+          <div class="top">
+            <h3>Upit (forma)</h3>
+            <span class="tag">brzo</span>
+          </div>
+
+          <form class="form" onsubmit="event.preventDefault(); alert('Forma je demo. Poveži je sa backendom ili Google Formom.');">
+            <div class="field">
+              <label>Ime i firma</label>
+              <input required placeholder="npr. Marko / Brand X" />
+            </div>
+            <div class="field">
+              <label>Email / telefon</label>
+              <input required placeholder="npr. marko@email.com / +382..." />
+            </div>
+            <div class="field">
+              <label>Cilj</label>
+              <input required placeholder="npr. više leadova / više posjeta / event launch" />
+            </div>
+            <div class="field">
+              <label>Poruka</label>
+              <textarea placeholder="Kratko: rok, budžet (okvirno), šta već imate."></textarea>
+            </div>
+            <button class="btn primary" type="submit"><span class="dot"></span> Pošalji upit</button>
+          </form>
+        </div>
+      </div>
+
+      <footer>
+        <div>© <span id="year"></span> Sindikat — Performance & Activation Studio</div>
+        <div>Podgorica • Crna Gora • @sindikat_events</div>
+      </footer>
+    </section>
+    <!-- ===== END ADDED ===== -->
+
+  </div>
+
+  <!-- MODALS -->
+  <div class="modal" id="modal-strategy" role="dialog" aria-modal="true" aria-label="Strategy Day detalji">
+    <div class="modalBackdrop" data-close></div>
+    <div class="modalPanel">
+      <div class="modalTop">
+        <div>
+          <h3 class="modalTitle">Strategy Day</h3>
+          <div class="pillRow" style="margin-top:8px">
+            <span>Konsultacije / Plan</span><span>1 dan</span><span>ishod: plan 30 dana</span>
+          </div>
+        </div>
+        <button class="modalClose" aria-label="Close" data-close>×</button>
+      </div>
+
+      <div class="modalBody">
+        <p>Jedan dan, jasan plan: cilj → kanali → budžet → prioriteti.</p>
+
+        <div class="modalGrid">
+          <div class="modalBlock">
+            <h4>Za koga je</h4>
+            <ul class="bullets" style="margin-top:0">
+              <li>Biznis koji hoće brz i čist plan bez nagađanja</li>
+              <li>Brend koji kreće sa kampanjama ili je “zaglavljen”</li>
+              <li>Event koji hoće kampanju, a ne samo produkciju</li>
+            </ul>
+          </div>
+
+          <div class="modalBlock">
+            <h4>Šta dobijaš</h4>
+            <ul class="bullets" style="margin-top:0">
+              <li>Discovery: cilj, publika, ponuda, funnel</li>
+              <li>Kanal plan: Meta / Google / SEO osnove</li>
+              <li>Mapa sadržaja: formati + zašto</li>
+              <li>Landing struktura (copy + sekcije + CTA)</li>
+              <li>Da li aktivacija ima smisla + okvirni koncept</li>
+              <li>1-page plan + checklista narednih koraka</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="modalBlock hasImage" style="--bgimg: url('https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=1600&q=80');">
+          <div class="imgBg" aria-hidden="true"></div>
+          <div class="content">
+            <h4>Operativa</h4>
+            <ul class="bullets" style="margin-top:0">
+              <li>Trajanje: 1 radni dan (ili 2×2h)</li>
+              <li>Inputi: sajt/IG, ponuda, budžet, konkurencija (ako ima)</li>
+              <li>Ishod: znaš tačno šta radiš narednih 30 dana</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="modalBlock">
+          <h4>CTA</h4>
+          <p style="margin:0">Najbrži ulaz u sistem — bez nagađanja.</p>
+          <div class="modalActions">
+            <a class="btn primary" href="#contact" data-close><span class="dot"></span> Zakaži Strategy Day</a>
+            <button class="btn" data-close>Zatvori</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal" id="modal-monthly" role="dialog" aria-modal="true" aria-label="Monthly Performance detalji">
+    <div class="modalBackdrop" data-close></div>
+    <div class="modalPanel">
+      <div class="modalTop">
+        <div>
+          <h3 class="modalTitle">Monthly Performance</h3>
+          <div class="pillRow" style="margin-top:8px">
+            <span>Kampanje / Optimizacija</span><span>30 dana</span><span>stabilan sistem</span>
+          </div>
+        </div>
+        <button class="modalClose" aria-label="Close" data-close>×</button>
+      </div>
+
+      <div class="modalBody">
+        <p>Kampanje koje rade — i koje se svakog dana poboljšavaju.</p>
+
+        <div class="modalGrid">
+          <div class="modalBlock">
+            <h4>Za koga je</h4>
+            <ul class="bullets" style="margin-top:0">
+              <li>Biznis kome trebaju leadovi, prodaja ili posjete (svakog mjeseca)</li>
+              <li>Brend koji ima budžet i hoće sistem, ne “boost post”</li>
+              <li>Lokali / retail / usluge / B2B sa jasnom ponudom</li>
+            </ul>
+          </div>
+
+          <div class="modalBlock">
+            <h4>Šta uključuje</h4>
+            <ul class="bullets" style="margin-top:0">
+              <li>Setup i vođenje Meta Ads + Google Ads</li>
+              <li>Struktura kampanja + naming standard</li>
+              <li>Test plan kreativa (hook, poruke, CTA)</li>
+              <li>Retargeting (topli korisnici)</li>
+              <li>Landing smjernice + SEO osnove (on-page)</li>
+              <li>Week-to-week optimizacija</li>
+              <li>Mjesečni report (kratko, mjerljivo, direktno)</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="modalBlock hasImage" style="--bgimg: url('https://images.unsplash.com/photo-1553877522-43269d4ea984?auto=format&fit=crop&w=1600&q=80');">
+          <div class="imgBg" aria-hidden="true"></div>
+          <div class="content">
+            <h4>Opcije</h4>
+            <ul class="bullets" style="margin-top:0">
+              <li><strong>Core:</strong> Meta ili Google (jedan kanal)</li>
+              <li><strong>Pro:</strong> Meta + Google</li>
+              <li><strong>Pro + Activation:</strong> teren (kad ima smisla)</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="modalBlock">
+          <h4>CTA</h4>
+          <p style="margin:0">Ako ti trebaju rezultati svaki mjesec — ovo je paket.</p>
+          <div class="modalActions">
+            <a class="btn primary" href="#contact" data-close><span class="dot"></span> Zakaži poziv</a>
+            <button class="btn" data-close>Zatvori</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal" id="modal-content" role="dialog" aria-modal="true" aria-label="Content Sprint detalji">
+    <div class="modalBackdrop" data-close></div>
+    <div class="modalPanel">
+      <div class="modalTop">
+        <div>
+          <h3 class="modalTitle">Content Sprint</h3>
+          <div class="pillRow" style="margin-top:8px">
+            <span>Ads-ready content</span><span>7–10 dana</span><span>library</span>
+          </div>
+        </div>
+        <button class="modalClose" aria-label="Close" data-close>×</button>
+      </div>
+
+      <div class="modalBody">
+        <p>Sadržaj napravljen da pretvara budžet u rezultat.</p>
+
+        <div class="modalGrid">
+          <div class="modalBlock">
+            <h4>Za koga je</h4>
+            <ul class="bullets" style="margin-top:0">
+              <li>Imaš budžet, ali nemaš dobre kreative</li>
+              <li>IG ti je “lijep”, ali ads ne rade</li>
+              <li>Treba ti library za 2–8 nedjelja</li>
+            </ul>
+          </div>
+
+          <div class="modalBlock">
+            <h4>Šta uključuje</h4>
+            <ul class="bullets" style="margin-top:0">
+              <li>Koncepti za ads (hook → poruka → CTA)</li>
+              <li>Snimanje foto/video</li>
+              <li>Montaža varijanti (6s/15s/30s, vertikalno/square)</li>
+              <li>UGC-style materijal (po potrebi)</li>
+              <li>Asset library spremna za kampanje</li>
+              <li>Plan distribucije (ads vs organski)</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="modalBlock hasImage" style="--bgimg: url('https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1600&q=80');">
+          <div class="imgBg" aria-hidden="true"></div>
+          <div class="content">
+            <h4>Output format</h4>
+            <ul class="bullets" style="margin-top:0">
+              <li>X reels/shorts varijanti</li>
+              <li>X statičnih kreativa</li>
+              <li>X story setova</li>
+              <li>Broj se zaključava prije starta</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="modalBlock">
+          <h4>CTA</h4>
+          <p style="margin:0">Ako ads nema goriva — sprint ga donosi.</p>
+          <div class="modalActions">
+            <a class="btn primary" href="#contact" data-close><span class="dot"></span> Zakaži Content Sprint</a>
+            <button class="btn" data-close>Zatvori</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal" id="modal-activation" role="dialog" aria-modal="true" aria-label="Activation Booster detalji">
+    <div class="modalBackdrop" data-close></div>
+    <div class="modalPanel">
+      <div class="modalTop">
+        <div>
+          <h3 class="modalTitle">Activation Booster</h3>
+          <div class="pillRow" style="margin-top:8px">
+            <span>Digital → teren</span><span>projekat</span><span>crowd pull</span>
+          </div>
+        </div>
+        <button class="modalClose" aria-label="Close" data-close>×</button>
+      </div>
+
+      <div class="modalBody">
+        <p>Aktivacija koja pojača kampanju, a ne pojede budžet.</p>
+
+        <div class="modalGrid">
+          <div class="modalBlock">
+            <h4>Za koga je</h4>
+            <ul class="bullets" style="margin-top:0">
+              <li>Brendovi koji žele buzz i realan crowd pull</li>
+              <li>Launch, promo period, sampling, događaj sa ciljem</li>
+              <li>Kad teren ima smisla kao pojačivač konverzije</li>
+            </ul>
+          </div>
+
+          <div class="modalBlock">
+            <h4>Šta uključuje</h4>
+            <ul class="bullets" style="margin-top:0">
+              <li>Koncept + mehanika (nagrada/sampling/CTA)</li>
+              <li>Operativni plan (tim, logistika, oprema, partneri)</li>
+              <li>Izvođenje na terenu</li>
+              <li>Sadržaj sa terena (ads + social)</li>
+              <li>Lead capture / retarget nastavak</li>
+              <li>After report (šta skalirati)</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="modalBlock hasImage" style="--bgimg: url('https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&w=1600&q=80');">
+          <div class="imgBg" aria-hidden="true"></div>
+          <div class="content">
+            <h4>Napomena</h4>
+            <p style="margin:0">Teren ne radimo radi terena. Radimo ga kad pojačava digital i konverziju.</p>
+          </div>
+        </div>
+
+        <div class="modalBlock">
+          <h4>CTA</h4>
+          <div class="modalActions">
+            <a class="btn primary" href="#contact" data-close><span class="dot"></span> Zakaži konsultacije</a>
+            <button class="btn" data-close>Zatvori</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Mobile menu toggle
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+    hamburger.addEventListener('click', ()=>{
+      const isOpen = mobileMenu.style.display === 'block';
+      mobileMenu.style.display = isOpen ? 'none' : 'block';
+      anime({
+        targets: mobileMenu,
+        opacity: isOpen ? [1,0] : [0,1],
+        translateY: isOpen ? [0,6] : [6,0],
+        duration: 260,
+        easing: 'easeOutQuad'
+      });
+    });
+    document.querySelectorAll('#mobileMenu a').forEach(a=>{
+      a.addEventListener('click', ()=>{ mobileMenu.style.display = 'none'; });
+    });
+
+    // Split hero title into words (keeps spaces)
+    const titleEl = document.getElementById('heroTitle');
+    const raw = titleEl.textContent.trim();
+    const words = raw.split(/\s+/);
+    titleEl.textContent = '';
+    words.forEach((w, i) => {
+      const span = document.createElement('span');
+      span.textContent = w;
+      titleEl.appendChild(span);
+      if (i !== words.length - 1) titleEl.appendChild(document.createTextNode(' '));
+    });
+
+    // Reveal observer
+    const revealEls = document.querySelectorAll('.reveal');
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(entry=>{
+        if(!entry.isIntersecting) return;
+        const el = entry.target;
+        anime({ targets: el, opacity:[0,1], translateY:[18,0], duration: 820, easing:'easeOutExpo' });
+        io.unobserve(el);
+      });
+    }, {threshold: 0.14});
+    revealEls.forEach(el=>io.observe(el));
+
+    // Hero title word stagger
+    window.addEventListener('load', ()=>{
+      anime({
+        targets: '#heroTitle span',
+        opacity: [0,1],
+        translateY: [16,0],
+        delay: anime.stagger(45),
+        duration: 900,
+        easing: 'easeOutExpo'
+      });
+    });
+
+    // Blobs base + drift
+    const heroBg = document.getElementById('heroBg');
+    const b1 = document.getElementById('blob1');
+    const b2 = document.getElementById('blob2');
+
+    const setBlobsBase = () => {
+      const w = window.innerWidth, h = window.innerHeight;
+      b1.style.left = Math.max(12, w*0.06) + 'px';
+      b1.style.top  = Math.max(12, h*0.16) + 'px';
+      b2.style.left = Math.max(12, w*0.60) + 'px';
+      b2.style.top  = Math.max(12, h*0.08) + 'px';
+    };
+    setBlobsBase();
+    window.addEventListener('resize', setBlobsBase);
+
+    anime({
+      targets: '#blob1',
+      translateX: [0, 18, -10, 0],
+      translateY: [0, -12, 16, 0],
+      duration: 9000,
+      easing: 'easeInOutSine',
+      loop: true
+    });
+    anime({
+      targets: '#blob2',
+      translateX: [0, -14, 10, 0],
+      translateY: [0, 14, -10, 0],
+      duration: 11000,
+      easing: 'easeInOutSine',
+      loop: true
+    });
+
+    // Parallax glow
+    let ticking = false;
+    window.addEventListener('scroll', ()=>{
+      if(ticking) return;
+      ticking = true;
+      requestAnimationFrame(()=>{
+        const y = window.scrollY || 0;
+        if(heroBg) heroBg.style.transform = `translateY(${y * 0.06}px)`;
+        ticking = false;
+      });
+    }, {passive:true});
+
+    // Auto-animate blog rail (gentle horizontal drift, still scrollable)
+    const blogScroll = document.getElementById('blogScroll');
+    const canAuto = window.matchMedia('(prefers-reduced-motion: no-preference)').matches;
+    if(blogScroll && canAuto){
+      let autoDir = 1;
+      let autoPausedUntil = 0;
+
+      const pauseAuto = () => { autoPausedUntil = Date.now() + 2200; };
+      ['wheel','touchstart','pointerdown','mouseenter'].forEach(evt => blogScroll.addEventListener(evt, pauseAuto, {passive:true}));
+
+      const step = () => {
+        const now = Date.now();
+        if(now > autoPausedUntil){
+          blogScroll.scrollLeft += autoDir * 0.35;
+          const max = blogScroll.scrollWidth - blogScroll.clientWidth - 2;
+          if(blogScroll.scrollLeft <= 0) autoDir = 1;
+          if(blogScroll.scrollLeft >= max) autoDir = -1;
+        }
+        requestAnimationFrame(step);
+      };
+      requestAnimationFrame(step);
+    }
+
+    // ===== ADDED: Partners marquee loop =====
+    anime({
+      targets: '#marqueeTrack',
+      translateX: ['0%', '-50%'],
+      duration: 18000,
+      easing: 'linear',
+      loop: true
+    });
+    // ===== END ADDED =====
+
+    // Modals
+    const openModal = (id) => {
+      const m = document.getElementById(id);
+      if(!m) return;
+      m.classList.add('open');
+      document.documentElement.style.overflow = 'hidden';
+      anime({ targets: m.querySelector('.modalPanel'), opacity:[0,1], translateY:[10,0], duration: 260, easing: 'easeOutExpo' });
+    };
+    const closeModal = (m) => {
+      if(!m) return;
+      anime({
+        targets: m.querySelector('.modalPanel'),
+        opacity:[1,0],
+        translateY:[0,10],
+        duration: 200,
+        easing: 'easeOutQuad',
+        complete: ()=>{
+          m.classList.remove('open');
+          document.documentElement.style.overflow = '';
+        }
+      });
+    };
+
+    document.querySelectorAll('[data-modal]').forEach(btn=>{
+      btn.addEventListener('click', ()=> openModal(btn.getAttribute('data-modal')));
+    });
+    document.querySelectorAll('.modal [data-close]').forEach(el=>{
+      el.addEventListener('click', ()=> closeModal(el.closest('.modal')));
+    });
+    window.addEventListener('keydown', (e)=>{
+      if(e.key !== 'Escape') return;
+      const m = document.querySelector('.modal.open');
+      if(m) closeModal(m);
+    });
+    document.querySelectorAll('.modal a[data-close]').forEach(a=>{
+      a.addEventListener('click', ()=> closeModal(a.closest('.modal')));
+    });
+  </script>
+</body>
+</html>
+
+
