@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="sr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sindikat — Kontakt</title>
+  <meta name="description" content="Zakaži poziv i pošalji upit. Sindikat — Performance & Activation Studio." />
+
+  <!-- Anime.js -->
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+
+  <style>
+    :root{
+      --bg:#05010D;
+      --bg2:#12011F;
+      --border:rgba(255,255,255,.2);
+      --text:#FFFFFF;
+      --muted:rgba(255,255,255,.78);
+      --accent:#FF3B6F;
+
+      --shadow: 0 22px 75px rgba(0,0,0,.68);
+      --shadow2: 0 14px 38px rgba(0,0,0,.48);
+
+      --r2:14px;
+      --r3:18px;
+
+      --max:1120px;
+      --ease: cubic-bezier(.2,.9,.2,1);
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      background:
+        radial-gradient(820px 520px at 12% 10%, rgba(255,59,111,.25), transparent 60%),
+        radial-gradient(900px 520px at 88% 8%, rgba(24,245,255,.18), transparent 58%),
+        radial-gradient(760px 520px at 70% 28%, rgba(162,76,255,.16), transparent 60%),
+        radial-gradient(680px 480px at 20% 70%, rgba(255,176,0,.12), transparent 62%),
+        linear-gradient(180deg, var(--bg), var(--bg2));
+      color:var(--text);
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      letter-spacing:.2px;
+      overflow-x:hidden;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* Subtle grain */
+    body:before{
+      content:"";
+      position:fixed; inset:0;
+      pointer-events:none;
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23n)' opacity='.23'/%3E%3C/svg%3E");
+      opacity:.06;
+      mix-blend-mode:overlay;
+      z-index:0;
+    }
+
+    a{color:inherit; text-decoration:none}
+    .wrap{max-width:var(--max); margin:0 auto; padding:22px 18px 120px; position:relative; z-index:2}
+
+    /* Background video */
+    .bgVideo{
+      position:fixed; inset:0;
+      width:100%; height:100%;
+      object-fit:cover;
+      z-index:0;
+      filter: saturate(1.1) contrast(1.08) brightness(.55);
+    }
+    .bgVideoOverlay{
+      position:fixed; inset:0;
+      z-index:1;
+      pointer-events:none;
+      background:
+        radial-gradient(900px 540px at 20% 20%, rgba(255,59,111,.12), transparent 60%),
+        radial-gradient(900px 540px at 80% 10%, rgba(24,245,255,.10), transparent 60%),
+        linear-gradient(180deg, rgba(0,0,0,.25), rgba(6,1,13,.82) 62%, rgba(6,1,13,.92));
+    }
+
+    /* Subtle animated blobs */
+    .blob{
+      position:fixed;
+      z-index:1;
+      pointer-events:none;
+      width:520px; height:520px;
+      border-radius:999px;
+      background: radial-gradient(circle at 35% 30%, rgba(255,59,111,.22), transparent 58%);
+      filter: blur(18px);
+      opacity:.55;
+      mix-blend-mode: screen;
+      transform: translate3d(0,0,0);
+    }
+    .blob.b2{
+      width:420px; height:420px;
+      background: radial-gradient(circle at 40% 35%, rgba(24,245,255,.18), transparent 60%);
+      opacity:.45;
+    }
+
+    /* Topbar */
+    .topbar{
+      position:fixed;
+      bottom:0; left:0; right:0;
+      z-index:50;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      background: rgba(5,7,12,.88);
+      border-top:3px solid rgba(255,255,255,.12);
+    }
+    .topbarInner{
+      max-width:var(--max);
+      margin:0 auto;
+      padding:12px 18px;
+      display:flex; align-items:center; gap:12px;
+    }
+    .brand{
+      display:flex; align-items:center; gap:12px;
+      font-weight:750;
+      letter-spacing:.9px;
+      text-transform:uppercase;
+      font-size:13px;
+      white-space:nowrap;
+    }
+    .mark{
+      width:34px; height:34px; border-radius:10px;
+      background:
+        radial-gradient(14px 14px at 35% 35%, rgba(24,245,255,.65), transparent 60%),
+        linear-gradient(145deg, rgba(255,59,111,.32), rgba(255,59,111,.10));
+      border:3px solid rgba(255,59,111,.6);
+      box-shadow:0 14px 28px rgba(0,0,0,.45), 0 0 0 3px rgba(0,0,0,.45) inset;
+      transform: rotate(-2deg);
+    }
+
+    .ctaCenter{margin:0 auto;}
+
+    nav{
+      display:flex; gap:10px; flex-wrap:wrap;
+      color:var(--muted);
+      font-size:13px;
+      align-items:center;
+      margin-left:auto;
+    }
+    nav a{
+      padding:9px 10px;
+      border-radius:10px;
+      border:2px solid transparent;
+      transition: background .2s var(--ease), color .2s var(--ease), transform .2s var(--ease), border-color .2s var(--ease);
+    }
+    nav a:hover{background:rgba(255,255,255,.05); color:var(--text); transform: translateY(-1px); border-color:rgba(24,245,255,.45)}
+
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center;
+      gap:10px;
+      border-radius:10px;
+      padding:12px 16px;
+      font-size:13px;
+      border:3px solid rgba(255,255,255,.2);
+      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+      color:var(--text);
+      transition:transform .18s var(--ease), box-shadow .18s var(--ease), border-color .18s var(--ease), background .18s var(--ease);
+      white-space:nowrap;
+      box-shadow: 0 12px 30px rgba(0,0,0,.28);
+    }
+    .btn:hover{transform:translateY(-3px); box-shadow:var(--shadow2); border-color:rgba(255,59,111,.5)}
+    .btn.primary{
+      background: linear-gradient(180deg, rgba(255,59,111,.35), rgba(255,59,111,.14));
+      border-color:rgba(255,59,111,.6);
+      box-shadow: 0 20px 60px rgba(255,59,111,.22), 0 10px 28px rgba(0,0,0,.28);
+    }
+    .dot{
+      width:8px; height:8px; border-radius:2px;
+      background:var(--accent);
+      box-shadow:0 0 0 5px rgba(255,59,111,.22), 0 0 24px rgba(255,59,111,.48);
+      transform: rotate(8deg);
+    }
+
+    /* Page header */
+    .pageHead{
+      padding:54px 0 18px;
+    }
+    .kicker{
+      display:flex; align-items:center; gap:10px;
+      color:var(--muted);
+      font-size:12px;
+      text-transform:uppercase;
+      letter-spacing:1.1px;
+      margin-bottom:14px;
+    }
+    h1{
+      margin:0;
+      font-size:44px;
+      line-height:1.08;
+      letter-spacing:-.8px;
+      max-width:22ch;
+    }
+    .sub{
+      margin-top:14px;
+      color:rgba(255,255,255,.80);
+      font-size:15px;
+      line-height:1.65;
+      max-width:70ch;
+      text-shadow: 0 10px 40px rgba(0,0,0,.35);
+    }
+
+    /* Section / Cards */
+    .section{
+      padding:34px 0 58px;
+      border-top:3px solid rgba(255,255,255,.08);
+    }
+    .headRow{
+      display:flex; align-items:flex-end; justify-content:space-between;
+      gap:16px; flex-wrap:wrap;
+      margin-bottom:22px;
+    }
+    .h2{
+      font-size:22px;
+      letter-spacing:-.2px;
+      margin:0;
+    }
+    .desc{
+      color:rgba(255,255,255,.70);
+      font-size:13px;
+      line-height:1.65;
+      max-width:64ch;
+    }
+
+    .splitRow{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:16px;
+      align-items:stretch;
+    }
+    .card{
+      border:3px solid rgba(255,255,255,.14);
+      border-radius:var(--r2);
+      background: linear-gradient(180deg, rgba(14,16,26,.92), rgba(7,8,19,.92));
+      padding:18px;
+      box-shadow: var(--shadow2);
+      position:relative;
+      overflow:hidden;
+    }
+    .card:before{
+      content:"";
+      position:absolute;
+      inset:-35%;
+      background:
+        radial-gradient(circle at 25% 25%, rgba(255,59,111,.20), transparent 60%),
+        radial-gradient(circle at 80% 30%, rgba(24,245,255,.14), transparent 60%);
+      opacity:.55;
+      transform: rotate(8deg);
+      pointer-events:none;
+    }
+    .card *{position:relative; z-index:2}
+    .top{
+      display:flex; align-items:center; justify-content:space-between;
+      gap:12px;
+      margin-bottom:10px;
+    }
+    .tag{
+      font-size:11px;
+      color:rgba(255,176,0,.98);
+      border:2px solid rgba(255,176,0,.32);
+      padding:6px 10px;
+      border-radius:10px;
+      background:rgba(255,176,0,.14);
+      white-space:nowrap;
+    }
+    .card p{margin:10px 0 0; color:rgba(255,255,255,.72); font-size:13px; line-height:1.65}
+
+    .pillRow{
+      margin-top:12px;
+      display:flex; flex-wrap:wrap; gap:10px;
+      color:rgba(255,255,255,.66);
+      font-size:12px;
+    }
+    .pillRow span{
+      border:2px solid rgba(255,255,255,.12);
+      background: rgba(8,10,16,.65);
+      padding:6px 10px;
+      border-radius:10px;
+    }
+
+    /* Form */
+    .form{display:grid; gap:12px;}
+    .field{display:grid; gap:8px;}
+    label{font-size:12px; color:rgba(255,255,255,.65)}
+    input, textarea{
+      width:100%;
+      padding:12px 12px;
+      border-radius:10px;
+      border:3px solid rgba(255,255,255,.14);
+      background: rgba(8,10,16,.70);
+      color:var(--text);
+      outline:none;
+      box-shadow: inset 0 0 0 1px rgba(0,0,0,.18), 0 10px 22px rgba(0,0,0,.2);
+    }
+    input:focus, textarea:focus{
+      border-color: rgba(255,59,111,.7);
+      box-shadow: 0 0 0 4px rgba(255,59,111,.18);
+    }
+    textarea{min-height:110px; resize:vertical}
+
+    /* Reveal base */
+    .reveal{ opacity:0; transform:translateY(18px); will-change: transform, opacity; }
+
+    footer{
+      border-top:3px solid rgba(255,255,255,.10);
+      padding:28px 0 8px;
+      color:rgba(255,255,255,.62);
+      font-size:12px;
+      display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap;
+    }
+
+    @media (max-width: 980px){
+      .pageHead{padding:38px 0 14px}
+      h1{font-size:36px}
+      .splitRow{grid-template-columns:1fr}
+      nav{display:none}
+      .topbarInner{justify-content:space-between}
+      .ctaCenter{margin-left:auto}
+    }
+    @media (max-width: 520px){
+      .wrap{padding:16px 14px 92px}
+      .btn.primary{width:auto}
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Background video -->
+  <video class="bgVideo" autoplay muted loop playsinline preload="metadata">
+    <source src="https://videos.pexels.com/video-files/4774631/4774631-hd_1920_1080_25fps.mp4" type="video/mp4">
+  </video>
+  <div class="bgVideoOverlay" aria-hidden="true"></div>
+
+  <div class="blob" id="blob1" aria-hidden="true"></div>
+  <div class="blob b2" id="blob2" aria-hidden="true"></div>
+
+  <!-- Topbar -->
+  <header class="topbar">
+    <div class="topbarInner reveal">
+      <a class="brand" href="index.html">
+        <div class="mark" aria-hidden="true"></div>
+        <div>SINDIKAT</div>
+      </a>
+
+      <a class="btn primary ctaCenter" href="#contact"><span class="dot"></span> Zatraži konsultacije</a>
+
+      <nav aria-label="Primary">
+        <a href="index.html#products">Proizvodi</a>
+        <a href="index.html#how">Kako radimo</a>
+        <a href="index.html#work">Case</a>
+        <a href="index.html#faq">FAQ</a>
+        <a href="contact.html#contact">Kontakt</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="wrap">
+    <!-- PAGE HEAD -->
+    <section class="pageHead">
+      <div class="kicker reveal"><span class="dot"></span> Kontakt</div>
+      <h1 class="reveal">Zakaži poziv ili pošalji upit.</h1>
+      <p class="sub reveal">
+        Počinjemo od cilja. Na pozivu prolazimo: cilj, budžet, rok i predlog paketa.
+        Ako nema cilja — ne krećemo.
+      </p>
+      <div style="height:16px"></div>
+      <div class="reveal" style="display:flex; gap:12px; flex-wrap:wrap">
+
+        <a class="btn" href="index.html">Nazad na početnu</a>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="section" id="contact">
+      <div class="headRow">
+        <h2 class="h2 reveal">Kontakt</h2>
+        <div class="desc reveal">Brzo, direktno, bez ping-ponga.</div>
+      </div>
+
+      <div class="splitRow">
+        <div class="card reveal">
+          <div class="top">
+            <h3 style="margin:0; font-size:16px; letter-spacing:-.2px">Brzi kontakt</h3>
+            <span class="tag">30 min</span>
+          </div>
+
+          <p>
+            Na pozivu prolazimo: cilj, budžet, rok i predlog paketa. Poslije toga dobijaš tačan plan sljedećih koraka.
+          </p>
+
+          <div class="pillRow">
+            <span>Meta/Google</span><span>SEO osnove</span><span>Content</span><span>Activation</span>
+          </div>
+
+          <div style="height:14px"></div>
+          <a class="btn primary" href="javascript:void(0)"><span class="dot"></span> Zakaži poziv</a>
+
+          <div style="height:14px"></div>
+          <div style="color:rgba(255,255,255,.62); font-size:12px; line-height:1.6">
+            (Ovo dugme je placeholder — poveži ga sa Calendly/Google Calendar linkom.)
+          </div>
+        </div>
+
+        <div class="card reveal">
+          <div class="top">
+            <h3 style="margin:0; font-size:16px; letter-spacing:-.2px">Upit (forma)</h3>
+            <span class="tag">brzo</span>
+          </div>
+
+          <form class="form" onsubmit="event.preventDefault(); alert('Forma je demo. Poveži je sa backendom ili Google Formom.');">
+            <div class="field">
+              <label>Ime i firma</label>
+              <input required placeholder="npr. Marko / Brand X" />
+            </div>
+            <div class="field">
+              <label>Email / telefon</label>
+              <input required placeholder="npr. marko@email.com / +382..." />
+            </div>
+            <div class="field">
+              <label>Cilj</label>
+              <input required placeholder="npr. više leadova / više posjeta / event launch" />
+            </div>
+            <div class="field">
+              <label>Poruka</label>
+              <textarea placeholder="Kratko: rok, budžet (okvirno), šta već imate."></textarea>
+            </div>
+            <button class="btn primary" type="submit"><span class="dot"></span> Pošalji upit</button>
+          </form>
+        </div>
+      </div>
+
+      <footer>
+        <div>© <span id="year"></span> Sindikat — Performance & Activation Studio</div>
+        <div>Podgorica • Crna Gora</div>
+      </footer>
+    </section>
+  </div>
+
+  <script>
+    // Year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Reveal observer
+    const revealEls = document.querySelectorAll('.reveal');
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(entry=>{
+        if(!entry.isIntersecting) return;
+        anime({
+          targets: entry.target,
+          opacity: [0,1],
+          translateY: [18,0],
+          duration: 820,
+          easing: 'easeOutExpo'
+        });
+        io.unobserve(entry.target);
+      });
+    }, {threshold: 0.14});
+    revealEls.forEach(el=>io.observe(el));
+
+    // Blobs
+    const b1 = document.getElementById('blob1');
+    const b2 = document.getElementById('blob2');
+
+    const setBlobsBase = () => {
+      const w = window.innerWidth, h = window.innerHeight;
+      b1.style.left = Math.max(12, w*0.06) + 'px';
+      b1.style.top  = Math.max(12, h*0.16) + 'px';
+      b2.style.left = Math.max(12, w*0.60) + 'px';
+      b2.style.top  = Math.max(12, h*0.08) + 'px';
+    };
+    setBlobsBase();
+    window.addEventListener('resize', setBlobsBase);
+
+    anime({
+      targets: '#blob1',
+      translateX: [0, 18, -10, 0],
+      translateY: [0, -12, 16, 0],
+      duration: 9000,
+      easing: 'easeInOutSine',
+      loop: true
+    });
+    anime({
+      targets: '#blob2',
+      translateX: [0, -14, 10, 0],
+      translateY: [0, 14, -10, 0],
+      duration: 11000,
+      easing: 'easeInOutSine',
+      loop: true
+    });
+
+    // CTA soft pulse
+    window.addEventListener('load', ()=>{
+      anime({
+        targets: '.btn.primary',
+        scale: [1, 1.02, 1],
+        duration: 1400,
+        easing: 'easeInOutSine',
+        delay: 700
+      });
+    });
+  </script>
+</body>
+</html>
+
+
+
