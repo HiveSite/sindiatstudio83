@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Sindikat — Blog / Insights</title>
-  <meta name="description" content="Insights iz prakse. Bez teorije. Kampanje, sadržaj i aktivacije koje dovode ljude — i gdje se najčešće griješi." />
+  <title>Sindikat — O nama</title>
+  <meta name="description" content="Sindikat je Performance & Activation Studio. Kampanje i aktivacije koje dovode ljude, pažnju i rezultat — online i na terenu." />
 
   <!-- Anime.js -->
   <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
@@ -159,21 +159,27 @@
       margin-left:auto;
       display:flex; align-items:center; gap:12px;
     }
+
     .brand{
       display:flex; align-items:center; gap:12px;
       font-weight:750;
       letter-spacing:.9px;
       text-transform:uppercase;
       font-size:13px;
+      white-space:nowrap;
     }
-    .mark{
-      width:34px; height:34px; border-radius:10px;
-      background:
-        radial-gradient(14px 14px at 35% 35%, rgba(24,245,255,.65), transparent 60%),
-        linear-gradient(145deg, rgba(255,59,111,.32), rgba(255,59,111,.10));
-      border:3px solid rgba(255,59,111,.6);
-      box-shadow:0 14px 28px rgba(0,0,0,.45), 0 0 0 3px rgba(0,0,0,.45) inset;
-      transform: rotate(-2deg);
+
+    /* Desktop logo stays as-is (image) */
+    .brandLogo{
+      width:34px;
+      height:34px;
+      border-radius:10px;
+      object-fit:contain;
+      background: rgba(255,255,255,.06);
+      border:3px solid rgba(255,255,255,.35);
+      box-shadow:
+        0 14px 28px rgba(0,0,0,.45),
+        0 0 0 3px rgba(0,0,0,.45) inset;
     }
 
     nav{
@@ -210,10 +216,6 @@
       border-color:rgba(255,59,111,.6);
       box-shadow: 0 20px 60px rgba(255,59,111,.22), 0 10px 28px rgba(0,0,0,.28);
     }
-    .btn.ghost{
-      background: linear-gradient(180deg, rgba(24,245,255,.10), rgba(255,255,255,.02));
-      border-color:rgba(24,245,255,.35);
-    }
     .dot{
       width:8px; height:8px; border-radius:2px;
       background:var(--accent);
@@ -221,7 +223,7 @@
       transform: rotate(8deg);
     }
 
-    /* Mobile nav */
+    /* Mobile nav (same as other pages) */
     .hamburger{
       display:none;
       width:44px; height:44px;
@@ -261,32 +263,8 @@
       color:var(--text);
     }
 
-    /* Sections */
-    .section{
-      padding:58px 0;
-      border-top:3px solid rgba(255,255,255,.08);
-    }
-    .headRow{
-      display:flex; align-items:flex-end; justify-content:space-between;
-      gap:16px; flex-wrap:wrap;
-      margin-bottom:22px;
-    }
-    .h2{
-      font-size:22px;
-      letter-spacing:-.2px;
-      margin:0;
-    }
-    .desc{
-      color:rgba(255,255,255,.70);
-      font-size:13px;
-      line-height:1.65;
-      max-width:70ch;
-    }
-
-    /* Blog hero */
-    .hero{
-      padding:54px 0 26px;
-    }
+    /* HERO (About page) */
+    .hero{ padding:54px 0 22px; }
     .heroGrid{
       display:grid;
       grid-template-columns: 1.15fr .85fr;
@@ -303,37 +281,49 @@
     }
     h1{
       margin:0;
-      font-size:52px;
+      font-size:54px;
       line-height:1.05;
       letter-spacing:-.8px;
-      max-width:22ch;
+      max-width:18ch;
     }
-    .heroTitle span{display:inline-block; will-change: transform, opacity}
+    .heroTitle span{display:inline-block; will-change: transform, opacity;}
     .sub{
       margin-top:18px;
       color:rgba(255,255,255,.80);
       font-size:16px;
       line-height:1.65;
-      max-width:70ch;
+      max-width:62ch;
       text-shadow: 0 10px 40px rgba(0,0,0,.35);
     }
     .heroActions{display:flex; gap:12px; flex-wrap:wrap; margin-top:24px}
+    .miniRow{
+      margin-top:22px;
+      display:flex; gap:12px; flex-wrap:wrap;
+      color:rgba(255,255,255,.70);
+      font-size:12px;
+    }
+    .miniRow span{
+      padding:8px 10px;
+      border:2px solid rgba(255,255,255,.12);
+      border-radius:10px;
+      background: rgba(10,12,18,.70);
+      box-shadow: 0 10px 24px rgba(0,0,0,.22);
+    }
 
-    /* “Uloga bloga” card */
+    /* Hero side card */
     .heroCard{
       border:3px solid rgba(255,255,255,.14);
       border-radius:var(--r3);
       background:
-        radial-gradient(520px 260px at 20% 18%, rgba(255,59,111,.22), transparent 62%),
-        radial-gradient(520px 260px at 76% 22%, rgba(24,245,255,.14), transparent 62%),
+        radial-gradient(520px 260px at 20% 18%, rgba(255,59,111,.26), transparent 62%),
+        radial-gradient(520px 260px at 76% 22%, rgba(24,245,255,.18), transparent 62%),
         linear-gradient(180deg, rgba(14,16,26,.92), rgba(7,8,19,.92));
       box-shadow:var(--shadow);
-      padding:20px;
+      padding:22px;
+      display:flex; flex-direction:column; justify-content:space-between;
+      min-height:100%;
       position:relative;
       overflow:hidden;
-      display:flex;
-      flex-direction:column;
-      gap:12px;
     }
     .heroCard:before{
       content:"";
@@ -342,231 +332,104 @@
       opacity:.55;
       pointer-events:none;
     }
-    .heroCard *{position:relative; z-index:2}
-    .heroCard .titleRow{
-      display:flex; align-items:center; justify-content:space-between; gap:12px;
-      font-size:12px; color:rgba(255,255,255,.70);
-      text-transform:uppercase; letter-spacing:1px;
-    }
-    .pillRow{
-      display:flex; flex-wrap:wrap; gap:10px;
-      color:rgba(255,255,255,.66);
-      font-size:12px;
-    }
-    .pillRow span{
-      border:2px solid rgba(255,255,255,.12);
-      background: rgba(8,10,16,.65);
-      padding:6px 10px;
-      border-radius:10px;
-    }
-    .mutedList{
-      margin:0;
-      padding-left:18px;
-      color:rgba(255,255,255,.72);
-      font-size:13px;
-      line-height:1.65;
-    }
-    .mutedList li{margin:6px 0}
-
-    /* Filters */
-    .filterRow{
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
-      align-items:center;
-    }
-    .filterBtn{
-      display:inline-flex;
-      align-items:center;
-      gap:10px;
-      padding:10px 12px;
-      border-radius:10px;
-      border:3px solid rgba(255,255,255,.14);
-      background: rgba(8,10,16,.65);
-      color:rgba(255,255,255,.78);
-      font-size:12px;
-      transition: transform .18s var(--ease), border-color .18s var(--ease), background .18s var(--ease), color .18s var(--ease);
-      cursor:pointer;
-      user-select:none;
-    }
-    .filterBtn:hover{transform:translateY(-2px); border-color:rgba(24,245,255,.40); color:#fff}
-    .filterBtn.active{
-      border-color:rgba(255,59,111,.55);
-      background: linear-gradient(180deg, rgba(255,59,111,.18), rgba(8,10,16,.62));
-      color:#fff;
-    }
-
-    /* Blog list as “drop” */
-    .aboutStack{display:grid; gap:14px}
-    .drop{
-      border:3px solid rgba(255,255,255,.14);
-      border-radius:var(--r2);
-      background: linear-gradient(180deg, rgba(14,16,26,.94), rgba(7,8,19,.94));
-      padding:0;
-      box-shadow: var(--shadow2);
-      overflow:hidden;
-    }
-    .drop summary{
-      list-style:none;
-      cursor:pointer;
-      padding:16px 18px;
-      display:flex; align-items:center; justify-content:space-between;
-      gap:12px;
-      font-weight:650;
-      border-bottom:3px solid rgba(255,255,255,.08);
-      background: linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
-    }
-    .drop summary::-webkit-details-marker{display:none}
-    .drop[open]{border-color:rgba(255,59,111,.55); box-shadow:var(--shadow)}
-    .tag{
-      font-size:11px;
-      color:rgba(255,176,0,.98);
-      border:2px solid rgba(255,176,0,.32);
-      padding:6px 10px;
-      border-radius:10px;
-      background:rgba(255,176,0,.14);
-      white-space:nowrap;
-    }
-    .dropBody{padding:16px 18px 18px}
-
-    /* Split: text + image (no text over image) */
-    .dropBodySplit{
-      display:grid;
-      grid-template-columns: 1fr 1fr;
-      gap:16px;
-      align-items:stretch;
-    }
-    .dropMedia{
-      border:3px solid rgba(255,255,255,.12);
-      border-radius: var(--r2);
-      overflow:hidden;
-      min-height: 240px;
-      background:
-        radial-gradient(520px 260px at 18% 20%, rgba(255,59,111,.18), transparent 60%),
-        radial-gradient(520px 260px at 82% 25%, rgba(24,245,255,.12), transparent 62%),
-        linear-gradient(180deg, rgba(7,7,10,.25), rgba(7,7,10,.82)),
-        var(--img);
-      background-size: cover;
-      background-position: center;
-      box-shadow: var(--shadow2);
-      position:relative;
-    }
-    .dropMedia:after{
-      content:"";
-      position:absolute; inset:0;
-      background: linear-gradient(180deg, rgba(0,0,0,.05), rgba(0,0,0,.55));
-      pointer-events:none;
-    }
-
-    .bullets{
-      margin-top:12px;
-      padding-left:18px;
-      color:rgba(255,255,255,.72);
-      font-size:13px;
-      line-height:1.65;
-    }
-    .bullets li{margin:6px 0}
-    .soft{
-      color:rgba(255,255,255,.72);
-      font-size:13px;
-      line-height:1.65;
-      margin:10px 0 0;
-    }
-    .callout{
-      margin-top:12px;
-      border:2px solid rgba(255,255,255,.12);
-      background: rgba(8,10,16,.65);
-      padding:12px 12px;
-      border-radius:12px;
-      color:rgba(255,255,255,.76);
-      font-size:13px;
-      line-height:1.6;
-    }
-    .callout strong{color:#fff}
-
-    /* CTA Band */
-    .ctaBand{
-      border:3px solid rgba(255,59,111,.55);
-      background:
-        radial-gradient(520px 240px at 18% 20%, rgba(255,59,111,.28), transparent 62%),
-        radial-gradient(520px 240px at 82% 30%, rgba(24,245,255,.18), transparent 62%),
-        linear-gradient(180deg, rgba(14,16,26,.90), rgba(7,8,19,.90));
-      border-radius:var(--r3);
-      padding:22px;
-      display:flex; align-items:center; justify-content:space-between;
-      gap:16px;
-      box-shadow: var(--shadow);
-      position:relative;
-      overflow:hidden;
-    }
-    .ctaBand:before{
+    .heroCard:after{
       content:"";
       position:absolute;
       inset:-40%;
-      background: linear-gradient(90deg, transparent, rgba(24,245,255,.22), transparent);
-      transform: rotate(25deg);
-      opacity:.3;
+      background: radial-gradient(circle at 30% 30%, rgba(24,245,255,.26), transparent 60%);
+      opacity:.35;
+      transform: rotate(8deg);
       pointer-events:none;
     }
-    .ctaBand .left{max-width:70ch}
-    .ctaBand .left .h2{font-size:20px}
-    .ctaBand .left .desc{margin-top:8px}
-    .ctaBand .right{display:flex; gap:12px; flex-wrap:wrap}
-
-    /* Marquee */
-    .marquee{
-      border:3px solid rgba(255,255,255,.14);
-      background: linear-gradient(180deg, rgba(14,16,26,.88), rgba(7,8,19,.88));
-      border-radius:var(--r3);
-      overflow:hidden;
-      position:relative;
-      box-shadow: var(--shadow2);
+    .heroCard *{position:relative; z-index:2}
+    .heroCard .label{
+      display:flex; align-items:center; justify-content:space-between;
+      font-size:12px; color:rgba(255,255,255,.70);
+      text-transform:uppercase; letter-spacing:1px;
+      margin-bottom:12px;
     }
-    .marqueeTrack{
-      display:flex;
-      gap:28px;
-      padding:16px 18px;
-      white-space:nowrap;
-      will-change:transform;
-    }
-    .logo{
-      color:rgba(255,255,255,.88);
-      font-size:12px;
-      letter-spacing:.9px;
-      text-transform:uppercase;
-      border:2px solid rgba(255,255,255,.14);
-      background: rgba(8,10,16,.70);
-      padding:10px 12px;
-      border-radius:10px;
-      position:relative;
-    }
-    .logo:after{
-      content:"";
-      position:absolute;
-      inset:-2px;
-      border:1px solid rgba(255,59,111,.3);
-      border-radius:10px;
-      opacity:.5;
-      pointer-events:none;
-    }
-
-    /* Contact */
-    .splitRow{
+    .statGrid{
       display:grid;
       grid-template-columns:1fr 1fr;
-      gap:16px;
-      align-items:stretch;
+      gap:12px;
+      margin-top:10px;
     }
+    .stat{
+      border:2px solid rgba(255,255,255,.12);
+      border-radius:var(--r2);
+      padding:14px 14px 12px;
+      background: rgba(8,10,16,.70);
+      box-shadow: var(--shadow2);
+      position:relative;
+      overflow:hidden;
+    }
+    .stat:before{
+      content:"";
+      position:absolute;
+      inset:-20%;
+      background: linear-gradient(90deg, rgba(255,59,111,.0), rgba(255,59,111,.28), rgba(24,245,255,.2), rgba(255,59,111,.0));
+      transform: rotate(10deg);
+      opacity:.25;
+    }
+    .stat .num{ font-size:26px; font-weight:800; letter-spacing:-.4px; }
+    .stat .cap{ margin-top:6px; color:rgba(255,255,255,.65); font-size:12px; line-height:1.35; }
+
+    .progressRail{
+      height:10px;
+      border-radius:var(--r2);
+      background:rgba(255,255,255,.12);
+      overflow:hidden;
+      margin-top:16px;
+      border:2px solid rgba(255,255,255,.10);
+    }
+    .progressFill{
+      height:100%;
+      width:0%;
+      background:linear-gradient(90deg, rgba(255,59,111,.95), rgba(24,245,255,.3), rgba(255,176,0,.6));
+      border-radius:var(--r2);
+      box-shadow: 0 10px 28px rgba(255,59,111,.25);
+    }
+    .heroCard .foot{
+      margin-top:16px;
+      display:flex; justify-content:space-between; align-items:center;
+      color:rgba(255,255,255,.65);
+      font-size:12px;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+
+    /* Sections */
+    .section{
+      padding:58px 0;
+      border-top:3px solid rgba(255,255,255,.08);
+    }
+    .headRow{
+      display:flex; align-items:flex-end; justify-content:space-between;
+      gap:16px; flex-wrap:wrap;
+      margin-bottom:22px;
+    }
+    .h2{ font-size:22px; letter-spacing:-.2px; margin:0; }
+    .desc{
+      color:rgba(255,255,255,.70);
+      font-size:13px;
+      line-height:1.65;
+      max-width:70ch;
+    }
+
+    .grid2{display:grid; grid-template-columns:repeat(2,1fr); gap:16px;}
+    .grid3{display:grid; grid-template-columns:repeat(3,1fr); gap:16px;}
+    .grid4{display:grid; grid-template-columns:repeat(4,1fr); gap:16px;}
+
     .card{
       border:3px solid rgba(255,255,255,.14);
       border-radius:var(--r2);
       background: linear-gradient(180deg, rgba(14,16,26,.92), rgba(7,8,19,.92));
       padding:18px;
       box-shadow: var(--shadow2);
-      position:relative;
-      overflow:hidden;
       transition: transform .18s var(--ease), border-color .18s var(--ease), box-shadow .18s var(--ease), filter .18s var(--ease);
       will-change: transform;
+      position:relative;
+      overflow:hidden;
     }
     .card:before{
       content:"";
@@ -597,13 +460,139 @@
       display:flex; align-items:center; justify-content:space-between;
       gap:12px;
       margin-bottom:10px;
-      position:relative;
-      z-index:2;
     }
-    .card h3{margin:0; font-size:16px; letter-spacing:-.2px; position:relative; z-index:2}
-    .card p{margin-top:10px; color:rgba(255,255,255,.72); font-size:13px; line-height:1.65; position:relative; z-index:2}
+    .tag{
+      font-size:11px;
+      color:rgba(255,176,0,.98);
+      border:2px solid rgba(255,176,0,.32);
+      padding:6px 10px;
+      border-radius:10px;
+      background:rgba(255,176,0,.14);
+      white-space:nowrap;
+    }
+    .card h3{margin:0; font-size:16px; letter-spacing:-.2px}
+    .card p{margin-top:10px; color:rgba(255,255,255,.72); font-size:13px; line-height:1.65}
 
-    .form{display:grid; gap:12px; position:relative; z-index:2}
+    .bullets{
+      margin-top:14px;
+      padding-left:18px;
+      color:rgba(255,255,255,.72);
+      font-size:13px;
+      line-height:1.65;
+    }
+    .bullets li{margin:6px 0}
+
+    .pillRow{
+      margin-top:12px;
+      display:flex; flex-wrap:wrap; gap:10px;
+      color:rgba(255,255,255,.66);
+      font-size:12px;
+    }
+    .pillRow span{
+      border:2px solid rgba(255,255,255,.12);
+      background: rgba(8,10,16,.65);
+      padding:6px 10px;
+      border-radius:10px;
+    }
+
+    /* Longform blocks */
+    .prose{
+      border:3px solid rgba(255,255,255,.14);
+      border-radius:var(--r3);
+      background: linear-gradient(180deg, rgba(14,16,26,.90), rgba(7,8,19,.90));
+      box-shadow: var(--shadow2);
+      overflow:hidden;
+      position:relative;
+    }
+    .prose:before{
+      content:"";
+      position:absolute;
+      inset:-35%;
+      background:
+        radial-gradient(circle at 25% 25%, rgba(255,59,111,.22), transparent 60%),
+        radial-gradient(circle at 78% 25%, rgba(24,245,255,.14), transparent 60%);
+      opacity:.55;
+      transform: rotate(10deg);
+      pointer-events:none;
+    }
+    .proseInner{ position:relative; z-index:2; padding:18px; }
+    .prose h3{ margin:0; font-size:16px; letter-spacing:-.2px; }
+    .prose .lead{
+      color:rgba(255,255,255,.80);
+      font-size:14px;
+      line-height:1.7;
+      margin:10px 0 0;
+      max-width:80ch;
+    }
+    .divider{ height:1px; background: rgba(255,255,255,.10); margin:16px 0; }
+
+    /* Step list */
+    .steps{ display:grid; gap:12px; }
+    .step{
+      border:2px solid rgba(255,255,255,.12);
+      border-radius:var(--r2);
+      padding:14px;
+      background: rgba(8,10,16,.65);
+      box-shadow: var(--shadow2);
+      position:relative;
+      overflow:hidden;
+    }
+    .step:before{
+      content:"";
+      position:absolute;
+      inset:-30%;
+      background: linear-gradient(90deg, transparent, rgba(255,59,111,.18), rgba(24,245,255,.12), transparent);
+      transform: rotate(8deg);
+      opacity:.25;
+      pointer-events:none;
+    }
+    .step .t{font-weight:700; margin:0}
+    .step .d{margin:8px 0 0; color:rgba(255,255,255,.72); font-size:13px; line-height:1.65}
+
+    /* Media card (text + image) */
+    .mediaCard{ padding:0; overflow:hidden; }
+    .mediaGrid{
+      display:grid;
+      grid-template-columns: 1.05fr .95fr;
+      gap:0;
+      align-items:stretch;
+    }
+    .mediaText{ padding:18px; }
+    .mediaImg{
+      border-left:3px solid rgba(255,255,255,.12);
+      background:#0a0b12;
+      min-height:240px;
+      position:relative;
+    }
+    .mediaImg img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      opacity:.92;
+      filter:saturate(1.05) contrast(1.14);
+      transform: scale(1.03);
+    }
+    .mediaImg:after{
+      content:"";
+      position:absolute; inset:0;
+      background:
+        radial-gradient(520px 240px at 18% 20%, rgba(255,59,111,.22), transparent 62%),
+        radial-gradient(520px 240px at 82% 30%, rgba(24,245,255,.14), transparent 62%),
+        linear-gradient(180deg, rgba(7,7,10,.08), rgba(7,7,10,.78));
+      opacity:1;
+      pointer-events:none;
+    }
+
+    /* SplitRow (needed for CONTACT) */
+    .splitRow{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:16px;
+      align-items:stretch;
+    }
+
+    /* Contact form styles */
+    .form{display:grid; gap:12px;}
     .field{display:grid; gap:8px;}
     label{font-size:12px; color:rgba(255,255,255,.65)}
     input, textarea{
@@ -622,6 +611,9 @@
     }
     textarea{min-height:110px; resize:vertical}
 
+    /* Reveal base */
+    .reveal{ opacity:0; transform:translateY(18px); will-change: transform, opacity; }
+
     footer{
       border-top:3px solid rgba(255,255,255,.10);
       padding:28px 0 8px;
@@ -630,28 +622,35 @@
       display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap;
     }
 
-    /* Reveal base */
-    .reveal{opacity:0; transform:translateY(18px); will-change: transform, opacity;}
-
-    /* Responsive */
     @media (max-width: 980px){
       .hero{padding:38px 0 18px}
       .heroGrid{grid-template-columns:1fr}
-      h1{font-size:40px}
+      h1{font-size:42px}
+
       nav{display:none}
       .hamburger{display:flex}
-      .ctaBand{flex-direction:column; align-items:flex-start}
+
+      .grid4{grid-template-columns:repeat(2,1fr)}
+      .grid3{grid-template-columns:1fr}
+      .grid2{grid-template-columns:1fr}
       .splitRow{grid-template-columns:1fr}
-      .dropBodySplit{grid-template-columns:1fr}
-      .dropMedia{min-height: 190px}
+
+      .mediaGrid{grid-template-columns:1fr}
+      .mediaImg{
+        border-left:0;
+        border-top:3px solid rgba(255,255,255,.12);
+        min-height:200px;
+      }
     }
+
     @media (max-width: 520px){
       .wrap{padding:16px 14px 72px}
-      h1{font-size:34px}
+      h1{font-size:36px}
+      .grid4{grid-template-columns:1fr}
+      .heroActions{gap:10px}
       .heroActions .btn{width:100%}
       .topbarInner{padding:12px 14px}
       .mobileMenuInner{padding:12px 14px 16px}
-      .dropMedia{min-height:170px}
     }
   </style>
 </head>
@@ -665,407 +664,367 @@
 
   <!-- Background glow -->
   <div class="heroBg" id="heroBg" aria-hidden="true"></div>
+
   <div class="blob" id="blob1" aria-hidden="true"></div>
   <div class="blob b2" id="blob2" aria-hidden="true"></div>
 
-<!-- Topbar -->
-<header class="topbar">
-  <div class="topbarInner reveal">
-    <div class="brand">
-      <div class="mark" aria-hidden="true"></div>
-      <div>SINDIKAT</div>
+  <!-- Topbar (same menu as other pages: desktop + mobile) -->
+  <header class="topbar">
+    <div class="topbarInner reveal">
+      <a class="brand" href="/pocetna" aria-label="Početna">
+        <img
+          src="https://via.placeholder.com/64x64?text=LOGO"
+          alt="Sindikat Studio 83 logo"
+          class="brandLogo"
+        />
+        <div>SINDIKAT STUDIO 83</div>
+      </a>
+
+      <a class="btn primary ctaCenter" href="/kontakt"><span class="dot"></span> Zatraži konsultacije</a>
+
+      <div class="navWrap">
+        <nav aria-label="Primary">
+          <a href="/pocetna">Početna</a>
+          <a href="/usluge">Usluge</a>
+          <a href="/onama">O nama</a>
+          <a href="/blog">Blog</a>
+          <a href="/poslovi">Poslovi</a>
+          <a href="/kontakt">Kontakt</a>
+        </nav>
+
+        <button class="hamburger" id="hamburger" aria-label="Open menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
     </div>
 
-    <a class="btn primary ctaCenter" href="/kontakt"><span class="dot"></span> Zakaži poziv</a>
-
-    <div class="navWrap">
-      <nav aria-label="Primary">
+    <div class="mobileMenu" id="mobileMenu">
+      <div class="mobileMenuInner">
         <a href="/pocetna">Početna</a>
         <a href="/usluge">Usluge</a>
         <a href="/onama">O nama</a>
         <a href="/blog">Blog</a>
         <a href="/poslovi">Poslovi</a>
         <a href="/kontakt">Kontakt</a>
-      </nav>
-
-      <button class="hamburger" id="hamburger" aria-label="Open menu">
-        <span></span><span></span><span></span>
-      </button>
+      </div>
     </div>
-  </div>
+  </header>
 
-  <div class="mobileMenu" id="mobileMenu">
-    <div class="mobileMenuInner">
-      <a href="/pocetna">Početna</a>
-      <a href="/usluge">Usluge</a>
-      <a href="/onama">O nama</a>
-      <a href="/blog">Blog</a>
-      <a href="/poslovi">Poslovi</a>
-      <a href="/kontakt">Kontakt</a>
-    </div>
-  </div>
-</header>
-
-
-    <!-- BLOG HERO -->
-    <section class="hero" id="blog">
+  <div class="wrap">
+    <!-- HERO -->
+    <section class="hero" id="about">
       <div class="heroGrid">
         <div>
-          <div class="kicker reveal"><span class="dot"></span> BLOG / INSIGHTS — SINDIKAT</div>
+          <div class="kicker reveal"><span class="dot"></span> Performance & Activation Studio</div>
 
           <h1 class="heroTitle reveal" id="heroTitle">
-            Insights iz prakse. Bez teorije.
+            O nama.
           </h1>
 
           <p class="sub reveal">
-            Kako razmišljamo o <strong>kampanjama</strong>, <strong>sadržaju</strong> i <strong>aktivacijama</strong> koje dovode ljude — i gdje se najčešće griješi.
+            Sindikat je Performance & Activation Studio. Ne pravimo kampanje da bi “izgledale dobro”.
+            Pravimo kampanje koje dovode ljude, pažnju i rezultat — online i na terenu.
+          </p>
+
+          <p class="sub reveal" style="margin-top:12px">
+            Sindikat je nastao iz event industrije, ali je evoluirao dalje. Danas spajamo digitalne kampanje,
+            sadržaj i aktivacije u jedan sistem koji ima jasan cilj i mjerljiv ishod.
           </p>
 
           <div class="heroActions reveal">
-            <a class="btn ghost" href="#offer">👉 Pogledaj ponudu</a>
-            <a class="btn primary" href="#contact"><span class="dot"></span> Zakaži poziv</a>
+            <a class="btn primary" href="/kontakt"><span class="dot"></span> Zakaži 30 min poziv</a>
+            <a class="btn" href="#what">Šta radimo</a>
+            <a class="btn" href="#principles">Principi rada</a>
+          </div>
+
+          <div class="miniRow reveal">
+            <span>Cilj → sistem → rezultat</span>
+            <span>Scope je zaključan</span>
+            <span>Rezultat > estetika</span>
           </div>
         </div>
 
-        <aside class="heroCard reveal" aria-label="Uloga bloga">
-          <div class="titleRow">
-            <span>Uloga bloga</span>
-            <span style="color:rgba(255,176,0,.9)">3 funkcije</span>
+        <aside class="heroCard reveal" id="heroCard" aria-label="Studio snapshot">
+          <div>
+            <div class="label">
+              <span>Studio snapshot</span>
+              <span style="color:rgba(255,176,0,.9)">Live</span>
+            </div>
+
+            <div class="statGrid">
+              <div class="stat">
+                <div class="num"><span class="counter" data-value="150">0</span>+</div>
+                <div class="cap">kampanja / aktivacija</div>
+              </div>
+              <div class="stat">
+                <div class="num"><span class="counter" data-value="48">0</span>h</div>
+                <div class="cap">tipičan turnaround</div>
+              </div>
+              <div class="stat">
+                <div class="num"><span class="counter" data-value="4">0</span></div>
+                <div class="cap">fokus oblasti</div>
+              </div>
+              <div class="stat">
+                <div class="num"><span class="counter" data-value="1">0</span></div>
+                <div class="cap">owner po projektu</div>
+              </div>
+            </div>
+
+            <div class="progressRail" aria-label="Delivery progress">
+              <div class="progressFill" id="progressFill"></div>
+            </div>
           </div>
 
-          <p class="soft" style="margin:0">
-            Blog nije content marketing igračka. On radi tri stvari — i zato je namjerno oštar.
-          </p>
-
-          <div class="pillRow">
-            <span>Autoritet</span>
-            <span>Filtriranje</span>
-            <span>Inbound</span>
-          </div>
-
-          <ul class="mutedList">
-            <li>nema generičnih savjeta</li>
-            <li>nema “trendova”</li>
-            <li>nema clickbait-a</li>
-          </ul>
-
-          <div class="callout">
-            <strong>Ton:</strong> direktno, bez “agencijskog” jezika, bez obećanja. Ako se neko ne slaže — to je plus.
+          <div class="foot">
+            <span>Podgorica • Crna Gora</span>
+            <span>Campaigns • Content • Activations</span>
           </div>
         </aside>
       </div>
     </section>
 
-    <!-- BLOG LIST -->
-    <section class="section" id="posts">
+    <!-- POSITIONING -->
+    <section class="section" id="positioning">
       <div class="headRow">
-        <h2 class="h2 reveal">Tekstovi (sa sadržajem)</h2>
-        <div class="desc reveal">Samo 3 kategorije. Namjerno. Ništa više.</div>
-      </div>
-
-      <div class="filterRow reveal" id="filterRow" role="tablist" aria-label="Blog filter">
-        <div class="filterBtn active" data-filter="all" role="tab" aria-selected="true">Sve</div>
-        <div class="filterBtn" data-filter="strategija" role="tab" aria-selected="false">Strategija</div>
-        <div class="filterBtn" data-filter="content" role="tab" aria-selected="false">Content & Ads</div>
-        <div class="filterBtn" data-filter="aktivacije" role="tab" aria-selected="false">Aktivacije & teren</div>
-      </div>
-
-      <div style="height:14px"></div>
-
-      <div class="aboutStack" id="postsStack">
-        <!-- 1 -->
-        <details class="drop reveal post" data-category="strategija" open>
-          <summary>
-            <span>Zašto većina kampanja ne dovede nikoga</span>
-            <span class="tag">Strategija</span>
-          </summary>
-          <div class="dropBody">
-            <div class="dropBodySplit">
-              <div>
-                <p class="soft" style="margin:0">
-                  Većina kampanja ne propadne zbog loših oglasa. Propadne jer nikada nije imala jasan cilj. Bez cilja, sve ostalo je improvizacija.
-                </p>
-
-                <ul class="bullets">
-                  <li>“Vidljivost” nije cilj</li>
-                  <li>“Više ljudi” nije cilj</li>
-                  <li>Kampanja bez mjerljivog ishoda je samo trošak</li>
-                  <li>Event bez kampanje je još skuplji trošak</li>
-                </ul>
-
-                <div class="callout">
-                  <strong>Zaključak:</strong> Ako ne znaš šta mjeriš — ne znaš ni da li si uspio.
-                </div>
-
-                <div style="height:12px"></div>
-                <a class="btn primary" href="#offer"><span class="dot"></span> 👉 Ovo rješavamo u Strategy Day</a>
-              </div>
-
-              <div class="dropMedia" style="--img:url('https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=1600&q=80');" aria-hidden="true"></div>
-            </div>
-          </div>
-        </details>
-
-        <!-- 2 -->
-        <details class="drop reveal post" data-category="content">
-          <summary>
-            <span>Content koji izgleda lijepo, ali ne radi ništa</span>
-            <span class="tag">Content & Ads</span>
-          </summary>
-          <div class="dropBody">
-            <div class="dropBodySplit">
-              <div>
-                <p class="soft" style="margin:0">
-                  Najskuplji sadržaj koji možeš da napraviš je onaj koji izgleda odlično — a ne prodaje ništa.
-                </p>
-
-                <ul class="bullets">
-                  <li>Content za ads ≠ content za Instagram feed</li>
-                  <li>Hook je važniji od estetike</li>
-                  <li>Prvih 2–3 sekunde odlučuju sve</li>
-                  <li>“Brend” nije izgovor za nejasnu poruku</li>
-                </ul>
-
-                <div class="callout">
-                  <strong>Zaključak:</strong> Ako sadržaj nema jasnu ulogu u funnelu — on je samo ukras.
-                </div>
-
-                <div style="height:12px"></div>
-                <a class="btn primary" href="#offer"><span class="dot"></span> 👉 Pogledaj Content Sprint</a>
-              </div>
-
-              <div class="dropMedia" style="--img:url('https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1600&q=80');" aria-hidden="true"></div>
-            </div>
-          </div>
-        </details>
-
-        <!-- 3 -->
-        <details class="drop reveal post" data-category="aktivacije">
-          <summary>
-            <span>Zašto event bez digitalne podrške ostaje prazan</span>
-            <span class="tag">Aktivacije & teren</span>
-          </summary>
-          <div class="dropBody">
-            <div class="dropBodySplit">
-              <div>
-                <p class="soft" style="margin:0">
-                  Event sam po sebi više ne privlači ljude. Ljude dovodi sistem — digital + teren + follow-up.
-                </p>
-
-                <ul class="bullets">
-                  <li>Event je pojačivač, ne početak</li>
-                  <li>Digital stvara očekivanje</li>
-                  <li>Teren daje iskustvo</li>
-                  <li>Digital poslije zatvara krug</li>
-                </ul>
-
-                <div class="callout">
-                  <strong>Zaključak:</strong> Najbolji eventi su oni koji počnu prije, a završe se poslije samog događaja.
-                </div>
-
-                <div style="height:12px"></div>
-                <a class="btn primary" href="#offer"><span class="dot"></span> 👉 Activation Booster</a>
-              </div>
-
-              <div class="dropMedia" style="--img:url('https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&w=1600&q=80');" aria-hidden="true"></div>
-            </div>
-          </div>
-        </details>
-
-        <!-- 4 -->
-        <details class="drop reveal post" data-category="strategija">
-          <summary>
-            <span>Meta i Google nisu problem. Problem je struktura.</span>
-            <span class="tag">Strategija</span>
-          </summary>
-          <div class="dropBody">
-            <div class="dropBodySplit">
-              <div>
-                <p class="soft" style="margin:0">
-                  Većina klijenata misli da “platforma ne radi”. U 90% slučajeva problem je struktura kampanje.
-                </p>
-
-                <ul class="bullets">
-                  <li>Pogrešan funnel</li>
-                  <li>Preširoka publika</li>
-                  <li>Jedan oglas za sve</li>
-                  <li>Nema testiranja</li>
-                </ul>
-
-                <div class="callout">
-                  <strong>Zaključak:</strong> Ads platforme rade tačno onoliko dobro koliko im dozvoliš.
-                </div>
-
-                <div style="height:12px"></div>
-                <a class="btn primary" href="#offer"><span class="dot"></span> 👉 Monthly Performance</a>
-              </div>
-
-              <div class="dropMedia" style="--img:url('https://images.unsplash.com/photo-1553877522-43269d4ea984?auto=format&fit=crop&w=1600&q=80');" aria-hidden="true"></div>
-            </div>
-          </div>
-        </details>
-
-        <!-- 5 -->
-        <details class="drop reveal post" data-category="content">
-          <summary>
-            <span>Zašto ne radimo “vođenje društvenih mreža”</span>
-            <span class="tag">Content & Ads</span>
-          </summary>
-          <div class="dropBody">
-            <div class="dropBodySplit">
-              <div>
-                <p class="soft" style="margin:0">
-                  Objave radi objava ne donose rezultat. Zato to ne prodajemo.
-                </p>
-
-                <ul class="bullets">
-                  <li>Social bez kampanje = buka</li>
-                  <li>Reach bez cilja = nula</li>
-                  <li>Content mora imati razlog postojanja</li>
-                </ul>
-
-                <div class="callout">
-                  <strong>Zaključak:</strong> Društvene mreže koristimo kao alat, ne kao proizvod.
-                </div>
-
-                <div style="height:12px"></div>
-                <a class="btn primary" href="#offer"><span class="dot"></span> 👉 Pogledaj ponudu (kako mi radimo)</a>
-              </div>
-
-              <div class="dropMedia" style="--img:url('https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=1600&q=80');" aria-hidden="true"></div>
-            </div>
-          </div>
-        </details>
-
-        <!-- 6 -->
-        <details class="drop reveal post" data-category="aktivacije">
-          <summary>
-            <span>Kako mjerimo uspjeh aktivacije (i zašto većina to ne radi)</span>
-            <span class="tag">Aktivacije & teren</span>
-          </summary>
-          <div class="dropBody">
-            <div class="dropBodySplit">
-              <div>
-                <p class="soft" style="margin:0">
-                  Ako ne znaš šta je aktivacija donijela — nisi uradio aktivaciju, nego događaj.
-                </p>
-
-                <ul class="bullets">
-                  <li>Lead capture</li>
-                  <li>QR / UGC / retarget</li>
-                  <li>Post-event kampanja</li>
-                  <li>Jasni KPI-jevi</li>
-                </ul>
-
-                <div class="callout">
-                  <strong>Zaključak:</strong> Teren bez mjerenja je izgubljena prilika.
-                </div>
-
-                <div style="height:12px"></div>
-                <a class="btn primary" href="#offer"><span class="dot"></span> 👉 Activation Booster</a>
-              </div>
-
-              <div class="dropMedia" style="--img:url('https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=1600&q=80');" aria-hidden="true"></div>
-            </div>
-          </div>
-        </details>
-      </div>
-
-      <div style="height:18px"></div>
-
-      <!-- Offer jump CTA -->
-      <div class="ctaBand reveal" id="offer">
-        <div class="left">
-          <div class="h2">CTA je vezan za paket. Uvijek.</div>
-          <div class="desc">Ako tekst govori o cilju i strukturi → Strategy Day. Ako govori o sistemu i optimizaciji → Monthly Performance. Ako govori o kreativama → Content Sprint. Ako govori o terenu → Activation Booster.</div>
+        <h2 class="h2 reveal">Šta jesmo (i šta nijesmo)</h2>
+        <div class="desc reveal">
+          Ako tražiš još jednu “full service” agenciju — nijesmo to. Ako tražiš tim koji preuzima odgovornost za rezultat — vjerovatno jesmo.
         </div>
-        <div class="right">
-          <a class="btn ghost" href="#posts">Pogledaj tekstove</a>
-          <a class="btn primary" href="#contact"><span class="dot"></span> Zakaži poziv</a>
+      </div>
+
+      <div class="grid2">
+        <div class="card reveal">
+          <div class="top"><h3>Šta jesmo</h3><span class="tag">fokus</span></div>
+          <ul class="bullets">
+            <li>Studio za performans i aktivacije</li>
+            <li>Sistem: digital + sadržaj + teren</li>
+            <li>Jasan cilj, KPI i mjerljiv ishod</li>
+            <li>Brz delivery, bez improvizacije</li>
+          </ul>
+          <div class="pillRow">
+            <span>Meta/Google</span><span>Content</span><span>SEO osnove</span><span>Activation</span>
+          </div>
+        </div>
+
+        <div class="card reveal">
+          <div class="top"><h3>Šta nijesmo</h3><span class="tag">filter</span></div>
+          <ul class="bullets">
+            <li>Event-only agencija</li>
+            <li>Social media “objave radi objava”</li>
+            <li>Produkcija bez plana distribucije</li>
+            <li>Full-service bez fokusa</li>
+            <li>Tim koji obećava sve svakome</li>
+          </ul>
+          <p style="margin-top:12px; color:rgba(255,255,255,.72); font-size:13px; line-height:1.65">
+            Ako tražiš količinu usluga — ima boljih opcija. Ako tražiš smisao i sistem — tu smo.
+          </p>
         </div>
       </div>
     </section>
 
-    <!-- SINGLE BLOG TEMPLATE -->
-    <section class="section" id="template">
+    <!-- ORIGIN -->
+    <section class="section" id="origin">
       <div class="headRow">
-        <h2 class="h2 reveal">Single blog stranica (template)</h2>
-        <div class="desc reveal">Bez sidebar-a, bez share dugmića, bez nepotrebnih linkova. Samo struktura koja radi.</div>
+        <h2 class="h2 reveal">Kako je nastao Sindikat</h2>
+        <div class="desc reveal">
+          Sindikat je počeo kao tim koji organizuje događaje — ali je brzo prešao u sistem koji povezuje digital i teren.
+        </div>
       </div>
 
-      <div class="card reveal">
-        <div class="top">
-          <h3>Jak naslov (bez ukrasa)</h3>
-          <span class="tag">Template</span>
-        </div>
+      <div class="card mediaCard reveal">
+        <div class="mediaGrid">
+          <div class="mediaText">
+            <div class="top"><h3>Od eventa do sistema</h3><span class="tag">evolucija</span></div>
+            <p style="margin-top:10px; color:rgba(255,255,255,.72); font-size:13px; line-height:1.65">
+              Sindikat je počeo kao tim koji organizuje događaje: produkcija, barovi, DJ-evi, logistika, ljudi na terenu.
+              Ali vrlo brzo smo vidjeli problem: događaji bez kampanje ostaju prazni, a kampanje bez dobrog sadržaja i terena ostaju slabe.
+            </p>
 
-        <p class="soft" style="margin:0">
-          Kratak intro (3–4 reda). Kažeš šta je problem i zašto je bitan. Bez “u današnjem digitalnom svijetu…”.
-        </p>
+            <div class="divider"></div>
 
-        <div class="callout" style="margin-top:12px">
-          <strong>Sekcije sa podnaslovima:</strong> 3–5 blokova. Svaki blok = jedna jasna misao.
-        </div>
+            <p style="margin:0; color:rgba(255,255,255,.78); font-size:13px; line-height:1.65">
+              Zato smo počeli da povezujemo stvari:
+            </p>
+            <ul class="bullets" style="margin-top:10px">
+              <li>event kao pojačivač pažnje</li>
+              <li>sadržaj kao gorivo za kampanje</li>
+              <li>kampanju kao sistem, ne kao trošak</li>
+            </ul>
 
-        <ul class="bullets">
-          <li><strong>Podnaslov 1:</strong> definicija / greška / zašto se dešava</li>
-          <li><strong>Podnaslov 2:</strong> primjer iz prakse (kratko, konkretno)</li>
-          <li><strong>Podnaslov 3:</strong> šta uraditi sledeće (checklist)</li>
-        </ul>
+            <p style="margin-top:12px; color:rgba(255,255,255,.72); font-size:13px; line-height:1.65">
+              Tako je nastao Sindikat kakav je danas — studio koji gleda širu sliku i radi samo ono što ima smisla.
+            </p>
+          </div>
 
-        <div class="callout">
-          <strong>Konkretan zaključak:</strong> jedna rečenica koju čitalac može da ponovi. Bez filozofije.
-        </div>
-
-        <div style="height:12px"></div>
-        <a class="btn primary" href="#contact"><span class="dot"></span> CTA vezan za paket</a>
-      </div>
-    </section>
-
-    <!-- PARTNERS MARQUEE (keep full animated bar) -->
-    <section class="section" id="partners">
-      <div class="headRow">
-        <h2 class="h2 reveal">Partner-ready</h2>
-        <div class="desc reveal">Ubacuješ stvarne logoe kasnije. Ovo je “full” animirani bar.</div>
-      </div>
-
-      <div class="marquee reveal">
-        <div class="marqueeTrack" id="marqueeTrack">
-          <div class="logo">Jägermeister</div>
-          <div class="logo">Coca-Cola</div>
-          <div class="logo">Jack Daniel’s</div>
-          <div class="logo">G3 Spirits</div>
-          <div class="logo">Nikšićko</div>
-          <div class="logo">Partner</div>
-
-          <div class="logo">Jägermeister</div>
-          <div class="logo">Coca-Cola</div>
-          <div class="logo">Jack Daniel’s</div>
-          <div class="logo">G3 Spirits</div>
-          <div class="logo">Nikšićko</div>
-          <div class="logo">Partner</div>
+          <div class="mediaImg" aria-hidden="true">
+            <img
+              src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&w=1600&q=80"
+              alt=""
+              loading="lazy"
+            />
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- CONTACT (keep) -->
+    <!-- WHAT -->
+    <section class="section" id="what">
+      <div class="headRow">
+        <h2 class="h2 reveal">Šta tačno radimo</h2>
+        <div class="desc reveal">
+          Radimo četiri stvari — jasno, fokusirano i bez improvizacije. Ne nudimo sve svima. Biramo alate prema cilju — ne obrnuto.
+        </div>
+      </div>
+
+      <div class="grid4">
+        <div class="card reveal">
+          <div class="top"><h3>Performance</h3><span class="tag">Meta/Google</span></div>
+          <p>Postavljamo i vodimo kampanje koje dovode posjete, leadove ili prodaju — mjerljivo.</p>
+        </div>
+        <div class="card reveal">
+          <div class="top"><h3>Sadržaj za ads</h3><span class="tag">foto/video</span></div>
+          <p>Hook → poruka → CTA. Foto, video, UGC i cut-down formati spremni za distribuciju.</p>
+        </div>
+        <div class="card reveal">
+          <div class="top"><h3>SEO osnove</h3><span class="tag">landing</span></div>
+          <p>On-page osnove, struktura landing stranica i sadržajni plan koji podržava kampanje.</p>
+        </div>
+        <div class="card reveal">
+          <div class="top"><h3>Aktivacije / eventi</h3><span class="tag">teren</span></div>
+          <p>Radimo teren kad ima ulogu u kampanji: digital → teren → digital, bez praznog “vibe-a”.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- PRINCIPLES -->
+    <section class="section" id="principles">
+      <div class="headRow">
+        <h2 class="h2 reveal">Kako razmišljamo</h2>
+        <div class="desc reveal">
+          Naš sistem ima guardrail-e. Bez njih, svaki projekat se pretvori u “full service” haos.
+        </div>
+      </div>
+
+      <div class="grid2">
+        <div class="prose reveal"><div class="proseInner">
+          <h3>1) Cilj prije svega</h3>
+          <p class="lead">Ako nema jasnog cilja, nema ni ponude. Sve kreće od pitanja: šta tačno želiš da se desi?</p>
+        </div></div>
+
+        <div class="prose reveal"><div class="proseInner">
+          <h3>2) Scope je svetinja</h3>
+          <p class="lead">Prije starta zaključavamo: šta radimo, šta ne radimo, rokove i deliverables. Bez “još samo ovo”.</p>
+        </div></div>
+
+        <div class="prose reveal"><div class="proseInner">
+          <h3>3) Jedan owner po projektu</h3>
+          <p class="lead">Svaki projekat ima jednu odgovornu osobu. Bez prebacivanja, bez haosa.</p>
+        </div></div>
+
+        <div class="prose reveal"><div class="proseInner">
+          <h3>4) Rezultat &gt; estetika</h3>
+          <p class="lead">Lijep dizajn je bonus. Konverzija, pažnja i učinak su obavezni.</p>
+        </div></div>
+      </div>
+    </section>
+
+    <!-- FOR WHO -->
+    <section class="section" id="forwho">
+      <div class="headRow">
+        <h2 class="h2 reveal">Za koga radimo</h2>
+        <div class="desc reveal">
+          Radimo sa timovima koji žele partnera, ne izvođača — i kojima je rezultat bitniji od ega.
+        </div>
+      </div>
+
+      <div class="grid2">
+        <div class="card reveal">
+          <div class="top"><h3>Radimo sa</h3><span class="tag">fit</span></div>
+          <ul class="bullets">
+            <li>brendovima koji imaju jasan cilj</li>
+            <li>firmama koje razumiju budžet i rok</li>
+            <li>timovima koji žele partnera, ne izvođača</li>
+            <li>projektima gdje je rezultat bitniji od ega</li>
+          </ul>
+        </div>
+
+        <div class="card reveal">
+          <div class="top"><h3>Najčešće</h3><span class="tag">tipovi</span></div>
+          <div class="pillRow">
+            <span>launch kampanje</span>
+            <span>retail i ugostiteljstvo</span>
+            <span>B2B usluge</span>
+            <span>brend aktivacije</span>
+            <span>događaji sa jasnom svrhom</span>
+          </div>
+          <p style="margin-top:12px; color:rgba(255,255,255,.72); font-size:13px; line-height:1.65">
+            Ne nudimo sve svima. Biramo alate prema cilju — ne obrnuto.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- COLLAB -->
+    <section class="section" id="collab">
+      <div class="headRow">
+        <h2 class="h2 reveal">Kako izgleda saradnja</h2>
+        <div class="desc reveal">
+          Bez nepotrebnih sastanaka. Bez konfuzije. Bez skrivenih koraka.
+        </div>
+      </div>
+
+      <div class="steps">
+        <div class="step reveal"><p class="t">Discovery</p><p class="d">Razgovaramo o cilju, budžetu i realnim očekivanjima.</p></div>
+        <div class="step reveal"><p class="t">Plan</p><p class="d">Biramo paket i zaključavamo scope.</p></div>
+        <div class="step reveal"><p class="t">Izvođenje</p><p class="d">Kampanje, sadržaj i/ili teren — svako zna svoj dio posla.</p></div>
+        <div class="step reveal"><p class="t">Optimizacija</p><p class="d">Gasimo ono što ne radi. Pojačavamo ono što radi.</p></div>
+      </div>
+    </section>
+
+    <!-- ROLE -->
+    <section class="section" id="role">
+      <div class="headRow">
+        <h2 class="h2 reveal">Naša uloga u tvom projektu</h2>
+        <div class="desc reveal">
+          Ne dolazimo da “preuzmemo sve”. Dolazimo da pojačamo ono što ima smisla.
+        </div>
+      </div>
+
+      <div class="grid2">
+        <div class="card reveal">
+          <div class="top"><h3>Ponekad to znači</h3><span class="tag">iskreno</span></div>
+          <ul class="bullets">
+            <li>da ti kažemo da ne radiš event</li>
+            <li>da ne trošiš budžet na pogrešan kanal</li>
+            <li>da prvo središ ponudu, pa tek onda kampanju</li>
+          </ul>
+          <p style="margin-top:12px; color:rgba(255,255,255,.72); font-size:13px; line-height:1.65">To je dio posla.</p>
+        </div>
+
+        <div class="card reveal">
+          <div class="top"><h3>Gdje radimo</h3><span class="tag">region</span></div>
+          <p>
+            Sjedište nam je u Podgorici, ali radimo projekte širom Crne Gore i regiona.
+            Digital nema granice — teren ima logistiku, ali i nju znamo.
+          </p>
+          <div class="pillRow" style="margin-top:12px">
+            <span>Podgorica</span><span>Crna Gora</span><span>Region</span><span>Online + teren</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
     <section class="section" id="contact">
       <div class="headRow">
         <h2 class="h2 reveal">Zakaži poziv</h2>
-        <div class="desc reveal">
-          Počinjemo od cilja. Ako nema cilja — ne krećemo.
-        </div>
+        <div class="desc reveal">Počinjemo od cilja. Ako nema cilja — ne krećemo.</div>
       </div>
 
       <div class="splitRow">
         <div class="card reveal">
-          <div class="top">
-            <h3>Brzi kontakt</h3>
-            <span class="tag">30 min</span>
-          </div>
-          <p>
-            Na pozivu prolazimo: cilj, budžet, rok i predlog paketa. Poslije toga dobijaš tačan plan sljedećih koraka.
-          </p>
+          <div class="top"><h3>Brzi kontakt</h3><span class="tag">30 min</span></div>
+          <p>Na pozivu prolazimo: cilj, budžet, rok i predlog paketa. Poslije toga dobijaš tačan plan sljedećih koraka.</p>
           <div class="pillRow" style="margin-top:14px">
             <span>Meta/Google</span><span>SEO osnove</span><span>Content</span><span>Activation</span>
           </div>
@@ -1074,11 +1033,7 @@
         </div>
 
         <div class="card reveal">
-          <div class="top">
-            <h3>Upit (forma)</h3>
-            <span class="tag">brzo</span>
-          </div>
-
+          <div class="top"><h3>Upit (forma)</h3><span class="tag">brzo</span></div>
           <form class="form" onsubmit="event.preventDefault(); alert('Forma je demo. Poveži je sa backendom ili Google Formom.');">
             <div class="field">
               <label>Ime i firma</label>
@@ -1103,39 +1058,37 @@
 
       <footer>
         <div>© <span id="year"></span> Sindikat — Performance & Activation Studio</div>
-        <div>Podgorica • Crna Gora • @sindikat_events</div>
+        <div>Podgorica • Crna Gora</div>
       </footer>
     </section>
-
   </div>
 
   <script>
     // Year
     document.getElementById('year').textContent = new Date().getFullYear();
 
-    // Mobile menu toggle
+    // Mobile menu toggle (same behavior as other pages)
     const hamburger = document.getElementById('hamburger');
     const mobileMenu = document.getElementById('mobileMenu');
-    hamburger.addEventListener('click', ()=>{
-      const isOpen = mobileMenu.style.display === 'block';
-      mobileMenu.style.display = isOpen ? 'none' : 'block';
-      anime({
-        targets: mobileMenu,
-        opacity: isOpen ? [1,0] : [0,1],
-        translateY: isOpen ? [0,6] : [6,0],
-        duration: 260,
-        easing: 'easeOutQuad'
+    if (hamburger && mobileMenu){
+      hamburger.addEventListener('click', ()=>{
+        const isOpen = mobileMenu.style.display === 'block';
+        mobileMenu.style.display = isOpen ? 'none' : 'block';
+        anime({
+          targets: mobileMenu,
+          opacity: isOpen ? [1,0] : [0,1],
+          translateY: isOpen ? [0,6] : [6,0],
+          duration: 260,
+          easing: 'easeOutQuad'
+        });
       });
-    });
 
-    // Close mobile menu after click
-    document.querySelectorAll('#mobileMenu a').forEach(a=>{
-      a.addEventListener('click', ()=>{
-        mobileMenu.style.display = 'none';
+      document.querySelectorAll('#mobileMenu a').forEach(a=>{
+        a.addEventListener('click', ()=>{ mobileMenu.style.display = 'none'; });
       });
-    });
+    }
 
-    // Split hero title into words (safe spacing)
+    // Hero title split into words
     const titleEl = document.getElementById('heroTitle');
     const raw = titleEl.textContent.trim();
     const words = raw.split(/\s+/);
@@ -1154,7 +1107,6 @@
       entries.forEach(entry=>{
         if(!entry.isIntersecting) return;
         const el = entry.target;
-
         anime({
           targets: el,
           opacity: [0,1],
@@ -1162,13 +1114,12 @@
           duration: 820,
           easing: 'easeOutExpo'
         });
-
         io.unobserve(el);
       });
     }, {threshold: 0.14});
     revealEls.forEach(el=>io.observe(el));
 
-    // Hero title word stagger on load
+    // Hero title word stagger + progress
     window.addEventListener('load', ()=>{
       anime({
         targets: '#heroTitle span',
@@ -1179,7 +1130,14 @@
         easing: 'easeOutExpo'
       });
 
-      // CTA soft pulse
+      anime({
+        targets: '#progressFill',
+        width: ['0%','62%'],
+        duration: 1200,
+        easing: 'easeOutExpo',
+        delay: 450
+      });
+
       anime({
         targets: '.btn.primary',
         scale: [1, 1.02, 1],
@@ -1189,16 +1147,34 @@
       });
     });
 
-    // Marquee loop
-    anime({
-      targets: '#marqueeTrack',
-      translateX: ['0%', '-50%'],
-      duration: 18000,
-      easing: 'linear',
-      loop: true
-    });
+    // Counters start when hero card is visible
+    const counters = document.querySelectorAll('.counter');
+    let countersStarted = false;
 
-    // Parallax + blobs
+    const counterIO = new IntersectionObserver((entries)=>{
+      entries.forEach(entry=>{
+        if(!entry.isIntersecting || countersStarted) return;
+        countersStarted = true;
+
+        counters.forEach((c)=>{
+          const end = Number(c.dataset.value || 0);
+          anime({
+            targets: c,
+            innerHTML: [0, end],
+            round: 1,
+            duration: 1400,
+            easing: 'easeOutExpo'
+          });
+        });
+
+        counterIO.disconnect();
+      });
+    }, {threshold: 0.25});
+
+    const heroCard = document.getElementById('heroCard');
+    if(heroCard) counterIO.observe(heroCard);
+
+    // Blobs drift
     const heroBg = document.getElementById('heroBg');
     const b1 = document.getElementById('blob1');
     const b2 = document.getElementById('blob2');
@@ -1230,6 +1206,7 @@
       loop: true
     });
 
+    // scroll parallax (small)
     let ticking = false;
     window.addEventListener('scroll', ()=>{
       if(ticking) return;
@@ -1241,53 +1218,25 @@
       });
     }, {passive:true});
 
-    // Blog filter (categories)
-    const buttons = Array.from(document.querySelectorAll('.filterBtn'));
-    const posts = Array.from(document.querySelectorAll('.post'));
+    // Subtle card tilt on desktop only
+    const tiltCards = document.querySelectorAll('.card');
+    const canTilt = window.matchMedia('(hover:hover) and (pointer:fine)').matches;
 
-    function setActive(btn){
-      buttons.forEach(b=>{
-        b.classList.toggle('active', b === btn);
-        b.setAttribute('aria-selected', b === btn ? 'true' : 'false');
-      });
-    }
-
-    function animateVisibility(el, show){
-      if(show){
-        el.style.display = '';
-        anime({
-          targets: el,
-          opacity: [0,1],
-          translateY: [10,0],
-          duration: 380,
-          easing: 'easeOutExpo'
+    if(canTilt){
+      tiltCards.forEach(card=>{
+        card.addEventListener('mousemove', (e)=>{
+          const r = card.getBoundingClientRect();
+          const px = (e.clientX - r.left) / r.width;
+          const py = (e.clientY - r.top) / r.height;
+          const rotY = (px - 0.5) * 4.5;
+          const rotX = (0.5 - py) * 3.8;
+          card.style.transform = `translateY(-3px) rotateX(${rotX}deg) rotateY(${rotY}deg)`;
         });
-      } else {
-        anime({
-          targets: el,
-          opacity: [1,0],
-          translateY: [0,8],
-          duration: 260,
-          easing: 'easeOutQuad',
-          complete: ()=>{ el.style.display = 'none'; }
-        });
-      }
-    }
-
-    buttons.forEach(btn=>{
-      btn.addEventListener('click', ()=>{
-        const filter = btn.dataset.filter;
-        setActive(btn);
-
-        posts.forEach(p=>{
-          const match = (filter === 'all') || (p.dataset.category === filter);
-          if(match && p.style.display === 'none') animateVisibility(p, true);
-          if(!match && p.style.display !== 'none') animateVisibility(p, false);
+        card.addEventListener('mouseleave', ()=>{
+          card.style.transform = '';
         });
       });
-    });
+    }
   </script>
 </body>
 </html>
-
-
