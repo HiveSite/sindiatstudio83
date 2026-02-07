@@ -113,6 +113,7 @@
       padding:12px 18px;
       display:flex; align-items:center; gap:12px;
     }
+
     .brand{
       display:flex; align-items:center; gap:12px;
       font-weight:750;
@@ -133,12 +134,16 @@
 
     .ctaCenter{margin:0 auto;}
 
+    .navWrap{
+      margin-left:auto;
+      display:flex; align-items:center; gap:12px;
+    }
+
     nav{
       display:flex; gap:10px; flex-wrap:wrap;
       color:var(--muted);
       font-size:13px;
       align-items:center;
-      margin-left:auto;
     }
     nav a{
       padding:9px 10px;
@@ -174,10 +179,48 @@
       transform: rotate(8deg);
     }
 
-    /* Page header */
-    .pageHead{
-      padding:54px 0 18px;
+    /* Mobile nav */
+    .hamburger{
+      display:none;
+      width:44px; height:44px;
+      border-radius:10px;
+      border:3px solid var(--border);
+      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+      align-items:center; justify-content:center;
+      gap:5px;
+      flex-direction:column;
     }
+    .hamburger span{
+      width:18px; height:2px; background:rgba(255,255,255,.8);
+      border-radius:3px;
+      display:block;
+    }
+    .mobileMenu{
+      display:none;
+      position:absolute;
+      left:0;
+      right:0;
+      bottom:100%;
+      border-bottom:3px solid rgba(255,255,255,.10);
+      background:rgba(5,7,12,.95);
+    }
+    .mobileMenuInner{
+      max-width:var(--max);
+      margin:0 auto;
+      padding:12px 18px 16px;
+      display:grid;
+      gap:8px;
+    }
+    .mobileMenuInner a{
+      padding:12px 12px;
+      border:3px solid rgba(255,255,255,.12);
+      border-radius:10px;
+      background: linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
+      color:var(--text);
+    }
+
+    /* Page header */
+    .pageHead{ padding:54px 0 18px; }
     .kicker{
       display:flex; align-items:center; gap:10px;
       color:var(--muted);
@@ -212,11 +255,7 @@
       gap:16px; flex-wrap:wrap;
       margin-bottom:22px;
     }
-    .h2{
-      font-size:22px;
-      letter-spacing:-.2px;
-      margin:0;
-    }
+    .h2{ font-size:22px; letter-spacing:-.2px; margin:0; }
     .desc{
       color:rgba(255,255,255,.70);
       font-size:13px;
@@ -251,11 +290,7 @@
       pointer-events:none;
     }
     .card *{position:relative; z-index:2}
-    .top{
-      display:flex; align-items:center; justify-content:space-between;
-      gap:12px;
-      margin-bottom:10px;
-    }
+    .top{ display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:10px; }
     .tag{
       font-size:11px;
       color:rgba(255,176,0,.98);
@@ -315,13 +350,17 @@
       .pageHead{padding:38px 0 14px}
       h1{font-size:36px}
       .splitRow{grid-template-columns:1fr}
+
       nav{display:none}
+      .hamburger{display:flex}
       .topbarInner{justify-content:space-between}
       .ctaCenter{margin-left:auto}
     }
     @media (max-width: 520px){
       .wrap{padding:16px 14px 92px}
       .btn.primary{width:auto}
+      .topbarInner{padding:12px 14px}
+      .mobileMenuInner{padding:12px 14px 16px}
     }
   </style>
 </head>
@@ -339,20 +378,38 @@
   <!-- Topbar -->
   <header class="topbar">
     <div class="topbarInner reveal">
-      <a class="brand" href="index.html">
+      <a class="brand" href="/pocetna" aria-label="Početna">
         <div class="mark" aria-hidden="true"></div>
         <div>SINDIKAT</div>
       </a>
 
-      <a class="btn primary ctaCenter" href="#contact"><span class="dot"></span> Zatraži konsultacije</a>
+      <a class="btn primary ctaCenter" href="/kontakt"><span class="dot"></span> Zatraži konsultacije</a>
 
-      <nav aria-label="Primary">
-        <a href="index.html#products">Proizvodi</a>
-        <a href="index.html#how">Kako radimo</a>
-        <a href="index.html#work">Case</a>
-        <a href="index.html#faq">FAQ</a>
-        <a href="contact.html#contact">Kontakt</a>
-      </nav>
+      <div class="navWrap">
+        <nav aria-label="Primary">
+          <a href="/pocetna">Početna</a>
+          <a href="/usluge">Usluge</a>
+          <a href="/onama">O nama</a>
+          <a href="/blog">Blog</a>
+          <a href="/poslovi">Poslovi</a>
+          <a href="/kontakt">Kontakt</a>
+        </nav>
+
+        <button class="hamburger" id="hamburger" aria-label="Open menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+
+    <div class="mobileMenu" id="mobileMenu">
+      <div class="mobileMenuInner">
+        <a href="/pocetna">Početna</a>
+        <a href="/usluge">Usluge</a>
+        <a href="/onama">O nama</a>
+        <a href="/blog">Blog</a>
+        <a href="/poslovi">Poslovi</a>
+        <a href="/kontakt">Kontakt</a>
+      </div>
     </div>
   </header>
 
@@ -367,8 +424,7 @@
       </p>
       <div style="height:16px"></div>
       <div class="reveal" style="display:flex; gap:12px; flex-wrap:wrap">
-
-        <a class="btn" href="index.html">Nazad na početnu</a>
+        <a class="btn" href="/pocetna">Nazad na početnu</a>
       </div>
     </section>
 
@@ -442,6 +498,30 @@
     // Year
     document.getElementById('year').textContent = new Date().getFullYear();
 
+    // Mobile menu toggle (same behavior as other pages)
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+    if (hamburger && mobileMenu){
+      hamburger.addEventListener('click', ()=>{
+        const isOpen = mobileMenu.style.display === 'block';
+        mobileMenu.style.display = isOpen ? 'none' : 'block';
+        anime({
+          targets: mobileMenu,
+          opacity: isOpen ? [1,0] : [0,1],
+          translateY: isOpen ? [0,6] : [6,0],
+          duration: 260,
+          easing: 'easeOutQuad'
+        });
+      });
+
+      // Close mobile menu after click
+      document.querySelectorAll('#mobileMenu a').forEach(a=>{
+        a.addEventListener('click', ()=>{
+          mobileMenu.style.display = 'none';
+        });
+      });
+    }
+
     // Reveal observer
     const revealEls = document.querySelectorAll('.reveal');
     const io = new IntersectionObserver((entries)=>{
@@ -503,6 +583,3 @@
   </script>
 </body>
 </html>
-
-
-
