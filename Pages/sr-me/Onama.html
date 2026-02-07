@@ -1,20 +1,81 @@
 <!DOCTYPE html>
-<html lang="sr">
+<html lang="sr-ME">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Sindikat — O nama</title>
-  <meta name="description" content="Sindikat je Performance & Activation Studio. Kampanje i aktivacije koje dovode ljude, pažnju i rezultat — online i na terenu." />
 
+  <!-- SEO -->
+  <title>O nama | Sindikat — Performance & Activation Studio (Podgorica)</title>
+  <meta name="description" content="Sindikat je Performance & Activation Studio iz Podgorice. Kampanje, sadržaj i aktivacije koje imaju jasan cilj i mjerljiv rezultat — online i na terenu." />
+  <meta name="robots" content="index, follow" />
+  <meta name="theme-color" content="#05010D" />
+
+  <!-- Canonical / hreflang -->
+  <link rel="canonical" href="https://sindikatstudio83.me/onama" />
+  <link rel="alternate" href="https://sindikatstudio83.me/onama" hreflang="sr-ME" />
+  <link rel="alternate" href="https://sindikatstudio83.me/onama" hreflang="sr" />
+  <link rel="alternate" href="https://sindikatstudio83.me/onama" hreflang="x-default" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Sindikat" />
+  <meta property="og:title" content="O nama | Sindikat — Performance & Activation Studio" />
+  <meta property="og:description" content="Performance & Activation Studio iz Podgorice. Kampanje, sadržaj i aktivacije sa fokusom na rezultat." />
+  <meta property="og:url" content="https://sindikatstudio83.me/onama" />
+  <!-- Ako nemaš OG sliku, ovo može ostati placeholder dok ne dodaš fajl -->
+  <meta property="og:image" content="https://sindikatstudio83.me/assets/og-cover.jpg" />
+
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@graph":[
+      {
+        "@type":"Organization",
+        "@id":"https://sindikatstudio83.me/#organization",
+        "name":"Sindikat",
+        "url":"https://sindikatstudio83.me/",
+        "logo":"https://sindikatstudio83.me/assets/logo.png",
+        "description":"Performance & Activation Studio iz Podgorice. Kampanje, sadržaj i aktivacije sa fokusom na rezultat.",
+        "address":{
+          "@type":"PostalAddress",
+          "addressLocality":"Podgorica",
+          "addressCountry":"ME"
+        },
+        "areaServed":{
+          "@type":"Country",
+          "name":"Crna Gora"
+        }
+      },
+      {
+        "@type":"WebSite",
+        "@id":"https://sindikatstudio83.me/#website",
+        "url":"https://sindikatstudio83.me/",
+        "name":"Sindikat",
+        "publisher":{"@id":"https://sindikatstudio83.me/#organization"},
+        "inLanguage":"sr-ME"
+      },
+      {
+        "@type":"AboutPage",
+        "@id":"https://sindikatstudio83.me/onama#about",
+        "url":"https://sindikatstudio83.me/onama",
+        "name":"O nama — Sindikat",
+        "isPartOf":{"@id":"https://sindikatstudio83.me/#website"},
+        "about":{"@id":"https://sindikatstudio83.me/#organization"},
+        "inLanguage":"sr-ME"
+      }
+    ]
+  }
+  </script>
 
   <!-- Google Tag Manager -->
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-PBXVW3GK');</script>
-<!-- End Google Tag Manager -->
-  
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-PBXVW3GK');</script>
+  <!-- End Google Tag Manager -->
+
   <!-- Anime.js -->
   <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
 
@@ -628,7 +689,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       align-items:stretch;
     }
 
-    /* Contact form styles (same as your original) */
+    /* Contact form styles */
     .form{display:grid; gap:12px;}
     .field{display:grid; gap:8px;}
     label{font-size:12px; color:rgba(255,255,255,.65)}
@@ -663,6 +724,19 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap;
     }
 
+    /* Logo helper (your existing class) */
+    .brandLogo{
+      width:34px;
+      height:34px;
+      border-radius:10px;
+      object-fit:contain;
+      background: rgba(255,255,255,.06);
+      border:3px solid rgba(255,255,255,.35);
+      box-shadow:
+        0 14px 28px rgba(0,0,0,.45),
+        0 0 0 3px rgba(0,0,0,.45) inset;
+    }
+
     @media (max-width: 980px){
       .hero{padding:38px 0 18px}
       .heroGrid{grid-template-columns:1fr}
@@ -691,39 +765,22 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       .heroActions .btn{width:100%}
       .topbarInner{padding:12px 14px}
       .mobileMenuInner{padding:12px 14px 16px}
-      
-      
-    .brandLogo{
-  width:34px;
-  height:34px;
-  border-radius:10px;
-  object-fit:contain;
-  background: rgba(255,255,255,.06);
-  border:3px solid rgba(255,255,255,.35);
-  box-shadow:
-    0 14px 28px rgba(0,0,0,.45),
-    0 0 0 3px rgba(0,0,0,.45) inset;
-}
-  
     }
   </style>
 </head>
 
-<!-- Background video -->
-<video class="bgVideo" autoplay muted loop playsinline preload="metadata">
-  <source src="https://videos.pexels.com/video-files/4774631/4774631-hd_1920_1080_25fps.mp4" type="video/mp4">
-</video>
-<div class="bgVideoOverlay" aria-hidden="true"></div>
-
 <body>
-
-
   <!-- Google Tag Manager (noscript) -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PBXVW3GK"
-height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-<!-- End Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PBXVW3GK"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
 
-  
+  <!-- Background video -->
+  <video class="bgVideo" autoplay muted loop playsinline preload="metadata" aria-hidden="true">
+    <source src="https://videos.pexels.com/video-files/4774631/4774631-hd_1920_1080_25fps.mp4" type="video/mp4">
+  </video>
+  <div class="bgVideoOverlay" aria-hidden="true"></div>
+
   <!-- Background glow -->
   <div class="heroBg" id="heroBg" aria-hidden="true"></div>
 
@@ -734,14 +791,15 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <header class="topbar">
     <div class="topbarInner reveal">
       <div class="brand">
-  <img
-    src="https://via.placeholder.com/64x64?text=LOGO"
-    alt="Sindikat Studio 83 logo"
-    class="brandLogo"
-  />
-  <div>SINDIKAT STUDIO 83</div>
-</div>
-
+        <img
+          src="https://via.placeholder.com/64x64?text=LOGO"
+          alt="Sindikat logo"
+          class="brandLogo"
+          loading="eager"
+          decoding="async"
+        />
+        <div>SINDIKAT STUDIO 83</div>
+      </div>
 
       <a class="btn primary ctaCenter" href="#contact"><span class="dot"></span> Zatraži konsultacije</a>
 
@@ -773,21 +831,19 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
   </header>
 
-  <div class="wrap">
-
+  <main class="wrap" id="main">
     <!-- HERO -->
     <section class="hero" id="about">
       <div class="heroGrid">
         <div>
           <div class="kicker reveal"><span class="dot"></span> Performance & Activation Studio</div>
 
-          <h1 class="heroTitle reveal" id="heroTitle">
-            O nama.
-          </h1>
+          <!-- Single H1 -->
+          <h1 class="heroTitle reveal" id="heroTitle">O nama</h1>
 
           <p class="sub reveal">
-            Sindikat je Performance & Activation Studio. Ne pravimo kampanje da bi “izgledale dobro”.
-            Pravimo kampanje koje dovode ljude, pažnju i rezultat — online i na terenu.
+            Sindikat je Performance & Activation Studio iz Podgorice.
+            Pravimo kampanje, sadržaj i aktivacije koje imaju jasan cilj i mjerljiv rezultat — online i na terenu.
           </p>
 
           <p class="sub reveal" style="margin-top:12px">
@@ -848,7 +904,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </section>
 
     <!-- POSITIONING -->
-    <section class="section" id="positioning">
+    <section class="section" id="positioning" aria-label="Pozicioniranje">
       <div class="headRow">
         <h2 class="h2 reveal">Šta jesmo (i šta nijesmo)</h2>
         <div class="desc reveal">
@@ -887,7 +943,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </section>
 
     <!-- ORIGIN -->
-    <section class="section" id="origin">
+    <section class="section" id="origin" aria-label="Kako je nastao Sindikat">
       <div class="headRow">
         <h2 class="h2 reveal">Kako je nastao Sindikat</h2>
         <div class="desc reveal">
@@ -923,8 +979,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <div class="mediaImg" aria-hidden="true">
             <img
               src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&w=1600&q=80"
-              alt=""
+              alt="Produkcija događaja i brend aktivacije u Crnoj Gori"
               loading="lazy"
+              decoding="async"
             />
           </div>
         </div>
@@ -932,7 +989,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </section>
 
     <!-- WHAT -->
-    <section class="section" id="what">
+    <section class="section" id="what" aria-label="Šta radimo">
       <div class="headRow">
         <h2 class="h2 reveal">Šta tačno radimo</h2>
         <div class="desc reveal">
@@ -961,7 +1018,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </section>
 
     <!-- PRINCIPLES -->
-    <section class="section" id="principles">
+    <section class="section" id="principles" aria-label="Principi rada">
       <div class="headRow">
         <h2 class="h2 reveal">Kako razmišljamo</h2>
         <div class="desc reveal">
@@ -1009,7 +1066,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </section>
 
     <!-- FOR WHO -->
-    <section class="section" id="forwho">
+    <section class="section" id="forwho" aria-label="Za koga radimo">
       <div class="headRow">
         <h2 class="h2 reveal">Za koga radimo</h2>
         <div class="desc reveal">
@@ -1045,7 +1102,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </section>
 
     <!-- COLLAB -->
-    <section class="section" id="collab">
+    <section class="section" id="collab" aria-label="Kako izgleda saradnja">
       <div class="headRow">
         <h2 class="h2 reveal">Kako izgleda saradnja</h2>
         <div class="desc reveal">
@@ -1074,7 +1131,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </section>
 
     <!-- ROLE -->
-    <section class="section" id="role">
+    <section class="section" id="role" aria-label="Uloga sindikata">
       <div class="headRow">
         <h2 class="h2 reveal">Naša uloga u tvom projektu</h2>
         <div class="desc reveal">
@@ -1108,66 +1165,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </div>
     </section>
 
-    <!-- CONTACT (YOUR ORIGINAL, UNCHANGED) -->
-    <section class="section" id="contact">
-      <div class="headRow">
-        <h2 class="h2 reveal">Zakaži poziv</h2>
-        <div class="desc reveal">
-          Počinjemo od cilja. Ako nema cilja — ne krećemo.
-        </div>
-      </div>
-
-      <div class="splitRow">
-        <div class="card reveal">
-          <div class="top">
-            <h3>Brzi kontakt</h3>
-            <span class="tag">30 min</span>
-          </div>
-          <p>
-            Na pozivu prolazimo: cilj, budžet, rok i predlog paketa. Poslije toga dobijaš tačan plan sljedećih koraka.
-          </p>
-          <div class="pillRow" style="margin-top:14px">
-            <span>Meta/Google</span><span>SEO osnove</span><span>Content</span><span>Activation</span>
-          </div>
-          <div style="height:14px"></div>
-          <a class="btn primary" href="javascript:void(0)"><span class="dot"></span> Zakaži poziv</a>
-        </div>
-
-        <div class="card reveal">
-          <div class="top">
-            <h3>Upit (forma)</h3>
-            <span class="tag">brzo</span>
-          </div>
-
-          <form class="form" onsubmit="event.preventDefault(); alert('Forma je demo. Poveži je sa backendom ili Google Formom.');">
-            <div class="field">
-              <label>Ime i firma</label>
-              <input required placeholder="npr. Marko / Brand X" />
-            </div>
-            <div class="field">
-              <label>Email / telefon</label>
-              <input required placeholder="npr. marko@email.com / +382..." />
-            </div>
-            <div class="field">
-              <label>Cilj</label>
-              <input required placeholder="npr. više leadova / više posjeta / event launch" />
-            </div>
-            <div class="field">
-              <label>Poruka</label>
-              <textarea placeholder="Kratko: rok, budžet (okvirno), šta već imate."></textarea>
-            </div>
-            <button class="btn primary" type="submit"><span class="dot"></span> Pošalji upit</button>
-          </form>
-        </div>
-      </div>
+    
 
       <footer>
         <div>© <span id="year"></span> Sindikat — Performance & Activation Studio</div>
-        <div>Podgorica • Crna Gora • @sindikat_events</div>
+        <div>Podgorica • Crna Gora</div>
       </footer>
     </section>
-
-  </div>
+  </main>
 
   <script>
     // Year
@@ -1176,24 +1181,26 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     // Mobile menu toggle
     const hamburger = document.getElementById('hamburger');
     const mobileMenu = document.getElementById('mobileMenu');
-    hamburger.addEventListener('click', ()=>{
-      const isOpen = mobileMenu.style.display === 'block';
-      mobileMenu.style.display = isOpen ? 'none' : 'block';
-      anime({
-        targets: mobileMenu,
-        opacity: isOpen ? [1,0] : [0,1],
-        translateY: isOpen ? [0,6] : [6,0],
-        duration: 260,
-        easing: 'easeOutQuad'
+    if (hamburger && mobileMenu){
+      hamburger.addEventListener('click', ()=>{
+        const isOpen = mobileMenu.style.display === 'block';
+        mobileMenu.style.display = isOpen ? 'none' : 'block';
+        anime({
+          targets: mobileMenu,
+          opacity: isOpen ? [1,0] : [0,1],
+          translateY: isOpen ? [0,6] : [6,0],
+          duration: 260,
+          easing: 'easeOutQuad'
+        });
       });
-    });
 
-    // Close mobile menu after click
-    document.querySelectorAll('#mobileMenu a').forEach(a=>{
-      a.addEventListener('click', ()=>{
-        mobileMenu.style.display = 'none';
+      // Close mobile menu after click
+      document.querySelectorAll('#mobileMenu a').forEach(a=>{
+        a.addEventListener('click', ()=>{
+          mobileMenu.style.display = 'none';
+        });
       });
-    });
+    }
 
     // Hero title split into words (kept same pattern)
     const titleEl = document.getElementById('heroTitle');
@@ -1288,10 +1295,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
     const setBlobsBase = () => {
       const w = window.innerWidth, h = window.innerHeight;
-      b1.style.left = Math.max(12, w*0.06) + 'px';
-      b1.style.top  = Math.max(12, h*0.16) + 'px';
-      b2.style.left = Math.max(12, w*0.60) + 'px';
-      b2.style.top  = Math.max(12, h*0.08) + 'px';
+      if(b1){
+        b1.style.left = Math.max(12, w*0.06) + 'px';
+        b1.style.top  = Math.max(12, h*0.16) + 'px';
+      }
+      if(b2){
+        b2.style.left = Math.max(12, w*0.60) + 'px';
+        b2.style.top  = Math.max(12, h*0.08) + 'px';
+      }
     };
     setBlobsBase();
     window.addEventListener('resize', setBlobsBase);
@@ -1347,10 +1358,3 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </script>
 </body>
 </html>
-
-
-
-
-
-
-
