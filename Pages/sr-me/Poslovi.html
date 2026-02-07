@@ -1,23 +1,26 @@
 <!DOCTYPE html>
 <html lang="sr">
 <head>
-
-
   <!-- Google Tag Manager -->
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-PBXVW3GK');</script>
-<!-- End Google Tag Manager -->
-  
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-PBXVW3GK');</script>
+  <!-- End Google Tag Manager -->
+
   <link rel="icon" type="image/png" href="/favicon.png">
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <title>Sindikat Poslovi — Zaposli se ili nađi talente</title>
-  <meta name="description" content="Sindikat Poslovi – pretraži oglase, apliciraj u par klikova ili objavi posao. Kategorije, filteri, sačuvani oglasi, e-mail upozorenja." />
-  <meta name="keywords" content="poslovi, zapošljavanje, karijera, oglasi za posao, praksa, freelance, Montenegro, Podgorica, zaposli.me, prekoveze.me" />
+  <title>Sindikat Poslovi — Event, sezonski i part-time poslovi</title>
+  <meta name="description" content="Sindikat Poslovi: part-time i sezonske prilike u event industriji (bar, servis, promo tim, produkcija), plus digital i back-office podrška. Brza pretraga, pametni filteri i prijava u par klikova." />
+  <meta name="keywords" content="poslovi, event poslovi, sezonski poslovi, part-time, barmen, konobar, hostesa, promoter, DJ, fotograf, produkcija, Podgorica, Budva, Kotor, Crna Gora" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Sindikat Poslovi — Event, sezonski i part-time poslovi">
+  <meta property="og:description" content="Pronađi event posao (part-time / sezonski) ili se prijavi kao talent. Filteri, sačuvani oglasi i brza prijava.">
+  <meta property="og:type" content="website">
 
   <!-- Anime.js -->
   <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
@@ -53,6 +56,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
       --nav-h:72px;
     }
+    
 
     *{box-sizing:border-box}
     html,body{height:100%}
@@ -144,6 +148,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       opacity:.45;
     }
 
+    /* Bottom topbar */
     .topbar{
       position:fixed;
       bottom:0; left:0; right:0;
@@ -342,12 +347,27 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       opacity:.45;
       pointer-events:none;
     }
-    .card:hover{
-      transform:translateY(-6px);
-      border-color:rgba(255,59,111,.5);
-      box-shadow: 0 22px 75px rgba(0,0,0,.68);
-      filter: brightness(1.04);
+
+    /* JOB CARD: stronger blue glow on hover/focus (desktop) */
+    .jobCard{
+      cursor:pointer;
     }
+    .jobCard:hover,
+    .jobCard:focus-within{
+      transform:translateY(-6px);
+      border-color: rgba(24,245,255,.62);
+      box-shadow:
+        0 22px 75px rgba(0,0,0,.72),
+        0 0 0 2px rgba(24,245,255,.12),
+        0 0 42px rgba(24,245,255,.18);
+      filter: brightness(1.05);
+    }
+    .jobCard:hover:after,
+    .jobCard:focus-within:after{
+      border-color: rgba(24,245,255,.35);
+      opacity:.85;
+    }
+
     .card *{position:relative; z-index:2;}
 
     .grid{display:grid; gap:16px;}
@@ -503,6 +523,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       background: rgba(255,59,111,.10);
       color:rgba(255,255,255,.9);
     }
+    .badge.blue{
+      border-color:rgba(24,245,255,.38);
+      background: rgba(24,245,255,.10);
+      color:rgba(255,255,255,.92);
+    }
 
     .jobTop{
       display:flex;
@@ -528,6 +553,39 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       -webkit-tap-highlight-color: transparent;
     }
     .saveBtn:hover{transform:translateY(-2px); border-color:rgba(24,245,255,.35)}
+
+    /* Job image */
+    .jobMedia{
+      display:grid;
+      grid-template-columns: 96px 1fr;
+      gap:12px;
+      align-items:stretch;
+      margin-bottom:10px;
+    }
+    .jobThumb{
+      width:96px;
+      height:76px;
+      border-radius:12px;
+      overflow:hidden;
+      border:3px solid rgba(255,255,255,.12);
+      background: rgba(8,10,16,.65);
+      box-shadow: 0 14px 38px rgba(0,0,0,.28);
+      position:relative;
+    }
+    .jobThumb img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      opacity:.92;
+      filter:saturate(1.05) contrast(1.12);
+      transform:scale(1.02);
+    }
+    .jobThumb:after{
+      content:"";
+      position:absolute; inset:0;
+      background: linear-gradient(180deg, rgba(0,0,0,.05), rgba(0,0,0,.55));
+      pointer-events:none;
+    }
 
     .pager{
       display:flex;
@@ -558,6 +616,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       padding:16px;
     }
     .modal-bg.show{display:flex;}
+
     .modal{
       width:100%;
       max-width:720px;
@@ -567,12 +626,16 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       box-shadow: 0 22px 75px rgba(0,0,0,.68);
       overflow:hidden;
       position:relative;
+      max-height: min(92vh, 860px);
+      display:flex;
+      flex-direction:column;
     }
     .modalHead{
       padding:16px 18px;
       display:flex; align-items:center; justify-content:space-between;
       border-bottom:3px solid rgba(255,255,255,.08);
       background: linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
+      flex:0 0 auto;
     }
     .modalHead h3{margin:0; font-size:16px; letter-spacing:-.2px}
     .xBtn{
@@ -582,8 +645,18 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       background: rgba(8,10,16,.55);
       color:rgba(255,255,255,.9);
       cursor:pointer;
+      flex:0 0 auto;
     }
-    .modalBody{padding:16px 18px 18px;}
+
+    /* ✅ FIX: modal body scroll (mobile and desktop) */
+    .modalBody{
+      padding:16px 18px 18px;
+      overflow:auto;
+      -webkit-overflow-scrolling: touch;
+      flex:1 1 auto;
+      min-height:0;
+    }
+
     .formGrid{display:grid; grid-template-columns: 1fr 1fr; gap:12px;}
     .formGrid .span2{grid-column: span 2;}
     .formActions{display:flex; justify-content:flex-end; gap:10px; margin-top:6px; flex-wrap:wrap;}
@@ -662,6 +735,77 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     /* FIX: .reveal više NE skriva sadržaj po defaultu */
     .reveal{opacity:1; transform:none; will-change: transform, opacity;}
 
+    /* Details modal content */
+    .detailsHero{
+      display:grid;
+      grid-template-columns: 140px 1fr;
+      gap:14px;
+      align-items:start;
+    }
+    .detailsImg{
+      width:140px;
+      height:110px;
+      border-radius:14px;
+      overflow:hidden;
+      border:3px solid rgba(255,255,255,.12);
+      background: rgba(8,10,16,.65);
+      position:relative;
+      box-shadow: 0 14px 38px rgba(0,0,0,.28);
+    }
+    .detailsImg img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      opacity:.94;
+      filter:saturate(1.05) contrast(1.12);
+      transform:scale(1.02);
+    }
+    .detailsImg:after{
+      content:"";
+      position:absolute; inset:0;
+      background:
+        radial-gradient(240px 140px at 20% 20%, rgba(24,245,255,.16), transparent 60%),
+        linear-gradient(180deg, rgba(0,0,0,.05), rgba(0,0,0,.62));
+      pointer-events:none;
+    }
+    .detailsTitle{
+      margin:0;
+      font-size:18px;
+      letter-spacing:-.2px;
+      line-height:1.25;
+    }
+    .detailsMeta{
+      margin-top:6px;
+      color:rgba(255,255,255,.70);
+      font-size:12px;
+      line-height:1.5;
+    }
+    .detailsSection{
+      margin-top:14px;
+      border-top:3px solid rgba(255,255,255,.08);
+      padding-top:12px;
+    }
+    .detailsSection h4{
+      margin:0;
+      font-size:13px;
+      letter-spacing:.2px;
+      text-transform:uppercase;
+      color:rgba(255,255,255,.78);
+    }
+    .detailsSection ul{
+      margin:10px 0 0;
+      padding-left:18px;
+      color:rgba(255,255,255,.74);
+      font-size:13px;
+      line-height:1.6;
+    }
+    .detailsSection p{
+      margin:10px 0 0;
+      color:rgba(255,255,255,.74);
+      font-size:13px;
+      line-height:1.65;
+    }
+
     @media (max-width: 980px){
       .gridJobs{grid-template-columns: 1fr;}
       .searchGrid{grid-template-columns: 1fr; }
@@ -672,6 +816,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       .formGrid{grid-template-columns: 1fr;}
       .formGrid .span2{grid-column: auto;}
       body{ padding-bottom: 108px; }
+
+      .detailsHero{grid-template-columns: 1fr; }
+      .detailsImg{width:100%; height:180px;}
     }
     @media (max-width: 520px){
       .heroTitle{font-size:34px}
@@ -691,6 +838,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       .pager{flex-direction: column; align-items: stretch; gap: 10px;}
       .pager .btn{ width: 100%; justify-content:center; }
       #page{ text-align: center; }
+
+      .jobMedia{grid-template-columns: 1fr; }
+      .jobThumb{width:100%; height:160px;}
     }
 
     input[type="checkbox"]{ accent-color: var(--accent); }
@@ -700,17 +850,77 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       .card:hover, .btn:hover{transform:none !important;}
       .blob{display:none;}
     }
+
+
+
+
+
+    /* META LINE — vrlo sitan tekst, uvijek 1 red, bez preloma, bez skrola */
+.jobMetaLine{
+  display:flex;
+  flex-wrap:nowrap;
+  align-items:center;
+
+  width:100%;
+  max-width:100%;
+  overflow:hidden;
+
+  gap: clamp(4px, 0.8vw, 8px);
+  font-size: clamp(8px, 0.95vw, 10px);
+  line-height: 1;
+
+  white-space:nowrap;
+  color: rgba(255,255,255,.72);
+}
+
+.jobMetaLine .sep{
+  flex:0 0 auto;
+  opacity:.45;
+}
+
+/* item: samo tekst, maksimalno kompaktan */
+.jobMetaLine .pill{
+  min-width:0;
+  flex:0 1 auto;
+
+  overflow:hidden;
+  text-overflow: ellipsis;
+  white-space:nowrap;
+
+  display:inline;
+  padding:0;
+  border:0;
+  background:none;
+
+  font-weight:500;
+  color: inherit;
+}
+
+/* naknada malo jača, ali i dalje diskretna */
+.jobMetaLine .pill.accent{
+  font-weight:600;
+  color: rgba(255,255,255,.88);
+}
+
+/* KRITIČNO: dozvoli shrink unutar grid/flex kolona */
+.jobMedia > div{ min-width:0; }
+.jobTop  > div{ min-width:0; }
+
+
+
+
+
+
+    
   </style>
 </head>
 
 <body>
-
   <!-- Google Tag Manager (noscript) -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PBXVW3GK"
-height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-<!-- End Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PBXVW3GK"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
 
-  
   <video class="bgVideo" autoplay muted loop playsinline preload="metadata">
     <source src="https://videos.pexels.com/video-files/4774631/4774631-hd_1920_1080_25fps.mp4" type="video/mp4">
   </video>
@@ -723,16 +933,16 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <div class="wrap">
     <section class="hero">
       <div class="kicker reveal"><span class="dot"></span> Sindikat Poslovi</div>
-      <h1 class="heroTitle reveal" id="heroTitle">Pronađi posao ili zaposli pravi tim.</h1>
+      <h1 class="heroTitle reveal" id="heroTitle">Pronađi posao brzo. Prijavi se još brže.</h1>
       <p class="sub reveal">
-        Brza pretraga, pametni filteri, sačuvani oglasi i upozorenja. Kao zaposli.me i prekoveze.me — ali u Sindikat sistemu.
+        Part-time i sezonske prilike fokusirane na event industriju (bar, servis, promo, produkcija), plus digital i logistika.
       </p>
 
       <div class="card reveal" style="margin-top:14px">
         <div class="searchGrid">
           <div class="inputRow">
             <div class="inputIcon" aria-hidden="true">🔎</div>
-            <input id="q" type="text" placeholder="Naziv pozicije ili ključne riječi (npr. 'marketing', 'barmen')" />
+            <input id="q" type="text" placeholder="Pozicija ili ključne riječi (npr. 'barmen', 'DJ', 'video')" />
           </div>
           <div class="inputRow">
             <div class="inputIcon" aria-hidden="true">📍</div>
@@ -766,7 +976,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <section class="section" id="partners">
       <div class="headRow">
         <h2 class="h2 reveal">Partneri</h2>
-        <div class="desc reveal">Logoi i kategorije partnera. (Vizuelno u istom sistemu kao naslovna.)</div>
+        <div class="desc reveal">Primjeri prikaza partnera (vizuelno u istom sistemu).</div>
       </div>
 
       <div class="marquee reveal">
@@ -815,7 +1025,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           </div>
 
           <div class="field" style="margin-top:12px">
-            <label>Plata (€/mj)</label>
+            <label>Naknada (€/mj ili jednokratno)</label>
             <input id="minPay" type="number" placeholder="Min"/>
             <input id="maxPay" type="number" placeholder="Max" style="margin-top:10px"/>
           </div>
@@ -826,11 +1036,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           </div>
 
           <div style="margin-top:14px; color:rgba(255,255,255,.62); font-size:12px; line-height:1.6">
-            Tip: sačuvaj oglase (☆) i aktiviraj alert sa ključnim riječima.
+            Tip: klikni oglas za detalje (opis, kvalifikacije, odgovornosti).
           </div>
         </aside>
 
-        <!-- VAŽNO: više ne zavisi od reveal da bi se vidjelo -->
         <div class="grid" style="gap:14px">
           <div id="jobList" class="grid" style="gap:14px"></div>
 
@@ -848,17 +1057,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </div>
     </section>
 
-    <section class="section" id="categories">
-      <div class="headRow">
-        <h2 class="h2 reveal">Kategorije</h2>
-        <div class="desc reveal">Brzi ulaz: filtriraj po kategoriji i tipu angažmana.</div>
-      </div>
-
-      <div class="grid" style="grid-template-columns: repeat(3, 1fr); gap:16px">
-        <div class="card reveal"><div style="display:flex; justify-content:space-between; gap:12px; align-items:center"><div><div style="font-weight:800">Ugostiteljstvo</div><div style="color:rgba(255,255,255,.66); font-size:12px; margin-top:6px">Konobari, barmeni, hostese…</div></div><span class="badge accent">🍹</span></div></div>
-        <div class="card reveal"><div style="display:flex; justify-content:space-between; gap:12px; align-items:center"><div><div style="font-weight:800">Marketing & Dizajn</div><div style="color:rgba(255,255,255,.66); font-size:12px; margin-top:6px">Social, grafika, copy…</div></div><span class="badge accent">🎯</span></div></div>
-        <div class="card reveal"><div style="display:flex; justify-content:space-between; gap:12px; align-items:center"><div><div style="font-weight:800">Audio/Video & Produkcija</div><div style="color:rgba(255,255,255,.66); font-size:12px; margin-top:6px">DJ, fotograf, snimatelj…</div></div><span class="badge accent">🎧</span></div></div>
-      </div>
 
       <footer style="border-top:3px solid rgba(255,255,255,.10); padding:22px 0 0; margin-top:22px; color:rgba(255,255,255,.62); font-size:12px; display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap;">
         <div>© <span id="yearSpan"></span> Sindikat — Poslovi</div>
@@ -867,6 +1065,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </section>
   </div>
 
+  <!-- Bottom nav -->
   <header class="topbar">
     <div class="topbarInner reveal">
       <div class="brand">
@@ -905,10 +1104,19 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </header>
 
   <div id="mobileOverlay" style="position:fixed; inset:0; background:rgba(0,0,0,.55); backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); z-index:49; opacity:0; pointer-events:none;"></div>
-
   <div id="toast"></div>
 
   <!-- MODALS -->
+  <div id="detailsModal" class="modal-bg" role="dialog" aria-modal="true" aria-label="Detalji oglasa">
+    <div class="modal">
+      <div class="modalHead">
+        <h3>Detalji oglasa</h3>
+        <button class="xBtn" data-close type="button" aria-label="Close">✕</button>
+      </div>
+      <div class="modalBody" id="detailsBody"></div>
+    </div>
+  </div>
+
   <div id="postJobModal" class="modal-bg" role="dialog" aria-modal="true" aria-label="Objavi oglas">
     <div class="modal">
       <div class="modalHead">
@@ -952,18 +1160,50 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
               <option>Free application</option>
             </select>
           </div>
+
+          <!-- ✅ PAY: monthly or one-time -->
           <div class="field">
-            <label>Plata (€/mj)</label>
+            <label>Iznos naknade (€)</label>
             <input name="pay" type="number" placeholder="npr. 900"/>
           </div>
-          <div class="field span2">
-            <label>Opis</label>
-            <textarea name="desc" rows="4" placeholder="Kratak opis posla, odgovornosti, benefiti…"></textarea>
+          <div class="field">
+            <label>Tip naknade</label>
+            <select name="payType">
+              <option value="monthly">Mjesečno</option>
+              <option value="one-time">Jednokratno</option>
+            </select>
           </div>
+
+          <div class="field span2">
+            <label>Slika (URL)</label>
+            <input name="img" placeholder="https://... (opciono)"/>
+          </div>
+
+          <div class="field span2">
+            <label>Kratak opis</label>
+            <textarea name="desc" rows="4" placeholder="Kratko: uloga, tempo, šta se radi…"></textarea>
+          </div>
+
+          <div class="field span2">
+            <label>Odgovornosti (po jedna stavka u novi red)</label>
+            <textarea name="responsibilities" rows="4" placeholder="npr. Priprema barske stanice&#10;Rad u smjenama po event kalendaru&#10;Komunikacija sa gostima"></textarea>
+          </div>
+
+          <div class="field span2">
+            <label>Kvalifikacije (po jedna stavka u novi red)</label>
+            <textarea name="qualifications" rows="4" placeholder="npr. Iskustvo u radu sa gostima&#10;Brzina i urednost&#10;Poželjno znanje engleskog"></textarea>
+          </div>
+
+          <div class="field span2">
+            <label>Benefiti (po jedna stavka u novi red)</label>
+            <textarea name="benefits" rows="3" placeholder="npr. Smjene po dogovoru&#10;Obuka&#10;Rad na većim eventima"></textarea>
+          </div>
+
           <div class="field span2">
             <label>Link za prijavu ili e-mail</label>
             <input name="apply" placeholder="npr. hr@firma.me ili https://…"/>
           </div>
+
           <div class="formActions span2">
             <button type="button" class="btn" data-close>Otkaži</button>
             <button class="btn primary" type="submit"><span class="dot"></span> Objavi</button>
@@ -1018,7 +1258,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </div>
       <div class="modalBody">
         <form id="alertsForm" class="grid" style="gap:12px">
-          <input id="alertQ" name="alertQ" placeholder="Ključne riječi (npr. barmen, copywriter)"/>
+          <input id="alertQ" name="alertQ" placeholder="Ključne riječi (npr. barmen, promoter, DJ)"/>
           <input id="alertEmail" name="alertEmail" type="email" placeholder="tvoj@email.com"/>
           <button class="btn primary" type="submit"><span class="dot"></span> Aktiviraj upozorenje</button>
         </form>
@@ -1027,52 +1267,599 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 
   <script>
-    /* sve inicijalizuj tek kad DOM bude spreman (WP-safe) */
     window.addEventListener("DOMContentLoaded", () => {
       const WEBAPP_URL = "https://script.google.com/macros/s/AKfycbwg35e8BF_-32054RhJphkuUvS1gg9UuWShQGBGIER04-2vAdyCbtE2swz3JNhWV9q11w/exec";
       const SOURCE_LABEL = "Sindikat Poslovi – website";
 
+      const safe = (v) => String(v ?? "")
+        .replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;").replace(/'/g,"&#039;");
+
+      const splitLines = (t) => (t || "")
+        .split("\n")
+        .map(s => s.trim())
+        .filter(Boolean);
+
       const baseJobs = [
-        { id:"j1", title:"Barmen / Event bar", company:"Sindikat", location:"Budva • Podgorica • Kotor", category:"Ugostiteljstvo", type:["Sezonski","Part-time"], pay:900, posted:"2025-12-01",
-          desc:"Rad na mobilnim barovima, klasični i signature kokteli. Prednost iskustvo u event okruženju. Obuka za recepte i standarde na licu mjesta.", apply:"sindikatevents@gmail.com" },
-        { id:"j2", title:"Konobar / Event catering", company:"Sindikat", location:"Podgorica • Budva", category:"Ugostiteljstvo", type:["Sezonski","Part-time"], pay:750, posted:"2025-12-05",
-          desc:"Usluga na korporativnim i privatnim događajima. Brza komunikacija, rad u timu, smjene po event kalendaru.", apply:"sindikatevents@gmail.com" },
-        { id:"j3", title:"Šanker / Mobilni bar setup", company:"Sindikat", location:"Kotor • Tivat", category:"Ugostiteljstvo", type:["Freelance","Sezonski"], pay:80, posted:"2025-12-08",
-          desc:"Montaža i priprema mobilnog šanka, led, garnish, logistika barske stanice. Prednost iskustvo na terenu.", apply:"sindikatevents@gmail.com" },
-        { id:"j4", title:"Barback / Pomoć u baru (event)", company:"Sindikat", location:"Budva • Podgorica", category:"Ugostiteljstvo", type:["Sezonski"], pay:650, posted:"2025-12-10",
-          desc:"Dopuna robe, led, čaše, održavanje barske stanice. Brz tempo, obuka obezbijeđena.", apply:"sindikatevents@gmail.com" },
-        { id:"j5", title:"Hostesa / Registracija & doček", company:"Sindikat", location:"Podgorica", category:"Event menadžment", type:["Part-time"], pay:35, posted:"2025-12-12",
-          desc:"Doček gostiju, registracija i usmjeravanje. Poželjno iskustvo i znanje engleskog jezika.", apply:"sindikatevents@gmail.com" },
-        { id:"j6", title:"Promoter / Brand aktivacije", company:"Sindikat", location:"Crna Gora (terenski)", category:"Event menadžment", type:["Part-time","Sezonski"], pay:40, posted:"2025-12-14",
-          desc:"Promo tim na aktivacijama (sampling, QR, UGC). Komunikativnost obavezna.", apply:"sindikatevents@gmail.com" },
-        { id:"j7", title:"Koordinator događaja (junior)", company:"Sindikat", location:"Podgorica", category:"Event menadžment", type:["Full-time"], pay:950, posted:"2025-12-16",
-          desc:"Koordinacija dobavljača, tajming, checkliste i komunikacija sa klijentom na dan eventa.", apply:"sindikatevents@gmail.com" },
-        { id:"j8", title:"Stagehand / Tehnička podrška", company:"Sindikat", location:"Podgorica • Budva", category:"Audio/Video & Produkcija", type:["Freelance"], pay:50, posted:"2025-12-18",
-          desc:"Pomoć pri montaži scene, kablovi, osnovni rigging i pack down.", apply:"sindikatevents@gmail.com" },
-        { id:"j9", title:"DJ (open format) — eventi", company:"Sindikat", location:"Podgorica • terenski", category:"Audio/Video & Produkcija", type:["Freelance"], pay:120, posted:"2025-12-19",
-          desc:"Open format setovi (pop, house, regional). Prednost sopstvena oprema.", apply:"sindikatevents@gmail.com" },
-        { id:"j10", title:"Fotograf — događaji", company:"Sindikat", location:"Kotor • Budva", category:"Audio/Video & Produkcija", type:["Freelance"], pay:150, posted:"2025-12-20",
-          desc:"Event fotografija, selekcija i isporuka highlight albuma u 48h.", apply:"sindikatevents@gmail.com" },
-        { id:"j11", title:"Snimatelj (short-form video)", company:"Sindikat", location:"Podgorica", category:"Audio/Video & Produkcija", type:["Freelance","Part-time"], pay:200, posted:"2025-12-22",
-          desc:"Snimanje reels/TikTok formata na eventima + osnovna montaža.", apply:"sindikatevents@gmail.com" },
-        { id:"j12", title:"Video editor (Reels / TikTok)", company:"Sindikat", location:"Remote", category:"Marketing & Dizajn", type:["Part-time","Remote"], pay:600, posted:"2025-12-23",
-          desc:"Montaža short-form videa, titlovi, tempo i hook. Event iskustvo plus.", apply:"sindikatevents@gmail.com" },
-        { id:"j13", title:"Graphic designer (Canva / Adobe)", company:"Sindikat", location:"Podgorica • Remote", category:"Marketing & Dizajn", type:["Part-time"], pay:550, posted:"2025-12-24",
-          desc:"Vizuali za kampanje, story setovi, baneri. Osnovni motion bonus.", apply:"sindikatevents@gmail.com" },
-        { id:"j14", title:"Copywriter (ads + landing)", company:"Sindikat", location:"Remote", category:"Marketing & Dizajn", type:["Freelance","Remote"], pay:120, posted:"2025-12-26",
-          desc:"Copy za oglase i landing stranice. Fokus na jasnoću i CTA.", apply:"sindikatevents@gmail.com" },
-        { id:"j15", title:"Meta Ads specialist (junior)", company:"Sindikat", location:"Podgorica", category:"IT & Digital", type:["Part-time"], pay:700, posted:"2025-12-27",
-          desc:"Postavljanje i osnovna optimizacija kampanja. Mentorstvo uključeno.", apply:"sindikatevents@gmail.com" },
-        { id:"j16", title:"Google Ads / Search specialist", company:"Sindikat", location:"Podgorica • Remote", category:"IT & Digital", type:["Freelance","Remote"], pay:250, posted:"2025-12-28",
-          desc:"Search struktura, keyword research, konverzije i landing preporuke.", apply:"sindikatevents@gmail.com" },
-        { id:"j17", title:"Webflow / WordPress implementacija", company:"Sindikat", location:"Remote", category:"IT & Digital", type:["Freelance","Remote"], pay:300, posted:"2025-12-29",
-          desc:"Implementacija dizajna, brzina, SEO osnove, forme i tracking.", apply:"sindikatevents@gmail.com" },
-        { id:"j18", title:"CRM & automatizacije (Zapier / Make)", company:"Sindikat", location:"Remote", category:"IT & Digital", type:["Freelance","Remote"], pay:200, posted:"2025-12-30",
-          desc:"Lead routing, email automatizacije, integracije i reporting.", apply:"sindikatevents@gmail.com" },
-        { id:"j19", title:"Office asistent / Administracija", company:"Sindikat", location:"Podgorica", category:"Administracija", type:["Full-time"], pay:800, posted:"2026-01-02",
-          desc:"Dokumentacija, logistika, fakture i komunikacija sa dobavljačima.", apply:"sindikatevents@gmail.com" },
-        { id:"j20", title:"Vozač / Logistika opreme", company:"Sindikat", location:"Podgorica", category:"Event menadžment", type:["Full-time","Sezonski"], pay:900, posted:"2026-01-04",
-          desc:"Prevoz i isporuka barske i event opreme, utovar/istovar.", apply:"sindikatevents@gmail.com" }
+        {
+          id:"j1",
+          title:"Barmen / Event bar",
+          company:"Sindikat",
+          location:"Budva • Podgorica • Kotor",
+          category:"Ugostiteljstvo",
+          type:["Sezonski","Part-time"],
+          pay:900,
+          payType:"monthly",
+          posted:"2025-12-01",
+          img:"https://images.unsplash.com/photo-1514933651103-005eec06c04b?auto=format&fit=crop&w=1200&q=70",
+          desc:"Rad na mobilnim barovima, klasični i signature kokteli. Obuka za recepte i standarde na licu mjesta.",
+          responsibilities:[
+            "Priprema barske stanice (led, garnish, čaše, mise en place)",
+            "Izrada koktela po recepturi i standardu",
+            "Održavanje urednosti i brzine tokom servisa"
+          ],
+          qualifications:[
+            "Iskustvo u radu u baru (poželjno, ali nije uslov)",
+            "Brzina, urednost i rad u timu",
+            "Poželjno osnovno znanje engleskog"
+          ],
+          benefits:[
+            "Obuka i standardi na licu mjesta",
+            "Smjene po event kalendaru",
+            "Rad na premium događajima"
+          ],
+          apply:"sindikatevents@gmail.com"
+        },
+        {
+          id:"j2",
+          title:"Konobar / Event catering",
+          company:"Sindikat",
+          location:"Podgorica • Budva",
+          category:"Ugostiteljstvo",
+          type:["Sezonski","Part-time"],
+          pay:750,
+          payType:"monthly",
+          posted:"2025-12-05",
+          img:"https://images.unsplash.com/photo-1525268323446-0505b6fe7778?auto=format&fit=crop&w=1200&q=70",
+          desc:"Usluga na korporativnim i privatnim događajima. Smjene po event kalendaru.",
+          responsibilities:[
+            "Usluga gostiju (piće/hrana) po standardu",
+            "Priprema i raspremanje zone (setup/packdown)",
+            "Komunikacija sa koordinatorom i timom"
+          ],
+          qualifications:[
+            "Ljubazna komunikacija i uredan nastup",
+            "Rad u timu i pod pritiskom",
+            "Poželjno iskustvo u ugostiteljstvu"
+          ],
+          benefits:[
+            "Smjene po dogovoru",
+            "Jasne checkliste i podrška koordinatora",
+            "Mogućnost napredovanja u team lead"
+          ],
+          apply:"sindikatevents@gmail.com"
+        },
+        {
+          id:"j3",
+          title:"Šanker / Mobilni bar setup",
+          company:"Sindikat",
+          location:"Kotor • Tivat",
+          category:"Ugostiteljstvo",
+          type:["Freelance","Sezonski"],
+          pay:250,
+          payType:"one-time",
+          posted:"2025-12-08",
+          img:"https://images.unsplash.com/photo-1541542684-4bf98d79c4f2?auto=format&fit=crop&w=1200&q=70",
+          desc:"Montaža i priprema mobilnog šanka, led, garnish, logistika barske stanice.",
+          responsibilities:[
+            "Montaža i pozicioniranje šanka i opreme",
+            "Priprema potrošnog materijala (led, garnish, čaše)",
+            "Koordinacija sa bar timom prije otvaranja"
+          ],
+          qualifications:[
+            "Poželjno iskustvo na terenu (event setup)",
+            "Fizička spremnost i odgovornost",
+            "Tačnost i poštovanje tajminga"
+          ],
+          benefits:[
+            "Jednokratne angažmane po eventima",
+            "Jasan scope i satnica po dogovoru",
+            "Brza isplata po završetku"
+          ],
+          apply:"sindikatevents@gmail.com"
+        },
+        {
+          id:"j4",
+          title:"Barback / Pomoć u baru (event)",
+          company:"Sindikat",
+          location:"Budva • Podgorica",
+          category:"Ugostiteljstvo",
+          type:["Sezonski"],
+          pay:650,
+          payType:"monthly",
+          posted:"2025-12-10",
+          img:"https://images.unsplash.com/photo-1543007630-9710e4a00a20?auto=format&fit=crop&w=1200&q=70",
+          desc:"Dopuna robe, led, čaše, održavanje barske stanice. Brz tempo, obuka obezbijeđena.",
+          responsibilities:[
+            "Dopuna robe i potrošnog materijala",
+            "Održavanje urednosti radne površine",
+            "Pomoć barmenima u špicu"
+          ],
+          qualifications:[
+            "Brzina i snalažljivost",
+            "Odgovornost i urednost",
+            "Spremnost za smjenski rad"
+          ],
+          benefits:[
+            "Obuka i jasne procedure",
+            "Brz ulaz u event bar tim",
+            "Rad na velikim događajima"
+          ],
+          apply:"sindikatevents@gmail.com"
+        },
+        {
+          id:"j5",
+          title:"Hostesa / Registracija & doček",
+          company:"Sindikat",
+          location:"Podgorica",
+          category:"Event menadžment",
+          type:["Part-time"],
+          pay:300,
+          payType:"one-time",
+          posted:"2025-12-12",
+          img:"https://images.unsplash.com/photo-1515168833906-d2a3b82b302a?auto=format&fit=crop&w=1200&q=70",
+          desc:"Doček gostiju, registracija i usmjeravanje. Poželjno iskustvo i znanje engleskog jezika.",
+          responsibilities:[
+            "Registracija i akreditacije (lista/QR)",
+            "Usmjeravanje gostiju i osnovne informacije",
+            "Koordinacija sa floor menadžerom"
+          ],
+          qualifications:[
+            "Uredan nastup i komunikativnost",
+            "Poželjno znanje engleskog",
+            "Tačnost i profesionalnost"
+          ],
+          benefits:[
+            "Jednokratni angažmani po događajima",
+            "Jasna uloga i checklista",
+            "Rad u premium okruženju"
+          ],
+          apply:"sindikatevents@gmail.com"
+        },
+        {
+          id:"j6",
+          title:"Promoter / Brand aktivacije",
+          company:"Sindikat",
+          location:"Crna Gora (terenski)",
+          category:"Event menadžment",
+          type:["Part-time","Sezonski"],
+          pay:450,
+          payType:"monthly",
+          posted:"2025-12-14",
+          img:"https://images.unsplash.com/photo-1520975693411-b9590cda5d72?auto=format&fit=crop&w=1200&q=70",
+          desc:"Promo tim na aktivacijama (sampling, QR, UGC). Komunikativnost obavezna.",
+          responsibilities:[
+            "Kontakt sa publikom (sampling/QR/anketa)",
+            "Kratko objašnjenje ponude i CTA",
+            "Izvještaj nakon smjene (osnovni podaci)"
+          ],
+          qualifications:[
+            "Komunikativnost i energija",
+            "Odgovornost prema brendu",
+            "Spremnost za terenski rad"
+          ],
+          benefits:[
+            "Dinamičan rad i putovanja",
+            "Mogućnost team lead uloge",
+            "Obuka i materijali"
+          ],
+          apply:"sindikatevents@gmail.com"
+        },
+        {
+          id:"j7",
+          title:"Koordinator događaja (junior)",
+          company:"Sindikat",
+          location:"Podgorica",
+          category:"Event menadžment",
+          type:["Full-time"],
+          pay:950,
+          payType:"monthly",
+          posted:"2025-12-16",
+          img:"https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1200&q=70",
+          desc:"Koordinacija dobavljača, tajming, checkliste i komunikacija sa klijentom na dan eventa.",
+          responsibilities:[
+            "Plan i checkliste (setup / show / packdown)",
+            "Koordinacija dobavljača i timova na terenu",
+            "Komunikacija sa klijentom i rješavanje situacija"
+          ],
+          qualifications:[
+            "Organizovanost i brzina odlučivanja",
+            "Poželjno iskustvo u eventima",
+            "Vozačka dozvola (bonus)"
+          ],
+          benefits:[
+            "Rad na velikim projektima",
+            "Jasan sistem i procesi",
+            "Napredovanje u lead poziciju"
+          ],
+          apply:"sindikatevents@gmail.com"
+        },
+        {
+          id:"j8",
+          title:"Stagehand / Tehnička podrška",
+          company:"Sindikat",
+          location:"Podgorica • Budva",
+          category:"Audio/Video & Produkcija",
+          type:["Freelance"],
+          pay:180,
+          payType:"one-time",
+          posted:"2025-12-18",
+          img:"https://images.unsplash.com/photo-1520174691701-bc555a3404ca?auto=format&fit=crop&w=1200&q=70",
+          desc:"Pomoć pri montaži scene, kablovi, osnovni rigging i pack down.",
+          responsibilities:[
+            "Montaža/demontaža opreme (osvjetljenje/razglas)",
+            "Kabliranje i osnovna tehnička pomoć",
+            "Poštovanje sigurnosnih procedura"
+          ],
+          qualifications:[
+            "Fizička spremnost",
+            "Tačnost i timski rad",
+            "Poželjno iskustvo u produkciji"
+          ],
+          benefits:[
+            "Angažmani po događajima",
+            "Rad sa iskusnim tehničarima",
+            "Brz rast kroz praksu"
+          ],
+          apply:"sindikatevents@gmail.com"
+        },
+        {
+          id:"j9",
+          title:"DJ (open format) — eventi",
+          company:"Sindikat",
+          location:"Podgorica • terenski",
+          category:"Audio/Video & Produkcija",
+          type:["Freelance"],
+          pay:250,
+          payType:"one-time",
+          posted:"2025-12-19",
+          img:"https://images.unsplash.com/photo-1511379938547-c1f69419868d?auto=format&fit=crop&w=1200&q=70",
+          desc:"Open format setovi (pop, house, regional). Prednost sopstvena oprema.",
+          responsibilities:[
+            "Priprema setova prema profilu događaja",
+            "Koordinacija sa produkcijom i tajmingom",
+            "Osiguranje kontinuiteta atmosfere"
+          ],
+          qualifications:[
+            "Iskustvo na eventima",
+            "Pouzdanost i tačnost",
+            "Poželjno sopstvena oprema"
+          ],
+          benefits:[
+            "Jednokratni angažmani",
+            "Mogućnost stalne saradnje",
+            "Rad na premium lokacijama"
+          ],
+          apply:"sindikatevents@gmail.com"
+        },
+        {
+          id:"j10",
+          title:"Fotograf — događaji",
+          company:"Sindikat",
+          location:"Kotor • Budva",
+          category:"Audio/Video & Produkcija",
+          type:["Freelance"],
+          pay:300,
+          payType:"one-time",
+          posted:"2025-12-20",
+          img:"https://images.unsplash.com/photo-1452587925148-ce544e77e70d?auto=format&fit=crop&w=1200&q=70",
+          desc:"Event fotografija, selekcija i isporuka highlight albuma u 48h.",
+          responsibilities:[
+            "Snimanje ključnih momenata (people, venue, brand)",
+            "Brza selekcija i osnovna obrada",
+            "Isporuka highlight seta u dogovorenom roku"
+          ],
+          qualifications:[
+            "Iskustvo u event fotografiji",
+            "Sopstvena oprema",
+            "Brza isporuka i organizovan rad"
+          ],
+          benefits:[
+            "Jasni brifovi",
+            "Kontinuirani angažmani",
+            "Rad sa brendovima"
+          ],
+          apply:"sindikatevents@gmail.com"
+        },
+        {
+          id:"j11",
+          title:"Snimatelj (short-form video)",
+          company:"Sindikat",
+          location:"Podgorica",
+          category:"Audio/Video & Produkcija",
+          type:["Freelance","Part-time"],
+          pay:450,
+          payType:"one-time",
+          posted:"2025-12-22",
+          img:"https://images.unsplash.com/photo-1526481280695-3c687fd5432c?auto=format&fit=crop&w=1200&q=70",
+          desc:"Snimanje reels/TikTok formata na eventima + osnovna montaža.",
+          responsibilities:[
+            "Snimanje short-form (hook, detalji, crowd)",
+            "Organizacija materijala i selekcija",
+            "Osnovna montaža ili predaja editoru"
+          ],
+          qualifications:[
+            "Osjećaj za tempo i kadar",
+            "Sopstvena oprema (poželjno)",
+            "Brzina isporuke"
+          ],
+          benefits:[
+            "Rad na događajima sa velikim reach-om",
+            "Jasni brifovi i reference",
+            "Mogućnost stalne saradnje"
+          ],
+          apply:"sindikatevents@gmail.com"
+        },
+        {
+          id:"j12",
+          title:"Video editor (Reels / TikTok)",
+          company:"Sindikat",
+          location:"Remote",
+          category:"Marketing & Dizajn",
+          type:["Part-time","Remote"],
+          pay:600,
+          payType:"monthly",
+          posted:"2025-12-23",
+          img:"https://images.unsplash.com/photo-1620674156044-52b714665d46?auto=format&fit=crop&w=1200&q=70",
+          desc:"Montaža short-form videa, titlovi, tempo i hook.",
+          responsibilities:[
+            "Montaža short-form klipova (15–45s)",
+            "Titlovi, ritam, hook i CTA",
+            "Organizacija fajlova i verzija"
+          ],
+          qualifications:[
+            "Iskustvo u montaži short-form",
+            "Brzina i preciznost",
+            "Poznavanje trendova (bonus)"
+          ],
+          benefits:[
+            "Remote rad",
+            "Jasan sistem feedbacka",
+            "Kontinuirani materijal"
+          ],
+          apply:"sindikatevents@gmail.com"
+        },
+        {
+          id:"j13",
+          title:"Graphic designer (Canva / Adobe)",
+          company:"Sindikat",
+          location:"Podgorica • Remote",
+          category:"Marketing & Dizajn",
+          type:["Part-time"],
+          pay:550,
+          payType:"monthly",
+          posted:"2025-12-24",
+          img:"https://images.unsplash.com/photo-1526498460520-4c246339dccb?auto=format&fit=crop&w=1200&q=70",
+          desc:"Vizuali za kampanje, story setovi, baneri. Osnovni motion bonus.",
+          responsibilities:[
+            "Kreiranje setova vizuala za ads",
+            "Adaptacije formata (feed/story)",
+            "Rad po briefu i rokovima"
+          ],
+          qualifications:[
+            "Canva i/ili Adobe osnovno",
+            "Osjećaj za tipografiju i kompoziciju",
+            "Brzina i urednost"
+          ],
+          benefits:[
+            "Jasni template-i",
+            "Part-time fleksibilno",
+            "Stalni tok posla"
+          ],
+          apply:"sindikatevents@gmail.com"
+        },
+        {
+          id:"j14",
+          title:"Copywriter (ads + landing)",
+          company:"Sindikat",
+          location:"Remote",
+          category:"Marketing & Dizajn",
+          type:["Freelance","Remote"],
+          pay:300,
+          payType:"one-time",
+          posted:"2025-12-26",
+          img:"https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&fit=crop&w=1200&q=70",
+          desc:"Copy za oglase i landing stranice. Fokus na jasnoću i CTA.",
+          responsibilities:[
+            "Pisanje ad copy varijanti (hook/benefit/CTA)",
+            "Struktura landing sekcija (headline, proof, CTA)",
+            "Iteracije na osnovu performansi"
+          ],
+          qualifications:[
+            "Jasno pisanje bez praznih fraza",
+            "Razumijevanje konverzije (bonus)",
+            "Poštovanje rokova"
+          ],
+          benefits:[
+            "Brifovi i reference",
+            "Rad po performance metrikama",
+            "Kontinuirani projekti"
+          ],
+          apply:"sindikatevents@gmail.com"
+        },
+        {
+          id:"j15",
+          title:"Meta Ads specialist (junior)",
+          company:"Sindikat",
+          location:"Podgorica",
+          category:"IT & Digital",
+          type:["Part-time"],
+          pay:700,
+          payType:"monthly",
+          posted:"2025-12-27",
+          img:"https://images.unsplash.com/photo-1553877522-43269d4ea984?auto=format&fit=crop&w=1200&q=70",
+          desc:"Postavljanje i osnovna optimizacija kampanja. Mentorstvo uključeno.",
+          responsibilities:[
+            "Postavljanje kampanja i setova oglasa",
+            "Praćenje osnovnih metrika i optimizacije",
+            "Koordinacija sa content timom"
+          ],
+          qualifications:[
+            "Osnovno znanje Meta Ads",
+            "Analitičnost i urednost",
+            "Spremnost za učenje"
+          ],
+          benefits:[
+            "Mentorstvo",
+            "Part-time fleksibilno",
+            "Rad na realnim budžetima"
+          ],
+          apply:"sindikatevents@gmail.com"
+        },
+        {
+          id:"j16",
+          title:"Google Ads / Search specialist",
+          company:"Sindikat",
+          location:"Podgorica • Remote",
+          category:"IT & Digital",
+          type:["Freelance","Remote"],
+          pay:350,
+          payType:"one-time",
+          posted:"2025-12-28",
+          img:"https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=70",
+          desc:"Search struktura, keyword research, konverzije i landing preporuke.",
+          responsibilities:[
+            "Kreiranje Search strukture i keyword research",
+            "Praćenje konverzija i optimizacija",
+            "Preporuke za landing i tracking"
+          ],
+          qualifications:[
+            "Iskustvo sa Google Ads",
+            "Razumijevanje intent-a",
+            "Preciznost u strukturi"
+          ],
+          benefits:[
+            "Remote saradnja",
+            "Jasni ciljevi i scope",
+            "Kontinuirani projekti"
+          ],
+          apply:"sindikatevents@gmail.com"
+        },
+        {
+          id:"j17",
+          title:"Webflow / WordPress implementacija",
+          company:"Sindikat",
+          location:"Remote",
+          category:"IT & Digital",
+          type:["Freelance","Remote"],
+          pay:400,
+          payType:"one-time",
+          posted:"2025-12-29",
+          img:"https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1200&q=70",
+          desc:"Implementacija dizajna, brzina, SEO osnove, forme i tracking.",
+          responsibilities:[
+            "Implementacija stranica po dizajnu",
+            "Optimizacija brzine i osnovni SEO",
+            "Forme, tracking i QA"
+          ],
+          qualifications:[
+            "Iskustvo sa WP/Webflow",
+            "Urednost i pažnja na detalje",
+            "Osnovno razumijevanje SEO"
+          ],
+          benefits:[
+            "Remote angažmani",
+            "Jasan scope i rokovi",
+            "Stalni tok taskova"
+          ],
+          apply:"sindikatevents@gmail.com"
+        },
+        {
+          id:"j18",
+          title:"CRM & automatizacije (Zapier / Make)",
+          company:"Sindikat",
+          location:"Remote",
+          category:"IT & Digital",
+          type:["Freelance","Remote"],
+          pay:300,
+          payType:"one-time",
+          posted:"2025-12-30",
+          img:"https://images.unsplash.com/photo-1556761175-4b46a572b786?auto=format&fit=crop&w=1200&q=70",
+          desc:"Lead routing, email automatizacije, integracije i reporting.",
+          responsibilities:[
+            "Povezivanje formi → CRM → email tokovi",
+            "Automatizacije u Zapier/Make",
+            "Osnovni reporting i monitoring"
+          ],
+          qualifications:[
+            "Iskustvo sa Zapier/Make",
+            "Logika i struktura",
+            "Samostalnost"
+          ],
+          benefits:[
+            "Remote projekti",
+            "Jasan sistem i spec",
+            "Kontinuirana saradnja"
+          ],
+          apply:"sindikatevents@gmail.com"
+        },
+        {
+          id:"j19",
+          title:"Office asistent / Administracija",
+          company:"Sindikat",
+          location:"Podgorica",
+          category:"Administracija",
+          type:["Full-time"],
+          pay:800,
+          payType:"monthly",
+          posted:"2026-01-02",
+          img:"https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?auto=format&fit=crop&w=1200&q=70",
+          desc:"Dokumentacija, logistika, fakture i komunikacija sa dobavljačima.",
+          responsibilities:[
+            "Dokumentacija i osnovna administracija",
+            "Komunikacija sa dobavljačima",
+            "Pomoć oko logistike događaja"
+          ],
+          qualifications:[
+            "Urednost i odgovornost",
+            "Osnovno poznavanje Excela/Sheets",
+            "Komunikacija i tačnost"
+          ],
+          benefits:[
+            "Stabilan angažman",
+            "Jasne procedure",
+            "Rad u dinamičnom timu"
+          ],
+          apply:"sindikatevents@gmail.com"
+        },
+        {
+          id:"j20",
+          title:"Vozač / Logistika opreme",
+          company:"Sindikat",
+          location:"Podgorica",
+          category:"Event menadžment",
+          type:["Full-time","Sezonski"],
+          pay:900,
+          payType:"monthly",
+          posted:"2026-01-04",
+          img:"https://images.unsplash.com/photo-1529070538774-1843cb3265df?auto=format&fit=crop&w=1200&q=70",
+          desc:"Prevoz i isporuka barske i event opreme, utovar/istovar.",
+          responsibilities:[
+            "Prevoz opreme na lokacije",
+            "Utovar/istovar uz tim",
+            "Briga o osnovnom stanju vozila i opreme"
+          ],
+          qualifications:[
+            "Vozačka dozvola B",
+            "Odgovornost i tačnost",
+            "Spremnost za rad po kalendaru događaja"
+          ],
+          benefits:[
+            "Stalna ili sezonska saradnja",
+            "Jasan plan i rute",
+            "Rad u timu"
+          ],
+          apply:"sindikatevents@gmail.com"
+        }
       ];
 
       const perPage = 5;
@@ -1080,6 +1867,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       let chips = new Set();
 
       const el = (id) => document.getElementById(id);
+
       const toast = (t) => {
         const n = el("toast");
         if (!n) return;
@@ -1088,51 +1876,80 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         setTimeout(()=>n.classList.remove("show"), 2400);
       };
 
+      // Prevent body scroll when any modal is open
+      const setBodyLock = (locked) => {
+        document.documentElement.style.overflow = locked ? "hidden" : "";
+        document.body.style.overflow = locked ? "hidden" : "";
+        document.body.style.touchAction = locked ? "none" : "";
+      };
+
       const readJobs = () => {
         const posted = JSON.parse(localStorage.getItem("sindikat_jobs") || "[]");
         const merged = [...posted, ...baseJobs.filter(b => !posted.some(p => p.id === b.id))];
         return merged.sort((a,b)=> new Date(b.posted) - new Date(a.posted));
       };
 
+      const payText = (j) => {
+        if (j.pay === "" || j.pay === null || j.pay === undefined) return "";
+        const label = (j.payType === "one-time") ? "jednokratno" : "mjesečno";
+        return `€ ${safe(j.pay)} • ${label}`;
+      };
+
       const jobCard = (j) => {
         const saved = new Set(JSON.parse(localStorage.getItem("sindikat_saved") || "[]")).has(j.id);
         const jobTypes = Array.isArray(j.type) ? j.type : (j.type || "").split("/").map(x=>x.trim()).filter(Boolean);
         const typeLabel = jobTypes.join(" / ");
-        const payBadge = j.pay ? `<span class="badge accent">€ ${j.pay}${(jobTypes.includes("Freelance")) ? " / sat" : ""}</span>` : "";
+        const payBadge = (j.pay !== "" && j.pay !== null && j.pay !== undefined)
+          ? `<span class="badge accent">${payText(j)}</span>`
+          : "";
         const postedBadge = `<span class="badge">Objavljeno: ${new Date(j.posted).toLocaleDateString()}</span>`;
+        const img = j.img ? safe(j.img) : "https://images.unsplash.com/photo-1520975682038-fd29b3c0d409?auto=format&fit=crop&w=1200&q=70";
 
-        const linkBtn = (j.apply && j.apply.startsWith("http"))
-          ? `<a target="_blank" rel="noopener" href="${j.apply}" class="btn" style="padding:10px 12px; font-size:12px;">Prijava na link</a>`
+        const linkBtn = (j.apply && String(j.apply).startsWith("http"))
+          ? `<a target="_blank" rel="noopener" href="${safe(j.apply)}" class="btn" style="padding:10px 12px; font-size:12px;" data-stop>Prijava na link</a>`
           : "";
 
-        const mailBtn = (j.apply && j.apply.includes("@"))
-          ? `<a href="mailto:${j.apply}" class="btn" style="padding:10px 12px; font-size:12px;">Pošalji e-mail</a>`
+        const mailBtn = (j.apply && String(j.apply).includes("@"))
+          ? `<a href="mailto:${safe(j.apply)}" class="btn" style="padding:10px 12px; font-size:12px;" data-stop>Pošalji e-mail</a>`
           : "";
 
         return `
-          <article class="card">
-            <div class="jobTop">
-              <div>
-                <h3 class="jobTitle">${j.title}</h3>
-                <div class="jobMeta">${j.company} • ${j.location}</div>
+          <article class="card jobCard" tabindex="0" role="button" aria-label="Detalji oglasa: ${safe(j.title)}" data-open="${safe(j.id)}">
+            <div class="jobMedia">
+              <div class="jobThumb" aria-hidden="true">
+                <img src="${img}" alt="" loading="lazy">
               </div>
-              <button class="saveBtn save" data-id="${j.id}" title="Sačuvaj" type="button">${saved ? "★" : "☆"}</button>
+
+              <div>
+                <div class="jobTop">
+                  <div>
+                    <h3 class="jobTitle">${safe(j.title)}</h3>
+                    <div class="jobMeta">${safe(j.company)} • ${safe(j.location)}</div>
+                  </div>
+                  <button class="saveBtn save" data-id="${safe(j.id)}" title="Sačuvaj" type="button" data-stop>${saved ? "★" : "☆"}</button>
+                </div>
+
+           <div class="jobMetaLine" aria-label="Meta informacije oglasa">
+  <span class="pill">${safe(j.category)}</span>
+  <span class="sep">•</span>
+  <span class="pill">${safe(typeLabel)}</span>
+
+  ${(j.pay !== "" && j.pay !== null && j.pay !== undefined)
+    ? `<span class="sep">•</span><span class="pill accent">${payText(j)}</span>`
+    : ``}
+
+  <span class="sep">•</span>
+  <span class="pill">Objavljeno: ${new Date(j.posted).toLocaleDateString()}</span>
+</div>
+
+
+              </div>
             </div>
 
-            <div style="display:flex; flex-wrap:wrap; gap:8px;">
-              <span class="badge">${j.category}</span>
-              <span class="badge">${typeLabel}</span>
-              ${payBadge}
-              ${postedBadge}
-            </div>
+            <p class="jobDesc">${safe(j.desc || "")}</p>
 
-            <p class="jobDesc">${j.desc}</p>
+                    <!-- actions removed: card is clickable -->
 
-            <div class="jobActions">
-              <button class="btn primary apply" data-id="${j.id}" type="button"><span class="dot"></span> Prijavi se</button>
-              ${linkBtn}
-              ${mailBtn}
-            </div>
           </article>
         `;
       };
@@ -1166,7 +1983,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           const id = "t_" + t.replace(/[^a-z]/gi, "");
           const tile = document.createElement("label");
           tile.className = "cbTile";
-          tile.innerHTML = `<input type="checkbox" value="${t}" id="${id}" /><span>${t}</span>`;
+          tile.innerHTML = `<input type="checkbox" value="${safe(t)}" id="${id}" /><span>${safe(t)}</span>`;
           typeFiltersWrap.appendChild(tile);
 
           const input = tile.querySelector("input");
@@ -1241,7 +2058,146 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         });
       }
 
+      const detailsModal = el("detailsModal");
+      const detailsBody = el("detailsBody");
+      const applyModal = el("applyModal");
+      const postJobModal = el("postJobModal");
+      const alertsModal = el("alertsModal");
+
+      function showModal(m){
+        if (!m) return;
+        m.classList.add("show");
+        m.setAttribute("aria-hidden", "false");
+        setBodyLock(true);
+      }
+      function hideModal(m){
+        if (!m) return;
+        m.classList.remove("show");
+        m.setAttribute("aria-hidden", "true");
+        // unlock only if no other modal open
+        const anyOpen = document.querySelector(".modal-bg.show");
+        if (!anyOpen) setBodyLock(false);
+      }
+
+      function findJobById(id){
+        const all = readJobs();
+        return all.find(x => String(x.id) === String(id));
+      }
+
+      function openDetails(id){
+        const j = findJobById(id);
+        if (!j || !detailsBody) return;
+
+        const jobTypes = Array.isArray(j.type) ? j.type : (j.type || "").split("/").map(x=>x.trim()).filter(Boolean);
+        const typeLabel = jobTypes.join(" / ");
+        const img = j.img ? safe(j.img) : "https://images.unsplash.com/photo-1520975682038-fd29b3c0d409?auto=format&fit=crop&w=1200&q=70";
+        const pay = (j.pay !== "" && j.pay !== null && j.pay !== undefined) ? `<span class="badge accent">${payText(j)}</span>` : `<span class="badge">Naknada: po dogovoru</span>`;
+        const posted = `<span class="badge">Objavljeno: ${new Date(j.posted).toLocaleDateString()}</span>`;
+
+        const responsibilities = (Array.isArray(j.responsibilities) ? j.responsibilities : splitLines(j.responsibilities)).filter(Boolean);
+        const qualifications = (Array.isArray(j.qualifications) ? j.qualifications : splitLines(j.qualifications)).filter(Boolean);
+        const benefits = (Array.isArray(j.benefits) ? j.benefits : splitLines(j.benefits)).filter(Boolean);
+
+        const applyBlock = (() => {
+          if (j.apply && String(j.apply).startsWith("http")) {
+            return `<a class="btn primary" href="${safe(j.apply)}" target="_blank" rel="noopener"><span class="dot"></span> Prijava na link</a>`;
+          }
+          if (j.apply && String(j.apply).includes("@")) {
+            return `<a class="btn primary" href="mailto:${safe(j.apply)}"><span class="dot"></span> Pošalji e-mail</a>`;
+          }
+          return `<button class="btn primary" type="button" id="detailsApplyBtn"><span class="dot"></span> Prijavi se</button>`;
+        })();
+
+        detailsBody.innerHTML = `
+          <div class="detailsHero">
+            <div class="detailsImg" aria-hidden="true">
+              <img src="${img}" alt="" loading="lazy">
+            </div>
+            <div>
+              <h2 class="detailsTitle">${safe(j.title)}</h2>
+              <div class="detailsMeta">${safe(j.company)} • ${safe(j.location)}</div>
+              <div style="display:flex; flex-wrap:wrap; gap:8px; margin-top:10px;">
+                <span class="badge">${safe(j.category)}</span>
+                <span class="badge">${safe(typeLabel)}</span>
+                ${pay}
+                ${posted}
+              </div>
+              <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:14px;">
+                <button class="btn" type="button" id="detailsSaveBtn" data-id="${safe(j.id)}">☆ Sačuvaj</button>
+                <button class="btn" type="button" id="detailsQuickApply" data-id="${safe(j.id)}">Brza prijava</button>
+                ${applyBlock}
+              </div>
+            </div>
+          </div>
+
+          <div class="detailsSection">
+            <h4>Opis pozicije</h4>
+            <p>${safe(j.desc || "")}</p>
+          </div>
+
+          <div class="detailsSection">
+            <h4>Odgovornosti</h4>
+            ${responsibilities.length ? `<ul>${responsibilities.map(x=>`<li>${safe(x)}</li>`).join("")}</ul>` : `<p>Po dogovoru.</p>`}
+          </div>
+
+          <div class="detailsSection">
+            <h4>Kvalifikacije</h4>
+            ${qualifications.length ? `<ul>${qualifications.map(x=>`<li>${safe(x)}</li>`).join("")}</ul>` : `<p>Po dogovoru.</p>`}
+          </div>
+
+          <div class="detailsSection">
+            <h4>Benefiti</h4>
+            ${benefits.length ? `<ul>${benefits.map(x=>`<li>${safe(x)}</li>`).join("")}</ul>` : `<p>Po dogovoru.</p>`}
+          </div>
+
+          <div class="detailsSection">
+            <h4>Kako aplicirati</h4>
+            <p>Klikni <b>Brza prijava</b> ili koristi dugme za e-mail/link ako je dostupno.</p>
+          </div>
+        `;
+
+        showModal(detailsModal);
+
+        // Sync saved state
+        const savedSet = new Set(JSON.parse(localStorage.getItem("sindikat_saved") || "[]"));
+        const ds = el("detailsSaveBtn");
+        if (ds){
+          const isSaved = savedSet.has(String(j.id));
+          ds.textContent = isSaved ? "★ Sačuvano" : "☆ Sačuvaj";
+          ds.addEventListener("click", ()=>{
+            const s = new Set(JSON.parse(localStorage.getItem("sindikat_saved") || "[]"));
+            if (s.has(String(j.id))){ s.delete(String(j.id)); toast("Uklonjeno iz sačuvanih"); ds.textContent = "☆ Sačuvaj"; }
+            else { s.add(String(j.id)); toast("Sačuvano"); ds.textContent = "★ Sačuvano"; }
+            localStorage.setItem("sindikat_saved", JSON.stringify([...s]));
+            render();
+          });
+        }
+
+        el("detailsQuickApply")?.addEventListener("click", ()=>openApply(String(j.id)));
+        el("detailsApplyBtn")?.addEventListener("click", ()=>openApply(String(j.id)));
+      }
+
+      function openApply(id){
+        showModal(applyModal);
+        const input = applyModal?.querySelector('[name="jobId"]');
+        if (input) input.value = id;
+      }
+
       function bindRowActions(){
+        // card click => details
+        document.querySelectorAll("[data-open]").forEach((n)=>{
+          n.addEventListener("click", (e)=>{
+            const id = n.getAttribute("data-open");
+            if (!id) return;
+            openDetails(id);
+          });
+        });
+
+        // stop propagation for buttons/links inside
+        document.querySelectorAll("[data-stop]").forEach((n)=>{
+          n.addEventListener("click", (e)=> e.stopPropagation());
+        });
+
         document.querySelectorAll(".apply").forEach((b)=> b.addEventListener("click", ()=>openApply(b.dataset.id)));
         document.querySelectorAll(".save").forEach((b)=> b.addEventListener("click", ()=>{
           const id = b.dataset.id;
@@ -1250,6 +2206,17 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           else { saved.add(id); toast("Sačuvano"); b.textContent = "★"; }
           localStorage.setItem("sindikat_saved", JSON.stringify([...saved]));
         }));
+
+        // keyboard open details
+        document.querySelectorAll(".jobCard").forEach((c)=>{
+          c.addEventListener("keydown", (e)=>{
+            if (e.key === "Enter" || e.key === " "){
+              e.preventDefault();
+              const id = c.getAttribute("data-open");
+              if (id) openDetails(id);
+            }
+          });
+        });
       }
 
       function render(){
@@ -1276,20 +2243,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         bindRowActions();
       }
 
-      const applyModal = el("applyModal");
-      const postJobModal = el("postJobModal");
-      const alertsModal = el("alertsModal");
-
-      function showModal(m){ if (!m) return; m.classList.add("show"); m.setAttribute("aria-hidden", "false"); }
-      function hideModal(m){ if (!m) return; m.classList.remove("show"); m.setAttribute("aria-hidden", "true"); }
-
-      function openApply(id){
-        showModal(applyModal);
-        const input = applyModal?.querySelector('[name="jobId"]');
-        if (input) input.value = id;
-      }
-
-      [applyModal, postJobModal, alertsModal].forEach((m)=>{
+      // Close modals
+      [detailsModal, applyModal, postJobModal, alertsModal].forEach((m)=>{
         if (!m) return;
         m.setAttribute("aria-hidden","true");
         m.addEventListener("click", (e)=>{
@@ -1302,7 +2257,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
       window.addEventListener("keydown", (e)=>{
         if (e.key !== "Escape") return;
-        [applyModal, postJobModal, alertsModal].forEach((m)=>{
+        [detailsModal, applyModal, postJobModal, alertsModal].forEach((m)=>{
           if (m && m.classList.contains("show")) hideModal(m);
         });
       });
@@ -1324,6 +2279,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         });
       }
 
+      // Post job submit
       el("postJobForm")?.addEventListener("submit", (e)=>{
         e.preventDefault();
         const fd = new FormData(e.target);
@@ -1331,7 +2287,20 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
         obj.id = "p_" + Date.now();
         obj.posted = new Date().toISOString().slice(0,10);
+
         obj.pay = obj.pay ? Number(obj.pay) : undefined;
+        obj.payType = obj.payType || "monthly"; // ✅ default
+
+        // normalize multi-lines
+        obj.responsibilities = splitLines(obj.responsibilities);
+        obj.qualifications = splitLines(obj.qualifications);
+        obj.benefits = splitLines(obj.benefits);
+
+        // normalize type
+        obj.type = obj.type ? [obj.type] : [];
+
+        // img fallback
+        if (!obj.img) obj.img = "https://images.unsplash.com/photo-1520975682038-fd29b3c0d409?auto=format&fit=crop&w=1200&q=70";
 
         const current = JSON.parse(localStorage.getItem("sindikat_jobs") || "[]");
         current.unshift(obj);
@@ -1344,10 +2313,15 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           company: obj.company || "",
           location: obj.location || "",
           category: obj.category || "",
-          type: obj.type || "",
+          type: (Array.isArray(obj.type) ? obj.type.join(" / ") : (obj.type || "")),
           pay: obj.pay ?? "",
+          payType: obj.payType || "",
           posted: obj.posted,
           desc: obj.desc || "",
+          responsibilities: (obj.responsibilities || []).join(" | "),
+          qualifications: (obj.qualifications || []).join(" | "),
+          benefits: (obj.benefits || []).join(" | "),
+          img: obj.img || "",
           apply: obj.apply || ""
         };
         sendToBackend(payload).catch(()=>{});
@@ -1357,6 +2331,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         page=1; render();
       });
 
+      // Apply submit
       el("applyForm")?.addEventListener("submit", (e)=>{
         e.preventDefault();
         const fd = new FormData(e.target);
@@ -1373,6 +2348,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         toast("Prijava poslata ✅");
       });
 
+      // Alerts submit
       el("alertsForm")?.addEventListener("submit", (e)=>{
         e.preventDefault();
         const fd = new FormData(e.target);
@@ -1384,6 +2360,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         toast("E-mail upozorenje aktivirano ✅");
       });
 
+      // Mobile menu
       const mobileBtn = el("mobileMenuBtn");
       const mobileMenu = el("mobileMenu");
       const mobileOverlay = el("mobileOverlay");
@@ -1410,7 +2387,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
       el("yearSpan") && (el("yearSpan").textContent = new Date().getFullYear());
 
-      /* animacije: sad su “safe” jer sadržaj nije skriven po defaultu */
+      // animations (safe)
       const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       if (!reduced && window.anime && 'IntersectionObserver' in window){
         const revealEls = document.querySelectorAll('.reveal');
@@ -1466,6 +2443,3 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </script>
 </body>
 </html>
-
-
-
