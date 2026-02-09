@@ -159,15 +159,39 @@
       border-top:3px solid rgba(255,255,255,.12);
     }
     .topbarInner{
-      max-width:var(--max);
-      margin:0 auto;
-      padding:12px 18px;
-      display:flex;
-      align-items:center;
-      gap:12px;
-      flex-wrap:nowrap;
-      position:relative;
-    }
+  max-width:var(--max);
+  margin:0 auto;
+  padding:12px 18px;
+
+  /* ✅ stabilan layout: 3 zone */
+  display:grid;
+  grid-template-columns: auto 1fr auto;
+  align-items:center;
+  gap:12px;
+
+  position:relative;
+}
+
+.ctaCenter{
+  /* ✅ više nema absolute => nema “letenja” */
+  position:static;
+  transform:none;
+  margin:0 !important;
+
+  justify-self:center;
+  white-space:nowrap;
+}
+
+/* na manjim ekranima CTA ide normalno (nema skakanja) */
+@media (max-width: 980px){
+  .topbarInner{
+    grid-template-columns: auto 1fr auto; /* ostaje isto */
+  }
+  .ctaCenter{
+    justify-self:center; /* i dalje centar */
+  }
+}
+
     .brand{
       display:flex; align-items:center; gap:12px;
       font-weight:750;
@@ -186,21 +210,7 @@
       transform: rotate(-2deg);
     }
 
-    .ctaCenter{
-      position:absolute;
-      left:50%;
-      transform:translateX(-50%);
-      margin:0 !important;
-      white-space:nowrap;
-    }
-    @media (max-width: 980px){
-      .ctaCenter{
-        position:static;
-        left:auto;
-        transform:none;
-        margin-left:auto !important;
-        margin-right:auto !important;
-      }
+  
     }
 
     .navWrap{
@@ -1065,46 +1075,45 @@
     </section>
   </div>
 
-  <!-- Bottom nav -->
+   <!-- Topbar -->
   <header class="topbar">
     <div class="topbarInner reveal">
-      <div class="brand">
+      <a class="brand" href="/pocetna" aria-label="Početna">
         <div class="mark" aria-hidden="true"></div>
         <div>SINDIKAT</div>
-      </div>
-
-      <a class="btn primary ctaCenter" href="https://sindikatevents.me/kontakt/">
-        <span class="dot"></span> Sarađuj sa nama
       </a>
+
+      <a class="btn primary ctaCenter" href="/kontakt"><span class="dot"></span> Zatraži konsultacije</a>
 
       <div class="navWrap">
         <nav aria-label="Primary">
-          <a href="https://sindikatevents.me/">Početna</a>
-          <a href="https://sindikatevents.me/poslovi/">Poslovi</a>
-          <a href="https://sindikatevents.me/onama/">O nama</a>
-          <a href="https://sindikatevents.me/kontakt/">Kontakt</a>
+          <a href="/pocetna">Početna</a>
+          <a href="/usluge">Usluge</a>
+          <a href="/onama">O nama</a>
+          <a href="/blog">Blog</a>
+          <a href="/poslovi">Poslovi</a>
+          <a href="/kontakt" aria-current="page">Kontakt</a>
         </nav>
 
-        <button class="hamburger" id="mobileMenuBtn" aria-label="Open menu" type="button" aria-expanded="false">
+        <button class="hamburger" id="hamburger" aria-label="Open menu">
           <span></span><span></span><span></span>
         </button>
       </div>
     </div>
 
-    <div class="mobileMenu" id="mobileMenu" aria-label="Mobile menu">
+    <div class="mobileMenu" id="mobileMenu">
       <div class="mobileMenuInner">
-        <a href="https://sindikatevents.me/">Početna</a>
-        <a href="https://sindikatevents.me/poslovi/">Poslovi</a>
-        <a href="https://sindikatevents.me/onama/">O nama</a>
-        <a href="https://sindikatevents.me/kontakt/">Kontakt</a>
-        <a href="#jobs">Oglasi</a>
-        <a href="#categories">Kategorije</a>
+        <a href="/pocetna">Početna</a>
+        <a href="/usluge">Usluge</a>
+        <a href="/onama">O nama</a>
+        <a href="/blog">Blog</a>
+        <a href="/poslovi">Poslovi</a>
+        <a href="/kontakt">Kontakt</a>
       </div>
     </div>
   </header>
 
-  <div id="mobileOverlay" style="position:fixed; inset:0; background:rgba(0,0,0,.55); backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); z-index:49; opacity:0; pointer-events:none;"></div>
-  <div id="toast"></div>
+  <main class="wrap" role="main">
 
   <!-- MODALS -->
   <div id="detailsModal" class="modal-bg" role="dialog" aria-modal="true" aria-label="Detalji oglasa">
@@ -2361,9 +2370,11 @@
       });
 
       // Mobile menu
-      const mobileBtn = el("mobileMenuBtn");
-      const mobileMenu = el("mobileMenu");
-      const mobileOverlay = el("mobileOverlay");
+      // Mobile menu
+const mobileBtn = el("hamburger");
+const mobileMenu = el("mobileMenu");
+const mobileOverlay = el("mobileOverlay"); // ako ne postoji u HTML-u, ostaje null i ne smeta
+
 
       function setMobile(open){
         if (!mobileMenu) return;
