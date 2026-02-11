@@ -795,61 +795,312 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </div>
     </section>
 
-    <!-- PRODUCTS -->
-    <section class="section" id="products">
-      <div class="headRow">
-        <h2 class="h2 reveal">Paketi</h2>
-        <div class="desc reveal">
-          Četiri proizvoda. Svaki ima jasan ishod, zaključan scope i logičnu ulogu u sistemu.
+   <!-- PRODUCTS (REPLACE WHOLE SECTION #products WITH THIS) -->
+<section class="section" id="products">
+  <div class="headRow">
+    <h2 class="h2 reveal">Paketi</h2>
+    <div class="desc reveal">
+      Četiri proizvoda. Svaki ima jasan ishod, zaključan scope i logičnu ulogu u sistemu.
+      Klijent kupuje ishod: više upita, rezervacija i prodaje.
+    </div>
+  </div>
+
+  <div class="grid2">
+    <!-- 1) Analiza i plan -->
+    <div class="card reveal">
+      <div class="top">
+        <h3>Analiza i plan kampanje</h3>
+        <span class="tag">1 dan</span>
+      </div>
+      <p>Jednodnevne konsultacije i slaganje sistema: cilj → kanali → budžet → prioriteti.</p>
+      <div class="pillRow"><span>1-strani plan</span><span>checklista</span><span>preporučeni koraci</span></div>
+      <div style="height:14px"></div>
+      <button class="btn primary" data-modal="modal-plan"><span class="dot"></span> Detaljnije</button>
+    </div>
+
+    <!-- 2) Vođenje kampanja -->
+    <div class="card reveal">
+      <div class="top">
+        <h3>Vođenje reklamnih kampanja</h3>
+        <span class="tag">30 dana</span>
+      </div>
+      <p>Vođenje Meta + Google kampanja uz stalnu optimizaciju i mjerljiv mjesečni izvještaj.</p>
+      <div class="pillRow"><span>Meta</span><span>Google</span><span>landing smjernice</span><span>report</span></div>
+      <div style="height:14px"></div>
+      <button class="btn primary" data-modal="modal-campaigns"><span class="dot"></span> Detaljnije</button>
+    </div>
+
+    <!-- 3) Produkcija sadržaja -->
+    <div class="card reveal">
+      <div class="top">
+        <h3>Produkcija sadržaja za oglase</h3>
+        <span class="tag">7–10 dana</span>
+      </div>
+      <p>Sadržaj koji se koristi u kampanjama i na mrežama — fokus na poruku, dokaz i CTA.</p>
+      <div class="pillRow"><span>hook → poruka</span><span>varijante</span><span>biblioteka materijala</span></div>
+      <div style="height:14px"></div>
+      <button class="btn primary" data-modal="modal-content-ads"><span class="dot"></span> Detaljnije</button>
+    </div>
+
+    <!-- 4) Aktivacija i događaji -->
+    <div class="card reveal">
+      <div class="top">
+        <h3>Promotivna aktivacija i događaji</h3>
+        <span class="tag">projekat</span>
+      </div>
+      <p>Digital → teren → digital. Aktivacija kao pojačivač kampanje i sadržaj sa terena za oglase.</p>
+      <div class="pillRow"><span>koncept + plan</span><span>tim + logistika</span><span>retarget nastavak</span></div>
+      <div style="height:14px"></div>
+      <button class="btn primary" data-modal="modal-activation-project"><span class="dot"></span> Detaljnije</button>
+    </div>
+  </div>
+</section>
+
+
+<!-- MODALS (REPLACE YOUR 4 PACKAGE MODALS WITH THESE 4) -->
+
+<!-- 1) Analiza i plan kampanje -->
+<div class="modal" id="modal-plan" role="dialog" aria-modal="true" aria-label="Analiza i plan kampanje detalji">
+  <div class="modalBackdrop" data-close></div>
+  <div class="modalPanel">
+    <div class="modalTop">
+      <div>
+        <h3 class="modalTitle">Analiza i plan kampanje</h3>
+        <div class="pillRow" style="margin-top:8px">
+          <span>1 dan</span><span>cilj → kanali → budžet</span><span>ishod: plan + checklista</span>
+        </div>
+      </div>
+      <button class="modalClose" aria-label="Close" data-close>×</button>
+    </div>
+
+    <div class="modalBody">
+      <p>Jednodnevne konsultacije i planiranje sistema: cilj → kanali → budžet → prioriteti.</p>
+
+      <div class="modalGrid">
+        <div class="modalBlock">
+          <h4>Za koga je</h4>
+          <ul class="bullets" style="margin-top:0">
+            <li>Hoćeš da “posložiš” Meta/Google oglase, sadržaj i promociju u jednu logiku</li>
+            <li>Krećeš sa kampanjama ili imaš haos u porukama/ponudi</li>
+            <li>Treba ti jasan plan šta radite narednih 30 dana</li>
+          </ul>
+        </div>
+
+        <div class="modalBlock">
+          <h4>Šta dobijaš (uključeno)</h4>
+          <ul class="bullets" style="margin-top:0">
+            <li>Razjašnjenje cilja: upiti, rezervacije, prodaja</li>
+            <li>Plan kanala: Meta / Google / SEO osnove</li>
+            <li>Mapa sadržaja: poruke, ponuda, dokaz, poziv na akciju</li>
+            <li>Procjena: da li promocija na terenu ima smisla (i kakva)</li>
+            <li>Ishod: 1-strani plan + checklista + preporučeni koraci</li>
+          </ul>
         </div>
       </div>
 
-      <div class="grid2">
-        <div class="card reveal">
-          <div class="top">
-            <h3>Strategy Day</h3>
-            <span class="tag">Konsultacije / Plan</span>
-          </div>
-          <p>Jedan dan, jasan plan: cilj → kanali → budžet → prioriteti.</p>
-          <div class="pillRow"><span>1 dan</span><span>1-page plan</span><span>checklista</span></div>
-          <div style="height:14px"></div>
-          <button class="btn primary" data-modal="modal-strategy"><span class="dot"></span> Detaljnije</button>
-        </div>
-
-        <div class="card reveal">
-          <div class="top">
-            <h3>Monthly Performance</h3>
-            <span class="tag">Kampanje / Optimizacija</span>
-          </div>
-          <p>Kampanje koje rade — i koje se svakog dana poboljšavaju.</p>
-          <div class="pillRow"><span>Meta</span><span>Google</span><span>retarget</span><span>report</span></div>
-          <div style="height:14px"></div>
-          <button class="btn primary" data-modal="modal-monthly"><span class="dot"></span> Detaljnije</button>
-        </div>
-
-        <div class="card reveal">
-          <div class="top">
-            <h3>Content Sprint</h3>
-            <span class="tag">Ads-ready content</span>
-          </div>
-          <p>Sadržaj napravljen da pretvara budžet u rezultat (ne samo da “izgleda”).</p>
-          <div class="pillRow"><span>7–10 dana</span><span>varijante</span><span>library</span></div>
-          <div style="height:14px"></div>
-          <button class="btn primary" data-modal="modal-content"><span class="dot"></span> Detaljnije</button>
-        </div>
-
-        <div class="card reveal">
-          <div class="top">
-            <h3>Activation Booster</h3>
-            <span class="tag">Digital → teren</span>
-          </div>
-          <p>Aktivacija koja pojača kampanju, a ne pojede budžet.</p>
-          <div class="pillRow"><span>promo</span><span>sampling</span><span>lead capture</span></div>
-          <div style="height:14px"></div>
-          <button class="btn primary" data-modal="modal-activation"><span class="dot"></span> Detaljnije</button>
+      <div class="modalBlock hasImage" style="--bgimg: url('https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=1600&q=80');">
+        <div class="imgBg" aria-hidden="true"></div>
+        <div class="content">
+          <h4>Operativa</h4>
+          <ul class="bullets" style="margin-top:0">
+            <li>Trajanje: 1 radni dan (ili 2×2h)</li>
+            <li>Inputi: sajt/IG, ponuda, budžet, cilj</li>
+            <li>Ishod: jasna mapa prioriteta i koraka</li>
+          </ul>
         </div>
       </div>
-    </section>
+
+      <div class="modalBlock">
+        <h4>CTA</h4>
+        <p style="margin:0">Najbrži ulaz u sistem — bez nagađanja.</p>
+        <div class="modalActions">
+          <a class="btn primary" href="#contact" data-close><span class="dot"></span> Zakaži poziv</a>
+          <button class="btn" data-close>Zatvori</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- 2) Vođenje reklamnih kampanja -->
+<div class="modal" id="modal-campaigns" role="dialog" aria-modal="true" aria-label="Vođenje reklamnih kampanja detalji">
+  <div class="modalBackdrop" data-close></div>
+  <div class="modalPanel">
+    <div class="modalTop">
+      <div>
+        <h3 class="modalTitle">Vođenje reklamnih kampanja</h3>
+        <div class="pillRow" style="margin-top:8px">
+          <span>30 dana</span><span>Meta + Google</span><span>week-to-week optimizacija</span>
+        </div>
+      </div>
+      <button class="modalClose" aria-label="Close" data-close>×</button>
+    </div>
+
+    <div class="modalBody">
+      <p>Vođenje kampanja koje donose upite/posjete/prodaju uz stalnu optimizaciju.</p>
+
+      <div class="modalGrid">
+        <div class="modalBlock">
+          <h4>Za koga je</h4>
+          <ul class="bullets" style="margin-top:0">
+            <li>Biznisi kojima trebaju stabilni upiti/rezervacije/prodaja</li>
+            <li>Brendovi koji hoće sistem, ne “boost post”</li>
+            <li>Meta + Google uz jasne landing smjernice</li>
+          </ul>
+        </div>
+
+        <div class="modalBlock">
+          <h4>Šta uključuje (tačno)</h4>
+          <ul class="bullets" style="margin-top:0">
+            <li>Meta + Google oglasi (postavka i vođenje)</li>
+            <li>Struktura kampanja + testiranje poruka i kreativa</li>
+            <li>Smjernice za landing + SEO osnove (on-page)</li>
+            <li>Optimizacija iz sedmice u sedmicu (budžet, publike, kreativa)</li>
+            <li>Mjesečni izvještaj (kratko, jasno, mjerljivo)</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="modalBlock hasImage" style="--bgimg: url('https://images.unsplash.com/photo-1553877522-43269d4ea984?auto=format&fit=crop&w=1600&q=80');">
+        <div class="imgBg" aria-hidden="true"></div>
+        <div class="content">
+          <h4>Napomena</h4>
+          <p style="margin:0">Ne radimo “puštanje reklama”. Radimo test → optimizacija → rezultat.</p>
+        </div>
+      </div>
+
+      <div class="modalBlock">
+        <h4>CTA</h4>
+        <p style="margin:0">Ako ti trebaju rezultati svaki mjesec — ovo je paket.</p>
+        <div class="modalActions">
+          <a class="btn primary" href="#contact" data-close><span class="dot"></span> Zakaži poziv</a>
+          <button class="btn" data-close>Zatvori</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- 3) Produkcija sadržaja za oglase -->
+<div class="modal" id="modal-content-ads" role="dialog" aria-modal="true" aria-label="Produkcija sadržaja za oglase detalji">
+  <div class="modalBackdrop" data-close></div>
+  <div class="modalPanel">
+    <div class="modalTop">
+      <div>
+        <h3 class="modalTitle">Produkcija sadržaja za oglase</h3>
+        <div class="pillRow" style="margin-top:8px">
+          <span>7–10 dana</span><span>ads-ready</span><span>biblioteka materijala</span>
+        </div>
+      </div>
+      <button class="modalClose" aria-label="Close" data-close>×</button>
+    </div>
+
+    <div class="modalBody">
+      <p>Sadržaj koji se koristi u kampanjama i na mrežama. Fokus: kratki formati, jasna poruka, dokaz i CTA.</p>
+
+      <div class="modalGrid">
+        <div class="modalBlock">
+          <h4>Za koga je</h4>
+          <ul class="bullets" style="margin-top:0">
+            <li>Imaš budžet, ali nemaš “gorivo” (kreative) koje radi</li>
+            <li>Treba ti library za oglase + mreže</li>
+            <li>Želiš sadržaj koji je vezan za rezultat, ne estetiku</li>
+          </ul>
+        </div>
+
+        <div class="modalBlock">
+          <h4>Šta uključuje (tačno)</h4>
+          <ul class="bullets" style="margin-top:0">
+            <li>Koncepti za oglase (hook → poruka → poziv na akciju)</li>
+            <li>Foto/video produkcija + montaža varijanti</li>
+            <li>Kratki formati + varijante za oglase</li>
+            <li>Biblioteka materijala spremna za Meta/Google</li>
+            <li>Plan objava i distribucije (mreže + oglasi)</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="modalBlock hasImage" style="--bgimg: url('https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1600&q=80');">
+        <div class="imgBg" aria-hidden="true"></div>
+        <div class="content">
+          <h4>Output</h4>
+          <p style="margin:0">Isporučuje se kao organizovana biblioteka fajlova + plan kako se koristi u ads i organski.</p>
+        </div>
+      </div>
+
+      <div class="modalBlock">
+        <h4>CTA</h4>
+        <p style="margin:0">Ako ads nema goriva — ovo ga donosi.</p>
+        <div class="modalActions">
+          <a class="btn primary" href="#contact" data-close><span class="dot"></span> Zakaži poziv</a>
+          <button class="btn" data-close>Zatvori</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- 4) Promotivna aktivacija i događaji -->
+<div class="modal" id="modal-activation-project" role="dialog" aria-modal="true" aria-label="Promotivna aktivacija i događaji detalji">
+  <div class="modalBackdrop" data-close></div>
+  <div class="modalPanel">
+    <div class="modalTop">
+      <div>
+        <h3 class="modalTitle">Promotivna aktivacija i događaji</h3>
+        <div class="pillRow" style="margin-top:8px">
+          <span>projekat</span><span>digital → teren → digital</span><span>sadržaj + retarget</span>
+        </div>
+      </div>
+      <button class="modalClose" aria-label="Close" data-close>×</button>
+    </div>
+
+    <div class="modalBody">
+      <p>Promocija ili događaj kao dio kampanje: digital → teren → digital. “Pojačivač” pažnje koji se poslije koristi u oglasima i na mrežama.</p>
+
+      <div class="modalGrid">
+        <div class="modalBlock">
+          <h4>Za koga je</h4>
+          <ul class="bullets" style="margin-top:0">
+            <li>Brendovi koji žele realan “crowd pull” i sadržaj sa terena</li>
+            <li>Launch, promo period, sampling, događaj sa ciljem</li>
+            <li>Kad teren pojačava digital i konverziju</li>
+          </ul>
+        </div>
+
+        <div class="modalBlock">
+          <h4>Šta uključuje (tačno)</h4>
+          <ul class="bullets" style="margin-top:0">
+            <li>Koncept aktivacije + plan izvođenja</li>
+            <li>Produkcija: tim, logistika, oprema, partneri</li>
+            <li>Promotivna mehanika (sampling, promo tim, “povuci masu”)</li>
+            <li>Sadržaj sa terena (za oglase + mreže)</li>
+            <li>Mjerenje i nastavak (retarget + prikupljanje upita)</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="modalBlock hasImage" style="--bgimg: url('https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&w=1600&q=80');">
+        <div class="imgBg" aria-hidden="true"></div>
+        <div class="content">
+          <h4>Napomena</h4>
+          <p style="margin:0">Teren ne radimo radi terena — radimo ga kad pojačava kampanju i donosi mjerljiv nastavak.</p>
+        </div>
+      </div>
+
+      <div class="modalBlock">
+        <h4>CTA</h4>
+        <div class="modalActions">
+          <a class="btn primary" href="#contact" data-close><span class="dot"></span> Zakaži konsultacije</a>
+          <button class="btn" data-close>Zatvori</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 
     <!-- ===== ADDED: PARTNERS ===== -->
     <section class="section" id="partners">
