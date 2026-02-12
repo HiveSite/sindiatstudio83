@@ -1546,42 +1546,74 @@
     }, {passive:true});
 
     // Modals
-    const openModal = (id) => {
-      const m = document.getElementById(id);
-      if(!m) return;
-      m.classList.add('open');
-      document.documentElement.style.overflow = 'hidden';
-      anime({ targets: m.querySelector('.modalPanel'), opacity:[0,1], translateY:[10,0], duration: 260, easing: 'easeOutExpo' });
-    };
-    const closeModal = (m) => {
-      if(!m) return;
-      anime({
-        targets: m.querySelector('.modalPanel'),
-        opacity:[1,0],
-        translateY:[0,10],
-        duration: 200,
-        easing: 'easeOutQuad',
-        complete: ()=>{
-          m.classList.remove('open');
-          document.documentElement.style.overflow = '';
-        }
-      });
-    };
+    let savedScrollY = 0;
 
-    document.querySelectorAll('[data-modal]').forEach(btn=>{
-      btn.addEventListener('click', ()=> openModal(btn.getAttribute('data-modal')));
+  const lockScroll = () => {
+    savedScrollY = window.scrollY || 0;
+    document.body.style.position = 'fixed';
+    document.body.style.top = `-${savedScrollY}px`;
+    document.body.style.left = '0';
+    document.body.style.right = '0';
+    document.body.style.width = '100%';
+  };
+
+  const unlockScroll = () => {
+    document.body.style.position = '';
+    document.body.style.top = '';
+    document.body.style.left = '';
+    document.body.style.right = '';
+    document.body.style.width = '';
+    window.scrollTo(0, savedScrollY);
+  };
+
+  // ---- Modals ----
+  const openModal = (id) => {
+    const m = document.getElementById(id);
+    if(!m) return;
+    m.classList.add('open');
+    lockScroll();
+    anime({ targets: m.querySelector('.modalPanel'), opacity:[0,1], translateY:[10,0], duration: 260, easing: 'easeOutExpo' });
+  };
+
+  const closeModal = (m) => {
+    if(!m) return;
+    anime({
+      targets: m.querySelector('.modalPanel'),
+      opacity:[1,0],
+      translateY:[0,10],
+      duration: 200,
+      easing: 'easeOutQuad',
+      complete: ()=>{
+        m.classList.remove('open');
+        unlockScroll();
+      }
     });
-    document.querySelectorAll('.modal [data-close]').forEach(el=>{
-      el.addEventListener('click', ()=> closeModal(el.closest('.modal')));
+  };
+
+  document.querySelectorAll('[data-modal]').forEach(btn=>{
+    btn.addEventListener('click', ()=> openModal(btn.getAttribute('data-modal')));
+  });
+  document.querySelectorAll('.modal [data-close]').forEach(el=>{
+    el.addEventListener('click', ()=> closeModal(el.closest('.modal')));
+  });
+
+  window.addEventListener('keydown', (e)=>{
+    if(e.key !== 'Escape') return;
+    const m = document.querySelector('.modal.open');
+    if(m) closeModal(m);
+  });
+
+  // Ako CTA link vodi na drugu stranicu, nema potrebe da zatvara modal prije navigacije.
+  // (ukloni ovaj blok skroz, ili ga ostavi ovako - da ne pravi scroll jump)
+  document.querySelectorAll('.modal a[data-close]').forEach(a=>{
+    a.addEventListener('click', (e)=>{
+      // opcija A: pusti navigaciju, ali prvo zatvori uredno bez skoka
+      // closeModal(a.closest('.modal'));
+
+      // opcija B (preporuka): ako link vodi na novu stranicu, samo pusti da ide
+      // i ne diraj modal (jer će navigacija svakako zamijeniti stranicu)
     });
-    window.addEventListener('keydown', (e)=>{
-      if(e.key !== 'Escape') return;
-      const m = document.querySelector('.modal.open');
-      if(m) closeModal(m);
-    });
-    document.querySelectorAll('.modal a[data-close]').forEach(a=>{
-      a.addEventListener('click', ()=> closeModal(a.closest('.modal')));
-    });
-  </script>
+  });
+</script>
 </body>
 </html>
