@@ -705,6 +705,7 @@
       overflow:hidden;
       position:relative;
       box-shadow: 0 14px 38px rgba(0,0,0,.48);
+      
     }
     .marqueeTrack{
       display:flex;
@@ -924,6 +925,91 @@
 .jobTop  > div{ min-width:0; }
 
 
+/* Partners marquee */
+.marquee{
+  position: relative;
+  overflow: hidden;
+  border:3px solid rgba(255,255,255,.10);
+  border-radius: 14px;
+  background: rgba(8,10,16,.55);
+  box-shadow: var(--shadow2);
+}
+
+.marquee:before,
+.marquee:after{
+  content:"";
+  position:absolute;
+  top:0; bottom:0;
+  width:72px;
+  pointer-events:none;
+  z-index:2;
+}
+.marquee:before{
+  left:0;
+  background: linear-gradient(90deg, rgba(5,1,13,.95), rgba(5,1,13,0));
+}
+.marquee:after{
+  right:0;
+  background: linear-gradient(270deg, rgba(5,1,13,.95), rgba(5,1,13,0));
+}
+
+.marqueeTrack{
+  display:flex;
+  gap:12px;
+  width: max-content;
+  padding: 14px;
+  will-change: transform;
+  animation: partnersMarquee var(--marqueeDur, 24s) linear infinite;
+}
+
+/* Pause on hover (desktop) */
+.marquee:hover .marqueeTrack{
+  animation-play-state: paused;
+}
+
+/* Smooth loop */
+@keyframes partnersMarquee{
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); } /* jer dupliramo sadržaj */
+}
+
+/* Partner pill (ako nemaš već) */
+.partnerPill{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  padding: 10px 12px;
+  border-radius: 14px;
+  border:2px solid rgba(255,255,255,.12);
+  background: linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
+  white-space: nowrap;
+}
+
+.partnerLogo{
+  width:42px; height:42px;
+  border-radius: 12px;
+  border:2px solid rgba(255,255,255,.12);
+  background: rgba(255,255,255,.06);
+  display:flex; align-items:center; justify-content:center;
+  overflow:hidden;
+}
+.partnerLogo img{
+  width: 78%;
+  height: 78%;
+  object-fit: contain;
+}
+
+.partnerKicker{
+  font-size:10px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.62);
+}
+.partnerBrand{
+  font-size:13px;
+  font-weight: 700;
+  color: rgba(255,255,255,.92);
+}
 
 
 
@@ -993,7 +1079,6 @@
     <section class="section" id="partners">
       <div class="headRow">
         <h2 class="h2 reveal">Partneri</h2>
-        <div class="desc reveal">Primjeri prikaza partnera (vizuelno u istom sistemu).</div>
       </div>
 
       <div class="marquee reveal">
@@ -2458,6 +2543,27 @@ const mobileOverlay = el("mobileOverlay"); // ako ne postoji u HTML-u, ostaje nu
 
       render();
     });
+
+
+
+// Partners marquee loop (auto-duplicate for seamless scroll)
+const partnersRow = document.getElementById('partnersRow');
+if (partnersRow && !partnersRow.dataset.cloned) {
+  const items = Array.from(partnersRow.children);
+
+  items.forEach(node => {
+    const clone = node.cloneNode(true);
+    clone.setAttribute('aria-hidden', 'true');
+    clone.tabIndex = -1;
+    partnersRow.appendChild(clone);
+  });
+
+  partnersRow.dataset.cloned = 'true';
+}
+
+
+
+    
   </script>
 </body>
 </html>
