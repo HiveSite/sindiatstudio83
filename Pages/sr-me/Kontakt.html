@@ -2,7 +2,6 @@
 <html lang="sr-ME">
 <head>
 
-
 <!-- Google Tag Manager -->
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -11,16 +10,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 })(window,document,'script','dataLayer','GTM-PBXVW3GK');</script>
 <!-- End Google Tag Manager -->
 
-  
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+  <link rel="icon" type="image/png" href="/favicon.png">
 
- <link rel="icon" type="image/png" href="/favicon.png">
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-  
   <!-- SEO: osnovno -->
   <title>Kontakt | Sindikat — Performance & Activation Studio (Podgorica, Crna Gora)</title>
   <meta name="description" content="Kontakt Sindikat (Podgorica, Crna Gora). Zakaži 30 min konsultacije ili pošalji upit za Meta/Google kampanje, sadržaj i aktivacije." />
@@ -93,8 +87,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   }
   </script>
 
-
-
   <!-- Anime.js -->
   <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
 
@@ -102,19 +94,30 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     :root{
       --bg:#05010D;
       --bg2:#12011F;
+      --panel:#0D0521;
+      --panel2:#13072B;
       --border:rgba(255,255,255,.2);
+      --border2:rgba(255,255,255,.12);
       --text:#FFFFFF;
       --muted:rgba(255,255,255,.78);
+      --muted2:rgba(255,255,255,.62);
       --accent:#FF3B6F;
+      --accent2:#FFB000;
+      --neon:#18F5FF;
+      --neon2:#A24CFF;
+      --neon3:#2BFF88;
 
       --shadow: 0 22px 75px rgba(0,0,0,.68);
       --shadow2: 0 14px 38px rgba(0,0,0,.48);
 
+      --r:10px;
       --r2:14px;
       --r3:18px;
 
       --max:1120px;
+
       --ease: cubic-bezier(.2,.9,.2,1);
+      --ease2: cubic-bezier(.16,1,.3,1);
     }
 
     *{box-sizing:border-box}
@@ -149,24 +152,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     a{color:inherit; text-decoration:none}
     .wrap{max-width:var(--max); margin:0 auto; padding:22px 18px 120px; position:relative; z-index:2}
 
-    /* Background video */
-    .bgVideo{
-      position:fixed; inset:0;
-      width:100%; height:100%;
-      object-fit:cover;
-      z-index:0;
-      filter: saturate(1.1) contrast(1.08) brightness(.55);
-    }
-    .bgVideoOverlay{
-      position:fixed; inset:0;
-      z-index:1;
-      pointer-events:none;
-      background:
-        radial-gradient(900px 540px at 20% 20%, rgba(255,59,111,.12), transparent 60%),
-        radial-gradient(900px 540px at 80% 10%, rgba(24,245,255,.10), transparent 60%),
-        linear-gradient(180deg, rgba(0,0,0,.25), rgba(6,1,13,.82) 62%, rgba(6,1,13,.92));
-    }
-
     /* Subtle animated blobs */
     .blob{
       position:fixed;
@@ -186,10 +171,12 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       opacity:.45;
     }
 
-    /* Topbar */
+    /* ✅ Bottom topbar (same as blog) */
     .topbar{
       position:fixed;
-      bottom:0; left:0; right:0;
+      bottom:0;
+      left:0;
+      right:0;
       z-index:50;
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
@@ -200,48 +187,44 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       max-width:var(--max);
       margin:0 auto;
       padding:12px 18px;
-      display:flex; align-items:center; gap:12px;
+      display:flex;
+      align-items:center;
+      gap:12px;
+      justify-content:flex-start;
     }
 
-    .brand{
-  display:flex; align-items:center; gap:12px;
-  font-weight:750;
-  letter-spacing:.9px;
-  text-transform:uppercase;
-  font-size:13px;
-  white-space:nowrap;
-}
-
-.mark{
-  width:176px; height:44px;
-  border-radius:14px;
-  border:1.5px solid rgba(255,59,111,.5);
-  box-shadow:
-    0 18px 34px rgba(0,0,0,.45),
-    0 0 0 3px rgba(0,0,0,.45) inset,
-    0 0 42px rgba(255,59,111,.22);
-  transform: rotate(-2deg);
-  overflow:hidden;
-  background: rgba(0,0,0,.18);
-  display:grid;
-  place-items:center;
-}
-
-.markImg{
-  width:100%;
-  height:100%;
-  object-fit:contain;
-  object-position:center;
-  padding:6px;
-  filter: drop-shadow(0 10px 18px rgba(0,0,0,.45));
-}
-
-
-    .ctaCenter{margin:0 auto;}
-
+    .ctaCenter{margin:0;}
     .navWrap{
       margin-left:auto;
       display:flex; align-items:center; gap:12px;
+    }
+
+    /* Buttons */
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center;
+      gap:10px;
+      border-radius:10px;
+      padding:12px 16px;
+      font-size:13px;
+      border:3px solid rgba(255,255,255,.16);
+      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+      color:var(--text);
+      transition:transform .18s var(--ease), box-shadow .18s var(--ease), border-color .18s var(--ease), background .18s var(--ease);
+      white-space:nowrap;
+      box-shadow: 0 12px 30px rgba(0,0,0,.28);
+      cursor:pointer;
+    }
+    .btn:hover{transform:translateY(-3px); box-shadow:var(--shadow2); border-color:rgba(255,59,111,.5)}
+    .btn.primary{
+      background: linear-gradient(180deg, rgba(255,59,111,.35), rgba(255,59,111,.14));
+      border-color:rgba(255,59,111,.6);
+      box-shadow: 0 20px 60px rgba(255,59,111,.20), 0 10px 28px rgba(0,0,0,.28);
+    }
+    .dot{
+      width:8px; height:8px; border-radius:2px;
+      background:var(--accent);
+      box-shadow:0 0 0 5px rgba(255,59,111,.22), 0 0 24px rgba(255,59,111,.42);
+      transform: rotate(8deg);
     }
 
     nav{
@@ -255,46 +238,26 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       border-radius:10px;
       border:2px solid transparent;
       transition: background .2s var(--ease), color .2s var(--ease), transform .2s var(--ease), border-color .2s var(--ease);
+      transform: translateY(0);
     }
-    nav a:hover{background:rgba(255,255,255,.05); color:var(--text); transform: translateY(-1px); border-color:rgba(24,245,255,.45)}
-    nav a[aria-current="page"]{background:rgba(255,255,255,.05); color:#fff; border-color:rgba(255,59,111,.45)}
-
-    .btn{
-      display:inline-flex; align-items:center; justify-content:center;
-      gap:10px;
-      border-radius:10px;
-      padding:12px 16px;
-      font-size:13px;
-      border:3px solid rgba(255,255,255,.2);
-      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+    nav a:hover{
+      background:rgba(255,255,255,.05);
       color:var(--text);
-      transition:transform .18s var(--ease), box-shadow .18s var(--ease), border-color .18s var(--ease), background .18s var(--ease);
-      white-space:nowrap;
-      box-shadow: 0 12px 30px rgba(0,0,0,.28);
-    }
-    .btn:hover{transform:translateY(-3px); box-shadow:var(--shadow2); border-color:rgba(255,59,111,.5)}
-    .btn.primary{
-      background: linear-gradient(180deg, rgba(255,59,111,.35), rgba(255,59,111,.14));
-      border-color:rgba(255,59,111,.6);
-      box-shadow: 0 20px 60px rgba(255,59,111,.22), 0 10px 28px rgba(0,0,0,.28);
-    }
-    .dot{
-      width:8px; height:8px; border-radius:2px;
-      background:var(--accent);
-      box-shadow:0 0 0 5px rgba(255,59,111,.22), 0 0 24px rgba(255,59,111,.48);
-      transform: rotate(8deg);
+      transform: translateY(-1px);
+      border-color:rgba(24,245,255,.35);
     }
 
-    /* Mobile nav */
+    /* Mobile nav (same as blog) */
     .hamburger{
       display:none;
       width:44px; height:44px;
       border-radius:10px;
-      border:3px solid var(--border);
+      border:3px solid rgba(255,255,255,.16);
       background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
       align-items:center; justify-content:center;
       gap:5px;
       flex-direction:column;
+      cursor:pointer;
     }
     .hamburger span{
       width:18px; height:2px; background:rgba(255,255,255,.8);
@@ -323,6 +286,87 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       border-radius:10px;
       background: linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
       color:var(--text);
+    }
+
+    @media (max-width: 980px){
+      nav{display:none}
+      .hamburger{display:flex}
+    }
+    @media (max-width: 520px){
+      .topbarInner{padding:12px 14px}
+      .mobileMenuInner{padding:12px 14px 16px}
+    }
+
+    /* ✅ FIX: CTA + hamburger in same row (same as blog) */
+    @media (max-width: 520px){
+      .topbarInner{
+        flex-wrap: nowrap;
+        gap: 10px;
+      }
+      .ctaCenter{
+        margin: 0;
+        flex: 1;
+        display:flex;
+        justify-content:center;
+      }
+      .ctaCenter.btn{
+        padding: 10px 12px;
+        font-size: 12px;
+      }
+      .navWrap{
+        margin-left: 0;
+        flex: 0 0 auto;
+      }
+      .hamburger{
+        flex: 0 0 auto;
+      }
+    }
+
+    /* ✅ FLOATING LOGO (same as blog) */
+    .floatingLogo{
+      position:fixed;
+      top:14px;
+      left:14px;
+      z-index:120;
+      display:block;
+      text-decoration:none;
+    }
+
+    /* mark + markImg (reused for floating logo) */
+    .mark{
+      width:176px; height:44px;
+      border-radius:14px;
+      border:1.5px solid rgba(255,59,111,.5);
+      box-shadow:
+        0 18px 34px rgba(0,0,0,.45),
+        0 0 0 3px rgba(0,0,0,.45) inset,
+        0 0 42px rgba(255,59,111,.22);
+      transform: rotate(-2deg);
+      overflow:hidden;
+      background: rgba(0,0,0,.18);
+      display:grid;
+      place-items:center;
+    }
+    .markImg{
+      width:100%;
+      height:100%;
+      object-fit:contain;
+      object-position:center;
+      padding:6px;
+      filter: drop-shadow(0 10px 18px rgba(0,0,0,.45));
+    }
+
+    /* responsive scale for floating logo */
+    .floatingLogo .mark{
+      width: 50vw;
+      max-width: 240px;
+      height: auto;
+      aspect-ratio: 176 / 44;
+      transform: rotate(-2deg);
+      transform-origin: top left;
+    }
+    @media (max-width: 480px){
+      .floatingLogo{ top:10px; left:10px; }
     }
 
     /* Page header */
@@ -369,12 +413,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       max-width:64ch;
     }
 
-    .splitRow{
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:16px;
-      align-items:stretch;
-    }
     .card{
       border:3px solid rgba(255,255,255,.14);
       border-radius:var(--r2);
@@ -405,20 +443,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       border-radius:10px;
       background:rgba(255,176,0,.14);
       white-space:nowrap;
-    }
-    .card p{margin:10px 0 0; color:rgba(255,255,255,.72); font-size:13px; line-height:1.65}
-
-    .pillRow{
-      margin-top:12px;
-      display:flex; flex-wrap:wrap; gap:10px;
-      color:rgba(255,255,255,.66);
-      font-size:12px;
-    }
-    .pillRow span{
-      border:2px solid rgba(255,255,255,.12);
-      background: rgba(8,10,16,.65);
-      padding:6px 10px;
-      border-radius:10px;
     }
 
     /* Form */
@@ -455,79 +479,71 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     @media (max-width: 980px){
       .pageHead{padding:38px 0 14px}
       h1{font-size:36px}
-      .splitRow{grid-template-columns:1fr}
-
-      nav{display:none}
-      .hamburger{display:flex}
-      .topbarInner{justify-content:space-between}
-      .ctaCenter{margin-left:auto}
     }
     @media (max-width: 520px){
       .wrap{padding:16px 14px 92px}
-      .btn.primary{width:auto}
-      .topbarInner{padding:12px 14px}
-      .mobileMenuInner{padding:12px 14px 16px}
     }
   </style>
 </head>
 
 <body>
-<!-- Google Tag Manager (noscript) -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PBXVW3GK"
-height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-<!-- End Google Tag Manager (noscript) -->
+  <!-- ✅ FLOATING LOGO (always visible, top-left) -->
+  <a class="floatingLogo" href="/sr-me/pocetna" aria-label="Sindikat Studio 83 — Početna">
+    <div class="mark" aria-hidden="true">
+      <img class="markImg" src="/studio83logo.png" alt="">
+    </div>
+  </a>
 
-  <!-- Background video -->
-
-  
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PBXVW3GK"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
 
   <div class="blob" id="blob1" aria-hidden="true"></div>
   <div class="blob b2" id="blob2" aria-hidden="true"></div>
 
- <header class="topbar">
-  <div class="topbarInner reveal">
-    <div class="brand">
-      <div class="mark" aria-hidden="true">
-        <img class="markImg" src="/studio83logo.png" alt="">
+  <!-- ✅ Bottom Topbar (same as blog) -->
+  <header class="topbar">
+    <div class="topbarInner reveal">
+      <!-- removed logo from bar (now floating) -->
+      <div class="brand"></div>
+
+      <a class="btn primary ctaCenter" href="/sr-me/kontakt" aria-current="page">
+        <span class="dot"></span>Kontaktiraj nas
+      </a>
+
+      <div class="navWrap">
+        <nav aria-label="Primary">
+          <a href="/sr-me/pocetna">Početna</a>
+          <a href="/sr-me/usluge">Usluge</a>
+          <a href="/sr-me/onama">O nama</a>
+          <a href="/sr-me/blog">Blog</a>
+          <a href="/sr-me/poslovi">Poslovi</a>
+        </nav>
+
+        <button class="hamburger" id="hamburger" aria-label="Open menu">
+          <span></span><span></span><span></span>
+        </button>
       </div>
     </div>
 
-    <a class="btn primary ctaCenter" href="/sr-me/kontakt" aria-current="page"><span class="dot"></span>Kontaktiraj nas</a>
-
-    <div class="navWrap">
-      <nav aria-label="Primary">
+    <div class="mobileMenu" id="mobileMenu">
+      <div class="mobileMenuInner">
         <a href="/sr-me/pocetna">Početna</a>
         <a href="/sr-me/usluge">Usluge</a>
         <a href="/sr-me/onama">O nama</a>
         <a href="/sr-me/blog">Blog</a>
         <a href="/sr-me/poslovi">Poslovi</a>
-      </nav>
-
-      <button class="hamburger" id="hamburger" aria-label="Open menu">
-        <span></span><span></span><span></span>
-      </button>
+        <a href="/sr-me/kontakt" aria-current="page">Kontakt</a>
+      </div>
     </div>
-  </div>
-
-  <div class="mobileMenu" id="mobileMenu">
-    <div class="mobileMenuInner">
-      <a href="/sr-me/pocetna">Početna</a>
-      <a href="/sr-me/usluge">Usluge</a>
-      <a href="/sr-me/onama">O nama</a>
-      <a href="/sr-me/blog">Blog</a>
-      <a href="/sr-me/poslovi">Poslovi</a>
-      <a href="/sr-me/kontakt" aria-current="page">Kontakt</a>
-    </div>
-  </div>
-</header>
-
+  </header>
 
   <main class="wrap" role="main">
     <!-- PAGE HEAD -->
     <section class="pageHead">
       <div class="kicker reveal"><span class="dot"></span> Kontakt</div>
 
-      <!-- SEO: jedan H1, jasan i lokalizovan -->
       <h1 class="reveal">Kontakt — SindikatStudio83</h1>
 
       <p class="sub reveal">
@@ -545,38 +561,33 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <section class="section" id="contact">
       <div class="headRow">
         <h2 class="h2 reveal">Kontakt</h2>
-      
       </div>
 
-     
-
-        <div class="card reveal">
-          <div class="top">
-            <h3 style="margin:0; font-size:16px; letter-spacing:-.2px">Upit (forma)</h3>
-            <span class="tag">brzo</span>
-          </div>
-
-          <!-- SEO: smisleni name/id atributi + autocomplete -->
-          <form class="form" id="kontakt-forma" onsubmit="event.preventDefault(); alert('Forma je demo. Poveži je sa backendom ili Google Formom.');" aria-label="Kontakt forma">
-            <div class="field">
-              <label for="imeFirma">Ime i firma</label>
-              <input id="imeFirma" name="name" required placeholder="npr. Marko / Brand X" autocomplete="name" />
-            </div>
-            <div class="field">
-              <label for="kontakt">Email / telefon</label>
-              <input id="kontakt" name="contact" required placeholder="npr. marko@email.com / +382..." autocomplete="email" />
-            </div>
-            <div class="field">
-              <label for="cilj">Cilj</label>
-              <input id="cilj" name="goal" required placeholder="npr. više leadova / više posjeta / event launch" />
-            </div>
-            <div class="field">
-              <label for="poruka">Poruka</label>
-              <textarea id="poruka" name="message" placeholder="Kratko: rok, budžet (okvirno), šta već imate."></textarea>
-            </div>
-            <button class="btn primary" type="submit"><span class="dot"></span> Pošalji upit</button>
-          </form>
+      <div class="card reveal">
+        <div class="top">
+          <h3 style="margin:0; font-size:16px; letter-spacing:-.2px">Upit (forma)</h3>
+          <span class="tag">brzo</span>
         </div>
+
+        <form class="form" id="kontakt-forma" onsubmit="event.preventDefault(); alert('Forma je demo. Poveži je sa backendom ili Google Formom.');" aria-label="Kontakt forma">
+          <div class="field">
+            <label for="imeFirma">Ime i firma</label>
+            <input id="imeFirma" name="name" required placeholder="npr. Marko / Brand X" autocomplete="name" />
+          </div>
+          <div class="field">
+            <label for="kontakt">Email / telefon</label>
+            <input id="kontakt" name="contact" required placeholder="npr. marko@email.com / +382..." autocomplete="email" />
+          </div>
+          <div class="field">
+            <label for="cilj">Cilj</label>
+            <input id="cilj" name="goal" required placeholder="npr. više leadova / više posjeta / event launch" />
+          </div>
+          <div class="field">
+            <label for="poruka">Poruka</label>
+            <textarea id="poruka" name="message" placeholder="Kratko: rok, budžet (okvirno), šta već imate."></textarea>
+          </div>
+          <button class="btn primary" type="submit"><span class="dot"></span> Pošalji upit</button>
+        </form>
       </div>
 
       <footer>
@@ -590,10 +601,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     // Year
     document.getElementById('year').textContent = new Date().getFullYear();
 
-    // Mobile menu toggle (same behavior as other pages)
+    // Mobile menu toggle (same behavior as blog)
     const hamburger = document.getElementById('hamburger');
     const mobileMenu = document.getElementById('mobileMenu');
-    if (hamburger && mobileMenu){
+
+    if (hamburger && mobileMenu) {
       hamburger.addEventListener('click', ()=>{
         const isOpen = mobileMenu.style.display === 'block';
         mobileMenu.style.display = isOpen ? 'none' : 'block';
@@ -606,11 +618,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         });
       });
 
-      // Close mobile menu after click
       document.querySelectorAll('#mobileMenu a').forEach(a=>{
-        a.addEventListener('click', ()=>{
-          mobileMenu.style.display = 'none';
-        });
+        a.addEventListener('click', ()=>{ mobileMenu.style.display = 'none'; });
       });
     }
 
