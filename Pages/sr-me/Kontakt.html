@@ -204,22 +204,38 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     }
 
     .brand{
-      display:flex; align-items:center; gap:12px;
-      font-weight:750;
-      letter-spacing:.9px;
-      text-transform:uppercase;
-      font-size:13px;
-      white-space:nowrap;
-    }
-    .mark{
-      width:34px; height:34px; border-radius:10px;
-      background:
-        radial-gradient(14px 14px at 35% 35%, rgba(24,245,255,.65), transparent 60%),
-        linear-gradient(145deg, rgba(255,59,111,.32), rgba(255,59,111,.10));
-      border:3px solid rgba(255,59,111,.6);
-      box-shadow:0 14px 28px rgba(0,0,0,.45), 0 0 0 3px rgba(0,0,0,.45) inset;
-      transform: rotate(-2deg);
-    }
+  display:flex; align-items:center; gap:12px;
+  font-weight:750;
+  letter-spacing:.9px;
+  text-transform:uppercase;
+  font-size:13px;
+  white-space:nowrap;
+}
+
+.mark{
+  width:176px; height:44px;
+  border-radius:14px;
+  border:1.5px solid rgba(255,59,111,.5);
+  box-shadow:
+    0 18px 34px rgba(0,0,0,.45),
+    0 0 0 3px rgba(0,0,0,.45) inset,
+    0 0 42px rgba(255,59,111,.22);
+  transform: rotate(-2deg);
+  overflow:hidden;
+  background: rgba(0,0,0,.18);
+  display:grid;
+  place-items:center;
+}
+
+.markImg{
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  object-position:center;
+  padding:6px;
+  filter: drop-shadow(0 10px 18px rgba(0,0,0,.45));
+}
+
 
     .ctaCenter{margin:0 auto;}
 
@@ -468,41 +484,43 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <div class="blob" id="blob1" aria-hidden="true"></div>
   <div class="blob b2" id="blob2" aria-hidden="true"></div>
 
-  <!-- Topbar -->
-  <header class="topbar">
-    <div class="topbarInner reveal">
-      <a class="brand" href="/pocetna" aria-label="Početna">
-        <div class="mark" aria-hidden="true"></div>
-        <div>SINDIKAT</div>
-      </a>
-
-      <div class="navWrap">
-        <nav aria-label="Primary">
-          <a href="/sr-me/pocetna">Početna</a>
-          <a href="/sr-me/usluge">Usluge</a>
-          <a href="/sr-me/onama">O nama</a>
-          <a href="/sr-me/blog">Blog</a>
-          <a href="/sr-me/poslovi">Poslovi</a>
-          <a href="/sr-me/kontakt" aria-current="page">Kontakt</a>
-        </nav>
-
-        <button class="hamburger" id="hamburger" aria-label="Open menu">
-          <span></span><span></span><span></span>
-        </button>
+ <header class="topbar">
+  <div class="topbarInner reveal">
+    <div class="brand">
+      <div class="mark" aria-hidden="true">
+        <img class="markImg" src="/studio83logo.png" alt="">
       </div>
     </div>
 
-    <div class="mobileMenu" id="mobileMenu">
-      <div class="mobileMenuInner">
+    <a class="btn primary ctaCenter" href="/sr-me/kontakt" aria-current="page"><span class="dot"></span>Kontaktiraj nas</a>
+
+    <div class="navWrap">
+      <nav aria-label="Primary">
         <a href="/sr-me/pocetna">Početna</a>
         <a href="/sr-me/usluge">Usluge</a>
         <a href="/sr-me/onama">O nama</a>
         <a href="/sr-me/blog">Blog</a>
         <a href="/sr-me/poslovi">Poslovi</a>
-        <a href="/sr-me/kontakt">Kontakt</a>
-      </div>
+      </nav>
+
+      <button class="hamburger" id="hamburger" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
     </div>
-  </header>
+  </div>
+
+  <div class="mobileMenu" id="mobileMenu">
+    <div class="mobileMenuInner">
+      <a href="/sr-me/pocetna">Početna</a>
+      <a href="/sr-me/usluge">Usluge</a>
+      <a href="/sr-me/onama">O nama</a>
+      <a href="/sr-me/blog">Blog</a>
+      <a href="/sr-me/poslovi">Poslovi</a>
+      <a href="/sr-me/kontakt" aria-current="page">Kontakt</a>
+    </div>
+  </div>
+</header>
+
 
   <main class="wrap" role="main">
     <!-- PAGE HEAD -->
