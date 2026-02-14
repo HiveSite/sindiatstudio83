@@ -291,18 +291,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       display:grid;
       place-items:center;
     }
-    /* MOBILE: povećaj logo */
-@media (max-width: 520px){
-  .brand .mark{
-    width: 220px;
-    height: 56px;
-  }
-
-  .brand .markImg{
-    padding: 8px;
-  }
-}
-
+   
 
     .markImg{
       width:100%;
@@ -446,11 +435,14 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       text-decoration:none;
     }
     .floatingLogo .mark{
-      width: clamp(120px, 22vw, 176px);
-      height: clamp(34px, 8vw, 44px);
-      transform: rotate(-2deg);
-      transform-origin: top left;
-    }
+  width: 50vw;
+  max-width: 240px;
+  height: auto;
+  aspect-ratio: 176 / 44;
+  transform: rotate(-2deg);
+  transform-origin: top left;
+}
+
     @media (max-width: 480px){
       .floatingLogo{ top:10px; left:10px; }
     }
@@ -926,6 +918,14 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       .mobileMenuInner{padding:12px 14px 16px}
       .modalHero{height:180px}
     }
+
+
+
+
+
+
+
+    
   </style>
 </head>
 
