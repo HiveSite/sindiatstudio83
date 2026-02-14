@@ -13,12 +13,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-
   <link rel="icon" type="image/png" href="/favicon.png">
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  
   <!-- SEO: osnovno -->
   <title>Blog | Meta oglasi, Google Ads i aktivacije — Sindikat Studio 83 (Podgorica)</title>
   <meta name="description" content="Blog za Crnu Goru: Meta oglasi, Google Ads, sadržaj za oglase, lokalni SEO i promotivne aktivacije. Praktični vodiči, preporuke i primjeri iz prakse — bez teorije." />
@@ -119,8 +117,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     ]
   }
   </script>
-
-
 
   <!-- Anime.js -->
   <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
@@ -249,162 +245,203 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       opacity:.45;
     }
 
-   /* Topbar (bottom) */
-.topbar{
-  position:fixed;
-  bottom:0;
-  left:0;
-  right:0;
-  z-index:50;
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  background: rgba(5,7,12,.88);
-  border-top:3px solid rgba(255,255,255,.12);
-}
-.topbarInner{
-  max-width:var(--max);
-  margin:0 auto;
-  padding:12px 18px;
-  display:flex; align-items:center; gap:12px;
-}
-.ctaCenter{margin:0 auto;}
-.navWrap{
-  margin-left:auto;
-  display:flex; align-items:center; gap:12px;
-}
+    /* Topbar (bottom) */
+    .topbar{
+      position:fixed;
+      bottom:0;
+      left:0;
+      right:0;
+      z-index:50;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      background: rgba(5,7,12,.88);
+      border-top:3px solid rgba(255,255,255,.12);
+    }
+    .topbarInner{
+      max-width:var(--max);
+      margin:0 auto;
+      padding:12px 18px;
+      display:flex; align-items:center; gap:12px;
+    }
+    .ctaCenter{margin:0 auto;}
+    .navWrap{
+      margin-left:auto;
+      display:flex; align-items:center; gap:12px;
+    }
 
-.brand{
-  display:flex; align-items:center; gap:12px;
-  font-weight:750;
-  letter-spacing:.9px;
-  text-transform:uppercase;
-  font-size:13px;
-}
-.mark{
-  width:176px; height:44px;
-  border-radius:14px;
-  border:1.5px solid rgba(255,59,111,.5);
-  box-shadow:
-    0 18px 34px rgba(0,0,0,.45),
-    0 0 0 3px rgba(0,0,0,.45) inset,
-    0 0 42px rgba(255,59,111,.22);
-  transform: rotate(-2deg);
-  overflow:hidden;
-  background: rgba(0,0,0,.18);
-  display:grid;
-  place-items:center;
-}
+    .brand{
+      display:flex; align-items:center; gap:12px;
+      font-weight:750;
+      letter-spacing:.9px;
+      text-transform:uppercase;
+      font-size:13px;
+    }
 
+    .mark{
+      width:176px; height:44px;
+      border-radius:14px;
+      border:1.5px solid rgba(255,59,111,.5);
+      box-shadow:
+        0 18px 34px rgba(0,0,0,.45),
+        0 0 0 3px rgba(0,0,0,.45) inset,
+        0 0 42px rgba(255,59,111,.22);
+      transform: rotate(-2deg);
+      overflow:hidden;
+      background: rgba(0,0,0,.18);
+      display:grid;
+      place-items:center;
+    }
 
-.markImg{
-  width:100%;
-  height:100%;
-  object-fit:contain;
-  object-position:center;
-  padding:6px;
-  filter: drop-shadow(0 10px 18px rgba(0,0,0,.45));
-}
+    .markImg{
+      width:100%;
+      height:100%;
+      object-fit:contain;
+      object-position:center;
+      padding:6px;
+      filter: drop-shadow(0 10px 18px rgba(0,0,0,.45));
+    }
 
+    nav{
+      display:flex; gap:10px; flex-wrap:wrap;
+      color:var(--muted);
+      font-size:13px;
+      align-items:center;
+    }
+    nav a{
+      padding:9px 10px;
+      border-radius:10px;
+      border:2px solid transparent;
+      transition: background .2s var(--ease), color .2s var(--ease), transform .2s var(--ease), border-color .2s var(--ease);
+      transform: translateY(0);
+    }
+    nav a:hover{
+      background:rgba(255,255,255,.05);
+      color:var(--text);
+      transform: translateY(-1px);
+      border-color:rgba(24,245,255,.35);
+    }
 
+    /* Buttons */
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center;
+      gap:10px;
+      border-radius:10px;
+      padding:12px 16px;
+      font-size:13px;
+      border:3px solid rgba(255,255,255,.16);
+      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+      color:var(--text);
+      transition:transform .18s var(--ease), box-shadow .18s var(--ease), border-color .18s var(--ease), background .18s var(--ease);
+      white-space:nowrap;
+      box-shadow: 0 12px 30px rgba(0,0,0,.28);
+      cursor:pointer;
+    }
+    .btn:hover{transform:translateY(-3px); box-shadow:var(--shadow2); border-color:rgba(255,59,111,.5)}
+    .btn.primary{
+      background: linear-gradient(180deg, rgba(255,59,111,.35), rgba(255,59,111,.14));
+      border-color:rgba(255,59,111,.6);
+      box-shadow: 0 20px 60px rgba(255,59,111,.20), 0 10px 28px rgba(0,0,0,.28);
+    }
+    .dot{
+      width:8px; height:8px; border-radius:2px;
+      background:var(--accent);
+      box-shadow:0 0 0 5px rgba(255,59,111,.22), 0 0 24px rgba(255,59,111,.42);
+      transform: rotate(8deg);
+    }
 
+    /* Mobile nav */
+    .hamburger{
+      display:none;
+      width:44px; height:44px;
+      border-radius:10px;
+      border:3px solid rgba(255,255,255,.16);
+      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+      align-items:center; justify-content:center;
+      gap:5px;
+      flex-direction:column;
+      cursor:pointer;
+    }
+    .hamburger span{
+      width:18px; height:2px; background:rgba(255,255,255,.8);
+      border-radius:3px;
+      display:block;
+    }
+    .mobileMenu{
+      display:none;
+      position:absolute;
+      left:0;
+      right:0;
+      bottom:100%;
+      border-bottom:3px solid rgba(255,255,255,.10);
+      background:rgba(5,7,12,.95);
+    }
+    .mobileMenuInner{
+      max-width:var(--max);
+      margin:0 auto;
+      padding:12px 18px 16px;
+      display:grid;
+      gap:8px;
+    }
+    .mobileMenuInner a{
+      padding:12px 12px;
+      border:3px solid rgba(255,255,255,.12);
+      border-radius:10px;
+      background: linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
+      color:var(--text);
+    }
 
-nav{
-  display:flex; gap:10px; flex-wrap:wrap;
-  color:var(--muted);
-  font-size:13px;
-  align-items:center;
-}
-nav a{
-  padding:9px 10px;
-  border-radius:10px;
-  border:2px solid transparent;
-  transition: background .2s var(--ease), color .2s var(--ease), transform .2s var(--ease), border-color .2s var(--ease);
-  transform: translateY(0);
-}
-nav a:hover{
-  background:rgba(255,255,255,.05);
-  color:var(--text);
-  transform: translateY(-1px);
-  border-color:rgba(24,245,255,.35);
-}
+    @media (max-width: 980px){
+      nav{display:none}
+      .hamburger{display:flex}
+    }
+    @media (max-width: 520px){
+      .topbarInner{padding:12px 14px}
+      .mobileMenuInner{padding:12px 14px 16px}
+    }
 
-/* Buttons (if blog has different btn styles, replace them with this) */
-.btn{
-  display:inline-flex; align-items:center; justify-content:center;
-  gap:10px;
-  border-radius:10px;
-  padding:12px 16px;
-  font-size:13px;
-  border:3px solid rgba(255,255,255,.16);
-  background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
-  color:var(--text);
-  transition:transform .18s var(--ease), box-shadow .18s var(--ease), border-color .18s var(--ease), background .18s var(--ease);
-  white-space:nowrap;
-  box-shadow: 0 12px 30px rgba(0,0,0,.28);
-  cursor:pointer;
-}
-.btn:hover{transform:translateY(-3px); box-shadow:var(--shadow2); border-color:rgba(255,59,111,.5)}
-.btn.primary{
-  background: linear-gradient(180deg, rgba(255,59,111,.35), rgba(255,59,111,.14));
-  border-color:rgba(255,59,111,.6);
-  box-shadow: 0 20px 60px rgba(255,59,111,.20), 0 10px 28px rgba(0,0,0,.28);
-}
-.dot{
-  width:8px; height:8px; border-radius:2px;
-  background:var(--accent);
-  box-shadow:0 0 0 5px rgba(255,59,111,.22), 0 0 24px rgba(255,59,111,.42);
-  transform: rotate(8deg);
-}
+    /* ✅ FIX: da CTA i hamburger budu U ISTOM REDU na mobu */
+    @media (max-width: 520px){
+      .topbarInner{
+        flex-wrap: nowrap;
+        gap: 10px;
+      }
+      .ctaCenter{
+        margin: 0;
+        flex: 1;
+        display:flex;
+        justify-content:center;
+      }
+      .ctaCenter.btn{
+        padding: 10px 12px;
+        font-size: 12px;
+      }
+      .navWrap{
+        margin-left: 0;
+        flex: 0 0 auto;
+      }
+      .hamburger{
+        flex: 0 0 auto;
+      }
+    }
 
-/* Mobile nav */
-.hamburger{
-  display:none;
-  width:44px; height:44px;
-  border-radius:10px;
-  border:3px solid rgba(255,255,255,.16);
-  background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
-  align-items:center; justify-content:center;
-  gap:5px;
-  flex-direction:column;
-  cursor:pointer;
-}
-.hamburger span{
-  width:18px; height:2px; background:rgba(255,255,255,.8);
-  border-radius:3px;
-  display:block;
-}
-.mobileMenu{
-  display:none;
-  position:absolute;
-  left:0;
-  right:0;
-  bottom:100%;
-  border-bottom:3px solid rgba(255,255,255,.10);
-  background:rgba(5,7,12,.95);
-}
-.mobileMenuInner{
-  max-width:var(--max);
-  margin:0 auto;
-  padding:12px 18px 16px;
-  display:grid;
-  gap:8px;
-}
-.mobileMenuInner a{
-  padding:12px 12px;
-  border:3px solid rgba(255,255,255,.12);
-  border-radius:10px;
-  background: linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
-  color:var(--text);
-}
-
-@media (max-width: 980px){
-  nav{display:none}
-  .hamburger{display:flex}
-}
-@media (max-width: 520px){
-  .topbarInner{padding:12px 14px}
-  .mobileMenuInner{padding:12px 14px 16px}
-}
+    /* ✅ FLOATING LOGO: uvijek vidljiv gore lijevo + skala */
+    .floatingLogo{
+      position:fixed;
+      top:14px;
+      left:14px;
+      z-index:120; /* iznad sadržaja, ispod modala (200) */
+      display:block;
+      text-decoration:none;
+    }
+    .floatingLogo .mark{
+      width: clamp(120px, 22vw, 176px);
+      height: clamp(34px, 8vw, 44px);
+      transform: rotate(-2deg);
+      transform-origin: top left;
+    }
+    @media (max-width: 480px){
+      .floatingLogo{ top:10px; left:10px; }
+    }
 
     /* Sections */
     .section{
@@ -722,7 +759,7 @@ nav a:hover{
     }
     .pageBtn[disabled]{opacity:.45; cursor:not-allowed; transform:none}
 
-    /* CTA Band (keep only here) */
+    /* CTA Band */
     .ctaBand{
       border:3px solid rgba(255,59,111,.55);
       background:
@@ -777,7 +814,6 @@ nav a:hover{
       position:relative;
     }
 
-    /* NEW: modal hero image inside popup */
     .modalHero{
       height:220px;
       border-top-left-radius: 18px;
@@ -882,7 +918,13 @@ nav a:hover{
 </head>
 
 <body>
- 
+
+  <!-- ✅ FLOATING LOGO (always visible, top-left) -->
+  <a class="floatingLogo" href="/sr-me/pocetna" aria-label="Sindikat Studio 83 — Početna">
+    <div class="mark" aria-hidden="true">
+      <img class="markImg" src="/studio83logo.png" alt="">
+    </div>
+  </a>
 
 <!-- Google Tag Manager (noscript) -->
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PBXVW3GK"
@@ -897,12 +939,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <!-- Topbar -->
 <header class="topbar">
   <div class="topbarInner reveal">
-    <div class="brand">
-      <div class="mark" aria-hidden="true">
-  <img class="markImg" src="/studio83logo.png" alt="">
-</div>
-
-    </div>
+    <!-- ✅ removed logo from bar (now floating) -->
+    <div class="brand"></div>
 
     <a class="btn primary ctaCenter" href="/sr-me/kontakt"><span class="dot"></span>Kontaktiraj nas</a>
 
@@ -931,7 +969,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
   </div>
 </header>
-
 
   <main class="wrap">
     <!-- HERO -->
@@ -1011,7 +1048,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </div>
         <div class="right">
           <a class="btn ghost" href="/sr-me/usluge">Pogledaj pakete</a>
-          <a class="btn primary" href="/sr-me/kontakt"><span class="dot"></span> Zakaži poziv</a>
         </div>
       </div>
     </section>
@@ -1046,27 +1082,26 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     document.getElementById('year').textContent = new Date().getFullYear();
 
     // Mobile menu toggle
-  const hamburger = document.getElementById('hamburger');
-const mobileMenu = document.getElementById('mobileMenu');
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
 
-if (hamburger && mobileMenu) {
-  hamburger.addEventListener('click', ()=>{
-    const isOpen = mobileMenu.style.display === 'block';
-    mobileMenu.style.display = isOpen ? 'none' : 'block';
-    anime({
-      targets: mobileMenu,
-      opacity: isOpen ? [1,0] : [0,1],
-      translateY: isOpen ? [0,6] : [6,0],
-      duration: 260,
-      easing: 'easeOutQuad'
-    });
-  });
+    if (hamburger && mobileMenu) {
+      hamburger.addEventListener('click', ()=>{
+        const isOpen = mobileMenu.style.display === 'block';
+        mobileMenu.style.display = isOpen ? 'none' : 'block';
+        anime({
+          targets: mobileMenu,
+          opacity: isOpen ? [1,0] : [0,1],
+          translateY: isOpen ? [0,6] : [6,0],
+          duration: 260,
+          easing: 'easeOutQuad'
+        });
+      });
 
-  document.querySelectorAll('#mobileMenu a').forEach(a=>{
-    a.addEventListener('click', ()=>{ mobileMenu.style.display = 'none'; });
-  });
-}
-
+      document.querySelectorAll('#mobileMenu a').forEach(a=>{
+        a.addEventListener('click', ()=>{ mobileMenu.style.display = 'none'; });
+      });
+    }
 
     // Split hero title into words (safe spacing)
     const titleEl = document.getElementById('heroTitle');
