@@ -571,7 +571,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           <span class="tag">brzo</span>
         </div>
 
-        <form class="form" id="kontakt-forma" onsubmit="event.preventDefault(); alert('Forma je demo. Poveži je sa backendom ili Google Formom.');" aria-label="Kontakt forma">
+        <!-- ✅ ONLY CHANGE: removed demo onsubmit; keeping everything else same -->
+        <form class="form" id="kontakt-forma" aria-label="Kontakt forma">
           <div class="field">
             <label for="imeFirma">Ime i firma</label>
             <input id="imeFirma" name="name" required placeholder="npr. Marko / Brand X" autocomplete="name" />
@@ -589,6 +590,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             <textarea id="poruka" name="message" placeholder="Kratko: rok, budžet (okvirno), šta već imate."></textarea>
           </div>
           <button class="btn primary" type="submit"><span class="dot"></span> Pošalji upit</button>
+
+          <!-- ✅ status message placeholder (non-invasive) -->
+          <div id="formStatus" style="margin-top:10px;font-size:13px;color:rgba(255,255,255,.82)"></div>
         </form>
       </div>
 
@@ -683,6 +687,75 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         delay: 700
       });
     });
+
+    /* ✅ FORM → GOOGLE SHEET (Apps Script Web App)
+       ONLY added this block, nothing else changed.
+       1) Deploy Apps Script as Web App (Execute as Me, Access Anyone)
+       2) Paste the /exec URL below
+    */
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyKu4_7m2qLOxnlfiDLYcwYbP4u1hswsp_mqH9rUj0ByyoUv1IVY0abc3gCK67QE4AQxQ/exec";
+
+    const form = document.getElementById("kontakt-forma");
+    const btn = form ? form.querySelector('button[type="submit"]') : null;
+    const statusEl = document.getElementById("formStatus");
+
+    function setStatus(text, isOk=true){
+      if(!statusEl) return;
+      statusEl.textContent = text || "";
+      statusEl.style.color = isOk ? "rgba(255,255,255,.82)" : "rgba(255,120,120,.95)";
+    }
+
+    if (form && btn) {
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+
+        const payload = {
+          name: document.getElementById("imeFirma").value.trim(),
+          contact: document.getElementById("kontakt").value.trim(),
+          goal: document.getElementById("cilj").value.trim(),
+          message: document.getElementById("poruka").value.trim(),
+          url: window.location.href,
+          source: "contact-page"
+        };
+
+        if (!payload.name || !payload.contact || !payload.goal) {
+          setStatus("Popuni obavezna polja (ime/firma, kontakt, cilj).", false);
+          return;
+        }
+
+        const oldHTML = btn.innerHTML;
+        btn.disabled = true;
+        btn.style.opacity = "0.75";
+        btn.innerHTML = "<span class='dot'></span> Šaljem...";
+
+        setStatus("Slanje u toku...", true);
+
+        try {
+          const res = await fetch(SCRIPT_URL, {
+            method: "POST",
+            headers: { "Content-Type": "text/plain;charset=utf-8" },
+            body: JSON.stringify(payload)
+          });
+
+          const data = await res.json().catch(() => ({}));
+
+          if (!res.ok || !data.ok) {
+            throw new Error(data.error || ("HTTP " + res.status));
+          }
+
+          setStatus("✅ Hvala! Upit je poslat. Javljamo se uskoro.", true);
+          form.reset();
+
+        } catch (err) {
+          console.error(err);
+          setStatus("❌ Nešto nije prošlo. Probaj ponovo ili piši direktno na email.", false);
+        } finally {
+          btn.disabled = false;
+          btn.style.opacity = "1";
+          btn.innerHTML = oldHTML;
+        }
+      });
+    }
   </script>
 </body>
 </html>
