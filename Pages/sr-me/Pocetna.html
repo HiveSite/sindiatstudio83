@@ -2,27 +2,18 @@
 <html lang="sr-ME">
 <head>
 
-
   <!-- Google Tag Manager -->
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-PBXVW3GK');</script>
-<!-- End Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-PBXVW3GK');</script>
+  <!-- End Google Tag Manager -->
 
-
-
-
-  
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="/favicon.png">
 
- <link rel="icon" type="image/png" href="/favicon.png">
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-  
   <!-- SEO: osnovno -->
   <title>Sindikat Studio 83 — Reklamne kampanje (Meta & Google) i promotivne aktivacije | Podgorica</title>
   <meta name="description" content="Sindikat Studio 83 (Podgorica) — Meta i Google oglasi, SEO osnove, vođenje društvenih mreža, produkcija sadržaja i promotivne aktivacije na terenu. Jasni paketi, mjerljiv rezultat: više upita, rezervacija i prodaje u Crnoj Gori." />
@@ -49,7 +40,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   <link rel="alternate" href="https://sindikatstudio83.me/sr-me/pocetna" hreflang="sr" />
   <link rel="alternate" href="https://sindikatstudio83.me/sr-me/pocetna" hreflang="x-default" />
 
-  <!-- JSON-LD: Organization + WebSite + WebPage + LocalBusiness/ProfessionalService + FAQ -->
+  <!-- JSON-LD -->
   <script type="application/ld+json">
   {
     "@context":"https://schema.org",
@@ -200,8 +191,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   }
   </script>
 
-
-
   <!-- Anime.js -->
   <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
 
@@ -266,53 +255,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
     a{color:inherit; text-decoration:none}
     img{max-width:100%; display:block}
+
     .wrap{max-width:var(--max); margin:0 auto; padding:22px 18px 120px; position:relative; z-index:2}
 
-    /* Backdrop glow */
-    .heroBg{
-      position:fixed;
-      inset:0;
-      z-index:1;
-      pointer-events:none;
-      overflow:hidden;
-      background:
-        radial-gradient(900px 540px at 20% 20%, rgba(255,59,111,.20), transparent 60%),
-        radial-gradient(900px 540px at 80% 10%, rgba(24,245,255,.14), transparent 60%),
-        radial-gradient(720px 520px at 68% 55%, rgba(162,76,255,.16), transparent 60%);
-    }
-    .heroBg:after{
-      content:"";
-      position:absolute; inset:0;
-      background:
-        radial-gradient(700px 420px at 18% 20%, rgba(255,59,111,.26), transparent 60%),
-        radial-gradient(900px 520px at 70% 12%, rgba(24,245,255,.2), transparent 58%),
-        linear-gradient(180deg, rgba(0,0,0,.25), rgba(6,1,13,.92) 62%, rgba(6,1,13,.98));
-    }
-
-    /* Background video */
-    .bgVideo{
-      position:fixed;
-      inset:0;
-      width:100%;
-      height:100%;
-      object-fit:cover;
-      z-index:0;
-      filter: saturate(1.1) contrast(1.08) brightness(.55);
-    }
-
-    /* Dark overlay for readability */
-    .bgVideoOverlay{
-      position:fixed;
-      inset:0;
-      z-index:1;
-      pointer-events:none;
-      background:
-        radial-gradient(900px 540px at 20% 20%, rgba(255,59,111,.12), transparent 60%),
-        radial-gradient(900px 540px at 80% 10%, rgba(24,245,255,.10), transparent 60%),
-        linear-gradient(180deg, rgba(0,0,0,.25), rgba(6,1,13,.82) 62%, rgba(6,1,13,.92));
-    }
-
-    /* Subtle animated blobs */
+    /* Blobs */
     .blob{
       position:fixed;
       z-index:1;
@@ -331,7 +277,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       opacity:.45;
     }
 
-    /* Topbar */
+    /* ✅ Bottom topbar (contact style) */
     .topbar{
       position:fixed;
       bottom:0;
@@ -342,31 +288,49 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       -webkit-backdrop-filter: blur(12px);
       background: rgba(5,7,12,.88);
       border-top:3px solid rgba(255,255,255,.12);
-      border-bottom:0;
     }
     .topbarInner{
       max-width:var(--max);
       margin:0 auto;
       padding:12px 18px;
-      display:flex; align-items:center; gap:12px;
+      display:flex;
+      align-items:center;
+      gap:12px;
+      justify-content:flex-start;
     }
-    .ctaCenter{margin:0 auto;}
+
+    .ctaCenter{margin:0;}
     .navWrap{
       margin-left:auto;
       display:flex; align-items:center; gap:12px;
     }
-    .brand{
-      display:flex; align-items:center; gap:12px;
-      font-weight:750;
-      letter-spacing:.9px;
-      text-transform:uppercase;
-      font-size:13px;
-    }
 
-    .brandLogo{
-      width:34px;
-      height:34px;
-      object-fit:contain;
+    /* Buttons */
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center;
+      gap:10px;
+      border-radius:10px;
+      padding:12px 16px;
+      font-size:13px;
+      border:3px solid rgba(255,255,255,.16);
+      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+      color:var(--text);
+      transition:transform .18s var(--ease), box-shadow .18s var(--ease), border-color .18s var(--ease), background .18s var(--ease);
+      white-space:nowrap;
+      box-shadow: 0 12px 30px rgba(0,0,0,.28);
+      cursor:pointer;
+    }
+    .btn:hover{transform:translateY(-3px); box-shadow:var(--shadow2); border-color:rgba(255,59,111,.5)}
+    .btn.primary{
+      background: linear-gradient(180deg, rgba(255,59,111,.35), rgba(255,59,111,.14));
+      border-color:rgba(255,59,111,.6);
+      box-shadow: 0 20px 60px rgba(255,59,111,.20), 0 10px 28px rgba(0,0,0,.28);
+    }
+    .dot{
+      width:8px; height:8px; border-radius:2px;
+      background:var(--accent);
+      box-shadow:0 0 0 5px rgba(255,59,111,.22), 0 0 24px rgba(255,59,111,.42);
+      transform: rotate(8deg);
     }
 
     nav{
@@ -382,32 +346,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       transition: background .2s var(--ease), color .2s var(--ease), transform .2s var(--ease), border-color .2s var(--ease);
       transform: translateY(0);
     }
-    nav a:hover{background:rgba(255,255,255,.05); color:var(--text); transform: translateY(-1px); border-color:rgba(24,245,255,.45)}
-
-    .btn{
-      display:inline-flex; align-items:center; justify-content:center;
-      gap:10px;
-      border-radius:10px;
-      padding:12px 16px;
-      font-size:13px;
-      border:3px solid var(--border);
-      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+    nav a:hover{
+      background:rgba(255,255,255,.05);
       color:var(--text);
-      transition:transform .18s var(--ease), box-shadow .18s var(--ease), border-color .18s var(--ease), background .18s var(--ease);
-      white-space:nowrap;
-      box-shadow: 0 12px 30px rgba(0,0,0,.28);
-    }
-    .btn:hover{transform:translateY(-3px); box-shadow:var(--shadow2); border-color:rgba(255,59,111,.5)}
-    .btn.primary{
-      background: linear-gradient(180deg, rgba(255,59,111,.35), rgba(255,59,111,.14));
-      border-color:rgba(255,59,111,.6);
-      box-shadow: 0 20px 60px rgba(255,59,111,.22), 0 10px 28px rgba(0,0,0,.28);
-    }
-    .dot{
-      width:8px; height:8px; border-radius:2px;
-      background:var(--accent);
-      box-shadow:0 0 0 5px rgba(255,59,111,.22), 0 0 24px rgba(255,59,111,.48);
-      transform: rotate(8deg);
+      transform: translateY(-1px);
+      border-color:rgba(24,245,255,.35);
     }
 
     /* Mobile nav */
@@ -415,11 +358,12 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       display:none;
       width:44px; height:44px;
       border-radius:10px;
-      border:3px solid var(--border);
+      border:3px solid rgba(255,255,255,.16);
       background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
       align-items:center; justify-content:center;
       gap:5px;
       flex-direction:column;
+      cursor:pointer;
     }
     .hamburger span{
       width:18px; height:2px; background:rgba(255,255,255,.8);
@@ -450,10 +394,83 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       color:var(--text);
     }
 
-    /* HERO */
-    .hero{
-      padding:54px 0 26px;
+    @media (max-width: 980px){
+      nav{display:none}
+      .hamburger{display:flex}
     }
+    @media (max-width: 520px){
+      .topbarInner{padding:12px 14px}
+      .mobileMenuInner{padding:12px 14px 16px}
+    }
+
+    /* ✅ CTA + hamburger in same row */
+    @media (max-width: 520px){
+      .topbarInner{
+        flex-wrap: nowrap;
+        gap: 10px;
+      }
+      .ctaCenter{
+        margin: 0;
+        flex: 1;
+        display:flex;
+        justify-content:center;
+      }
+      .ctaCenter.btn{
+        padding: 10px 12px;
+        font-size: 12px;
+      }
+      .navWrap{
+        margin-left: 0;
+        flex: 0 0 auto;
+      }
+      .hamburger{ flex: 0 0 auto; }
+    }
+
+    /* ✅ Floating logo */
+    .floatingLogo{
+      position:fixed;
+      top:14px;
+      left:14px;
+      z-index:120;
+      display:block;
+      text-decoration:none;
+    }
+    .mark{
+      width:176px; height:44px;
+      border-radius:14px;
+      border:1.5px solid rgba(255,59,111,.5);
+      box-shadow:
+        0 18px 34px rgba(0,0,0,.45),
+        0 0 0 3px rgba(0,0,0,.45) inset,
+        0 0 42px rgba(255,59,111,.22);
+      transform: rotate(-2deg);
+      overflow:hidden;
+      background: rgba(0,0,0,.18);
+      display:grid;
+      place-items:center;
+    }
+    .markImg{
+      width:100%;
+      height:100%;
+      object-fit:contain;
+      object-position:center;
+      padding:6px;
+      filter: drop-shadow(0 10px 18px rgba(0,0,0,.45));
+    }
+    .floatingLogo .mark{
+      width: 50vw;
+      max-width: 240px;
+      height: auto;
+      aspect-ratio: 176 / 44;
+      transform: rotate(-2deg);
+      transform-origin: top left;
+    }
+    @media (max-width: 480px){
+      .floatingLogo{ top:10px; left:10px; }
+    }
+
+    /* HERO */
+    .hero{ padding:64px 0 22px; }
     .heroGrid{
       display:grid;
       grid-template-columns: 1.25fr .75fr;
@@ -475,10 +492,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       letter-spacing:-.8px;
       max-width:18ch;
     }
-    .heroTitle span{
-      display:inline-block;
-      will-change: transform, opacity;
-    }
+    .heroTitle span{display:inline-block; will-change:transform, opacity;}
     .sub{
       margin-top:18px;
       color:rgba(255,255,255,.80);
@@ -519,8 +533,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     .heroCard:before{
       content:"";
       position:absolute; inset:0;
-      background:
-        linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,0));
+      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,0));
       opacity:.55;
       pointer-events:none;
     }
@@ -563,17 +576,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       transform: rotate(10deg);
       opacity:.25;
     }
-    .stat .num{
-      font-size:26px;
-      font-weight:800;
-      letter-spacing:-.4px;
-    }
-    .stat .cap{
-      margin-top:6px;
-      color:rgba(255,255,255,.65);
-      font-size:12px;
-      line-height:1.35;
-    }
+    .stat .num{ font-size:26px; font-weight:800; letter-spacing:-.4px; }
+    .stat .cap{ margin-top:6px; color:rgba(255,255,255,.65); font-size:12px; line-height:1.35; }
+
     .progressRail{
       height:10px;
       border-radius:var(--r2);
@@ -608,11 +613,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       gap:16px; flex-wrap:wrap;
       margin-bottom:22px;
     }
-    .h2{
-      font-size:22px;
-      letter-spacing:-.2px;
-      margin:0;
-    }
+    .h2{ font-size:22px; letter-spacing:-.2px; margin:0; }
     .desc{
       color:rgba(255,255,255,.70);
       font-size:13px;
@@ -627,8 +628,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     .card{
       border:3px solid rgba(255,255,255,.14);
       border-radius:var(--r2);
-      background:
-        linear-gradient(180deg, rgba(14,16,26,.92), rgba(7,8,19,.92));
+      background: linear-gradient(180deg, rgba(14,16,26,.92), rgba(7,8,19,.92));
       padding:18px;
       box-shadow: var(--shadow2);
       transition: transform .18s var(--ease), border-color .18s var(--ease), box-shadow .18s var(--ease), filter .18s var(--ease);
@@ -677,6 +677,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     }
     .card h3{margin:0; font-size:16px; letter-spacing:-.2px}
     .card p{margin-top:10px; color:rgba(255,255,255,.72); font-size:13px; line-height:1.65}
+
     .bullets{
       margin-top:14px;
       padding-left:18px;
@@ -699,17 +700,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       border-radius:10px;
     }
 
-    .aboutStack{
-      display:grid;
-      gap:14px;
-    }
-
-    .aboutGrid{
-      display:grid;
-      grid-template-columns: 1fr 1fr;
-      gap:14px;
-      align-items:start;
-    }
+    /* Details drops */
+    .aboutGrid{ display:grid; grid-template-columns:1fr 1fr; gap:14px; align-items:start; }
+    .aboutStack{ display:grid; gap:14px; }
 
     .drop{
       border:3px solid rgba(255,255,255,.14);
@@ -731,13 +724,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     }
     .drop summary::-webkit-details-marker{display:none}
     .drop summary .tag{margin-left:auto}
-    .drop .dropBody{
-      padding:16px 18px 18px;
-    }
-    .drop[open]{
-      border-color:rgba(255,59,111,.55);
-      box-shadow: var(--shadow);
-    }
+    .drop .dropBody{ padding:16px 18px 18px; }
+    .drop[open]{ border-color:rgba(255,59,111,.55); box-shadow: var(--shadow); }
 
     .dropBodySplit{
       display:grid;
@@ -895,16 +883,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       font-size:13px;
       line-height:1.65;
     }
-    .faqAInner{
-      padding:0 0 16px;
-    }
+    .faqAInner{ padding:0 0 16px; }
 
     /* Reveal base */
-    .reveal{
-      opacity:0;
-      transform:translateY(18px);
-      will-change: transform, opacity;
-    }
+    .reveal{ opacity:0; transform:translateY(18px); will-change: transform, opacity; }
 
     footer{
       border-top:3px solid rgba(255,255,255,.10);
@@ -914,7 +896,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap;
     }
 
-    /* SEO helper (vidljivo za screen reader, ne ruši dizajn) */
+    /* SEO helper */
     .srOnly{
       position:absolute !important;
       width:1px !important;
@@ -927,30 +909,25 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       border:0 !important;
     }
 
-    /* Mobile */
+    /* Responsive */
     @media (max-width: 980px){
-      .hero{padding:38px 0 18px}
+      .hero{padding:48px 0 18px}
       .heroGrid{grid-template-columns:1fr}
       h1{font-size:42px}
       .grid4{grid-template-columns:repeat(2,1fr)}
       .grid3{grid-template-columns:1fr}
       .grid2{grid-template-columns:1fr}
-      nav{display:none}
-      .hamburger{display:flex}
       .ctaBand{flex-direction:column; align-items:flex-start}
       .aboutGrid{grid-template-columns:1fr}
       .dropBodySplit{grid-template-columns:1fr;}
       .dropMedia{min-height: 190px;}
     }
     @media (max-width: 520px){
-      .wrap{padding:16px 14px 72px}
+      .wrap{padding:16px 14px 92px}
       h1{font-size:36px}
       .grid4{grid-template-columns:1fr}
       .heroActions{gap:10px}
       .heroActions .btn{width:100%}
-      .miniRow span{width:auto}
-      .topbarInner{padding:12px 14px}
-      .mobileMenuInner{padding:12px 14px 16px}
       .thumb{height:165px}
       .dropMedia{min-height:170px}
     }
@@ -958,48 +935,37 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </head>
 
 <body>
+  <!-- ✅ FLOATING LOGO -->
+  <a class="floatingLogo" href="/sr-me/pocetna" aria-label="Sindikat Studio 83 — Početna">
+    <div class="mark" aria-hidden="true">
+      <img class="markImg" src="/studio83logo.png" alt="">
+    </div>
+  </a>
+
   <!-- Google Tag Manager (noscript) -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PBXVW3GK"
-height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-<!-- End Google Tag Manager (noscript) -->
-
-  <!-- Background video -->
-  <video class="bgVideo" autoplay muted loop playsinline preload="metadata"
-    poster="https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=1600&q=80"
-    aria-hidden="true">
-    <source src="https://videos.pexels.com/video-files/4774631/4774631-hd_1920_1080_25fps.mp4" type="video/mp4">
-  </video>
-  <div class="bgVideoOverlay" aria-hidden="true"></div>
-
-  <!-- Background glow -->
-  <div class="heroBg" id="heroBg" aria-hidden="true"></div>
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PBXVW3GK"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
 
   <div class="blob" id="blob1" aria-hidden="true"></div>
   <div class="blob b2" id="blob2" aria-hidden="true"></div>
 
-  <!-- Topbar -->
+  <!-- ✅ Bottom Topbar (contact style) -->
   <header class="topbar">
     <div class="topbarInner reveal">
-      <div class="brand">
-        <img
-          src="https://via.placeholder.com/64x64?text=LOGO"
-          alt="Sindikat Studio 83 — reklamne kampanje i promotivne aktivacije u Podgorici"
-          class="brandLogo"
-          loading="eager"
-        />
-        <div>SINDIKAT STUDIO 83</div>
-      </div>
+      <div class="brand"></div>
 
-      <a class="btn primary ctaCenter" href="/sr-me/kontakt"><span class="dot"></span> Zatraži konsultacije</a>
+      <a class="btn primary ctaCenter" href="/sr-me/kontakt">
+        <span class="dot"></span>Kontaktiraj nas
+      </a>
 
       <div class="navWrap">
         <nav aria-label="Primary">
-          <a href="/sr-me/pocetna">Početna</a>
+          <a href="/sr-me/pocetna" aria-current="page">Početna</a>
           <a href="/sr-me/usluge">Usluge</a>
           <a href="/sr-me/onama">O nama</a>
           <a href="/sr-me/blog">Blog</a>
           <a href="/sr-me/poslovi">Poslovi</a>
-          <a href="/sr-me/kontakt">Kontakt</a>
         </nav>
 
         <button class="hamburger" id="hamburger" aria-label="Open menu">
@@ -1010,158 +976,91 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
     <div class="mobileMenu" id="mobileMenu">
       <div class="mobileMenuInner">
-        <a href="/sr-me/pocetna">Početna</a>
+        <a href="/sr-me/pocetna" aria-current="page">Početna</a>
         <a href="/sr-me/usluge">Usluge</a>
         <a href="/sr-me/onama">O nama</a>
         <a href="/sr-me/blog">Blog</a>
         <a href="/sr-me/poslovi">Poslovi</a>
-        <a href="/sr-me/kontakt">Kontakt</a>
       </div>
     </div>
   </header>
 
-  <main class="wrap">
+  <main class="wrap" role="main">
+<!-- HERO -->
+<section class="hero">
+  <div class="heroGrid">
+    <div>
+      
+                <div class="kicker reveal"></span></div>
 
-    <!-- HERO -->
-    <section class="hero">
-      <div class="heroGrid">
-        <div>
-          <div class="kicker reveal"><span class="dot"></span> Podgorica • reklamne kampanje • Meta i Google oglasi • promotivne aktivacije</div>
+      <div class="kicker reveal">
+        </span>
+        <span class="dot"></span>
+        Podgorica • reklamne kampanje • Meta & Google oglasi • promotivne aktivacije
+        
+      </div>
 
-          <!-- H1: slogan ostaje -->
-          <h1 class="heroTitle reveal" id="heroTitle">
-            Kampanje i aktivacije koje dovode ljude.
-          </h1>
+      <h1 class="heroTitle reveal" id="heroTitle">
+        Kampanje koje donose upite, rezervacije i prodaju.
+      </h1>
 
-          <!-- Vidljiv SEO “glavni pasus” (ključne riječi prirodno) -->
-         <p class="sub reveal">
-  Ako ti treba <strong>reklamna kampanja u Crnoj Gori</strong> koja donosi 
-  <strong>upite, rezervacije i prodaju</strong>, radimo 
-  <strong>Meta i Google oglase</strong>, <strong>SEO osnove</strong>, 
-  <strong>produkciju sadržaja</strong>, <strong>vođenje društvenih mreža</strong> 
-  i <strong>promotivne aktivacije</strong>.
-  Jasan sistem: cilj → kanali → sadržaj → optimizacija → rezultat.
-</p>
+      <p class="sub reveal">
+        <strong>Reklamne kampanje u Crnoj Gori</strong> sa jasnim ciljem i mjerljivim rezultatom.
+        Radimo <strong>Meta i Google oglase</strong>, <strong>SEO osnove</strong>,
+        <strong>sadržaj</strong> i <strong>društvene mreže</strong> —
+        sistemski, bez improvizacije.
+      </p>
 
+      <p class="srOnly">
+        Sindikat Studio 83 je studio iz Podgorice specijalizovan za reklamne kampanje u Crnoj Gori:
+        Meta oglasi, Google oglasi, SEO osnove, produkcija sadržaja, vođenje društvenih mreža,
+        promotivne aktivacije i optimizacija landing stranica za lokalne biznise.
+      </p>
 
-          <p class="sub reveal" style="margin-top:12px">
-            <strong>Crna Gora:</strong> lokalni rast bez haosa — jasni paketi, dogovoreni obim posla i mjerljivo izvještavanje.
-          </p>
+      <div class="heroActions reveal">
+    
+      </div>
+    </div>
 
-          <!-- “Nevidljivo” za dizajn, ali dostupno korisnicima (screen reader) -->
-          <p class="srOnly">
-            Sindikat Studio 83 je studio iz Podgorice koji pruža usluge: reklamna agencija Podgorica, Meta oglasi Crna Gora,
-            Google reklame Podgorica, promocije na terenu Crna Gora, produkcija video sadržaja, vođenje društvenih mreža,
-            izrada i optimizacija landing stranica i SEO osnove za lokalne biznise.
-          </p>
+    <aside class="heroCard reveal" id="heroCard" aria-label="Studio snapshot">
+      <div>
+        <div class="label">
+          <span>Studio presjek</span>
+          <span style="color:rgba(255,176,0,.9)">Aktivno</span>
+        </div>
 
-          <div class="heroActions reveal">
-            <a class="btn primary" href="#contact"><span class="dot"></span> Zakaži 30 min poziv</a>
-            <a class="btn" href="#products">Pogledaj pakete</a>
-            <a class="btn" href="#work">Pogledaj primjere</a>
+        <div class="statGrid">
+          <div class="stat">
+            <div class="num"><span class="counter" data-value="160">0</span>+</div>
+            <div class="cap">događaja</div>
           </div>
-
-          <div class="miniRow reveal">
-            <span>Bez cilja → nema ponude</span>
-            <span>Obim posla je zaključan</span>
-            <span>Rezultat > estetika</span>
+          <div class="stat">
+            <div class="num"><span class="counter" data-value="48">0</span>h</div>
+            <div class="cap">rok isporuke</div>
           </div>
-
-          <!-- Interno linkovanje (vidljivo, korisno) -->
-          <div class="miniRow reveal" style="margin-top:12px">
-            <span><a href="/sr-me/usluge" style="text-decoration:underline; text-underline-offset:3px">Usluge</a> (šta tačno radimo)</span>
-            <span><a href="/sr-me/blog" style="text-decoration:underline; text-underline-offset:3px">Blog</a> (savjeti za rast)</span>
-            <span><a href="/sr-me/kontakt" style="text-decoration:underline; text-underline-offset:3px">Kontakt</a> (brz upit)</span>
+          <div class="stat">
+            <div class="num"><span class="counter" data-value="4">0</span></div>
+            <div class="cap">ključne usluge</div>
+          </div>
+          <div class="stat">
+            <div class="num"><span class="counter" data-value="1">0</span></div>
+            <div class="cap">odgovorna osoba</div>
           </div>
         </div>
 
-        <aside class="heroCard reveal" id="heroCard" aria-label="Studio snapshot">
-          <div>
-            <div class="label">
-              <span>Studio presjek</span>
-              <span style="color:rgba(255,176,0,.9)">Aktivno</span>
-            </div>
-
-            <div class="statGrid">
-              <div class="stat">
-                <div class="num"><span class="counter" data-value="150">0</span>+</div>
-                <div class="cap">kampanja / aktivacija</div>
-              </div>
-              <div class="stat">
-                <div class="num"><span class="counter" data-value="48">0</span>h</div>
-                <div class="cap">tipičan rok isporuke</div>
-              </div>
-              <div class="stat">
-                <div class="num"><span class="counter" data-value="4">0</span></div>
-                <div class="cap">ključne usluge</div>
-              </div>
-              <div class="stat">
-                <div class="num"><span class="counter" data-value="1">0</span></div>
-                <div class="cap">odgovorna osoba</div>
-              </div>
-            </div>
-
-            <div class="progressRail" aria-label="Delivery progress">
-              <div class="progressFill" id="progressFill"></div>
-            </div>
-          </div>
-
-          <div class="foot">
-            <span>Podgorica • Crna Gora</span>
-            <span>Kampanje • Sadržaj • Aktivacije</span>
-          </div>
-        </aside>
-      </div>
-    </section>
-
-    <!-- WHAT / WHAT NOT -->
-    <section class="section" id="about">
-      <div class="headRow">
-        <h2 class="h2 reveal">Šta smo (i šta nismo)</h2>
-        <div class="desc reveal">
-          Sindikat Studio 83 nije agencija koja prodaje “sve”. Mi prodajemo rezultat — ne gomilu nepovezanih usluga.
-          Fokus: <strong>reklamne kampanje</strong> i <strong>promotivne aktivacije</strong> koje vraćaju uloženo.
+        <div class="progressRail" aria-label="Delivery progress">
+          <div class="progressFill" id="progressFill"></div>
         </div>
       </div>
 
-      <div class="aboutGrid">
-        <details class="drop reveal" open>
-          <summary>
-            <span>Šta smo</span>
-            <span class="tag">Fokus</span>
-          </summary>
-          <div class="dropBody">
-            <ul class="bullets">
-              <li>Studio za reklamne kampanje i promotivne aktivacije u Podgorici</li>
-              <li>Meta i Google oglasi sa jasnim ciljem i budžetom</li>
-              <li>Sadržaj napravljen za oglase i konverziju (upit/rezervacija/prodaja)</li>
-              <li>Terenske promocije koje pojačavaju kampanju (digital → teren → digital)</li>
-            </ul>
-            <div class="pillRow">
-              <span>Meta oglasi</span><span>Google oglasi</span><span>SEO osnove</span><span>Sadržaj</span><span>Promocije na terenu</span>
-            </div>
-          </div>
-        </details>
-
-        <details class="drop reveal">
-          <summary>
-            <span>Šta nismo</span>
-            <span class="tag">Filter</span>
-          </summary>
-          <div class="dropBody">
-            <ul class="bullets">
-              <li>Samo “događaji” bez kampanje i bez mjerenja</li>
-              <li>Objave na mrežama bez cilja i bez jasnog poziva na akciju</li>
-              <li>Produkcija radi estetike (bez veze sa rezultatom)</li>
-              <li>Projekti bez dogovorenog obima posla, rokova i odgovornosti</li>
-            </ul>
-            <div class="pillRow">
-              <span>Bez improvizacije</span><span>Bez balasta</span><span>Bez “može još ovo”</span>
-            </div>
-          </div>
-        </details>
+      <div class="foot">
+        <span>Podgorica • Crna Gora</span>
+        <span>Kampanje • Sadržaj • Aktivacije</span>
       </div>
-    </section>
+    </aside>
+  </div>
+</section>
+
 
     <!-- PRODUCTS -->
     <section class="section" id="products">
@@ -1174,7 +1073,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </div>
 
       <div class="aboutStack">
-        <!-- Analiza i plan -->
         <details class="drop reveal" open>
           <summary>
             <span>Analiza i plan kampanje</span>
@@ -1195,13 +1093,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                   <li>Ishod: 1-strani plan + checklista + preporučeni koraci</li>
                 </ul>
               </div>
-
               <div class="dropMedia" style="--img: url('https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=1600&q=80');" aria-hidden="true"></div>
             </div>
           </div>
         </details>
 
-        <!-- Vođenje kampanja -->
         <details class="drop reveal">
           <summary>
             <span>Vođenje reklamnih kampanja</span>
@@ -1222,13 +1118,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                   <li>Mjesečni izvještaj (kratko, jasno, mjerljivo)</li>
                 </ul>
               </div>
-
               <div class="dropMedia" style="--img: url('https://images.unsplash.com/photo-1553877522-43269d4ea984?auto=format&fit=crop&w=1600&q=80');" aria-hidden="true"></div>
             </div>
           </div>
         </details>
 
-        <!-- Produkcija sadržaja -->
         <details class="drop reveal">
           <summary>
             <span>Produkcija sadržaja za oglase</span>
@@ -1249,13 +1143,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                   <li>Plan objava i distribucije (mreže + oglasi)</li>
                 </ul>
               </div>
-
               <div class="dropMedia" style="--img: url('https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1600&q=80');" aria-hidden="true"></div>
             </div>
           </div>
         </details>
 
-        <!-- Promotivna aktivacija i događaji -->
         <details class="drop reveal">
           <summary>
             <span>Promotivna aktivacija i događaji</span>
@@ -1276,7 +1168,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                   <li>Mjerenje i nastavak (retarget + prikupljanje upita)</li>
                 </ul>
               </div>
-
               <div class="dropMedia" style="--img: url('https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&w=1600&q=80');" aria-hidden="true"></div>
             </div>
           </div>
@@ -1294,7 +1185,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           </div>
         </div>
         <div class="right">
-          <a class="btn primary" href="#contact"><span class="dot"></span> Zakaži 30 min</a>
+          <a class="btn primary" href="/sr-me/kontakt"><span class="dot"></span> Zakaži 30 min</a>
           <a class="btn" href="#faq">Pogledaj FAQ</a>
         </div>
       </div>
@@ -1328,55 +1219,52 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </section>
 
     <!-- WORK -->
-   <div class="grid3">
-  <a class="card portfolioCard reveal" href="/sr-me/blog" aria-label="Primjer: launch kampanja i promotivna aktivacija">
-    <div class="thumb">
-      <img
-        alt="Launch kampanja i promotivna aktivacija na terenu — Podgorica"
-        src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&w=1600&q=80"
-        loading="lazy"
-      >
-    </div>
-    <div class="meta">
-      <h3>Launch kampanja + promocija</h3>
-      <p>Digital kampanja koja je završila aktivacijom na terenu i nastavkom kroz retarget.</p>
-      <div class="k"><span>Meta oglasi</span><span>Sadržaj</span><span>Aktivacija</span></div>
-    </div>
-  </a>
+    <section class="section" id="work">
+      <div class="headRow">
+        <h2 class="h2 reveal">Primjeri (vibe + struktura)</h2>
+        <div class="desc reveal">Ovo su placeholder kartice koje možeš kasnije zamijeniti realnim case study-ima.</div>
+      </div>
 
-  <a class="card portfolioCard reveal" href="/sr-me/blog" aria-label="Primjer: kontinuirane Meta i Google kampanje">
-    <div class="thumb">
-      <img
-        alt="Kontinuirane Meta i Google kampanje — optimizacija i rast upita"
-        src="https://images.unsplash.com/photo-1557426272-fc759fdf7a8d?auto=format&fit=crop&w=1600&q=80"
-        loading="lazy"
-      >
-    </div>
-    <div class="meta">
-      <h3>Kontinuirane kampanje</h3>
-      <p>Stalan sistem upita uz testiranje poruka i optimizaciju budžeta.</p>
-      <div class="k"><span>Google</span><span>Meta</span><span>Landing</span></div>
-    </div>
-  </a>
+      <div class="grid3">
+        <a class="card portfolioCard reveal" href="/sr-me/blog" aria-label="Primjer: launch kampanja i promotivna aktivacija">
+          <div class="thumb">
+            <img alt="Launch kampanja i promotivna aktivacija na terenu — Podgorica"
+              src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&w=1600&q=80" loading="lazy">
+          </div>
+          <div class="meta">
+            <h3>Launch kampanja + promocija</h3>
+            <p>Digital kampanja koja je završila aktivacijom na terenu i nastavkom kroz retarget.</p>
+            <div class="k"><span>Meta oglasi</span><span>Sadržaj</span><span>Aktivacija</span></div>
+          </div>
+        </a>
 
-  <a class="card portfolioCard reveal" href="/sr-me/blog" aria-label="Primjer: promo tim i sadržaj sa terena">
-    <div class="thumb">
-      <img
-        alt="Promotivna aktivacija — promo tim i sadržaj sa terena za oglase"
-        src="https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=1600&q=80"
-        loading="lazy"
-      >
-    </div>
-    <div class="meta">
-      <h3>Promotivna aktivacija</h3>
-      <p>Promo tim + sadržaj sa terena, spreman za oglase i mreže.</p>
-      <div class="k"><span>Promo</span><span>Produkcija</span><span>UGC</span></div>
-    </div>
-  </a>
-</div>
+        <a class="card portfolioCard reveal" href="/sr-me/blog" aria-label="Primjer: kontinuirane Meta i Google kampanje">
+          <div class="thumb">
+            <img alt="Kontinuirane Meta i Google kampanje — optimizacija i rast upita"
+              src="https://images.unsplash.com/photo-1557426272-fc759fdf7a8d?auto=format&fit=crop&w=1600&q=80" loading="lazy">
+          </div>
+          <div class="meta">
+            <h3>Kontinuirane kampanje</h3>
+            <p>Stalan sistem upita uz testiranje poruka i optimizaciju budžeta.</p>
+            <div class="k"><span>Google</span><span>Meta</span><span>Landing</span></div>
+          </div>
+        </a>
 
+        <a class="card portfolioCard reveal" href="/sr-me/blog" aria-label="Primjer: promo tim i sadržaj sa terena">
+          <div class="thumb">
+            <img alt="Promotivna aktivacija — promo tim i sadržaj sa terena za oglase"
+              src="https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=1600&q=80" loading="lazy">
+          </div>
+          <div class="meta">
+            <h3>Promotivna aktivacija</h3>
+            <p>Promo tim + sadržaj sa terena, spreman za oglase i mreže.</p>
+            <div class="k"><span>Promo</span><span>Produkcija</span><span>UGC</span></div>
+          </div>
+        </a>
+      </div>
+    </section>
 
-    <!-- PARTNERS MARQUEE -->
+    <!-- PARTNERS -->
     <section class="section" id="partners">
       <div class="headRow">
         <h2 class="h2 reveal">Spremni za partnere</h2>
@@ -1438,152 +1326,74 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
       <div class="grid2">
         <div class="faqItem reveal">
-          <button class="faqQ" type="button">
-            Da li radite samo Meta i Google oglase?
-            <span>+</span>
-          </button>
-          <div class="faqA">
-            <div class="faqAInner">
-              Da — radimo <strong>Meta</strong> (Facebook i Instagram) i <strong>Google</strong> oglase, ali nikad kao “puko puštanje reklama”.
-              Krećemo od cilja i budžeta, postavljamo strukturu kampanja, testiramo poruke i kreative, i optimizujemo iz sedmice u sedmicu.
-              Po potrebi dodajemo <strong>produkciju sadržaja</strong>, <strong>landing smjernice</strong> i <strong>promociju na terenu</strong> da bi rezultat bio jači i stabilniji.
-            </div>
-          </div>
+          <button class="faqQ" type="button">Da li radite samo Meta i Google oglase? <span>+</span></button>
+          <div class="faqA"><div class="faqAInner">
+            Da — radimo <strong>Meta</strong> (Facebook i Instagram) i <strong>Google</strong> oglase, ali nikad kao “puko puštanje reklama”.
+            Krećemo od cilja i budžeta, postavljamo strukturu kampanja, testiramo poruke i kreative, i optimizujemo iz sedmice u sedmicu.
+            Po potrebi dodajemo <strong>produkciju sadržaja</strong>, <strong>landing smjernice</strong> i <strong>promociju na terenu</strong> da bi rezultat bio jači i stabilniji.
+          </div></div>
         </div>
 
         <div class="faqItem reveal">
-          <button class="faqQ" type="button">
-            Da li radite SEO u Podgorici i Crnoj Gori?
-            <span>+</span>
-          </button>
-          <div class="faqA">
-            <div class="faqAInner">
-              Radimo <strong>SEO osnove</strong> koje imaju smisla za lokalne biznise: naslovi i opisi, struktura stranice (H1/H2),
-              interno povezivanje, jasni tekstovi usluga, FAQ i plan sadržaja za blog.
-              SEO koristimo kao dio sistema koji podiže učinak kampanja i kredibilitet sajta.
-            </div>
-          </div>
+          <button class="faqQ" type="button">Da li radite SEO u Podgorici i Crnoj Gori? <span>+</span></button>
+          <div class="faqA"><div class="faqAInner">
+            Radimo <strong>SEO osnove</strong> koje imaju smisla za lokalne biznise: naslovi i opisi, struktura stranice (H1/H2),
+            interno povezivanje, jasni tekstovi usluga, FAQ i plan sadržaja za blog.
+            SEO koristimo kao dio sistema koji podiže učinak kampanja i kredibilitet sajta.
+          </div></div>
         </div>
 
         <div class="faqItem reveal">
-          <button class="faqQ" type="button">
-            Da li vodite društvene mreže?
-            <span>+</span>
-          </button>
-          <div class="faqA">
-            <div class="faqAInner">
-              Da. Vodimo društvene mreže u funkciji rasta: plan objava, produkcija i objavljivanje sadržaja, moderacija i jasna veza sa kampanjama.
-              Ne radimo objave “radi objava” — sadržaj mora da podrži oglase, promocije, događaje i konverziju (upit, rezervaciju, prodaju).
-            </div>
-          </div>
+          <button class="faqQ" type="button">Da li vodite društvene mreže? <span>+</span></button>
+          <div class="faqA"><div class="faqAInner">
+            Da. Vodimo društvene mreže u funkciji rasta: plan objava, produkcija i objavljivanje sadržaja, moderacija i jasna veza sa kampanjama.
+            Ne radimo objave “radi objava” — sadržaj mora da podrži oglase, promocije, događaje i konverziju (upit, rezervaciju, prodaju).
+          </div></div>
         </div>
 
         <div class="faqItem reveal">
-          <button class="faqQ" type="button">
-            Da li radite promocije i aktivacije na terenu?
-            <span>+</span>
-          </button>
-          <div class="faqA">
-            <div class="faqAInner">
-              Da. Radimo <strong>promotivne aktivacije i događaje</strong> kao dio šire kampanje: digital → teren → digital.
-              To uključuje koncept, plan izvođenja, tim i logistiku, promotivnu mehaniku (npr. sampling, promo tim),
-              i sadržaj sa terena koji se dalje koristi u oglasima i na mrežama.
-            </div>
-          </div>
+          <button class="faqQ" type="button">Da li radite promocije i aktivacije na terenu? <span>+</span></button>
+          <div class="faqA"><div class="faqAInner">
+            Da. Radimo <strong>promotivne aktivacije i događaje</strong> kao dio šire kampanje: digital → teren → digital.
+            To uključuje koncept, plan izvođenja, tim i logistiku, promotivnu mehaniku (npr. sampling, promo tim),
+            i sadržaj sa terena koji se dalje koristi u oglasima i na mrežama.
+          </div></div>
         </div>
 
         <div class="faqItem reveal">
-          <button class="faqQ" type="button">
-            Za koga su vaše usluge?
-            <span>+</span>
-          </button>
-          <div class="faqA">
-            <div class="faqAInner">
-              Za biznise i brendove u <strong>Podgorici i Crnoj Gori</strong> koji žele mjerljiv rast: više gostiju, upita, rezervacija ili prodaje.
-              Posebno dobro radimo sa ugostiteljstvom, retailom i servisnim biznisima, kao i brendovima kojima trebaju promocije i događaji.
-              Ako nema cilja i budžeta — ne ulazimo u projekat.
-            </div>
-          </div>
+          <button class="faqQ" type="button">Za koga su vaše usluge? <span>+</span></button>
+          <div class="faqA"><div class="faqAInner">
+            Za biznise i brendove u <strong>Podgorici i Crnoj Gori</strong> koji žele mjerljiv rast: više gostiju, upita, rezervacija ili prodaje.
+            Posebno dobro radimo sa ugostiteljstvom, retailom i servisnim biznisima, kao i brendovima kojima trebaju promocije i događaji.
+            Ako nema cilja i budžeta — ne ulazimo u projekat.
+          </div></div>
         </div>
 
         <div class="faqItem reveal">
-          <button class="faqQ" type="button">
-            Koliko brzo može da se krene?
-            <span>+</span>
-          </button>
-          <div class="faqA">
-            <div class="faqAInner">
-              Ako imamo cilj, okvirni budžet i dogovoren obim posla — krećemo brzo.
-              Najbrži ulaz je <strong>Analiza i plan kampanje (1 dan)</strong>, nakon čega prelazimo na vođenje kampanja,
-              produkciju sadržaja ili promociju na terenu, zavisno od prioriteta.
-            </div>
-          </div>
+          <button class="faqQ" type="button">Koliko brzo može da se krene? <span>+</span></button>
+          <div class="faqA"><div class="faqAInner">
+            Ako imamo cilj, okvirni budžet i dogovoren obim posla — krećemo brzo.
+            Najbrži ulaz je <strong>Analiza i plan kampanje (1 dan)</strong>, nakon čega prelazimo na vođenje kampanja,
+            produkciju sadržaja ili promociju na terenu, zavisno od prioriteta.
+          </div></div>
         </div>
 
         <div class="faqItem reveal">
-          <button class="faqQ" type="button">
-            Kako izgleda saradnja i izvještavanje?
-            <span>+</span>
-          </button>
-          <div class="faqA">
-            <div class="faqAInner">
-              Saradnja je bez haosa: jedan dogovoreni obim posla, jedna odgovorna osoba i jasni rokovi.
-              Izvještavanje je kratko i mjerljivo: šta smo uradili, šta radi, šta gasimo i šta pojačavamo.
-              Fokus je na rezultatu, ne na “aktivnostima”.
-            </div>
-          </div>
+          <button class="faqQ" type="button">Kako izgleda saradnja i izvještavanje? <span>+</span></button>
+          <div class="faqA"><div class="faqAInner">
+            Saradnja je bez haosa: jedan dogovoreni obim posla, jedna odgovorna osoba i jasni rokovi.
+            Izvještavanje je kratko i mjerljivo: šta smo uradili, šta radi, šta gasimo i šta pojačavamo.
+            Fokus je na rezultatu, ne na “aktivnostima”.
+          </div></div>
         </div>
 
         <div class="faqItem reveal">
-          <button class="faqQ" type="button">
-            Šta dobijam kroz vaše pakete?
-            <span>+</span>
-          </button>
-          <div class="faqA">
-            <div class="faqAInner">
-              Dobijaš sistem: jasan plan, kampanje koje donose upite/rezervacije/prodaju, sadržaj napravljen za oglase i mreže,
-              i po potrebi promotivnu aktivaciju ili događaj koji pojačava kampanju.
-              Paketi su složeni tako da kupuješ ishod, a ne nepovezane usluge.
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- CONTACT (anchor ostaje radi CTA; link ide na /sr-me/kontakt) -->
-    <section class="section" id="contact">
-      <div class="headRow">
-        <h2 class="h2 reveal">Kontakt</h2>
-        <div class="desc reveal">
-          Najbrže: pošalji upit na kontakt stranici ili zakaži konsultacije.
-          <a href="/sr-me/kontakt" style="text-decoration:underline; text-underline-offset:3px">Otvori kontakt</a>.
-        </div>
-      </div>
-
-      <div class="grid2">
-        <div class="card reveal">
-          <div class="top"><h3>Brzi put</h3><span class="tag">Podgorica</span></div>
-          <p>
-            Ako želiš da pričamo konkretno: cilj + budžet + rok. Mi kažemo šta ima smisla (i šta nema).
-          </p>
-          <div class="pillRow">
-            <span>Meta oglasi</span><span>Google oglasi</span><span>SEO osnove</span><span>Aktivacije</span>
-          </div>
-          <div style="margin-top:14px; display:flex; gap:12px; flex-wrap:wrap">
-            <a class="btn primary" href="/sr-me/kontakt"><span class="dot"></span> Pošalji upit</a>
-            <a class="btn" href="#products">Paketi</a>
-          </div>
-        </div>
-
-        <div class="card reveal">
-          <div class="top"><h3>Lokalni signal</h3><span class="tag">Crna Gora</span></div>
-          <p>
-            Radimo sa lokalnim biznisima koji žele mjerljiv rast. U praksi, to znači: jasna ponuda, dobra landing stranica,
-            reklame koje testiraju poruke i sadržaj koji pojačava konverziju.
-          </p>
-          <div class="pillRow">
-            <span>Upiti</span><span>Rezervacije</span><span>Prodaja</span><span>Mjerenje</span>
-          </div>
+          <button class="faqQ" type="button">Šta dobijam kroz vaše pakete? <span>+</span></button>
+          <div class="faqA"><div class="faqAInner">
+            Dobijaš sistem: jasan plan, kampanje koje donose upite/rezervacije/prodaju, sadržaj napravljen za oglase i mreže,
+            i po potrebi promotivnu aktivaciju ili događaj koji pojačava kampanju.
+            Paketi su složeni tako da kupuješ ishod, a ne nepovezane usluge.
+          </div></div>
         </div>
       </div>
     </section>
@@ -1606,60 +1416,57 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     // Mobile menu toggle
     const hamburger = document.getElementById('hamburger');
     const mobileMenu = document.getElementById('mobileMenu');
-    hamburger.addEventListener('click', ()=>{
-      const isOpen = mobileMenu.style.display === 'block';
-      mobileMenu.style.display = isOpen ? 'none' : 'block';
-      anime({
-        targets: mobileMenu,
-        opacity: isOpen ? [1,0] : [0,1],
-        translateY: isOpen ? [0,6] : [6,0],
-        duration: 260,
-        easing: 'easeOutQuad'
+    if (hamburger && mobileMenu) {
+      hamburger.addEventListener('click', ()=>{
+        const isOpen = mobileMenu.style.display === 'block';
+        mobileMenu.style.display = isOpen ? 'none' : 'block';
+        anime({
+          targets: mobileMenu,
+          opacity: isOpen ? [1,0] : [0,1],
+          translateY: isOpen ? [0,6] : [6,0],
+          duration: 260,
+          easing: 'easeOutQuad'
+        });
       });
-    });
 
-    // Close mobile menu after click
-    document.querySelectorAll('#mobileMenu a').forEach(a=>{
-      a.addEventListener('click', ()=>{
-        mobileMenu.style.display = 'none';
+      document.querySelectorAll('#mobileMenu a').forEach(a=>{
+        a.addEventListener('click', ()=>{ mobileMenu.style.display = 'none'; });
       });
-    });
+    }
 
     // Split hero title into words (safe spacing)
     const titleEl = document.getElementById('heroTitle');
-    const raw = titleEl.textContent.trim();
-    const words = raw.split(/\s+/);
-    titleEl.textContent = '';
-    words.forEach((w, i) => {
-      const span = document.createElement('span');
-      span.textContent = w;
-      span.style.display = 'inline-block';
-      titleEl.appendChild(span);
-      if (i < words.length - 1) titleEl.appendChild(document.createTextNode(' '));
-    });
+    if (titleEl) {
+      const raw = titleEl.textContent.trim();
+      const words = raw.split(/\s+/);
+      titleEl.textContent = '';
+      words.forEach((w, i) => {
+        const span = document.createElement('span');
+        span.textContent = w;
+        span.style.display = 'inline-block';
+        titleEl.appendChild(span);
+        if (i < words.length - 1) titleEl.appendChild(document.createTextNode(' '));
+      });
+    }
 
     // Reveal observer
     const revealEls = document.querySelectorAll('.reveal');
     const io = new IntersectionObserver((entries)=>{
       entries.forEach(entry=>{
         if(!entry.isIntersecting) return;
-        const el = entry.target;
-
         anime({
-          targets: el,
+          targets: entry.target,
           opacity: [0,1],
           translateY: [18,0],
           duration: 820,
           easing: 'easeOutExpo'
         });
-
-        io.unobserve(el);
+        io.unobserve(entry.target);
       });
     }, {threshold: 0.14});
-
     revealEls.forEach(el=>io.observe(el));
 
-    // Hero title word stagger on load
+    // Hero title word stagger + progress + CTA pulse
     window.addEventListener('load', ()=>{
       anime({
         targets: '#heroTitle span',
@@ -1670,7 +1477,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         easing: 'easeOutExpo'
       });
 
-      // Progress bar fill
       anime({
         targets: '#progressFill',
         width: ['0%','62%'],
@@ -1679,7 +1485,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         delay: 450
       });
 
-      // CTA soft pulse
       anime({
         targets: '.btn.primary',
         scale: [1, 1.02, 1],
@@ -1692,7 +1497,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     // Counters start when hero card is visible
     const counters = document.querySelectorAll('.counter');
     let countersStarted = false;
-
     const counterIO = new IntersectionObserver((entries)=>{
       entries.forEach(entry=>{
         if(!entry.isIntersecting || countersStarted) return;
@@ -1712,7 +1516,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         counterIO.disconnect();
       });
     }, {threshold: 0.25});
-
     const heroCard = document.getElementById('heroCard');
     if(heroCard) counterIO.observe(heroCard);
 
@@ -1775,8 +1578,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       });
     });
 
-    // Parallax + blobs
-    const heroBg = document.getElementById('heroBg');
+    // Blobs
     const b1 = document.getElementById('blob1');
     const b2 = document.getElementById('blob2');
 
@@ -1807,17 +1609,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       loop: true
     });
 
-    let ticking = false;
-    window.addEventListener('scroll', ()=>{
-      if(ticking) return;
-      ticking = true;
-      requestAnimationFrame(()=>{
-        const y = window.scrollY || 0;
-        if(heroBg) heroBg.style.transform = `translateY(${y * 0.06}px)`;
-        ticking = false;
-      });
-    }, {passive:true});
-
     // Subtle card tilt on desktop only
     const tiltCards = document.querySelectorAll('.card');
     const canTilt = window.matchMedia('(hover:hover) and (pointer:fine)').matches;
@@ -1832,9 +1623,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           const rotX = (0.5 - py) * 3.8;
           card.style.transform = `translateY(-3px) rotateX(${rotX}deg) rotateY(${rotY}deg)`;
         });
-        card.addEventListener('mouseleave', ()=>{
-          card.style.transform = '';
-        });
+        card.addEventListener('mouseleave', ()=>{ card.style.transform = ''; });
       });
     }
   </script>
