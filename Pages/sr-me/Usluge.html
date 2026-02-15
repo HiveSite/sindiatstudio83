@@ -643,7 +643,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <div class="brand"></div>
 
       <a class="btn primary ctaCenter" href="/sr-me/kontakt">
-        <span class="dot"></span> Zakaži 30 min poziv
+        <span class="dot"></span>Kontaktiraj nas
       </a>
 
       <div class="navWrap">
@@ -653,7 +653,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <a href="/sr-me/onama">O nama</a>
           <a href="/sr-me/blog">Blog</a>
           <a href="/sr-me/poslovi">Poslovi</a>
-          <a href="/sr-me/kontakt">Kontakt</a>
         </nav>
 
         <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
@@ -670,7 +669,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <a href="/sr-me/onama">O nama</a>
         <a href="/sr-me/blog">Blog</a>
         <a href="/sr-me/poslovi">Poslovi</a>
-        <a href="/sr-me/kontakt">Kontakt</a>
       </div>
     </div>
   </header>
@@ -952,8 +950,447 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </footer>
   </div>
 
-  <!-- MODALS (ostaju isti kao kod tebe) -->
-  <!-- ... (svi tvoji modali ostaju bez izmjene) ... -->
+  <!-- ✅ MODALS: stvarni sadržaj za "Detaljnije" -->
+
+  <!-- Branding -->
+  <div class="modal" id="modal-branding" aria-hidden="true">
+    <div class="modalBackdrop" data-close></div>
+    <div class="modalPanel" role="dialog" aria-modal="true" aria-label="Branding & Digital identitet">
+      <div class="modalTop">
+        <h3 class="modalTitle">Branding & Digital identitet</h3>
+        <button class="modalClose" type="button" data-close aria-label="Zatvori">×</button>
+      </div>
+      <div class="modalBody">
+        <p>Brand koji izgleda ozbiljno i komunicira jasno — da klijent odmah shvati ko si, šta radiš i zašto da izabere tebe.</p>
+
+        <div class="modalGrid">
+          <div class="modalBlock">
+            <h4>Šta dobijaš</h4>
+            <ul class="bullets">
+              <li>Logo refresh ili novi logo (po potrebi)</li>
+              <li>Boje, tipografija, grid i pravila upotrebe</li>
+              <li>Ton komunikacije (kako pričamo i šta naglašavamo)</li>
+              <li>Brand kit za web i društvene mreže</li>
+            </ul>
+          </div>
+          <div class="modalBlock">
+            <h4>Proces (jednostavno)</h4>
+            <ul class="bullets">
+              <li>Brzi audit: ko si / publika / konkurencija</li>
+              <li>2–3 vizuelna pravca + selekcija</li>
+              <li>Finalizacija i priprema fajlova</li>
+              <li>Mini vodič + predlošci</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="modalActions">
+          <a class="btn primary" href="/sr-me/kontakt"><span class="dot"></span> Kontaktiraj nas</a>
+          <a class="btn" href="/sr-me/kontakt">Zakaži 30 min poziv</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Ads -->
+  <div class="modal" id="modal-ads" aria-hidden="true">
+    <div class="modalBackdrop" data-close></div>
+    <div class="modalPanel" role="dialog" aria-modal="true" aria-label="Oglašavanje (Performance)">
+      <div class="modalTop">
+        <h3 class="modalTitle">Oglašavanje (Performance)</h3>
+        <button class="modalClose" type="button" data-close aria-label="Zatvori">×</button>
+      </div>
+      <div class="modalBody">
+        <p>Kampanje koje se ne rade “reda radi” — nego da donesu upite, pozive, rezervacije ili prodaju. Meta + Google, sa testiranjem i optimizacijom.</p>
+
+        <div class="modalGrid">
+          <div class="modalBlock">
+            <h4>Šta radimo</h4>
+            <ul class="bullets">
+              <li>Setup kampanja + struktura (ACQ / RET)</li>
+              <li>Test creative-a (varijante poruka i vizuala)</li>
+              <li>Optimizacija budžeta i publika</li>
+              <li>Mjesečni report: šta radi / šta ne radi / šta dalje</li>
+            </ul>
+          </div>
+          <div class="modalBlock">
+            <h4>Uslov da radi</h4>
+            <ul class="bullets">
+              <li>Jasan cilj (lead / prodaja / posjeta)</li>
+              <li>Dobra landing stranica (ili je napravimo)</li>
+              <li>Tracking (GA4 / pixel / conversion events)</li>
+              <li>Budžet za test (da ne nagađamo)</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="modalActions">
+          <a class="btn primary" href="/sr-me/kontakt"><span class="dot"></span> Traži ponudu</a>
+          <a class="btn" href="/sr-me/kontakt">Zakaži 30 min poziv</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Web -->
+  <div class="modal" id="modal-web" aria-hidden="true">
+    <div class="modalBackdrop" data-close></div>
+    <div class="modalPanel" role="dialog" aria-modal="true" aria-label="Web sajtovi & Landing page">
+      <div class="modalTop">
+        <h3 class="modalTitle">Web sajtovi & Landing page</h3>
+        <button class="modalClose" type="button" data-close aria-label="Zatvori">×</button>
+      </div>
+      <div class="modalBody">
+        <p>Ne pravimo “lijep sajt”. Pravimo stranicu koja vodi korisnika: problem → dokaz → rješenje → CTA.</p>
+
+        <div class="modalGrid">
+          <div class="modalBlock">
+            <h4>Uključeno</h4>
+            <ul class="bullets">
+              <li>Struktura sekcija (hero, benefit, dokaz, FAQ, CTA)</li>
+              <li>Copy koji objašnjava i prodaje (bez praznih fraza)</li>
+              <li>Responsive dizajn (mobilni prioritet)</li>
+              <li>Osnove SEO + performanse</li>
+            </ul>
+          </div>
+          <div class="modalBlock">
+            <h4>Najčešći ishodi</h4>
+            <ul class="bullets">
+              <li>Više upita sa istog broja posjeta</li>
+              <li>Manje “zbunjenih” korisnika</li>
+              <li>Jasniji CTA i bolji flow</li>
+              <li>Bolja osnova za oglase i SEO</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="modalActions">
+          <a class="btn primary" href="/sr-me/kontakt"><span class="dot"></span> Hoću landing</a>
+          <a class="btn" href="/sr-me/kontakt">Zakaži 30 min poziv</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Copy -->
+  <div class="modal" id="modal-copy" aria-hidden="true">
+    <div class="modalBackdrop" data-close></div>
+    <div class="modalPanel" role="dialog" aria-modal="true" aria-label="Copywriting & Content">
+      <div class="modalTop">
+        <h3 class="modalTitle">Copywriting & Content</h3>
+        <button class="modalClose" type="button" data-close aria-label="Zatvori">×</button>
+      </div>
+      <div class="modalBody">
+        <p>Poruke koje “režu” kroz šum. U oglasu, na landing-u i u sadržaju — da ljudi razumiju i kliknu.</p>
+
+        <div class="modalGrid">
+          <div class="modalBlock">
+            <h4>Šta dobijaš</h4>
+            <ul class="bullets">
+              <li>Hook varijante (više uglova)</li>
+              <li>Ads copy set (headline / primary text)</li>
+              <li>Landing copy (sekcije + CTA)</li>
+              <li>Mini content plan (teme + format)</li>
+            </ul>
+          </div>
+          <div class="modalBlock">
+            <h4>Kako radimo</h4>
+            <ul class="bullets">
+              <li>Brzi intervju + ponuda (value)</li>
+              <li>Analiza publike (šta ih stvarno boli)</li>
+              <li>Varijante i test (bez vezivanja za jednu ideju)</li>
+              <li>Final: dokument + “šta testirati prvo”</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="modalActions">
+          <a class="btn primary" href="/sr-me/kontakt"><span class="dot"></span> Treba mi copy</a>
+          <a class="btn" href="/sr-me/kontakt">Zakaži 30 min poziv</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- UX -->
+  <div class="modal" id="modal-ux" aria-hidden="true">
+    <div class="modalBackdrop" data-close></div>
+    <div class="modalPanel" role="dialog" aria-modal="true" aria-label="UX optimizacija (Conversion)">
+      <div class="modalTop">
+        <h3 class="modalTitle">UX optimizacija (Conversion)</h3>
+        <button class="modalClose" type="button" data-close aria-label="Zatvori">×</button>
+      </div>
+      <div class="modalBody">
+        <p>Uklanjamo trenje: gdje ljudi odustaju, gdje se zbune i zašto ne kliknu. Cilj je više akcija bez većeg budžeta.</p>
+
+        <div class="modalGrid">
+          <div class="modalBlock">
+            <h4>Šta analiziramo</h4>
+            <ul class="bullets">
+              <li>Flow: ulaz → ponuda → CTA</li>
+              <li>Hijerarhija informacija (šta je prvo/bitno)</li>
+              <li>Forme i mikro-CTA</li>
+              <li>Mobilni UX (90% realnosti)</li>
+            </ul>
+          </div>
+          <div class="modalBlock">
+            <h4>Šta dobijaš</h4>
+            <ul class="bullets">
+              <li>Lista tačnih izmjena (prioritet + razlog)</li>
+              <li>Brze pobjede (quick wins)</li>
+              <li>Predlog novih sekcija / reda</li>
+              <li>Prije/poslije logika + mjerenje</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="modalActions">
+          <a class="btn primary" href="/sr-me/kontakt"><span class="dot"></span> Hoću audit</a>
+          <a class="btn" href="/sr-me/kontakt">Zakaži 30 min poziv</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Analytics -->
+  <div class="modal" id="modal-analytics" aria-hidden="true">
+    <div class="modalBackdrop" data-close></div>
+    <div class="modalPanel" role="dialog" aria-modal="true" aria-label="Analytics & Tracking">
+      <div class="modalTop">
+        <h3 class="modalTitle">Analytics & Tracking</h3>
+        <button class="modalClose" type="button" data-close aria-label="Zatvori">×</button>
+      </div>
+      <div class="modalBody">
+        <p>Bez mjerenja nema optimizacije. Postavljamo tracking tako da znaš šta tačno donosi upite i prodaju.</p>
+
+        <div class="modalGrid">
+          <div class="modalBlock">
+            <h4>Uključeno</h4>
+            <ul class="bullets">
+              <li>GA4 setup i provjera</li>
+              <li>Eventi: klik, forma, poziv, lead, kupovina (po potrebi)</li>
+              <li>UTM standard + naming</li>
+              <li>Osnovni dashboard (jasno, bez šuma)</li>
+            </ul>
+          </div>
+          <div class="modalBlock">
+            <h4>Rezultat</h4>
+            <ul class="bullets">
+              <li>Tačno znaš odakle dolaze leadovi</li>
+              <li>Funnel i drop-off tačke</li>
+              <li>Podaci spremni za ads optimizaciju</li>
+              <li>Manje “osjećaja”, više odluka</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="modalActions">
+          <a class="btn primary" href="/sr-me/kontakt"><span class="dot"></span> Sredi tracking</a>
+          <a class="btn" href="/sr-me/kontakt">Zakaži 30 min poziv</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Events -->
+  <div class="modal" id="modal-events" aria-hidden="true">
+    <div class="modalBackdrop" data-close></div>
+    <div class="modalPanel" role="dialog" aria-modal="true" aria-label="Aktivacije & Događaji">
+      <div class="modalTop">
+        <h3 class="modalTitle">Aktivacije & Događaji</h3>
+        <button class="modalClose" type="button" data-close aria-label="Zatvori">×</button>
+      </div>
+      <div class="modalBody">
+        <p>Radimo aktivacije koje pojačavaju kampanju: pravi doživljaj + sadržaj koji se kasnije koristi za retarget i prodaju.</p>
+
+        <div class="modalGrid">
+          <div class="modalBlock">
+            <h4>Šta pokrivamo</h4>
+            <ul class="bullets">
+              <li>Koncept i mehanika (zašto bi neko stao)</li>
+              <li>Logistika + tim na terenu</li>
+              <li>Foto/video plan (šta tačno snimamo)</li>
+              <li>Post-event sadržaj i ads plan</li>
+            </ul>
+          </div>
+          <div class="modalBlock">
+            <h4>Kad ima smisla</h4>
+            <ul class="bullets">
+              <li>Lansiranje proizvoda / brenda</li>
+              <li>Sezonske kampanje i festivali</li>
+              <li>Kad želiš “buzz” + dokaz (UGC)</li>
+              <li>Kad trebaš sadržaj za 30 dana</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="modalActions">
+          <a class="btn primary" href="/sr-me/kontakt"><span class="dot"></span> Planiraj aktivaciju</a>
+          <a class="btn" href="/sr-me/kontakt">Zakaži 30 min poziv</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SEO -->
+  <div class="modal" id="modal-seo" aria-hidden="true">
+    <div class="modalBackdrop" data-close></div>
+    <div class="modalPanel" role="dialog" aria-modal="true" aria-label="SEO sistem (On-page + Sadržaj)">
+      <div class="modalTop">
+        <h3 class="modalTitle">SEO sistem (On-page + Sadržaj)</h3>
+        <button class="modalClose" type="button" data-close aria-label="Zatvori">×</button>
+      </div>
+      <div class="modalBody">
+        <p>SEO kao sistem: struktura sajta + ključne riječi + interne veze + sadržaj koji donosi upite (ne samo posjete).</p>
+
+        <div class="modalGrid">
+          <div class="modalBlock">
+            <h4>On-page osnova</h4>
+            <ul class="bullets">
+              <li>Struktura stranica i linkovanje</li>
+              <li>Title/description, H tagovi, schema (osnove)</li>
+              <li>Brzina + tehničke provjere</li>
+              <li>Search Console setup i monitoring</li>
+            </ul>
+          </div>
+          <div class="modalBlock">
+            <h4>Sadržaj koji radi</h4>
+            <ul class="bullets">
+              <li>Plan tema (namjera: kupujem / tražim / upoređujem)</li>
+              <li>Struktura bloga (kategorije + interne veze)</li>
+              <li>Prioritet: stranice koje prodaju</li>
+              <li>Mjerenje: upiti i konverzije</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="modalActions">
+          <a class="btn primary" href="/sr-me/kontakt"><span class="dot"></span> Hoću SEO plan</a>
+          <a class="btn" href="/sr-me/kontakt">Zakaži 30 min poziv</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Gamification -->
+  <div class="modal" id="modal-gamification" aria-hidden="true">
+    <div class="modalBackdrop" data-close></div>
+    <div class="modalPanel" role="dialog" aria-modal="true" aria-label="Gamification & Interaktivne kampanje">
+      <div class="modalTop">
+        <h3 class="modalTitle">Gamification & Interaktivne kampanje</h3>
+        <button class="modalClose" type="button" data-close aria-label="Zatvori">×</button>
+      </div>
+      <div class="modalBody">
+        <p>Interakcija koja pravi “priču”: ljudi učestvuju, dijele, ostavljaju podatke i ulaze u funnel bez agresivnog prodavanja.</p>
+
+        <div class="modalGrid">
+          <div class="modalBlock">
+            <h4>Primjeri mehanika</h4>
+            <ul class="bullets">
+              <li>Kviz / test / “koji si tip”</li>
+              <li>Spin / scratch / mini igra</li>
+              <li>Takmičenje (UGC) + nagrade</li>
+              <li>Lead capture + automatski follow-up</li>
+            </ul>
+          </div>
+          <div class="modalBlock">
+            <h4>Šta dobijaš</h4>
+            <ul class="bullets">
+              <li>Koncept + pravila (jasno i fer)</li>
+              <li>UX prototip + flow</li>
+              <li>Copy + vizuelni okvir</li>
+              <li>Plan promocije + retarget</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="modalActions">
+          <a class="btn primary" href="/sr-me/kontakt"><span class="dot"></span> Hoću kampanju</a>
+          <a class="btn" href="/sr-me/kontakt">Zakaži 30 min poziv</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Custom -->
+  <div class="modal" id="modal-custom" aria-hidden="true">
+    <div class="modalBackdrop" data-close></div>
+    <div class="modalPanel" role="dialog" aria-modal="true" aria-label="Custom digital rješenja">
+      <div class="modalTop">
+        <h3 class="modalTitle">Custom digital rješenja</h3>
+        <button class="modalClose" type="button" data-close aria-label="Zatvori">×</button>
+      </div>
+      <div class="modalBody">
+        <p>Kad ti treba nešto specifično: kalkulator, forma, mini sistem, landing sa posebnom logikom ili MVP alat koji prodaje.</p>
+
+        <div class="modalGrid">
+          <div class="modalBlock">
+            <h4>Tipični primjeri</h4>
+            <ul class="bullets">
+              <li>Kalkulator cijene / ponude</li>
+              <li>Napredne forme (multi-step)</li>
+              <li>Mini CRM / lead inbox</li>
+              <li>Integracije (webhook, email, sheet)</li>
+            </ul>
+          </div>
+          <div class="modalBlock">
+            <h4>Kako radimo</h4>
+            <ul class="bullets">
+              <li>Scope zaključan prije starta</li>
+              <li>MVP prvo (da radi, pa onda “šminka”)</li>
+              <li>Dokumentacija i predaja</li>
+              <li>Mjerenje rezultata (ako je funnel)</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="modalActions">
+          <a class="btn primary" href="/sr-me/kontakt"><span class="dot"></span> Treba mi rješenje</a>
+          <a class="btn" href="/sr-me/kontakt">Zakaži 30 min poziv</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mobile MVP -->
+  <div class="modal" id="modal-mobile" aria-hidden="true">
+    <div class="modalBackdrop" data-close></div>
+    <div class="modalPanel" role="dialog" aria-modal="true" aria-label="Mobile MVP & Prototip (ograničeno)">
+      <div class="modalTop">
+        <h3 class="modalTitle">Mobile MVP & Prototip (ograničeno)</h3>
+        <button class="modalClose" type="button" data-close aria-label="Zatvori">×</button>
+      </div>
+      <div class="modalBody">
+        <p>Prva verzija aplikacije — da validiraš ideju prije velikog ulaganja. Fokus: flow, ključne funkcije i plan implementacije.</p>
+
+        <div class="modalGrid">
+          <div class="modalBlock">
+            <h4>Šta dobijaš</h4>
+            <ul class="bullets">
+              <li>Definicija MVP scope-a (šta ulazi / šta ne)</li>
+              <li>UX prototip (ekrani + flow)</li>
+              <li>Specifikacija funkcija (jasno dev-u)</li>
+              <li>Plan faza (šta prvo, šta kasnije)</li>
+            </ul>
+          </div>
+          <div class="modalBlock">
+            <h4>Kad je idealno</h4>
+            <ul class="bullets">
+              <li>Imaš ideju, ali ne želiš rizik “full build”</li>
+              <li>Treba ti prototip za investitore/partnera</li>
+              <li>Želiš brz feedback sa tržišta</li>
+              <li>Želiš plan troška prije razvoja</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="modalActions">
+          <a class="btn primary" href="/sr-me/kontakt"><span class="dot"></span> Validiraj ideju</a>
+          <a class="btn" href="/sr-me/kontakt">Zakaži 30 min poziv</a>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <script>
     // Year (safe)
@@ -1147,12 +1584,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       if(e.key !== 'Escape') return;
       const m = document.querySelector('.modal.open');
       if(m) closeModal(m);
-    });
-
-    document.querySelectorAll('.modal a[data-close]').forEach(a=>{
-      a.addEventListener('click', (e)=>{
-        // pusti navigaciju
-      });
     });
   </script>
 </body>
