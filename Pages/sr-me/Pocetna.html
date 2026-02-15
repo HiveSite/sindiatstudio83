@@ -724,7 +724,16 @@
     }
     .drop summary::-webkit-details-marker{display:none}
     .drop summary .tag{margin-left:auto}
-    .drop .dropBody{ padding:16px 18px 18px; }
+/* ✅ Smooth drops like FAQ */
+.drop .dropBody{
+  height: 0;
+  overflow: hidden;
+  padding: 0 18px; /* bočni padding ostaje, visinu animiramo */
+}
+
+.drop .dropBodyInner{
+  padding: 16px 0 18px; /* unutrašnji padding bez skakanja */
+}
     .drop[open]{ border-color:rgba(255,59,111,.55); box-shadow: var(--shadow); }
 
     .dropBodySplit{
@@ -1062,134 +1071,157 @@
 </section>
 
 
-    <!-- PRODUCTS -->
-    <section class="section" id="products">
-      <div class="headRow">
-        <h2 class="h2 reveal">Paketi u ponudi</h2>
-        <div class="desc reveal">
-          Meta i Google oglasi, SEO osnove, društvene mreže, produkcija sadržaja i promocije na terenu su povezani logično.
-          Klijent kupuje ishod: više upita, rezervacija i prodaje.
+<!-- PRODUCTS -->
+<section class="section" id="products">
+  <div class="headRow">
+    <h2 class="h2 reveal">Paketi u ponudi</h2>
+    <div class="desc reveal">
+      Meta i Google oglasi, SEO osnove, društvene mreže, produkcija sadržaja i promocije na terenu su povezani logično.
+      Klijent kupuje ishod: više upiti, rezervacije i prodaje.
+    </div>
+  </div>
+
+  <div class="aboutStack">
+
+    <details class="drop reveal" open>
+      <summary>
+        <span>Analiza i plan kampanje</span>
+        <span class="tag">1 dan</span>
+      </summary>
+
+      <div class="dropBody">
+        <div class="dropBodyInner">
+          <div class="dropBodySplit">
+            <div class="dropText">
+              <p>
+                Jednodnevne konsultacije i planiranje sistema: cilj → kanali → budžet → prioriteti.
+                Idealno ako želiš da “posložiš” Meta/Google oglase, sadržaj i promociju u jednu logiku.
+              </p>
+              <ul class="bullets">
+                <li>Razjašnjenje cilja: upiti, rezervacije, prodaja</li>
+                <li>Plan kanala: Meta / Google / SEO osnove</li>
+                <li>Mapa sadržaja: poruke, ponuda, dokaz, poziv na akciju</li>
+                <li>Procjena: da li promocija na terenu ima smisla (i kakva)</li>
+                <li>Ishod: 1-strani plan + checklista + preporučeni koraci</li>
+              </ul>
+            </div>
+            <div class="dropMedia"
+              style="--img: url('https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=1600&q=80');"
+              aria-hidden="true"></div>
+          </div>
         </div>
       </div>
+    </details>
 
-      <div class="aboutStack">
-        <details class="drop reveal" open>
-          <summary>
-            <span>Analiza i plan kampanje</span>
-            <span class="tag">1 dan</span>
-          </summary>
-          <div class="dropBody">
-            <div class="dropBodySplit">
-              <div class="dropText">
-                <p>
-                  Jednodnevne konsultacije i planiranje sistema: cilj → kanali → budžet → prioriteti.
-                  Idealno ako želiš da “posložiš” Meta/Google oglase, sadržaj i promociju u jednu logiku.
-                </p>
-                <ul class="bullets">
-                  <li>Razjašnjenje cilja: upiti, rezervacije, prodaja</li>
-                  <li>Plan kanala: Meta / Google / SEO osnove</li>
-                  <li>Mapa sadržaja: poruke, ponuda, dokaz, poziv na akciju</li>
-                  <li>Procjena: da li promocija na terenu ima smisla (i kakva)</li>
-                  <li>Ishod: 1-strani plan + checklista + preporučeni koraci</li>
-                </ul>
-              </div>
-              <div class="dropMedia" style="--img: url('https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=1600&q=80');" aria-hidden="true"></div>
+    <details class="drop reveal">
+      <summary>
+        <span>Vođenje reklamnih kampanja</span>
+        <span class="tag">30 dana</span>
+      </summary>
+
+      <div class="dropBody">
+        <div class="dropBodyInner">
+          <div class="dropBodySplit">
+            <div class="dropText">
+              <p>
+                Vođenje kampanja koje donose upite/posjete/prodaju uz stalnu optimizaciju.
+                Najčešće: Meta oglasi (FB/IG) + Google oglasi, uz jasne landing smjernice.
+              </p>
+              <ul class="bullets">
+                <li>Meta + Google oglasi (postavka i vođenje)</li>
+                <li>Struktura kampanja + testiranje poruka i kreativa</li>
+                <li>Smjernice za landing + SEO osnove (on-page)</li>
+                <li>Optimizacija iz sedmice u sedmicu (budžet, publike, kreativa)</li>
+                <li>Mjesečni izvještaj (kratko, jasno, mjerljivo)</li>
+              </ul>
             </div>
-          </div>
-        </details>
-
-        <details class="drop reveal">
-          <summary>
-            <span>Vođenje reklamnih kampanja</span>
-            <span class="tag">30 dana</span>
-          </summary>
-          <div class="dropBody">
-            <div class="dropBodySplit">
-              <div class="dropText">
-                <p>
-                  Vođenje kampanja koje donose upite/posjete/prodaju uz stalnu optimizaciju.
-                  Najčešće: Meta oglasi (FB/IG) + Google oglasi, uz jasne landing smjernice.
-                </p>
-                <ul class="bullets">
-                  <li>Meta + Google oglasi (postavka i vođenje)</li>
-                  <li>Struktura kampanja + testiranje poruka i kreativa</li>
-                  <li>Smjernice za landing + SEO osnove (on-page)</li>
-                  <li>Optimizacija iz sedmice u sedmicu (budžet, publike, kreativa)</li>
-                  <li>Mjesečni izvještaj (kratko, jasno, mjerljivo)</li>
-                </ul>
-              </div>
-              <div class="dropMedia" style="--img: url('https://images.unsplash.com/photo-1553877522-43269d4ea984?auto=format&fit=crop&w=1600&q=80');" aria-hidden="true"></div>
-            </div>
-          </div>
-        </details>
-
-        <details class="drop reveal">
-          <summary>
-            <span>Produkcija sadržaja za oglase</span>
-            <span class="tag">7–10 dana</span>
-          </summary>
-          <div class="dropBody">
-            <div class="dropBodySplit">
-              <div class="dropText">
-                <p>
-                  Sadržaj koji se koristi u kampanjama i na mrežama. Ne “objave radi objava”, nego gorivo za rezultat.
-                  Fokus: kratki formati, jasna poruka, dokaz i poziv na akciju.
-                </p>
-                <ul class="bullets">
-                  <li>Koncepti za oglase (hook → poruka → poziv na akciju)</li>
-                  <li>Foto/video produkcija + montaža varijanti</li>
-                  <li>Kratki formati + varijante za oglase</li>
-                  <li>Biblioteka materijala spremna za Meta/Google</li>
-                  <li>Plan objava i distribucije (mreže + oglasi)</li>
-                </ul>
-              </div>
-              <div class="dropMedia" style="--img: url('https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1600&q=80');" aria-hidden="true"></div>
-            </div>
-          </div>
-        </details>
-
-        <details class="drop reveal">
-          <summary>
-            <span>Promotivna aktivacija i događaji</span>
-            <span class="tag">projekat</span>
-          </summary>
-          <div class="dropBody">
-            <div class="dropBodySplit">
-              <div class="dropText">
-                <p>
-                  Promocija ili događaj kao dio kampanje: digital → teren → digital.
-                  Dobijaš “pojačivač” pažnje koji se poslije koristi u oglasima i na mrežama.
-                </p>
-                <ul class="bullets">
-                  <li>Koncept aktivacije + plan izvođenja</li>
-                  <li>Produkcija: tim, logistika, oprema, partneri</li>
-                  <li>Promotivna mehanika (sampling, promo tim, “povuci masu”)</li>
-                  <li>Sadržaj sa terena (za oglase + mreže)</li>
-                  <li>Mjerenje i nastavak (retarget + prikupljanje upita)</li>
-                </ul>
-              </div>
-              <div class="dropMedia" style="--img: url('https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&w=1600&q=80');" aria-hidden="true"></div>
-            </div>
-          </div>
-        </details>
-      </div>
-
-      <div style="height:18px"></div>
-
-      <div class="ctaBand reveal" id="ctaBand">
-        <div class="left">
-          <div class="h2">Ne znaš koji paket je za tebe?</div>
-          <div class="desc">
-            Krećemo od cilja. Na pozivu ti kažemo tačno šta ima smisla — i šta nema.
-            Ako treba, šaljemo i kratke preporuke za optimizaciju sajta (SEO osnove + landing logika).
+            <div class="dropMedia"
+              style="--img: url('https://images.unsplash.com/photo-1553877522-43269d4ea984?auto=format&fit=crop&w=1600&q=80');"
+              aria-hidden="true"></div>
           </div>
         </div>
-        <div class="right">
-          <a class="btn primary" href="/sr-me/kontakt"><span class="dot"></span> Zakaži 30 min</a>
-          <a class="btn" href="#faq">Pogledaj FAQ</a>
+      </div>
+    </details>
+
+    <details class="drop reveal">
+      <summary>
+        <span>Produkcija sadržaja za oglase</span>
+        <span class="tag">7–10 dana</span>
+      </summary>
+
+      <div class="dropBody">
+        <div class="dropBodyInner">
+          <div class="dropBodySplit">
+            <div class="dropText">
+              <p>
+                Sadržaj koji se koristi u kampanjama i na mrežama. Ne “objave radi objava”, nego gorivo za rezultat.
+                Fokus: kratki formati, jasna poruka, dokaz i poziv na akciju.
+              </p>
+              <ul class="bullets">
+                <li>Koncepti za oglase (hook → poruka → poziv na akciju)</li>
+                <li>Foto/video produkcija + montaža varijanti</li>
+                <li>Kratki formati + varijante za oglase</li>
+                <li>Biblioteka materijala spremna za Meta/Google</li>
+                <li>Plan objava i distribucije (mreže + oglasi)</li>
+              </ul>
+            </div>
+            <div class="dropMedia"
+              style="--img: url('https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1600&q=80');"
+              aria-hidden="true"></div>
+          </div>
         </div>
       </div>
-    </section>
+    </details>
+
+    <details class="drop reveal">
+      <summary>
+        <span>Promotivna aktivacija i događaji</span>
+        <span class="tag">projekat</span>
+      </summary>
+
+      <div class="dropBody">
+        <div class="dropBodyInner">
+          <div class="dropBodySplit">
+            <div class="dropText">
+              <p>
+                Promocija ili događaj kao dio kampanje: digital → teren → digital.
+                Dobijaš “pojačivač” pažnje koji se poslije koristi u oglasima i na mrežama.
+              </p>
+              <ul class="bullets">
+                <li>Koncept aktivacije + plan izvođenja</li>
+                <li>Produkcija: tim, logistika, oprema, partneri</li>
+                <li>Promotivna mehanika (sampling, promo tim, “povuci masu”)</li>
+                <li>Sadržaj sa terena (za oglase + mreže)</li>
+                <li>Mjerenje i nastavak (retarget + prikupljanje upita)</li>
+              </ul>
+            </div>
+            <div class="dropMedia"
+              style="--img: url('https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&w=1600&q=80');"
+              aria-hidden="true"></div>
+          </div>
+        </div>
+      </div>
+    </details>
+
+  </div>
+
+  <div style="height:18px"></div>
+
+  <div class="ctaBand reveal" id="ctaBand">
+    <div class="left">
+      <div class="h2">Ne znaš koji paket je za tebe?</div>
+      <div class="desc">
+        Krećemo od cilja. Na pozivu ti kažemo tačno šta ima smisla — i šta nema.
+        Ako treba, šaljemo i kratke preporuke za optimizaciju sajta (SEO osnove + landing logika).
+      </div>
+    </div>
+    <div class="right">
+      <a class="btn primary" href="/sr-me/kontakt"><span class="dot"></span> Zakaži 30 min</a>
+      <a class="btn" href="#faq">Pogledaj FAQ</a>
+    </div>
+  </div>
+</section>
+
 
     <!-- HOW -->
     <section class="section" id="how">
@@ -1567,16 +1599,80 @@
       });
     });
 
-    // DROPS accordion (details.drop): kad se jedan otvori, ostali se zatvaraju
-    const drops = Array.from(document.querySelectorAll('details.drop'));
-    drops.forEach((d) => {
-      d.addEventListener('toggle', () => {
-        if (!d.open) return;
-        drops.forEach((other) => {
-          if (other !== d) other.open = false;
-        });
-      });
+   // ✅ DROPS accordion (Paketi u ponudi) — animate like FAQ (height)
+const drops = Array.from(document.querySelectorAll('details.drop'));
+
+function closeDrop(d){
+  const body = d.querySelector('.dropBody');
+  if(!body) { d.removeAttribute('open'); return; }
+
+  const current = body.getBoundingClientRect().height;
+
+  anime.remove(body);
+  anime({
+    targets: body,
+    height: [current, 0],
+    duration: 260,
+    easing: 'easeOutQuad',
+    complete: () => {
+      d.removeAttribute('open');
+      body.style.height = '0px';
+    }
+  });
+}
+
+function openDrop(d){
+  const body = d.querySelector('.dropBody');
+  const inner = d.querySelector('.dropBodyInner');
+  if(!body || !inner) { d.setAttribute('open',''); return; }
+
+  d.setAttribute('open','');
+
+  body.style.height = 'auto';
+  const full = inner.scrollHeight;
+  body.style.height = '0px';
+
+  anime.remove(body);
+  anime({
+    targets: body,
+    height: [0, full],
+    duration: 320,
+    easing: 'easeOutExpo',
+    complete: () => {
+      body.style.height = 'auto';
+    }
+  });
+}
+
+// init + click behaviour
+drops.forEach((d) => {
+  const summary = d.querySelector('summary');
+  const body = d.querySelector('.dropBody');
+
+  // init height state
+  if (d.hasAttribute('open') && body) {
+    body.style.height = 'auto';
+  } else if (body) {
+    body.style.height = '0px';
+  }
+
+  if(!summary) return;
+
+  summary.addEventListener('click', (e) => {
+    e.preventDefault();
+
+    const isOpen = d.hasAttribute('open');
+
+    // close others (accordion)
+    drops.forEach((other) => {
+      if (other !== d && other.hasAttribute('open')) closeDrop(other);
     });
+
+    if (isOpen) closeDrop(d);
+    else openDrop(d);
+  });
+});
+
 
     // Blobs
     const b1 = document.getElementById('blob1');
