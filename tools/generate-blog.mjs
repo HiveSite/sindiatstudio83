@@ -7,7 +7,7 @@ const __dirname = path.dirname(__filename);
 
 // --- CONFIG ---
 const DEFAULT_SHEET_URL =
-  "https://script.google.com/macros/s/AKfycbzn8mswJ8woL7oGgUyaS79kxS8UR5tFHjY0t4hNA2KptQxtz_-eaBiYrGCJ60wSY4-V/exec";
+  "https://script.google.com/macros/s/AKfycbzGf2MSW8mS-sm9ZUnszl7rfYoP2WRJ-3reuYdeMz-4PD0adX2L5ZzOz47Xaa-w-45N/exec";
 
 let SHEET_API_URL = process.env.SHEET_API_URL || DEFAULT_SHEET_URL;
 
