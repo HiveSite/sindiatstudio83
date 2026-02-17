@@ -40,7 +40,7 @@ jobs:
         with:
           node-version: "20"
 
-      - name: Run generator
+      - name: Run blog generator
         env:
           SHEET_API_URL: "https://script.google.com/macros/s/AKfycbzGf2MSW8mS-sm9ZUnszl7rfYoP2WRJ-3reuYdeMz-4PD0adX2L5ZzOz47Xaa-w-45N/exec"
         run: node tools/generate-blog.mjs
@@ -51,7 +51,7 @@ jobs:
       - name: Fix canonical + OG URL + twitter card
         run: node tools/fix-head-meta.mjs
 
-      - name: Generate sitemap.xml
+      - name: Generate sitemap.xml (clean only)
         run: node tools/generate-sitemap.mjs
 
       - name: Commit changes
@@ -59,5 +59,5 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add -A
-          git diff --cached --quiet || git commit -m "sync: blog + sitemap + clean urls"
+          git diff --cached --quiet || git commit -m "sync: blog + clean urls + sitemap"
           git push
