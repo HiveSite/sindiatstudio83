@@ -1176,318 +1176,44 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       });
     }, {passive:true});
 
-    // POSTS (15) - UPDATED: each post has popupImg (different from card img)
-    const POSTS = [
-      {
-        id:"p01",
-        category:"strategija",
-        badge:"Strategija",
-        title:"Zašto kampanja u Podgorici propadne prije nego krene",
-        img:"https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=1600&q=80",
-        popupImg:"https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1800&q=80",
-        alt:"Planiranje reklamne kampanje i strategije u timu",
-        popupAlt:"Tim i planiranje marketing strategije",
-        tags:["Podgorica","cilj","ponuda"],
-        excerpt:"Ako nemaš precizan cilj i jednu ponudu, oglasi samo ubrzaju haos. Ovo je okvir koji postavlja temelje prije prvog eura.",
-        body:`
-          <p>Najčešći razlog zašto kampanja u Podgorici ne dovede rezultat nije “algoritam”. To je nedostatak strukture: nejasan cilj, preširoka publika i ponuda koja zvuči kao lista usluga. Kad ljudi u Crnoj Gori kliknu oglas, oni traže brz odgovor: ko si, šta tačno dobijaš, koliko je jednostavno da te kontaktiraju i zašto bi ti vjerovali.</p>
-          <p>Prvi korak je da izabereš <strong>jedan primarni KPI</strong>: upit, rezervacija, poziv ili prodaja. “Vidljivost” može biti sredstvo, ali nije cilj. Drugi korak: napiši ponudu u jednoj rečenici (format: <em>za koga</em> + <em>šta dobija</em> + <em>u kom roku</em> + <em>šta je sljedeći korak</em>). Ako to ne možeš jasno reći, kampanja će proizvoditi klikove bez namjere.</p>
-          <p>Treći korak je kanal konverzije: DM, forma ili poziv. Svaki kanal traži drugačiji sistem. Ako ideš na DM, treba ti brz odgovor i “skripta” (3–5 poruka). Ako ideš na formu, drži je kratko (2–4 polja). Ako ideš na poziv, mjeri pozive i obezbijedi da se neko javlja.</p>
-          <p>Na manjim tržištima povjerenje je ključ. Zato blog i FAQ nisu ukras: oni objašnjavaju pristup, daju preporuke i skraćuju vrijeme odlučivanja. Oglas dovodi pažnju, a sadržaj i jasna struktura dovode odluku.</p>
-          <p><strong>Checklist:</strong> KPI (1), ponuda (1 rečenica), kanal (1), dokaz (3 signala povjerenja), mjerenje (konverzija).</p>
-          <div class="ref">
-            <strong>Reference:</strong><br>
-            • Google Ads: principi relevantnosti i “landing page experience” — https://support.google.com/google-ads/<br>
-            • Google Search Central: osnove za kvalitet stranica i indeksiranje — https://developers.google.com/search
-          </div>
-        `
-      },
-      {
-        id:"p02",
-        category:"performance",
-        badge:"Performance",
-        title:"Meta oglasi u Crnoj Gori: 5 grešaka koje ubiju rezultat",
-        img:"https://images.unsplash.com/photo-1553877522-43269d4ea984?auto=format&fit=crop&w=1600&q=80",
-        popupImg:"https://images.unsplash.com/photo-1556157382-97eda2d62296?auto=format&fit=crop&w=1800&q=80",
-        alt:"Analitika i optimizacija kampanja",
-        popupAlt:"Dashboard i metrike kampanje",
-        tags:["Meta","optimizacija","budžet"],
-        excerpt:"Greške su uglavnom strukturalne: pogrešan funnel, loš event, preširok target i nema poruka po fazama.",
-        body:`
-          <p>Kad Meta oglasi “ne rade”, najčešće je problem u strukturi, ne u dizajnu. Na tržištu Crne Gore razlike se brzo vide: mali budžet ne prašta kampanju koja pokušava sve odjednom. Prva greška je “jedna kampanja za sve”. Cold publika treba drugačiju poruku od ljudi koji su već posjetili sajt ili otvorili formu.</p>
-          <p>Druga greška je preširok target bez signala. “Svi 18–65 u Podgorici” može proći za reach, ali za upite obično nosi nisku namjeru. Treća greška: nema testiranja poruka. Umjesto 10 varijanti istog vizuala, testiraj 3 poruke: problem→rješenje, ponuda→benefit, dokaz→primjer.</p>
-          <p>Četvrta greška je pogrešan event i mjerenje. Ako optimizuješ na pogrešnu radnju (npr. “ViewContent”), sistem ti donosi ljude koji vole da gledaju, ne da pitaju. Peta greška: budžet se povećava da “spasi” slab rezultat. Budžet pojačava ono što već postoji. Ako je poruka pogrešna, samo brže gubiš novac.</p>
-          <p><strong>Brzi audit:</strong> (1) da li imaš poruke po fazama, (2) koji event je optimizacija, (3) top 2 kreativa po rezultatu, (4) breakdown po placementu, (5) da li landing/forma imaju frikciju.</p>
-          <div class="ref">
-            <strong>Reference:</strong><br>
-            • Meta Business: principi mjerenja i optimizacije — https://www.facebook.com/business/<br>
-            • Google Ads Help (principi relevantnosti i kvaliteta) — https://support.google.com/google-ads/
-          </div>
-        `
-      },
-      {
-        id:"p03",
-        category:"kreative",
-        badge:"Kreative",
-        title:"Sadržaj za reklame: zašto ‘lijepo’ često ne radi",
-        img:"https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1600&q=80",
-        popupImg:"https://images.unsplash.com/photo-1522542550221-31fd19575a2d?auto=format&fit=crop&w=1800&q=80",
-        alt:"Produkcija sadržaja i kreativa",
-        popupAlt:"Produkcija video sadržaja i set",
-        tags:["hook","UGC","poruka"],
-        excerpt:"Ads kreativa mora da nosi hook, poruku i dokaz. Feed estetika nije KPI. Evo strukture koja radi lokalno.",
-        body:`
-          <p>Najčešća zamka je da se sadržaj pravi kao “portfolio”, a ne kao alat. U oglašavanju, posebno za Podgoricu i Crnu Goru, korisnik donosi odluku u par sekundi: da li je ovo relevantno i da li je vjerodostojno. Zato je struktura važnija od “lijepe montaže”.</p>
-          <p>Dobra ads kreativa ima tri dijela: <strong>hook</strong> (problem ili želja), <strong>poruku</strong> (šta tačno nudimo), <strong>dokaz</strong> (primjer, recenzija, rezultat, scena sa terena). Ako fali dokaz, sadržaj zvuči kao obećanje. Ako fali poruka, izgleda kao reklama “bez proizvoda”.</p>
-          <p>UGC format (telefon, prirodno) često pobjeđuje jer djeluje kao preporuka, a ne kao reklama. Ali UGC bez strukture je samo “priča”. Dodaj tekst na ekranu, jasan CTA i jednu ključnu tvrdnju koja je provjerljiva (npr. “odgovaramo u roku od 24h”, “termini petak-subota brzo odlaze”, “ponuda važi do…”).</p>
-          <p><strong>Praktično:</strong> 2 sata snimanja → 25–35 mikro-klipova → 10–12 oglasa. To je gorivo za mjesec, a ne jedan “hero” video.</p>
-          <div class="ref">
-            <strong>Reference:</strong><br>
-            • Meta Business: creative best practices — https://www.facebook.com/business/<br>
-            • Google Ads: relevantnost oglasa i odredišta — https://support.google.com/google-ads/
-          </div>
-        `
-      },
-      {
-        id:"p04",
-        category:"aktivacije",
-        badge:"Aktivacije",
-        title:"Aktivacije u Crnoj Gori: kako teren pojača digital",
-        img:"https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&w=1600&q=80",
-        popupImg:"https://images.unsplash.com/photo-1515162305289-9f3f4f3f1f8f?auto=format&fit=crop&w=1800&q=80",
-        alt:"Promotivna aktivacija i publika",
-        popupAlt:"Publika i događaj u prostoru",
-        tags:["teren","QR","retarget"],
-        excerpt:"Najbolji eventi i aktivacije imaju pre-launch, teren i follow-up. Ako nema mjerenja, nema ni optimizacije.",
-        body:`
-          <p>Aktivacije nisu samo “da se desi događaj”. One su kanal koji gradi povjerenje i proizvodi sadržaj. U Crnoj Gori, gdje se reputacija brzo širi, teren često radi ono što oglasi ne mogu: uklanja sumnju i daje “dokaz uživo”.</p>
-          <p>Da bi teren radio sa digitalom, treba ti sistem <strong>digital → teren → digital</strong>. Digital prije pravi očekivanje i publiku (video views, engaged). Teren daje iskustvo i prikuplja signale (QR skenovi, lead forma, mini-nagrada, prijava na listu). Digital poslije zatvara krug retargetingom i porukom koja odgovara na prigovore.</p>
-          <p>Tri stvari koje najčešće falе: (1) capture (kontakt ili signal), (2) plan sadržaja (20+ mikro-klipova za oglase), (3) follow-up poruka. Bez follow-up-a, plaćaš samo “taj dan”.</p>
-          <p><strong>Checklist:</strong> QR/forma, jedna jednostavna mehanika, 20 klipova, retarget segmenti, poruka poslije (ponuda ili sljedeći datum).</p>
-          <div class="ref">
-            <strong>Reference:</strong><br>
-            • Bizzabo benchmarking (event marketing trendovi) — https://welcome.bizzabo.com/hubfs/Q125_BenchmarkingReport_2.18.pdf<br>
-            • Cvent industrijski uvidi (events) — https://www.cvent.com/en/resource/platform/cvent-source-industry-insights-march-2024-snapshot-report
-          </div>
-        `
-      },
-      {
-        id:"p05",
-        category:"performance",
-        badge:"Performance",
-        title:"Google Ads Podgorica: 7 stvari koje dižu cijenu (i kako da je spustiš)",
-        img:"https://images.unsplash.com/photo-1454165205744-3b78555e5572?auto=format&fit=crop&w=1600&q=80",
-        popupImg:"https://images.unsplash.com/photo-1556157382-5e063bb2667b?auto=format&fit=crop&w=1800&q=80",
-        alt:"Google Ads optimizacija i planiranje",
-        popupAlt:"Laptop i analitika za oglase",
-        tags:["Quality Score","landing","namjera"],
-        excerpt:"Cijena nije slučajna: relevantnost, očekivani CTR i landing iskustvo odlučuju koliko plaćaš i kakav lead dobijaš.",
-        body:`
-          <p>U Google Ads-u cijena po kliku je direktno povezana sa kvalitetom. Ako su ključne riječi preširoke, dobijaš pogrešan promet. Ako landing ne odgovara na upit, korisnik odlazi. Ako oglas ne “ponovi” jezik pretrage, CTR pada. Sve to povećava trošak.</p>
-          <p>Najveći uticaj ima struktura: jedna namjera po ad grupi, jasni naslovi, ekstenzije (call, sitelinks) i negativne riječi koje čiste saobraćaj. Za Podgoricu često radi kombinacija “usluga + lokacija” jer hvata visoku namjeru.</p>
-          <p>Landing mora da bude brz i jasan: ponuda, lokacija, dokaz, CTA. Ne šalji saobraćaj na “o nama” ili stranicu sa 10 opcija. Jedna stranica = jedna radnja.</p>
-          <div class="ref">
-            <strong>Reference:</strong><br>
-            • Google Ads Help: Quality Score i landing page experience — https://support.google.com/google-ads/
-          </div>
-        `
-      },
-      {
-        id:"p06",
-        category:"strategija",
-        badge:"Strategija",
-        title:"Ponuda koja konvertuje: kako da reklame ne budu ‘buka’",
-        img:"https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&w=1600&q=80",
-        popupImg:"https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=1800&q=80",
-        alt:"Definisanje ponude i vrijednosti",
-        popupAlt:"Radionica i brainstorming ponude",
-        tags:["ponuda","CTA","konverzija"],
-        excerpt:"Oglas ne popravlja ponudu. Ponuda popravlja oglas. Evo jednostavnog template-a za tržište Crne Gore.",
-        body:`
-          <p>Ako oglasi dovode klikove bez upita, najčešće ponuda nije jasna. Ljudi u Crnoj Gori ne vole da “pogađaju” šta tačno dobijaš. Ponuda treba da bude precizna, mjerljiva i sa jednim sljedećim korakom.</p>
-          <p>Ponuda koja konvertuje ima: (1) šta dobijaš, (2) za koga je, (3) koliko brzo, (4) šta uradiš sad. Umjesto “radimo marketing”, reci “za 30 dana: kampanje + landing + retarget + sadržaj, cilj: X upita (u zavisnosti od budžeta)”.</p>
-          <p>Ne moraš da obećaš nemoguće. Moraš da obećaš <strong>proces</strong> i jasnu isporuku. U manjim sredinama proces gradi povjerenje.</p>
-          <div class="ref">
-            <strong>Reference:</strong><br>
-            • Google Ads: relevantnost i iskustvo odredišta — https://support.google.com/google-ads/
-          </div>
-        `
-      },
-      {
-        id:"p07",
-        category:"kreative",
-        badge:"Kreative",
-        title:"15 ideja za video oglase za ugostiteljstvo u Podgorici",
-        img:"https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1600&q=80",
-        popupImg:"https://images.unsplash.com/photo-1528715471579-d1bcf0ba5e83?auto=format&fit=crop&w=1800&q=80",
-        alt:"Restoran i bar atmosfera za video oglase",
-        popupAlt:"Kamera i snimanje u ugostiteljstvu",
-        tags:["ugostiteljstvo","rezervacije","video"],
-        excerpt:"Brzi formati koji donose rezervacije: hook→ponuda→dokaz. Spremno za snimanje telefonom i ads testiranje.",
-        body:`
-          <p>Za ugostiteljstvo u Podgorici, oglasi rade kad rješavaju praktično pitanje: gdje da idem i zašto baš tu. Evo ideja za kratke klipove: “radni dan prazan?”, “happy hour”, “brunch”, “live muzika”, “najtraženiji koktel”, “meni + cijena”, “parking”, “pet-friendly”, “rođendanski paket”, “team dinner”.</p>
-          <p>Svaki klip neka ima tekst na ekranu (hook), jednu ponudu (šta i kad) i dokaz (kadar gužve, recenzija, reakcija). CTA neka bude jedan: rezerviši / pošalji poruku / pozovi.</p>
-          <div class="ref">
-            <strong>Reference:</strong><br>
-            • Meta Business: video i creative testiranje — https://www.facebook.com/business/
-          </div>
-        `
-      },
-      {
-        id:"p08",
-        category:"performance",
-        badge:"Performance",
-        title:"Retargeting u Crnoj Gori: mali budžet, veliki efekat",
-        img:"https://images.unsplash.com/photo-1553484771-047a44eee27b?auto=format&fit=crop&w=1600&q=80",
-        popupImg:"https://images.unsplash.com/photo-1556740749-887f6717d7e4?auto=format&fit=crop&w=1800&q=80",
-        alt:"Retargeting i funnel segmentacija",
-        popupAlt:"Kupac i online ponašanje",
-        tags:["segmenti","timing","ROI"],
-        excerpt:"Retargeting nije ‘prati me svuda’. To su 3 publike i 3 poruke, sa timingom koji ima smisla.",
-        body:`
-          <p>Retargeting je najisplativiji kad je segmentiran: engaged (gledali/reakcije), visitors (posjetili landing), hot (započeli konverziju). Svaka publika traži drugačiju poruku: dokaz, uklanjanje frikcije, last nudge.</p>
-          <p>Timing je ključ: 3–7 dana hot, 7–14 visitors, 14–30 engaged. Kreative za retarget nisu iste kao za cold — one odgovaraju na prigovore: cijena, lokacija, vrijeme, povjerenje.</p>
-          <div class="ref">
-            <strong>Reference:</strong><br>
-            • Google Ads / Meta: osnove publika i mjerenja — https://support.google.com/google-ads/ • https://www.facebook.com/business/
-          </div>
-        `
-      },
-      {
-        id:"p09",
-        category:"aktivacije",
-        badge:"Aktivacije",
-        title:"Promo tim i sampling: kako da aktivacija ostavi trag",
-        img:"https://images.unsplash.com/photo-1541532713592-79a0317b6b77?auto=format&fit=crop&w=1600&q=80",
-        popupImg:"https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=1800&q=80",
-        alt:"Promotivni tim i sampling aktivacija",
-        popupAlt:"Aktivacija i komunikacija sa publikom",
-        tags:["mehanika","capture","KPI"],
-        excerpt:"Sampling bez mehanike i mjerenja je ‘dijelili smo’. Ovo je sistem: skripta, QR, sadržaj i follow-up.",
-        body:`
-          <p>Sampling nije cilj. Cilj je signal i nastavak komunikacije. Zato ti treba jedna jednostavna mehanika: probaj → QR → benefit. Promo tim treba skriptu (3 rečenice), a ne improvizaciju. Bez capture-a, nema retargeta, nema optimizacije.</p>
-          <p>Na terenu obavezno praviš sadržaj (mikro-klipovi) za narednu sedmicu oglasa. Teren bez sadržaja i follow-up-a je propuštena prilika.</p>
-          <div class="ref">
-            <strong>Reference:</strong><br>
-            • Bizzabo benchmarking (event/aktivacije) — https://welcome.bizzabo.com/hubfs/Q125_BenchmarkingReport_2.18.pdf
-          </div>
-        `
-      },
-      {
-        id:"p10",
-        category:"strategija",
-        badge:"Strategija",
-        title:"Landing stranica: 9 elemenata koji pretvaraju posjetu u upit",
-        img:"https://images.unsplash.com/photo-1559028012-481c04fa702d?auto=format&fit=crop&w=1600&q=80",
-        popupImg:"https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1800&q=80",
-        alt:"Landing stranica i konverzija",
-        popupAlt:"Tim i dizajn landing stranice",
-        tags:["landing","CTA","povjerenje"],
-        excerpt:"Ako šalješ promet na stranicu bez jedne radnje, gubiš. Ovo je landing formula za lokalni biznis u CG.",
-        body:`
-          <p>Landing treba da odgovori odmah: ko si, gdje si, šta nudiš, šta uradiš sad. Elementi koji najviše dižu upite: H1 sa uslugom + lokacijom, jedna ponuda, jedan CTA, dokaz iznad prevoja, “kako radimo” u 3 koraka, FAQ, lokalni signal (Podgorica/CG), brzina i mobilna čitljivost.</p>
-          <div class="ref">
-            <strong>Reference:</strong><br>
-            • Google Ads Help: landing page experience — https://support.google.com/google-ads/
-          </div>
-        `
-      },
-      {
-        id:"p11",
-        category:"performance",
-        badge:"Performance",
-        title:"30-dnevni plan optimizacije kampanje (bez haosa)",
-        img:"https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1600&q=80",
-        popupImg:"https://images.unsplash.com/photo-1556761175-4b46a572b786?auto=format&fit=crop&w=1800&q=80",
-        alt:"Planiranje i praćenje performansi",
-        popupAlt:"Planiranje i timeline optimizacije",
-        tags:["plan","testovi","skaliranje"],
-        excerpt:"Šta radiš prve 3 sedmice odlučuje rezultat. Plan: test, selekcija pobjednika, retarget, skaliranje.",
-        body:`
-          <p>Najčešći problem je previše promjena odjednom. Plan: dan 1–3 mjerenje + test poruka; dan 4–7 gašenje lošeg; dan 8–14 retarget segmenti + dokaz; dan 15–21 skaliranje pobjednika; dan 22–30 rotacija kreativa i zaključak za sledeći mjesec. Mijenjaj jednu stvar u jednom trenutku.</p>
-          <div class="ref">
-            <strong>Reference:</strong><br>
-            • Google Ads / Meta: principi testiranja — https://support.google.com/google-ads/ • https://www.facebook.com/business/
-          </div>
-        `
-      },
-      {
-        id:"p12",
-        category:"kreative",
-        badge:"Kreative",
-        title:"Copy za oglase: 12 hook formula za Podgoricu",
-        img:"https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&fit=crop&w=1600&q=80",
-        popupImg:"https://images.unsplash.com/photo-1516387938699-a93567ec168e?auto=format&fit=crop&w=1800&q=80",
-        alt:"Pisanje copyja i hookova",
-        popupAlt:"Pisanje copyja i sadržaja",
-        tags:["copy","hook","CTA"],
-        excerpt:"Najbolji copy nije ‘agencijski’. Najbolji copy je jasan: problem, ponuda, dokaz, jedna radnja.",
-        body:`
-          <p>Hook formule: “Ako ti je X, uradi Y”, “3 greške koje ubiju rezultat”, “koliko košta X u Podgorici”, “za 30 dana: sistem → ishod”, “ovo radimo / ovo ne radimo”. CTA neka bude jedna radnja, ne četiri opcije. Piši kao da objašnjavaš prijatelju u 10 sekundi.</p>
-          <div class="ref">
-            <strong>Reference:</strong><br>
-            • Google Ads / Meta: relevantnost poruke — https://support.google.com/google-ads/ • https://www.facebook.com/business/
-          </div>
-        `
-      },
-      {
-        id:"p13",
-        category:"aktivacije",
-        badge:"Aktivacije",
-        title:"Kako napuniti event: pre-launch, launch, follow-up",
-        img:"https://images.unsplash.com/photo-1514525253161-7a46d19cd6c?auto=format&fit=crop&w=1600&q=80",
-        popupImg:"https://images.unsplash.com/photo-1531058020387-3be344556be6?auto=format&fit=crop&w=1800&q=80",
-        alt:"Događaj i publika",
-        popupAlt:"Stage i atmosfera događaja",
-        tags:["event","launch","follow-up"],
-        excerpt:"Event se ne puni ‘taj dan’. Puni se sistemom: najava, dokaz, teren, i retarget poslije.",
-        body:`
-          <p>Pre-launch (7–14 dana): teaser, value, proof. Launch: poruka “večeras/termini”, teren sadržaj + capture. Follow-up: highlight, sljedeći termin, retarget engaged. Najveći ROI je često u follow-up fazi jer publiku ne gradiš od nule.</p>
-          <div class="ref">
-            <strong>Reference:</strong><br>
-            • Bizzabo benchmarking — https://welcome.bizzabo.com/hubfs/Q125_BenchmarkingReport_2.18.pdf
-          </div>
-        `
-      },
-      {
-        id:"p14",
-        category:"strategija",
-        badge:"Strategija",
-        title:"Lokalni SEO (Podgorica): 10 osnova koje pomažu i oglasima",
-        img:"https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1600&q=80",
-        popupImg:"https://images.unsplash.com/photo-1507721999472-8ed4421c4af2?auto=format&fit=crop&w=1800&q=80",
-        alt:"SEO i web optimizacija",
-        popupAlt:"SEO analiza i pregled sajt strukture",
-        tags:["SEO","lokalno","trust"],
-        excerpt:"SEO nije samo ranking. To je signal povjerenja koji povećava CTR i konverziju — posebno na manjem tržištu.",
-        body:`
-          <p>Osnove: title/meta sa lokacijom, H1 bez poezije, interna struktura linkova, FAQ, lokalni signali (adresa/grad), brzina, alt tekstovi, sitemap/robots, konzistentne stranice po temama. Sve to pomaže i kampanjama jer korisnik brže vjeruje.</p>
-          <div class="ref">
-            <strong>Reference:</strong><br>
-            • Google Search Central — https://developers.google.com/search
-          </div>
-        `
-      },
-      {
-        id:"p15",
-        category:"performance",
-        badge:"Performance",
-        title:"Koliko košta oglašavanje u Crnoj Gori: realan okvir",
-        img:"https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&w=1600&q=80",
-        popupImg:"https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?auto=format&fit=crop&w=1800&q=80",
-        alt:"Budžet i troškovi oglašavanja",
-        popupAlt:"Budžetiranje i finansijski plan",
-        tags:["budžet","CPC","CPA"],
-        excerpt:"Ne postoji jedna cijena. Postoje faktori: cilj, ponuda, konkurencija, kreativa i landing. Evo kako da razmišljaš.",
-        body:`
-          <p>Cijena zavisi od cilja. Reach je lakši od leadova, a leadovi lakši od prodaje. Frikcija u formi, nejasna ponuda i loš landing dižu CPA. Konkurentne niše dižu CPC. Najvažnije: ne mjeri “trošak”, nego učenje i optimizaciju. Kreni sa testom, identifikuj pobjednike, pa skaliraj.</p>
-          <div class="ref">
-            <strong>Reference:</strong><br>
-            • Google Ads Help: kvalitet i cijena — https://support.google.com/google-ads/
-          </div>
-        `
-      }
-    ];
+    // ✅ BLOG POSTS FROM GOOGLE SHEET (WebApp)
+const API_URL = "https://script.google.com/macros/s/AKfycbzGf2MSW8mS-sm9ZUnszl7rfYoP2WRJ-3reuYdeMz-4PD0adX2L5ZzOz47Xaa-w-45N/exec?sheet=Posts&onlyPublished=1";
+
+// gdje generator pravi statične stranice
+const BLOG_BASE = "/sr-me/blog/";
+
+// umjesto hardcoded niza
+let POSTS = [];
+
+function fromApiToUiPost(p){
+  return {
+    id: p.slug, // koristi se samo interno
+    slug: p.slug,
+
+    category: (p.category || "").toLowerCase(),
+    badge: p.category_label || (p.category ? (p.category[0].toUpperCase()+p.category.slice(1)) : "Blog"),
+
+    title: p.title || "",
+    excerpt: p.excerpt || "",
+
+    tags: Array.isArray(p.tags) ? p.tags : [],
+    img: p.cover_image || "",
+    alt: p.cover_alt || p.title || ""
+  };
+}
+
+async function loadPosts(){
+  const res = await fetch(API_URL, { cache: "no-store" });
+  const data = await res.json();
+
+  if(!data || !data.ok) throw new Error((data && data.error) ? data.error : "API error");
+  const list = Array.isArray(data.posts) ? data.posts : [];
+
+  POSTS = list
+    .map(fromApiToUiPost)
+    .filter(p => p.slug && p.title);
+}
+
 
     // Build + pagination
     const grid = document.getElementById('postsGrid');
@@ -1555,7 +1281,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <div class="readLink"><span class="chev">↗</span> Otvori tekst</div>
         </div>
       `;
-      el.addEventListener('click', ()=> openModal(p.id));
+el.addEventListener('click', ()=>{
+  window.location.href = BLOG_BASE + p.slug + "/";
+});
       return el;
     }
 
@@ -1656,7 +1384,19 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 
     // Initial render
-    renderGrid();
+   // Initial render (load from sheet -> render)
+loadPosts()
+  .then(() => renderGrid())
+  .catch(err => {
+    console.error(err);
+    grid.innerHTML = `
+      <div style="opacity:.85; border:3px solid rgba(255,255,255,.14); border-radius:14px; padding:14px;">
+        Ne mogu da učitam postove. Provjeri WebApp link / sheet name / prava pristupa.<br>
+        <div style="margin-top:8px; opacity:.8; font-size:12px;">${String(err.message || err)}</div>
+      </div>
+    `;
+  });
+
 
     // Hero title word stagger on load
     window.addEventListener('load', ()=>{
