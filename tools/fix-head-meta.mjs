@@ -4,7 +4,7 @@ import path from "path";
 const BASE = "https://www.sindikatstudio83.me";
 const ROOT = path.resolve("Pages");
 
-// Tvoj postojeći logo fajl (pošto kažeš da je dostupan)
+// Default OG/Twitter slika (tvoj logo, pošto kažeš da je dostupan)
 const DEFAULT_OG_IMAGE = `${BASE}/studio83logo.png`;
 
 // Strane koje hoćemo da tretiramo kao “ključne” za sr-me
@@ -19,7 +19,6 @@ function shouldSkipFile(fp) {
 }
 
 function ensureSlash(u) {
-  // ensure trailing slash on path URLs (ignore if ends with .xml/.png/.jpg etc.)
   try {
     const url = new URL(u);
     const p = url.pathname;
@@ -31,7 +30,6 @@ function ensureSlash(u) {
 }
 
 function toCanonicalFromFile(fp) {
-  // convert Pages/.../index.html -> https://www.../.../
   const rel = path.relative(ROOT, fp).replace(/\\/g, "/");
   if (rel.toLowerCase() === "index.html") return `${BASE}/`;
   if (rel.toLowerCase().endsWith("/index.html")) {
@@ -60,7 +58,6 @@ function withHead(html, fn) {
 
 function upsertTag(html, regex, newTag) {
   if (regex.test(html)) return html.replace(regex, newTag);
-  // insert before </head>
   if (/<\/head>/i.test(html)) return html.replace(/<\/head>/i, `  ${newTag}\n</head>`);
   return `${newTag}\n${html}`;
 }
@@ -68,6 +65,11 @@ function upsertTag(html, regex, newTag) {
 function upsertCanonical(html, canonical) {
   const tag = `<link rel="canonical" href="${canonical}" />`;
   return upsertTag(html, /<link\s+rel=["']canonical["'][^>]*>/i, tag);
+}
+
+function upsertRobots(html) {
+  const tag = `<meta name="robots" content="index,follow" />`;
+  return upsertTag(html, /<meta\s+name=["']robots["'][^>]*>/i, tag);
 }
 
 function upsertOgUrl(html, canonical) {
@@ -90,9 +92,6 @@ function normalizeToWwwAbsolute(u) {
 }
 
 function fixOrAddOgImage(head) {
-  // supports both attribute orders:
-  // <meta property="og:image" content="...">
-  // <meta content="..." property="og:image">
   const re1 = /<meta\b[^>]*property=["']og:image["'][^>]*content=["']([^"']+)["'][^>]*>/i;
   const re2 = /<meta\b[^>]*content=["']([^"']+)["'][^>]*property=["']og:image["'][^>]*>/i;
 
@@ -108,21 +107,87 @@ function fixOrAddOgImage(head) {
   if (m1) return head.replace(re1, newTag);
   if (m2) return head.replace(re2, newTag);
 
-  // doesn't exist → insert
   return upsertTag(head, /<meta\s+property=["']og:image["'][^>]*>/i, newTag);
+}
+
+function getTitle(head) {
+  const m = head.match(/<title[^>]*>([\s\S]*?)<\/title>/i);
+  return m ? m[1].trim().replace(/\s+/g, " ") : "";
+}
+
+function getDescription(head) {
+  const m =
+    head.match(/<meta\b[^>]*name=["']description["'][^>]*content=["']([^"']*)["'][^>]*>/i) ||
+    head.match(/<meta\b[^>]*content=["']([^"']*)["'][^>]*name=["']description["'][^>]*>/i);
+  return m ? m[1].trim().replace(/\s+/g, " ") : "";
+}
+
+function escapeAttr(s) {
+  return String(s || "")
+    .replace(/&/g, "&amp;")
+    .replace(/"/g, "&quot;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;");
+}
+
+function upsertOgTitle(head, title) {
+  if (!title) return head;
+  const tag = `<meta property="og:title" content="${escapeAttr(title)}" />`;
+  return upsertTag(head, /<meta\s+property=["']og:title["'][^>]*>/i, tag);
+}
+
+function upsertOgDescription(head, desc) {
+  if (!desc) return head;
+  const tag = `<meta property="og:description" content="${escapeAttr(desc)}" />`;
+  return upsertTag(head, /<meta\s+property=["']og:description["'][^>]*>/i, tag);
+}
+
+function upsertTwitterTitle(head, title) {
+  if (!title) return head;
+  const tag = `<meta name="twitter:title" content="${escapeAttr(title)}" />`;
+  return upsertTag(head, /<meta\s+name=["']twitter:title["'][^>]*>/i, tag);
+}
+
+function upsertTwitterDescription(head, desc) {
+  if (!desc) return head;
+  const tag = `<meta name="twitter:description" content="${escapeAttr(desc)}" />`;
+  return upsertTag(head, /<meta\s+name=["']twitter:description["'][^>]*>/i, tag);
+}
+
+function upsertTwitterImage(head, imgUrl) {
+  const img = normalizeToWwwAbsolute(imgUrl || DEFAULT_OG_IMAGE);
+  const tag = `<meta name="twitter:image" content="${img}" />`;
+  return upsertTag(head, /<meta\s+name=["']twitter:image["'][^>]*>/i, tag);
 }
 
 function fixHtmlLang(html, canonicalPath) {
   if (!LANG_FIX_PATHS.has(canonicalPath)) return html;
-  // change <html lang="sr"> to sr-ME (only if sr)
   return html.replace(/<html([^>]*?)\slang=["']sr["']([^>]*?)>/i, `<html$1 lang="sr-ME"$2>`);
 }
 
 function normalizeDomainsInHead(head) {
-  // normalize any leftover non-www canonical/og:url occurrences (HEAD only)
   return head
     .replaceAll("https://sindikatstudio83.me", BASE)
     .replaceAll("http://sindikatstudio83.me", BASE);
+}
+
+function dedupeHeadMeta(head) {
+  let seenCharset = false;
+  head = head.replace(/<meta\s+charset=["'][^"']+["']\s*\/?>/gi, (m) => {
+    if (seenCharset) return "";
+    seenCharset = true;
+    return m;
+  });
+
+  let seenViewport = false;
+  head = head.replace(/<meta\b[^>]*name=["']viewport["'][^>]*>/gi, (m) => {
+    if (seenViewport) return "";
+    seenViewport = true;
+    return m;
+  });
+
+  head = head.replace(/\n{3,}/g, "\n\n");
+  return head;
 }
 
 function listIndexHtml(dir) {
@@ -168,9 +233,23 @@ function main() {
       h = normalizeDomainsInHead(h);
 
       h = upsertCanonical(h, canonical);
+      h = upsertRobots(h);
       h = upsertOgUrl(h, canonical);
       h = upsertTwitterCard(h);
+
       h = fixOrAddOgImage(h);
+
+      const title = getTitle(h);
+      const desc = getDescription(h);
+
+      h = upsertOgTitle(h, title);
+      h = upsertOgDescription(h, desc);
+
+      h = upsertTwitterTitle(h, title);
+      h = upsertTwitterDescription(h, desc);
+      h = upsertTwitterImage(h, DEFAULT_OG_IMAGE);
+
+      h = dedupeHeadMeta(h);
 
       return h;
     });
