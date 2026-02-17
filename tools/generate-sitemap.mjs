@@ -5,21 +5,38 @@ const BASE_URL = "https://www.sindikatstudio83.me";
 const ROOT_DIR = path.resolve("Pages");
 const OUT_FILE = path.join(ROOT_DIR, "sitemap.xml");
 
-// Fajlovi koje preskačemo (dodaj po potrebi)
+// Fajlovi koje preskačemo
 const SKIP_FILES = new Set([
   "404.html",
 ]);
 
-// Folderi koje preskačemo (dodaj po potrebi)
+// Folderi koje preskačemo
 const SKIP_DIRS = new Set([
   ".git",
   ".github",
   "node_modules",
   "tools",
+  "_templates",
 ]);
 
 function isSkippableDir(dirName) {
   return SKIP_DIRS.has(dirName);
+}
+
+// Pravila za izbacivanje URL-ova koje ne želimo u sitemap
+function shouldSkipUrl(url) {
+  // 1) izbaci template placeholder za blog
+  if (url.includes("/sr-me/blog/%3Cslug%3E/")) return true;
+  if (url.includes("/sr-me/blog/<slug>/")) return true;
+
+  // 2) izbaci sve legacy .html stranice u sr-me rootu (redirect stubovi)
+  //    Primjeri: /sr-me/Pocetna.html, /sr-me/Usluge.html, /sr-me/Poslovi.html ...
+  if (/\/sr-me\/[^\/]+\.html$/i.test(url)) return true;
+
+  // 3) izbaci bilo šta što je “internal”
+  if (url.includes("/_templates/")) return true;
+
+  return false;
 }
 
 function walk(dir) {
@@ -56,8 +73,8 @@ function fileToUrl(filePath) {
   } else if (rel.toLowerCase() === "index.html") {
     rel = ""; // root
   } else {
-    // Pocetna.html -> /sr-me/Pocetna.html (ostaje kako jeste)
-    // Ako želiš “clean URLs” bez .html, možemo u fazi 2.
+    // svi ostali *.html ostaju kao *.html URL
+    // ali mi ćemo ih kasnije filtrirati shouldSkipUrl()
   }
 
   // Normalizuj: ukloni duple slasheve
@@ -68,13 +85,11 @@ function fileToUrl(filePath) {
 
 function isoDateFromMtime(filePath) {
   const st = fs.statSync(filePath);
-  const d = st.mtime;
-  // YYYY-MM-DD
-  return d.toISOString().slice(0, 10);
+  return st.mtime.toISOString().slice(0, 10); // YYYY-MM-DD
 }
 
 function escapeXml(s) {
-  return s
+  return String(s || "")
     .replaceAll("&", "&amp;")
     .replaceAll("<", "&lt;")
     .replaceAll(">", "&gt;")
@@ -98,8 +113,7 @@ function buildSitemap(urlEntries) {
     })
     .join("");
 
-  const footer = `</urlset>\n`;
-  return header + body + footer;
+  return header + body + `</urlset>\n`;
 }
 
 function main() {
@@ -110,25 +124,31 @@ function main() {
 
   const htmlFiles = walk(ROOT_DIR);
 
-  // napravi entries
   const entries = htmlFiles
     .map((fp) => ({
       loc: fileToUrl(fp),
       lastmod: isoDateFromMtime(fp),
       file: fp,
     }))
-    // (Opcionalno) preskoči dev/test stranice po putanji:
-    .filter((x) => !x.loc.includes("/test/"));
+    .filter((x) => !x.loc.includes("/test/"))
+    .filter((x) => !shouldSkipUrl(x.loc));
 
-  // sortiraj stabilno
-  entries.sort((a, b) => a.loc.localeCompare(b.loc));
+  // ukloni duplikate (ako se ikad pojave)
+  const seen = new Set();
+  const unique = [];
+  for (const e of entries) {
+    if (seen.has(e.loc)) continue;
+    seen.add(e.loc);
+    unique.push(e);
+  }
 
-  const xml = buildSitemap(entries);
+  unique.sort((a, b) => a.loc.localeCompare(b.loc));
 
+  const xml = buildSitemap(unique);
   fs.writeFileSync(OUT_FILE, xml, "utf8");
 
   console.log(`✅ sitemap generated: ${OUT_FILE}`);
-  console.log(`✅ URLs: ${entries.length}`);
+  console.log(`✅ URLs: ${unique.length}`);
 }
 
 main();
