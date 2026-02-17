@@ -1502,7 +1502,7 @@ loadPosts()
     { title: "Fokus", q: "Malo buke, puno rezultata.", a: "Sindikat Studio 83" }
   ];
 
-  const DURATION_MS = 3000;
+  const DURATION_MS = 2000;
 
   function injectStyles(){
     if (document.getElementById("blueCenterNoteStyles")) return;
@@ -1654,17 +1654,23 @@ loadPosts()
     }, DURATION_MS);
   }
 
-  function run(){
-    injectStyles();
-    if (!document.body) { setTimeout(run, 50); return; }
-    showBlueNote();
-  }
+ function run(){
+  injectStyles();
+  if (!document.body) { setTimeout(run, 50); return; }
 
-  if (document.readyState === "loading"){
-    document.addEventListener("DOMContentLoaded", run);
-  } else {
-    run();
-  }
+  // ✅ pokaži samo jednom po sesiji (dok je tab otvoren)
+  if (sessionStorage.getItem("s83_blue_note_shown") === "1") return;
+  sessionStorage.setItem("s83_blue_note_shown", "1");
+
+  showBlueNote();
+}
+
+if (document.readyState === "loading"){
+  document.addEventListener("DOMContentLoaded", run);
+} else {
+  run();
+}
+
 })();
 </script>
 
