@@ -31,9 +31,14 @@ jobs:
           echo "TOOLS DIR:"
           ls -la tools || true
           echo "FIND generate-blog.mjs:"
-          find . -maxdepth 5 -type f -name "generate-blog.mjs" -print
-          echo "TEST exact path:"
+          find . -maxdepth 6 -type f -name "generate-blog.mjs" -print
+          echo "FIND generate-sitemap.mjs:"
+          find . -maxdepth 6 -type f -name "generate-sitemap.mjs" -print
+          echo "TEST tools scripts:"
           test -f tools/generate-blog.mjs && echo "OK: tools/generate-blog.mjs exists" || (echo "MISSING: tools/generate-blog.mjs" && exit 1)
+          test -f tools/generate-sitemap.mjs && echo "OK: tools/generate-sitemap.mjs exists" || (echo "MISSING: tools/generate-sitemap.mjs" && exit 1)
+          test -f tools/fix-clean-urls-and-canonicals.mjs && echo "OK: tools/fix-clean-urls-and-canonicals.mjs exists" || (echo "MISSING: tools/fix-clean-urls-and-canonicals.mjs" && exit 1)
+          test -f tools/fix-head-meta.mjs && echo "OK: tools/fix-head-meta.mjs exists" || (echo "MISSING: tools/fix-head-meta.mjs" && exit 1)
 
       - name: Setup Node
         uses: actions/setup-node@v4
@@ -53,6 +58,27 @@ jobs:
 
       - name: Generate sitemap.xml (clean only)
         run: node tools/generate-sitemap.mjs
+
+      - name: Debug - show sitemap preview + checks
+        run: |
+          echo "==== HEAD Pages/sitemap.xml ===="
+          sed -n '1,80p' Pages/sitemap.xml || true
+          echo "==== CHECK: should include clean /sr-me/usluge/ ===="
+          grep -n "/sr-me/usluge/" Pages/sitemap.xml || true
+          echo "==== CHECK: should NOT include legacy .html (sr-me root) ===="
+          if grep -nE "/sr-me/[^/]+\.html" Pages/sitemap.xml; then
+            echo "❌ ERROR: sitemap still contains legacy .html URLs under /sr-me/."
+            exit 1
+          else
+            echo "✅ OK: no legacy /sr-me/*.html in sitemap."
+          fi
+          echo "==== CHECK: should NOT include blog <slug> placeholder ===="
+          if grep -n "<slug>" Pages/sitemap.xml; then
+            echo "❌ ERROR: sitemap contains <slug> placeholder."
+            exit 1
+          else
+            echo "✅ OK: no <slug> placeholder in sitemap."
+          fi
 
       - name: Commit changes
         run: |
