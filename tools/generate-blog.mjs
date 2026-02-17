@@ -6,7 +6,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 // ✅ PROMIJENI OVO:
-const SHEET_API_URL = process.env.SHEET_API_URL; // npr https://script.google.com/macros/s/XXXX/exec?sheet=Posts
+const SHEET_API_URL =   process.env.SHEET_API_URL ||   "https://script.google.com/macros/s/AKfycbzn8mswJ8woL7oGgUyaS79kxS8UR5tFHjY0t4hNA2KptQxtz_-eaBiYrGCJ60wSY4-V/exec";
 
 // ✅ SITE BASE (za canonical)
 const SITE_BASE = "https://sindikatstudio83.me";
