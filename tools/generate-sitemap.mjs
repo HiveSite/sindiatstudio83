@@ -25,17 +25,18 @@ function isSkippableDir(dirName) {
 
 // Pravila za izbacivanje URL-ova koje ne želimo u sitemap
 function shouldSkipUrl(url) {
-  // 1) izbaci template placeholder za blog
-  if (url.includes("/sr-me/blog/%3Cslug%3E/")) return true;
+  // 1) izbaci blog template placeholder
   if (url.includes("/sr-me/blog/<slug>/")) return true;
+  if (url.includes("/sr-me/blog/%3Cslug%3E/")) return true;
 
-  // 2) izbaci sve legacy .html stranice u sr-me rootu (redirect stubovi)
-  //    Primjeri: /sr-me/Pocetna.html, /sr-me/Usluge.html, /sr-me/Poslovi.html ...
+  // 2) izbaci legacy .html stranice u sr-me rootu (redirect stubovi)
+  //    /sr-me/Pocetna.html, /sr-me/Usluge.html...
   if (/\/sr-me\/[^\/]+\.html$/i.test(url)) return true;
 
-  // 3) izbaci bilo šta što je “internal”
+  // 3) izbaci internal/template putanje
   if (url.includes("/_templates/")) return true;
 
+  // 4) (opciono) ako slučajno imaš uppercase "Pages/sr-me/Blog" itd.
   return false;
 }
 
@@ -63,6 +64,10 @@ function walk(dir) {
   return files;
 }
 
+function normalizePathSlashes(p) {
+  return ("/" + p).replace(/\/{2,}/g, "/");
+}
+
 function fileToUrl(filePath) {
   // relative path from Pages/
   let rel = path.relative(ROOT_DIR, filePath).replace(/\\/g, "/");
@@ -74,13 +79,18 @@ function fileToUrl(filePath) {
     rel = ""; // root
   } else {
     // svi ostali *.html ostaju kao *.html URL
-    // ali mi ćemo ih kasnije filtrirati shouldSkipUrl()
+    // ali ćemo ih filtrirati shouldSkipUrl()
   }
 
-  // Normalizuj: ukloni duple slasheve
-  const urlPath = ("/" + rel).replace(/\/{2,}/g, "/");
+  const urlPath = normalizePathSlashes(rel);
 
-  return BASE_URL + urlPath;
+  // osiguraj trailing slash samo za "folder" rute (one koje ne sadrže .html)
+  // npr. /sr-me/usluge  -> /sr-me/usluge/
+  // ali /neki.html ostaje /neki.html
+  let finalPath = urlPath;
+  if (!finalPath.includes(".") && !finalPath.endsWith("/")) finalPath += "/";
+
+  return BASE_URL + finalPath;
 }
 
 function isoDateFromMtime(filePath) {
@@ -133,7 +143,7 @@ function main() {
     .filter((x) => !x.loc.includes("/test/"))
     .filter((x) => !shouldSkipUrl(x.loc));
 
-  // ukloni duplikate (ako se ikad pojave)
+  // ukloni duplikate
   const seen = new Set();
   const unique = [];
   for (const e of entries) {
