@@ -6,9 +6,7 @@ const ROOT_DIR = path.resolve("Pages");
 const OUT_FILE = path.join(ROOT_DIR, "sitemap.xml");
 
 // Fajlovi koje preskačemo
-const SKIP_FILES = new Set([
-  "404.html",
-]);
+const SKIP_FILES = new Set(["404.html"]);
 
 // Folderi koje preskačemo
 const SKIP_DIRS = new Set([
@@ -23,20 +21,49 @@ function isSkippableDir(dirName) {
   return SKIP_DIRS.has(dirName);
 }
 
-// Pravila za izbacivanje URL-ova koje ne želimo u sitemap
+function normalizePathSlashes(p) {
+  return ("/" + p).replace(/\/{2,}/g, "/");
+}
+
+// ✅ Samo clean URL-ovi: index.html -> folder URL
+// ❌ Bilo koji drugi .html (legacy ili stub) -> null (ne ulazi u sitemap)
+function fileToUrl(filePath) {
+  let rel = path.relative(ROOT_DIR, filePath).replace(/\\/g, "/");
+  const lower = rel.toLowerCase();
+
+  // DOZVOLI SAMO index.html
+  const isRootIndex = lower === "index.html";
+  const isFolderIndex = lower.endsWith("/index.html");
+  if (!isRootIndex && !isFolderIndex) return null;
+
+  if (isRootIndex) rel = ""; // root
+  else rel = rel.slice(0, -"/index.html".length) + "/";
+
+  let finalPath = normalizePathSlashes(rel);
+
+  // osiguraj trailing slash na folder rutama (osim root-a koji je "/")
+  if (finalPath !== "/" && !finalPath.endsWith("/")) finalPath += "/";
+
+  return BASE_URL + finalPath;
+}
+
+// Pravila za izbacivanje URL-ova koje ne želimo u sitemap (safety net)
 function shouldSkipUrl(url) {
+  if (!url) return true;
+
   // 1) izbaci blog template placeholder
   if (url.includes("/sr-me/blog/<slug>/")) return true;
   if (url.includes("/sr-me/blog/%3Cslug%3E/")) return true;
 
-  // 2) izbaci legacy .html stranice u sr-me rootu (redirect stubovi)
-  //    /sr-me/Pocetna.html, /sr-me/Usluge.html...
-  if (/\/sr-me\/[^\/]+\.html$/i.test(url)) return true;
-
-  // 3) izbaci internal/template putanje
+  // 2) izbaci internal/template putanje
   if (url.includes("/_templates/")) return true;
 
-  // 4) (opciono) ako slučajno imaš uppercase "Pages/sr-me/Blog" itd.
+  // 3) izbaci test rute (ako ih ima)
+  if (url.includes("/test/")) return true;
+
+  // 4) zaštita: ako se ikad provuče .html, izbaci ga
+  if (/\.html$/i.test(url)) return true;
+
   return false;
 }
 
@@ -62,35 +89,6 @@ function walk(dir) {
   }
 
   return files;
-}
-
-function normalizePathSlashes(p) {
-  return ("/" + p).replace(/\/{2,}/g, "/");
-}
-
-function fileToUrl(filePath) {
-  // relative path from Pages/
-  let rel = path.relative(ROOT_DIR, filePath).replace(/\\/g, "/");
-
-  // index.html -> folder url
-  if (rel.toLowerCase().endsWith("/index.html")) {
-    rel = rel.slice(0, -"/index.html".length) + "/";
-  } else if (rel.toLowerCase() === "index.html") {
-    rel = ""; // root
-  } else {
-    // svi ostali *.html ostaju kao *.html URL
-    // ali ćemo ih filtrirati shouldSkipUrl()
-  }
-
-  const urlPath = normalizePathSlashes(rel);
-
-  // osiguraj trailing slash samo za "folder" rute (one koje ne sadrže .html)
-  // npr. /sr-me/usluge  -> /sr-me/usluge/
-  // ali /neki.html ostaje /neki.html
-  let finalPath = urlPath;
-  if (!finalPath.includes(".") && !finalPath.endsWith("/")) finalPath += "/";
-
-  return BASE_URL + finalPath;
 }
 
 function isoDateFromMtime(filePath) {
@@ -134,13 +132,18 @@ function main() {
 
   const htmlFiles = walk(ROOT_DIR);
 
+  // napravi entries samo iz index.html fajlova
   const entries = htmlFiles
-    .map((fp) => ({
-      loc: fileToUrl(fp),
-      lastmod: isoDateFromMtime(fp),
-      file: fp,
-    }))
-    .filter((x) => !x.loc.includes("/test/"))
+    .map((fp) => {
+      const loc = fileToUrl(fp);
+      if (!loc) return null;
+      return {
+        loc,
+        lastmod: isoDateFromMtime(fp),
+        file: fp,
+      };
+    })
+    .filter(Boolean)
     .filter((x) => !shouldSkipUrl(x.loc));
 
   // ukloni duplikate
