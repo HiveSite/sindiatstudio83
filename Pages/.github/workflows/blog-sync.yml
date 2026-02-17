@@ -1,1 +1,36 @@
+name: Blog Sync
 
+on:
+  workflow_dispatch: {}
+  # opcionalno: automatski na 1h
+  schedule:
+    - cron: "0 * * * *"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Generate blog from Sheet
+        env:
+          SHEET_API_URL: ${{ secrets.SHEET_API_URL }}
+        run: |
+          npm run blog:sync
+
+      - name: Commit & push changes
+        run: |
+          git config user.name "blog-bot"
+          git config user.email "blog-bot@users.noreply.github.com"
+          git add sr-me/blog/posts.json sr-me/blog/*/index.html
+          git commit -m "sync: blog from sheet" || echo "No changes to commit"
+          git push
