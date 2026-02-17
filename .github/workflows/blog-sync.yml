@@ -3,14 +3,10 @@ name: Blog Sync
 on:
   workflow_dispatch:
   schedule:
-    - cron: "*/30 * * * *"  # na 30 min
+    - cron: "*/30 * * * *"
 
 permissions:
   contents: write
-
-concurrency:
-  group: blog-sync
-  cancel-in-progress: true
 
 jobs:
   sync:
@@ -20,6 +16,19 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
+
+      - name: Debug - list repo files
+        run: |
+          echo "PWD:"
+          pwd
+          echo "ROOT:"
+          ls -la
+          echo "TOOLS DIR:"
+          ls -la tools || true
+          echo "FIND generate-blog.mjs:"
+          find . -maxdepth 4 -type f -name "generate-blog.mjs" -print
+          echo "TEST exact path:"
+          test -f tools/generate-blog.mjs && echo "OK: tools/generate-blog.mjs exists" || (echo "MISSING: tools/generate-blog.mjs" && exit 1)
 
       - name: Setup Node
         uses: actions/setup-node@v4
