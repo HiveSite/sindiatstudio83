@@ -8,12 +8,18 @@ on:
 permissions:
   contents: write
 
+concurrency:
+  group: blog-sync
+  cancel-in-progress: true
+
 jobs:
   sync:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Setup Node
         uses: actions/setup-node@v4
@@ -22,9 +28,8 @@ jobs:
 
       - name: Run generator
         env:
-          SHEET_API_URL: ${{ secrets.SHEET_API_URL }}
-        run: |
-          node tools/generate-blog.mjs
+          SHEET_API_URL: "https://script.google.com/macros/s/AKfycbzn8mswJ8woL7oGgUyaS79kxS8UR5tFHjY0t4hNA2KptQxtz_-eaBiYrGCJ60wSY4-V/exec"
+        run: node tools/generate-blog.mjs
 
       - name: Commit changes
         run: |
