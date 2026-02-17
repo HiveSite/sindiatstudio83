@@ -1,0 +1,1576 @@
+<!DOCTYPE html>
+<html lang="sr">
+<head>
+
+  <!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-PBXVW3GK');</script>
+<!-- End Google Tag Manager -->
+  
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Sindikat — Usluge</title>
+  <meta name="description" content="Usluge koje donose upite, rezervacije i prodaju: oglašavanje, web, sadržaj, SEO, analitika i aktivacije — u jednom sistemu." />
+  <link rel="icon" type="image/png" href="/favicon.png">
+
+
+  <!-- Anime.js -->
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+
+  <style>
+    :root{
+      --bg:#05010D;
+      --bg2:#12011F;
+      --text:#FFFFFF;
+      --muted:rgba(255,255,255,.78);
+      --muted2:rgba(255,255,255,.62);
+      --border:rgba(255,255,255,.14);
+      --border2:rgba(255,255,255,.10);
+      --accent:#FF3B6F;
+      --accent2:#FFB000;
+
+      --shadow: 0 22px 75px rgba(0,0,0,.68);
+      --shadow2: 0 14px 38px rgba(0,0,0,.48);
+
+      --r2:14px;
+      --r3:18px;
+
+      --max:1120px;
+      --ease: cubic-bezier(.2,.9,.2,1);
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      background:
+        radial-gradient(820px 520px at 12% 10%, rgba(255,59,111,.22), transparent 60%),
+        radial-gradient(900px 520px at 88% 8%, rgba(24,245,255,.14), transparent 58%),
+        radial-gradient(760px 520px at 70% 28%, rgba(162,76,255,.12), transparent 60%),
+        radial-gradient(680px 480px at 20% 70%, rgba(255,176,0,.10), transparent 62%),
+        linear-gradient(180deg, var(--bg), var(--bg2));
+      color:var(--text);
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      letter-spacing:.2px;
+      overflow-x:hidden;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* Subtle grain */
+    body:before{
+      content:"";
+      position:fixed; inset:0;
+      pointer-events:none;
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23n)' opacity='.23'/%3E%3C/svg%3E");
+      opacity:.06;
+      mix-blend-mode:overlay;
+      z-index:0;
+    }
+
+    a{color:inherit; text-decoration:none}
+    img{max-width:100%; display:block}
+    .wrap{max-width:var(--max); margin:0 auto; padding:22px 18px 120px; position:relative; z-index:2}
+
+    /* Backdrop glow */
+    .heroBg{
+      position:fixed;
+      inset:0;
+      z-index:1;
+      pointer-events:none;
+      overflow:hidden;
+      background:
+        radial-gradient(900px 540px at 20% 20%, rgba(255,59,111,.14), transparent 60%),
+        radial-gradient(900px 540px at 80% 10%, rgba(24,245,255,.10), transparent 60%),
+        radial-gradient(720px 520px at 68% 55%, rgba(162,76,255,.12), transparent 60%);
+    }
+    .heroBg:after{
+      content:"";
+      position:absolute; inset:0;
+      background:
+        radial-gradient(700px 420px at 18% 20%, rgba(255,59,111,.18), transparent 60%),
+        radial-gradient(900px 520px at 70% 12%, rgba(24,245,255,.14), transparent 58%),
+        linear-gradient(180deg, rgba(0,0,0,.18), rgba(6,1,13,.86) 62%, rgba(6,1,13,.96));
+    }
+
+    /* Subtle animated blobs */
+    .blob{
+      position:fixed;
+      z-index:1;
+      pointer-events:none;
+      width:520px; height:520px;
+      border-radius:999px;
+      background: radial-gradient(circle at 35% 30%, rgba(255,59,111,.18), transparent 58%);
+      filter: blur(18px);
+      opacity:.55;
+      mix-blend-mode: screen;
+      transform: translate3d(0,0,0);
+    }
+    .blob.b2{
+      width:420px; height:420px;
+      background: radial-gradient(circle at 40% 35%, rgba(24,245,255,.14), transparent 60%);
+      opacity:.45;
+    }
+
+    /* ✅ FLOATING LOGO (same behavior as Kontakt) */
+    .floatingLogo{
+      position:fixed;
+      top:14px;
+      left:14px;
+      z-index:120;
+      display:block;
+      text-decoration:none;
+    }
+    .logoMark{
+      width:176px; height:44px;
+      border-radius:14px;
+      border:1.5px solid rgba(255,59,111,.5);
+      box-shadow:
+        0 18px 34px rgba(0,0,0,.45),
+        0 0 0 3px rgba(0,0,0,.45) inset,
+        0 0 42px rgba(255,59,111,.22);
+      transform: rotate(-2deg);
+      overflow:hidden;
+      background: rgba(0,0,0,.18);
+      display:grid;
+      place-items:center;
+    }
+    .logoMarkImg{
+      width:100%;
+      height:100%;
+      object-fit:contain;
+      object-position:center;
+      padding:6px;
+      filter: drop-shadow(0 10px 18px rgba(0,0,0,.45));
+    }
+    .floatingLogo .logoMark{
+      width: 50vw;
+      max-width: 240px;
+      height: auto;
+      aspect-ratio: 176 / 44;
+      transform: rotate(-2deg);
+      transform-origin: top left;
+    }
+    @media (max-width: 480px){
+      .floatingLogo{ top:10px; left:10px; }
+    }
+
+    /* Topbar (bottom) */
+    .topbar{
+      position:fixed;
+      bottom:0;
+      left:0;
+      right:0;
+      z-index:50;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      background: rgba(5,7,12,.88);
+      border-top:3px solid rgba(255,255,255,.12);
+    }
+    .topbarInner{
+      max-width:var(--max);
+      margin:0 auto;
+      padding:12px 18px;
+      display:flex; align-items:center; gap:12px;
+      justify-content:flex-start; /* same as Kontakt */
+    }
+    .ctaCenter{margin:0;} /* same as Kontakt */
+    .navWrap{
+      margin-left:auto;
+      display:flex; align-items:center; gap:12px;
+      position:relative;
+    }
+    .brand{ /* kept for spacing parity, but empty in HTML */
+      display:flex; align-items:center; gap:12px;
+      font-weight:750;
+      letter-spacing:.9px;
+      text-transform:uppercase;
+      font-size:13px;
+    }
+
+    nav{
+      display:flex; gap:10px; flex-wrap:wrap;
+      color:var(--muted);
+      font-size:13px;
+      align-items:center;
+    }
+    nav a{
+      padding:9px 10px;
+      border-radius:10px;
+      border:2px solid transparent;
+      transition: background .2s var(--ease), color .2s var(--ease), transform .2s var(--ease), border-color .2s var(--ease);
+      transform: translateY(0);
+    }
+    nav a:hover{background:rgba(255,255,255,.05); color:var(--text); transform: translateY(-1px); border-color:rgba(24,245,255,.35)}
+
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center;
+      gap:10px;
+      border-radius:10px;
+      padding:12px 16px;
+      font-size:13px;
+      border:3px solid rgba(255,255,255,.16);
+      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+      color:var(--text);
+      transition:transform .18s var(--ease), box-shadow .18s var(--ease), border-color .18s var(--ease), background .18s var(--ease);
+      white-space:nowrap;
+      box-shadow: 0 12px 30px rgba(0,0,0,.28);
+      cursor:pointer;
+    }
+    .btn:hover{transform:translateY(-3px); box-shadow:var(--shadow2); border-color:rgba(255,59,111,.5)}
+    .btn.primary{
+      background: linear-gradient(180deg, rgba(255,59,111,.35), rgba(255,59,111,.14));
+      border-color:rgba(255,59,111,.6);
+      box-shadow: 0 20px 60px rgba(255,59,111,.20), 0 10px 28px rgba(0,0,0,.28);
+    }
+    .dot{
+      width:8px; height:8px; border-radius:2px;
+      background:var(--accent);
+      box-shadow:0 0 0 5px rgba(255,59,111,.22), 0 0 24px rgba(255,59,111,.42);
+      transform: rotate(8deg);
+    }
+
+    /* Mobile nav */
+    .hamburger{
+      display:none;
+      width:44px; height:44px;
+      border-radius:10px;
+      border:3px solid rgba(255,255,255,.16);
+      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+      align-items:center; justify-content:center;
+      gap:5px;
+      flex-direction:column;
+      cursor:pointer;
+    }
+    .hamburger span{
+      width:18px; height:2px; background:rgba(255,255,255,.8);
+      border-radius:3px;
+      display:block;
+    }
+    .mobileMenu{
+      display:none;
+      position:absolute;
+      left:0;
+      right:0;
+      bottom:100%;
+      border-bottom:3px solid rgba(255,255,255,.10);
+      background:rgba(5,7,12,.95);
+    }
+    .mobileMenuInner{
+      max-width:var(--max);
+      margin:0 auto;
+      padding:12px 18px 16px;
+      display:grid;
+      gap:8px;
+    }
+    .mobileMenuInner a{
+      padding:12px 12px;
+      border:3px solid rgba(255,255,255,.12);
+      border-radius:10px;
+      background: linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
+      color:var(--text);
+    }
+
+    /* Sections */
+    .section{
+      padding:58px 0;
+      border-top:3px solid rgba(255,255,255,.08);
+    }
+    .headRow{
+      display:flex; align-items:flex-end; justify-content:space-between;
+      gap:16px; flex-wrap:wrap;
+      margin-bottom:22px;
+    }
+    .h2{
+      font-size:22px;
+      letter-spacing:-.2px;
+      margin:0;
+    }
+    .desc{
+      color:rgba(255,255,255,.70);
+      font-size:13px;
+      line-height:1.65;
+      max-width:72ch;
+    }
+
+    /* HERO */
+    .hero{ padding:40px 0 22px; }
+    .kicker{
+      display:flex; align-items:center; gap:10px;
+      color:var(--muted);
+      font-size:12px;
+      text-transform:uppercase;
+      letter-spacing:1.1px;
+      margin-bottom:14px;
+    }
+    h1{
+      margin:0;
+      font-size:46px;
+      line-height:1.05;
+      letter-spacing:-.8px;
+      max-width:24ch;
+    }
+    .heroTitle span{display:inline-block; will-change: transform, opacity;}
+    .sub{
+      margin-top:14px;
+      color:rgba(255,255,255,.80);
+      font-size:15px;
+      line-height:1.65;
+      max-width:72ch;
+      text-shadow: 0 10px 40px rgba(0,0,0,.35);
+    }
+    .heroActions{display:flex; gap:12px; flex-wrap:wrap; margin-top:18px}
+    .miniRow{
+      margin-top:18px;
+      display:flex; gap:12px; flex-wrap:wrap;
+      color:rgba(255,255,255,.70);
+      font-size:12px;
+    }
+    .miniRow span{
+      padding:8px 10px;
+      border:2px solid rgba(255,255,255,.12);
+      border-radius:10px;
+      background: rgba(10,12,18,.70);
+      box-shadow: 0 10px 24px rgba(0,0,0,.22);
+    }
+
+    /* Cards */
+    .grid2{display:grid; grid-template-columns:repeat(2,1fr); gap:16px;}
+    .card{
+      border:3px solid rgba(255,255,255,.14);
+      border-radius:var(--r2);
+      background: linear-gradient(180deg, rgba(14,16,26,.92), rgba(7,8,19,.92));
+      padding:0;
+      box-shadow: var(--shadow2);
+      transition: transform .18s var(--ease), border-color .18s var(--ease), box-shadow .18s var(--ease), filter .18s var(--ease);
+      will-change: transform;
+      position:relative;
+      overflow:hidden;
+    }
+    .card:before{
+      content:"";
+      position:absolute;
+      inset:-35%;
+      background:
+        radial-gradient(circle at 25% 25%, rgba(255,59,111,.18), transparent 60%),
+        radial-gradient(circle at 80% 30%, rgba(24,245,255,.12), transparent 60%);
+      opacity:.5;
+      transform: rotate(8deg);
+      pointer-events:none;
+      z-index:0;
+    }
+    .card:after{
+      content:"";
+      position:absolute;
+      inset:0;
+      border:1px solid rgba(255,59,111,.18);
+      opacity:.45;
+      pointer-events:none;
+      z-index:0;
+    }
+    .card:hover{
+      transform:translateY(-6px);
+      border-color:rgba(255,59,111,.5);
+      box-shadow:var(--shadow);
+      filter: brightness(1.04);
+    }
+
+    /* media (image) inside card */
+    .cardMedia{
+      height:128px;
+      position:relative;
+      border-bottom:3px solid rgba(255,255,255,.10);
+      background: #0a0b12;
+      overflow:hidden;
+    }
+    .cardMedia img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      opacity:.90;
+      filter:saturate(1.05) contrast(1.15);
+      transform:scale(1.05);
+    }
+    .cardMedia:after{
+      content:"";
+      position:absolute; inset:0;
+      background:
+        radial-gradient(420px 220px at 18% 20%, rgba(255,59,111,.18), transparent 60%),
+        radial-gradient(420px 220px at 82% 20%, rgba(24,245,255,.12), transparent 60%),
+        linear-gradient(180deg, rgba(7,7,10,.05), rgba(7,7,10,.82));
+      pointer-events:none;
+    }
+
+    .iconBadge{
+      position:absolute;
+      left:14px;
+      bottom:12px;
+      width:42px;
+      height:42px;
+      border-radius:14px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      border:2px solid rgba(255,255,255,.16);
+      background: rgba(8,10,16,.70);
+      box-shadow: 0 18px 36px rgba(0,0,0,.42);
+      z-index:2;
+    }
+    .iconBadge svg{
+      width:20px; height:20px;
+      stroke: rgba(255,255,255,.92);
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .cardBody{
+      padding:18px;
+      position:relative;
+      z-index:2;
+    }
+    .card .top{
+      display:flex; align-items:center; justify-content:space-between;
+      gap:12px;
+      margin-bottom:10px;
+    }
+    .tag{
+      font-size:11px;
+      color:rgba(255,176,0,.98);
+      border:2px solid rgba(255,176,0,.32);
+      padding:6px 10px;
+      border-radius:10px;
+      background:rgba(255,176,0,.14);
+      white-space:nowrap;
+    }
+    .card h3{margin:0; font-size:16px; letter-spacing:-.2px;}
+    .card p{margin-top:10px; color:rgba(255,255,255,.72); font-size:13px; line-height:1.65;}
+    .pillRow{
+      margin-top:12px;
+      display:flex; flex-wrap:wrap; gap:10px;
+      color:rgba(255,255,255,.66);
+      font-size:12px;
+    }
+    .pillRow span{
+      border:2px solid rgba(255,255,255,.12);
+      background: rgba(8,10,16,.65);
+      padding:6px 10px;
+      border-radius:10px;
+    }
+    .bullets{
+      margin-top:12px;
+      padding-left:18px;
+      color:rgba(255,255,255,.72);
+      font-size:13px;
+      line-height:1.65;
+    }
+    .bullets li{margin:6px 0}
+
+    .reveal{opacity:0; transform:translateY(18px); will-change: transform, opacity;}
+
+    footer{
+      border-top:3px solid rgba(255,255,255,.10);
+      padding:28px 0 8px;
+      color:rgba(255,255,255,.62);
+      font-size:12px;
+      display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap;
+      margin-top:42px;
+    }
+
+    /* Modal */
+    .modal{
+      position:fixed;
+      inset:0;
+      z-index:90;
+      display:none;
+      align-items:center;
+      justify-content:center;
+      padding:18px;
+    }
+    .modal.open{display:flex;}
+    .modalBackdrop{
+      position:absolute;
+      inset:0;
+      background: rgba(0,0,0,.62);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+    .modalPanel{
+      position:relative;
+      width:min(920px, 100%);
+      max-height:min(84vh, 820px);
+      overflow:auto;
+      border-radius:var(--r3);
+      border:3px solid rgba(255,255,255,.14);
+      background:
+        radial-gradient(520px 260px at 20% 18%, rgba(255,59,111,.18), transparent 62%),
+        radial-gradient(520px 260px at 76% 22%, rgba(24,245,255,.12), transparent 62%),
+        linear-gradient(180deg, rgba(14,16,26,.96), rgba(7,8,19,.96));
+      box-shadow: var(--shadow);
+      padding:18px;
+    }
+    .modalTop{
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:12px;
+      padding-bottom:12px;
+      border-bottom:3px solid rgba(255,255,255,.08);
+      margin-bottom:12px;
+    }
+    .modalTitle{margin:0; font-size:18px; letter-spacing:-.2px;}
+    .modalClose{
+      width:44px; height:44px;
+      border-radius:12px;
+      border:3px solid rgba(255,255,255,.14);
+      background: rgba(8,10,16,.60);
+      color:#fff;
+      cursor:pointer;
+      display:flex; align-items:center; justify-content:center;
+      font-size:18px;
+      line-height:1;
+      transition: transform .18s var(--ease), border-color .18s var(--ease), box-shadow .18s var(--ease);
+      box-shadow: 0 12px 30px rgba(0,0,0,.28);
+    }
+    .modalClose:hover{
+      transform: translateY(-2px);
+      border-color: rgba(255,59,111,.55);
+      box-shadow: var(--shadow2);
+    }
+    .modalBody{
+      color:rgba(255,255,255,.78);
+      font-size:13px;
+      line-height:1.7;
+    }
+    .modalGrid{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:16px;
+      margin-top:12px;
+    }
+    .modalBlock{
+      border:2px solid rgba(255,255,255,.12);
+      border-radius:var(--r2);
+      padding:14px;
+      background: rgba(8,10,16,.60);
+      box-shadow: var(--shadow2);
+    }
+    .modalBlock h4{
+      margin:0 0 8px;
+      font-size:13px;
+      letter-spacing:-.1px;
+      color:#fff;
+    }
+    .modalActions{
+      margin-top:14px;
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+      align-items:center;
+      justify-content:flex-start;
+    }
+
+    @media (max-width: 980px){
+      h1{font-size:40px}
+      .grid2{grid-template-columns:1fr}
+      nav{display:none}
+      .hamburger{display:flex}
+      .modalGrid{grid-template-columns:1fr}
+      .cardMedia{height:140px}
+    }
+    @media (max-width: 520px){
+      .wrap{padding:16px 14px 72px}
+      h1{font-size:34px}
+      .heroActions{gap:10px}
+      .heroActions .btn{width:100%}
+      .topbarInner{padding:12px 14px}
+      .mobileMenuInner{padding:12px 14px 16px}
+    }
+
+    /* ✅ FIX: CTA + hamburger in same row (Kontakt behavior) */
+    @media (max-width: 520px){
+      .topbarInner{
+        flex-wrap: nowrap;
+        gap: 10px;
+      }
+      .ctaCenter{
+        margin: 0;
+        flex: 1;
+        display:flex;
+        justify-content:center;
+      }
+      .ctaCenter.btn{
+        padding: 10px 12px;
+        font-size: 12px;
+      }
+      .navWrap{
+        margin-left: 0;
+        flex: 0 0 auto;
+      }
+      .hamburger{
+        flex: 0 0 auto;
+      }
+    }
+  </style>
+  <link rel="canonical" href="https://www.sindikatstudio83.me/sr-me/usluge/" />
+</head>
+
+<body>
+  <!-- ✅ FLOATING LOGO (same as Kontakt page) -->
+  <a class="floatingLogo" href="/sr-me/pocetna" aria-label="Sindikat Studio 83 — Početna">
+    <div class="logoMark" aria-hidden="true">
+      <img class="logoMarkImg" src="/studio83logo.png" alt="">
+    </div>
+  </a>
+
+  <!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PBXVW3GK"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+  <div class="heroBg" id="heroBg" aria-hidden="true"></div>
+  <div class="blob" id="blob1" aria-hidden="true"></div>
+  <div class="blob b2" id="blob2" aria-hidden="true"></div>
+
+  <!-- ✅ Bottom Topbar (same as Kontakt) -->
+  <header class="topbar">
+    <div class="topbarInner reveal">
+      <!-- removed logo from bar (now floating) -->
+      <div class="brand"></div>
+
+      <a class="btn primary ctaCenter" href="/sr-me/kontakt">
+        <span class="dot"></span>Kontaktiraj nas
+      </a>
+
+      <div class="navWrap">
+        <nav aria-label="Primary">
+          <a href="/sr-me/pocetna">Početna</a>
+          <a href="/sr-me/usluge" aria-current="page">Usluge</a>
+          <a href="/sr-me/onama">O nama</a>
+          <a href="/sr-me/blog">Blog</a>
+          <a href="/sr-me/poslovi">Poslovi</a>
+        </nav>
+
+        <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile menu OUTSIDE .topbarInner (same as Kontakt page) -->
+    <div class="mobileMenu" id="mobileMenu" aria-label="Mobile menu">
+      <div class="mobileMenuInner">
+        <a href="/sr-me/pocetna">Početna</a>
+        <a href="/sr-me/usluge" aria-current="page">Usluge</a>
+        <a href="/sr-me/onama">O nama</a>
+        <a href="/sr-me/blog">Blog</a>
+        <a href="/sr-me/poslovi">Poslovi</a>
+      </div>
+    </div>
+  </header>
+
+  <div class="wrap">
+    <!-- HERO -->
+    <section class="hero" id="top">
+            <div class="kicker reveal"></span></div>
+
+      <div class="kicker reveal"><span class="dot"></span> Usluge koje klijenti traže</div>
+
+      <h1 class="heroTitle reveal" id="heroTitle">Naše usluge.</h1>
+
+      <p class="sub reveal">
+        Oglašavanje, sadržaj, web, SEO i analitika — u jednom sistemu.
+        Ne prodajemo “usluge”. Prodajemo ishod: leadove, posjete i prodaju.
+      </p>
+
+      <div class="heroActions reveal">
+       
+      </div>
+
+      
+    </section>
+
+    <!-- SERVICES -->
+    <section class="section" id="services">
+      <div class="headRow">
+        <h2 class="h2 reveal">Usluge</h2>
+        <div class="desc reveal">
+          Jasni ishodi. Zaključan scope. Sistem koji pretvara pažnju u upite, rezervacije i prodaju.
+        </div>
+      </div>
+
+      <div class="grid2">
+
+        <!-- 1) Branding -->
+        <div class="card reveal">
+          <div class="cardMedia">
+            <img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1600&q=80" alt="Branding">
+            <div class="iconBadge" aria-hidden="true">
+              <!-- badge-check -->
+              <svg viewBox="0 0 24 24"><path d="M8 12l2 2 6-6"/><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            </div>
+          </div>
+          <div class="cardBody">
+            <div class="top">
+              <h3>Branding & Digital identitet</h3>
+              <span class="tag">7–14 dana</span>
+            </div>
+            <p>Vizuelni i komunikacijski identitet koji radi u digitalu: jasno, prepoznatljivo, prodajno.</p>
+            <div class="pillRow"><span>logo + vizuelni sistem</span><span>tone of voice</span><span>brand kit</span></div>
+            <div style="height:14px"></div>
+            <button class="btn primary" data-modal="modal-branding"><span class="dot"></span> Detaljnije</button>
+          </div>
+        </div>
+
+        <!-- 2) Ads -->
+        <div class="card reveal">
+          <div class="cardMedia">
+            <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1600&q=80" alt="Oglašavanje">
+            <div class="iconBadge" aria-hidden="true">
+              <!-- target -->
+              <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3"/><path d="M22 12h-4"/><path d="M6 12H2"/><path d="M12 2v4"/><path d="M12 18v4"/></svg>
+            </div>
+          </div>
+          <div class="cardBody">
+            <div class="top">
+              <h3>Oglašavanje (Performance)</h3>
+              <span class="tag">30 dana</span>
+            </div>
+            <p>Meta + Google kampanje uz testiranje i optimizaciju. Fokus: leadovi / prodaja / posjete.</p>
+            <div class="pillRow"><span>Meta</span><span>Google</span><span>retarget</span><span>report</span></div>
+            <div style="height:14px"></div>
+            <button class="btn primary" data-modal="modal-ads"><span class="dot"></span> Detaljnije</button>
+          </div>
+        </div>
+
+        <!-- 3) Web -->
+        <div class="card reveal">
+          <div class="cardMedia">
+            <img src="https://images.unsplash.com/photo-1522542550221-31fd19575a2d?auto=format&fit=crop&w=1600&q=80" alt="Web sajtovi">
+            <div class="iconBadge" aria-hidden="true">
+              <!-- layout -->
+              <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18"/><path d="M8 20V9"/></svg>
+            </div>
+          </div>
+          <div class="cardBody">
+            <div class="top">
+              <h3>Web sajtovi & Landing page</h3>
+              <span class="tag">10–21 dan</span>
+            </div>
+            <p>Stranice koje pretvaraju posjete u akciju: struktura, copy, dokaz i CTA.</p>
+            <div class="pillRow"><span>landing</span><span>UX</span><span>copy</span><span>konverzija</span></div>
+            <div style="height:14px"></div>
+            <button class="btn primary" data-modal="modal-web"><span class="dot"></span> Detaljnije</button>
+          </div>
+        </div>
+
+        <!-- 4) Copy -->
+        <div class="card reveal">
+          <div class="cardMedia">
+            <img src="https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&fit=crop&w=1600&q=80" alt="Copywriting">
+            <div class="iconBadge" aria-hidden="true">
+              <!-- pen-tool -->
+              <svg viewBox="0 0 24 24"><path d="M12 19h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4 12.5-12.5z"/></svg>
+            </div>
+          </div>
+          <div class="cardBody">
+            <div class="top">
+              <h3>Copywriting & Content</h3>
+              <span class="tag">7–14 dana</span>
+            </div>
+            <p>Poruke koje hvataju pažnju i vode do upita: ads copy, landing copy i content plan.</p>
+            <div class="pillRow"><span>hook → poruka</span><span>CTA</span><span>varijante</span></div>
+            <div style="height:14px"></div>
+            <button class="btn primary" data-modal="modal-copy"><span class="dot"></span> Detaljnije</button>
+          </div>
+        </div>
+
+        <!-- 5) UX -->
+        <div class="card reveal">
+          <div class="cardMedia">
+            <img src="https://images.unsplash.com/photo-1559028012-481c04fa702d?auto=format&fit=crop&w=1600&q=80" alt="UX optimizacija">
+            <div class="iconBadge" aria-hidden="true">
+              <!-- mouse-pointer -->
+              <svg viewBox="0 0 24 24"><path d="M3 3l8 19 2-8 8-2L3 3z"/><path d="M13 13l6 6"/></svg>
+            </div>
+          </div>
+          <div class="cardBody">
+            <div class="top">
+              <h3>UX optimizacija (Conversion)</h3>
+              <span class="tag">5–10 dana</span>
+            </div>
+            <p>Ispravljamo tok i trenje: manje konfuzije, više klikova, više formi i poziva.</p>
+            <div class="pillRow"><span>user flow</span><span>sekcije</span><span>forme</span><span>CTA</span></div>
+            <div style="height:14px"></div>
+            <button class="btn primary" data-modal="modal-ux"><span class="dot"></span> Detaljnije</button>
+          </div>
+        </div>
+
+        <!-- 6) Analytics -->
+        <div class="card reveal">
+          <div class="cardMedia">
+            <img src="https://images.unsplash.com/photo-1556155092-8707de31f9c4?auto=format&fit=crop&w=1600&q=80" alt="Analytics">
+            <div class="iconBadge" aria-hidden="true">
+              <!-- bar-chart -->
+              <svg viewBox="0 0 24 24"><path d="M4 20V10"/><path d="M10 20V4"/><path d="M16 20v-7"/><path d="M22 20H2"/></svg>
+            </div>
+          </div>
+          <div class="cardBody">
+            <div class="top">
+              <h3>Analytics & Tracking</h3>
+              <span class="tag">3–7 dana</span>
+            </div>
+            <p>GA4 + event tracking: mjerimo ono što je bitno i optimizujemo na osnovu podataka.</p>
+            <div class="pillRow"><span>GA4</span><span>events</span><span>funnel</span><span>dashboard</span></div>
+            <div style="height:14px"></div>
+            <button class="btn primary" data-modal="modal-analytics"><span class="dot"></span> Detaljnije</button>
+          </div>
+        </div>
+
+        <!-- 7) Events -->
+        <div class="card reveal">
+          <div class="cardMedia">
+            <img src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&w=1600&q=80" alt="Aktivacije">
+            <div class="iconBadge" aria-hidden="true">
+              <!-- sparkles -->
+              <svg viewBox="0 0 24 24"><path d="M12 2l1.2 3.8L17 7l-3.8 1.2L12 12l-1.2-3.8L7 7l3.8-1.2L12 2z"/><path d="M19 12l.9 2.8L23 16l-3.1 1.2L19 20l-.9-2.8L15 16l3.1-1.2L19 12z"/><path d="M5 13l.7 2.2L8 16l-2.3.8L5 19l-.7-2.2L2 16l2.3-.8L5 13z"/></svg>
+            </div>
+          </div>
+          <div class="cardBody">
+            <div class="top">
+              <h3>Aktivacije & Događaji</h3>
+              <span class="tag">projekat</span>
+            </div>
+            <p>Digital → teren → digital. Aktivacija kao pojačivač kampanje i sadržaj za retarget.</p>
+            <div class="pillRow"><span>koncept</span><span>logistika</span><span>sadržaj</span><span>retarget</span></div>
+            <div style="height:14px"></div>
+            <button class="btn primary" data-modal="modal-events"><span class="dot"></span> Detaljnije</button>
+          </div>
+        </div>
+
+        <!-- 8) SEO -->
+        <div class="card reveal">
+          <div class="cardMedia">
+            <img src="https://images.unsplash.com/photo-1557804506-669a67965ba0?auto=format&fit=crop&w=1600&q=80" alt="SEO">
+            <div class="iconBadge" aria-hidden="true">
+              <!-- search -->
+              <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+            </div>
+          </div>
+          <div class="cardBody">
+            <div class="top">
+              <h3>SEO sistem (On-page + Sadržaj)</h3>
+              <span class="tag">14–21 dan</span>
+            </div>
+            <p>Organski upiti kroz strukturu sajta, ključne riječi, interne linkove i sadržaj.</p>
+            <div class="pillRow"><span>audit</span><span>on-page</span><span>content plan</span><span>Search Console</span></div>
+            <div style="height:14px"></div>
+            <button class="btn primary" data-modal="modal-seo"><span class="dot"></span> Detaljnije</button>
+          </div>
+        </div>
+
+        <!-- 9) Gamification -->
+        <div class="card reveal">
+          <div class="cardMedia">
+            <img src="https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=1600&q=80" alt="Gamification">
+            <div class="iconBadge" aria-hidden="true">
+              <!-- gamepad -->
+              <svg viewBox="0 0 24 24"><path d="M6 12h12"/><path d="M8 12v-2"/><path d="M8 12v2"/><path d="M15.5 10.5h.01"/><path d="M17.5 13.5h.01"/><path d="M7 20l-2-3a6 6 0 0 1 0-10l2-3"/><path d="M17 20l2-3a6 6 0 0 0 0-10l-2-3"/></svg>
+            </div>
+          </div>
+          <div class="cardBody">
+            <div class="top">
+              <h3>Gamification & Interaktivne kampanje</h3>
+              <span class="tag">projekat</span>
+            </div>
+            <p>Mehanike koje podižu angažman i prave buzz: kviz, promo igra, interaktivna akcija.</p>
+            <div class="pillRow"><span>koncept</span><span>mehanika</span><span>nagrade</span><span>lead capture</span></div>
+            <div style="height:14px"></div>
+            <button class="btn primary" data-modal="modal-gamification"><span class="dot"></span> Detaljnije</button>
+          </div>
+        </div>
+
+        <!-- 10) Custom -->
+        <div class="card reveal">
+          <div class="cardMedia">
+            <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1600&q=80" alt="Custom rješenja">
+            <div class="iconBadge" aria-hidden="true">
+              <!-- code -->
+              <svg viewBox="0 0 24 24"><path d="M16 18l6-6-6-6"/><path d="M8 6l-6 6 6 6"/><path d="M10 20l4-16"/></svg>
+            </div>
+          </div>
+          <div class="cardBody">
+            <div class="top">
+              <h3>Custom digital rješenja</h3>
+              <span class="tag">projekat</span>
+            </div>
+            <p>Posebne funkcionalnosti i alati za kampanje: kalkulatori, forme, sistemi, MVP.</p>
+            <div class="pillRow"><span>web alati</span><span>MVP</span><span>integracije</span><span>automatizacije</span></div>
+            <div style="height:14px"></div>
+            <button class="btn primary" data-modal="modal-custom"><span class="dot"></span> Detaljnije</button>
+          </div>
+        </div>
+
+        <!-- 11) Mobile -->
+        <div class="card reveal">
+          <div class="cardMedia">
+            <img src="https://images.unsplash.com/photo-1512499617640-c2f999098c01?auto=format&fit=crop&w=1600&q=80" alt="Mobile MVP">
+            <div class="iconBadge" aria-hidden="true">
+              <!-- smartphone -->
+              <svg viewBox="0 0 24 24"><rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 19h2"/></svg>
+            </div>
+          </div>
+          <div class="cardBody">
+            <div class="top">
+              <h3>Mobile MVP & Prototip (ograničeno)</h3>
+              <span class="tag">projekat</span>
+            </div>
+            <p>Prva verzija aplikacije: koncept, UX prototip i MVP plan (za validaciju ideje).</p>
+            <div class="pillRow"><span>prototip</span><span>MVP scope</span><span>validacija</span></div>
+            <div style="height:14px"></div>
+            <button class="btn primary" data-modal="modal-mobile"><span class="dot"></span> Detaljnije</button>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+      <div>© <span id="year"></span> Sindikat — Performance & Activation Studio</div>
+      <div>Podgorica • Crna Gora • @sindikat_events</div>
+    </footer>
+  </div>
+
+  <!-- ✅ MODALS: stvarni sadržaj za "Detaljnije" -->
+
+  <!-- Branding -->
+  <div class="modal" id="modal-branding" aria-hidden="true">
+    <div class="modalBackdrop" data-close></div>
+    <div class="modalPanel" role="dialog" aria-modal="true" aria-label="Branding & Digital identitet">
+      <div class="modalTop">
+        <h3 class="modalTitle">Branding & Digital identitet</h3>
+        <button class="modalClose" type="button" data-close aria-label="Zatvori">×</button>
+      </div>
+      <div class="modalBody">
+        <p>Brand koji izgleda ozbiljno i komunicira jasno — da klijent odmah shvati ko si, šta radiš i zašto da izabere tebe.</p>
+
+        <div class="modalGrid">
+          <div class="modalBlock">
+            <h4>Šta dobijaš</h4>
+            <ul class="bullets">
+              <li>Logo refresh ili novi logo (po potrebi)</li>
+              <li>Boje, tipografija, grid i pravila upotrebe</li>
+              <li>Ton komunikacije (kako pričamo i šta naglašavamo)</li>
+              <li>Brand kit za web i društvene mreže</li>
+            </ul>
+          </div>
+          <div class="modalBlock">
+            <h4>Proces (jednostavno)</h4>
+            <ul class="bullets">
+              <li>Brzi audit: ko si / publika / konkurencija</li>
+              <li>2–3 vizuelna pravca + selekcija</li>
+              <li>Finalizacija i priprema fajlova</li>
+              <li>Mini vodič + predlošci</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="modalActions">
+          <a class="btn primary" href="/sr-me/kontakt"><span class="dot"></span> Kontaktiraj nas</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Ads -->
+  <div class="modal" id="modal-ads" aria-hidden="true">
+    <div class="modalBackdrop" data-close></div>
+    <div class="modalPanel" role="dialog" aria-modal="true" aria-label="Oglašavanje (Performance)">
+      <div class="modalTop">
+        <h3 class="modalTitle">Oglašavanje (Performance)</h3>
+        <button class="modalClose" type="button" data-close aria-label="Zatvori">×</button>
+      </div>
+      <div class="modalBody">
+        <p>Kampanje koje se ne rade “reda radi” — nego da donesu upite, pozive, rezervacije ili prodaju. Meta + Google, sa testiranjem i optimizacijom.</p>
+
+        <div class="modalGrid">
+          <div class="modalBlock">
+            <h4>Šta radimo</h4>
+            <ul class="bullets">
+              <li>Setup kampanja + struktura (ACQ / RET)</li>
+              <li>Test creative-a (varijante poruka i vizuala)</li>
+              <li>Optimizacija budžeta i publika</li>
+              <li>Mjesečni report: šta radi / šta ne radi / šta dalje</li>
+            </ul>
+          </div>
+          <div class="modalBlock">
+            <h4>Uslov da radi</h4>
+            <ul class="bullets">
+              <li>Jasan cilj (lead / prodaja / posjeta)</li>
+              <li>Dobra landing stranica (ili je napravimo)</li>
+              <li>Tracking (GA4 / pixel / conversion events)</li>
+              <li>Budžet za test (da ne nagađamo)</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="modalActions">
+          <a class="btn primary" href="/sr-me/kontakt"><span class="dot"></span> Traži ponudu</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Web -->
+  <div class="modal" id="modal-web" aria-hidden="true">
+    <div class="modalBackdrop" data-close></div>
+    <div class="modalPanel" role="dialog" aria-modal="true" aria-label="Web sajtovi & Landing page">
+      <div class="modalTop">
+        <h3 class="modalTitle">Web sajtovi & Landing page</h3>
+        <button class="modalClose" type="button" data-close aria-label="Zatvori">×</button>
+      </div>
+      <div class="modalBody">
+        <p>Ne pravimo “lijep sajt”. Pravimo stranicu koja vodi korisnika: problem → dokaz → rješenje → CTA.</p>
+
+        <div class="modalGrid">
+          <div class="modalBlock">
+            <h4>Uključeno</h4>
+            <ul class="bullets">
+              <li>Struktura sekcija (hero, benefit, dokaz, FAQ, CTA)</li>
+              <li>Copy koji objašnjava i prodaje (bez praznih fraza)</li>
+              <li>Responsive dizajn (mobilni prioritet)</li>
+              <li>Osnove SEO + performanse</li>
+            </ul>
+          </div>
+          <div class="modalBlock">
+            <h4>Najčešći ishodi</h4>
+            <ul class="bullets">
+              <li>Više upita sa istog broja posjeta</li>
+              <li>Manje “zbunjenih” korisnika</li>
+              <li>Jasniji CTA i bolji flow</li>
+              <li>Bolja osnova za oglase i SEO</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="modalActions">
+          <a class="btn primary" href="/sr-me/kontakt"><span class="dot"></span> Hoću landing</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Copy -->
+  <div class="modal" id="modal-copy" aria-hidden="true">
+    <div class="modalBackdrop" data-close></div>
+    <div class="modalPanel" role="dialog" aria-modal="true" aria-label="Copywriting & Content">
+      <div class="modalTop">
+        <h3 class="modalTitle">Copywriting & Content</h3>
+        <button class="modalClose" type="button" data-close aria-label="Zatvori">×</button>
+      </div>
+      <div class="modalBody">
+        <p>Poruke koje “režu” kroz šum. U oglasu, na landing-u i u sadržaju — da ljudi razumiju i kliknu.</p>
+
+        <div class="modalGrid">
+          <div class="modalBlock">
+            <h4>Šta dobijaš</h4>
+            <ul class="bullets">
+              <li>Hook varijante (više uglova)</li>
+              <li>Ads copy set (headline / primary text)</li>
+              <li>Landing copy (sekcije + CTA)</li>
+              <li>Mini content plan (teme + format)</li>
+            </ul>
+          </div>
+          <div class="modalBlock">
+            <h4>Kako radimo</h4>
+            <ul class="bullets">
+              <li>Brzi intervju + ponuda (value)</li>
+              <li>Analiza publike (šta ih stvarno boli)</li>
+              <li>Varijante i test (bez vezivanja za jednu ideju)</li>
+              <li>Final: dokument + “šta testirati prvo”</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="modalActions">
+          <a class="btn primary" href="/sr-me/kontakt"><span class="dot"></span> Treba mi copy</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- UX -->
+  <div class="modal" id="modal-ux" aria-hidden="true">
+    <div class="modalBackdrop" data-close></div>
+    <div class="modalPanel" role="dialog" aria-modal="true" aria-label="UX optimizacija (Conversion)">
+      <div class="modalTop">
+        <h3 class="modalTitle">UX optimizacija (Conversion)</h3>
+        <button class="modalClose" type="button" data-close aria-label="Zatvori">×</button>
+      </div>
+      <div class="modalBody">
+        <p>Uklanjamo trenje: gdje ljudi odustaju, gdje se zbune i zašto ne kliknu. Cilj je više akcija bez većeg budžeta.</p>
+
+        <div class="modalGrid">
+          <div class="modalBlock">
+            <h4>Šta analiziramo</h4>
+            <ul class="bullets">
+              <li>Flow: ulaz → ponuda → CTA</li>
+              <li>Hijerarhija informacija (šta je prvo/bitno)</li>
+              <li>Forme i mikro-CTA</li>
+              <li>Mobilni UX (90% realnosti)</li>
+            </ul>
+          </div>
+          <div class="modalBlock">
+            <h4>Šta dobijaš</h4>
+            <ul class="bullets">
+              <li>Lista tačnih izmjena (prioritet + razlog)</li>
+              <li>Brze pobjede (quick wins)</li>
+              <li>Predlog novih sekcija / reda</li>
+              <li>Prije/poslije logika + mjerenje</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="modalActions">
+          <a class="btn primary" href="/sr-me/kontakt"><span class="dot"></span> Hoću audit</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Analytics -->
+  <div class="modal" id="modal-analytics" aria-hidden="true">
+    <div class="modalBackdrop" data-close></div>
+    <div class="modalPanel" role="dialog" aria-modal="true" aria-label="Analytics & Tracking">
+      <div class="modalTop">
+        <h3 class="modalTitle">Analytics & Tracking</h3>
+        <button class="modalClose" type="button" data-close aria-label="Zatvori">×</button>
+      </div>
+      <div class="modalBody">
+        <p>Bez mjerenja nema optimizacije. Postavljamo tracking tako da znaš šta tačno donosi upite i prodaju.</p>
+
+        <div class="modalGrid">
+          <div class="modalBlock">
+            <h4>Uključeno</h4>
+            <ul class="bullets">
+              <li>GA4 setup i provjera</li>
+              <li>Eventi: klik, forma, poziv, lead, kupovina (po potrebi)</li>
+              <li>UTM standard + naming</li>
+              <li>Osnovni dashboard (jasno, bez šuma)</li>
+            </ul>
+          </div>
+          <div class="modalBlock">
+            <h4>Rezultat</h4>
+            <ul class="bullets">
+              <li>Tačno znaš odakle dolaze leadovi</li>
+              <li>Funnel i drop-off tačke</li>
+              <li>Podaci spremni za ads optimizaciju</li>
+              <li>Manje “osjećaja”, više odluka</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="modalActions">
+          <a class="btn primary" href="/sr-me/kontakt"><span class="dot"></span> Sredi tracking</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Events -->
+  <div class="modal" id="modal-events" aria-hidden="true">
+    <div class="modalBackdrop" data-close></div>
+    <div class="modalPanel" role="dialog" aria-modal="true" aria-label="Aktivacije & Događaji">
+      <div class="modalTop">
+        <h3 class="modalTitle">Aktivacije & Događaji</h3>
+        <button class="modalClose" type="button" data-close aria-label="Zatvori">×</button>
+      </div>
+      <div class="modalBody">
+        <p>Radimo aktivacije koje pojačavaju kampanju: pravi doživljaj + sadržaj koji se kasnije koristi za retarget i prodaju.</p>
+
+        <div class="modalGrid">
+          <div class="modalBlock">
+            <h4>Šta pokrivamo</h4>
+            <ul class="bullets">
+              <li>Koncept i mehanika (zašto bi neko stao)</li>
+              <li>Logistika + tim na terenu</li>
+              <li>Foto/video plan (šta tačno snimamo)</li>
+              <li>Post-event sadržaj i ads plan</li>
+            </ul>
+          </div>
+          <div class="modalBlock">
+            <h4>Kad ima smisla</h4>
+            <ul class="bullets">
+              <li>Lansiranje proizvoda / brenda</li>
+              <li>Sezonske kampanje i festivali</li>
+              <li>Kad želiš “buzz” + dokaz (UGC)</li>
+              <li>Kad trebaš sadržaj za 30 dana</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="modalActions">
+          <a class="btn primary" href="/sr-me/kontakt"><span class="dot"></span> Planiraj aktivaciju</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SEO -->
+  <div class="modal" id="modal-seo" aria-hidden="true">
+    <div class="modalBackdrop" data-close></div>
+    <div class="modalPanel" role="dialog" aria-modal="true" aria-label="SEO sistem (On-page + Sadržaj)">
+      <div class="modalTop">
+        <h3 class="modalTitle">SEO sistem (On-page + Sadržaj)</h3>
+        <button class="modalClose" type="button" data-close aria-label="Zatvori">×</button>
+      </div>
+      <div class="modalBody">
+        <p>SEO kao sistem: struktura sajta + ključne riječi + interne veze + sadržaj koji donosi upite (ne samo posjete).</p>
+
+        <div class="modalGrid">
+          <div class="modalBlock">
+            <h4>On-page osnova</h4>
+            <ul class="bullets">
+              <li>Struktura stranica i linkovanje</li>
+              <li>Title/description, H tagovi, schema (osnove)</li>
+              <li>Brzina + tehničke provjere</li>
+              <li>Search Console setup i monitoring</li>
+            </ul>
+          </div>
+          <div class="modalBlock">
+            <h4>Sadržaj koji radi</h4>
+            <ul class="bullets">
+              <li>Plan tema (namjera: kupujem / tražim / upoređujem)</li>
+              <li>Struktura bloga (kategorije + interne veze)</li>
+              <li>Prioritet: stranice koje prodaju</li>
+              <li>Mjerenje: upiti i konverzije</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="modalActions">
+          <a class="btn primary" href="/sr-me/kontakt"><span class="dot"></span> Hoću SEO plan</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Gamification -->
+  <div class="modal" id="modal-gamification" aria-hidden="true">
+    <div class="modalBackdrop" data-close></div>
+    <div class="modalPanel" role="dialog" aria-modal="true" aria-label="Gamification & Interaktivne kampanje">
+      <div class="modalTop">
+        <h3 class="modalTitle">Gamification & Interaktivne kampanje</h3>
+        <button class="modalClose" type="button" data-close aria-label="Zatvori">×</button>
+      </div>
+      <div class="modalBody">
+        <p>Interakcija koja pravi “priču”: ljudi učestvuju, dijele, ostavljaju podatke i ulaze u funnel bez agresivnog prodavanja.</p>
+
+        <div class="modalGrid">
+          <div class="modalBlock">
+            <h4>Primjeri mehanika</h4>
+            <ul class="bullets">
+              <li>Kviz / test / “koji si tip”</li>
+              <li>Spin / scratch / mini igra</li>
+              <li>Takmičenje (UGC) + nagrade</li>
+              <li>Lead capture + automatski follow-up</li>
+            </ul>
+          </div>
+          <div class="modalBlock">
+            <h4>Šta dobijaš</h4>
+            <ul class="bullets">
+              <li>Koncept + pravila (jasno i fer)</li>
+              <li>UX prototip + flow</li>
+              <li>Copy + vizuelni okvir</li>
+              <li>Plan promocije + retarget</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="modalActions">
+          <a class="btn primary" href="/sr-me/kontakt"><span class="dot"></span> Hoću kampanju</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Custom -->
+  <div class="modal" id="modal-custom" aria-hidden="true">
+    <div class="modalBackdrop" data-close></div>
+    <div class="modalPanel" role="dialog" aria-modal="true" aria-label="Custom digital rješenja">
+      <div class="modalTop">
+        <h3 class="modalTitle">Custom digital rješenja</h3>
+        <button class="modalClose" type="button" data-close aria-label="Zatvori">×</button>
+      </div>
+      <div class="modalBody">
+        <p>Kad ti treba nešto specifično: kalkulator, forma, mini sistem, landing sa posebnom logikom ili MVP alat koji prodaje.</p>
+
+        <div class="modalGrid">
+          <div class="modalBlock">
+            <h4>Tipični primjeri</h4>
+            <ul class="bullets">
+              <li>Kalkulator cijene / ponude</li>
+              <li>Napredne forme (multi-step)</li>
+              <li>Mini CRM / lead inbox</li>
+              <li>Integracije (webhook, email, sheet)</li>
+            </ul>
+          </div>
+          <div class="modalBlock">
+            <h4>Kako radimo</h4>
+            <ul class="bullets">
+              <li>Scope zaključan prije starta</li>
+              <li>MVP prvo (da radi, pa onda “šminka”)</li>
+              <li>Dokumentacija i predaja</li>
+              <li>Mjerenje rezultata (ako je funnel)</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="modalActions">
+          <a class="btn primary" href="/sr-me/kontakt"><span class="dot"></span> Treba mi rješenje</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mobile MVP -->
+  <div class="modal" id="modal-mobile" aria-hidden="true">
+    <div class="modalBackdrop" data-close></div>
+    <div class="modalPanel" role="dialog" aria-modal="true" aria-label="Mobile MVP & Prototip (ograničeno)">
+      <div class="modalTop">
+        <h3 class="modalTitle">Mobile MVP & Prototip (ograničeno)</h3>
+        <button class="modalClose" type="button" data-close aria-label="Zatvori">×</button>
+      </div>
+      <div class="modalBody">
+        <p>Prva verzija aplikacije — da validiraš ideju prije velikog ulaganja. Fokus: flow, ključne funkcije i plan implementacije.</p>
+
+        <div class="modalGrid">
+          <div class="modalBlock">
+            <h4>Šta dobijaš</h4>
+            <ul class="bullets">
+              <li>Definicija MVP scope-a (šta ulazi / šta ne)</li>
+              <li>UX prototip (ekrani + flow)</li>
+              <li>Specifikacija funkcija (jasno dev-u)</li>
+              <li>Plan faza (šta prvo, šta kasnije)</li>
+            </ul>
+          </div>
+          <div class="modalBlock">
+            <h4>Kad je idealno</h4>
+            <ul class="bullets">
+              <li>Imaš ideju, ali ne želiš rizik “full build”</li>
+              <li>Treba ti prototip za investitore/partnera</li>
+              <li>Želiš brz feedback sa tržišta</li>
+              <li>Želiš plan troška prije razvoja</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="modalActions">
+          <a class="btn primary" href="/sr-me/kontakt"><span class="dot"></span> Validiraj ideju</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Year (safe)
+    const yearEl = document.getElementById('year');
+    if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+    // Mobile menu toggle (with proper state)
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+
+    const closeMobileMenu = () => {
+      if (!mobileMenu) return;
+      mobileMenu.style.display = 'none';
+      mobileMenu.style.opacity = '';
+      mobileMenu.style.transform = '';
+      if (hamburger) hamburger.setAttribute('aria-expanded','false');
+    };
+
+    if (hamburger && mobileMenu) {
+      hamburger.addEventListener('click', ()=>{
+        const isOpen = mobileMenu.style.display === 'block';
+        if (isOpen) {
+          anime({
+            targets: mobileMenu,
+            opacity: [1,0],
+            translateY: [0,6],
+            duration: 220,
+            easing: 'easeOutQuad',
+            complete: closeMobileMenu
+          });
+        } else {
+          mobileMenu.style.display = 'block';
+          hamburger.setAttribute('aria-expanded','true');
+          anime({
+            targets: mobileMenu,
+            opacity: [0,1],
+            translateY: [6,0],
+            duration: 260,
+            easing: 'easeOutQuad'
+          });
+        }
+      });
+
+      document.querySelectorAll('#mobileMenu a').forEach(a=>{
+        a.addEventListener('click', closeMobileMenu);
+      });
+
+      // Close on outside click (nice UX)
+      document.addEventListener('click', (e)=>{
+        if (mobileMenu.style.display !== 'block') return;
+        const inside = mobileMenu.contains(e.target) || hamburger.contains(e.target);
+        if (!inside) closeMobileMenu();
+      });
+    }
+
+    // Split hero title into words (keeps spaces)
+    const titleEl = document.getElementById('heroTitle');
+    if (titleEl) {
+      const raw = titleEl.textContent.trim();
+      const words = raw.split(/\s+/);
+      titleEl.textContent = '';
+      words.forEach((w, i) => {
+        const span = document.createElement('span');
+        span.textContent = w;
+        titleEl.appendChild(span);
+        if (i !== words.length - 1) titleEl.appendChild(document.createTextNode(' '));
+      });
+    }
+
+    // Reveal observer
+    const revealEls = document.querySelectorAll('.reveal');
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(entry=>{
+        if(!entry.isIntersecting) return;
+        const el = entry.target;
+        anime({ targets: el, opacity:[0,1], translateY:[18,0], duration: 820, easing:'easeOutExpo' });
+        io.unobserve(el);
+      });
+    }, {threshold: 0.14});
+    revealEls.forEach(el=>io.observe(el));
+
+    // Hero title word stagger
+    window.addEventListener('load', ()=>{
+      anime({
+        targets: '#heroTitle span',
+        opacity: [0,1],
+        translateY: [16,0],
+        delay: anime.stagger(45),
+        duration: 900,
+        easing: 'easeOutExpo'
+      });
+    });
+
+    // Blobs base + drift
+    const heroBg = document.getElementById('heroBg');
+    const b1 = document.getElementById('blob1');
+    const b2 = document.getElementById('blob2');
+
+    const setBlobsBase = () => {
+      if (!b1 || !b2) return;
+      const w = window.innerWidth, h = window.innerHeight;
+      b1.style.left = Math.max(12, w*0.06) + 'px';
+      b1.style.top  = Math.max(12, h*0.16) + 'px';
+      b2.style.left = Math.max(12, w*0.60) + 'px';
+      b2.style.top  = Math.max(12, h*0.08) + 'px';
+    };
+    setBlobsBase();
+    window.addEventListener('resize', setBlobsBase);
+
+    anime({
+      targets: '#blob1',
+      translateX: [0, 18, -10, 0],
+      translateY: [0, -12, 16, 0],
+      duration: 9000,
+      easing: 'easeInOutSine',
+      loop: true
+    });
+    anime({
+      targets: '#blob2',
+      translateX: [0, -14, 10, 0],
+      translateY: [0, 14, -10, 0],
+      duration: 11000,
+      easing: 'easeInOutSine',
+      loop: true
+    });
+
+    // Parallax glow
+    let ticking = false;
+    window.addEventListener('scroll', ()=>{
+      if(ticking) return;
+      ticking = true;
+      requestAnimationFrame(()=>{
+        const y = window.scrollY || 0;
+        if(heroBg) heroBg.style.transform = `translateY(${y * 0.06}px)`;
+        ticking = false;
+      });
+    }, {passive:true});
+
+    // Modals
+    let savedScrollY = 0;
+
+    const lockScroll = () => {
+      savedScrollY = window.scrollY || 0;
+      document.body.style.position = 'fixed';
+      document.body.style.top = `-${savedScrollY}px`;
+      document.body.style.left = '0';
+      document.body.style.right = '0';
+      document.body.style.width = '100%';
+    };
+
+    const unlockScroll = () => {
+      document.body.style.position = '';
+      document.body.style.top = '';
+      document.body.style.left = '';
+      document.body.style.right = '';
+      document.body.style.width = '';
+      window.scrollTo(0, savedScrollY);
+    };
+
+    const openModal = (id) => {
+      const m = document.getElementById(id);
+      if(!m) return;
+      m.classList.add('open');
+      lockScroll();
+      anime({ targets: m.querySelector('.modalPanel'), opacity:[0,1], translateY:[10,0], duration: 260, easing: 'easeOutExpo' });
+    };
+
+    const closeModal = (m) => {
+      if(!m) return;
+      anime({
+        targets: m.querySelector('.modalPanel'),
+        opacity:[1,0],
+        translateY:[0,10],
+        duration: 200,
+        easing: 'easeOutQuad',
+        complete: ()=>{
+          m.classList.remove('open');
+          unlockScroll();
+        }
+      });
+    };
+
+    document.querySelectorAll('[data-modal]').forEach(btn=>{
+      btn.addEventListener('click', ()=> openModal(btn.getAttribute('data-modal')));
+    });
+    document.querySelectorAll('.modal [data-close]').forEach(el=>{
+      el.addEventListener('click', ()=> closeModal(el.closest('.modal')));
+    });
+
+    window.addEventListener('keydown', (e)=>{
+      if(e.key !== 'Escape') return;
+      const m = document.querySelector('.modal.open');
+      if(m) closeModal(m);
+    });
+  </script>
+</body>
+</html>

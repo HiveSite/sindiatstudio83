@@ -1,0 +1,2632 @@
+<!DOCTYPE html>
+<html lang="sr">
+<head>
+ <!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-PBXVW3GK');</script>
+<!-- End Google Tag Manager -->
+
+
+ <link rel="icon" type="image/png" href="/favicon.png">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  
+
+  <link rel="icon" type="image/png" href="/favicon.png">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Sindikat Poslovi — Event, sezonski i part-time poslovi</title>
+  <meta name="description" content="Sindikat Poslovi: part-time i sezonske prilike u event industriji (bar, servis, promo tim, produkcija), plus digital i back-office podrška. Brza pretraga, pametni filteri i prijava u par klikova." />
+  <meta name="keywords" content="poslovi, event poslovi, sezonski poslovi, part-time, barmen, konobar, hostesa, promoter, DJ, fotograf, produkcija, Podgorica, Budva, Kotor, Crna Gora" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Sindikat Poslovi — Event, sezonski i part-time poslovi">
+  <meta property="og:description" content="Pronađi event posao (part-time / sezonski) ili se prijavi kao talent. Filteri, sačuvani oglasi i brza prijava.">
+  <meta property="og:type" content="website">
+
+  <!-- Anime.js -->
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+
+  <style>
+    :root{
+      --bg:#05010D;
+      --bg2:#12011F;
+      --panel:#0D0521;
+      --panel2:#13072B;
+      --border:rgba(255,255,255,.2);
+      --border2:rgba(255,255,255,.12);
+      --text:#FFFFFF;
+      --muted:rgba(255,255,255,.78);
+      --muted2:rgba(255,255,255,.62);
+
+      --accent:#FF3B6F;
+      --accent2:#FFB000;
+      --neon:#18F5FF;
+      --neon2:#A24CFF;
+
+      --shadow: 0 22px 75px rgba(0,0,0,.68);
+      --shadow2: 0 14px 38px rgba(0,0,0,.48);
+
+      --r:10px;
+      --r2:14px;
+      --r3:18px;
+
+      --max:1120px;
+
+      --ease: cubic-bezier(.2,.9,.2,1);
+      --ease2: cubic-bezier(.16,1,.3,1);
+
+      --nav-h:72px;
+    }
+    
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      background:
+        radial-gradient(820px 520px at 12% 10%, rgba(255,59,111,.25), transparent 60%),
+        radial-gradient(900px 520px at 88% 8%, rgba(24,245,255,.18), transparent 58%),
+        radial-gradient(760px 520px at 70% 28%, rgba(162,76,255,.16), transparent 60%),
+        radial-gradient(680px 480px at 20% 70%, rgba(255,176,0,.12), transparent 62%),
+        linear-gradient(180deg, var(--bg), var(--bg2));
+      color:var(--text);
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      letter-spacing:.2px;
+      overflow-x:hidden;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      padding-bottom: 84px;
+    }
+
+    body:before{
+      content:"";
+      position:fixed; inset:0;
+      pointer-events:none;
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23n)' opacity='.23'/%3E%3C/svg%3E");
+      opacity:.06;
+      mix-blend-mode:overlay;
+      z-index:0;
+    }
+
+    a{color:inherit; text-decoration:none}
+    img{max-width:100%; display:block}
+    .wrap{max-width:var(--max); margin:0 auto; padding:22px 18px 120px; position:relative; z-index:2}
+
+    .bgVideo{
+      position:fixed;
+      inset:0;
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      z-index:0;
+      filter: saturate(1.1) contrast(1.08) brightness(.55);
+    }
+    .bgVideoOverlay{
+      position:fixed;
+      inset:0;
+      z-index:1;
+      pointer-events:none;
+      background:
+        radial-gradient(900px 540px at 20% 20%, rgba(255,59,111,.12), transparent 60%),
+        radial-gradient(900px 540px at 80% 10%, rgba(24,245,255,.10), transparent 60%),
+        linear-gradient(180deg, rgba(0,0,0,.25), rgba(6,1,13,.82) 62%, rgba(6,1,13,.92));
+    }
+    .heroBg{
+      position:fixed;
+      inset:0;
+      z-index:1;
+      pointer-events:none;
+      overflow:hidden;
+      background:
+        radial-gradient(900px 540px at 20% 20%, rgba(255,59,111,.20), transparent 60%),
+        radial-gradient(900px 540px at 80% 10%, rgba(24,245,255,.14), transparent 60%),
+        radial-gradient(720px 520px at 68% 55%, rgba(162,76,255,.16), transparent 60%);
+    }
+    .heroBg:after{
+      content:"";
+      position:absolute; inset:0;
+      background:
+        radial-gradient(700px 420px at 18% 20%, rgba(255,59,111,.26), transparent 60%),
+        radial-gradient(900px 520px at 70% 12%, rgba(24,245,255,.2), transparent 58%),
+        linear-gradient(180deg, rgba(0,0,0,.25), rgba(6,1,13,.92) 62%, rgba(6,1,13,.98));
+    }
+
+    .blob{
+      position:fixed;
+      z-index:1;
+      pointer-events:none;
+      width:520px; height:520px;
+      border-radius:999px;
+      background: radial-gradient(circle at 35% 30%, rgba(255,59,111,.22), transparent 58%);
+      filter: blur(18px);
+      opacity:.55;
+      mix-blend-mode: screen;
+      transform: translate3d(0,0,0);
+    }
+    .blob.b2{
+      width:420px; height:420px;
+      background: radial-gradient(circle at 40% 35%, rgba(24,245,255,.18), transparent 60%);
+      opacity:.45;
+    }
+
+
+ /* ✅ FLOATING LOGO (same as kontakt/blog) */
+.floatingLogo{
+  position:fixed;
+  top:14px;
+  left:14px;
+  z-index:120;
+  display:block;
+  text-decoration:none;
+}
+
+/* mark + markImg (reused for floating logo) */
+.mark{
+  width:176px; height:44px;
+  border-radius:14px;
+  border:1.5px solid rgba(255,59,111,.5);
+  box-shadow:
+    0 18px 34px rgba(0,0,0,.45),
+    0 0 0 3px rgba(0,0,0,.45) inset,
+    0 0 42px rgba(255,59,111,.22);
+  transform: rotate(-2deg);
+  overflow:hidden;
+  background: rgba(0,0,0,.18);
+  display:grid;
+  place-items:center;
+}
+.markImg{
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  object-position:center;
+  padding:6px;
+  filter: drop-shadow(0 10px 18px rgba(0,0,0,.45));
+}
+
+/* responsive scale for floating logo */
+.floatingLogo .mark{
+  width: 50vw;
+  max-width: 240px;
+  height: auto;
+  aspect-ratio: 176 / 44;
+  transform: rotate(-2deg);
+  transform-origin: top left;
+}
+@media (max-width: 480px){
+  .floatingLogo{ top:10px; left:10px; }
+}
+
+   
+
+    /* Bottom topbar */
+    .topbar{
+      position:fixed;
+      bottom:0; left:0; right:0;
+      z-index:50;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      background: rgba(5,7,12,.88);
+      border-top:3px solid rgba(255,255,255,.12);
+    }
+  .topbarInner{
+  max-width:var(--max);
+  margin:0 auto;
+  padding:12px 18px;
+  display:flex;
+  align-items:center;
+  gap:12px;
+  justify-content:flex-start;
+}
+
+.ctaCenter{ margin:0; }
+.navWrap{
+  margin-left:auto;
+  display:flex;
+  align-items:center;
+  gap:12px;
+  white-space:nowrap;
+}
+
+
+   
+/* na manjim ekranima CTA ide normalno (nema skakanja) */
+@media (max-width: 520px){
+  .topbarInner{
+    flex-wrap: nowrap;
+    gap: 10px;
+  }
+  .ctaCenter{
+    margin: 0;
+    flex: 1;
+    display:flex;
+    justify-content:center;
+  }
+  .ctaCenter.btn{
+    padding: 10px 12px;
+    font-size: 12px;
+  }
+  .navWrap{
+    margin-left: 0;
+    flex: 0 0 auto;
+  }
+  .hamburger{
+    flex: 0 0 auto;
+  }
+}
+
+
+    .brand{
+      display:flex; align-items:center; gap:12px;
+      font-weight:750;
+      letter-spacing:.9px;
+      text-transform:uppercase;
+      font-size:13px;
+      white-space:nowrap;
+    }
+    .mark{
+      width:34px; height:34px; border-radius:10px;
+      background:
+        radial-gradient(14px 14px at 35% 35%, rgba(24,245,255,.65), transparent 60%),
+        linear-gradient(145deg, rgba(255,59,111,.32), rgba(255,59,111,.10));
+      border:3px solid rgba(255,59,111,.6);
+      box-shadow:0 14px 28px rgba(0,0,0,.45), 0 0 0 3px rgba(0,0,0,.45) inset;
+      transform: rotate(-2deg);
+    }
+
+  
+    }
+
+    .navWrap{
+      margin-left:auto;
+      display:flex;
+      align-items:center;
+      gap:12px;
+      white-space:nowrap;
+    }
+    nav{
+      display:flex;
+      gap:10px;
+      flex-wrap:nowrap;
+      color:rgba(255,255,255,.78);
+      font-size:13px;
+      align-items:center;
+      white-space:nowrap;
+    }
+    nav a{
+      padding:9px 10px;
+      border-radius:10px;
+      border:2px solid transparent;
+      transition: background .2s var(--ease), color .2s var(--ease), transform .2s var(--ease), border-color .2s var(--ease);
+      transform: translateY(0);
+    }
+    nav a:hover{
+      background:rgba(255,255,255,.05);
+      color:var(--text);
+      transform: translateY(-1px);
+      border-color:rgba(24,245,255,.45)
+    }
+
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center;
+      gap:10px;
+      border-radius:10px;
+      padding:12px 16px;
+      font-size:13px;
+      border:3px solid rgba(255,255,255,.2);
+      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+      color:var(--text);
+      transition:transform .18s var(--ease), box-shadow .18s var(--ease), border-color .18s var(--ease), background .18s var(--ease);
+      white-space:nowrap;
+      box-shadow: 0 12px 30px rgba(0,0,0,.28);
+      cursor:pointer;
+      -webkit-tap-highlight-color: transparent;
+      user-select:none;
+    }
+    .btn:hover{transform:translateY(-3px); box-shadow:var(--shadow2); border-color:rgba(255,59,111,.5)}
+    .btn.primary{
+      background: linear-gradient(180deg, rgba(255,59,111,.35), rgba(255,59,111,.14));
+      border-color:rgba(255,59,111,.6);
+      box-shadow: 0 20px 60px rgba(255,59,111,.22), 0 10px 28px rgba(0,0,0,.28);
+    }
+    .dot{
+      width:8px; height:8px; border-radius:2px;
+      background:var(--accent);
+      box-shadow:0 0 0 5px rgba(255,59,111,.22), 0 0 24px rgba(255,59,111,.48);
+      transform: rotate(8deg);
+    }
+
+    .hamburger{
+      display:none;
+      width:44px; height:44px;
+      border-radius:10px;
+      border:3px solid rgba(255,255,255,.2);
+      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+      align-items:center; justify-content:center;
+      gap:5px;
+      flex-direction:column;
+      cursor:pointer;
+    }
+    .hamburger span{
+      width:18px; height:2px; background:rgba(255,255,255,.8);
+      border-radius:3px;
+      display:block;
+    }
+
+    .mobileMenu{
+      display:none;
+      position:absolute;
+      left:0; right:0;
+      bottom:100%;
+      border-bottom:3px solid rgba(255,255,255,.10);
+      background:rgba(5,7,12,.95);
+      z-index:60;
+    }
+    .mobileMenu.open{display:block;}
+    .mobileMenuInner{
+      max-width:var(--max);
+      margin:0 auto;
+      padding:12px 18px 16px;
+      display:grid;
+      gap:8px;
+    }
+    .mobileMenuInner a{
+      padding:12px 12px;
+      border:3px solid rgba(255,255,255,.12);
+      border-radius:10px;
+      background: linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
+      color:var(--text);
+    }
+
+    .section{
+      padding:34px 0;
+      border-top:3px solid rgba(255,255,255,.08);
+    }
+    .headRow{
+      display:flex; align-items:flex-end; justify-content:space-between;
+      gap:16px; flex-wrap:wrap;
+      margin-bottom:18px;
+    }
+    .h2{font-size:22px; letter-spacing:-.2px; margin:0;}
+    .desc{color:rgba(255,255,255,.70); font-size:13px; line-height:1.65; max-width:70ch;}
+
+    .card{
+      border:3px solid rgba(255,255,255,.14);
+      border-radius:14px;
+      background: linear-gradient(180deg, rgba(14,16,26,.92), rgba(7,8,19,.92));
+      padding:18px;
+      box-shadow: 0 14px 38px rgba(0,0,0,.48);
+      transition: transform .18s var(--ease), border-color .18s var(--ease), box-shadow .18s var(--ease), filter .18s var(--ease);
+      will-change: transform;
+      position:relative;
+      overflow:hidden;
+      transform: translateZ(0);
+    }
+    .card:before{
+      content:"";
+      position:absolute;
+      inset:-35%;
+      background:
+        radial-gradient(circle at 25% 25%, rgba(255,59,111,.24), transparent 60%),
+        radial-gradient(circle at 80% 30%, rgba(24,245,255,.18), transparent 60%);
+      opacity:.5;
+      transform: rotate(8deg);
+      pointer-events:none;
+    }
+    .card:after{
+      content:"";
+      position:absolute;
+      inset:0;
+      border:1px solid rgba(255,59,111,.24);
+      opacity:.45;
+      pointer-events:none;
+    }
+
+    /* JOB CARD: stronger blue glow on hover/focus (desktop) */
+    .jobCard{
+      cursor:pointer;
+    }
+    .jobCard:hover,
+    .jobCard:focus-within{
+      transform:translateY(-6px);
+      border-color: rgba(24,245,255,.62);
+      box-shadow:
+        0 22px 75px rgba(0,0,0,.72),
+        0 0 0 2px rgba(24,245,255,.12),
+        0 0 42px rgba(24,245,255,.18);
+      filter: brightness(1.05);
+    }
+    .jobCard:hover:after,
+    .jobCard:focus-within:after{
+      border-color: rgba(24,245,255,.35);
+      opacity:.85;
+    }
+
+    .card *{position:relative; z-index:2;}
+
+    .grid{display:grid; gap:16px;}
+    .gridJobs{
+      display:grid;
+      grid-template-columns: 280px 1fr;
+      gap:16px;
+      align-items:start;
+    }
+
+    .field{display:grid; gap:8px;}
+    label{font-size:12px; color:rgba(255,255,255,.65)}
+    input, textarea, select{
+      width:100%;
+      padding:12px 12px;
+      border-radius:10px;
+      border:3px solid rgba(255,255,255,.14);
+      background: rgba(8,10,16,.70);
+      color:var(--text);
+      outline:none;
+      box-shadow: inset 0 0 0 1px rgba(0,0,0,.18), 0 10px 22px rgba(0,0,0,.2);
+      appearance:none;
+    }
+    input:focus, textarea:focus, select:focus{
+      border-color: rgba(255,59,111,.7);
+      box-shadow: 0 0 0 4px rgba(255,59,111,.18);
+    }
+    textarea{min-height:110px; resize:vertical}
+
+    .hero{padding:28px 0 8px;}
+    .kicker{
+      display:flex; align-items:center; gap:10px;
+      color:rgba(255,255,255,.78);
+      font-size:12px;
+      text-transform:uppercase;
+      letter-spacing:1.1px;
+      margin-bottom:12px;
+    }
+    .heroTitle{
+      margin:0;
+      font-size:44px;
+      line-height:1.05;
+      letter-spacing:-.8px;
+      max-width:22ch;
+    }
+    .sub{
+      margin-top:14px;
+      color:rgba(255,255,255,.80);
+      font-size:15px;
+      line-height:1.65;
+      max-width:70ch;
+      text-shadow: 0 10px 40px rgba(0,0,0,.35);
+    }
+    .searchGrid{
+      margin-top:16px;
+      display:grid;
+      grid-template-columns: 1.2fr .8fr .8fr auto;
+      gap:12px;
+      align-items:stretch;
+    }
+    .inputRow{display:flex; align-items:center; gap:10px; min-width:0;}
+    .inputRow input, .inputRow select{min-width:0;}
+    .inputIcon{
+      width:28px; height:28px;
+      border-radius:10px;
+      border:2px solid rgba(255,255,255,.14);
+      display:flex; align-items:center; justify-content:center;
+      background: rgba(8,10,16,.55);
+      color:rgba(255,255,255,.85);
+      flex:0 0 auto;
+    }
+
+    .pillRow{
+      display:flex; flex-wrap:wrap; gap:10px;
+      color:rgba(255,255,255,.66);
+      font-size:12px;
+      margin-top:12px;
+    }
+    .pillRow button{
+      border:2px solid rgba(255,255,255,.12);
+      background: rgba(8,10,16,.65);
+      padding:8px 10px;
+      border-radius:10px;
+      color:rgba(255,255,255,.78);
+      cursor:pointer;
+      transition: border-color .18s var(--ease), transform .18s var(--ease), background .18s var(--ease);
+      -webkit-tap-highlight-color: transparent;
+    }
+    .pillRow button:hover{transform:translateY(-2px); border-color:rgba(24,245,255,.35)}
+    .pillRow button.active{border-color:rgba(255,59,111,.7); background: rgba(255,59,111,.10);}
+
+    #typeFilters{
+      display:grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap:10px;
+      margin-top:4px;
+    }
+    .cbTile{
+      position:relative;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+
+      min-height:54px;
+      padding:10px 10px;
+
+      border:3px solid rgba(255,255,255,.14);
+      background: rgba(8,10,16,.65);
+      border-radius:0;
+      color:rgba(255,255,255,.82);
+      font-size:12px;
+      font-weight:750;
+
+      cursor:pointer;
+      user-select:none;
+      transition: transform .18s var(--ease), border-color .18s var(--ease), background .18s var(--ease), color .18s var(--ease);
+    }
+    .cbTile:hover{
+      transform: translateY(-2px);
+      border-color: rgba(24,245,255,.35);
+    }
+    .cbTile input{
+      position:absolute;
+      inset:0;
+      width:100%;
+      height:100%;
+      opacity:0;
+      margin:0;
+      cursor:pointer;
+    }
+    .cbTile.checked{
+      border-color: rgba(255,59,111,.7);
+      background: rgba(255,59,111,.10);
+      color:#fff;
+    }
+
+    .badge{
+      font-size:11px;
+      border:2px solid rgba(255,255,255,.14);
+      border-radius:10px;
+      padding:6px 10px;
+      background: rgba(8,10,16,.65);
+      color:rgba(255,255,255,.78);
+      display:inline-flex;
+      gap:8px;
+      align-items:center;
+      max-width:100%;
+      white-space:normal;
+    }
+    .badge.accent{
+      border-color:rgba(255,59,111,.45);
+      background: rgba(255,59,111,.10);
+      color:rgba(255,255,255,.9);
+    }
+    .badge.blue{
+      border-color:rgba(24,245,255,.38);
+      background: rgba(24,245,255,.10);
+      color:rgba(255,255,255,.92);
+    }
+
+    .jobTop{
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:12px;
+      margin-bottom:10px;
+    }
+    .jobTitle{margin:0; font-size:16px; letter-spacing:-.2px;}
+    .jobMeta{margin-top:6px; color:rgba(255,255,255,.66); font-size:12px;}
+    .jobDesc{margin-top:10px; color:rgba(255,255,255,.74); font-size:13px; line-height:1.65;}
+    .jobActions{margin-top:14px; display:flex; gap:10px; flex-wrap:wrap; align-items:center;}
+    .saveBtn{
+      width:42px; height:42px;
+      border-radius:10px;
+      border:3px solid rgba(255,255,255,.14);
+      background: rgba(8,10,16,.55);
+      color:rgba(255,255,255,.9);
+      display:flex; align-items:center; justify-content:center;
+      cursor:pointer;
+      transition: transform .18s var(--ease), border-color .18s var(--ease);
+      flex:0 0 auto;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .saveBtn:hover{transform:translateY(-2px); border-color:rgba(24,245,255,.35)}
+
+    /* Job image */
+    .jobMedia{
+      display:grid;
+      grid-template-columns: 96px 1fr;
+      gap:12px;
+      align-items:stretch;
+      margin-bottom:10px;
+    }
+    .jobThumb{
+      width:96px;
+      height:76px;
+      border-radius:12px;
+      overflow:hidden;
+      border:3px solid rgba(255,255,255,.12);
+      background: rgba(8,10,16,.65);
+      box-shadow: 0 14px 38px rgba(0,0,0,.28);
+      position:relative;
+    }
+    .jobThumb img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      opacity:.92;
+      filter:saturate(1.05) contrast(1.12);
+      transform:scale(1.02);
+    }
+    .jobThumb:after{
+      content:"";
+      position:absolute; inset:0;
+      background: linear-gradient(180deg, rgba(0,0,0,.05), rgba(0,0,0,.55));
+      pointer-events:none;
+    }
+
+    .pager{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      margin-top:14px;
+      color:rgba(255,255,255,.66);
+      font-size:12px;
+    }
+    .pager .btn{padding:10px 12px; font-size:12px;}
+    .btn[disabled]{
+      opacity:.55;
+      cursor:not-allowed;
+      transform:none !important;
+      box-shadow: none !important;
+    }
+
+    .modal-bg{
+      position:fixed; inset:0;
+      background: rgba(0,0,0,0.65);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      z-index:70;
+      display:none;
+      align-items:center;
+      justify-content:center;
+      padding:16px;
+    }
+    .modal-bg.show{display:flex;}
+
+    .modal{
+      width:100%;
+      max-width:720px;
+      border:3px solid rgba(255,255,255,.14);
+      border-radius:18px;
+      background: linear-gradient(180deg, rgba(14,16,26,.92), rgba(7,8,19,.92));
+      box-shadow: 0 22px 75px rgba(0,0,0,.68);
+      overflow:hidden;
+      position:relative;
+      max-height: min(92vh, 860px);
+      display:flex;
+      flex-direction:column;
+    }
+    .modalHead{
+      padding:16px 18px;
+      display:flex; align-items:center; justify-content:space-between;
+      border-bottom:3px solid rgba(255,255,255,.08);
+      background: linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
+      flex:0 0 auto;
+    }
+    .modalHead h3{margin:0; font-size:16px; letter-spacing:-.2px}
+    .xBtn{
+      width:44px; height:44px;
+      border-radius:10px;
+      border:3px solid rgba(255,255,255,.14);
+      background: rgba(8,10,16,.55);
+      color:rgba(255,255,255,.9);
+      cursor:pointer;
+      flex:0 0 auto;
+    }
+
+    /* ✅ FIX: modal body scroll (mobile and desktop) */
+    .modalBody{
+      padding:16px 18px 18px;
+      overflow:auto;
+      -webkit-overflow-scrolling: touch;
+      flex:1 1 auto;
+      min-height:0;
+    }
+
+    .formGrid{display:grid; grid-template-columns: 1fr 1fr; gap:12px;}
+    .formGrid .span2{grid-column: span 2;}
+    .formActions{display:flex; justify-content:flex-end; gap:10px; margin-top:6px; flex-wrap:wrap;}
+
+    #toast{
+      position:fixed;
+      bottom:92px;
+      left:50%;
+      transform:translateX(-50%);
+      z-index:90;
+      display:none;
+      padding:12px 14px;
+      border-radius:12px;
+      border:3px solid rgba(255,59,111,.55);
+      background: linear-gradient(180deg, rgba(255,59,111,.22), rgba(7,8,19,.92));
+      box-shadow: 0 14px 38px rgba(0,0,0,.48);
+      color:rgba(255,255,255,.92);
+      font-weight:650;
+      font-size:13px;
+      max-width: min(560px, calc(100vw - 24px));
+      text-align:center;
+    }
+    #toast.show{display:block;}
+
+    .marquee{
+      border:3px solid rgba(255,255,255,.14);
+      background: linear-gradient(180deg, rgba(14,16,26,.88), rgba(7,8,19,.88));
+      border-radius:18px;
+      overflow:hidden;
+      position:relative;
+      box-shadow: 0 14px 38px rgba(0,0,0,.48);
+      
+    }
+    .marqueeTrack{
+      display:flex;
+      gap:14px;
+      padding:14px 16px;
+      white-space:nowrap;
+      will-change:transform;
+      align-items:center;
+    }
+    .partnerPill{
+      display:flex;
+      gap:10px;
+      align-items:center;
+      border:2px solid rgba(255,255,255,.14);
+      background: rgba(8,10,16,.70);
+      padding:10px 12px;
+      border-radius:12px;
+      position:relative;
+      min-width: 220px;
+      flex: 0 0 auto;
+    }
+    .partnerPill:after{
+      content:"";
+      position:absolute;
+      inset:-2px;
+      border:1px solid rgba(255,59,111,.24);
+      border-radius:12px;
+      opacity:.45;
+      pointer-events:none;
+    }
+    .partnerLogo{
+      width:30px; height:30px;
+      border-radius:10px;
+      border:2px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.06);
+      display:flex; align-items:center; justify-content:center;
+      overflow:hidden;
+      flex:0 0 auto;
+    }
+    .partnerLogo img{width:100%; height:100%; object-fit:contain; background:#fff}
+    .partnerTxt{display:grid; gap:3px;}
+    .partnerKicker{font-size:10px; letter-spacing:1px; text-transform:uppercase; color:rgba(255,255,255,.65)}
+    .partnerBrand{font-size:13px; font-weight:750; letter-spacing:-.1px}
+
+    /* FIX: .reveal više NE skriva sadržaj po defaultu */
+    .reveal{opacity:1; transform:none; will-change: transform, opacity;}
+
+    /* Details modal content */
+    .detailsHero{
+      display:grid;
+      grid-template-columns: 140px 1fr;
+      gap:14px;
+      align-items:start;
+    }
+    .detailsImg{
+      width:140px;
+      height:110px;
+      border-radius:14px;
+      overflow:hidden;
+      border:3px solid rgba(255,255,255,.12);
+      background: rgba(8,10,16,.65);
+      position:relative;
+      box-shadow: 0 14px 38px rgba(0,0,0,.28);
+    }
+    .detailsImg img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      opacity:.94;
+      filter:saturate(1.05) contrast(1.12);
+      transform:scale(1.02);
+    }
+    .detailsImg:after{
+      content:"";
+      position:absolute; inset:0;
+      background:
+        radial-gradient(240px 140px at 20% 20%, rgba(24,245,255,.16), transparent 60%),
+        linear-gradient(180deg, rgba(0,0,0,.05), rgba(0,0,0,.62));
+      pointer-events:none;
+    }
+    .detailsTitle{
+      margin:0;
+      font-size:18px;
+      letter-spacing:-.2px;
+      line-height:1.25;
+    }
+    .detailsMeta{
+      margin-top:6px;
+      color:rgba(255,255,255,.70);
+      font-size:12px;
+      line-height:1.5;
+    }
+    .detailsSection{
+      margin-top:14px;
+      border-top:3px solid rgba(255,255,255,.08);
+      padding-top:12px;
+    }
+    .detailsSection h4{
+      margin:0;
+      font-size:13px;
+      letter-spacing:.2px;
+      text-transform:uppercase;
+      color:rgba(255,255,255,.78);
+    }
+    .detailsSection ul{
+      margin:10px 0 0;
+      padding-left:18px;
+      color:rgba(255,255,255,.74);
+      font-size:13px;
+      line-height:1.6;
+    }
+    .detailsSection p{
+      margin:10px 0 0;
+      color:rgba(255,255,255,.74);
+      font-size:13px;
+      line-height:1.65;
+    }
+
+    @media (max-width: 980px){
+      .gridJobs{grid-template-columns: 1fr;}
+      .searchGrid{grid-template-columns: 1fr; }
+      nav{display:none}
+      .hamburger{display:flex}
+      .wrap{padding:18px 14px 120px}
+      .heroTitle{font-size:38px}
+      .formGrid{grid-template-columns: 1fr;}
+      .formGrid .span2{grid-column: auto;}
+      body{ padding-bottom: 108px; }
+
+      .detailsHero{grid-template-columns: 1fr; }
+      .detailsImg{width:100%; height:180px;}
+    }
+    @media (max-width: 520px){
+      .heroTitle{font-size:34px}
+      .topbarInner{padding:12px 14px}
+      .mobileMenuInner{padding:12px 14px 16px}
+      body{ padding-bottom: 120px; }
+      .partnerPill{ min-width: 180px; }
+      .marqueeTrack{ gap: 10px; }
+    }
+    @media (max-width: 980px){
+      .gridJobs aside.card{position: relative !important; top: auto !important;}
+      .card{ padding: 14px; }
+      .jobTop{flex-direction: column; align-items: flex-start; gap: 10px; position: relative;}
+      .saveBtn{position: absolute; top: 10px; right: 10px;}
+      .jobActions{flex-direction: column; align-items: stretch; gap: 10px;}
+      .jobActions .btn, .jobActions a.btn{width: 100%; justify-content: center;}
+      .pager{flex-direction: column; align-items: stretch; gap: 10px;}
+      .pager .btn{ width: 100%; justify-content:center; }
+      #page{ text-align: center; }
+
+      .jobMedia{grid-template-columns: 1fr; }
+      .jobThumb{width:100%; height:160px;}
+    }
+
+    input[type="checkbox"]{ accent-color: var(--accent); }
+
+    @media (prefers-reduced-motion: reduce){
+      .card, .btn, nav a{transition:none !important;}
+      .card:hover, .btn:hover{transform:none !important;}
+      .blob{display:none;}
+    }
+
+
+
+
+
+    /* META LINE — vrlo sitan tekst, uvijek 1 red, bez preloma, bez skrola */
+.jobMetaLine{
+  display:flex;
+  flex-wrap:nowrap;
+  align-items:center;
+
+  width:100%;
+  max-width:100%;
+  overflow:hidden;
+
+  gap: clamp(4px, 0.8vw, 8px);
+  font-size: clamp(8px, 0.95vw, 10px);
+  line-height: 1;
+
+  white-space:nowrap;
+  color: rgba(255,255,255,.72);
+}
+
+.jobMetaLine .sep{
+  flex:0 0 auto;
+  opacity:.45;
+}
+
+/* item: samo tekst, maksimalno kompaktan */
+.jobMetaLine .pill{
+  min-width:0;
+  flex:0 1 auto;
+
+  overflow:hidden;
+  text-overflow: ellipsis;
+  white-space:nowrap;
+
+  display:inline;
+  padding:0;
+  border:0;
+  background:none;
+
+  font-weight:500;
+  color: inherit;
+}
+
+/* naknada malo jača, ali i dalje diskretna */
+.jobMetaLine .pill.accent{
+  font-weight:600;
+  color: rgba(255,255,255,.88);
+}
+
+/* KRITIČNO: dozvoli shrink unutar grid/flex kolona */
+.jobMedia > div{ min-width:0; }
+.jobTop  > div{ min-width:0; }
+
+
+/* Partners marquee */
+.marquee{
+  position: relative;
+  overflow: hidden;
+  border:3px solid rgba(255,255,255,.10);
+  border-radius: 14px;
+  background: rgba(8,10,16,.55);
+  box-shadow: var(--shadow2);
+}
+
+.marquee:before,
+.marquee:after{
+  content:"";
+  position:absolute;
+  top:0; bottom:0;
+  width:72px;
+  pointer-events:none;
+  z-index:2;
+}
+.marquee:before{
+  left:0;
+  background: linear-gradient(90deg, rgba(5,1,13,.95), rgba(5,1,13,0));
+}
+.marquee:after{
+  right:0;
+  background: linear-gradient(270deg, rgba(5,1,13,.95), rgba(5,1,13,0));
+}
+
+.marqueeTrack{
+  display:flex;
+  gap:12px;
+  width: max-content;
+  padding: 14px;
+  will-change: transform;
+  animation: partnersMarquee var(--marqueeDur, 24s) linear infinite;
+}
+
+/* Pause on hover (desktop) */
+.marquee:hover .marqueeTrack{
+  animation-play-state: paused;
+}
+
+/* Smooth loop */
+@keyframes partnersMarquee{
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); } /* jer dupliramo sadržaj */
+}
+
+/* Partner pill (ako nemaš već) */
+.partnerPill{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  padding: 10px 12px;
+  border-radius: 14px;
+  border:2px solid rgba(255,255,255,.12);
+  background: linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
+  white-space: nowrap;
+}
+
+.partnerLogo{
+  width:42px; height:42px;
+  border-radius: 12px;
+  border:2px solid rgba(255,255,255,.12);
+  background: rgba(255,255,255,.06);
+  display:flex; align-items:center; justify-content:center;
+  overflow:hidden;
+}
+.partnerLogo img{
+  width: 78%;
+  height: 78%;
+  object-fit: contain;
+}
+
+.partnerKicker{
+  font-size:10px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.62);
+}
+.partnerBrand{
+  font-size:13px;
+  font-weight: 700;
+  color: rgba(255,255,255,.92);
+}
+
+
+
+
+    
+  </style>
+  <link rel="canonical" href="https://www.sindikatstudio83.me/sr-me/poslovi/" />
+</head>
+
+<body>
+ <!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PBXVW3GK"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+ <!-- ✅ FLOATING LOGO (always visible, top-left) -->
+<a class="floatingLogo" href="/sr-me/pocetna" aria-label="Sindikat Studio 83 — Poslovi">
+  <div class="mark" aria-hidden="true">
+    <img class="markImg" src="/studio83logo.png" alt="">
+  </div>
+</a>
+
+
+  <div class="blob" id="blob1" aria-hidden="true"></div>
+  <div class="blob b2" id="blob2" aria-hidden="true"></div>
+
+  <div class="wrap">
+    <section class="hero">
+                 <div class="kicker reveal"></span></div>
+
+      <h1 class="heroTitle reveal" id="heroTitle">Pronađi posao brzo. Prijavi se još brže.</h1>
+      <p class="sub reveal">
+        Part-time i sezonske prilike fokusirane na event industriju (bar, servis, promo, produkcija), plus digital i logistika.
+      </p>
+
+      <div class="card reveal" style="margin-top:14px">
+        <div class="searchGrid">
+          <div class="inputRow">
+            <div class="inputIcon" aria-hidden="true">🔎</div>
+            <input id="q" type="text" placeholder="Pozicija ili ključne riječi (npr. 'barmen', 'DJ', 'video')" />
+          </div>
+          <div class="inputRow">
+            <div class="inputIcon" aria-hidden="true">📍</div>
+            <input id="loc" type="text" placeholder="Lokacija (npr. Podgorica, Budva)" />
+          </div>
+          <div class="inputRow">
+            <div class="inputIcon" aria-hidden="true">🏷️</div>
+            <select id="cat">
+              <option value="">Sve kategorije</option>
+              <option>Ugostiteljstvo</option>
+              <option>Marketing & Dizajn</option>
+              <option>Audio/Video & Produkcija</option>
+              <option>Event menadžment</option>
+              <option>IT & Digital</option>
+              <option>Administracija</option>
+            </select>
+          </div>
+          <button id="searchBtn" class="btn primary" type="button"><span class="dot"></span> Pretraži</button>
+        </div>
+
+        <div class="pillRow" style="margin-top:12px">
+          <button type="button" data-chip>Full-time</button>
+          <button type="button" data-chip>Part-time</button>
+          <button type="button" data-chip>Sezonski</button>
+          <button type="button" data-chip>Praksa</button>
+          <button type="button" data-chip>Remote</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="partners">
+      <div class="headRow">
+        <h2 class="h2 reveal">Partneri</h2>
+      </div>
+
+      <div class="marquee reveal">
+        <div class="marqueeTrack" id="partnersRow" role="list" aria-label="Naši partneri">
+          <div class="partnerPill" role="listitem" tabindex="0">
+            <div class="partnerLogo"><img src="https://brandlogos.net/wp-content/uploads/2022/09/jagermeister-logo_brandFlogos.net_pu6cx-512x512.png" alt="Jägermeister logo"></div>
+            <div class="partnerTxt"><div class="partnerKicker">DRINK PARTNER</div><div class="partnerBrand">Jägermeister</div></div>
+          </div>
+          <div class="partnerPill" role="listitem" tabindex="0">
+            <div class="partnerLogo"><img src="https://cdn.freebiesupply.com/logos/large/2x/niksicko-pivo-logo-png-transparent.png" alt="Nikšićko Pivo logo"></div>
+            <div class="partnerTxt"><div class="partnerKicker">BEER PARTNER</div><div class="partnerBrand">Nikšićko Pivo</div></div>
+          </div>
+          <div class="partnerPill" role="listitem" tabindex="0">
+            <div class="partnerLogo"><img src="https://upload.wikimedia.org/wikipedia/commons/4/40/Ploom_logo.svg" alt="Ploom logo"></div>
+            <div class="partnerTxt"><div class="partnerKicker">PREMIUM PARTNER</div><div class="partnerBrand">Ploom</div></div>
+          </div>
+
+          <div class="partnerPill" role="listitem" aria-hidden="true">
+            <div class="partnerLogo"><img src="https://brandlogos.net/wp-content/uploads/2022/09/jagermeister-logo_brandFlogos.net_pu6cx-512x512.png" alt=""></div>
+            <div class="partnerTxt"><div class="partnerKicker">DRINK PARTNER</div><div class="partnerBrand">Jägermeister</div></div>
+          </div>
+          <div class="partnerPill" role="listitem" aria-hidden="true">
+            <div class="partnerLogo"><img src="https://cdn.freebiesupply.com/logos/large/2x/niksicko-pivo-logo-png-transparent.png" alt=""></div>
+            <div class="partnerTxt"><div class="partnerKicker">BEER PARTNER</div><div class="partnerBrand">Nikšićko Pivo</div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="jobs">
+      <div class="headRow">
+        <h2 class="h2 reveal">Aktuelni oglasi</h2>
+        <div class="desc reveal"><span id="count"></span> rezultata</div>
+      </div>
+
+      <div class="gridJobs">
+        <aside class="card reveal" style="position:sticky; top:18px">
+          <div style="display:flex; align-items:center; justify-content:space-between; gap:10px; margin-bottom:10px">
+            <div style="font-weight:800; letter-spacing:-.2px">Filteri</div>
+            <span class="badge">Scope</span>
+          </div>
+
+          <div class="field">
+            <label>Tip angažmana</label>
+            <div id="typeFilters"></div>
+          </div>
+
+          <div class="field" style="margin-top:12px">
+            <label>Naknada (€/mj ili jednokratno)</label>
+            <input id="minPay" type="number" placeholder="Min"/>
+            <input id="maxPay" type="number" placeholder="Max" style="margin-top:10px"/>
+          </div>
+
+          <div style="margin-top:12px; display:flex; gap:10px; flex-wrap:wrap">
+            <button id="clearFilters" class="btn" type="button">Očisti filtere</button>
+            <button id="openAlerts" class="btn primary" type="button"><span class="dot"></span> E-mail alert</button>
+          </div>
+
+          <div style="margin-top:14px; color:rgba(255,255,255,.62); font-size:12px; line-height:1.6">
+            Tip: klikni oglas za detalje (opis, kvalifikacije, odgovornosti).
+          </div>
+        </aside>
+
+        <div class="grid" style="gap:14px">
+          <div id="jobList" class="grid" style="gap:14px"></div>
+
+          <div class="pager">
+            <button id="prev" class="btn" type="button">⟵ Prethodna</button>
+            <div id="page"></div>
+            <button id="next" class="btn" type="button">Sljedeća ⟶</button>
+          </div>
+
+          <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:6px">
+            <button id="openPostJob" class="btn primary" type="button"><span class="dot"></span> Objavi oglas</button>
+            <a href="https://sindikatstudio83.me/sr-mr/kontakt/" class="btn" style="align-items:center">Kontakt</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+      <footer style="border-top:3px solid rgba(255,255,255,.10); padding:22px 0 0; margin-top:22px; color:rgba(255,255,255,.62); font-size:12px; display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap;">
+        <div>© <span id="yearSpan"></span> Sindikat — Poslovi</div>
+        <div>Podgorica • Crna Gora</div>
+      </footer>
+    </section>
+  </div>
+
+ <!-- Topbar -->
+  <header class="topbar">
+    <div class="topbarInner reveal">
+      <!-- ✅ removed logo from bar (now floating) -->
+      <div class="brand"></div>
+
+      <a class="btn primary ctaCenter" href="/sr-me/kontakt"><span class="dot"></span>Kontaktiraj nas</a>
+
+      <div class="navWrap">
+        <nav aria-label="Primary">
+          <a href="/sr-me/pocetna">Početna</a>
+          <a href="/sr-me/usluge">Usluge</a>
+          <a href="/sr-me/onama" aria-current="page">O nama</a>
+          <a href="/sr-me/blog">Blog</a>
+          <a href="/sr-me/poslovi">Poslovi</a>
+        </nav>
+
+        <button class="hamburger" id="hamburger" aria-label="Open menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+
+    <div class="mobileMenu" id="mobileMenu">
+      <div class="mobileMenuInner">
+        <a href="/sr-me/pocetna">Početna</a>
+        <a href="/sr-me/usluge">Usluge</a>
+        <a href="/sr-me/onama" aria-current="page">O nama</a>
+        <a href="/sr-me/blog">Blog</a>
+        <a href="/sr-me/poslovi">Poslovi</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap" role="main">
+
+  <!-- MODALS -->
+  <div id="detailsModal" class="modal-bg" role="dialog" aria-modal="true" aria-label="Detalji oglasa">
+    <div class="modal">
+      <div class="modalHead">
+        <h3>Detalji oglasa</h3>
+        <button class="xBtn" data-close type="button" aria-label="Close">✕</button>
+      </div>
+      <div class="modalBody" id="detailsBody"></div>
+    </div>
+  </div>
+
+  <div id="postJobModal" class="modal-bg" role="dialog" aria-modal="true" aria-label="Objavi oglas">
+    <div class="modal">
+      <div class="modalHead">
+        <h3>Objavi oglas</h3>
+        <button class="xBtn" data-close type="button" aria-label="Close">✕</button>
+      </div>
+      <div class="modalBody">
+        <form id="postJobForm" class="formGrid">
+          <div class="field span2">
+            <label>Naziv pozicije</label>
+            <input name="title" required placeholder="npr. Barmen (sezona)"/>
+          </div>
+          <div class="field">
+            <label>Kompanija</label>
+            <input name="company" required placeholder="Naziv kompanije"/>
+          </div>
+          <div class="field">
+            <label>Lokacija</label>
+            <input name="location" required placeholder="Podgorica"/>
+          </div>
+          <div class="field">
+            <label>Kategorija</label>
+            <select name="category">
+              <option>Ugostiteljstvo</option>
+              <option>Marketing & Dizajn</option>
+              <option>Audio/Video & Produkcija</option>
+              <option>Event menadžment</option>
+              <option>IT & Digital</option>
+              <option>Administracija</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Tip</label>
+            <select name="type">
+              <option>Full-time</option>
+              <option>Part-time</option>
+              <option>Praksa</option>
+              <option>Sezonski</option>
+              <option>Freelance</option>
+              <option>Remote</option>
+              <option>Free application</option>
+            </select>
+          </div>
+
+          <!-- ✅ PAY: monthly or one-time -->
+          <div class="field">
+            <label>Iznos naknade (€)</label>
+            <input name="pay" type="number" placeholder="npr. 900"/>
+          </div>
+          <div class="field">
+            <label>Tip naknade</label>
+            <select name="payType">
+              <option value="monthly">Mjesečno</option>
+              <option value="one-time">Jednokratno</option>
+            </select>
+          </div>
+
+          <div class="field span2">
+            <label>Slika (URL)</label>
+            <input name="img" placeholder="https://... (opciono)"/>
+          </div>
+
+          <div class="field span2">
+            <label>Kratak opis</label>
+            <textarea name="desc" rows="4" placeholder="Kratko: uloga, tempo, šta se radi…"></textarea>
+          </div>
+
+          <div class="field span2">
+            <label>Odgovornosti (po jedna stavka u novi red)</label>
+            <textarea name="responsibilities" rows="4" placeholder="npr. Priprema barske stanice&#10;Rad u smjenama po event kalendaru&#10;Komunikacija sa gostima"></textarea>
+          </div>
+
+          <div class="field span2">
+            <label>Kvalifikacije (po jedna stavka u novi red)</label>
+            <textarea name="qualifications" rows="4" placeholder="npr. Iskustvo u radu sa gostima&#10;Brzina i urednost&#10;Poželjno znanje engleskog"></textarea>
+          </div>
+
+          <div class="field span2">
+            <label>Benefiti (po jedna stavka u novi red)</label>
+            <textarea name="benefits" rows="3" placeholder="npr. Smjene po dogovoru&#10;Obuka&#10;Rad na većim eventima"></textarea>
+          </div>
+
+          <div class="field span2">
+            <label>Link za prijavu ili e-mail</label>
+            <input name="apply" placeholder="npr. hr@firma.me ili https://…"/>
+          </div>
+
+          <div class="formActions span2">
+            <button type="button" class="btn" data-close>Otkaži</button>
+            <button class="btn primary" type="submit"><span class="dot"></span> Objavi</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div id="applyModal" class="modal-bg" role="dialog" aria-modal="true" aria-label="Prijava na oglas">
+    <div class="modal" style="max-width:640px">
+      <div class="modalHead">
+        <h3>Prijava na oglas</h3>
+        <button class="xBtn" data-close type="button" aria-label="Close">✕</button>
+      </div>
+      <div class="modalBody">
+        <form id="applyForm" class="grid" style="gap:12px">
+          <input type="hidden" name="jobId" />
+          <div class="field">
+            <label>Ime i prezime</label>
+            <input name="name" required />
+          </div>
+          <div class="field">
+            <label>E-mail</label>
+            <input name="email" type="email" required />
+          </div>
+          <div class="field">
+            <label>Telefon</label>
+            <input name="phone" />
+          </div>
+          <div class="field">
+            <label>Poruka</label>
+            <textarea name="msg" rows="4" placeholder="Kratko predstavljanje…"></textarea>
+          </div>
+          <div style="display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap;">
+            <label style="display:flex; gap:8px; align-items:center; color:rgba(255,255,255,.66); font-size:12px;">
+              <input type="checkbox" required />
+              Prihvatam uslove korišćenja
+            </label>
+            <button class="btn primary" type="submit"><span class="dot"></span> Pošalji prijavu</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div id="alertsModal" class="modal-bg" role="dialog" aria-modal="true" aria-label="E-mail upozorenja">
+    <div class="modal" style="max-width:560px">
+      <div class="modalHead">
+        <h3>E-mail upozorenja</h3>
+        <button class="xBtn" data-close type="button" aria-label="Close">✕</button>
+      </div>
+      <div class="modalBody">
+        <form id="alertsForm" class="grid" style="gap:12px">
+          <input id="alertQ" name="alertQ" placeholder="Ključne riječi (npr. barmen, promoter, DJ)"/>
+          <input id="alertEmail" name="alertEmail" type="email" placeholder="tvoj@email.com"/>
+          <button class="btn primary" type="submit"><span class="dot"></span> Aktiviraj upozorenje</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    window.addEventListener("DOMContentLoaded", () => {
+      const WEBAPP_URL = "https://script.google.com/macros/s/AKfycbwg35e8BF_-32054RhJphkuUvS1gg9UuWShQGBGIER04-2vAdyCbtE2swz3JNhWV9q11w/exec";
+      const SOURCE_LABEL = "Sindikat Poslovi – website";
+
+      const safe = (v) => String(v ?? "")
+        .replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;").replace(/'/g,"&#039;");
+
+      const splitLines = (t) => (t || "")
+        .split("\n")
+        .map(s => s.trim())
+        .filter(Boolean);
+
+      const baseJobs = [
+        {
+          id:"j1",
+          title:"Barmen / Event bar",
+          company:"Sindikat",
+          location:"Budva • Podgorica • Kotor",
+          category:"Ugostiteljstvo",
+          type:["Sezonski","Part-time"],
+          pay:900,
+          payType:"monthly",
+          posted:"2025-12-01",
+          img:"https://images.unsplash.com/photo-1514933651103-005eec06c04b?auto=format&fit=crop&w=1200&q=70",
+          desc:"Rad na mobilnim barovima, klasični i signature kokteli. Obuka za recepte i standarde na licu mjesta.",
+          responsibilities:[
+            "Priprema barske stanice (led, garnish, čaše, mise en place)",
+            "Izrada koktela po recepturi i standardu",
+            "Održavanje urednosti i brzine tokom servisa"
+          ],
+          qualifications:[
+            "Iskustvo u radu u baru (poželjno, ali nije uslov)",
+            "Brzina, urednost i rad u timu",
+            "Poželjno osnovno znanje engleskog"
+          ],
+          benefits:[
+            "Obuka i standardi na licu mjesta",
+            "Smjene po event kalendaru",
+            "Rad na premium događajima"
+          ],
+          apply:"sindikatevents@gmail.com"
+        },
+        {
+          id:"j2",
+          title:"Konobar / Event catering",
+          company:"Sindikat",
+          location:"Podgorica • Budva",
+          category:"Ugostiteljstvo",
+          type:["Sezonski","Part-time"],
+          pay:750,
+          payType:"monthly",
+          posted:"2025-12-05",
+          img:"https://images.unsplash.com/photo-1525268323446-0505b6fe7778?auto=format&fit=crop&w=1200&q=70",
+          desc:"Usluga na korporativnim i privatnim događajima. Smjene po event kalendaru.",
+          responsibilities:[
+            "Usluga gostiju (piće/hrana) po standardu",
+            "Priprema i raspremanje zone (setup/packdown)",
+            "Komunikacija sa koordinatorom i timom"
+          ],
+          qualifications:[
+            "Ljubazna komunikacija i uredan nastup",
+            "Rad u timu i pod pritiskom",
+            "Poželjno iskustvo u ugostiteljstvu"
+          ],
+          benefits:[
+            "Smjene po dogovoru",
+            "Jasne checkliste i podrška koordinatora",
+            "Mogućnost napredovanja u team lead"
+          ],
+          apply:"sindikatevents@gmail.com"
+        },
+        {
+          id:"j3",
+          title:"Šanker / Mobilni bar setup",
+          company:"Sindikat",
+          location:"Kotor • Tivat",
+          category:"Ugostiteljstvo",
+          type:["Freelance","Sezonski"],
+          pay:250,
+          payType:"one-time",
+          posted:"2025-12-08",
+          img:"https://images.unsplash.com/photo-1541542684-4bf98d79c4f2?auto=format&fit=crop&w=1200&q=70",
+          desc:"Montaža i priprema mobilnog šanka, led, garnish, logistika barske stanice.",
+          responsibilities:[
+            "Montaža i pozicioniranje šanka i opreme",
+            "Priprema potrošnog materijala (led, garnish, čaše)",
+            "Koordinacija sa bar timom prije otvaranja"
+          ],
+          qualifications:[
+            "Poželjno iskustvo na terenu (event setup)",
+            "Fizička spremnost i odgovornost",
+            "Tačnost i poštovanje tajminga"
+          ],
+          benefits:[
+            "Jednokratne angažmane po eventima",
+            "Jasan scope i satnica po dogovoru",
+            "Brza isplata po završetku"
+          ],
+          apply:"sindikatevents@gmail.com"
+        },
+        {
+          id:"j4",
+          title:"Barback / Pomoć u baru (event)",
+          company:"Sindikat",
+          location:"Budva • Podgorica",
+          category:"Ugostiteljstvo",
+          type:["Sezonski"],
+          pay:650,
+          payType:"monthly",
+          posted:"2025-12-10",
+          img:"https://images.unsplash.com/photo-1543007630-9710e4a00a20?auto=format&fit=crop&w=1200&q=70",
+          desc:"Dopuna robe, led, čaše, održavanje barske stanice. Brz tempo, obuka obezbijeđena.",
+          responsibilities:[
+            "Dopuna robe i potrošnog materijala",
+            "Održavanje urednosti radne površine",
+            "Pomoć barmenima u špicu"
+          ],
+          qualifications:[
+            "Brzina i snalažljivost",
+            "Odgovornost i urednost",
+            "Spremnost za smjenski rad"
+          ],
+          benefits:[
+            "Obuka i jasne procedure",
+            "Brz ulaz u event bar tim",
+            "Rad na velikim događajima"
+          ],
+          apply:"sindikatevents@gmail.com"
+        },
+        {
+          id:"j5",
+          title:"Hostesa / Registracija & doček",
+          company:"Sindikat",
+          location:"Podgorica",
+          category:"Event menadžment",
+          type:["Part-time"],
+          pay:300,
+          payType:"one-time",
+          posted:"2025-12-12",
+          img:"https://images.unsplash.com/photo-1515168833906-d2a3b82b302a?auto=format&fit=crop&w=1200&q=70",
+          desc:"Doček gostiju, registracija i usmjeravanje. Poželjno iskustvo i znanje engleskog jezika.",
+          responsibilities:[
+            "Registracija i akreditacije (lista/QR)",
+            "Usmjeravanje gostiju i osnovne informacije",
+            "Koordinacija sa floor menadžerom"
+          ],
+          qualifications:[
+            "Uredan nastup i komunikativnost",
+            "Poželjno znanje engleskog",
+            "Tačnost i profesionalnost"
+          ],
+          benefits:[
+            "Jednokratni angažmani po događajima",
+            "Jasna uloga i checklista",
+            "Rad u premium okruženju"
+          ],
+          apply:"sindikatevents@gmail.com"
+        },
+        {
+          id:"j6",
+          title:"Promoter / Brand aktivacije",
+          company:"Sindikat",
+          location:"Crna Gora (terenski)",
+          category:"Event menadžment",
+          type:["Part-time","Sezonski"],
+          pay:450,
+          payType:"monthly",
+          posted:"2025-12-14",
+          img:"https://images.unsplash.com/photo-1520975693411-b9590cda5d72?auto=format&fit=crop&w=1200&q=70",
+          desc:"Promo tim na aktivacijama (sampling, QR, UGC). Komunikativnost obavezna.",
+          responsibilities:[
+            "Kontakt sa publikom (sampling/QR/anketa)",
+            "Kratko objašnjenje ponude i CTA",
+            "Izvještaj nakon smjene (osnovni podaci)"
+          ],
+          qualifications:[
+            "Komunikativnost i energija",
+            "Odgovornost prema brendu",
+            "Spremnost za terenski rad"
+          ],
+          benefits:[
+            "Dinamičan rad i putovanja",
+            "Mogućnost team lead uloge",
+            "Obuka i materijali"
+          ],
+          apply:"sindikatevents@gmail.com"
+        },
+        {
+          id:"j7",
+          title:"Koordinator događaja (junior)",
+          company:"Sindikat",
+          location:"Podgorica",
+          category:"Event menadžment",
+          type:["Full-time"],
+          pay:950,
+          payType:"monthly",
+          posted:"2025-12-16",
+          img:"https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1200&q=70",
+          desc:"Koordinacija dobavljača, tajming, checkliste i komunikacija sa klijentom na dan eventa.",
+          responsibilities:[
+            "Plan i checkliste (setup / show / packdown)",
+            "Koordinacija dobavljača i timova na terenu",
+            "Komunikacija sa klijentom i rješavanje situacija"
+          ],
+          qualifications:[
+            "Organizovanost i brzina odlučivanja",
+            "Poželjno iskustvo u eventima",
+            "Vozačka dozvola (bonus)"
+          ],
+          benefits:[
+            "Rad na velikim projektima",
+            "Jasan sistem i procesi",
+            "Napredovanje u lead poziciju"
+          ],
+          apply:"sindikatevents@gmail.com"
+        },
+        {
+          id:"j8",
+          title:"Stagehand / Tehnička podrška",
+          company:"Sindikat",
+          location:"Podgorica • Budva",
+          category:"Audio/Video & Produkcija",
+          type:["Freelance"],
+          pay:180,
+          payType:"one-time",
+          posted:"2025-12-18",
+          img:"https://images.unsplash.com/photo-1520174691701-bc555a3404ca?auto=format&fit=crop&w=1200&q=70",
+          desc:"Pomoć pri montaži scene, kablovi, osnovni rigging i pack down.",
+          responsibilities:[
+            "Montaža/demontaža opreme (osvjetljenje/razglas)",
+            "Kabliranje i osnovna tehnička pomoć",
+            "Poštovanje sigurnosnih procedura"
+          ],
+          qualifications:[
+            "Fizička spremnost",
+            "Tačnost i timski rad",
+            "Poželjno iskustvo u produkciji"
+          ],
+          benefits:[
+            "Angažmani po događajima",
+            "Rad sa iskusnim tehničarima",
+            "Brz rast kroz praksu"
+          ],
+          apply:"sindikatevents@gmail.com"
+        },
+        {
+          id:"j9",
+          title:"DJ (open format) — eventi",
+          company:"Sindikat",
+          location:"Podgorica • terenski",
+          category:"Audio/Video & Produkcija",
+          type:["Freelance"],
+          pay:250,
+          payType:"one-time",
+          posted:"2025-12-19",
+          img:"https://images.unsplash.com/photo-1511379938547-c1f69419868d?auto=format&fit=crop&w=1200&q=70",
+          desc:"Open format setovi (pop, house, regional). Prednost sopstvena oprema.",
+          responsibilities:[
+            "Priprema setova prema profilu događaja",
+            "Koordinacija sa produkcijom i tajmingom",
+            "Osiguranje kontinuiteta atmosfere"
+          ],
+          qualifications:[
+            "Iskustvo na eventima",
+            "Pouzdanost i tačnost",
+            "Poželjno sopstvena oprema"
+          ],
+          benefits:[
+            "Jednokratni angažmani",
+            "Mogućnost stalne saradnje",
+            "Rad na premium lokacijama"
+          ],
+          apply:"sindikatevents@gmail.com"
+        },
+        {
+          id:"j10",
+          title:"Fotograf — događaji",
+          company:"Sindikat",
+          location:"Kotor • Budva",
+          category:"Audio/Video & Produkcija",
+          type:["Freelance"],
+          pay:300,
+          payType:"one-time",
+          posted:"2025-12-20",
+          img:"https://images.unsplash.com/photo-1452587925148-ce544e77e70d?auto=format&fit=crop&w=1200&q=70",
+          desc:"Event fotografija, selekcija i isporuka highlight albuma u 48h.",
+          responsibilities:[
+            "Snimanje ključnih momenata (people, venue, brand)",
+            "Brza selekcija i osnovna obrada",
+            "Isporuka highlight seta u dogovorenom roku"
+          ],
+          qualifications:[
+            "Iskustvo u event fotografiji",
+            "Sopstvena oprema",
+            "Brza isporuka i organizovan rad"
+          ],
+          benefits:[
+            "Jasni brifovi",
+            "Kontinuirani angažmani",
+            "Rad sa brendovima"
+          ],
+          apply:"sindikatevents@gmail.com"
+        },
+        {
+          id:"j11",
+          title:"Snimatelj (short-form video)",
+          company:"Sindikat",
+          location:"Podgorica",
+          category:"Audio/Video & Produkcija",
+          type:["Freelance","Part-time"],
+          pay:450,
+          payType:"one-time",
+          posted:"2025-12-22",
+          img:"https://images.unsplash.com/photo-1526481280695-3c687fd5432c?auto=format&fit=crop&w=1200&q=70",
+          desc:"Snimanje reels/TikTok formata na eventima + osnovna montaža.",
+          responsibilities:[
+            "Snimanje short-form (hook, detalji, crowd)",
+            "Organizacija materijala i selekcija",
+            "Osnovna montaža ili predaja editoru"
+          ],
+          qualifications:[
+            "Osjećaj za tempo i kadar",
+            "Sopstvena oprema (poželjno)",
+            "Brzina isporuke"
+          ],
+          benefits:[
+            "Rad na događajima sa velikim reach-om",
+            "Jasni brifovi i reference",
+            "Mogućnost stalne saradnje"
+          ],
+          apply:"sindikatevents@gmail.com"
+        },
+        {
+          id:"j12",
+          title:"Video editor (Reels / TikTok)",
+          company:"Sindikat",
+          location:"Remote",
+          category:"Marketing & Dizajn",
+          type:["Part-time","Remote"],
+          pay:600,
+          payType:"monthly",
+          posted:"2025-12-23",
+          img:"https://images.unsplash.com/photo-1620674156044-52b714665d46?auto=format&fit=crop&w=1200&q=70",
+          desc:"Montaža short-form videa, titlovi, tempo i hook.",
+          responsibilities:[
+            "Montaža short-form klipova (15–45s)",
+            "Titlovi, ritam, hook i CTA",
+            "Organizacija fajlova i verzija"
+          ],
+          qualifications:[
+            "Iskustvo u montaži short-form",
+            "Brzina i preciznost",
+            "Poznavanje trendova (bonus)"
+          ],
+          benefits:[
+            "Remote rad",
+            "Jasan sistem feedbacka",
+            "Kontinuirani materijal"
+          ],
+          apply:"sindikatevents@gmail.com"
+        },
+        {
+          id:"j13",
+          title:"Graphic designer (Canva / Adobe)",
+          company:"Sindikat",
+          location:"Podgorica • Remote",
+          category:"Marketing & Dizajn",
+          type:["Part-time"],
+          pay:550,
+          payType:"monthly",
+          posted:"2025-12-24",
+          img:"https://images.unsplash.com/photo-1526498460520-4c246339dccb?auto=format&fit=crop&w=1200&q=70",
+          desc:"Vizuali za kampanje, story setovi, baneri. Osnovni motion bonus.",
+          responsibilities:[
+            "Kreiranje setova vizuala za ads",
+            "Adaptacije formata (feed/story)",
+            "Rad po briefu i rokovima"
+          ],
+          qualifications:[
+            "Canva i/ili Adobe osnovno",
+            "Osjećaj za tipografiju i kompoziciju",
+            "Brzina i urednost"
+          ],
+          benefits:[
+            "Jasni template-i",
+            "Part-time fleksibilno",
+            "Stalni tok posla"
+          ],
+          apply:"sindikatevents@gmail.com"
+        },
+        {
+          id:"j14",
+          title:"Copywriter (ads + landing)",
+          company:"Sindikat",
+          location:"Remote",
+          category:"Marketing & Dizajn",
+          type:["Freelance","Remote"],
+          pay:300,
+          payType:"one-time",
+          posted:"2025-12-26",
+          img:"https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&fit=crop&w=1200&q=70",
+          desc:"Copy za oglase i landing stranice. Fokus na jasnoću i CTA.",
+          responsibilities:[
+            "Pisanje ad copy varijanti (hook/benefit/CTA)",
+            "Struktura landing sekcija (headline, proof, CTA)",
+            "Iteracije na osnovu performansi"
+          ],
+          qualifications:[
+            "Jasno pisanje bez praznih fraza",
+            "Razumijevanje konverzije (bonus)",
+            "Poštovanje rokova"
+          ],
+          benefits:[
+            "Brifovi i reference",
+            "Rad po performance metrikama",
+            "Kontinuirani projekti"
+          ],
+          apply:"sindikatevents@gmail.com"
+        },
+        {
+          id:"j15",
+          title:"Meta Ads specialist (junior)",
+          company:"Sindikat",
+          location:"Podgorica",
+          category:"IT & Digital",
+          type:["Part-time"],
+          pay:700,
+          payType:"monthly",
+          posted:"2025-12-27",
+          img:"https://images.unsplash.com/photo-1553877522-43269d4ea984?auto=format&fit=crop&w=1200&q=70",
+          desc:"Postavljanje i osnovna optimizacija kampanja. Mentorstvo uključeno.",
+          responsibilities:[
+            "Postavljanje kampanja i setova oglasa",
+            "Praćenje osnovnih metrika i optimizacije",
+            "Koordinacija sa content timom"
+          ],
+          qualifications:[
+            "Osnovno znanje Meta Ads",
+            "Analitičnost i urednost",
+            "Spremnost za učenje"
+          ],
+          benefits:[
+            "Mentorstvo",
+            "Part-time fleksibilno",
+            "Rad na realnim budžetima"
+          ],
+          apply:"sindikatevents@gmail.com"
+        },
+        {
+          id:"j16",
+          title:"Google Ads / Search specialist",
+          company:"Sindikat",
+          location:"Podgorica • Remote",
+          category:"IT & Digital",
+          type:["Freelance","Remote"],
+          pay:350,
+          payType:"one-time",
+          posted:"2025-12-28",
+          img:"https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=70",
+          desc:"Search struktura, keyword research, konverzije i landing preporuke.",
+          responsibilities:[
+            "Kreiranje Search strukture i keyword research",
+            "Praćenje konverzija i optimizacija",
+            "Preporuke za landing i tracking"
+          ],
+          qualifications:[
+            "Iskustvo sa Google Ads",
+            "Razumijevanje intent-a",
+            "Preciznost u strukturi"
+          ],
+          benefits:[
+            "Remote saradnja",
+            "Jasni ciljevi i scope",
+            "Kontinuirani projekti"
+          ],
+          apply:"sindikatevents@gmail.com"
+        },
+        {
+          id:"j17",
+          title:"Webflow / WordPress implementacija",
+          company:"Sindikat",
+          location:"Remote",
+          category:"IT & Digital",
+          type:["Freelance","Remote"],
+          pay:400,
+          payType:"one-time",
+          posted:"2025-12-29",
+          img:"https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1200&q=70",
+          desc:"Implementacija dizajna, brzina, SEO osnove, forme i tracking.",
+          responsibilities:[
+            "Implementacija stranica po dizajnu",
+            "Optimizacija brzine i osnovni SEO",
+            "Forme, tracking i QA"
+          ],
+          qualifications:[
+            "Iskustvo sa WP/Webflow",
+            "Urednost i pažnja na detalje",
+            "Osnovno razumijevanje SEO"
+          ],
+          benefits:[
+            "Remote angažmani",
+            "Jasan scope i rokovi",
+            "Stalni tok taskova"
+          ],
+          apply:"sindikatevents@gmail.com"
+        },
+        {
+          id:"j18",
+          title:"CRM & automatizacije (Zapier / Make)",
+          company:"Sindikat",
+          location:"Remote",
+          category:"IT & Digital",
+          type:["Freelance","Remote"],
+          pay:300,
+          payType:"one-time",
+          posted:"2025-12-30",
+          img:"https://images.unsplash.com/photo-1556761175-4b46a572b786?auto=format&fit=crop&w=1200&q=70",
+          desc:"Lead routing, email automatizacije, integracije i reporting.",
+          responsibilities:[
+            "Povezivanje formi → CRM → email tokovi",
+            "Automatizacije u Zapier/Make",
+            "Osnovni reporting i monitoring"
+          ],
+          qualifications:[
+            "Iskustvo sa Zapier/Make",
+            "Logika i struktura",
+            "Samostalnost"
+          ],
+          benefits:[
+            "Remote projekti",
+            "Jasan sistem i spec",
+            "Kontinuirana saradnja"
+          ],
+          apply:"sindikatevents@gmail.com"
+        },
+        {
+          id:"j19",
+          title:"Office asistent / Administracija",
+          company:"Sindikat",
+          location:"Podgorica",
+          category:"Administracija",
+          type:["Full-time"],
+          pay:800,
+          payType:"monthly",
+          posted:"2026-01-02",
+          img:"https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?auto=format&fit=crop&w=1200&q=70",
+          desc:"Dokumentacija, logistika, fakture i komunikacija sa dobavljačima.",
+          responsibilities:[
+            "Dokumentacija i osnovna administracija",
+            "Komunikacija sa dobavljačima",
+            "Pomoć oko logistike događaja"
+          ],
+          qualifications:[
+            "Urednost i odgovornost",
+            "Osnovno poznavanje Excela/Sheets",
+            "Komunikacija i tačnost"
+          ],
+          benefits:[
+            "Stabilan angažman",
+            "Jasne procedure",
+            "Rad u dinamičnom timu"
+          ],
+          apply:"sindikatevents@gmail.com"
+        },
+        {
+          id:"j20",
+          title:"Vozač / Logistika opreme",
+          company:"Sindikat",
+          location:"Podgorica",
+          category:"Event menadžment",
+          type:["Full-time","Sezonski"],
+          pay:900,
+          payType:"monthly",
+          posted:"2026-01-04",
+          img:"https://images.unsplash.com/photo-1529070538774-1843cb3265df?auto=format&fit=crop&w=1200&q=70",
+          desc:"Prevoz i isporuka barske i event opreme, utovar/istovar.",
+          responsibilities:[
+            "Prevoz opreme na lokacije",
+            "Utovar/istovar uz tim",
+            "Briga o osnovnom stanju vozila i opreme"
+          ],
+          qualifications:[
+            "Vozačka dozvola B",
+            "Odgovornost i tačnost",
+            "Spremnost za rad po kalendaru događaja"
+          ],
+          benefits:[
+            "Stalna ili sezonska saradnja",
+            "Jasan plan i rute",
+            "Rad u timu"
+          ],
+          apply:"sindikatevents@gmail.com"
+        }
+      ];
+
+      const perPage = 5;
+      let page = 1;
+      let chips = new Set();
+
+      const el = (id) => document.getElementById(id);
+
+      const toast = (t) => {
+        const n = el("toast");
+        if (!n) return;
+        n.textContent = t;
+        n.classList.add("show");
+        setTimeout(()=>n.classList.remove("show"), 2400);
+      };
+
+      // Prevent body scroll when any modal is open
+      const setBodyLock = (locked) => {
+        document.documentElement.style.overflow = locked ? "hidden" : "";
+        document.body.style.overflow = locked ? "hidden" : "";
+        document.body.style.touchAction = locked ? "none" : "";
+      };
+
+      const readJobs = () => {
+        const posted = JSON.parse(localStorage.getItem("sindikat_jobs") || "[]");
+        const merged = [...posted, ...baseJobs.filter(b => !posted.some(p => p.id === b.id))];
+        return merged.sort((a,b)=> new Date(b.posted) - new Date(a.posted));
+      };
+
+      const payText = (j) => {
+        if (j.pay === "" || j.pay === null || j.pay === undefined) return "";
+        const label = (j.payType === "one-time") ? "jednokratno" : "mjesečno";
+        return `€ ${safe(j.pay)} • ${label}`;
+      };
+
+      const jobCard = (j) => {
+        const saved = new Set(JSON.parse(localStorage.getItem("sindikat_saved") || "[]")).has(j.id);
+        const jobTypes = Array.isArray(j.type) ? j.type : (j.type || "").split("/").map(x=>x.trim()).filter(Boolean);
+        const typeLabel = jobTypes.join(" / ");
+        const payBadge = (j.pay !== "" && j.pay !== null && j.pay !== undefined)
+          ? `<span class="badge accent">${payText(j)}</span>`
+          : "";
+        const postedBadge = `<span class="badge">Objavljeno: ${new Date(j.posted).toLocaleDateString()}</span>`;
+        const img = j.img ? safe(j.img) : "https://images.unsplash.com/photo-1520975682038-fd29b3c0d409?auto=format&fit=crop&w=1200&q=70";
+
+        const linkBtn = (j.apply && String(j.apply).startsWith("http"))
+          ? `<a target="_blank" rel="noopener" href="${safe(j.apply)}" class="btn" style="padding:10px 12px; font-size:12px;" data-stop>Prijava na link</a>`
+          : "";
+
+        const mailBtn = (j.apply && String(j.apply).includes("@"))
+          ? `<a href="mailto:${safe(j.apply)}" class="btn" style="padding:10px 12px; font-size:12px;" data-stop>Pošalji e-mail</a>`
+          : "";
+
+        return `
+          <article class="card jobCard" tabindex="0" role="button" aria-label="Detalji oglasa: ${safe(j.title)}" data-open="${safe(j.id)}">
+            <div class="jobMedia">
+              <div class="jobThumb" aria-hidden="true">
+                <img src="${img}" alt="" loading="lazy">
+              </div>
+
+              <div>
+                <div class="jobTop">
+                  <div>
+                    <h3 class="jobTitle">${safe(j.title)}</h3>
+                    <div class="jobMeta">${safe(j.company)} • ${safe(j.location)}</div>
+                  </div>
+                  <button class="saveBtn save" data-id="${safe(j.id)}" title="Sačuvaj" type="button" data-stop>${saved ? "★" : "☆"}</button>
+                </div>
+
+           <div class="jobMetaLine" aria-label="Meta informacije oglasa">
+  <span class="pill">${safe(j.category)}</span>
+  <span class="sep">•</span>
+  <span class="pill">${safe(typeLabel)}</span>
+
+  ${(j.pay !== "" && j.pay !== null && j.pay !== undefined)
+    ? `<span class="sep">•</span><span class="pill accent">${payText(j)}</span>`
+    : ``}
+
+  <span class="sep">•</span>
+  <span class="pill">Objavljeno: ${new Date(j.posted).toLocaleDateString()}</span>
+</div>
+
+
+              </div>
+            </div>
+
+            <p class="jobDesc">${safe(j.desc || "")}</p>
+
+                    <!-- actions removed: card is clickable -->
+
+          </article>
+        `;
+      };
+
+      const inlineAd = () => `
+        <div class="card" style="padding:0; overflow:hidden">
+          <div style="height:190px; position:relative; border-bottom:3px solid rgba(255,255,255,.12); background:#0a0b12;">
+            <img
+              src="https://montenegro.socialimpactaward.net/app/uploads/sites/17/2025/07/0P3A5763-1200x600.jpg"
+              alt="Sponzorisani vizual"
+              loading="lazy"
+              style="width:100%; height:100%; object-fit:cover; opacity:.92; filter:saturate(1.05) contrast(1.18); transform:scale(1.04);"
+            />
+          </div>
+          <div style="padding:14px 16px;">
+            <div style="display:flex; align-items:center; justify-content:space-between; gap:10px;">
+              <div style="font-weight:800; letter-spacing:-.2px;">Sponzor</div>
+              <span class="badge">Promo</span>
+            </div>
+            <div style="color:rgba(255,255,255,.66); font-size:12px; line-height:1.6; margin-top:8px;">
+              Placeholder za sponzorisani slot/baner.
+            </div>
+          </div>
+        </div>
+      `;
+
+      const types = ["Full-time","Part-time","Sezonski","Praksa","Freelance","Remote","Free application"];
+      const typeFiltersWrap = el("typeFilters");
+      if (typeFiltersWrap){
+        types.forEach((t)=>{
+          const id = "t_" + t.replace(/[^a-z]/gi, "");
+          const tile = document.createElement("label");
+          tile.className = "cbTile";
+          tile.innerHTML = `<input type="checkbox" value="${safe(t)}" id="${id}" /><span>${safe(t)}</span>`;
+          typeFiltersWrap.appendChild(tile);
+
+          const input = tile.querySelector("input");
+          const sync = () => tile.classList.toggle("checked", input.checked);
+          input.addEventListener("change", sync);
+          sync();
+        });
+        typeFiltersWrap.addEventListener("change", ()=>{ page=1; render(); });
+      }
+
+      document.querySelectorAll("[data-chip]").forEach((c)=>{
+        c.addEventListener("click", ()=>{
+          const v = c.textContent.trim();
+          if (chips.has(v)) { chips.delete(v); c.classList.remove("active"); }
+          else { chips.add(v); c.classList.add("active"); }
+          page=1; render();
+        });
+      });
+
+      ["q","loc","cat","minPay","maxPay"].forEach((id)=>{
+        const node = el(id);
+        if (!node) return;
+        node.addEventListener("input", ()=>{ page=1; render(); });
+      });
+
+      el("searchBtn")?.addEventListener("click", ()=>{ page=1; render(); });
+
+      const prev = el("prev"), next = el("next");
+      prev?.addEventListener("click", ()=>{ if (page>1){ page--; render(); } });
+      next?.addEventListener("click", ()=>{ page++; render(); });
+
+      el("clearFilters")?.addEventListener("click", ()=>{
+        chips.clear();
+        document.querySelectorAll("[data-chip]").forEach(c=>c.classList.remove("active"));
+        ["q","loc","cat","minPay","maxPay"].forEach((id)=>{ const e = el(id); if (e) e.value = ""; });
+        document.querySelectorAll("#typeFilters input").forEach(cb=>cb.checked=false);
+        document.querySelectorAll("#typeFilters .cbTile").forEach(tile=>tile.classList.remove("checked"));
+        page=1; render();
+      });
+
+      function getFilters(){
+        const q = (el("q")?.value || "").trim().toLowerCase();
+        const loc = (el("loc")?.value || "").trim().toLowerCase();
+        const cat = el("cat")?.value || "";
+        const minPay = parseFloat(el("minPay")?.value || "");
+        const maxPay = parseFloat(el("maxPay")?.value || "");
+        const typesChecked = [...document.querySelectorAll("#typeFilters input:checked")].map(i=>i.value);
+        const typeSet = new Set([...typesChecked, ...chips]);
+        return { q, loc, cat, minPay, maxPay, typeSet };
+      }
+
+      function filterJobs(list){
+        const f = getFilters();
+        return list.filter((j)=>{
+          const hitQ = !f.q || `${j.title} ${j.company} ${j.desc}`.toLowerCase().includes(f.q);
+          const hitLoc = !f.loc || (j.location || "").toLowerCase().includes(f.loc);
+          const hitCat = !f.cat || j.category === f.cat;
+
+          const jobTypes = Array.isArray(j.type) ? j.type : (j.type || "").split("/").map(x => x.trim()).filter(Boolean);
+          const hitType = f.typeSet.size === 0 || jobTypes.some(t => f.typeSet.has(t));
+
+          const hasPay = (j.pay !== "" && j.pay !== null && j.pay !== undefined);
+          const payVal = hasPay ? Number(j.pay) : null;
+
+          const payFilterActive = !(isNaN(f.minPay) && isNaN(f.maxPay));
+          if (payFilterActive && !hasPay) return false;
+
+          const hitPayMin = isNaN(f.minPay) || (payVal >= f.minPay);
+          const hitPayMax = isNaN(f.maxPay) || (payVal <= f.maxPay);
+
+          return hitQ && hitLoc && hitCat && hitType && hitPayMin && hitPayMax;
+        });
+      }
+
+      const detailsModal = el("detailsModal");
+      const detailsBody = el("detailsBody");
+      const applyModal = el("applyModal");
+      const postJobModal = el("postJobModal");
+      const alertsModal = el("alertsModal");
+
+      function showModal(m){
+        if (!m) return;
+        m.classList.add("show");
+        m.setAttribute("aria-hidden", "false");
+        setBodyLock(true);
+      }
+      function hideModal(m){
+        if (!m) return;
+        m.classList.remove("show");
+        m.setAttribute("aria-hidden", "true");
+        // unlock only if no other modal open
+        const anyOpen = document.querySelector(".modal-bg.show");
+        if (!anyOpen) setBodyLock(false);
+      }
+
+      function findJobById(id){
+        const all = readJobs();
+        return all.find(x => String(x.id) === String(id));
+      }
+
+      function openDetails(id){
+        const j = findJobById(id);
+        if (!j || !detailsBody) return;
+
+        const jobTypes = Array.isArray(j.type) ? j.type : (j.type || "").split("/").map(x=>x.trim()).filter(Boolean);
+        const typeLabel = jobTypes.join(" / ");
+        const img = j.img ? safe(j.img) : "https://images.unsplash.com/photo-1520975682038-fd29b3c0d409?auto=format&fit=crop&w=1200&q=70";
+        const pay = (j.pay !== "" && j.pay !== null && j.pay !== undefined) ? `<span class="badge accent">${payText(j)}</span>` : `<span class="badge">Naknada: po dogovoru</span>`;
+        const posted = `<span class="badge">Objavljeno: ${new Date(j.posted).toLocaleDateString()}</span>`;
+
+        const responsibilities = (Array.isArray(j.responsibilities) ? j.responsibilities : splitLines(j.responsibilities)).filter(Boolean);
+        const qualifications = (Array.isArray(j.qualifications) ? j.qualifications : splitLines(j.qualifications)).filter(Boolean);
+        const benefits = (Array.isArray(j.benefits) ? j.benefits : splitLines(j.benefits)).filter(Boolean);
+
+        const applyBlock = (() => {
+          if (j.apply && String(j.apply).startsWith("http")) {
+            return `<a class="btn primary" href="${safe(j.apply)}" target="_blank" rel="noopener"><span class="dot"></span> Prijava na link</a>`;
+          }
+          if (j.apply && String(j.apply).includes("@")) {
+            return `<a class="btn primary" href="mailto:${safe(j.apply)}"><span class="dot"></span> Pošalji e-mail</a>`;
+          }
+          return `<button class="btn primary" type="button" id="detailsApplyBtn"><span class="dot"></span> Prijavi se</button>`;
+        })();
+
+        detailsBody.innerHTML = `
+          <div class="detailsHero">
+            <div class="detailsImg" aria-hidden="true">
+              <img src="${img}" alt="" loading="lazy">
+            </div>
+            <div>
+              <h2 class="detailsTitle">${safe(j.title)}</h2>
+              <div class="detailsMeta">${safe(j.company)} • ${safe(j.location)}</div>
+              <div style="display:flex; flex-wrap:wrap; gap:8px; margin-top:10px;">
+                <span class="badge">${safe(j.category)}</span>
+                <span class="badge">${safe(typeLabel)}</span>
+                ${pay}
+                ${posted}
+              </div>
+              <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:14px;">
+                <button class="btn" type="button" id="detailsSaveBtn" data-id="${safe(j.id)}">☆ Sačuvaj</button>
+                <button class="btn" type="button" id="detailsQuickApply" data-id="${safe(j.id)}">Brza prijava</button>
+                ${applyBlock}
+              </div>
+            </div>
+          </div>
+
+          <div class="detailsSection">
+            <h4>Opis pozicije</h4>
+            <p>${safe(j.desc || "")}</p>
+          </div>
+
+          <div class="detailsSection">
+            <h4>Odgovornosti</h4>
+            ${responsibilities.length ? `<ul>${responsibilities.map(x=>`<li>${safe(x)}</li>`).join("")}</ul>` : `<p>Po dogovoru.</p>`}
+          </div>
+
+          <div class="detailsSection">
+            <h4>Kvalifikacije</h4>
+            ${qualifications.length ? `<ul>${qualifications.map(x=>`<li>${safe(x)}</li>`).join("")}</ul>` : `<p>Po dogovoru.</p>`}
+          </div>
+
+          <div class="detailsSection">
+            <h4>Benefiti</h4>
+            ${benefits.length ? `<ul>${benefits.map(x=>`<li>${safe(x)}</li>`).join("")}</ul>` : `<p>Po dogovoru.</p>`}
+          </div>
+
+          <div class="detailsSection">
+            <h4>Kako aplicirati</h4>
+            <p>Klikni <b>Brza prijava</b> ili koristi dugme za e-mail/link ako je dostupno.</p>
+          </div>
+        `;
+
+        showModal(detailsModal);
+
+        // Sync saved state
+        const savedSet = new Set(JSON.parse(localStorage.getItem("sindikat_saved") || "[]"));
+        const ds = el("detailsSaveBtn");
+        if (ds){
+          const isSaved = savedSet.has(String(j.id));
+          ds.textContent = isSaved ? "★ Sačuvano" : "☆ Sačuvaj";
+          ds.addEventListener("click", ()=>{
+            const s = new Set(JSON.parse(localStorage.getItem("sindikat_saved") || "[]"));
+            if (s.has(String(j.id))){ s.delete(String(j.id)); toast("Uklonjeno iz sačuvanih"); ds.textContent = "☆ Sačuvaj"; }
+            else { s.add(String(j.id)); toast("Sačuvano"); ds.textContent = "★ Sačuvano"; }
+            localStorage.setItem("sindikat_saved", JSON.stringify([...s]));
+            render();
+          });
+        }
+
+        el("detailsQuickApply")?.addEventListener("click", ()=>openApply(String(j.id)));
+        el("detailsApplyBtn")?.addEventListener("click", ()=>openApply(String(j.id)));
+      }
+
+      function openApply(id){
+        showModal(applyModal);
+        const input = applyModal?.querySelector('[name="jobId"]');
+        if (input) input.value = id;
+      }
+
+      function bindRowActions(){
+        // card click => details
+        document.querySelectorAll("[data-open]").forEach((n)=>{
+          n.addEventListener("click", (e)=>{
+            const id = n.getAttribute("data-open");
+            if (!id) return;
+            openDetails(id);
+          });
+        });
+
+        // stop propagation for buttons/links inside
+        document.querySelectorAll("[data-stop]").forEach((n)=>{
+          n.addEventListener("click", (e)=> e.stopPropagation());
+        });
+
+        document.querySelectorAll(".apply").forEach((b)=> b.addEventListener("click", ()=>openApply(b.dataset.id)));
+        document.querySelectorAll(".save").forEach((b)=> b.addEventListener("click", ()=>{
+          const id = b.dataset.id;
+          const saved = new Set(JSON.parse(localStorage.getItem("sindikat_saved") || "[]"));
+          if (saved.has(id)){ saved.delete(id); toast("Uklonjeno iz sačuvanih"); b.textContent = "☆"; }
+          else { saved.add(id); toast("Sačuvano"); b.textContent = "★"; }
+          localStorage.setItem("sindikat_saved", JSON.stringify([...saved]));
+        }));
+
+        // keyboard open details
+        document.querySelectorAll(".jobCard").forEach((c)=>{
+          c.addEventListener("keydown", (e)=>{
+            if (e.key === "Enter" || e.key === " "){
+              e.preventDefault();
+              const id = c.getAttribute("data-open");
+              if (id) openDetails(id);
+            }
+          });
+        });
+      }
+
+      function render(){
+        const listEl = el("jobList");
+        if (!listEl) return;
+
+        const full = readJobs();
+        const data = filterJobs(full);
+        const total = data.length;
+        const pages = Math.max(1, Math.ceil(total / perPage));
+        if (page > pages) page = pages;
+
+        const start = (page - 1) * perPage;
+        const slice = data.slice(start, start + perPage);
+        const cards = [];
+        slice.forEach((j, idx)=>{ cards.push(jobCard(j)); if (idx===1) cards.push(inlineAd()); });
+
+        listEl.innerHTML = cards.join("");
+        el("count") && (el("count").textContent = total);
+        el("page") && (el("page").textContent = `Strana ${page} / ${pages}`);
+        prev && (prev.disabled = page === 1);
+        next && (next.disabled = page === pages);
+
+        bindRowActions();
+      }
+
+      // Close modals
+      [detailsModal, applyModal, postJobModal, alertsModal].forEach((m)=>{
+        if (!m) return;
+        m.setAttribute("aria-hidden","true");
+        m.addEventListener("click", (e)=>{
+          if (e.target===m || e.target.hasAttribute("data-close")) hideModal(m);
+        });
+      });
+
+      el("openPostJob")?.addEventListener("click", ()=> showModal(postJobModal));
+      el("openAlerts")?.addEventListener("click", ()=> showModal(alertsModal));
+
+      window.addEventListener("keydown", (e)=>{
+        if (e.key !== "Escape") return;
+        [detailsModal, applyModal, postJobModal, alertsModal].forEach((m)=>{
+          if (m && m.classList.contains("show")) hideModal(m);
+        });
+      });
+
+      function sendToBackend(params){
+        const urlp = new URLSearchParams(location.search);
+        if (!params.utm_source) params.utm_source = urlp.get("utm_source") || "";
+        if (!params.utm_medium) params.utm_medium = urlp.get("utm_medium") || "";
+        if (!params.utm_campaign) params.utm_campaign = urlp.get("utm_campaign") || "";
+        params.userAgent = navigator.userAgent || "";
+        params.source = SOURCE_LABEL;
+
+        const body = new URLSearchParams(params).toString();
+        return fetch(WEBAPP_URL, {
+          method: "POST",
+          mode: "no-cors",
+          headers: { "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8" },
+          body
+        });
+      }
+
+      // Post job submit
+      el("postJobForm")?.addEventListener("submit", (e)=>{
+        e.preventDefault();
+        const fd = new FormData(e.target);
+        const obj = Object.fromEntries(fd.entries());
+
+        obj.id = "p_" + Date.now();
+        obj.posted = new Date().toISOString().slice(0,10);
+
+        obj.pay = obj.pay ? Number(obj.pay) : undefined;
+        obj.payType = obj.payType || "monthly"; // ✅ default
+
+        // normalize multi-lines
+        obj.responsibilities = splitLines(obj.responsibilities);
+        obj.qualifications = splitLines(obj.qualifications);
+        obj.benefits = splitLines(obj.benefits);
+
+        // normalize type
+        obj.type = obj.type ? [obj.type] : [];
+
+        // img fallback
+        if (!obj.img) obj.img = "https://images.unsplash.com/photo-1520975682038-fd29b3c0d409?auto=format&fit=crop&w=1200&q=70";
+
+        const current = JSON.parse(localStorage.getItem("sindikat_jobs") || "[]");
+        current.unshift(obj);
+        localStorage.setItem("sindikat_jobs", JSON.stringify(current));
+
+        const payload = {
+          action: "post_job",
+          id: obj.id,
+          title: obj.title || "",
+          company: obj.company || "",
+          location: obj.location || "",
+          category: obj.category || "",
+          type: (Array.isArray(obj.type) ? obj.type.join(" / ") : (obj.type || "")),
+          pay: obj.pay ?? "",
+          payType: obj.payType || "",
+          posted: obj.posted,
+          desc: obj.desc || "",
+          responsibilities: (obj.responsibilities || []).join(" | "),
+          qualifications: (obj.qualifications || []).join(" | "),
+          benefits: (obj.benefits || []).join(" | "),
+          img: obj.img || "",
+          apply: obj.apply || ""
+        };
+        sendToBackend(payload).catch(()=>{});
+        e.target.reset();
+        hideModal(postJobModal);
+        toast("Oglas objavljen ✅");
+        page=1; render();
+      });
+
+      // Apply submit
+      el("applyForm")?.addEventListener("submit", (e)=>{
+        e.preventDefault();
+        const fd = new FormData(e.target);
+        const obj = Object.fromEntries(fd.entries());
+
+        if (!obj.jobId || !obj.name || !obj.email){
+          toast("Popunite obavezna polja"); return;
+        }
+
+        const payload = { action:"apply", jobId: obj.jobId, name: obj.name, email: obj.email, phone: obj.phone||"", msg: obj.msg||"" };
+        sendToBackend(payload).catch(()=>{});
+        e.target.reset();
+        hideModal(applyModal);
+        toast("Prijava poslata ✅");
+      });
+
+      // Alerts submit
+      el("alertsForm")?.addEventListener("submit", (e)=>{
+        e.preventDefault();
+        const fd = new FormData(e.target);
+        const obj = Object.fromEntries(fd.entries());
+        if (!(obj.alertQ && obj.alertEmail)){ toast("Unesi ključne riječi i e-mail"); return; }
+        sendToBackend({ action:"alert", alertQ: obj.alertQ, alertEmail: obj.alertEmail }).catch(()=>{});
+        e.target.reset();
+        hideModal(alertsModal);
+        toast("E-mail upozorenje aktivirano ✅");
+      });
+
+      // Mobile menu
+      // Mobile menu
+const mobileBtn = el("hamburger");
+const mobileMenu = el("mobileMenu");
+const mobileOverlay = el("mobileOverlay"); // ako ne postoji u HTML-u, ostaje null i ne smeta
+
+
+      function setMobile(open){
+        if (!mobileMenu) return;
+        mobileMenu.classList.toggle("open", open);
+        if (mobileOverlay){
+          mobileOverlay.style.opacity = open ? "1" : "0";
+          mobileOverlay.style.pointerEvents = open ? "auto" : "none";
+        }
+        mobileBtn?.setAttribute("aria-expanded", open ? "true" : "false");
+      }
+
+      mobileBtn?.addEventListener("click", (e)=>{ e.stopPropagation(); setMobile(!mobileMenu.classList.contains("open")); });
+      mobileOverlay?.addEventListener("click", ()=> setMobile(false));
+      document.addEventListener("click", (e)=>{
+        if (!mobileMenu?.classList.contains("open")) return;
+        const inside = mobileMenu.contains(e.target) || mobileBtn.contains(e.target);
+        if (!inside) setMobile(false);
+      });
+      document.querySelectorAll("#mobileMenu a").forEach(a=> a.addEventListener("click", ()=> setMobile(false)));
+      window.addEventListener("keydown", (e)=>{ if (e.key === "Escape") setMobile(false); });
+
+      el("yearSpan") && (el("yearSpan").textContent = new Date().getFullYear());
+
+      // animations (safe)
+      const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (!reduced && window.anime && 'IntersectionObserver' in window){
+        const revealEls = document.querySelectorAll('.reveal');
+        revealEls.forEach(node=>{
+          node.style.opacity = 0;
+          node.style.transform = 'translateY(18px)';
+        });
+
+        const io = new IntersectionObserver((entries)=>{
+          entries.forEach(entry=>{
+            if(!entry.isIntersecting) return;
+            anime({ targets: entry.target, opacity:[0,1], translateY:[18,0], duration:820, easing:'easeOutExpo' });
+            io.unobserve(entry.target);
+          });
+        }, {threshold: 0.14});
+        revealEls.forEach(node=>io.observe(node));
+      }
+
+      if (!reduced && window.anime){
+        anime({ targets:'#partnersRow', translateX:['0%','-50%'], duration:18000, easing:'linear', loop:true });
+      }
+
+      const heroBg = el('heroBg');
+      const b1 = el('blob1');
+      const b2 = el('blob2');
+
+      const setBlobsBase = () => {
+        const w = window.innerWidth, h = window.innerHeight;
+        if (b1){ b1.style.left = Math.max(12, w*0.06) + 'px'; b1.style.top  = Math.max(12, h*0.18) + 'px'; }
+        if (b2){ b2.style.left = Math.max(12, w*0.60) + 'px'; b2.style.top  = Math.max(12, h*0.10) + 'px'; }
+      };
+      setBlobsBase();
+      window.addEventListener('resize', setBlobsBase);
+
+      if (!reduced && window.anime){
+        anime({ targets:'#blob1', translateX:[0,18,-10,0], translateY:[0,-12,16,0], duration:9000, easing:'easeInOutSine', loop:true });
+        anime({ targets:'#blob2', translateX:[0,-14,10,0], translateY:[0,14,-10,0], duration:11000, easing:'easeInOutSine', loop:true });
+      }
+
+      let ticking = false;
+      window.addEventListener('scroll', ()=>{
+        if(ticking) return;
+        ticking = true;
+        requestAnimationFrame(()=>{
+          const y = window.scrollY || 0;
+          if(heroBg) heroBg.style.transform = `translateY(${y * 0.06}px)`;
+          ticking = false;
+        });
+      }, {passive:true});
+
+      render();
+    });
+
+
+
+// Partners marquee loop (auto-duplicate for seamless scroll)
+const partnersRow = document.getElementById('partnersRow');
+if (partnersRow && !partnersRow.dataset.cloned) {
+  const items = Array.from(partnersRow.children);
+
+  items.forEach(node => {
+    const clone = node.cloneNode(true);
+    clone.setAttribute('aria-hidden', 'true');
+    clone.tabIndex = -1;
+    partnersRow.appendChild(clone);
+  });
+
+  partnersRow.dataset.cloned = 'true';
+}
+
+
+
+    
+  </script>
+</body>
+</html>
