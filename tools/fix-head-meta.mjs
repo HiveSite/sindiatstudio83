@@ -4,11 +4,19 @@ import path from "path";
 const BASE = "https://www.sindikatstudio83.me";
 const ROOT = path.resolve("Pages");
 
+// Tvoj postojeći logo fajl (pošto kažeš da je dostupan)
+const DEFAULT_OG_IMAGE = `${BASE}/studio83logo.png`;
+
 // Strane koje hoćemo da tretiramo kao “ključne” za sr-me
 const LANG_FIX_PATHS = new Set([
   "/sr-me/usluge/",
   "/sr-me/poslovi/",
 ]);
+
+function shouldSkipFile(fp) {
+  const rel = path.relative(ROOT, fp).replace(/\\/g, "/");
+  return rel.includes("<slug>") || rel.includes("_templates");
+}
 
 function ensureSlash(u) {
   // ensure trailing slash on path URLs (ignore if ends with .xml/.png/.jpg etc.)
@@ -41,6 +49,15 @@ function write(fp, content) {
   fs.writeFileSync(fp, content, "utf8");
 }
 
+// Operiši samo nad <head>...</head>
+function withHead(html, fn) {
+  const m = html.match(/<head\b[^>]*>[\s\S]*?<\/head>/i);
+  if (!m) return fn(html);
+  const head = m[0];
+  const updated = fn(head);
+  return html.replace(head, updated);
+}
+
 function upsertTag(html, regex, newTag) {
   if (regex.test(html)) return html.replace(regex, newTag);
   // insert before </head>
@@ -63,24 +80,49 @@ function upsertTwitterCard(html) {
   return upsertTag(html, /<meta\s+name=["']twitter:card["'][^>]*>/i, tag);
 }
 
-function fixOgImage(html) {
-  // If og:image exists and is non-www or relative, normalize to www absolute.
-  const m = html.match(/<meta\s+property=["']og:image["']\s+content=["']([^"']+)["'][^>]*>/i);
-  if (!m) return html;
+function normalizeToWwwAbsolute(u) {
+  let url = (u || "").trim();
+  if (!url) return "";
+  if (url.startsWith("/")) url = `${BASE}${url}`;
+  url = url.replace(/^https:\/\/sindikatstudio83\.me/i, BASE);
+  url = url.replace(/^http:\/\/sindikatstudio83\.me/i, BASE);
+  return url;
+}
 
-  let img = m[1].trim();
-  if (img.startsWith("/")) img = `${BASE}${img}`;
-  if (img.startsWith("https://sindikatstudio83.me")) img = img.replace("https://sindikatstudio83.me", BASE);
-  if (img.startsWith("http://sindikatstudio83.me")) img = img.replace("http://sindikatstudio83.me", BASE);
+function fixOrAddOgImage(head) {
+  // supports both attribute orders:
+  // <meta property="og:image" content="...">
+  // <meta content="..." property="og:image">
+  const re1 = /<meta\b[^>]*property=["']og:image["'][^>]*content=["']([^"']+)["'][^>]*>/i;
+  const re2 = /<meta\b[^>]*content=["']([^"']+)["'][^>]*property=["']og:image["'][^>]*>/i;
 
+  let existing = "";
+  const m1 = head.match(re1);
+  const m2 = head.match(re2);
+  if (m1) existing = m1[1];
+  else if (m2) existing = m2[1];
+
+  const img = normalizeToWwwAbsolute(existing || DEFAULT_OG_IMAGE);
   const newTag = `<meta property="og:image" content="${img}" />`;
-  return html.replace(/<meta\s+property=["']og:image["']\s+content=["'][^"']+["'][^>]*>/i, newTag);
+
+  if (m1) return head.replace(re1, newTag);
+  if (m2) return head.replace(re2, newTag);
+
+  // doesn't exist → insert
+  return upsertTag(head, /<meta\s+property=["']og:image["'][^>]*>/i, newTag);
 }
 
 function fixHtmlLang(html, canonicalPath) {
   if (!LANG_FIX_PATHS.has(canonicalPath)) return html;
   // change <html lang="sr"> to sr-ME (only if sr)
   return html.replace(/<html([^>]*?)\slang=["']sr["']([^>]*?)>/i, `<html$1 lang="sr-ME"$2>`);
+}
+
+function normalizeDomainsInHead(head) {
+  // normalize any leftover non-www canonical/og:url occurrences (HEAD only)
+  return head
+    .replaceAll("https://sindikatstudio83.me", BASE)
+    .replaceAll("http://sindikatstudio83.me", BASE);
 }
 
 function listIndexHtml(dir) {
@@ -103,26 +145,43 @@ function main() {
   const files = listIndexHtml(ROOT);
 
   let changed = 0;
+  let skipped = 0;
+
   for (const fp of files) {
+    if (shouldSkipFile(fp)) {
+      skipped += 1;
+      continue;
+    }
+
     let html = read(fp);
 
     const canonical = ensureSlash(toCanonicalFromFile(fp));
     const canonicalPath = new URL(canonical).pathname;
 
-    html = upsertCanonical(html, canonical);
-    html = upsertOgUrl(html, canonical);
-    html = upsertTwitterCard(html);
-    html = fixOgImage(html);
+    // Fix lang on full HTML (html tag is outside head)
     html = fixHtmlLang(html, canonicalPath);
 
-    // also normalize any leftover non-www canonical/og:url occurrences
-    html = html.replaceAll("https://sindikatstudio83.me", BASE).replaceAll("http://sindikatstudio83.me", BASE);
+    // Operiši samo u HEAD-u
+    html = withHead(html, (head) => {
+      let h = head;
+
+      h = normalizeDomainsInHead(h);
+
+      h = upsertCanonical(h, canonical);
+      h = upsertOgUrl(h, canonical);
+      h = upsertTwitterCard(h);
+      h = fixOrAddOgImage(h);
+
+      return h;
+    });
 
     write(fp, html);
     changed += 1;
   }
 
   console.log(`✅ Updated head meta in ${changed} index.html files`);
+  if (skipped) console.log(`↩️ Skipped ${skipped} template index.html files (<slug>/_templates)`);
+  console.log(`🖼️ Default og:image used (when missing): ${DEFAULT_OG_IMAGE}`);
 }
 
 main();
