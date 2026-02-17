@@ -45,9 +45,14 @@ jobs:
           SHEET_API_URL: "https://script.google.com/macros/s/AKfycbzGf2MSW8mS-sm9ZUnszl7rfYoP2WRJ-3reuYdeMz-4PD0adX2L5ZzOz47Xaa-w-45N/exec"
         run: node tools/generate-blog.mjs
 
-      # ✅ OVDJE UBACIŠ OVAJ KORAK
       - name: Generate clean URLs + fix canonicals
         run: node tools/fix-clean-urls-and-canonicals.mjs
+
+      - name: Fix canonical + OG URL + twitter card
+        run: node tools/fix-head-meta.mjs
+
+      - name: Generate sitemap.xml
+        run: node tools/generate-sitemap.mjs
 
       - name: Commit changes
         run: |
