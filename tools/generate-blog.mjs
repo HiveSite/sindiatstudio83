@@ -12,7 +12,7 @@ const SHEET_API_URL = process.env.SHEET_API_URL; // npr https://script.google.co
 const SITE_BASE = "https://sindikatstudio83.me";
 
 // ✅ paths u repou
-const OUT_DIR = path.join(__dirname, "..", "sr-me", "blog");
+const OUT_DIR = path.join(__dirname, "..", "Pages", "sr-me", "blog");
 const TEMPLATE_PATH = path.join(OUT_DIR, "_templates", "post.template.html");
 const POSTS_JSON_PATH = path.join(OUT_DIR, "posts.json");
 
