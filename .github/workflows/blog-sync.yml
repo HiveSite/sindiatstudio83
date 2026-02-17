@@ -37,7 +37,7 @@ jobs:
 
       - name: Run generator
         env:
-          SHEET_API_URL: "https://script.google.com/macros/s/AKfycbzn8mswJ8woL7oGgUyaS79kxS8UR5tFHjY0t4hNA2KptQxtz_-eaBiYrGCJ60wSY4-V/exec"
+          SHEET_API_URL: "https://script.google.com/macros/s/AKfycbzGf2MSW8mS-sm9ZUnszl7rfYoP2WRJ-3reuYdeMz-4PD0adX2L5ZzOz47Xaa-w-45N/exec"
         run: node tools/generate-blog.mjs
 
       - name: Commit changes
