@@ -1,1 +1,8 @@
-
+{
+  "name": "sindikat-blog-generator",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "blog:sync": "node tools/generate-blog.mjs"
+  }
+}
