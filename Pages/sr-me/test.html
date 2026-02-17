@@ -1076,7 +1076,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     // =========================
     // ✅ CMS SETTINGS (ONLY CHANGE THIS LINE)
     // =========================
-    const SHEET_API_URL = "https://script.google.com/macros/s/AKfycbz4xFpXQhA5pnMQNN2Km8dWPQXZGStI5WY0b6_zx-5Z9yTCunlIpcrbliCW_uokKM6xCg/exec"; // npr. https://script.google.com/macros/s/XXX/exec
+    const SHEET_API_URL = "https://script.google.com/macros/s/AKfycbxgZK0wQ2l-Ecs--4NKfGw1seBgIoD8WsfgYeR77bWbrwJisiwqDEL5wz-iphGw30wX/exec"; // npr. https://script.google.com/macros/s/XXX/exec
+    const BLOG_POST_PAGE = "/sr-me/blog/post.html"; // nova stranica koju pravimo
 
     // Year
     document.getElementById('year').textContent = new Date().getFullYear();
@@ -1328,7 +1329,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <div class="readLink"><span class="chev">↗</span> Otvori tekst</div>
         </div>
       `;
-      el.addEventListener('click', ()=> openModal(p.id));
+      el.addEventListener('click', ()=> {
+  window.location.href = `${BLOG_POST_PAGE}?id=${encodeURIComponent(p.id)}`;
+});
+
       return el;
     }
 
