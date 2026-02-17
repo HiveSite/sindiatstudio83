@@ -12,12 +12,15 @@ const DEFAULT_SHEET_URL =
 let SHEET_API_URL = process.env.SHEET_API_URL || DEFAULT_SHEET_URL;
 
 // canonical base
-const SITE_BASE = "https://sindikatstudio83.me";
+const SITE_BASE = "https://www.sindikatstudio83.me";
 
 // output paths
 const OUT_DIR = path.join(__dirname, "..", "Pages", "sr-me", "blog");
 const TEMPLATE_PATH = path.join(OUT_DIR, "_templates", "post.template.html");
 const POSTS_JSON_PATH = path.join(OUT_DIR, "posts.json");
+
+// NEW: sitemap output
+const SITEMAP_PATH = path.join(__dirname, "..", "Pages", "sitemap.xml");
 
 // expected column order if API returns arrays (or TSV/CSV without headers)
 const COLUMN_ORDER = [
@@ -104,6 +107,51 @@ function canonicalForSlug(slug) {
   return `${SITE_BASE}/sr-me/blog/${encodeURIComponent(slug)}/`;
 }
 
+/* ---------------------------
+   SITEMAP HELPERS (NEW)
+---------------------------- */
+function xmlEscape(s) {
+  return String(s || "")
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&apos;");
+}
+
+function toIsoDate(dateStr) {
+  const s = safeStr(dateStr);
+  if (!s) return "";
+  const d = new Date(s);
+  if (Number.isNaN(d.getTime())) return "";
+  return d.toISOString().slice(0, 10);
+}
+
+function buildSitemapXml(urls) {
+  const header =
+    `<?xml version="1.0" encoding="UTF-8"?>\n` +
+    `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n`;
+
+  const body = urls
+    .filter((u) => u && u.loc)
+    .map((u) => {
+      const loc = xmlEscape(u.loc);
+      const lastmod = xmlEscape(u.lastmod || "");
+      return (
+        `  <url>\n` +
+        `    <loc>${loc}</loc>\n` +
+        (lastmod ? `    <lastmod>${lastmod}</lastmod>\n` : "") +
+        `  </url>\n`
+      );
+    })
+    .join("");
+
+  return header + body + `</urlset>\n`;
+}
+
+/* ---------------------------
+   FETCH / PARSE HELPERS
+---------------------------- */
 async function fetchJson(url, timeoutMs = 15000) {
   const controller = new AbortController();
   const t = setTimeout(() => controller.abort(), timeoutMs);
@@ -149,7 +197,12 @@ function tsvToRows(txt) {
   if (!lines.length) return [];
 
   // if first line has tabs, treat as TSV; if commas, treat as CSV
-  const sep = lines[0].includes("\t") ? "\t" : (lines[0].includes(",") ? "," : "\t");
+  const sep = lines[0].includes("\t")
+    ? "\t"
+    : lines[0].includes(",")
+      ? ","
+      : "\t";
+
   const rows = lines.map((l) => l.split(sep).map((x) => safeStr(x)));
   return rows;
 }
@@ -164,7 +217,7 @@ function arrayRowToObject(arr) {
 
 function normalizePost(raw) {
   // raw can be object OR array
-  const p = Array.isArray(raw) ? arrayRowToObject(raw) : (raw || {});
+  const p = Array.isArray(raw) ? arrayRowToObject(raw) : raw || {};
 
   const slug = slugify(p.slug);
   const title = safeStr(p.title);
@@ -290,7 +343,9 @@ async function main() {
   console.log("Published length:", published.length);
 
   // sort newest first (if date exists)
-  published.sort((a, b) => String(b.date || "").localeCompare(String(a.date || "")));
+  published.sort((a, b) =>
+    String(b.date || "").localeCompare(String(a.date || ""))
+  );
 
   // write posts.json (listing)
   const postsJson = toPostsJson(published);
@@ -315,6 +370,48 @@ async function main() {
     });
     writeFile(outPath, html);
   }
+
+  // -------------------------
+  // SITEMAP GENERATION (NEW)
+  // -------------------------
+  const staticUrls = [
+    `${SITE_BASE}/`,
+    `${SITE_BASE}/sr-me/Pocetna.html`,
+    `${SITE_BASE}/sr-me/Usluge.html`,
+    `${SITE_BASE}/sr-me/Onama.html`,
+    `${SITE_BASE}/sr-me/Kontakt.html`,
+    `${SITE_BASE}/sr-me/Poslovi.html`,
+    `${SITE_BASE}/sr-me/blog/`,
+  ];
+
+  // If you use paginated pages /sr-me/blog/p01/ ... /p15/
+  for (let i = 1; i <= 15; i++) {
+    const p = String(i).padStart(2, "0");
+    staticUrls.push(`${SITE_BASE}/sr-me/blog/p${p}/`);
+  }
+
+  const blogPostUrls = published.map((p) => ({
+    loc: canonicalForSlug(p.slug),
+    lastmod: toIsoDate(p.date) || "",
+  }));
+
+  const sitemapUrls = [
+    ...staticUrls.map((u) => ({ loc: u, lastmod: "" })),
+    ...blogPostUrls,
+  ];
+
+  // remove duplicates by loc
+  const seen = new Set();
+  const unique = [];
+  for (const u of sitemapUrls) {
+    if (!u?.loc) continue;
+    if (seen.has(u.loc)) continue;
+    seen.add(u.loc);
+    unique.push(u);
+  }
+
+  writeFile(SITEMAP_PATH, buildSitemapXml(unique));
+  console.log(`✅ sitemap generated -> ${SITEMAP_PATH} (urls: ${unique.length})`);
 
   console.log(`Generated: ${postsJson.length} posts -> ${POSTS_JSON_PATH}`);
 }
