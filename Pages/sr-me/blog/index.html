@@ -926,6 +926,88 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 
 
+<style>
+  /* Quote popup (toast) */
+  .quote-toast{
+    position: fixed;
+    left: 50%;
+    bottom: 22px;
+    transform: translateX(-50%);
+    z-index: 99999;
+    width: min(640px, calc(100% - 28px));
+    background: rgba(14, 10, 26, 0.92);
+    border: 1px solid rgba(255, 0, 180, 0.28);
+    box-shadow: 0 18px 60px rgba(0,0,0,.45);
+    border-radius: 16px;
+    padding: 14px 14px;
+    color: #fff;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .25s ease, transform .25s ease;
+  }
+  .quote-toast.show{
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateX(-50%) translateY(0);
+  }
+  .quote-toast .row{
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+  }
+  .quote-toast .mark{
+    width: 34px;
+    height: 34px;
+    border-radius: 10px;
+    flex: 0 0 auto;
+    display: grid;
+    place-items: center;
+    background: rgba(255, 0, 180, 0.14);
+    border: 1px solid rgba(255, 0, 180, 0.22);
+    font-size: 18px;
+    line-height: 1;
+  }
+  .quote-toast .text{
+    flex: 1 1 auto;
+    font-size: 14px;
+    line-height: 1.35;
+    opacity: .95;
+  }
+  .quote-toast .text .q{
+    display: block;
+    font-weight: 600;
+    letter-spacing: .2px;
+  }
+  .quote-toast .text .a{
+    display: block;
+    margin-top: 4px;
+    font-size: 12.5px;
+    opacity: .75;
+  }
+  .quote-toast .close{
+    flex: 0 0 auto;
+    border: 0;
+    background: transparent;
+    color: rgba(255,255,255,.85);
+    width: 34px;
+    height: 34px;
+    border-radius: 10px;
+    cursor: pointer;
+    display: grid;
+    place-items: center;
+    transition: background .15s ease, color .15s ease;
+  }
+  .quote-toast .close:hover{
+    background: rgba(255,255,255,.08);
+    color: #fff;
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .quote-toast{ transition: none; }
+  }
+</style>
 
 
 
@@ -1410,5 +1492,67 @@ loadPosts()
       });
     });
   </script>
+
+<!-- Quote Popup / Toast -->
+<div id="quoteToast" class="quote-toast" role="dialog" aria-live="polite" aria-label="Zanimljiv citat">
+  <div class="row">
+    <div class="mark">✦</div>
+
+    <div class="text">
+      <span class="q" id="quoteText">“Brzina bez pravca je samo haos.”</span>
+      <span class="a" id="quoteAuthor">— Sindikat Studio 83</span>
+    </div>
+
+    <button class="close" id="quoteClose" aria-label="Zatvori">✕</button>
+  </div>
+</div>
+
+<script>
+  (function(){
+    const toast = document.getElementById('quoteToast');
+    const closeBtn = document.getElementById('quoteClose');
+
+    // Dodaj još citata po želji
+    const quotes = [
+      { q: '“Brzina bez pravca je samo haos.”', a: '— Sindikat Studio 83' },
+      { q: '“Kad priča klikne — prodaja dođe.”', a: '— Sindikat Studio 83' },
+      { q: '“Malo buke, puno rezultata.”', a: '— Sindikat Studio 83' },
+      { q: '“Ne jurimo reach. Jurimo upite.”', a: '— Sindikat Studio 83' }
+    ];
+
+    function showToast(){
+      // random citat
+      const pick = quotes[Math.floor(Math.random() * quotes.length)];
+      const qt = document.getElementById('quoteText');
+      const qa = document.getElementById('quoteAuthor');
+      if (qt) qt.textContent = pick.q;
+      if (qa) qa.textContent = pick.a;
+
+      toast.classList.add('show');
+
+      // auto-hide nakon 3 sekunde
+      const t = setTimeout(hideToast, 3000);
+
+      // close odmah
+      closeBtn.addEventListener('click', function(){
+        clearTimeout(t);
+        hideToast();
+      }, { once: true });
+    }
+
+    function hideToast(){
+      toast.classList.remove('show');
+    }
+
+    // pokaži kad se DOM učita
+    if (document.readyState === 'loading'){
+      document.addEventListener('DOMContentLoaded', showToast);
+    } else {
+      showToast();
+    }
+  })();
+</script>
+
+  
 </body>
 </html>
