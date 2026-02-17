@@ -45,10 +45,14 @@ jobs:
           SHEET_API_URL: "https://script.google.com/macros/s/AKfycbzGf2MSW8mS-sm9ZUnszl7rfYoP2WRJ-3reuYdeMz-4PD0adX2L5ZzOz47Xaa-w-45N/exec"
         run: node tools/generate-blog.mjs
 
+      # ✅ OVDJE UBACIŠ OVAJ KORAK
+      - name: Generate clean URLs + fix canonicals
+        run: node tools/fix-clean-urls-and-canonicals.mjs
+
       - name: Commit changes
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add -A
-          git diff --cached --quiet || git commit -m "sync: blog from sheet"
+          git diff --cached --quiet || git commit -m "sync: blog + sitemap + clean urls"
           git push
