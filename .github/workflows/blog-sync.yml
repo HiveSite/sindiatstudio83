@@ -40,6 +40,15 @@ jobs:
           SHEET_API_URL: "https://script.google.com/macros/s/AKfycbzn8mswJ8woL7oGgUyaS79kxS8UR5tFHjY0t4hNA2KptQxtz_-eaBiYrGCJ60wSY4-V/exec"
         run: node tools/generate-blog.mjs
 
+- name: Debug - check generator file exists
+  run: |
+    pwd
+    ls -la
+    ls -la tools || true
+    test -f tools/generate-blog.mjs && echo "OK: tools/generate-blog.mjs exists" || (echo "MISSING: tools/generate-blog.mjs" && exit 1)
+    find . -maxdepth 5 -name "generate-blog.mjs" -print
+
+
       - name: Commit changes
         run: |
           git config user.name "github-actions[bot]"
