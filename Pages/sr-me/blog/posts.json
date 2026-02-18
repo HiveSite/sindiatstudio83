@@ -7,14 +7,14 @@
     "status": "published",
     "category": "strategija",
     "date": "",
-    "cover_image": "https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=1600&q=80",
-    "cover_alt": "Planiranje reklamne kampanje i strategije u timu",
+    "cover_image": "https://source.unsplash.com/1600x900/?marketing,strategy,planning&sig=3001",
+    "cover_alt": "Planiranje marketinške strategije i ciljeva u timu",
     "tags": [
       "Podgorica",
       "cilj",
       "ponuda"
     ],
-    "og_image": "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1800&q=80"
+    "og_image": "https://source.unsplash.com/1800x1000/?business,workshop,brand-strategy&sig=4001"
   },
   {
     "slug": "p02",
@@ -24,14 +24,14 @@
     "status": "published",
     "category": "performance",
     "date": "",
-    "cover_image": "https://images.unsplash.com/photo-1553877522-43269d4ea984?auto=format&fit=crop&w=1600&q=80",
-    "cover_alt": "Analitika i optimizacija kampanja",
+    "cover_image": "https://source.unsplash.com/1600x900/?social-media,advertising,analytics&sig=3002",
+    "cover_alt": "Analitika i optimizacija Meta oglasa",
     "tags": [
       "Meta",
       "optimizacija",
       "budžet"
     ],
-    "og_image": "https://images.unsplash.com/photo-1556157382-97eda2d62296?auto=format&fit=crop&w=1800&q=80"
+    "og_image": "https://source.unsplash.com/1800x1000/?dashboard,performance,data&sig=4002"
   },
   {
     "slug": "p03",
@@ -41,14 +41,14 @@
     "status": "published",
     "category": "kreative",
     "date": "",
-    "cover_image": "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1600&q=80",
-    "cover_alt": "Produkcija sadržaja i kreativa",
+    "cover_image": "https://source.unsplash.com/1600x900/?content,video,creator&sig=3003",
+    "cover_alt": "Produkcija sadržaja za oglase i kreativa",
     "tags": [
       "hook",
       "UGC",
       "poruka"
     ],
-    "og_image": "https://images.unsplash.com/photo-1522542550221-31fd19575a2d?auto=format&fit=crop&w=1800&q=80"
+    "og_image": "https://source.unsplash.com/1800x1000/?filming,studio,production&sig=4003"
   },
   {
     "slug": "p04",
@@ -58,14 +58,14 @@
     "status": "published",
     "category": "dogadjaji",
     "date": "",
-    "cover_image": "https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&w=1600&q=80",
-    "cover_alt": "Prostor i atmosfera na događaju sa publikom",
+    "cover_image": "https://source.unsplash.com/1600x900/?event,conference,venue&sig=3004",
+    "cover_alt": "Prostor i atmosfera na događaju u Podgorici",
     "tags": [
       "event",
       "Podgorica",
       "budžet"
     ],
-    "og_image": "https://images.unsplash.com/photo-1519751138087-5bf79df62d5b?auto=format&fit=crop&w=1800&q=80"
+    "og_image": "https://source.unsplash.com/1800x1000/?event,planning,logistics&sig=4004"
   },
   {
     "slug": "p05",
@@ -75,14 +75,14 @@
     "status": "published",
     "category": "aktivacije",
     "date": "",
-    "cover_image": "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1600&q=80",
-    "cover_alt": "Promo tim i brend aktivacija na terenu",
+    "cover_image": "https://source.unsplash.com/1600x900/?brand-activation,promo,event&sig=3005",
+    "cover_alt": "Brend aktivacija i promo tim na terenu",
     "tags": [
       "aktivacije",
       "promo",
       "mjerenje"
     ],
-    "og_image": "https://images.unsplash.com/photo-1531058020387-3be344556be6?auto=format&fit=crop&w=1800&q=80"
+    "og_image": "https://source.unsplash.com/1800x1000/?sampling,booth,crowd&sig=4005"
   },
   {
     "slug": "p06",
@@ -92,15 +92,15 @@
     "status": "published",
     "category": "dogadjaji",
     "date": "",
-    "cover_image": "https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&w=1600&q=80",
-    "cover_alt": "Publika i atmosfera na događaju u zatvorenom prostoru",
+    "cover_image": "https://source.unsplash.com/1600x900/?event-management,team,coordination&sig=3006",
+    "cover_alt": "Organizacija događaja i koordinacija tima",
     "tags": [
       "organizacija događaja",
       "Podgorica",
       "produkcija",
       "logistika"
     ],
-    "og_image": "https://images.unsplash.com/photo-1519751138087-5bf79df62d5b?auto=format&fit=crop&w=1800&q=80"
+    "og_image": "https://source.unsplash.com/1800x1000/?stage,event-production,crew&sig=4006"
   },
   {
     "slug": "p07",
@@ -110,15 +110,15 @@
     "status": "published",
     "category": "dogadjaji",
     "date": "",
-    "cover_image": "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1600&q=80",
-    "cover_alt": "Tim koji planira događaj i koordinaciju",
+    "cover_image": "https://source.unsplash.com/1600x900/?event-production,budget,planning&sig=3007",
+    "cover_alt": "Budžetiranje i planiranje event produkcije",
     "tags": [
       "cijena događaja",
       "produkcija",
       "budžet",
       "Crna Gora"
     ],
-    "og_image": "https://images.unsplash.com/photo-1515165562835-c3b8c0b7bcbf?auto=format&fit=crop&w=1800&q=80"
+    "og_image": "https://source.unsplash.com/1800x1000/?sound,lighting,stage&sig=4007"
   },
   {
     "slug": "p08",
@@ -128,15 +128,15 @@
     "status": "published",
     "category": "dogadjaji",
     "date": "",
-    "cover_image": "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1600&q=80",
-    "cover_alt": "Planiranje korporativnog događaja i koordinacija tima",
+    "cover_image": "https://source.unsplash.com/1600x900/?corporate,event,meeting&sig=3008",
+    "cover_alt": "Checklista i planiranje korporativnog događaja",
     "tags": [
       "corporate event",
       "checklist",
       "rider",
       "protokol"
     ],
-    "og_image": "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1800&q=80"
+    "og_image": "https://source.unsplash.com/1800x1000/?conference,teamwork,agenda&sig=4008"
   },
   {
     "slug": "p09",
@@ -146,15 +146,15 @@
     "status": "published",
     "category": "aktivacije",
     "date": "",
-    "cover_image": "https://images.unsplash.com/photo-1531058020387-3be344556be6?auto=format&fit=crop&w=1600&q=80",
-    "cover_alt": "Interakcija brenda sa publikom na događaju",
+    "cover_image": "https://source.unsplash.com/1600x900/?promotion,brand,engagement&sig=3009",
+    "cover_alt": "Interakcija brenda i publike tokom aktivacije",
     "tags": [
       "aktivacije",
       "promo",
       "strategija",
       "mjerenje"
     ],
-    "og_image": "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1800&q=80"
+    "og_image": "https://source.unsplash.com/1800x1000/?street-marketing,activation,campaign&sig=4009"
   },
   {
     "slug": "p11",
@@ -164,15 +164,15 @@
     "status": "published",
     "category": "dogadjaji",
     "date": "",
-    "cover_image": "https://images.unsplash.com/photo-1515165562835-c3b8c0b7bcbf?auto=format&fit=crop&w=1600&q=80",
-    "cover_alt": "Scena i tehnička produkcija sa rasvjetom na događaju",
+    "cover_image": "https://source.unsplash.com/1600x900/?event,lighting,sound&sig=3011",
+    "cover_alt": "Ozvučenje i rasvjeta na događaju",
     "tags": [
       "ozvučenje",
       "rasvjeta",
       "event",
       "greške"
     ],
-    "og_image": "https://images.unsplash.com/photo-1515165562835-c3b8c0b7bcbf?auto=format&fit=crop&w=1800&q=80"
+    "og_image": "https://source.unsplash.com/1800x1000/?stage-lights,audio,concert&sig=4011"
   },
   {
     "slug": "p12",
@@ -182,15 +182,15 @@
     "status": "published",
     "category": "aktivacije",
     "date": "",
-    "cover_image": "https://images.unsplash.com/photo-1531058020387-3be344556be6?auto=format&fit=crop&w=1600&q=80",
-    "cover_alt": "Publika i interakcija tokom brend aktivacije",
+    "cover_image": "https://source.unsplash.com/1600x900/?marketing,metrics,reporting&sig=3012",
+    "cover_alt": "Mjerenje rezultata aktivacije i metrike",
     "tags": [
       "mjerenje",
       "aktivacije",
       "leadovi",
       "UGC"
     ],
-    "og_image": "https://images.unsplash.com/photo-1553877522-43269d4ea984?auto=format&fit=crop&w=1800&q=80"
+    "og_image": "https://source.unsplash.com/1800x1000/?analytics,kpi,report&sig=4012"
   },
   {
     "slug": "p13",
@@ -200,15 +200,15 @@
     "status": "published",
     "category": "aktivacije",
     "date": "",
-    "cover_image": "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1600&q=80",
-    "cover_alt": "Brend tim i organizacija aktivacije u noćnom prostoru",
+    "cover_image": "https://source.unsplash.com/1600x900/?nightlife,bar,event&sig=3013",
+    "cover_alt": "Aktivacija u baru ili klubu sa publikom",
     "tags": [
       "barovi",
       "klubovi",
       "aktivacije",
       "rezervacije"
     ],
-    "og_image": "https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&w=1800&q=80"
+    "og_image": "https://source.unsplash.com/1800x1000/?club,crowd,neon-lights&sig=4013"
   },
   {
     "slug": "p14",
@@ -218,15 +218,15 @@
     "status": "published",
     "category": "strategija",
     "date": "",
-    "cover_image": "https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=1600&q=80",
-    "cover_alt": "Planiranje kampanje i koordinacija tima",
+    "cover_image": "https://source.unsplash.com/1600x900/?event-marketing,digital,campaign&sig=3014",
+    "cover_alt": "Event marketing i digital kampanja u sinergiji",
     "tags": [
       "event marketing",
       "meta",
       "remarketing",
       "upiti"
     ],
-    "og_image": "https://images.unsplash.com/photo-1556157382-97eda2d62296?auto=format&fit=crop&w=1800&q=80"
+    "og_image": "https://source.unsplash.com/1800x1000/?social-media,remarketing,content&sig=4014"
   },
   {
     "slug": "p15",
@@ -236,15 +236,15 @@
     "status": "published",
     "category": "aktivacije",
     "date": "",
-    "cover_image": "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1600&q=80",
-    "cover_alt": "Tim koji analizira rezultate i radi retrospektivu",
+    "cover_image": "https://source.unsplash.com/1600x900/?case-study,results,analysis&sig=3015",
+    "cover_alt": "Analiza rezultata aktivacije kroz case study",
     "tags": [
       "case study",
       "aktivacija",
       "proces",
       "rezultat"
     ],
-    "og_image": "https://images.unsplash.com/photo-1553877522-43269d4ea984?auto=format&fit=crop&w=1800&q=80"
+    "og_image": "https://source.unsplash.com/1800x1000/?meeting,retrospective,notes&sig=4015"
   },
   {
     "slug": "p16",
@@ -254,15 +254,15 @@
     "status": "published",
     "category": "strategija",
     "date": "",
-    "cover_image": "https://images.unsplash.com/photo-1553877522-43269d4ea984?auto=format&fit=crop&w=1600&q=80",
-    "cover_alt": "Analitika i optimizacija Meta kampanja na dashboardu",
+    "cover_image": "https://source.unsplash.com/1600x900/?local-business,meta-ads,marketing&sig=3016",
+    "cover_alt": "Meta oglasi za lokalni biznis u Podgorici",
     "tags": [
       "Meta Ads",
       "Podgorica",
       "funnel",
       "lokalni biznis"
     ],
-    "og_image": "https://images.unsplash.com/photo-1556157382-97eda2d62296?auto=format&fit=crop&w=1800&q=80"
+    "og_image": "https://source.unsplash.com/1800x1000/?small-business,advertising,growth&sig=4016"
   },
   {
     "slug": "p17",
@@ -272,15 +272,15 @@
     "status": "published",
     "category": "performance",
     "date": "",
-    "cover_image": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1600&q=80",
-    "cover_alt": "Analiza ključnih riječi i planiranje kampanje",
+    "cover_image": "https://source.unsplash.com/1600x900/?google-ads,search,keywords&sig=3017",
+    "cover_alt": "Google pretraga i ključne riječi za leadove",
     "tags": [
       "Google Ads",
       "ključne riječi",
       "leadovi",
       "usluge"
     ],
-    "og_image": "https://images.unsplash.com/photo-1553877522-43269d4ea984?auto=format&fit=crop&w=1800&q=80"
+    "og_image": "https://source.unsplash.com/1800x1000/?search-marketing,seo,keywords&sig=4017"
   },
   {
     "slug": "p18",
@@ -290,15 +290,15 @@
     "status": "published",
     "category": "kreative",
     "date": "",
-    "cover_image": "https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=1600&q=80",
-    "cover_alt": "Tim analizira kampanju i strategiju",
+    "cover_image": "https://source.unsplash.com/1600x900/?leads,conversion,marketing&sig=3018",
+    "cover_alt": "Kampanja bez upita: analiza konverzija",
     "tags": [
       "upiti",
       "kampanja",
       "poruka",
       "optimizacija"
     ],
-    "og_image": "https://images.unsplash.com/photo-1553877522-43269d4ea984?auto=format&fit=crop&w=1800&q=80"
+    "og_image": "https://source.unsplash.com/1800x1000/?conversion-rate,funnel,optimization&sig=4018"
   },
   {
     "slug": "p19",
@@ -308,15 +308,15 @@
     "status": "published",
     "category": "performance",
     "date": "",
-    "cover_image": "https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=1600&q=80",
-    "cover_alt": "Dizajn i planiranje landing stranice",
+    "cover_image": "https://source.unsplash.com/1600x900/?landing-page,website,design&sig=3019",
+    "cover_alt": "Dizajn landing stranice za konverziju",
     "tags": [
       "landing page",
       "konverzija",
       "CTA",
       "struktura"
     ],
-    "og_image": "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1800&q=80"
+    "og_image": "https://source.unsplash.com/1800x1000/?ux,ui,conversion&sig=4019"
   },
   {
     "slug": "p20",
@@ -326,15 +326,15 @@
     "status": "published",
     "category": "strategija",
     "date": "",
-    "cover_image": "https://images.unsplash.com/photo-1553877522-43269d4ea984?auto=format&fit=crop&w=1600&q=80",
-    "cover_alt": "Planiranje budžeta i optimizacija kampanje",
+    "cover_image": "https://source.unsplash.com/1600x900/?budget,marketing,planning&sig=3020",
+    "cover_alt": "Planiranje budžeta za digital kampanju",
     "tags": [
       "budžet",
       "Meta",
       "Google",
       "rezultati"
     ],
-    "og_image": "https://images.unsplash.com/photo-1556157382-97eda2d62296?auto=format&fit=crop&w=1800&q=80"
+    "og_image": "https://source.unsplash.com/1800x1000/?finance,forecast,analysis&sig=4020"
   },
   {
     "slug": "p21",
@@ -344,15 +344,15 @@
     "status": "published",
     "category": "performance",
     "date": "",
-    "cover_image": "https://images.unsplash.com/photo-1556155092-8707de31f9c4?auto=format&fit=crop&w=1600&q=80",
-    "cover_alt": "Analitika i optimizacija remarketing kampanja",
+    "cover_image": "https://source.unsplash.com/1600x900/?remarketing,ads,retargeting&sig=3021",
+    "cover_alt": "Remarketing i retargeting kampanje",
     "tags": [
       "remarketing",
       "Meta",
       "Google",
       "prodaja"
     ],
-    "og_image": "https://images.unsplash.com/photo-1551836022-4c4c79ecde51?auto=format&fit=crop&w=1800&q=80"
+    "og_image": "https://source.unsplash.com/1800x1000/?customer-journey,ads,conversion&sig=4021"
   },
   {
     "slug": "p22",
@@ -362,15 +362,15 @@
     "status": "published",
     "category": "kreative",
     "date": "",
-    "cover_image": "https://images.unsplash.com/photo-1522542550221-31fd19575a2d?auto=format&fit=crop&w=1600&q=80",
-    "cover_alt": "Produkcija video sadržaja i priprema seta",
+    "cover_image": "https://source.unsplash.com/1600x900/?creative,brainstorming,content&sig=3022",
+    "cover_alt": "Kreativni brainstorming za oglase",
     "tags": [
       "kreativa",
       "varijacije",
       "hook",
       "oglasi"
     ],
-    "og_image": "https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=1800&q=80"
+    "og_image": "https://source.unsplash.com/1800x1000/?content-production,editing,video&sig=4022"
   },
   {
     "slug": "p23",
@@ -380,15 +380,15 @@
     "status": "published",
     "category": "performance",
     "date": "",
-    "cover_image": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1600&q=80",
-    "cover_alt": "Analiza metrika kampanje i ključnih pokazatelja",
+    "cover_image": "https://source.unsplash.com/1600x900/?cpc,cpl,marketing,metrics&sig=3023",
+    "cover_alt": "Metrike CPC i CPL u analizi kampanje",
     "tags": [
       "CPC",
       "CPL",
       "upiti",
       "metrike"
     ],
-    "og_image": "https://images.unsplash.com/photo-1554224155-1696413565d3?auto=format&fit=crop&w=1800&q=80"
+    "og_image": "https://source.unsplash.com/1800x1000/?numbers,spreadsheet,reporting&sig=4023"
   },
   {
     "slug": "p24",
@@ -398,15 +398,15 @@
     "status": "published",
     "category": "performance",
     "date": "",
-    "cover_image": "https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=1600&q=80",
-    "cover_alt": "Postavljanje analitike i praćenje konverzija u timu",
+    "cover_image": "https://source.unsplash.com/1600x900/?analytics,tracking,ga4&sig=3024",
+    "cover_alt": "GA4 i GTM mjerenje konverzija",
     "tags": [
       "GA4",
       "GTM",
       "mjerenje",
       "konverzije"
     ],
-    "og_image": "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1800&q=80"
+    "og_image": "https://source.unsplash.com/1800x1000/?tag-manager,data-layer,events&sig=4024"
   },
   {
     "slug": "p25",
@@ -416,15 +416,15 @@
     "status": "published",
     "category": "strategija",
     "date": "",
-    "cover_image": "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1600&q=80",
-    "cover_alt": "Strategijsko planiranje marketing kanala i prioriteta",
+    "cover_image": "https://source.unsplash.com/1600x900/?seo,search,marketing&sig=3025",
+    "cover_alt": "SEO i oglasi kao kombinovana strategija",
     "tags": [
       "SEO",
       "oglasi",
       "strategija",
       "upiti"
     ],
-    "og_image": "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=1800&q=80"
+    "og_image": "https://source.unsplash.com/1800x1000/?traffic,growth,strategy&sig=4025"
   },
   {
     "slug": "p26",
@@ -434,15 +434,15 @@
     "status": "published",
     "category": "performance",
     "date": "",
-    "cover_image": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1600&q=80",
-    "cover_alt": "Analitika i lokalni SEO planiranje na ekranu",
+    "cover_image": "https://source.unsplash.com/1600x900/?local-seo,google-maps,business&sig=3026",
+    "cover_alt": "Local SEO i Google Maps pozicioniranje",
     "tags": [
       "Local SEO",
       "Podgorica",
       "Google Maps",
       "upiti"
     ],
-    "og_image": "https://images.unsplash.com/photo-1507209696998-3c532be9b2b5?auto=format&fit=crop&w=1800&q=80"
+    "og_image": "https://source.unsplash.com/1800x1000/?map,city,location&sig=4026"
   },
   {
     "slug": "p27",
@@ -452,15 +452,15 @@
     "status": "published",
     "category": "aktivacije",
     "date": "",
-    "cover_image": "https://images.unsplash.com/photo-1523952578875-1b4c2c0b4b5e?auto=format&fit=crop&w=1600&q=80",
-    "cover_alt": "Rad na laptopu i upravljanje lokalnim profilom",
+    "cover_image": "https://source.unsplash.com/1600x900/?google-business,reviews,local&sig=3027",
+    "cover_alt": "Google Business profil i recenzije",
     "tags": [
       "Google Business",
       "recenzije",
       "ranking",
       "local"
     ],
-    "og_image": "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1800&q=80"
+    "og_image": "https://source.unsplash.com/1800x1000/?reputation,stars,customer-review&sig=4027"
   },
   {
     "slug": "p28",
@@ -470,15 +470,15 @@
     "status": "published",
     "category": "strategija",
     "date": "",
-    "cover_image": "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1600&q=80",
-    "cover_alt": "Kod i web razvoj kao dio tehničkog SEO",
+    "cover_image": "https://source.unsplash.com/1600x900/?technical-seo,website,audit&sig=3028",
+    "cover_alt": "Tehnički SEO audit i greške na sajtu",
     "tags": [
       "SEO greške",
       "agencije",
       "Crna Gora",
       "struktura"
     ],
-    "og_image": "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=1800&q=80"
+    "og_image": "https://source.unsplash.com/1800x1000/?code,debugging,web-development&sig=4028"
   },
   {
     "slug": "p29",
@@ -488,15 +488,15 @@
     "status": "published",
     "category": "performance",
     "date": "",
-    "cover_image": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1600&q=80",
-    "cover_alt": "Planiranje sadržaja i strukture servisne stranice",
+    "cover_image": "https://source.unsplash.com/1600x900/?service-page,website,conversion&sig=3029",
+    "cover_alt": "Servisna landing stranica za upite",
     "tags": [
       "service landing",
       "SEO",
       "upiti",
       "konverzija"
     ],
-    "og_image": "https://images.unsplash.com/photo-1556157382-97eda2d62296?auto=format&fit=crop&w=1800&q=80"
+    "og_image": "https://source.unsplash.com/1800x1000/?lead-generation,form,website&sig=4029"
   },
   {
     "slug": "p30",
@@ -506,14 +506,14 @@
     "status": "published",
     "category": "kreative",
     "date": "",
-    "cover_image": "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1600&q=80",
-    "cover_alt": "Pisanje i strukturiranje ponude usluga",
+    "cover_image": "https://source.unsplash.com/1600x900/?services,copywriting,web&sig=3030",
+    "cover_alt": "Pisanje i strukturiranje stranice Usluge",
     "tags": [
       "usluge",
       "struktura",
       "SEO",
       "ponuda"
     ],
-    "og_image": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1800&q=80"
+    "og_image": "https://source.unsplash.com/1800x1000/?website-content,structure,copy&sig=4030"
   }
 ]
