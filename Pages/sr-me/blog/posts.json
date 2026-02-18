@@ -52,206 +52,468 @@
   },
   {
     "slug": "p04",
-    "title": "Aktivacije u Crnoj Gori: kako teren pojača digital",
-    "excerpt": "Najbolji eventi i aktivacije imaju pre-launch, teren i follow-up. Ako nema mjerenja, nema ni optimizacije.",
-    "description": "Najbolji eventi i aktivacije imaju pre-launch, teren i follow-up. Ako nema mjerenja, nema ni optimizacije.",
+    "title": "Koliko košta organizacija događaja u Podgorici (realan okvir)",
+    "excerpt": "Ako nemaš okvir budžeta, event se pretvori u improvizaciju. Evo šta ulazi u cijenu, gdje ljudi griješe i kako da kontrolišeš trošak.",
+    "description": "Ako nemaš okvir budžeta, event se pretvori u improvizaciju. Evo šta ulazi u cijenu, gdje ljudi griješe i kako da kontrolišeš trošak.",
     "status": "published",
-    "category": "aktivacije",
+    "category": "dogadjaji",
     "date": "",
-    "cover_image": "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&w=1600&q=80",
-    "cover_alt": "Promotivna aktivacija i publika",
+    "cover_image": "https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&w=1600&q=80",
+    "cover_alt": "Prostor i atmosfera na događaju sa publikom",
     "tags": [
-      "teren",
-      "QR",
-      "retarget"
+      "event",
+      "Podgorica",
+      "budžet"
     ],
-    "og_image": "https://images.unsplash.com/photo-1515162305289-9f3f4f3f1f8f?auto=format&fit=crop&w=1800&q=80"
+    "og_image": "https://images.unsplash.com/photo-1519751138087-5bf79df62d5b?auto=format&fit=crop&w=1800&q=80"
   },
   {
     "slug": "p05",
-    "title": "Google Ads Podgorica: 7 stvari koje dižu cijenu (i kako da je spustiš)",
-    "excerpt": "Cijena nije slučajna: relevantnost, očekivani CTR i landing iskustvo odlučuju koliko plaćaš i kakav lead dobijaš.",
-    "description": "Cijena nije slučajna: relevantnost, očekivani CTR i landing iskustvo odlučuju koliko plaćaš i kakav lead dobijaš.",
-    "status": "published",
-    "category": "performance",
-    "date": "",
-    "cover_image": "https://images.unsplash.com/photo-1454165205744-3b78555e5572?auto=format&fit=crop&w=1600&q=80",
-    "cover_alt": "Google Ads optimizacija i planiranje",
-    "tags": [
-      "Quality Score",
-      "landing",
-      "namjera"
-    ],
-    "og_image": "https://images.unsplash.com/photo-1556157382-5e063bb2667b?auto=format&fit=crop&w=1800&q=80"
-  },
-  {
-    "slug": "p06",
-    "title": "Ponuda koja konvertuje: kako da reklame ne budu ‘buka’",
-    "excerpt": "Oglas ne popravlja ponudu. Ponuda popravlja oglas. Evo jednostavnog template-a za tržište Crne Gore.",
-    "description": "Oglas ne popravlja ponudu. Ponuda popravlja oglas. Evo jednostavnog template-a za tržište Crne Gore.",
-    "status": "published",
-    "category": "strategija",
-    "date": "",
-    "cover_image": "https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&w=1600&q=80",
-    "cover_alt": "Definisanje ponude i vrijednosti",
-    "tags": [
-      "ponuda",
-      "CTA",
-      "konverzija"
-    ],
-    "og_image": "https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=1800&q=80"
-  },
-  {
-    "slug": "p07",
-    "title": "15 ideja za video oglase za ugostiteljstvo u Podgorici",
-    "excerpt": "Brzi formati koji donose rezervacije: hook→ponuda→dokaz. Spremno za snimanje telefonom i ads testiranje.",
-    "description": "Brzi formati koji donose rezervacije: hook→ponuda→dokaz. Spremno za snimanje telefonom i ads testiranje.",
-    "status": "published",
-    "category": "kreative",
-    "date": "",
-    "cover_image": "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1600&q=80",
-    "cover_alt": "Restoran i bar atmosfera za video oglase",
-    "tags": [
-      "ugostiteljstvo",
-      "rezervacije",
-      "video"
-    ],
-    "og_image": "https://images.unsplash.com/photo-1528715471579-d1bcf0ba5e83?auto=format&fit=crop&w=1800&q=80"
-  },
-  {
-    "slug": "p08",
-    "title": "Retargeting u Crnoj Gori: mali budžet, veliki efekat",
-    "excerpt": "Retargeting nije ‘prati me svuda’. To su 3 publike i 3 poruke, sa timingom koji ima smisla.",
-    "description": "Retargeting nije ‘prati me svuda’. To su 3 publike i 3 poruke, sa timingom koji ima smisla.",
-    "status": "published",
-    "category": "performance",
-    "date": "",
-    "cover_image": "https://images.unsplash.com/photo-1553484771-047a44eee27b?auto=format&fit=crop&w=1600&q=80",
-    "cover_alt": "Retargeting i funnel segmentacija",
-    "tags": [
-      "segmenti",
-      "timing",
-      "ROI"
-    ],
-    "og_image": "https://images.unsplash.com/photo-1556740749-887f6717d7e4?auto=format&fit=crop&w=1800&q=80"
-  },
-  {
-    "slug": "p09",
-    "title": "Promo tim i sampling: kako da aktivacija ostavi trag",
-    "excerpt": "Sampling bez mehanike i mjerenja je ‘dijelili smo’. Ovo je sistem: skripta, QR, sadržaj i follow-up.",
-    "description": "Sampling bez mehanike i mjerenja je ‘dijelili smo’. Ovo je sistem: skripta, QR, sadržaj i follow-up.",
+    "title": "Brend aktivacije u Crnoj Gori: kako da teren donese rezultat",
+    "excerpt": "Aktivacija nije “dijeljenje letaka”. Ako nemaš jasnu poruku, tok i mjerenje, dobiješ buku. Ovo je model koji donosi leadove i prodaju.",
+    "description": "Aktivacija nije “dijeljenje letaka”. Ako nemaš jasnu poruku, tok i mjerenje, dobiješ buku. Ovo je model koji donosi leadove i prodaju.",
     "status": "published",
     "category": "aktivacije",
     "date": "",
-    "cover_image": "https://images.unsplash.com/photo-1541532713592-79a0317b6b77?auto=format&fit=crop&w=1600&q=80",
-    "cover_alt": "Promotivni tim i sampling aktivacija",
+    "cover_image": "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1600&q=80",
+    "cover_alt": "Promo tim i brend aktivacija na terenu",
     "tags": [
-      "mehanika",
-      "capture",
-      "KPI"
-    ],
-    "og_image": "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=1800&q=80"
-  },
-  {
-    "slug": "p10",
-    "title": "Landing stranica: 9 elemenata koji pretvaraju posjetu u upit",
-    "excerpt": "Ako šalješ promet na stranicu bez jedne radnje, gubiš. Ovo je landing formula za lokalni biznis u CG.",
-    "description": "Ako šalješ promet na stranicu bez jedne radnje, gubiš. Ovo je landing formula za lokalni biznis u CG.",
-    "status": "published",
-    "category": "strategija",
-    "date": "",
-    "cover_image": "https://images.unsplash.com/photo-1559028012-481c04fa702d?auto=format&fit=crop&w=1600&q=80",
-    "cover_alt": "Landing stranica i konverzija",
-    "tags": [
-      "landing",
-      "CTA",
-      "povjerenje"
-    ],
-    "og_image": "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1800&q=80"
-  },
-  {
-    "slug": "p11",
-    "title": "30-dnevni plan optimizacije kampanje (bez haosa)",
-    "excerpt": "Šta radiš prve 3 sedmice odlučuje rezultat. Plan: test, selekcija pobjednika, retarget, skaliranje.",
-    "description": "Šta radiš prve 3 sedmice odlučuje rezultat. Plan: test, selekcija pobjednika, retarget, skaliranje.",
-    "status": "published",
-    "category": "performance",
-    "date": "",
-    "cover_image": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1600&q=80",
-    "cover_alt": "Planiranje i praćenje performansi",
-    "tags": [
-      "plan",
-      "testovi",
-      "skaliranje"
-    ],
-    "og_image": "https://images.unsplash.com/photo-1556761175-4b46a572b786?auto=format&fit=crop&w=1800&q=80"
-  },
-  {
-    "slug": "p12",
-    "title": "Copy za oglase: 12 hook formula za Podgoricu",
-    "excerpt": "Najbolji copy nije ‘agencijski’. Najbolji copy je jasan: problem, ponuda, dokaz, jedna radnja.",
-    "description": "Najbolji copy nije ‘agencijski’. Najbolji copy je jasan: problem, ponuda, dokaz, jedna radnja.",
-    "status": "published",
-    "category": "kreative",
-    "date": "",
-    "cover_image": "https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&fit=crop&w=1600&q=80",
-    "cover_alt": "Pisanje copyja i hookova",
-    "tags": [
-      "copy",
-      "hook",
-      "CTA"
-    ],
-    "og_image": "https://images.unsplash.com/photo-1516387938699-a93567ec168e?auto=format&fit=crop&w=1800&q=80"
-  },
-  {
-    "slug": "p13",
-    "title": "Kako napuniti event: pre-launch, launch, follow-up",
-    "excerpt": "Event se ne puni ‘taj dan’. Puni se sistemom: najava, dokaz, teren, i retarget poslije.",
-    "description": "Event se ne puni ‘taj dan’. Puni se sistemom: najava, dokaz, teren, i retarget poslije.",
-    "status": "published",
-    "category": "aktivacije",
-    "date": "",
-    "cover_image": "https://images.unsplash.com/photo-1514525253161-7a46d19cd6c?auto=format&fit=crop&w=1600&q=80",
-    "cover_alt": "Događaj i publika",
-    "tags": [
-      "event",
-      "launch",
-      "follow-up"
+      "aktivacije",
+      "promo",
+      "mjerenje"
     ],
     "og_image": "https://images.unsplash.com/photo-1531058020387-3be344556be6?auto=format&fit=crop&w=1800&q=80"
   },
   {
+    "slug": "p06",
+    "title": "Organizacija događaja u Podgorici: kompletan vodič (budžet, logistika, tim)",
+    "excerpt": "Ako želiš event koji izgleda “lako”, moraš ga isplanirati kao sistem. Ovo je vodič: budžet, tim, tehnika, tok i kontrola rizika.",
+    "description": "Ako želiš event koji izgleda “lako”, moraš ga isplanirati kao sistem. Ovo je vodič: budžet, tim, tehnika, tok i kontrola rizika.",
+    "status": "published",
+    "category": "dogadjaji",
+    "date": "",
+    "cover_image": "https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&w=1600&q=80",
+    "cover_alt": "Publika i atmosfera na događaju u zatvorenom prostoru",
+    "tags": [
+      "organizacija događaja",
+      "Podgorica",
+      "produkcija",
+      "logistika"
+    ],
+    "og_image": "https://images.unsplash.com/photo-1519751138087-5bf79df62d5b?auto=format&fit=crop&w=1800&q=80"
+  },
+  {
+    "slug": "p07",
+    "title": "Koliko košta produkcija događaja u Crnoj Gori? (primjeri budžeta)",
+    "excerpt": "Ne postoji “jedna cijena”, ali postoji logika budžeta. Evo realnih opsega po nivou produkcije i stavke koje najčešće iznenade.",
+    "description": "Ne postoji “jedna cijena”, ali postoji logika budžeta. Evo realnih opsega po nivou produkcije i stavke koje najčešće iznenade.",
+    "status": "published",
+    "category": "dogadjaji",
+    "date": "",
+    "cover_image": "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1600&q=80",
+    "cover_alt": "Tim koji planira događaj i koordinaciju",
+    "tags": [
+      "cijena događaja",
+      "produkcija",
+      "budžet",
+      "Crna Gora"
+    ],
+    "og_image": "https://images.unsplash.com/photo-1515165562835-c3b8c0b7bcbf?auto=format&fit=crop&w=1800&q=80"
+  },
+  {
+    "slug": "p08",
+    "title": "Checklista za corporate event: od lokacije do tehničkog rider-a",
+    "excerpt": "Jedan propušten detalj može da napravi haos. Ova lista ti štedi vrijeme: lokacija, protokol, tehnika, program i plan B.",
+    "description": "Jedan propušten detalj može da napravi haos. Ova lista ti štedi vrijeme: lokacija, protokol, tehnika, program i plan B.",
+    "status": "published",
+    "category": "dogadjaji",
+    "date": "",
+    "cover_image": "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1600&q=80",
+    "cover_alt": "Planiranje korporativnog događaja i koordinacija tima",
+    "tags": [
+      "corporate event",
+      "checklist",
+      "rider",
+      "protokol"
+    ],
+    "og_image": "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1800&q=80"
+  },
+  {
+    "slug": "p09",
+    "title": "Brend aktivacije: šta radi “aktivacija” a šta samo “promo”",
+    "excerpt": "Aktivacija je sistem za rezultat: poruka, interakcija i mjerenje. Promo je distribucija bez strategije. Evo razlike i kako da postaviš aktivaciju da radi.",
+    "description": "Aktivacija je sistem za rezultat: poruka, interakcija i mjerenje. Promo je distribucija bez strategije. Evo razlike i kako da postaviš aktivaciju da radi.",
+    "status": "published",
+    "category": "aktivacije",
+    "date": "",
+    "cover_image": "https://images.unsplash.com/photo-1531058020387-3be344556be6?auto=format&fit=crop&w=1600&q=80",
+    "cover_alt": "Interakcija brenda sa publikom na događaju",
+    "tags": [
+      "aktivacije",
+      "promo",
+      "strategija",
+      "mjerenje"
+    ],
+    "og_image": "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1800&q=80"
+  },
+  {
+    "slug": "p11",
+    "title": "Ozvučenje i rasvjeta: najčešće greške koje unište event",
+    "excerpt": "Tehnika rijetko “pukne” sama od sebe — obično je problem plan. Ovo su greške koje prave sramotu i kako ih spriječiti bez bacanja para.",
+    "description": "Tehnika rijetko “pukne” sama od sebe — obično je problem plan. Ovo su greške koje prave sramotu i kako ih spriječiti bez bacanja para.",
+    "status": "published",
+    "category": "dogadjaji",
+    "date": "",
+    "cover_image": "https://images.unsplash.com/photo-1515165562835-c3b8c0b7bcbf?auto=format&fit=crop&w=1600&q=80",
+    "cover_alt": "Scena i tehnička produkcija sa rasvjetom na događaju",
+    "tags": [
+      "ozvučenje",
+      "rasvjeta",
+      "event",
+      "greške"
+    ],
+    "og_image": "https://images.unsplash.com/photo-1515165562835-c3b8c0b7bcbf?auto=format&fit=crop&w=1800&q=80"
+  },
+  {
+    "slug": "p12",
+    "title": "Kako mjeriti uspjeh aktivacije (footfall, sampling, leadovi, UGC)",
+    "excerpt": "Aktivacija bez mjerenja je doživljaj, ali ne i kanal. Ovo su metrike koje imaju smisla i jednostavan sistem izvještaja koji klijent razumije.",
+    "description": "Aktivacija bez mjerenja je doživljaj, ali ne i kanal. Ovo su metrike koje imaju smisla i jednostavan sistem izvještaja koji klijent razumije.",
+    "status": "published",
+    "category": "aktivacije",
+    "date": "",
+    "cover_image": "https://images.unsplash.com/photo-1531058020387-3be344556be6?auto=format&fit=crop&w=1600&q=80",
+    "cover_alt": "Publika i interakcija tokom brend aktivacije",
+    "tags": [
+      "mjerenje",
+      "aktivacije",
+      "leadovi",
+      "UGC"
+    ],
+    "og_image": "https://images.unsplash.com/photo-1553877522-43269d4ea984?auto=format&fit=crop&w=1800&q=80"
+  },
+  {
+    "slug": "p13",
+    "title": "Najbolji formati aktivacija za barove i klubove (bez bacanja para)",
+    "excerpt": "Bar/klub aktivacija mora da donese jednu stvar: rezervaciju, posjetu ili prodaju. Ovo su formati koji rade lokalno i kako da ih postaviš da se mjere.",
+    "description": "Bar/klub aktivacija mora da donese jednu stvar: rezervaciju, posjetu ili prodaju. Ovo su formati koji rade lokalno i kako da ih postaviš da se mjere.",
+    "status": "published",
+    "category": "aktivacije",
+    "date": "",
+    "cover_image": "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1600&q=80",
+    "cover_alt": "Brend tim i organizacija aktivacije u noćnom prostoru",
+    "tags": [
+      "barovi",
+      "klubovi",
+      "aktivacije",
+      "rezervacije"
+    ],
+    "og_image": "https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&w=1800&q=80"
+  },
+  {
     "slug": "p14",
-    "title": "Lokalni SEO (Podgorica): 10 osnova koje pomažu i oglasima",
-    "excerpt": "SEO nije samo ranking. To je signal povjerenja koji povećava CTR i konverziju — posebno na manjem tržištu.",
-    "description": "SEO nije samo ranking. To je signal povjerenja koji povećava CTR i konverziju — posebno na manjem tržištu.",
+    "title": "Event + digital: kako spojiti teren i Meta kampanju da donese upite",
+    "excerpt": "Teren daje dokaz i sadržaj, digital pretvara pažnju u upit. Ovo je sistem: prije-event, tokom-event, poslije-event i kako da se sve mjeri.",
+    "description": "Teren daje dokaz i sadržaj, digital pretvara pažnju u upit. Ovo je sistem: prije-event, tokom-event, poslije-event i kako da se sve mjeri.",
+    "status": "published",
+    "category": "strategija",
+    "date": "",
+    "cover_image": "https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=1600&q=80",
+    "cover_alt": "Planiranje kampanje i koordinacija tima",
+    "tags": [
+      "event marketing",
+      "meta",
+      "remarketing",
+      "upiti"
+    ],
+    "og_image": "https://images.unsplash.com/photo-1556157382-97eda2d62296?auto=format&fit=crop&w=1800&q=80"
+  },
+  {
+    "slug": "p15",
+    "title": "Case study format (anonimno): “aktivacija 1 dan — šta je radilo, šta nije”",
+    "excerpt": "Najbrži način da dobiješ povjerenje je da pokažeš proces i lekcije. Evo šablona case study-ja koji možeš pisati i bez otkrivanja klijenta.",
+    "description": "Najbrži način da dobiješ povjerenje je da pokažeš proces i lekcije. Evo šablona case study-ja koji možeš pisati i bez otkrivanja klijenta.",
+    "status": "published",
+    "category": "aktivacije",
+    "date": "",
+    "cover_image": "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1600&q=80",
+    "cover_alt": "Tim koji analizira rezultate i radi retrospektivu",
+    "tags": [
+      "case study",
+      "aktivacija",
+      "proces",
+      "rezultat"
+    ],
+    "og_image": "https://images.unsplash.com/photo-1553877522-43269d4ea984?auto=format&fit=crop&w=1800&q=80"
+  },
+  {
+    "slug": "p16",
+    "title": "Meta Ads za lokalni biznis u Podgorici: šta radi 2026, šta ne",
+    "excerpt": "U Podgorici budžeti su često mali — zato strategija mora biti tačna. Evo šta realno radi na Meta 2026 i šta najčešće baca pare.",
+    "description": "U Podgorici budžeti su često mali — zato strategija mora biti tačna. Evo šta realno radi na Meta 2026 i šta najčešće baca pare.",
+    "status": "published",
+    "category": "strategija",
+    "date": "",
+    "cover_image": "https://images.unsplash.com/photo-1553877522-43269d4ea984?auto=format&fit=crop&w=1600&q=80",
+    "cover_alt": "Analitika i optimizacija Meta kampanja na dashboardu",
+    "tags": [
+      "Meta Ads",
+      "Podgorica",
+      "funnel",
+      "lokalni biznis"
+    ],
+    "og_image": "https://images.unsplash.com/photo-1556157382-97eda2d62296?auto=format&fit=crop&w=1800&q=80"
+  },
+  {
+    "slug": "p17",
+    "title": "Google Ads za uslužne firme: 10 ključnih riječi koje donose upite",
+    "excerpt": "Nije poenta u “više ključnih riječi”, nego u namjeri. Ovo je lista search intent fraza koje najčešće donose leadove i kako da ih grupišeš.",
+    "description": "Nije poenta u “više ključnih riječi”, nego u namjeri. Ovo je lista search intent fraza koje najčešće donose leadove i kako da ih grupišeš.",
+    "status": "published",
+    "category": "performance",
+    "date": "",
+    "cover_image": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1600&q=80",
+    "cover_alt": "Analiza ključnih riječi i planiranje kampanje",
+    "tags": [
+      "Google Ads",
+      "ključne riječi",
+      "leadovi",
+      "usluge"
+    ],
+    "og_image": "https://images.unsplash.com/photo-1553877522-43269d4ea984?auto=format&fit=crop&w=1800&q=80"
+  },
+  {
+    "slug": "p18",
+    "title": "Zašto kampanja troši a nema upita: 7 tipičnih problema",
+    "excerpt": "Kad nema upita, problem je skoro uvijek u poruci, ponudi ili frikciji. Ovo je lista 7 uzroka + brza rješenja koja možeš odmah testirati.",
+    "description": "Kad nema upita, problem je skoro uvijek u poruci, ponudi ili frikciji. Ovo je lista 7 uzroka + brza rješenja koja možeš odmah testirati.",
+    "status": "published",
+    "category": "kreative",
+    "date": "",
+    "cover_image": "https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=1600&q=80",
+    "cover_alt": "Tim analizira kampanju i strategiju",
+    "tags": [
+      "upiti",
+      "kampanja",
+      "poruka",
+      "optimizacija"
+    ],
+    "og_image": "https://images.unsplash.com/photo-1553877522-43269d4ea984?auto=format&fit=crop&w=1800&q=80"
+  },
+  {
+    "slug": "p19",
+    "title": "Landing page koji konvertuje: primjer strukture (naslov–dokaz–CTA)",
+    "excerpt": "Landing nije “lijepa strana”, nego put do upita. Ovo je struktura koja radi lokalno: naslov, dokaz, ponuda, FAQ i jasan CTA.",
+    "description": "Landing nije “lijepa strana”, nego put do upita. Ovo je struktura koja radi lokalno: naslov, dokaz, ponuda, FAQ i jasan CTA.",
+    "status": "published",
+    "category": "performance",
+    "date": "",
+    "cover_image": "https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=1600&q=80",
+    "cover_alt": "Dizajn i planiranje landing stranice",
+    "tags": [
+      "landing page",
+      "konverzija",
+      "CTA",
+      "struktura"
+    ],
+    "og_image": "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1800&q=80"
+  },
+  {
+    "slug": "p20",
+    "title": "Koliki budžet treba za prve rezultate na Meta/Google?",
+    "excerpt": "Budžet ne spašava lošu ponudu. Ali kad je sistem dobar, i mali budžet može dati signal. Evo okvira za start i kako skalirati bez spaljivanja.",
+    "description": "Budžet ne spašava lošu ponudu. Ali kad je sistem dobar, i mali budžet može dati signal. Evo okvira za start i kako skalirati bez spaljivanja.",
+    "status": "published",
+    "category": "strategija",
+    "date": "",
+    "cover_image": "https://images.unsplash.com/photo-1553877522-43269d4ea984?auto=format&fit=crop&w=1600&q=80",
+    "cover_alt": "Planiranje budžeta i optimizacija kampanje",
+    "tags": [
+      "budžet",
+      "Meta",
+      "Google",
+      "rezultati"
+    ],
+    "og_image": "https://images.unsplash.com/photo-1556157382-97eda2d62296?auto=format&fit=crop&w=1800&q=80"
+  },
+  {
+    "slug": "p21",
+    "title": "Remarketing: najjeftiniji “drugi pokušaj” koji donosi prodaju",
+    "excerpt": "Remarketing nije “ganjanje” ljudi — to je način da zatvoriš krug i pretvoriš pažnju u upit. Evo strukture koja radi lokalno.",
+    "description": "Remarketing nije “ganjanje” ljudi — to je način da zatvoriš krug i pretvoriš pažnju u upit. Evo strukture koja radi lokalno.",
+    "status": "published",
+    "category": "performance",
+    "date": "",
+    "cover_image": "https://images.unsplash.com/photo-1556155092-8707de31f9c4?auto=format&fit=crop&w=1600&q=80",
+    "cover_alt": "Analitika i optimizacija remarketing kampanja",
+    "tags": [
+      "remarketing",
+      "Meta",
+      "Google",
+      "prodaja"
+    ],
+    "og_image": "https://images.unsplash.com/photo-1551836022-4c4c79ecde51?auto=format&fit=crop&w=1800&q=80"
+  },
+  {
+    "slug": "p22",
+    "title": "Kreativa za oglase: kako smisliti 10 varijacija bez izgaranja",
+    "excerpt": "Ne treba ti 10 “različitih videa”, nego 10 varijacija poruke i ugla. Ovo je sistem koji za 2 sata daje gorivo za mjesec.",
+    "description": "Ne treba ti 10 “različitih videa”, nego 10 varijacija poruke i ugla. Ovo je sistem koji za 2 sata daje gorivo za mjesec.",
+    "status": "published",
+    "category": "kreative",
+    "date": "",
+    "cover_image": "https://images.unsplash.com/photo-1522542550221-31fd19575a2d?auto=format&fit=crop&w=1600&q=80",
+    "cover_alt": "Produkcija video sadržaja i priprema seta",
+    "tags": [
+      "kreativa",
+      "varijacije",
+      "hook",
+      "oglasi"
+    ],
+    "og_image": "https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=1800&q=80"
+  },
+  {
+    "slug": "p23",
+    "title": "Cijena klika vs cijena upita: šta je stvarno bitno",
+    "excerpt": "Jeфtin klik može biti najskuplji ako ne donosi upite. Evo koje metrike prate realan rezultat i kako da čitaš kampanju bez zablude.",
+    "description": "Jeфtin klik može biti najskuplji ako ne donosi upite. Evo koje metrike prate realan rezultat i kako da čitaš kampanju bez zablude.",
+    "status": "published",
+    "category": "performance",
+    "date": "",
+    "cover_image": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1600&q=80",
+    "cover_alt": "Analiza metrika kampanje i ključnih pokazatelja",
+    "tags": [
+      "CPC",
+      "CPL",
+      "upiti",
+      "metrike"
+    ],
+    "og_image": "https://images.unsplash.com/photo-1554224155-1696413565d3?auto=format&fit=crop&w=1800&q=80"
+  },
+  {
+    "slug": "p24",
+    "title": "GA4/GTM osnove: šta mora biti izmjereno da optimizacija ima smisla",
+    "excerpt": "Bez mjerenja optimizuješ “po osjećaju”. Ovo je minimum koji treba da pratiš: upiti, CTA klikovi, forme i izvori koji donose kvalitet.",
+    "description": "Bez mjerenja optimizuješ “po osjećaju”. Ovo je minimum koji treba da pratiš: upiti, CTA klikovi, forme i izvori koji donose kvalitet.",
+    "status": "published",
+    "category": "performance",
+    "date": "",
+    "cover_image": "https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=1600&q=80",
+    "cover_alt": "Postavljanje analitike i praćenje konverzija u timu",
+    "tags": [
+      "GA4",
+      "GTM",
+      "mjerenje",
+      "konverzije"
+    ],
+    "og_image": "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1800&q=80"
+  },
+  {
+    "slug": "p25",
+    "title": "SEO vs oglasi: kada je pametno jedno, kada kombinacija",
+    "excerpt": "SEO gradi dugoročan tok upita, oglasi daju brz signal. Najjače je kad radiš i jedno i drugo kao sistem — evo kada šta ima smisla.",
+    "description": "SEO gradi dugoročan tok upita, oglasi daju brz signal. Najjače je kad radiš i jedno i drugo kao sistem — evo kada šta ima smisla.",
+    "status": "published",
+    "category": "strategija",
+    "date": "",
+    "cover_image": "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1600&q=80",
+    "cover_alt": "Strategijsko planiranje marketing kanala i prioriteta",
+    "tags": [
+      "SEO",
+      "oglasi",
+      "strategija",
+      "upiti"
+    ],
+    "og_image": "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=1800&q=80"
+  },
+  {
+    "slug": "p26",
+    "title": "Local SEO Podgorica: kako da se pojavljuješ u mapama i pretrazi",
+    "excerpt": "Ako te nema na mapama i lokalnoj pretrazi, gubiš najtoplije upite. Ovo je praktičan plan: profil, stranice, sadržaj i signali povjerenja.",
+    "description": "Ako te nema na mapama i lokalnoj pretrazi, gubiš najtoplije upite. Ovo je praktičan plan: profil, stranice, sadržaj i signali povjerenja.",
+    "status": "published",
+    "category": "performance",
+    "date": "",
+    "cover_image": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1600&q=80",
+    "cover_alt": "Analitika i lokalni SEO planiranje na ekranu",
+    "tags": [
+      "Local SEO",
+      "Podgorica",
+      "Google Maps",
+      "upiti"
+    ],
+    "og_image": "https://images.unsplash.com/photo-1507209696998-3c532be9b2b5?auto=format&fit=crop&w=1800&q=80"
+  },
+  {
+    "slug": "p27",
+    "title": "Google Business profil: šta tačno utiče na ranking (i recenzije)",
+    "excerpt": "Profil nije ukras: on je prodajni kanal. Ovo su faktori koji guraju ranking i “sitnice” koje prave razliku u Podgorici.",
+    "description": "Profil nije ukras: on je prodajni kanal. Ovo su faktori koji guraju ranking i “sitnice” koje prave razliku u Podgorici.",
+    "status": "published",
+    "category": "aktivacije",
+    "date": "",
+    "cover_image": "https://images.unsplash.com/photo-1523952578875-1b4c2c0b4b5e?auto=format&fit=crop&w=1600&q=80",
+    "cover_alt": "Rad na laptopu i upravljanje lokalnim profilom",
+    "tags": [
+      "Google Business",
+      "recenzije",
+      "ranking",
+      "local"
+    ],
+    "og_image": "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1800&q=80"
+  },
+  {
+    "slug": "p28",
+    "title": "Najčešće SEO greške na sajtovima agencija u CG (i kako ih riješiti)",
+    "excerpt": "Većina lokalnih sajtova izgleda “fino”, ali gubi rang zbog osnovnih grešaka: duplikati, loša struktura, slab intent. Evo spiska i rješenja.",
+    "description": "Većina lokalnih sajtova izgleda “fino”, ali gubi rang zbog osnovnih grešaka: duplikati, loša struktura, slab intent. Evo spiska i rješenja.",
     "status": "published",
     "category": "strategija",
     "date": "",
     "cover_image": "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1600&q=80",
-    "cover_alt": "SEO i web optimizacija",
+    "cover_alt": "Kod i web razvoj kao dio tehničkog SEO",
     "tags": [
-      "SEO",
-      "lokalno",
-      "trust"
+      "SEO greške",
+      "agencije",
+      "Crna Gora",
+      "struktura"
     ],
-    "og_image": "https://images.unsplash.com/photo-1507721999472-8ed4421c4af2?auto=format&fit=crop&w=1800&q=80"
+    "og_image": "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=1800&q=80"
   },
   {
-    "slug": "p15",
-    "title": "Koliko košta oglašavanje u Crnoj Gori: realan okvir",
-    "excerpt": "Ne postoji jedna cijena. Postoje faktori: cilj, ponuda, konkurencija, kreativa i landing. Evo kako da razmišljaš.",
-    "description": "Ne postoji jedna cijena. Postoje faktori: cilj, ponuda, konkurencija, kreativa i landing. Evo kako da razmišljaš.",
+    "slug": "p29",
+    "title": "Servisne landing stranice: zašto su jače od “samo bloga”",
+    "excerpt": "Blog privlači, landing konvertuje. Najjači model je kad pišeš blog kao “service post” koji vodi direktno do upita.",
+    "description": "Blog privlači, landing konvertuje. Najjači model je kad pišeš blog kao “service post” koji vodi direktno do upita.",
     "status": "published",
     "category": "performance",
     "date": "",
-    "cover_image": "https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&w=1600&q=80",
-    "cover_alt": "Budžet i troškovi oglašavanja",
+    "cover_image": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1600&q=80",
+    "cover_alt": "Planiranje sadržaja i strukture servisne stranice",
     "tags": [
-      "budžet",
-      "CPC",
-      "CPA"
+      "service landing",
+      "SEO",
+      "upiti",
+      "konverzija"
     ],
-    "og_image": "https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?auto=format&fit=crop&w=1800&q=80"
+    "og_image": "https://images.unsplash.com/photo-1556157382-97eda2d62296?auto=format&fit=crop&w=1800&q=80"
+  },
+  {
+    "slug": "p30",
+    "title": "Kako napisati stranicu “Usluge” da Google i ljudi razumiju ponudu",
+    "excerpt": "Stranica “Usluge” je najvažnija prodajna strana. Ako je nejasna, sve ostalo pada. Ovo je struktura koja je jasna, SEO-friendly i prodajna.",
+    "description": "Stranica “Usluge” je najvažnija prodajna strana. Ako je nejasna, sve ostalo pada. Ovo je struktura koja je jasna, SEO-friendly i prodajna.",
+    "status": "published",
+    "category": "kreative",
+    "date": "",
+    "cover_image": "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1600&q=80",
+    "cover_alt": "Pisanje i strukturiranje ponude usluga",
+    "tags": [
+      "usluge",
+      "struktura",
+      "SEO",
+      "ponuda"
+    ],
+    "og_image": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1800&q=80"
   }
 ]
