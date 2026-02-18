@@ -31,6 +31,9 @@ function fileToUrl(filePath) {
   let rel = path.relative(ROOT_DIR, filePath).replace(/\\/g, "/");
   const lower = rel.toLowerCase();
 
+  // ⛔️ Safety: ako se .html provuče kao dio foldera (npr. /usluge.html/index.html), izbaci
+  if (lower.includes(".html/")) return null;
+
   // DOZVOLI SAMO index.html
   const isRootIndex = lower === "index.html";
   const isFolderIndex = lower.endsWith("/index.html");
@@ -51,18 +54,21 @@ function fileToUrl(filePath) {
 function shouldSkipUrl(url) {
   if (!url) return true;
 
+  const lower = url.toLowerCase();
+
   // 1) izbaci blog template placeholder
-  if (url.includes("/sr-me/blog/<slug>/")) return true;
-  if (url.includes("/sr-me/blog/%3Cslug%3E/")) return true;
+  if (lower.includes("/sr-me/blog/<slug>/")) return true;
+  if (lower.includes("/sr-me/blog/%3cslug%3e/")) return true;
 
   // 2) izbaci internal/template putanje
-  if (url.includes("/_templates/")) return true;
+  if (lower.includes("/_templates/")) return true;
 
   // 3) izbaci test rute (ako ih ima)
-  if (url.includes("/test/")) return true;
+  if (lower.includes("/test/")) return true;
 
-  // 4) zaštita: ako se ikad provuče .html, izbaci ga
-  if (/\.html$/i.test(url)) return true;
+  // 4) zaštita: ako se ikad provuče ".html" BILO GDJE u putanji, izbaci ga
+  // hvata i ".../neko.html/" i ".../neko.html"
+  if (/\.html(\/|$)/i.test(url)) return true;
 
   return false;
 }
