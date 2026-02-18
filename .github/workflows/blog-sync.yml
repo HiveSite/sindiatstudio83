@@ -59,6 +59,10 @@ jobs:
       - name: Generate sitemap.xml (clean only)
         run: node tools/generate-sitemap.mjs
 
+      - name: Add JSON-LD schema (Organization + LocalBusiness + BlogPosting)
+        run: node tools/add-schema.mjs
+
+
       - name: Debug - show sitemap preview + checks
         run: |
           echo "==== HEAD Pages/sitemap.xml ===="
