@@ -14,8 +14,13 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <link rel="icon" type="image/png" href="/favicon.png">
-  
-  
+
+  <!-- ✅ Preconnect / DNS Prefetch (ubrzava first byte ka Apps Scriptu) -->
+  <link rel="dns-prefetch" href="//script.google.com">
+  <link rel="dns-prefetch" href="//script.googleusercontent.com">
+  <link rel="dns-prefetch" href="//lh3.googleusercontent.com">
+  <link rel="preconnect" href="https://script.google.com" crossorigin>
+  <link rel="preconnect" href="https://script.googleusercontent.com" crossorigin>
 
   <!-- SEO: osnovno -->
   <title>Blog | Meta oglasi, Google Ads i aktivacije — Sindikat Studio 83 (Podgorica)</title>
@@ -50,7 +55,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     "@graph":[
       {
         "@type":"Organization",
-       "@id":"https://www.sindikatstudio83.me/sr-me/#organizacija",
+        "@id":"https://www.sindikatstudio83.me/sr-me/#organizacija",
         "name":"Sindikat Studio 83",
         "url":"https://www.sindikatstudio83.me/sr-me/",
         "logo":"https://www.sindikatstudio83.me/sr-me/assets/logo.png",
@@ -205,27 +210,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         linear-gradient(180deg, rgba(0,0,0,.25), rgba(6,1,13,.92) 62%, rgba(6,1,13,.98));
     }
 
-    /* Background video */
-    .bgVideo{
-      position:fixed;
-      inset:0;
-      width:100%;
-      height:100%;
-      object-fit:cover;
-      z-index:0;
-      filter: saturate(1.1) contrast(1.08) brightness(.55);
-    }
-    .bgVideoOverlay{
-      position:fixed;
-      inset:0;
-      z-index:1;
-      pointer-events:none;
-      background:
-        radial-gradient(900px 540px at 20% 20%, rgba(255,59,111,.12), transparent 60%),
-        radial-gradient(900px 540px at 80% 10%, rgba(24,245,255,.10), transparent 60%),
-        linear-gradient(180deg, rgba(0,0,0,.25), rgba(6,1,13,.82) 62%, rgba(6,1,13,.92));
-    }
-
     /* Subtle animated blobs */
     .blob{
       position:fixed;
@@ -258,14 +242,14 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       border-top:3px solid rgba(255,255,255,.12);
     }
     .topbarInner{
-  max-width:var(--max);
-  margin:0 auto;
-  padding:12px 18px;
-  display:flex; 
-  align-items:center; 
-  gap:12px;
-  justify-content:flex-start;
-}
+      max-width:var(--max);
+      margin:0 auto;
+      padding:12px 18px;
+      display:flex;
+      align-items:center;
+      gap:12px;
+      justify-content:flex-start;
+    }
 
     .ctaCenter{margin:0;}
     .navWrap{
@@ -295,8 +279,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       display:grid;
       place-items:center;
     }
-   
-
     .markImg{
       width:100%;
       height:100%;
@@ -325,6 +307,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       transform: translateY(-1px);
       border-color:rgba(24,245,255,.35);
     }
+    nav a[aria-current="page"]{
+      background:rgba(255,255,255,.05);
+      color:#fff;
+      border-color:rgba(255,59,111,.45);
+    }
 
     /* Buttons */
     .btn{
@@ -346,6 +333,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       background: linear-gradient(180deg, rgba(255,59,111,.35), rgba(255,59,111,.14));
       border-color:rgba(255,59,111,.6);
       box-shadow: 0 20px 60px rgba(255,59,111,.20), 0 10px 28px rgba(0,0,0,.28);
+    }
+    .btn.ghost{
+      background: rgba(8,10,16,.65);
+      border-color: rgba(255,255,255,.14);
     }
     .dot{
       width:8px; height:8px; border-radius:2px;
@@ -429,24 +420,23 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       }
     }
 
-    /* ✅ FLOATING LOGO: uvijek vidljiv gore lijevo + skala */
+    /* ✅ FLOATING LOGO */
     .floatingLogo{
       position:fixed;
       top:14px;
       left:14px;
-      z-index:120; /* iznad sadržaja, ispod modala (200) */
+      z-index:120;
       display:block;
       text-decoration:none;
     }
     .floatingLogo .mark{
-  width: 50vw;
-  max-width: 240px;
-  height: auto;
-  aspect-ratio: 176 / 44;
-  transform: rotate(-2deg);
-  transform-origin: top left;
-}
-
+      width: 50vw;
+      max-width: 240px;
+      height: auto;
+      aspect-ratio: 176 / 44;
+      transform: rotate(-2deg);
+      transform-origin: top left;
+    }
     @media (max-width: 480px){
       .floatingLogo{ top:10px; left:10px; }
     }
@@ -725,6 +715,45 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       background: rgba(8,10,16,.55);
     }
 
+    /* ✅ Skeleton shimmer */
+    .skeleton{
+      position:relative;
+      overflow:hidden;
+      cursor:default;
+    }
+    .skeleton:hover{ transform:none; box-shadow: var(--shadow2); border-color: rgba(255,255,255,.14); filter:none; }
+    .skeleton .thumb{ background: rgba(255,255,255,.06); }
+    .skLine{
+      height: 12px;
+      border-radius: 10px;
+      background: rgba(255,255,255,.08);
+    }
+    .skLine.lg{ height: 16px; }
+    .skLine.w80{ width: 80%; }
+    .skLine.w60{ width: 60%; }
+    .skLine.w45{ width: 45%; }
+    .skTag{
+      width: 72px;
+      height: 26px;
+      border-radius: 10px;
+      background: rgba(255,255,255,.08);
+      border: 2px solid rgba(255,255,255,.10);
+    }
+    .skRow{ display:flex; gap:8px; flex-wrap:wrap; }
+    .shimmer:before{
+      content:"";
+      position:absolute;
+      inset:-40%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,.10), transparent);
+      transform: rotate(12deg);
+      animation: shimmer 1.15s linear infinite;
+      pointer-events:none;
+    }
+    @keyframes shimmer{
+      0%{ transform: translateX(-20%) rotate(12deg); }
+      100%{ transform: translateX(20%) rotate(12deg); }
+    }
+
     /* Pagination */
     .pager{
       margin-top:18px;
@@ -797,100 +826,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     .ctaBand .left .desc{margin-top:8px}
     .ctaBand .right{display:flex; gap:12px; flex-wrap:wrap; position:relative; z-index:2}
 
-    /* Modal */
-    .modalOverlay{
-      position:fixed;
-      inset:0;
-      z-index:200;
-      background:rgba(0,0,0,.72);
-      display:none;
-      align-items:center;
-      justify-content:center;
-      padding:18px;
-    }
-    .modal{
-      width:min(980px, 100%);
-      max-height: min(86vh, 780px);
-      overflow:auto;
-      border-radius: 18px;
-      border:3px solid rgba(255,255,255,.14);
-      background:
-        radial-gradient(520px 260px at 20% 18%, rgba(255,59,111,.18), transparent 62%),
-        radial-gradient(520px 260px at 76% 22%, rgba(24,245,255,.12), transparent 62%),
-        linear-gradient(180deg, rgba(14,16,26,.96), rgba(7,8,19,.96));
-      box-shadow: var(--shadow);
-      position:relative;
-    }
-
-    .modalHero{
-      height:220px;
-      border-top-left-radius: 18px;
-      border-top-right-radius: 18px;
-      overflow:hidden;
-      border-bottom:3px solid rgba(255,255,255,.12);
-      position:relative;
-      background:#0a0b12;
-    }
-    .modalHero img{
-      width:100%;
-      height:100%;
-      object-fit:cover;
-      transform: scale(1.02);
-      filter: saturate(1.05) contrast(1.05) brightness(.92);
-    }
-    .modalHero:after{
-      content:"";
-      position:absolute;
-      inset:0;
-      background:
-        radial-gradient(640px 220px at 18% 10%, rgba(255,59,111,.25), transparent 62%),
-        radial-gradient(640px 220px at 82% 18%, rgba(24,245,255,.18), transparent 62%),
-        linear-gradient(180deg, rgba(0,0,0,.08), rgba(0,0,0,.45));
-      pointer-events:none;
-    }
-
-    .modalHeader{
-      padding:16px 16px 0;
-      display:flex;
-      align-items:flex-start;
-      justify-content:space-between;
-      gap:12px;
-    }
-    .modalHeader h2{
-      margin:0;
-      font-size:20px;
-      letter-spacing:-.25px;
-      line-height:1.2;
-    }
-    .modalClose{
-      border-radius:12px;
-      border:3px solid rgba(255,255,255,.14);
-      background: rgba(8,10,16,.65);
-      color:#fff;
-      width:42px;
-      height:42px;
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      cursor:pointer;
-      flex:0 0 auto;
-    }
-    .modalBody{
-      padding:12px 16px 16px;
-      color:rgba(255,255,255,.78);
-      font-size:14px;
-      line-height:1.75;
-    }
-    .modalBody .ref{
-      margin-top:14px;
-      border-top:2px solid rgba(255,255,255,.10);
-      padding-top:12px;
-      color:rgba(255,255,255,.68);
-      font-size:12px;
-      line-height:1.6;
-    }
-    .modalBody a{ text-decoration: underline; }
-
     footer{
       border-top:3px solid rgba(255,255,255,.10);
       padding:28px 0 8px;
@@ -907,136 +842,51 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       .hero{padding:38px 0 18px}
       .heroGrid{grid-template-columns:1fr}
       h1{font-size:38px}
-      nav{display:none}
-      .hamburger{display:flex}
       .ctaBand{flex-direction:column; align-items:flex-start}
       .postsGrid{grid-template-columns:1fr}
       .thumb{height:170px}
       .pager{flex-direction:column; align-items:flex-start}
-      .modalHero{height:200px}
     }
     @media (max-width: 520px){
       .wrap{padding:16px 14px 72px}
       h1{font-size:32px}
       .topbarInner{padding:12px 14px}
       .mobileMenuInner{padding:12px 14px 16px}
-      .modalHero{height:180px}
     }
-
-<style>
-  /* Quote popup (toast) */
-  .quote-toast{
-    position: fixed;
-    left: 50%;
-    bottom: 22px;
-    transform: translateX(-50%);
-    z-index: 99999;
-    width: min(640px, calc(100% - 28px));
-    background: rgba(14, 10, 26, 0.92);
-    border: 1px solid rgba(255, 0, 180, 0.28);
-    box-shadow: 0 18px 60px rgba(0,0,0,.45);
-    border-radius: 16px;
-    padding: 14px 14px;
-    color: #fff;
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity .25s ease, transform .25s ease;
-  }
-  .quote-toast.show{
-    opacity: 1;
-    pointer-events: auto;
-    transform: translateX(-50%) translateY(0);
-  }
-  .quote-toast .row{
-    display: flex;
-    gap: 12px;
-    align-items: flex-start;
-  }
-  .quote-toast .mark{
-    width: 34px;
-    height: 34px;
-    border-radius: 10px;
-    flex: 0 0 auto;
-    display: grid;
-    place-items: center;
-    background: rgba(255, 0, 180, 0.14);
-    border: 1px solid rgba(255, 0, 180, 0.22);
-    font-size: 18px;
-    line-height: 1;
-  }
-  .quote-toast .text{
-    flex: 1 1 auto;
-    font-size: 14px;
-    line-height: 1.35;
-    opacity: .95;
-  }
-  .quote-toast .text .q{
-    display: block;
-    font-weight: 600;
-    letter-spacing: .2px;
-  }
-  .quote-toast .text .a{
-    display: block;
-    margin-top: 4px;
-    font-size: 12.5px;
-    opacity: .75;
-  }
-  .quote-toast .close{
-    flex: 0 0 auto;
-    border: 0;
-    background: transparent;
-    color: rgba(255,255,255,.85);
-    width: 34px;
-    height: 34px;
-    border-radius: 10px;
-    cursor: pointer;
-    display: grid;
-    place-items: center;
-    transition: background .15s ease, color .15s ease;
-  }
-  .quote-toast .close:hover{
-    background: rgba(255,255,255,.08);
-    color: #fff;
-  }
-
-  @media (prefers-reduced-motion: reduce){
-    .quote-toast{ transition: none; }
-  }
-</style>
-
-    
   </style>
+
+
+
+  <!-- (tvoja schema dupla ostaje, ne diram, ali realno ti je redundant; ostavila sam kako si poslala) -->
   <script type="application/ld+json" data-schema="org">
-{
-  "@context": "https://schema.org",
-  "@type": "Organization",
-  "@id": "https://www.sindikatstudio83.me/#org",
-  "name": "Sindikat Studio 83",
-  "url": "https://www.sindikatstudio83.me/",
-  "logo": {
-    "@type": "ImageObject",
-    "url": "https://www.sindikatstudio83.me/studio83logo.png"
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "@id": "https://www.sindikatstudio83.me/#org",
+    "name": "Sindikat Studio 83",
+    "url": "https://www.sindikatstudio83.me/",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://www.sindikatstudio83.me/studio83logo.png"
+    }
   }
-}
-</script>
+  </script>
   <script type="application/ld+json" data-schema="localbusiness">
-{
-  "@context": "https://schema.org",
-  "@type": "LocalBusiness",
-  "@id": "https://www.sindikatstudio83.me/#localbusiness",
-  "name": "Sindikat Studio 83",
-  "url": "https://www.sindikatstudio83.me/",
-  "image": "https://www.sindikatstudio83.me/studio83logo.png",
-  "address": {
-    "@type": "PostalAddress",
-    "addressLocality": "Podgorica",
-    "addressRegion": "Crna Gora",
-    "addressCountry": "ME"
+  {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "@id": "https://www.sindikatstudio83.me/#localbusiness",
+    "name": "Sindikat Studio 83",
+    "url": "https://www.sindikatstudio83.me/",
+    "image": "https://www.sindikatstudio83.me/studio83logo.png",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Podgorica",
+      "addressRegion": "Crna Gora",
+      "addressCountry": "ME"
+    }
   }
-}
-</script>
+  </script>
 </head>
 
 <body>
@@ -1048,10 +898,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     </div>
   </a>
 
-<!-- Google Tag Manager (noscript) -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PBXVW3GK"
-height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-<!-- End Google Tag Manager (noscript) -->
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PBXVW3GK"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
 
   <!-- Background glow -->
   <div class="heroBg" id="heroBg" aria-hidden="true"></div>
@@ -1059,53 +909,50 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <div class="blob b2" id="blob2" aria-hidden="true"></div>
 
   <!-- Topbar -->
-<header class="topbar">
-  <div class="topbarInner reveal">
-    <!-- ✅ removed logo from bar (now floating) -->
-    <div class="brand"></div>
+  <header class="topbar">
+    <div class="topbarInner reveal">
+      <div class="brand"></div>
 
-    <a class="btn primary ctaCenter" href="/sr-me/kontakt"><span class="dot"></span>Kontaktiraj nas</a>
+      <a class="btn primary ctaCenter" href="/sr-me/kontakt"><span class="dot"></span>Kontaktiraj nas</a>
 
-    <div class="navWrap">
-      <nav aria-label="Primary">
+      <div class="navWrap">
+        <nav aria-label="Primary">
+          <a href="/sr-me/pocetna">Početna</a>
+          <a href="/sr-me/usluge">Usluge</a>
+          <a href="/sr-me/onama">O nama</a>
+          <a href="/sr-me/blog" aria-current="page">Blog</a>
+          <a href="/sr-me/poslovi">Poslovi</a>
+        </nav>
+
+        <button class="hamburger" id="hamburger" aria-label="Open menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+
+    <div class="mobileMenu" id="mobileMenu">
+      <div class="mobileMenuInner">
         <a href="/sr-me/pocetna">Početna</a>
         <a href="/sr-me/usluge">Usluge</a>
         <a href="/sr-me/onama">O nama</a>
         <a href="/sr-me/blog" aria-current="page">Blog</a>
         <a href="/sr-me/poslovi">Poslovi</a>
-      </nav>
-
-      <button class="hamburger" id="hamburger" aria-label="Open menu">
-        <span></span><span></span><span></span>
-      </button>
+      </div>
     </div>
-  </div>
-
-  <div class="mobileMenu" id="mobileMenu">
-    <div class="mobileMenuInner">
-      <a href="/sr-me/pocetna">Početna</a>
-      <a href="/sr-me/usluge">Usluge</a>
-      <a href="/sr-me/onama">O nama</a>
-      <a href="/sr-me/blog" aria-current="page">Blog</a>
-      <a href="/sr-me/poslovi">Poslovi</a>
-    </div>
-  </div>
-</header>
+  </header>
 
   <main class="wrap">
     <!-- HERO -->
     <section class="hero" id="top">
       <div class="heroGrid">
         <div>
-          <div class="kicker reveal"></span></div>
           <div class="kicker reveal"><span class="dot"></span> BLOG — Podgorica • Crna Gora • oglasi • SEO • aktivacije</div>
 
-          <h1 class="heroTitle reveal" id="heroTitle">
-            Blog o oglašavanju i aktivacijama.
-          </h1>
+          <h1 class="heroTitle reveal" id="heroTitle">Blog o oglašavanju i aktivacijama.</h1>
 
           <p class="sub reveal">
-            Praktični tekstovi za <strong>Crnu Goru</strong>: <strong>Meta oglasi</strong>, <strong>Google Ads</strong>, <strong>sadržaj za reklame</strong>, <strong>lokalni SEO</strong> i <strong>promotivne aktivacije</strong>.
+            Praktični tekstovi za <strong>Crnu Goru</strong>: <strong>Meta oglasi</strong>, <strong>Google Ads</strong>,
+            <strong>sadržaj za reklame</strong>, <strong>lokalni SEO</strong> i <strong>promotivne aktivacije</strong>.
             Nije samo “sales” — ovdje su i preporuke, zanimljivosti i tips & tricks koje štede budžet i vrijeme.
           </p>
         </div>
@@ -1151,7 +998,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <div style="height:14px"></div>
 
       <div class="postsGrid" id="postsGrid">
-        <!-- injected by JS -->
+        <!-- ✅ Skeleton će se ubaciti odmah preko JS -->
       </div>
 
       <!-- Pagination -->
@@ -1160,7 +1007,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <div class="pagerBtns" id="pagerBtns"></div>
       </div>
 
-      <!-- Keep only this CTA block (per request) -->
+      <!-- CTA -->
       <div class="ctaBand reveal" id="offer">
         <div class="left">
           <div class="h2">Hoćeš da ovo uradimo umjesto tebe?</div>
@@ -1181,25 +1028,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </footer>
   </main>
 
-  <!-- Modal -->
-  <div class="modalOverlay" id="modalOverlay" role="dialog" aria-modal="true" aria-label="Blog post">
-    <div class="modal" role="document">
-      <!-- NEW: second (different) image for popup -->
-      <div class="modalHero" id="modalHero">
-        <img id="modalHeroImg" src="" alt="" loading="eager" />
-      </div>
-
-      <div class="modalHeader">
-        <div>
-          <h2 id="modalTitle">Naslov</h2>
-          <div class="miniK" id="modalMeta" style="margin-top:10px"></div>
-        </div>
-        <button class="modalClose" id="modalClose" aria-label="Close">✕</button>
-      </div>
-      <div class="modalBody" id="modalBody"></div>
-    </div>
-  </div>
-
   <script>
     // Year
     document.getElementById('year').textContent = new Date().getFullYear();
@@ -1207,7 +1035,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     // Mobile menu toggle
     const hamburger = document.getElementById('hamburger');
     const mobileMenu = document.getElementById('mobileMenu');
-
     if (hamburger && mobileMenu) {
       hamburger.addEventListener('click', ()=>{
         const isOpen = mobileMenu.style.display === 'block';
@@ -1220,13 +1047,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           easing: 'easeOutQuad'
         });
       });
-
       document.querySelectorAll('#mobileMenu a').forEach(a=>{
         a.addEventListener('click', ()=>{ mobileMenu.style.display = 'none'; });
       });
     }
 
-    // Split hero title into words (safe spacing)
+    // Split hero title into words
     const titleEl = document.getElementById('heroTitle');
     const raw = titleEl.textContent.trim();
     const words = raw.split(/\s+/);
@@ -1246,10 +1072,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
     const setBlobsBase = () => {
       const w = window.innerWidth, h = window.innerHeight;
-      b1.style.left = Math.max(12, w*0.06) + 'px';
-      b1.style.top  = Math.max(12, h*0.16) + 'px';
-      b2.style.left = Math.max(12, w*0.60) + 'px';
-      b2.style.top  = Math.max(12, h*0.08) + 'px';
+      if(b1){
+        b1.style.left = Math.max(12, w*0.06) + 'px';
+        b1.style.top  = Math.max(12, h*0.16) + 'px';
+      }
+      if(b2){
+        b2.style.left = Math.max(12, w*0.60) + 'px';
+        b2.style.top  = Math.max(12, h*0.08) + 'px';
+      }
     };
     setBlobsBase();
     window.addEventListener('resize', setBlobsBase);
@@ -1282,44 +1112,54 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       });
     }, {passive:true});
 
+    // ✅ Reveal observer (global)
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(entry=>{
+        if(!entry.isIntersecting) return;
+        const el = entry.target;
+        anime({ targets: el, opacity:[0,1], translateY:[18,0], duration:820, easing: 'easeOutExpo' });
+        io.unobserve(el);
+      });
+    }, {threshold: 0.14});
+
+    document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
     // ✅ BLOG POSTS FROM GOOGLE SHEET (WebApp)
-const API_URL = "https://script.google.com/macros/s/AKfycbzGf2MSW8mS-sm9ZUnszl7rfYoP2WRJ-3reuYdeMz-4PD0adX2L5ZzOz47Xaa-w-45N/exec?sheet=Posts&onlyPublished=1";
+    const API_URL = "https://script.google.com/macros/s/AKfycbzGf2MSW8mS-sm9ZUnszl7rfYoP2WRJ-3reuYdeMz-4PD0adX2L5ZzOz47Xaa-w-45N/exec?sheet=Posts&onlyPublished=1";
+    const BLOG_BASE = "/sr-me/blog/";
 
-// gdje generator pravi statične stranice
-const BLOG_BASE = "/sr-me/blog/";
+    let POSTS = [];
 
-// umjesto hardcoded niza
-let POSTS = [];
+    function fromApiToUiPost(p){
+      return {
+        id: p.slug,
+        slug: p.slug,
+        category: (p.category || "").toLowerCase(),
+        badge: p.category_label || (p.category ? (p.category[0].toUpperCase()+p.category.slice(1)) : "Blog"),
+        title: p.title || "",
+        excerpt: p.excerpt || "",
+        tags: Array.isArray(p.tags) ? p.tags : [],
+        img: p.cover_image || "",
+        alt: p.cover_alt || p.title || ""
+      };
+    }
 
-function fromApiToUiPost(p){
-  return {
-    id: p.slug, // koristi se samo interno
-    slug: p.slug,
+    async function loadPosts(){
+      // ✅ Abort ako baš dugo traje (da ne visi)
+      const controller = new AbortController();
+      const t = setTimeout(()=>controller.abort(), 12000);
 
-    category: (p.category || "").toLowerCase(),
-    badge: p.category_label || (p.category ? (p.category[0].toUpperCase()+p.category.slice(1)) : "Blog"),
+      const res = await fetch(API_URL, { cache: "no-store", signal: controller.signal });
+      clearTimeout(t);
 
-    title: p.title || "",
-    excerpt: p.excerpt || "",
+      const data = await res.json();
+      if(!data || !data.ok) throw new Error((data && data.error) ? data.error : "API error");
 
-    tags: Array.isArray(p.tags) ? p.tags : [],
-    img: p.cover_image || "",
-    alt: p.cover_alt || p.title || ""
-  };
-}
-
-async function loadPosts(){
-  const res = await fetch(API_URL, { cache: "no-store" });
-  const data = await res.json();
-
-  if(!data || !data.ok) throw new Error((data && data.error) ? data.error : "API error");
-  const list = Array.isArray(data.posts) ? data.posts : [];
-
-  POSTS = list
-    .map(fromApiToUiPost)
-    .filter(p => p.slug && p.title);
-}
-
+      const list = Array.isArray(data.posts) ? data.posts : [];
+      POSTS = list
+        .map(fromApiToUiPost)
+        .filter(p => p.slug && p.title);
+    }
 
     // Build + pagination
     const grid = document.getElementById('postsGrid');
@@ -1343,7 +1183,6 @@ async function loadPosts(){
       currentPage = Math.min(currentPage, tp);
 
       pagerLeft.textContent = `Strana ${currentPage} / ${tp}`;
-
       pagerBtns.innerHTML = '';
 
       const prev = document.createElement('button');
@@ -1387,10 +1226,38 @@ async function loadPosts(){
           <div class="readLink"><span class="chev">↗</span> Otvori tekst</div>
         </div>
       `;
-el.addEventListener('click', ()=>{
-  window.location.href = BLOG_BASE + p.slug + "/";
-});
+      el.addEventListener('click', ()=>{
+        window.location.href = BLOG_BASE + p.slug + "/";
+      });
       return el;
+    }
+
+    // ✅ Skeleton cards (prikaži odmah)
+    function renderSkeleton(){
+      grid.innerHTML = '';
+      for(let i=0;i<6;i++){
+        const sk = document.createElement('article');
+        sk.className = 'card skeleton shimmer';
+        sk.innerHTML = `
+          <div class="thumb"></div>
+          <div class="meta">
+            <div class="skLine lg w80"></div>
+            <div class="skLine w60"></div>
+            <div class="skLine w45"></div>
+            <div class="skRow" style="margin-top:6px">
+              <div class="skTag"></div>
+              <div class="skTag"></div>
+              <div class="skTag"></div>
+            </div>
+            <div class="readLink" style="opacity:.55; margin-top:auto">
+              <span class="chev">↗</span> Učitavam...
+            </div>
+          </div>
+        `;
+        grid.appendChild(sk);
+      }
+      pagerLeft.textContent = 'Učitavam...';
+      pagerBtns.innerHTML = '';
     }
 
     function renderGrid(){
@@ -1403,60 +1270,14 @@ el.addEventListener('click', ()=>{
       const start = (currentPage - 1) * PAGE_SIZE;
       const slice = list.slice(start, start + PAGE_SIZE);
 
-      slice.forEach(p => grid.appendChild(makeCard(p)));
+      slice.forEach(p => {
+        const card = makeCard(p);
+        grid.appendChild(card);
+        io.observe(card); // ✅ samo novo dodate observe
+      });
 
       renderPager();
-
-      // re-attach reveal observer for newly rendered cards
-      document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
     }
-
-    // Modal logic
-    const modalOverlay = document.getElementById('modalOverlay');
-    const modalClose = document.getElementById('modalClose');
-    const modalTitle = document.getElementById('modalTitle');
-    const modalMeta = document.getElementById('modalMeta');
-    const modalBody = document.getElementById('modalBody');
-    const modalHeroImg = document.getElementById('modalHeroImg');
-
-    function openModal(postId){
-      const p = POSTS.find(x=>x.id===postId);
-      if(!p) return;
-
-      // NEW: set popup hero image (different from card)
-      modalHeroImg.src = p.popupImg || p.img;
-      modalHeroImg.alt = p.popupAlt || p.alt || p.title;
-
-      modalTitle.textContent = p.title;
-      modalMeta.innerHTML = `
-        <span>${p.badge}</span>
-        <span>${p.tags[0] || 'Crna Gora'}</span>
-        <span>${p.tags[1] || 'Podgorica'}</span>
-      `;
-      modalBody.innerHTML = p.body;
-
-      modalOverlay.style.display = 'flex';
-      anime({ targets: modalOverlay, opacity:[0,1], duration:220, easing:'easeOutQuad' });
-      anime({ targets: '#modalHero img', opacity:[0,1], scale:[1.03,1.02], duration:520, easing:'easeOutExpo' });
-    }
-
-    function closeModal(){
-      anime({
-        targets: modalOverlay,
-        opacity:[1,0],
-        duration:180,
-        easing:'easeOutQuad',
-        complete: ()=>{ modalOverlay.style.display = 'none'; }
-      });
-    }
-
-    modalClose.addEventListener('click', closeModal);
-    modalOverlay.addEventListener('click', (e)=>{
-      if(e.target === modalOverlay) closeModal();
-    });
-    document.addEventListener('keydown', (e)=>{
-      if(e.key === 'Escape' && modalOverlay.style.display === 'flex') closeModal();
-    });
 
     // Filter buttons
     const buttons = Array.from(document.querySelectorAll('.filterBtn'));
@@ -1471,38 +1292,37 @@ el.addEventListener('click', ()=>{
         currentFilter = btn.dataset.filter;
         currentPage = 1;
         setActive(btn);
-        renderGrid();
+
+        // ako nema postova još, samo skeleton dok se ne učita
+        if(!POSTS.length){
+          renderSkeleton();
+        } else {
+          renderGrid();
+        }
+
         window.location.hash = '#posts';
       });
     });
 
-    // Reveal observer (global, reused)
-    const io = new IntersectionObserver((entries)=>{
-      entries.forEach(entry=>{
-        if(!entry.isIntersecting) return;
-        const el = entry.target;
-        anime({ targets: el, opacity:[0,1], translateY:[18,0], duration:820, easing: 'easeOutExpo' });
-        io.unobserve(el);
+    // ✅ Init: pokaži skeleton odmah, pa zamijeni kad API stigne
+    renderSkeleton();
+
+    loadPosts()
+      .then(() => {
+        // ako je filter već kliknut, renderGrid će to poštovati
+        renderGrid();
+      })
+      .catch(err => {
+        console.error(err);
+        grid.innerHTML = `
+          <div style="opacity:.90; border:3px solid rgba(255,255,255,.14); border-radius:14px; padding:14px;">
+            Ne mogu da učitam postove. Provjeri WebApp link / sheet name / prava pristupa.<br>
+            <div style="margin-top:8px; opacity:.8; font-size:12px;">${String(err.message || err)}</div>
+          </div>
+        `;
+        pagerLeft.textContent = 'Greška';
+        pagerBtns.innerHTML = '';
       });
-    }, {threshold: 0.14});
-
-    // Initial observe for static elements
-    document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
-
-    // Initial render
-   // Initial render (load from sheet -> render)
-loadPosts()
-  .then(() => renderGrid())
-  .catch(err => {
-    console.error(err);
-    grid.innerHTML = `
-      <div style="opacity:.85; border:3px solid rgba(255,255,255,.14); border-radius:14px; padding:14px;">
-        Ne mogu da učitam postove. Provjeri WebApp link / sheet name / prava pristupa.<br>
-        <div style="margin-top:8px; opacity:.8; font-size:12px;">${String(err.message || err)}</div>
-      </div>
-    `;
-  });
-
 
     // Hero title word stagger on load
     window.addEventListener('load', ()=>{
@@ -1517,188 +1337,7 @@ loadPosts()
     });
   </script>
 
-<script>
-(function(){
-  // 1) Citati (dodaj/izmijeni slobodno)
-  const quotes = [
-    { title: "Mala mudrost", q: "Brzina bez pravca je samo haos.", a: "Sindikat Studio 83" },
-    { title: "Podsjetnik", q: "Ne jurimo reach. Jurimo upite.", a: "Sindikat Studio 83" },
-    { title: "Fokus", q: "Malo buke, puno rezultata.", a: "Sindikat Studio 83" }
-  ];
-
-  const DURATION_MS = 2000;
-
-  function injectStyles(){
-    if (document.getElementById("blueCenterNoteStyles")) return;
-
-    const css = `
-      .blueNoteOverlay{
-        position: fixed;
-        inset: 0;
-        z-index: 2147483647;
-        display: grid;
-        place-items: center;
-        padding: 18px;
-        background: rgba(0,0,0,.58);
-        opacity: 0;
-        transition: opacity .18s ease;
-      }
-      .blueNoteOverlay.show{ opacity: 1; }
-
-      .blueNote{
-        width: min(520px, calc(100% - 28px));
-        border-radius: 20px;
-        border: 2px solid rgba(24,245,255,.38);
-        background:
-          radial-gradient(520px 260px at 20% 18%, rgba(24,245,255,.18), transparent 62%),
-          radial-gradient(520px 260px at 76% 22%, rgba(162,76,255,.10), transparent 62%),
-          linear-gradient(180deg, rgba(14,16,26,.92), rgba(7,8,19,.92));
-        box-shadow: 0 26px 80px rgba(0,0,0,.60);
-        backdrop-filter: blur(14px);
-        -webkit-backdrop-filter: blur(14px);
-        color: #fff;
-        font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-        overflow: hidden;
-
-        transform: translateY(10px) scale(.985);
-        opacity: 0;
-        transition: opacity .18s ease, transform .18s ease;
-      }
-      .blueNote.show{
-        opacity: 1;
-        transform: translateY(0) scale(1);
-      }
-
-      .blueNoteBar{
-        height: 3px;
-        background: linear-gradient(90deg, rgba(24,245,255,.95), rgba(24,245,255,.55));
-      }
-
-      .blueNoteInner{
-        display: flex;
-        gap: 12px;
-        padding: 16px 16px 16px;
-        align-items: flex-start;
-      }
-
-      .blueNoteIcon{
-        width: 42px;
-        height: 42px;
-        border-radius: 14px;
-        display: grid;
-        place-items: center;
-        flex: 0 0 auto;
-        background: rgba(24,245,255,.12);
-        border: 1px solid rgba(24,245,255,.22);
-        box-shadow: inset 0 0 0 1px rgba(0,0,0,.25);
-      }
-
-      .blueNoteHead{
-        display: flex;
-        align-items: baseline;
-        justify-content: space-between;
-        gap: 10px;
-      }
-
-      .blueNoteTitle{
-        font-weight: 850;
-        font-size: 13px;
-        letter-spacing: .2px;
-        opacity: .95;
-      }
-
-      .blueNoteMsg{
-        margin-top: 8px;
-        font-size: 14px;
-        line-height: 1.55;
-        opacity: .92;
-      }
-
-      .blueNoteAuthor{
-        margin-top: 8px;
-        font-size: 12.5px;
-        opacity: .68;
-      }
-
-      @media (prefers-reduced-motion: reduce){
-        .blueNoteOverlay, .blueNote{ transition: none; }
-      }
-    `;
-
-    const style = document.createElement("style");
-    style.id = "blueCenterNoteStyles";
-    style.textContent = css;
-    document.head.appendChild(style);
-  }
-
-  function showBlueNote(){
-    // očisti stare ako postoje
-    const oldO = document.getElementById("blueNoteOverlay");
-    if (oldO) oldO.remove();
-
-    const pick = quotes[Math.floor(Math.random() * quotes.length)];
-
-    const overlay = document.createElement("div");
-    overlay.id = "blueNoteOverlay";
-    overlay.className = "blueNoteOverlay";
-
-    const box = document.createElement("div");
-    box.className = "blueNote";
-    box.setAttribute("role","dialog");
-    box.setAttribute("aria-live","polite");
-
-    box.innerHTML = `
-      <div class="blueNoteBar"></div>
-      <div class="blueNoteInner">
-        <div class="blueNoteIcon">✦</div>
-        <div style="flex:1; min-width:0;">
-          <div class="blueNoteHead">
-            <div class="blueNoteTitle">${pick.title}</div>
-          </div>
-          <div class="blueNoteMsg">“${pick.q}”</div>
-          <div class="blueNoteAuthor">— ${pick.a}</div>
-        </div>
-      </div>
-    `;
-
-    overlay.appendChild(box);
-    document.body.appendChild(overlay);
-
-    // show animacija
-    requestAnimationFrame(() => {
-      overlay.classList.add("show");
-      box.classList.add("show");
-    });
-
-    // auto close nakon 3s (bez dugmeta, bez klika)
-    setTimeout(() => {
-      overlay.classList.remove("show");
-      box.classList.remove("show");
-      setTimeout(() => overlay.remove(), 220);
-    }, DURATION_MS);
-  }
-
- function run(){
-  injectStyles();
-  if (!document.body) { setTimeout(run, 50); return; }
-
-  // ✅ pokaži samo jednom po sesiji (dok je tab otvoren)
-  if (sessionStorage.getItem("s83_blue_note_shown") === "1") return;
-  sessionStorage.setItem("s83_blue_note_shown", "1");
-
-  showBlueNote();
-}
-
-if (document.readyState === "loading"){
-  document.addEventListener("DOMContentLoaded", run);
-} else {
-  run();
-}
-
-})();
-</script>
 
 
-  
 </body>
 </html>
