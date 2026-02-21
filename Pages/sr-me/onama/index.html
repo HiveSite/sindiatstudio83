@@ -23,9 +23,9 @@
 
   <!-- Canonical / hreflang -->
   <link rel="canonical" href="https://www.sindikatstudio83.me/sr-me/onama/" />
-  <link rel="alternate" href="https://www.sindikatstudio83.me/sr-me/onama" hreflang="sr-ME" />
-  <link rel="alternate" href="https://www.sindikatstudio83.me/sr-me/onama" hreflang="sr" />
-  <link rel="alternate" href="https://www.sindikatstudio83.me/sr-me/onama" hreflang="x-default" />
+  <link rel="alternate" href="https://www.sindikatstudio83.me/sr-me/onama/" hreflang="sr-ME" />
+  <link rel="alternate" href="https://www.sindikatstudio83.me/sr-me/onama/" hreflang="sr" />
+  <link rel="alternate" href="https://www.sindikatstudio83.me/sr-me/onama/" hreflang="x-default" />
 
   <!-- Open Graph -->
   <meta property="og:type" content="website" />
@@ -67,8 +67,8 @@
       },
       {
         "@type":"AboutPage",
-        "@id":"https://www.sindikatstudio83.me/sr-me/onama#about",
-        "url":"https://www.sindikatstudio83.me/sr-me/onama",
+        "@id":"https://www.sindikatstudio83.me/sr-me/onama/#about",
+        "url":"https://www.sindikatstudio83.me/sr-me/onama/",
         "name":"O nama — Sindikat",
         "isPartOf":{"@id":"https://www.sindikatstudio83.me/sr-me/#website"},
         "about":{"@id":"https://www.sindikatstudio83.me/sr-me/#organization"},
@@ -234,6 +234,7 @@
     .navWrap{
       margin-left:auto;
       display:flex; align-items:center; gap:12px;
+      position:relative;
     }
 
     .brand{
@@ -396,7 +397,7 @@
       position:fixed;
       top:14px;
       left:14px;
-      z-index:120; /* iznad sadržaja, ispod modala (200) */
+      z-index:120;
       display:block;
       text-decoration:none;
     }
@@ -413,9 +414,7 @@
     }
 
     /* HERO (About page) */
-    .hero{
-      padding:54px 0 22px;
-    }
+    .hero{ padding:54px 0 22px; }
     .heroGrid{
       display:grid;
       grid-template-columns: 1.15fr .85fr;
@@ -702,10 +701,7 @@
     }
 
     /* Step list */
-    .steps{
-      display:grid;
-      gap:12px;
-    }
+    .steps{ display:grid; gap:12px; }
     .step{
       border:2px solid rgba(255,255,255,.12);
       border-radius:var(--r2);
@@ -728,19 +724,14 @@
     .step .d{margin:8px 0 0; color:rgba(255,255,255,.72); font-size:13px; line-height:1.65}
 
     /* Media card (text + image) */
-    .mediaCard{
-      padding:0;
-      overflow:hidden;
-    }
+    .mediaCard{ padding:0; overflow:hidden; }
     .mediaGrid{
       display:grid;
       grid-template-columns: 1.05fr .95fr;
       gap:0;
       align-items:stretch;
     }
-    .mediaText{
-      padding:18px;
-    }
+    .mediaText{ padding:18px; }
     .mediaImg{
       border-left:3px solid rgba(255,255,255,.12);
       background:#0a0b12;
@@ -767,11 +758,7 @@
     }
 
     /* Reveal base */
-    .reveal{
-      opacity:0;
-      transform:translateY(18px);
-      will-change: transform, opacity;
-    }
+    .reveal{ opacity:0; transform:translateY(18px); will-change: transform, opacity; }
 
     footer{
       border-top:3px solid rgba(255,255,255,.10);
@@ -785,11 +772,9 @@
       .hero{padding:38px 0 18px}
       .heroGrid{grid-template-columns:1fr}
       h1{font-size:42px}
-
       .grid4{grid-template-columns:repeat(2,1fr)}
       .grid3{grid-template-columns:1fr}
       .grid2{grid-template-columns:1fr}
-
       .mediaGrid{grid-template-columns:1fr}
       .mediaImg{
         border-left:0;
@@ -807,10 +792,12 @@
       .mobileMenuInner{padding:12px 14px 16px}
     }
   </style>
+
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="O nama | Sindikat — Performance &amp; Activation Studio (Podgorica)" />
   <meta name="twitter:description" content="Sindikat je Performance &amp; Activation Studio iz Podgorice. Kampanje, sadržaj i aktivacije koje imaju jasan cilj i mjerljiv rezultat — online i na terenu." />
   <meta name="twitter:image" content="https://www.sindikatstudio83.me/studio83logo.png" />
+
   <script type="application/ld+json" data-schema="org">
 {
   "@context": "https://schema.org",
@@ -824,6 +811,7 @@
   }
 }
 </script>
+
   <script type="application/ld+json" data-schema="localbusiness">
 {
   "@context": "https://schema.org",
@@ -881,13 +869,16 @@
           <a href="/sr-me/poslovi">Poslovi</a>
         </nav>
 
-        <button class="hamburger" id="hamburger" aria-label="Open menu">
+        <button class="hamburger" id="hamburger"
+          aria-label="Open menu"
+          aria-expanded="false"
+          aria-controls="mobileMenu">
           <span></span><span></span><span></span>
         </button>
       </div>
     </div>
 
-    <div class="mobileMenu" id="mobileMenu">
+    <div class="mobileMenu" id="mobileMenu" aria-label="Mobile menu">
       <div class="mobileMenuInner">
         <a href="/sr-me/pocetna">Početna</a>
         <a href="/sr-me/usluge">Usluge</a>
@@ -903,7 +894,7 @@
     <section class="hero" id="about">
       <div class="heroGrid">
         <div>
-          <div class="kicker reveal"></span></div>
+          <!-- ✅ fix: removed broken </span> -->
           <div class="kicker reveal"><span class="dot"></span> Performance & Activation Studio</div>
 
           <!-- Single H1 -->
@@ -918,8 +909,6 @@
             Sindikat je nastao iz event industrije, ali je evoluirao dalje. Danas spajamo digitalne kampanje,
             sadržaj i aktivacije u jedan sistem koji ima jasan cilj i mjerljiv ishod.
           </p>
-
-    
 
           <div class="miniRow reveal">
             <span>Cilj → sistem → rezultat</span>
@@ -1237,44 +1226,71 @@
 
   <script>
     // Year
-    document.getElementById('year').textContent = new Date().getFullYear();
+    const yearEl = document.getElementById('year');
+    if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-    // Mobile menu toggle
+    // Mobile menu toggle (proper state + nice UX)
     const hamburger = document.getElementById('hamburger');
     const mobileMenu = document.getElementById('mobileMenu');
+
+    const closeMobileMenu = () => {
+      if (!mobileMenu) return;
+      mobileMenu.style.display = 'none';
+      mobileMenu.style.opacity = '';
+      mobileMenu.style.transform = '';
+      if (hamburger) hamburger.setAttribute('aria-expanded','false');
+    };
+
     if (hamburger && mobileMenu){
       hamburger.addEventListener('click', ()=>{
         const isOpen = mobileMenu.style.display === 'block';
-        mobileMenu.style.display = isOpen ? 'none' : 'block';
-        anime({
-          targets: mobileMenu,
-          opacity: isOpen ? [1,0] : [0,1],
-          translateY: isOpen ? [0,6] : [6,0],
-          duration: 260,
-          easing: 'easeOutQuad'
-        });
+        if (isOpen) {
+          anime({
+            targets: mobileMenu,
+            opacity: [1,0],
+            translateY: [0,6],
+            duration: 220,
+            easing: 'easeOutQuad',
+            complete: closeMobileMenu
+          });
+        } else {
+          mobileMenu.style.display = 'block';
+          hamburger.setAttribute('aria-expanded','true');
+          anime({
+            targets: mobileMenu,
+            opacity: [0,1],
+            translateY: [6,0],
+            duration: 260,
+            easing: 'easeOutQuad'
+          });
+        }
       });
 
-      // Close mobile menu after click
       document.querySelectorAll('#mobileMenu a').forEach(a=>{
-        a.addEventListener('click', ()=>{
-          mobileMenu.style.display = 'none';
-        });
+        a.addEventListener('click', closeMobileMenu);
+      });
+
+      document.addEventListener('click', (e)=>{
+        if (mobileMenu.style.display !== 'block') return;
+        const inside = mobileMenu.contains(e.target) || hamburger.contains(e.target);
+        if (!inside) closeMobileMenu();
       });
     }
 
-    // Hero title split into words (kept same pattern)
+    // Hero title split into words (safe)
     const titleEl = document.getElementById('heroTitle');
-    const raw = titleEl.textContent.trim();
-    const words = raw.split(/\s+/);
-    titleEl.textContent = '';
-    words.forEach((w, i) => {
-      const span = document.createElement('span');
-      span.textContent = w;
-      span.style.display = 'inline-block';
-      titleEl.appendChild(span);
-      if (i < words.length - 1) titleEl.appendChild(document.createTextNode(' '));
-    });
+    if (titleEl) {
+      const raw = titleEl.textContent.trim();
+      const words = raw.split(/\s+/);
+      titleEl.textContent = '';
+      words.forEach((w, i) => {
+        const span = document.createElement('span');
+        span.textContent = w;
+        span.style.display = 'inline-block';
+        titleEl.appendChild(span);
+        if (i < words.length - 1) titleEl.appendChild(document.createTextNode(' '));
+      });
+    }
 
     // Reveal observer
     const revealEls = document.querySelectorAll('.reveal');
