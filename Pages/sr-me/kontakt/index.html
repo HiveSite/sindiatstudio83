@@ -635,6 +635,34 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     // Year
     document.getElementById('year').textContent = new Date().getFullYear();
 
+
+    // ✅ TAB TITLE SYSTEM (kad tab nije aktivan)
+const BASE_TITLE = document.title;
+const BACKGROUND_TITLE = "👋 Vratite se kad ste spremni";
+
+let attentionTimeout = null;
+
+document.addEventListener("visibilitychange", () => {
+  if (document.hidden) {
+    document.title = BACKGROUND_TITLE;
+  } else {
+    document.title = BASE_TITLE;
+    if (attentionTimeout) {
+      clearTimeout(attentionTimeout);
+      attentionTimeout = null;
+    }
+  }
+});
+
+// opcionalno: kratki "flash" title-a kad se desi akcija
+function flashTitleOnce(text, duration = 3500) {
+  document.title = text;
+  attentionTimeout = setTimeout(() => {
+    if (!document.hidden) document.title = BASE_TITLE;
+  }, duration);
+}
+
+    
     // Mobile menu toggle (same behavior as blog)
     const hamburger = document.getElementById('hamburger');
     const mobileMenu = document.getElementById('mobileMenu');
