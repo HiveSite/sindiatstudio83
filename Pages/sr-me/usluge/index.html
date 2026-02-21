@@ -175,15 +175,15 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       margin:0 auto;
       padding:12px 18px;
       display:flex; align-items:center; gap:12px;
-      justify-content:flex-start; /* same as Kontakt */
+      justify-content:flex-start;
     }
-    .ctaCenter{margin:0;} /* same as Kontakt */
+    .ctaCenter{margin:0;}
     .navWrap{
       margin-left:auto;
       display:flex; align-items:center; gap:12px;
       position:relative;
     }
-    .brand{ /* kept for spacing parity, but empty in HTML */
+    .brand{
       display:flex; align-items:center; gap:12px;
       font-weight:750;
       letter-spacing:.9px;
@@ -296,6 +296,35 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       max-width:72ch;
     }
 
+    /* Group titles */
+    .groupHeader{
+      margin:18px 0 12px;
+      display:flex;
+      align-items:center;
+      gap:12px;
+      flex-wrap:wrap;
+    }
+    .groupHeader .gTitle{
+      margin:0;
+      font-size:14px;
+      letter-spacing:.5px;
+      text-transform:uppercase;
+      color:rgba(255,255,255,.86);
+    }
+    .groupHeader .gHint{
+      font-size:12px;
+      color:rgba(255,255,255,.66);
+      border:2px solid rgba(255,255,255,.12);
+      background: rgba(8,10,16,.55);
+      padding:6px 10px;
+      border-radius:10px;
+    }
+    .groupDivider{
+      height:1px;
+      background: rgba(255,255,255,.10);
+      margin:18px 0 6px;
+    }
+
     /* HERO */
     .hero{ padding:40px 0 22px; }
     .kicker{
@@ -349,6 +378,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       will-change: transform;
       position:relative;
       overflow:hidden;
+      scroll-margin-top: 90px;
     }
     .card:before{
       content:"";
@@ -616,6 +646,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       }
     }
   </style>
+
   <link rel="canonical" href="https://www.sindikatstudio83.me/sr-me/usluge/" />
   <meta name="robots" content="index,follow" />
   <meta property="og:url" content="https://www.sindikatstudio83.me/sr-me/usluge/" />
@@ -626,6 +657,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   <meta name="twitter:title" content="Sindikat — Usluge" />
   <meta name="twitter:description" content="Usluge koje donose upite, rezervacije i prodaju: oglašavanje, web, sadržaj, SEO, analitika i aktivacije — u jednom sistemu." />
   <meta name="twitter:image" content="https://www.sindikatstudio83.me/studio83logo.png" />
+
   <script type="application/ld+json" data-schema="org">
 {
   "@context": "https://schema.org",
@@ -639,6 +671,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   }
 }
 </script>
+
   <script type="application/ld+json" data-schema="localbusiness">
 {
   "@context": "https://schema.org",
@@ -655,6 +688,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   }
 }
 </script>
+
+  <!-- ✅ Services schema aligned with REAL services on this page -->
   <script type="application/ld+json" data-schema="services">
 {
   "@context": "https://schema.org",
@@ -675,157 +710,105 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   "hasPart": [
     {
       "@type": "Service",
-      "@id": "https://www.sindikatstudio83.me/sr-me/usluge/#event-produkcija",
-      "name": "Organizacija i produkcija događaja",
-      "description": "Plan i realizacija događaja: koncept, budžet, logistika, koordinacija tima i isporuka na terenu.",
-      "url": "https://www.sindikatstudio83.me/sr-me/usluge/#event-produkcija",
-      "provider": {
-        "@id": "https://www.sindikatstudio83.me/#org"
-      },
-      "areaServed": [
-        "Podgorica",
-        "Crna Gora"
-      ]
-    },
-    {
-      "@type": "Service",
-      "@id": "https://www.sindikatstudio83.me/sr-me/usluge/#brand-aktivacije",
-      "name": "Brend aktivacije i promotivne kampanje",
-      "description": "Aktivacije na terenu + digitalna podrška: promo tim, brending, sampling, fotke/video i reporting.",
-      "url": "https://www.sindikatstudio83.me/sr-me/usluge/#brand-aktivacije",
-      "provider": {
-        "@id": "https://www.sindikatstudio83.me/#org"
-      },
-      "areaServed": [
-        "Podgorica",
-        "Crna Gora"
-      ]
-    },
-    {
-      "@type": "Service",
-      "@id": "https://www.sindikatstudio83.me/sr-me/usluge/#promo-timovi",
-      "name": "Promo timovi (hostese, promoteri)",
-      "description": "Angažman i vođenje promo osoblja: selekcija, obuka, smjene, komunikacija i kontrola kvaliteta.",
-      "url": "https://www.sindikatstudio83.me/sr-me/usluge/#promo-timovi",
-      "provider": {
-        "@id": "https://www.sindikatstudio83.me/#org"
-      },
-      "areaServed": [
-        "Podgorica",
-        "Crna Gora"
-      ]
-    },
-    {
-      "@type": "Service",
-      "@id": "https://www.sindikatstudio83.me/sr-me/usluge/#tehnicka-produkcija",
-      "name": "Tehnička produkcija (audio/rasvjeta/tehnika)",
-      "description": "Tehnička podrška za event: ozvučenje, rasvjeta, setup, tehničari i koordinacija tokom programa.",
-      "url": "https://www.sindikatstudio83.me/sr-me/usluge/#tehnicka-produkcija",
-      "provider": {
-        "@id": "https://www.sindikatstudio83.me/#org"
-      },
-      "areaServed": [
-        "Podgorica",
-        "Crna Gora"
-      ]
-    },
-    {
-      "@type": "Service",
-      "@id": "https://www.sindikatstudio83.me/sr-me/usluge/#program-booking",
-      "name": "Program i booking (DJ / sadržaj / tok događaja)",
-      "description": "Kreiranje programa i toka večeri: DJ/program, dinamika, vođenje i koordinacija izvođača.",
-      "url": "https://www.sindikatstudio83.me/sr-me/usluge/#program-booking",
-      "provider": {
-        "@id": "https://www.sindikatstudio83.me/#org"
-      },
-      "areaServed": [
-        "Podgorica",
-        "Crna Gora"
-      ]
-    },
-    {
-      "@type": "Service",
-      "@id": "https://www.sindikatstudio83.me/sr-me/usluge/#meta-oglasi",
-      "name": "Meta oglasi (Facebook & Instagram)",
-      "description": "Planiranje i vođenje Meta kampanja: kreativa, targetiranje, optimizacija budžeta i konverzija.",
-      "url": "https://www.sindikatstudio83.me/sr-me/usluge/#meta-oglasi",
-      "provider": {
-        "@id": "https://www.sindikatstudio83.me/#org"
-      },
-      "areaServed": [
-        "Podgorica",
-        "Crna Gora"
-      ]
-    },
-    {
-      "@type": "Service",
-      "@id": "https://www.sindikatstudio83.me/sr-me/usluge/#google-ads",
-      "name": "Google Ads (Search, Display, YouTube)",
-      "description": "Kampanje za upite i prodaju: ključne riječi, oglasi, landing struktura i optimizacija performansi.",
-      "url": "https://www.sindikatstudio83.me/sr-me/usluge/#google-ads",
-      "provider": {
-        "@id": "https://www.sindikatstudio83.me/#org"
-      },
-      "areaServed": [
-        "Podgorica",
-        "Crna Gora"
-      ]
-    },
-    {
-      "@type": "Service",
-      "@id": "https://www.sindikatstudio83.me/sr-me/usluge/#seo-local-seo",
-      "name": "SEO & Local SEO",
-      "description": "On-page SEO, struktura sajta, sadržaj i lokalno rangiranje (Podgorica/Crna Gora).",
-      "url": "https://www.sindikatstudio83.me/sr-me/usluge/#seo-local-seo",
-      "provider": {
-        "@id": "https://www.sindikatstudio83.me/#org"
-      },
-      "areaServed": [
-        "Podgorica",
-        "Crna Gora"
-      ]
+      "@id": "https://www.sindikatstudio83.me/sr-me/usluge/#ads-performance",
+      "name": "Oglašavanje (Performance)",
+      "description": "Meta + Google kampanje uz testiranje i optimizaciju. Fokus: leadovi / prodaja / posjete.",
+      "url": "https://www.sindikatstudio83.me/sr-me/usluge/#ads-performance",
+      "provider": { "@id": "https://www.sindikatstudio83.me/#org" },
+      "areaServed": ["Podgorica","Crna Gora"]
     },
     {
       "@type": "Service",
       "@id": "https://www.sindikatstudio83.me/sr-me/usluge/#landing-web",
-      "name": "Landing stranice & Web",
-      "description": "Stranice koje konvertuju: jasna ponuda, brza forma, praćenje i optimizacija.",
+      "name": "Web sajtovi & Landing page",
+      "description": "Stranice koje konvertuju: jasna ponuda, struktura, CTA, praćenje i optimizacija.",
       "url": "https://www.sindikatstudio83.me/sr-me/usluge/#landing-web",
-      "provider": {
-        "@id": "https://www.sindikatstudio83.me/#org"
-      },
-      "areaServed": [
-        "Podgorica",
-        "Crna Gora"
-      ]
+      "provider": { "@id": "https://www.sindikatstudio83.me/#org" },
+      "areaServed": ["Podgorica","Crna Gora"]
     },
     {
       "@type": "Service",
-      "@id": "https://www.sindikatstudio83.me/sr-me/usluge/#sadrzaj-kreativa",
-      "name": "Sadržaj i kreativa (copy + oglasi)",
-      "description": "Copy i kreativa za oglase: hook, ponuda, varijacije, A/B testovi i optimizacija na osnovu rezultata.",
-      "url": "https://www.sindikatstudio83.me/sr-me/usluge/#sadrzaj-kreativa",
-      "provider": {
-        "@id": "https://www.sindikatstudio83.me/#org"
-      },
-      "areaServed": [
-        "Podgorica",
-        "Crna Gora"
-      ]
+      "@id": "https://www.sindikatstudio83.me/sr-me/usluge/#analytics-tracking",
+      "name": "Analytics & Tracking",
+      "description": "GA4 + event tracking: mjerimo ono što je bitno i optimizujemo na osnovu podataka.",
+      "url": "https://www.sindikatstudio83.me/sr-me/usluge/#analytics-tracking",
+      "provider": { "@id": "https://www.sindikatstudio83.me/#org" },
+      "areaServed": ["Podgorica","Crna Gora"]
+    },
+
+    {
+      "@type": "Service",
+      "@id": "https://www.sindikatstudio83.me/sr-me/usluge/#copy-content",
+      "name": "Copywriting & Content",
+      "description": "Poruke koje vode do upita: ads copy, landing copy i content plan.",
+      "url": "https://www.sindikatstudio83.me/sr-me/usluge/#copy-content",
+      "provider": { "@id": "https://www.sindikatstudio83.me/#org" },
+      "areaServed": ["Podgorica","Crna Gora"]
     },
     {
       "@type": "Service",
-      "@id": "https://www.sindikatstudio83.me/sr-me/usluge/#analitika-mjerenje",
-      "name": "Analitika i mjerenje (GTM / GA4)",
-      "description": "Postavka praćenja i mjerenja: događaji, konverzije, izvještaji i optimizacija na osnovu podataka.",
-      "url": "https://www.sindikatstudio83.me/sr-me/usluge/#analitika-mjerenje",
-      "provider": {
-        "@id": "https://www.sindikatstudio83.me/#org"
-      },
-      "areaServed": [
-        "Podgorica",
-        "Crna Gora"
-      ]
+      "@id": "https://www.sindikatstudio83.me/sr-me/usluge/#ux-conversion",
+      "name": "UX optimizacija (Conversion)",
+      "description": "Uklanjamo trenje u toku: manje konfuzije, više klikova, više formi i poziva.",
+      "url": "https://www.sindikatstudio83.me/sr-me/usluge/#ux-conversion",
+      "provider": { "@id": "https://www.sindikatstudio83.me/#org" },
+      "areaServed": ["Podgorica","Crna Gora"]
+    },
+    {
+      "@type": "Service",
+      "@id": "https://www.sindikatstudio83.me/sr-me/usluge/#seo-system",
+      "name": "SEO sistem (On-page + Sadržaj)",
+      "description": "Organski upiti kroz strukturu sajta, ključne riječi, interne linkove i sadržaj.",
+      "url": "https://www.sindikatstudio83.me/sr-me/usluge/#seo-system",
+      "provider": { "@id": "https://www.sindikatstudio83.me/#org" },
+      "areaServed": ["Podgorica","Crna Gora"]
+    },
+
+    {
+      "@type": "Service",
+      "@id": "https://www.sindikatstudio83.me/sr-me/usluge/#events-activations",
+      "name": "Aktivacije & Događaji",
+      "description": "Digital → teren → digital. Aktivacija kao pojačivač kampanje i sadržaj za retarget.",
+      "url": "https://www.sindikatstudio83.me/sr-me/usluge/#events-activations",
+      "provider": { "@id": "https://www.sindikatstudio83.me/#org" },
+      "areaServed": ["Podgorica","Crna Gora"]
+    },
+    {
+      "@type": "Service",
+      "@id": "https://www.sindikatstudio83.me/sr-me/usluge/#gamification",
+      "name": "Gamification & Interaktivne kampanje",
+      "description": "Mehanike koje podižu angažman: kviz, promo igra, interaktivna akcija, lead capture.",
+      "url": "https://www.sindikatstudio83.me/sr-me/usluge/#gamification",
+      "provider": { "@id": "https://www.sindikatstudio83.me/#org" },
+      "areaServed": ["Podgorica","Crna Gora"]
+    },
+
+    {
+      "@type": "Service",
+      "@id": "https://www.sindikatstudio83.me/sr-me/usluge/#branding",
+      "name": "Branding & Digital identitet",
+      "description": "Vizuelni i komunikacijski identitet koji radi u digitalu: jasno, prepoznatljivo, prodajno.",
+      "url": "https://www.sindikatstudio83.me/sr-me/usluge/#branding",
+      "provider": { "@id": "https://www.sindikatstudio83.me/#org" },
+      "areaServed": ["Podgorica","Crna Gora"]
+    },
+    {
+      "@type": "Service",
+      "@id": "https://www.sindikatstudio83.me/sr-me/usluge/#custom",
+      "name": "Custom digital rješenja",
+      "description": "Specifične funkcionalnosti za kampanje: kalkulatori, napredne forme, integracije, automatizacije.",
+      "url": "https://www.sindikatstudio83.me/sr-me/usluge/#custom",
+      "provider": { "@id": "https://www.sindikatstudio83.me/#org" },
+      "areaServed": ["Podgorica","Crna Gora"]
+    },
+    {
+      "@type": "Service",
+      "@id": "https://www.sindikatstudio83.me/sr-me/usluge/#mobile-mvp",
+      "name": "Mobile MVP & Prototip (ograničeno)",
+      "description": "Prva verzija aplikacije: koncept, UX prototip i MVP plan (za validaciju ideje).",
+      "url": "https://www.sindikatstudio83.me/sr-me/usluge/#mobile-mvp",
+      "provider": { "@id": "https://www.sindikatstudio83.me/#org" },
+      "areaServed": ["Podgorica","Crna Gora"]
     }
   ]
 }
@@ -833,7 +816,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </head>
 
 <body>
-  <!-- ✅ FLOATING LOGO (same as Kontakt page) -->
+  <!-- ✅ FLOATING LOGO -->
   <a class="floatingLogo" href="/sr-me/pocetna" aria-label="Sindikat Studio 83 — Početna">
     <div class="logoMark" aria-hidden="true">
       <img class="logoMarkImg" src="/studio83logo.png" alt="">
@@ -849,10 +832,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <div class="blob" id="blob1" aria-hidden="true"></div>
   <div class="blob b2" id="blob2" aria-hidden="true"></div>
 
-  <!-- ✅ Bottom Topbar (same as Kontakt) -->
+  <!-- ✅ Bottom Topbar -->
   <header class="topbar">
     <div class="topbarInner reveal">
-      <!-- removed logo from bar (now floating) -->
       <div class="brand"></div>
 
       <a class="btn primary ctaCenter" href="/sr-me/kontakt">
@@ -874,7 +856,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </div>
     </div>
 
-    <!-- Mobile menu OUTSIDE .topbarInner (same as Kontakt page) -->
     <div class="mobileMenu" id="mobileMenu" aria-label="Mobile menu">
       <div class="mobileMenuInner">
         <a href="/sr-me/pocetna">Početna</a>
@@ -889,22 +870,27 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <div class="wrap">
     <!-- HERO -->
     <section class="hero" id="top">
-            <div class="kicker reveal"></span></div>
+      <div class="kicker reveal"></span></div>
 
-      <div class="kicker reveal"><span class="dot"></span> Usluge koje klijenti traže</div>
+      <div class="kicker reveal"><span class="dot"></span> Performance &amp; Activation sistem • Podgorica / Crna Gora</div>
 
-      <h1 class="heroTitle reveal" id="heroTitle">Naše usluge.</h1>
+      <h1 class="heroTitle reveal" id="heroTitle">Marketing koji pretvara pažnju u upite i prodaju.</h1>
 
       <p class="sub reveal">
-        Oglašavanje, sadržaj, web, SEO i analitika — u jednom sistemu.
-        Ne prodajemo “usluge”. Prodajemo ishod: leadove, posjete i prodaju.
+        Ne prodajemo “spisak usluga”. Postavljamo sistem: <strong>Meta/Google</strong>, <strong>landing</strong>, <strong>sadržaj</strong>, <strong>teren</strong> i <strong>mjerenje</strong> — povezano oko istog cilja.
+        Počni od core paketa (Ads / Landing / Tracking), a ostalo dodaj po potrebi.
       </p>
 
-      <div class="heroActions reveal">
-       
+      <div class="miniRow reveal">
+        <span>Upiti / rezervacije</span>
+        <span>Mjerenje (GA4 / GTM)</span>
+        <span>Digital → teren → digital</span>
       </div>
 
-      
+      <div class="heroActions reveal">
+        <a class="btn primary" href="/sr-me/kontakt"><span class="dot"></span> Traži preporuku</a>
+        <a class="btn" href="#services"> Pogledaj usluge</a>
+      </div>
     </section>
 
     <!-- SERVICES -->
@@ -913,38 +899,23 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <h2 class="h2 reveal">Usluge</h2>
         <div class="desc reveal">
           Jasni ishodi. Zaključan scope. Sistem koji pretvara pažnju u upite, rezervacije i prodaju.
+          <strong>Core</strong> je osnova (Ads / Landing / Tracking), a ostalo je po potrebi — da budžet ide na ono što stvarno radi.
         </div>
+      </div>
+
+      <!-- CORE -->
+      <div class="groupHeader reveal">
+        <h3 class="gTitle">Core</h3>
+        <span class="gHint">osnova koja donosi rezultat</span>
       </div>
 
       <div class="grid2">
 
-        <!-- 1) Branding -->
-        <div class="card reveal">
-          <div class="cardMedia">
-            <img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1600&q=80" alt="Branding">
-            <div class="iconBadge" aria-hidden="true">
-              <!-- badge-check -->
-              <svg viewBox="0 0 24 24"><path d="M8 12l2 2 6-6"/><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-            </div>
-          </div>
-          <div class="cardBody">
-            <div class="top">
-              <h3>Branding & Digital identitet</h3>
-              <span class="tag">7–14 dana</span>
-            </div>
-            <p>Vizuelni i komunikacijski identitet koji radi u digitalu: jasno, prepoznatljivo, prodajno.</p>
-            <div class="pillRow"><span>logo + vizuelni sistem</span><span>tone of voice</span><span>brand kit</span></div>
-            <div style="height:14px"></div>
-            <button class="btn primary" data-modal="modal-branding"><span class="dot"></span> Detaljnije</button>
-          </div>
-        </div>
-
-        <!-- 2) Ads -->
-        <div class="card reveal">
+        <!-- 2) Ads (CORE) -->
+        <div class="card reveal" id="ads-performance">
           <div class="cardMedia">
             <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1600&q=80" alt="Oglašavanje">
             <div class="iconBadge" aria-hidden="true">
-              <!-- target -->
               <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3"/><path d="M22 12h-4"/><path d="M6 12H2"/><path d="M12 2v4"/><path d="M12 18v4"/></svg>
             </div>
           </div>
@@ -953,61 +924,90 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
               <h3>Oglašavanje (Performance)</h3>
               <span class="tag">30 dana</span>
             </div>
-            <p>Meta + Google kampanje uz testiranje i optimizaciju. Fokus: leadovi / prodaja / posjete.</p>
+            <p>Meta + Google kampanje uz strukturu testiranja i optimizaciju. Fokus: <strong>leadovi / prodaja / posjete</strong> + jasan mjesečni plan narednih poteza.</p>
             <div class="pillRow"><span>Meta</span><span>Google</span><span>retarget</span><span>report</span></div>
             <div style="height:14px"></div>
             <button class="btn primary" data-modal="modal-ads"><span class="dot"></span> Detaljnije</button>
           </div>
         </div>
 
-        <!-- 3) Web -->
-        <div class="card reveal">
+        <!-- 3) Web (CORE) -->
+        <div class="card reveal" id="landing-web">
           <div class="cardMedia">
             <img src="https://images.unsplash.com/photo-1522542550221-31fd19575a2d?auto=format&fit=crop&w=1600&q=80" alt="Web sajtovi">
             <div class="iconBadge" aria-hidden="true">
-              <!-- layout -->
               <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18"/><path d="M8 20V9"/></svg>
             </div>
           </div>
           <div class="cardBody">
             <div class="top">
-              <h3>Web sajtovi & Landing page</h3>
+              <h3>Web sajtovi &amp; Landing page</h3>
               <span class="tag">10–21 dan</span>
             </div>
-            <p>Stranice koje pretvaraju posjete u akciju: struktura, copy, dokaz i CTA.</p>
+            <p>Stranice koje pretvaraju posjete u akciju: jasna ponuda, dokaz, CTA i tracking — da se budžet iz oglasa ne “prosipa”.</p>
             <div class="pillRow"><span>landing</span><span>UX</span><span>copy</span><span>konverzija</span></div>
             <div style="height:14px"></div>
             <button class="btn primary" data-modal="modal-web"><span class="dot"></span> Detaljnije</button>
           </div>
         </div>
 
-        <!-- 4) Copy -->
-        <div class="card reveal">
+        <!-- 6) Analytics (CORE) -->
+        <div class="card reveal" id="analytics-tracking">
+          <div class="cardMedia">
+            <img src="https://images.unsplash.com/photo-1556155092-8707de31f9c4?auto=format&fit=crop&w=1600&q=80" alt="Analytics">
+            <div class="iconBadge" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M4 20V10"/><path d="M10 20V4"/><path d="M16 20v-7"/><path d="M22 20H2"/></svg>
+            </div>
+          </div>
+          <div class="cardBody">
+            <div class="top">
+              <h3>Analytics &amp; Tracking</h3>
+              <span class="tag">3–7 dana</span>
+            </div>
+            <p>GA4 + event tracking: mjerimo ono što je bitno (klik, poziv, forma, lead) i optimizujemo na osnovu podataka — bez nagađanja.</p>
+            <div class="pillRow"><span>GA4</span><span>events</span><span>funnel</span><span>dashboard</span></div>
+            <div style="height:14px"></div>
+            <button class="btn primary" data-modal="modal-analytics"><span class="dot"></span> Detaljnije</button>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="groupDivider reveal"></div>
+
+      <!-- BOOSTER -->
+      <div class="groupHeader reveal">
+        <h3 class="gTitle">Booster</h3>
+        <span class="gHint">pojačava učinak core-a</span>
+      </div>
+
+      <div class="grid2">
+
+        <!-- 4) Copy (BOOSTER) -->
+        <div class="card reveal" id="copy-content">
           <div class="cardMedia">
             <img src="https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&fit=crop&w=1600&q=80" alt="Copywriting">
             <div class="iconBadge" aria-hidden="true">
-              <!-- pen-tool -->
               <svg viewBox="0 0 24 24"><path d="M12 19h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4 12.5-12.5z"/></svg>
             </div>
           </div>
           <div class="cardBody">
             <div class="top">
-              <h3>Copywriting & Content</h3>
+              <h3>Copywriting &amp; Content</h3>
               <span class="tag">7–14 dana</span>
             </div>
-            <p>Poruke koje hvataju pažnju i vode do upita: ads copy, landing copy i content plan.</p>
+            <p>Poruke koje hvataju pažnju i vode do upita: ads copy, landing copy i content plan — sa varijantama za test.</p>
             <div class="pillRow"><span>hook → poruka</span><span>CTA</span><span>varijante</span></div>
             <div style="height:14px"></div>
             <button class="btn primary" data-modal="modal-copy"><span class="dot"></span> Detaljnije</button>
           </div>
         </div>
 
-        <!-- 5) UX -->
-        <div class="card reveal">
+        <!-- 5) UX (BOOSTER) -->
+        <div class="card reveal" id="ux-conversion">
           <div class="cardMedia">
             <img src="https://images.unsplash.com/photo-1559028012-481c04fa702d?auto=format&fit=crop&w=1600&q=80" alt="UX optimizacija">
             <div class="iconBadge" aria-hidden="true">
-              <!-- mouse-pointer -->
               <svg viewBox="0 0 24 24"><path d="M3 3l8 19 2-8 8-2L3 3z"/><path d="M13 13l6 6"/></svg>
             </div>
           </div>
@@ -1016,61 +1016,18 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
               <h3>UX optimizacija (Conversion)</h3>
               <span class="tag">5–10 dana</span>
             </div>
-            <p>Ispravljamo tok i trenje: manje konfuzije, više klikova, više formi i poziva.</p>
+            <p>Ispravljamo tok i trenje: manje konfuzije, više klikova, više formi i poziva — da isti saobraćaj donosi više rezultata.</p>
             <div class="pillRow"><span>user flow</span><span>sekcije</span><span>forme</span><span>CTA</span></div>
             <div style="height:14px"></div>
             <button class="btn primary" data-modal="modal-ux"><span class="dot"></span> Detaljnije</button>
           </div>
         </div>
 
-        <!-- 6) Analytics -->
-        <div class="card reveal">
-          <div class="cardMedia">
-            <img src="https://images.unsplash.com/photo-1556155092-8707de31f9c4?auto=format&fit=crop&w=1600&q=80" alt="Analytics">
-            <div class="iconBadge" aria-hidden="true">
-              <!-- bar-chart -->
-              <svg viewBox="0 0 24 24"><path d="M4 20V10"/><path d="M10 20V4"/><path d="M16 20v-7"/><path d="M22 20H2"/></svg>
-            </div>
-          </div>
-          <div class="cardBody">
-            <div class="top">
-              <h3>Analytics & Tracking</h3>
-              <span class="tag">3–7 dana</span>
-            </div>
-            <p>GA4 + event tracking: mjerimo ono što je bitno i optimizujemo na osnovu podataka.</p>
-            <div class="pillRow"><span>GA4</span><span>events</span><span>funnel</span><span>dashboard</span></div>
-            <div style="height:14px"></div>
-            <button class="btn primary" data-modal="modal-analytics"><span class="dot"></span> Detaljnije</button>
-          </div>
-        </div>
-
-        <!-- 7) Events -->
-        <div class="card reveal">
-          <div class="cardMedia">
-            <img src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&w=1600&q=80" alt="Aktivacije">
-            <div class="iconBadge" aria-hidden="true">
-              <!-- sparkles -->
-              <svg viewBox="0 0 24 24"><path d="M12 2l1.2 3.8L17 7l-3.8 1.2L12 12l-1.2-3.8L7 7l3.8-1.2L12 2z"/><path d="M19 12l.9 2.8L23 16l-3.1 1.2L19 20l-.9-2.8L15 16l3.1-1.2L19 12z"/><path d="M5 13l.7 2.2L8 16l-2.3.8L5 19l-.7-2.2L2 16l2.3-.8L5 13z"/></svg>
-            </div>
-          </div>
-          <div class="cardBody">
-            <div class="top">
-              <h3>Aktivacije & Događaji</h3>
-              <span class="tag">projekat</span>
-            </div>
-            <p>Digital → teren → digital. Aktivacija kao pojačivač kampanje i sadržaj za retarget.</p>
-            <div class="pillRow"><span>koncept</span><span>logistika</span><span>sadržaj</span><span>retarget</span></div>
-            <div style="height:14px"></div>
-            <button class="btn primary" data-modal="modal-events"><span class="dot"></span> Detaljnije</button>
-          </div>
-        </div>
-
-        <!-- 8) SEO -->
-        <div class="card reveal">
+        <!-- 8) SEO (BOOSTER) -->
+        <div class="card reveal" id="seo-system">
           <div class="cardMedia">
             <img src="https://images.unsplash.com/photo-1557804506-669a67965ba0?auto=format&fit=crop&w=1600&q=80" alt="SEO">
             <div class="iconBadge" aria-hidden="true">
-              <!-- search -->
               <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
             </div>
           </div>
@@ -1079,40 +1036,102 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
               <h3>SEO sistem (On-page + Sadržaj)</h3>
               <span class="tag">14–21 dan</span>
             </div>
-            <p>Organski upiti kroz strukturu sajta, ključne riječi, interne linkove i sadržaj.</p>
+            <p>Organski upiti kroz strukturu sajta, ključne riječi, interne linkove i sadržaj — fokus na stranice koje prodaju, ne “prazan promet”.</p>
             <div class="pillRow"><span>audit</span><span>on-page</span><span>content plan</span><span>Search Console</span></div>
             <div style="height:14px"></div>
             <button class="btn primary" data-modal="modal-seo"><span class="dot"></span> Detaljnije</button>
           </div>
         </div>
 
-        <!-- 9) Gamification -->
-        <div class="card reveal">
+      </div>
+
+      <div class="groupDivider reveal"></div>
+
+      <!-- SIGNATURE -->
+      <div class="groupHeader reveal">
+        <h3 class="gTitle">Signature</h3>
+        <span class="gHint">ono što nas diferencira</span>
+      </div>
+
+      <div class="grid2">
+
+        <!-- 7) Events (SIGNATURE) -->
+        <div class="card reveal" id="events-activations">
+          <div class="cardMedia">
+            <img src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&w=1600&q=80" alt="Aktivacije">
+            <div class="iconBadge" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M12 2l1.2 3.8L17 7l-3.8 1.2L12 12l-1.2-3.8L7 7l3.8-1.2L12 2z"/><path d="M19 12l.9 2.8L23 16l-3.1 1.2L19 20l-.9-2.8L15 16l3.1-1.2L19 12z"/><path d="M5 13l.7 2.2L8 16l-2.3.8L5 19l-.7-2.2L2 16l2.3-.8L5 13z"/></svg>
+            </div>
+          </div>
+          <div class="cardBody">
+            <div class="top">
+              <h3>Aktivacije &amp; Događaji</h3>
+              <span class="tag">projekat</span>
+            </div>
+            <p>Digital → teren → digital. Aktivacija kao pojačivač kampanje, plus sadržaj koji poslije koristiš za retarget i prodaju.</p>
+            <div class="pillRow"><span>koncept</span><span>logistika</span><span>sadržaj</span><span>retarget</span></div>
+            <div style="height:14px"></div>
+            <button class="btn primary" data-modal="modal-events"><span class="dot"></span> Detaljnije</button>
+          </div>
+        </div>
+
+        <!-- 9) Gamification (SIGNATURE) -->
+        <div class="card reveal" id="gamification">
           <div class="cardMedia">
             <img src="https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=1600&q=80" alt="Gamification">
             <div class="iconBadge" aria-hidden="true">
-              <!-- gamepad -->
               <svg viewBox="0 0 24 24"><path d="M6 12h12"/><path d="M8 12v-2"/><path d="M8 12v2"/><path d="M15.5 10.5h.01"/><path d="M17.5 13.5h.01"/><path d="M7 20l-2-3a6 6 0 0 1 0-10l2-3"/><path d="M17 20l2-3a6 6 0 0 0 0-10l-2-3"/></svg>
             </div>
           </div>
           <div class="cardBody">
             <div class="top">
-              <h3>Gamification & Interaktivne kampanje</h3>
+              <h3>Gamification &amp; Interaktivne kampanje</h3>
               <span class="tag">projekat</span>
             </div>
-            <p>Mehanike koje podižu angažman i prave buzz: kviz, promo igra, interaktivna akcija.</p>
+            <p>Mehanike koje podižu angažman i prave buzz: kviz, promo igra, interaktivna akcija — uz lead capture i nastavak u funnel-u.</p>
             <div class="pillRow"><span>koncept</span><span>mehanika</span><span>nagrade</span><span>lead capture</span></div>
             <div style="height:14px"></div>
             <button class="btn primary" data-modal="modal-gamification"><span class="dot"></span> Detaljnije</button>
           </div>
         </div>
 
-        <!-- 10) Custom -->
-        <div class="card reveal">
+      </div>
+
+      <div class="groupDivider reveal"></div>
+
+      <!-- LIMITED / BY REQUEST -->
+      <div class="groupHeader reveal">
+        <h3 class="gTitle">Limited / po upitu</h3>
+        <span class="gHint">radimo selektivno</span>
+      </div>
+
+      <div class="grid2">
+
+        <!-- 1) Branding (LIMITED) -->
+        <div class="card reveal" id="branding">
+          <div class="cardMedia">
+            <img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1600&q=80" alt="Branding">
+            <div class="iconBadge" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M8 12l2 2 6-6"/><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            </div>
+          </div>
+          <div class="cardBody">
+            <div class="top">
+              <h3>Branding &amp; Digital identitet</h3>
+              <span class="tag">7–14 dana</span>
+            </div>
+            <p>Vizuelni i komunikacijski identitet koji radi u digitalu: jasno, prepoznatljivo, prodajno (brand kit + pravila upotrebe).</p>
+            <div class="pillRow"><span>logo + vizuelni sistem</span><span>tone of voice</span><span>brand kit</span></div>
+            <div style="height:14px"></div>
+            <button class="btn primary" data-modal="modal-branding"><span class="dot"></span> Detaljnije</button>
+          </div>
+        </div>
+
+        <!-- 10) Custom (LIMITED) -->
+        <div class="card reveal" id="custom">
           <div class="cardMedia">
             <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1600&q=80" alt="Custom rješenja">
             <div class="iconBadge" aria-hidden="true">
-              <!-- code -->
               <svg viewBox="0 0 24 24"><path d="M16 18l6-6-6-6"/><path d="M8 6l-6 6 6 6"/><path d="M10 20l4-16"/></svg>
             </div>
           </div>
@@ -1121,28 +1140,27 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
               <h3>Custom digital rješenja</h3>
               <span class="tag">projekat</span>
             </div>
-            <p>Posebne funkcionalnosti i alati za kampanje: kalkulatori, forme, sistemi, MVP.</p>
+            <p>Posebne funkcionalnosti i alati za kampanje: kalkulatori, napredne forme, integracije i automatizacije — kad donose realan efekat.</p>
             <div class="pillRow"><span>web alati</span><span>MVP</span><span>integracije</span><span>automatizacije</span></div>
             <div style="height:14px"></div>
             <button class="btn primary" data-modal="modal-custom"><span class="dot"></span> Detaljnije</button>
           </div>
         </div>
 
-        <!-- 11) Mobile -->
-        <div class="card reveal">
+        <!-- 11) Mobile (LIMITED) -->
+        <div class="card reveal" id="mobile-mvp">
           <div class="cardMedia">
             <img src="https://images.unsplash.com/photo-1512499617640-c2f999098c01?auto=format&fit=crop&w=1600&q=80" alt="Mobile MVP">
             <div class="iconBadge" aria-hidden="true">
-              <!-- smartphone -->
               <svg viewBox="0 0 24 24"><rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 19h2"/></svg>
             </div>
           </div>
           <div class="cardBody">
             <div class="top">
-              <h3>Mobile MVP & Prototip (ograničeno)</h3>
+              <h3>Mobile MVP &amp; Prototip (ograničeno)</h3>
               <span class="tag">projekat</span>
             </div>
-            <p>Prva verzija aplikacije: koncept, UX prototip i MVP plan (za validaciju ideje).</p>
+            <p>Prva verzija aplikacije: koncept, UX prototip i MVP plan (za validaciju ideje) — radimo selektivno.</p>
             <div class="pillRow"><span>prototip</span><span>MVP scope</span><span>validacija</span></div>
             <div style="height:14px"></div>
             <button class="btn primary" data-modal="modal-mobile"><span class="dot"></span> Detaljnije</button>
@@ -1150,6 +1168,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </div>
 
       </div>
+
     </section>
 
     <!-- FOOTER -->
@@ -1159,7 +1178,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </footer>
   </div>
 
-  <!-- ✅ MODALS: stvarni sadržaj za "Detaljnije" -->
+  <!-- ✅ MODALS (unchanged content structure; kept your original ids/logic) -->
 
   <!-- Branding -->
   <div class="modal" id="modal-branding" aria-hidden="true">
