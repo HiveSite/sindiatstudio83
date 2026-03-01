@@ -1425,30 +1425,32 @@
         });
       }
 
-      function populateChips(typesArr){
-        const row = el("chipRow");
-        if (!row) return;
+    function populateCategoryChips(categories){
+  const row = el("chipRow");
+  if (!row) return;
 
-        // preserve existing chip selections if still valid
-        const prev = new Set(chips);
-        chips = new Set([...prev].filter(v => typesArr.includes(v)));
+  // zadrži stare selekcije ako i dalje postoje
+  const prev = new Set(chips);
+  chips = new Set([...prev].filter(v => categories.includes(v)));
 
-        row.innerHTML = "";
-        typesArr.forEach(t=>{
-          const b = document.createElement("button");
-          b.type = "button";
-          b.setAttribute("data-chip", "");
-          b.textContent = t;
-          if (chips.has(t)) b.classList.add("active");
-          b.addEventListener("click", ()=>{
-            if (chips.has(t)) { chips.delete(t); b.classList.remove("active"); }
-            else { chips.add(t); b.classList.add("active"); }
-            page = 1;
-            render();
-          });
-          row.appendChild(b);
-        });
-      }
+  row.innerHTML = "";
+  categories.forEach(c=>{
+    const b = document.createElement("button");
+    b.type = "button";
+    b.setAttribute("data-chip", "");
+    b.textContent = c;
+    if (chips.has(c)) b.classList.add("active");
+
+    b.addEventListener("click", ()=>{
+      if (chips.has(c)) { chips.delete(c); b.classList.remove("active"); }
+      else { chips.add(c); b.classList.add("active"); }
+      page = 1;
+      render();
+    });
+
+    row.appendChild(b);
+  });
+}
 
       // ✅ 1 stalni posao VAN CMS-a
       const staticAlways = {
@@ -1568,16 +1570,22 @@
         page=1; render();
       });
 
-      function getFilters(){
-        const q = (el("q")?.value || "").trim().toLowerCase();
-        const loc = (el("loc")?.value || "").trim().toLowerCase();
-        const cat = el("cat")?.value || "";
-        const minPay = parseFloat(el("minPay")?.value || "");
-        const maxPay = parseFloat(el("maxPay")?.value || "");
-        const typesChecked = [...document.querySelectorAll("#typeFilters input:checked")].map(i=>i.value);
-        const typeSet = new Set([...typesChecked, ...chips]);
-        return { q, loc, cat, minPay, maxPay, typeSet };
-      }
+     function getFilters(){
+  const q = (el("q")?.value || "").trim().toLowerCase();
+  const loc = (el("loc")?.value || "").trim().toLowerCase();
+  const cat = el("cat")?.value || "";
+  const minPay = parseFloat(el("minPay")?.value || "");
+  const maxPay = parseFloat(el("maxPay")?.value || "");
+
+  // checkbox filteri = tipovi (type)
+  const typesChecked = [...document.querySelectorAll("#typeFilters input:checked")].map(i=>i.value);
+  const typeSet = new Set(typesChecked);
+
+  // chipovi = kategorije (category)
+  const catSet = new Set([...chips]);
+
+  return { q, loc, cat, minPay, maxPay, typeSet, catSet };
+}
 
       function filterJobs(list){
         const f = getFilters();
@@ -1771,7 +1779,7 @@
         const { categories, types } = buildFilterStats(merged);
         populateCategorySelect(categories);
         populateTypeFilters(types);
-        populateChips(types);
+populateCategoryChips(categories);
         populatePostFormSelects(categories, types);
 
         return merged;
