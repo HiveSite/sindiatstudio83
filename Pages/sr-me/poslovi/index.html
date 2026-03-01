@@ -59,15 +59,36 @@
 
   <style>
     :root{
-      --bg:#05010D; --bg2:#12011F;
+      --bg:#05010D;
+      --bg2:#12011F;
+      --panel:#0D0521;
+      --panel2:#13072B;
+      --border:rgba(255,255,255,.2);
+      --border2:rgba(255,255,255,.12);
       --text:#FFFFFF;
+      --muted:rgba(255,255,255,.78);
+      --muted2:rgba(255,255,255,.62);
+
       --accent:#FF3B6F;
+      --accent2:#FFB000;
       --neon:#18F5FF;
+      --neon2:#A24CFF;
+
+      --shadow: 0 22px 75px rgba(0,0,0,.68);
       --shadow2: 0 14px 38px rgba(0,0,0,.48);
+
+      --r:10px;
+      --r2:14px;
+      --r3:18px;
+
       --max:1120px;
+
       --ease: cubic-bezier(.2,.9,.2,1);
-      --marqueeDur: 24s;
+      --ease2: cubic-bezier(.16,1,.3,1);
+
+      --nav-h:72px;
     }
+
     *{box-sizing:border-box}
     html,body{height:100%}
     body{
@@ -80,81 +101,300 @@
         linear-gradient(180deg, var(--bg), var(--bg2));
       color:var(--text);
       font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      letter-spacing:.2px;
       overflow-x:hidden;
-      padding-bottom: 84px;
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
+      padding-bottom: 84px;
     }
+
     body:before{
-      content:""; position:fixed; inset:0; pointer-events:none;
+      content:"";
+      position:fixed; inset:0;
+      pointer-events:none;
       background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23n)' opacity='.23'/%3E%3C/svg%3E");
-      opacity:.06; mix-blend-mode:overlay; z-index:0;
+      opacity:.06;
+      mix-blend-mode:overlay;
+      z-index:0;
     }
+
     a{color:inherit; text-decoration:none}
+    img{max-width:100%; display:block}
     .wrap{max-width:var(--max); margin:0 auto; padding:22px 18px 120px; position:relative; z-index:2}
 
-    .heroBg{ position:fixed; inset:0; z-index:1; pointer-events:none; }
-    .floatingLogo{ position:fixed; top:14px; left:14px; z-index:120; display:block; }
-    .logoMark{
-      width:176px; height:44px; border-radius:14px;
-      border:1.5px solid rgba(255,59,111,.5);
-      box-shadow: 0 18px 34px rgba(0,0,0,.45), 0 0 42px rgba(255,59,111,.22);
-      transform: rotate(-2deg);
-      overflow:hidden; background: rgba(0,0,0,.18); display:grid; place-items:center;
+    .heroBg{
+      position:fixed;
+      inset:0;
+      z-index:1;
+      pointer-events:none;
+      overflow:hidden;
+      background:
+        radial-gradient(900px 540px at 20% 20%, rgba(255,59,111,.20), transparent 60%),
+        radial-gradient(900px 540px at 80% 10%, rgba(24,245,255,.14), transparent 60%),
+        radial-gradient(720px 520px at 68% 55%, rgba(162,76,255,.16), transparent 60%);
     }
-    .logoMarkImg{ width:100%; height:100%; object-fit:contain; padding:6px; }
-    .floatingLogo .logoMark{ width: 50vw; max-width: 240px; height:auto; aspect-ratio:176/44; }
+    .heroBg:after{
+      content:"";
+      position:absolute; inset:0;
+      background:
+        radial-gradient(700px 420px at 18% 20%, rgba(255,59,111,.26), transparent 60%),
+        radial-gradient(900px 520px at 70% 12%, rgba(24,245,255,.2), transparent 58%),
+        linear-gradient(180deg, rgba(0,0,0,.25), rgba(6,1,13,.92) 62%, rgba(6,1,13,.98));
+    }
 
+    .blob{
+      position:fixed;
+      z-index:1;
+      pointer-events:none;
+      width:520px; height:520px;
+      border-radius:999px;
+      background: radial-gradient(circle at 35% 30%, rgba(255,59,111,.22), transparent 58%);
+      filter: blur(18px);
+      opacity:.55;
+      mix-blend-mode: screen;
+      transform: translate3d(0,0,0);
+    }
+    .blob.b2{
+      width:420px; height:420px;
+      background: radial-gradient(circle at 40% 35%, rgba(24,245,255,.18), transparent 60%);
+      opacity:.45;
+    }
+
+    /* ✅ FLOATING LOGO */
+    .floatingLogo{
+      position:fixed;
+      top:14px;
+      left:14px;
+      z-index:120;
+      display:block;
+      text-decoration:none;
+    }
+    .logoMark{
+      width:176px; height:44px;
+      border-radius:14px;
+      border:1.5px solid rgba(255,59,111,.5);
+      box-shadow:
+        0 18px 34px rgba(0,0,0,.45),
+        0 0 0 3px rgba(0,0,0,.45) inset,
+        0 0 42px rgba(255,59,111,.22);
+      transform: rotate(-2deg);
+      overflow:hidden;
+      background: rgba(0,0,0,.18);
+      display:grid;
+      place-items:center;
+    }
+    .logoMarkImg{
+      width:100%;
+      height:100%;
+      object-fit:contain;
+      object-position:center;
+      padding:6px;
+      filter: drop-shadow(0 10px 18px rgba(0,0,0,.45));
+    }
+    .floatingLogo .logoMark{
+      width: 50vw;
+      max-width: 240px;
+      height: auto;
+      aspect-ratio: 176 / 44;
+      transform: rotate(-2deg);
+      transform-origin: top left;
+    }
+    @media (max-width: 480px){
+      .floatingLogo{ top:10px; left:10px; }
+    }
+
+    /* ✅ ORIGINAL BOTTOM TOPBAR + HAMBURGER + MOBILE MENU */
     .topbar{
-      position:fixed; bottom:0; left:0; right:0; z-index:50;
-      backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+      position:fixed;
+      bottom:0; left:0; right:0;
+      z-index:50;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
       background: rgba(5,7,12,.88);
       border-top:3px solid rgba(255,255,255,.12);
     }
     .topbarInner{
-      max-width:var(--max); margin:0 auto; padding:12px 18px;
-      display:flex; align-items:center; gap:12px;
+      max-width:var(--max);
+      margin:0 auto;
+      padding:12px 18px;
+      display:flex;
+      align-items:center;
+      gap:12px;
+      justify-content:flex-start;
     }
-    nav{ display:flex; gap:10px; margin-left:auto; color:rgba(255,255,255,.78); font-size:13px; }
-    nav a{ padding:9px 10px; border-radius:10px; border:2px solid transparent; transition:.2s var(--ease); }
-    nav a:hover{ background:rgba(255,255,255,.05); border-color:rgba(24,245,255,.45); color:#fff; transform: translateY(-1px); }
+    .ctaCenter{ margin:0; }
+    .navWrap{
+      margin-left:auto;
+      display:flex;
+      align-items:center;
+      gap:12px;
+      white-space:nowrap;
+    }
+
+    nav{
+      display:flex;
+      gap:10px;
+      flex-wrap:nowrap;
+      color:rgba(255,255,255,.78);
+      font-size:13px;
+      align-items:center;
+      white-space:nowrap;
+    }
+    nav a{
+      padding:9px 10px;
+      border-radius:10px;
+      border:2px solid transparent;
+      transition: background .2s var(--ease), color .2s var(--ease), transform .2s var(--ease), border-color .2s var(--ease);
+      transform: translateY(0);
+    }
+    nav a:hover{
+      background:rgba(255,255,255,.05);
+      color:var(--text);
+      transform: translateY(-1px);
+      border-color:rgba(24,245,255,.45)
+    }
 
     .btn{
-      display:inline-flex; align-items:center; justify-content:center; gap:10px;
-      border-radius:10px; padding:12px 16px; font-size:13px;
+      display:inline-flex; align-items:center; justify-content:center;
+      gap:10px;
+      border-radius:10px;
+      padding:12px 16px;
+      font-size:13px;
       border:3px solid rgba(255,255,255,.2);
       background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
-      color:#fff; cursor:pointer; user-select:none;
-      transition:transform .18s var(--ease), box-shadow .18s var(--ease), border-color .18s var(--ease);
+      color:var(--text);
+      transition:transform .18s var(--ease), box-shadow .18s var(--ease), border-color .18s var(--ease), background .18s var(--ease);
+      white-space:nowrap;
       box-shadow: 0 12px 30px rgba(0,0,0,.28);
+      cursor:pointer;
+      -webkit-tap-highlight-color: transparent;
+      user-select:none;
     }
+    .btn:hover{transform:translateY(-3px); box-shadow:var(--shadow2); border-color:rgba(255,59,111,.5)}
     .btn.primary{
       background: linear-gradient(180deg, rgba(255,59,111,.35), rgba(255,59,111,.14));
       border-color:rgba(255,59,111,.6);
+      box-shadow: 0 20px 60px rgba(255,59,111,.22), 0 10px 28px rgba(0,0,0,.28);
     }
-    .btn:hover{ transform:translateY(-3px); box-shadow:var(--shadow2); border-color:rgba(255,59,111,.5) }
-    .dot{ width:8px; height:8px; border-radius:2px; background:var(--accent); box-shadow:0 0 24px rgba(255,59,111,.48); transform: rotate(8deg); }
+    .dot{
+      width:8px; height:8px; border-radius:2px;
+      background:var(--accent);
+      box-shadow:0 0 0 5px rgba(255,59,111,.22), 0 0 24px rgba(255,59,111,.48);
+      transform: rotate(8deg);
+    }
 
-    .section{ padding:34px 0; border-top:3px solid rgba(255,255,255,.08); }
-    .headRow{ display:flex; align-items:flex-end; justify-content:space-between; gap:16px; flex-wrap:wrap; margin-bottom:18px; }
-    .h2{ font-size:22px; margin:0; letter-spacing:-.2px; }
-    .desc{ color:rgba(255,255,255,.70); font-size:13px; line-height:1.65; }
+    .hamburger{
+      display:none;
+      width:44px; height:44px;
+      border-radius:10px;
+      border:3px solid rgba(255,255,255,.2);
+      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+      align-items:center; justify-content:center;
+      gap:5px;
+      flex-direction:column;
+      cursor:pointer;
+    }
+    .hamburger span{
+      width:18px; height:2px; background:rgba(255,255,255,.8);
+      border-radius:3px;
+      display:block;
+    }
+
+    .mobileMenu{
+      display:none;
+      position:absolute;
+      left:0; right:0;
+      bottom:100%;
+      border-bottom:3px solid rgba(255,255,255,.10);
+      background:rgba(5,7,12,.95);
+      z-index:60;
+    }
+    .mobileMenu.open{display:block;}
+    .mobileMenuInner{
+      max-width:var(--max);
+      margin:0 auto;
+      padding:12px 18px 16px;
+      display:grid;
+      gap:8px;
+    }
+    .mobileMenuInner a{
+      padding:12px 12px;
+      border:3px solid rgba(255,255,255,.12);
+      border-radius:10px;
+      background: linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
+      color:var(--text);
+    }
+
+  /* overlay for mobile menu (NE prekriva bottom topbar) */
+
+    .section{
+      padding:34px 0;
+      border-top:3px solid rgba(255,255,255,.08);
+    }
+    .headRow{
+      display:flex; align-items:flex-end; justify-content:space-between;
+      gap:16px; flex-wrap:wrap;
+      margin-bottom:18px;
+    }
+    .h2{font-size:22px; letter-spacing:-.2px; margin:0;}
+    .desc{color:rgba(255,255,255,.70); font-size:13px; line-height:1.65; max-width:70ch;}
 
     .card{
       border:3px solid rgba(255,255,255,.14);
       border-radius:14px;
       background: linear-gradient(180deg, rgba(14,16,26,.92), rgba(7,8,19,.92));
       padding:18px;
-      box-shadow: var(--shadow2);
-      transition: transform .18s var(--ease), border-color .18s var(--ease);
-      position:relative; overflow:hidden;
+      box-shadow: 0 14px 38px rgba(0,0,0,.48);
+      transition: transform .18s var(--ease), border-color .18s var(--ease), box-shadow .18s var(--ease), filter .18s var(--ease);
+      will-change: transform;
+      position:relative;
+      overflow:hidden;
+      transform: translateZ(0);
     }
-    .gridJobs{ display:grid; grid-template-columns: 280px 1fr; gap:16px; align-items:start; }
-    .grid{ display:grid; gap:14px; }
 
-    .hero{ padding:28px 0 8px; }
-    .heroTitle{ margin:0; font-size:44px; line-height:1.05; letter-spacing:-.8px; max-width:22ch; }
-    .sub{ margin-top:14px; color:rgba(255,255,255,.80); font-size:15px; line-height:1.65; max-width:70ch; }
+    .grid{display:grid; gap:16px;}
+    .gridJobs{
+      display:grid;
+      grid-template-columns: 280px 1fr;
+      gap:16px;
+      align-items:start;
+    }
+
+    .field{display:grid; gap:8px;}
+    label{font-size:12px; color:rgba(255,255,255,.65)}
+    input, textarea, select{
+      width:100%;
+      padding:12px 12px;
+      border-radius:10px;
+      border:3px solid rgba(255,255,255,.14);
+      background: rgba(8,10,16,.70);
+      color:var(--text);
+      outline:none;
+      box-shadow: inset 0 0 0 1px rgba(0,0,0,.18), 0 10px 22px rgba(0,0,0,.2);
+      appearance:none;
+    }
+    input:focus, textarea:focus, select:focus{
+      border-color: rgba(255,59,111,.7);
+      box-shadow: 0 0 0 4px rgba(255,59,111,.18);
+    }
+    textarea{min-height:110px; resize:vertical}
+
+    .hero{padding:28px 0 8px;}
+    .heroTitle{
+      margin:0;
+      font-size:44px;
+      line-height:1.05;
+      letter-spacing:-.8px;
+      max-width:22ch;
+    }
+    .sub{
+      margin-top:14px;
+      color:rgba(255,255,255,.80);
+      font-size:15px;
+      line-height:1.65;
+      max-width:70ch;
+      text-shadow: 0 10px 40px rgba(0,0,0,.35);
+    }
 
     .searchGrid{
       margin-top:16px;
@@ -163,110 +403,280 @@
       gap:12px;
       align-items:stretch;
     }
-    .inputRow{ display:flex; align-items:center; gap:10px; min-width:0; }
-    .inputRow input{
-      width:100%; padding:12px 12px; border-radius:10px;
-      border:3px solid rgba(255,255,255,.14);
-      background: rgba(8,10,16,.70);
-      color:#fff; outline:none;
-    }
-    .inputRow input:focus{ border-color: rgba(255,59,111,.7); box-shadow: 0 0 0 4px rgba(255,59,111,.18); }
+    .inputRow{display:flex; align-items:center; gap:10px; min-width:0;}
+    .inputRow input{min-width:0;}
     .inputIcon{
-      width:28px; height:28px; border-radius:10px;
+      width:28px; height:28px;
+      border-radius:10px;
       border:2px solid rgba(255,255,255,.14);
       display:flex; align-items:center; justify-content:center;
       background: rgba(8,10,16,.55);
+      color:rgba(255,255,255,.85);
       flex:0 0 auto;
     }
 
-    /* ✅ CATEGORY FILTER BUTTONS (dynamic) */
-    .pillRow{ display:flex; flex-wrap:wrap; gap:10px; margin-top:12px; }
-    .pillRow button{
-      border:2px solid rgba(255,255,255,.12);
-      background: rgba(8,10,16,.65);
-      padding:8px 10px;
-      border-radius:10px;
-      color:rgba(255,255,255,.78);
-      cursor:pointer;
-      transition: border-color .18s var(--ease), transform .18s var(--ease), background .18s var(--ease);
+    /* ✅ SAME TILE STYLE, NOW USED FOR CATEGORY FILTERS */
+    #catFilters{
+      display:grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap:10px;
+      margin-top:4px;
     }
-    .pillRow button:hover{ transform:translateY(-2px); border-color:rgba(24,245,255,.35) }
-    .pillRow button.active{ border-color:rgba(255,59,111,.7); background: rgba(255,59,111,.10); color:#fff; }
-
-    #typeFilters{ display:grid; grid-template-columns: repeat(2, 1fr); gap:10px; margin-top:4px; }
     .cbTile{
-      position:relative; display:flex; align-items:center; justify-content:center;
-      text-align:center; min-height:54px; padding:10px;
-      border:3px solid rgba(255,255,255,.14); background: rgba(8,10,16,.65);
-      color:rgba(255,255,255,.82); font-size:12px; font-weight:750; cursor:pointer;
-      transition: transform .18s var(--ease), border-color .18s var(--ease), background .18s var(--ease);
+      position:relative;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      min-height:54px;
+      padding:10px 10px;
+      border:3px solid rgba(255,255,255,.14);
+      background: rgba(8,10,16,.65);
+      border-radius:0;
+      color:rgba(255,255,255,.82);
+      font-size:12px;
+      font-weight:750;
+      cursor:pointer;
+      user-select:none;
+      transition: transform .18s var(--ease), border-color .18s var(--ease), background .18s var(--ease), color .18s var(--ease);
     }
     .cbTile:hover{ transform: translateY(-2px); border-color: rgba(24,245,255,.35); }
-    .cbTile input{ position:absolute; inset:0; width:100%; height:100%; opacity:0; margin:0; cursor:pointer; }
-    .cbTile.checked{ border-color: rgba(255,59,111,.7); background: rgba(255,59,111,.10); color:#fff; }
+    .cbTile input{
+      position:absolute;
+      inset:0;
+      width:100%;
+      height:100%;
+      opacity:0;
+      margin:0;
+      cursor:pointer;
+    }
+    .cbTile.checked{
+      border-color: rgba(255,59,111,.7);
+      background: rgba(255,59,111,.10);
+      color:#fff;
+    }
 
+    .badge{
+      font-size:11px;
+      border:2px solid rgba(255,255,255,.14);
+      border-radius:10px;
+      padding:6px 10px;
+      background: rgba(8,10,16,.65);
+      color:rgba(255,255,255,.78);
+      display:inline-flex;
+      gap:8px;
+      align-items:center;
+      max-width:100%;
+      white-space:normal;
+    }
+
+    /* JOB CARD */
     .jobCard{ cursor:pointer; }
-    .jobCard:hover{ transform:translateY(-6px); border-color: rgba(24,245,255,.62); }
-    .jobMedia{ display:grid; grid-template-columns: 96px 1fr; gap:12px; align-items:stretch; }
+    .jobCard:hover,
+    .jobCard:focus-within{
+      transform:translateY(-6px);
+      border-color: rgba(24,245,255,.62);
+      box-shadow:
+        0 22px 75px rgba(0,0,0,.72),
+        0 0 0 2px rgba(24,245,255,.12),
+        0 0 42px rgba(24,245,255,.18);
+      filter: brightness(1.05);
+    }
+
+    .jobTop{
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:12px;
+      margin-bottom:10px;
+    }
+    .jobTitle{margin:0; font-size:16px; letter-spacing:-.2px;}
+    .jobMeta{margin-top:6px; color:rgba(255,255,255,.66); font-size:12px;}
+    .jobDesc{
+      margin-top:10px;
+      color:rgba(255,255,255,.74);
+      font-size:13px;
+      line-height:1.65;
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 2;
+      overflow: hidden;
+    }
+    .jobMedia{
+      display:grid;
+      grid-template-columns: 96px 1fr;
+      gap:12px;
+      align-items:stretch;
+      margin-bottom:10px;
+    }
     .jobThumb{
-      width:96px; height:76px; border-radius:12px; overflow:hidden;
+      width:96px;
+      height:76px;
+      border-radius:12px;
+      overflow:hidden;
       border:3px solid rgba(255,255,255,.12);
       background: rgba(8,10,16,.65);
+      box-shadow: 0 14px 38px rgba(0,0,0,.28);
+      position:relative;
     }
-    .jobThumb img{ width:100%; height:100%; object-fit:cover; opacity:.92; }
-    .jobTitle{ margin:0; font-size:16px; letter-spacing:-.2px; }
-    .jobMeta{ margin-top:6px; color:rgba(255,255,255,.66); font-size:12px; }
-    .jobDesc{
-      margin-top:10px; color:rgba(255,255,255,.74); font-size:13px; line-height:1.65;
-      display:-webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow:hidden;
+    .jobThumb img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      opacity:.92;
+      filter:saturate(1.05) contrast(1.12);
+      transform:scale(1.02);
     }
+    .jobThumb:after{
+      content:"";
+      position:absolute; inset:0;
+      background: linear-gradient(180deg, rgba(0,0,0,.05), rgba(0,0,0,.55));
+      pointer-events:none;
+    }
+
     .jobMetaLine{
-      display:flex; flex-wrap:nowrap; align-items:center; gap:8px;
-      font-size:10px; white-space:nowrap; overflow:hidden; color:rgba(255,255,255,.72);
+      display:flex;
+      flex-wrap:nowrap;
+      align-items:center;
+      width:100%;
+      max-width:100%;
+      overflow:hidden;
+      gap: clamp(4px, 0.8vw, 8px);
+      font-size: clamp(8px, 0.95vw, 10px);
+      line-height: 1;
+      white-space:nowrap;
+      color: rgba(255,255,255,.72);
     }
-    .jobMetaLine .sep{ opacity:.45; }
-    .pager{ display:flex; align-items:center; justify-content:space-between; gap:12px; margin-top:14px; color:rgba(255,255,255,.66); font-size:12px; }
-    .btn[disabled]{ opacity:.55; cursor:not-allowed; transform:none !important; box-shadow:none !important; }
+    .jobMetaLine .sep{ flex:0 0 auto; opacity:.45; }
+    .jobMetaLine .pill{
+      min-width:0;
+      flex:0 1 auto;
+      overflow:hidden;
+      text-overflow: ellipsis;
+      white-space:nowrap;
+      display:inline;
+      padding:0;
+      border:0;
+      background:none;
+      font-weight:500;
+      color: inherit;
+    }
+
+    .pager{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      margin-top:14px;
+      color:rgba(255,255,255,.66);
+      font-size:12px;
+    }
+    .pager .btn{padding:10px 12px; font-size:12px;}
+    .btn[disabled]{
+      opacity:.55;
+      cursor:not-allowed;
+      transform:none !important;
+      box-shadow: none !important;
+    }
 
     .modal-bg{
-      position:fixed; inset:0; background: rgba(0,0,0,0.65);
-      backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
-      z-index:70; display:none; align-items:center; justify-content:center; padding:16px;
+      position:fixed; inset:0;
+      background: rgba(0,0,0,0.65);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      z-index:70;
+      display:none;
+      align-items:center;
+      justify-content:center;
+      padding:16px;
     }
-    .modal-bg.show{ display:flex; }
-    .modal{
-      width:100%; max-width:720px; border:3px solid rgba(255,255,255,.14);
-      border-radius:18px; background: linear-gradient(180deg, rgba(14,16,26,.92), rgba(7,8,19,.92));
-      box-shadow: 0 22px 75px rgba(0,0,0,.68);
-      overflow:hidden; max-height: min(92vh, 860px); display:flex; flex-direction:column;
-    }
-    .modalHead{ padding:16px 18px; display:flex; align-items:center; justify-content:space-between; border-bottom:3px solid rgba(255,255,255,.08); }
-    .xBtn{ width:44px; height:44px; border-radius:10px; border:3px solid rgba(255,255,255,.14); background: rgba(8,10,16,.55); color:#fff; cursor:pointer; }
-    .modalBody{ padding:16px 18px 18px; overflow:auto; flex:1 1 auto; min-height:0; }
+    .modal-bg.show{display:flex;}
 
-    .formGrid{ display:grid; grid-template-columns: 1fr 1fr; gap:12px; }
-    .formGrid .span2{ grid-column: span 2; }
-    .field{ display:grid; gap:8px; }
-    label{ font-size:12px; color:rgba(255,255,255,.65); }
-    textarea, select{
-      width:100%; padding:12px 12px; border-radius:10px;
+    .modal{
+      width:100%;
+      max-width:720px;
       border:3px solid rgba(255,255,255,.14);
-      background: rgba(8,10,16,.70);
-      color:#fff; outline:none;
+      border-radius:18px;
+      background: linear-gradient(180deg, rgba(14,16,26,.92), rgba(7,8,19,.92));
+      box-shadow: 0 22px 75px rgba(0,0,0,.68);
+      overflow:hidden;
+      position:relative;
+      max-height: min(92vh, 860px);
+      display:flex;
+      flex-direction:column;
     }
-    textarea{ min-height:110px; resize:vertical; }
-    .formActions{ display:flex; justify-content:flex-end; gap:10px; margin-top:6px; flex-wrap:wrap; }
+    .modalHead{
+      padding:16px 18px;
+      display:flex; align-items:center; justify-content:space-between;
+      border-bottom:3px solid rgba(255,255,255,.08);
+      background: linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
+      flex:0 0 auto;
+    }
+    .modalHead h3{margin:0; font-size:16px; letter-spacing:-.2px}
+    .xBtn{
+      width:44px; height:44px;
+      border-radius:10px;
+      border:3px solid rgba(255,255,255,.14);
+      background: rgba(8,10,16,.55);
+      color:rgba(255,255,255,.9);
+      cursor:pointer;
+      flex:0 0 auto;
+    }
+    .modalBody{
+      padding:16px 18px 18px;
+      overflow:auto;
+      -webkit-overflow-scrolling: touch;
+      flex:1 1 auto;
+      min-height:0;
+    }
+
+    .formGrid{display:grid; grid-template-columns: 1fr 1fr; gap:12px;}
+    .formGrid .span2{grid-column: span 2;}
+    .formActions{display:flex; justify-content:flex-end; gap:10px; margin-top:6px; flex-wrap:wrap;}
+
+    #toast{
+      position:fixed;
+      bottom:92px;
+      left:50%;
+      transform:translateX(-50%);
+      z-index:90;
+      display:none;
+      padding:12px 14px;
+      border-radius:12px;
+      border:3px solid rgba(255,59,111,.55);
+      background: linear-gradient(180deg, rgba(255,59,111,.22), rgba(7,8,19,.92));
+      box-shadow: 0 14px 38px rgba(0,0,0,.48);
+      color:rgba(255,255,255,.92);
+      font-weight:650;
+      font-size:13px;
+      max-width: min(560px, calc(100vw - 24px));
+      text-align:center;
+    }
+    #toast.show{display:block;}
 
     @media (max-width: 980px){
-      .gridJobs{grid-template-columns:1fr;}
-      .searchGrid{grid-template-columns:1fr;}
-      nav{display:none;}
-      .heroTitle{font-size:38px;}
-      .formGrid{grid-template-columns:1fr;}
-      .formGrid .span2{grid-column:auto;}
-      .jobMedia{grid-template-columns:1fr;}
+      .gridJobs{grid-template-columns: 1fr;}
+      .searchGrid{grid-template-columns: 1fr; }
+      nav{display:none}
+      .hamburger{display:flex}
+      .wrap{padding:18px 14px 120px}
+      .heroTitle{font-size:38px}
+      .formGrid{grid-template-columns: 1fr;}
+      .formGrid .span2{grid-column: auto;}
+      body{ padding-bottom: 108px; }
+
+      .gridJobs aside.card{position: relative !important; top: auto !important;}
+      .card{ padding: 14px; }
+      .pager{flex-direction: column; align-items: stretch; gap: 10px;}
+      .pager .btn{ width: 100%; justify-content:center; }
+
+      .jobMedia{grid-template-columns: 1fr; }
       .jobThumb{width:100%; height:160px;}
-      body{padding-bottom:108px;}
+    }
+    @media (prefers-reduced-motion: reduce){
+      .card, .btn, nav a{transition:none !important;}
+      .card:hover, .btn:hover{transform:none !important;}
+      .blob{display:none;}
     }
   </style>
 </head>
@@ -275,25 +685,51 @@
   <!-- Google Tag Manager (noscript) -->
   <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PBXVW3GK"
   height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
 
   <div class="heroBg" id="heroBg" aria-hidden="true"></div>
 
+  <!-- ✅ FLOATING LOGO -->
   <a class="floatingLogo" href="/sr-me/pocetna" aria-label="Sindikat Studio 83 — Poslovi">
     <div class="logoMark" aria-hidden="true">
       <img class="logoMarkImg" src="/studio83logo.png" alt="">
     </div>
   </a>
 
+  <div class="blob" id="blob1" aria-hidden="true"></div>
+  <div class="blob b2" id="blob2" aria-hidden="true"></div>
+
+  <!-- ✅ mobile overlay (original) -->
+  <div id="mobileOverlay" aria-hidden="true"></div>
+
+  <!-- ✅ ORIGINAL Topbar (bottom) -->
   <header class="topbar">
     <div class="topbarInner">
-      <a class="btn primary" href="/sr-me/kontakt"><span class="dot"></span>Kontaktiraj nas</a>
-      <nav aria-label="Primary">
+      <a class="btn primary ctaCenter" href="/sr-me/kontakt"><span class="dot"></span>Kontaktiraj nas</a>
+
+      <div class="navWrap">
+        <nav aria-label="Primary">
+          <a href="/sr-me/pocetna">Početna</a>
+          <a href="/sr-me/usluge">Usluge</a>
+          <a href="/sr-me/onama">O nama</a>
+          <a href="/sr-me/blog">Blog</a>
+          <a href="/sr-me/poslovi" aria-current="page">Poslovi</a>
+        </nav>
+
+        <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+
+    <div class="mobileMenu" id="mobileMenu">
+      <div class="mobileMenuInner">
         <a href="/sr-me/pocetna">Početna</a>
         <a href="/sr-me/usluge">Usluge</a>
         <a href="/sr-me/onama">O nama</a>
         <a href="/sr-me/blog">Blog</a>
         <a href="/sr-me/poslovi" aria-current="page">Poslovi</a>
-      </nav>
+      </div>
     </div>
   </header>
 
@@ -316,9 +752,6 @@
           </div>
           <button id="searchBtn" class="btn primary" type="button"><span class="dot"></span> Pretraži</button>
         </div>
-
-        <!-- ✅ FILTER DUGMIĆI = Jobs_Live.category -->
-        <div class="pillRow" id="catChips" aria-label="Filter po kategoriji"></div>
       </div>
     </section>
 
@@ -332,12 +765,13 @@
         <aside class="card" style="position:sticky; top:18px">
           <div style="display:flex; align-items:center; justify-content:space-between; gap:10px; margin-bottom:10px">
             <div style="font-weight:800; letter-spacing:-.2px">Filteri</div>
-            <span style="font-size:11px; border:2px solid rgba(255,255,255,.14); border-radius:10px; padding:6px 10px; background: rgba(8,10,16,.65); color:rgba(255,255,255,.78);">Scope</span>
+            <span class="badge">Scope</span>
           </div>
 
+          <!-- ✅ OVDJE SU SAD KATEGORIJE (Jobs_Live.category) -->
           <div class="field">
-            <label>Tip angažmana (type)</label>
-            <div id="typeFilters"></div>
+            <label>Kategorije (category)</label>
+            <div id="catFilters"></div>
           </div>
 
           <div class="field" style="margin-top:12px">
@@ -356,8 +790,8 @@
           </div>
         </aside>
 
-        <div class="grid">
-          <div id="jobList" class="grid"></div>
+        <div class="grid" style="gap:14px">
+          <div id="jobList" class="grid" style="gap:14px"></div>
 
           <div class="pager">
             <button id="prev" class="btn" type="button">⟵ Prethodna</button>
@@ -366,34 +800,51 @@
           </div>
         </div>
       </div>
+
+      <footer style="border-top:3px solid rgba(255,255,255,.10); padding:22px 0 0; margin-top:22px; color:rgba(255,255,255,.62); font-size:12px; display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap;">
+        <div>© <span id="yearSpan"></span> Sindikat — Poslovi</div>
+        <div>Podgorica • Crna Gora</div>
+      </footer>
     </section>
   </main>
 
-  <div id="toast" role="status" aria-live="polite" style="display:none"></div>
+  <div id="toast" role="status" aria-live="polite"></div>
+
+  <!-- Details modal -->
+  <div id="detailsModal" class="modal-bg" role="dialog" aria-modal="true" aria-label="Detalji oglasa" aria-hidden="true">
+    <div class="modal">
+      <div class="modalHead">
+        <h3>Detalji oglasa</h3>
+        <button class="xBtn" data-close type="button" aria-label="Close">✕</button>
+      </div>
+      <div class="modalBody" id="detailsBody"></div>
+    </div>
+  </div>
 
   <!-- Post modal -->
   <div id="postJobModal" class="modal-bg" role="dialog" aria-modal="true" aria-label="Pošalji oglas" aria-hidden="true">
     <div class="modal">
       <div class="modalHead">
-        <h3 style="margin:0; font-size:16px;">Pošalji oglas</h3>
+        <h3>Pošalji oglas</h3>
         <button class="xBtn" data-close type="button" aria-label="Close">✕</button>
       </div>
       <div class="modalBody">
         <form id="postJobForm" class="formGrid">
           <div class="field span2">
             <label>Naziv pozicije</label>
-            <input name="title" required placeholder="npr. Barmen (sezona)" />
+            <input name="title" required placeholder="npr. Barmen (sezona)"/>
           </div>
           <div class="field">
             <label>Kompanija</label>
-            <input name="company" required placeholder="Naziv kompanije" />
+            <input name="company" required placeholder="Naziv kompanije"/>
           </div>
           <div class="field">
             <label>Lokacija</label>
-            <input name="location" required placeholder="Podgorica" />
+            <input name="location" required placeholder="Podgorica"/>
           </div>
+
           <div class="field">
-            <label>Kategorija (dinamički iz category)</label>
+            <label>Kategorija</label>
             <select name="category" id="postCat"></select>
           </div>
           <div class="field">
@@ -403,7 +854,7 @@
 
           <div class="field">
             <label>Iznos naknade (€)</label>
-            <input name="pay" type="number" placeholder="npr. 900" />
+            <input name="pay" type="number" placeholder="npr. 900"/>
           </div>
           <div class="field">
             <label>Tip naknade</label>
@@ -415,7 +866,7 @@
 
           <div class="field span2">
             <label>Slika (URL)</label>
-            <input name="img" placeholder="https://... (opciono)" />
+            <input name="img" placeholder="https://... (opciono)"/>
           </div>
 
           <div class="field span2">
@@ -440,7 +891,7 @@
 
           <div class="field span2">
             <label>Link za prijavu ili e-mail</label>
-            <input name="apply" placeholder="npr. hr@firma.me ili https://…" />
+            <input name="apply" placeholder="npr. hr@firma.me ili https://…"/>
           </div>
 
           <div class="formActions span2">
@@ -452,23 +903,14 @@
     </div>
   </div>
 
-  <!-- Details modal (minimal) -->
-  <div id="detailsModal" class="modal-bg" role="dialog" aria-modal="true" aria-label="Detalji oglasa" aria-hidden="true">
-    <div class="modal">
-      <div class="modalHead">
-        <h3 style="margin:0; font-size:16px;">Detalji oglasa</h3>
-        <button class="xBtn" data-close type="button" aria-label="Close">✕</button>
-      </div>
-      <div class="modalBody" id="detailsBody"></div>
-    </div>
-  </div>
-
   <script>
     window.addEventListener("DOMContentLoaded", () => {
+      // ✅ TVOJ WEB APP URL (CMS)
       const WEBAPP_URL = "https://script.google.com/macros/s/AKfycbwSwvILrfKoSaDYrOIegGY3E_4_eokard8yY9lurGfcEL7fQNsPxb5wT0ZRKwJfnC2_/exec";
       const SOURCE_LABEL = "Sindikat Poslovi – website";
 
       const el = (id) => document.getElementById(id);
+
       const safe = (v) => String(v ?? "")
         .replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;")
         .replace(/"/g,"&quot;").replace(/'/g,"&#039;");
@@ -481,44 +923,80 @@
         return s.split("\n").map(x=>x.trim()).filter(Boolean);
       };
 
-      function toast(msg){
+      const toast = (t) => {
         const n = el("toast");
         if (!n) return;
-        n.textContent = msg;
-        n.style.display = "block";
-        n.style.position = "fixed";
-        n.style.bottom = "92px";
-        n.style.left = "50%";
-        n.style.transform = "translateX(-50%)";
-        n.style.zIndex = "90";
-        n.style.padding = "12px 14px";
-        n.style.borderRadius = "12px";
-        n.style.border = "3px solid rgba(255,59,111,.55)";
-        n.style.background = "linear-gradient(180deg, rgba(255,59,111,.22), rgba(7,8,19,.92))";
-        n.style.boxShadow = "0 14px 38px rgba(0,0,0,.48)";
-        n.style.color = "rgba(255,255,255,.92)";
-        n.style.fontWeight = "650";
-        n.style.fontSize = "13px";
-        setTimeout(()=>{ n.style.display="none"; }, 2600);
-      }
+        n.textContent = t;
+        n.classList.add("show");
+        setTimeout(()=>n.classList.remove("show"), 2600);
+      };
 
-      function setBodyLock(locked){
+      const setBodyLock = (locked) => {
         document.documentElement.style.overflow = locked ? "hidden" : "";
         document.body.style.overflow = locked ? "hidden" : "";
         document.body.style.touchAction = locked ? "none" : "";
+      };
+
+      // ✅ ORIGINAL mobile menu behavior
+      const mobileBtn = el("hamburger");
+      const mobileMenu = el("mobileMenu");
+      const mobileOverlay = el("mobileOverlay");
+
+      function setMobile(open){
+        if (!mobileMenu) return;
+        mobileMenu.classList.toggle("open", open);
+        if (mobileOverlay){
+          mobileOverlay.style.opacity = open ? "1" : "0";
+          mobileOverlay.style.pointerEvents = open ? "auto" : "none";
+        }
+        mobileBtn?.setAttribute("aria-expanded", open ? "true" : "false");
       }
 
-      function showModal(m){
-        if (!m) return;
-        m.classList.add("show");
-        m.setAttribute("aria-hidden","false");
-        setBodyLock(true);
+      mobileBtn?.addEventListener("click", (e)=>{ e.stopPropagation(); setMobile(!mobileMenu.classList.contains("open")); });
+      mobileOverlay?.addEventListener("click", ()=> setMobile(false));
+      document.addEventListener("click", (e)=>{
+        if (!mobileMenu?.classList.contains("open")) return;
+        const inside = mobileMenu.contains(e.target) || mobileBtn.contains(e.target);
+        if (!inside) setMobile(false);
+      });
+      document.querySelectorAll("#mobileMenu a").forEach(a=> a.addEventListener("click", ()=> setMobile(false)));
+      window.addEventListener("keydown", (e)=>{ if (e.key === "Escape") setMobile(false); });
+
+      async function fetchLiveJobs(){
+        try{
+          const res = await fetch(WEBAPP_URL + "?action=jobs", { method:"GET" });
+          const data = await res.json();
+          const jobs = (data && data.jobs) ? data.jobs : [];
+          return jobs.map(normalizeJobFromSheet);
+        }catch(err){
+          console.warn("fetchLiveJobs error", err);
+          return [];
+        }
       }
-      function hideModal(m){
-        if (!m) return;
-        m.classList.remove("show");
-        m.setAttribute("aria-hidden","true");
-        if (!document.querySelector(".modal-bg.show")) setBodyLock(false);
+
+      function normalizeJobFromSheet(j){
+        return {
+          id: String(j.id || ""),
+          title: String(j.title || ""),
+          company: String(j.company || ""),
+          location: String(j.location || ""),
+          category: String(j.category || ""),
+          type: String(j.type || ""),
+          pay: (j.pay === "" || j.pay === null || j.pay === undefined) ? "" : Number(j.pay),
+          payType: String(j.payType || ""),
+          posted: String(j.posted || new Date().toISOString().slice(0,10)),
+          img: String(j.img || ""),
+          desc: String(j.desc || ""),
+          responsibilities: splitLines(j.responsibilities),
+          qualifications: splitLines(j.qualifications),
+          benefits: splitLines(j.benefits),
+          apply: String(j.apply || "")
+        };
+      }
+
+      function uniqueSorted(arr){
+        return [...new Set(arr.map(x => String(x || "").trim()).filter(Boolean))]
+          .sort((a,b)=> a.localeCompare(b, "sr"));
       }
 
       function parseTypeToArray(typeVal){
@@ -529,39 +1007,6 @@
         if (s.includes(" | ")) return s.split(" | ").map(x=>x.trim()).filter(Boolean);
         if (s.includes("|")) return s.split("|").map(x=>x.trim()).filter(Boolean);
         return [s];
-      }
-
-      function uniqueSorted(arr){
-        return [...new Set(arr.map(x => String(x || "").trim()).filter(Boolean))]
-          .sort((a,b)=> a.localeCompare(b, "sr"));
-      }
-
-      async function fetchLiveJobs(){
-        try{
-          const res = await fetch(WEBAPP_URL + "?action=jobs", { method:"GET" });
-          const data = await res.json();
-          const jobs = (data && data.jobs) ? data.jobs : [];
-          return jobs.map((j)=>({
-            id: String(j.id || ""),
-            title: String(j.title || ""),
-            company: String(j.company || ""),
-            location: String(j.location || ""),
-            category: String(j.category || ""),
-            type: String(j.type || ""),
-            pay: (j.pay === "" || j.pay === null || j.pay === undefined) ? "" : Number(j.pay),
-            payType: String(j.payType || ""),
-            posted: String(j.posted || new Date().toISOString().slice(0,10)),
-            img: String(j.img || ""),
-            desc: String(j.desc || ""),
-            responsibilities: splitLines(j.responsibilities),
-            qualifications: splitLines(j.qualifications),
-            benefits: splitLines(j.benefits),
-            apply: String(j.apply || "")
-          }));
-        }catch(err){
-          console.warn("fetchLiveJobs error", err);
-          return [];
-        }
       }
 
       // ✅ static job
@@ -583,22 +1028,8 @@
         apply:"sindikatevents@gmail.com"
       };
 
-      let allJobsCache = [];
-      let categoriesCache = [];
-      let typesCache = [];
-
-      // ✅ category filter state (multi-select)
+      // ✅ category filter state (multi)
       let catSet = new Set();
-
-      // pagination
-      const perPage = 5;
-      let page = 1;
-
-      function payText(j){
-        if (j.pay === "" || j.pay === null || j.pay === undefined || Number.isNaN(Number(j.pay))) return "";
-        const label = (j.payType === "one-time") ? "jednokratno" : "mjesečno";
-        return `€ ${safe(j.pay)} • ${label}`;
-      }
 
       function buildFilterStats(jobs){
         const categories = uniqueSorted(jobs.map(j => j.category));
@@ -606,51 +1037,27 @@
         return { categories, types };
       }
 
-      // ✅ build category buttons from Jobs_Live.category
-      function populateCategoryButtons(categories){
-        const row = el("catChips");
-        if (!row) return;
-
-        // keep selected ones if still exist
-        catSet = new Set([...catSet].filter(c => categories.includes(c)));
-
-        row.innerHTML = "";
-        categories.forEach(c=>{
-          const b = document.createElement("button");
-          b.type = "button";
-          b.textContent = c;
-          if (catSet.has(c)) b.classList.add("active");
-
-          b.addEventListener("click", ()=>{
-            if (catSet.has(c)) { catSet.delete(c); b.classList.remove("active"); }
-            else { catSet.add(c); b.classList.add("active"); }
-            page = 1;
-            render();
-          });
-
-          row.appendChild(b);
-        });
-      }
-
-      function populateTypeFilters(typesArr){
-        const wrap = el("typeFilters");
+      function populateCategoryFilters(categories){
+        const wrap = el("catFilters");
         if (!wrap) return;
 
-        // preserve checked values
-        const checked = new Set([...wrap.querySelectorAll("input:checked")].map(i=>i.value));
+        // keep selected values if still exist
+        catSet = new Set([...catSet].filter(v => categories.includes(v)));
 
         wrap.innerHTML = "";
-        typesArr.forEach((t)=>{
+        categories.forEach((c)=>{
           const tile = document.createElement("label");
           tile.className = "cbTile";
-          tile.innerHTML = `<input type="checkbox" value="${safe(t)}"><span>${safe(t)}</span>`;
+          tile.innerHTML = `<input type="checkbox" value="${safe(c)}"><span>${safe(c)}</span>`;
           wrap.appendChild(tile);
 
           const input = tile.querySelector("input");
-          input.checked = checked.has(t);
+          input.checked = catSet.has(c);
           tile.classList.toggle("checked", input.checked);
 
           input.addEventListener("change", ()=>{
+            if (input.checked) catSet.add(c);
+            else catSet.delete(c);
             tile.classList.toggle("checked", input.checked);
             page = 1;
             render();
@@ -673,31 +1080,33 @@
         }
       }
 
+      // UI state
+      let allJobsCache = [];
+      const perPage = 5;
+      let page = 1;
+
+      const payText = (j) => {
+        if (j.pay === "" || j.pay === null || j.pay === undefined || Number.isNaN(Number(j.pay))) return "";
+        const label = (j.payType === "one-time") ? "jednokratno" : "mjesečno";
+        return `€ ${safe(j.pay)} • ${label}`;
+      };
+
       function getFilters(){
         const q = (el("q")?.value || "").trim().toLowerCase();
         const loc = (el("loc")?.value || "").trim().toLowerCase();
         const minPay = parseFloat(el("minPay")?.value || "");
         const maxPay = parseFloat(el("maxPay")?.value || "");
-
-        const typesChecked = [...document.querySelectorAll("#typeFilters input:checked")].map(i=>i.value);
-        const typeSet = new Set(typesChecked);
-
-        return { q, loc, minPay, maxPay, typeSet, catSet };
+        return { q, loc, minPay, maxPay, catSet };
       }
 
       function filterJobs(list){
         const f = getFilters();
-
         return list.filter((j)=>{
           const hitQ = !f.q || `${j.title} ${j.company} ${j.desc}`.toLowerCase().includes(f.q);
           const hitLoc = !f.loc || (j.location || "").toLowerCase().includes(f.loc);
 
-          // ✅ category buttons filter (multi)
+          // ✅ category tiles filter
           const hitCategory = (f.catSet.size === 0) || f.catSet.has(j.category);
-
-          // type checkbox filter
-          const jobTypes = parseTypeToArray(j.type);
-          const hitType = (f.typeSet.size === 0) || jobTypes.some(t => f.typeSet.has(t));
 
           const hasPay = (j.pay !== "" && j.pay !== null && j.pay !== undefined && !Number.isNaN(Number(j.pay)));
           const payVal = hasPay ? Number(j.pay) : null;
@@ -708,78 +1117,114 @@
           const hitPayMin = isNaN(f.minPay) || (payVal >= f.minPay);
           const hitPayMax = isNaN(f.maxPay) || (payVal <= f.maxPay);
 
-          return hitQ && hitLoc && hitCategory && hitType && hitPayMin && hitPayMax;
+          return hitQ && hitLoc && hitCategory && hitPayMin && hitPayMax;
         });
       }
 
-      function jobCard(j){
+      const jobCard = (j) => {
         const img = j.img ? safe(j.img) : "https://images.unsplash.com/photo-1520975682038-fd29b3c0d409?auto=format&fit=crop&w=1200&q=70";
         const typeLabel = parseTypeToArray(j.type).join(" / ");
 
         return `
-          <article class="card jobCard" tabindex="0" role="button" data-open="${safe(j.id)}" aria-label="Detalji oglasa: ${safe(j.title)}">
+          <article class="card jobCard" tabindex="0" role="button" aria-label="Detalji oglasa: ${safe(j.title)}" data-open="${safe(j.id)}">
             <div class="jobMedia">
               <div class="jobThumb" aria-hidden="true">
                 <img src="${img}" alt="" loading="lazy">
               </div>
+
               <div>
-                <h3 class="jobTitle">${safe(j.title)}</h3>
-                <div class="jobMeta">${safe(j.company)} • ${safe(j.location)}</div>
+                <div class="jobTop">
+                  <div>
+                    <h3 class="jobTitle">${safe(j.title)}</h3>
+                    <div class="jobMeta">${safe(j.company)} • ${safe(j.location)}</div>
+                  </div>
+                </div>
 
                 <div class="jobMetaLine" aria-label="Meta informacije oglasa">
-                  <span>${safe(j.category)}</span>
+                  <span class="pill">${safe(j.category)}</span>
                   <span class="sep">•</span>
-                  <span>${safe(typeLabel)}</span>
-                  ${payText(j) ? `<span class="sep">•</span><span>${payText(j)}</span>` : ``}
+                  <span class="pill">${safe(typeLabel)}</span>
+
+                  ${(j.pay !== "" && j.pay !== null && j.pay !== undefined && !Number.isNaN(Number(j.pay)))
+                    ? `<span class="sep">•</span><span class="pill">${payText(j)}</span>`
+                    : ``}
+
                   <span class="sep">•</span>
-                  <span>Objavljeno: ${new Date(j.posted).toLocaleDateString()}</span>
+                  <span class="pill">Objavljeno: ${new Date(j.posted).toLocaleDateString()}</span>
                 </div>
               </div>
             </div>
+
             <p class="jobDesc">${safe(j.desc || "")}</p>
           </article>
         `;
-      }
+      };
 
       const detailsModal = el("detailsModal");
       const detailsBody = el("detailsBody");
       const postJobModal = el("postJobModal");
 
+      function showModal(m){
+        if (!m) return;
+        m.classList.add("show");
+        m.setAttribute("aria-hidden","false");
+        setBodyLock(true);
+      }
+      function hideModal(m){
+        if (!m) return;
+        m.classList.remove("show");
+        m.setAttribute("aria-hidden","true");
+        if (!document.querySelector(".modal-bg.show")) setBodyLock(false);
+      }
+
       function openDetails(id){
-        const j = allJobsCache.find(x => String(x.id) === String(id));
+        const j = (allJobsCache || []).find(x => String(x.id) === String(id));
         if (!j || !detailsBody) return;
 
         const typeLabel = parseTypeToArray(j.type).join(" / ");
+        const img = j.img ? safe(j.img) : "https://images.unsplash.com/photo-1520975682038-fd29b3c0d409?auto=format&fit=crop&w=1200&q=70";
+
         detailsBody.innerHTML = `
           <div style="display:grid; gap:10px;">
-            <div style="font-size:18px; font-weight:800;">${safe(j.title)}</div>
-            <div style="color:rgba(255,255,255,.72);">${safe(j.company)} • ${safe(j.location)}</div>
-            <div style="display:flex; flex-wrap:wrap; gap:8px; margin-top:6px;">
-              <span style="font-size:11px; border:2px solid rgba(255,255,255,.14); border-radius:10px; padding:6px 10px; background: rgba(8,10,16,.65); color:rgba(255,255,255,.78);">${safe(j.category)}</span>
-              <span style="font-size:11px; border:2px solid rgba(255,255,255,.14); border-radius:10px; padding:6px 10px; background: rgba(8,10,16,.65); color:rgba(255,255,255,.78);">${safe(typeLabel)}</span>
-              ${payText(j) ? `<span style="font-size:11px; border:2px solid rgba(255,59,111,.45); border-radius:10px; padding:6px 10px; background: rgba(255,59,111,.10); color:rgba(255,255,255,.92);">${payText(j)}</span>` : ``}
+            <div style="display:grid; grid-template-columns: 140px 1fr; gap:12px; align-items:start;">
+              <div style="width:140px; height:110px; border-radius:14px; overflow:hidden; border:3px solid rgba(255,255,255,.12); background: rgba(8,10,16,.65);">
+                <img src="${img}" alt="" style="width:100%; height:100%; object-fit:cover; opacity:.94;" loading="lazy">
+              </div>
+              <div>
+                <div style="font-size:18px; font-weight:800; letter-spacing:-.2px;">${safe(j.title)}</div>
+                <div style="color:rgba(255,255,255,.72); margin-top:6px;">${safe(j.company)} • ${safe(j.location)}</div>
+                <div style="display:flex; flex-wrap:wrap; gap:8px; margin-top:10px;">
+                  <span class="badge">${safe(j.category)}</span>
+                  <span class="badge">${safe(typeLabel)}</span>
+                  ${payText(j) ? `<span class="badge" style="border-color:rgba(255,59,111,.45); background: rgba(255,59,111,.10); color:rgba(255,255,255,.92);">${payText(j)}</span>` : ``}
+                  <span class="badge">Objavljeno: ${new Date(j.posted).toLocaleDateString()}</span>
+                </div>
+              </div>
             </div>
 
-            <div style="margin-top:10px; color:rgba(255,255,255,.78); line-height:1.65;">${safe(j.desc || "")}</div>
+            <div style="border-top:3px solid rgba(255,255,255,.08); padding-top:12px; margin-top:6px;">
+              <div style="font-size:13px; text-transform:uppercase; letter-spacing:.2px; color:rgba(255,255,255,.78); font-weight:800;">Opis pozicije</div>
+              <div style="margin-top:10px; color:rgba(255,255,255,.74); line-height:1.65;">${safe(j.desc || "")}</div>
+            </div>
 
-            <div style="margin-top:10px;">
-              <div style="font-weight:800; margin-bottom:6px;">Odgovornosti</div>
-              <ul style="margin:0; padding-left:18px; color:rgba(255,255,255,.74); line-height:1.6;">
-                ${(j.responsibilities||[]).map(x=>`<li>${safe(x)}</li>`).join("") || `<li>Po dogovoru.</li>`}
+            <div style="border-top:3px solid rgba(255,255,255,.08); padding-top:12px;">
+              <div style="font-size:13px; text-transform:uppercase; letter-spacing:.2px; color:rgba(255,255,255,.78); font-weight:800;">Odgovornosti</div>
+              <ul style="margin:10px 0 0; padding-left:18px; color:rgba(255,255,255,.74); line-height:1.6;">
+                ${(j.responsibilities||[]).length ? (j.responsibilities||[]).map(x=>`<li>${safe(x)}</li>`).join("") : `<li>Po dogovoru.</li>`}
               </ul>
             </div>
 
-            <div style="margin-top:10px;">
-              <div style="font-weight:800; margin-bottom:6px;">Kvalifikacije</div>
-              <ul style="margin:0; padding-left:18px; color:rgba(255,255,255,.74); line-height:1.6;">
-                ${(j.qualifications||[]).map(x=>`<li>${safe(x)}</li>`).join("") || `<li>Po dogovoru.</li>`}
+            <div style="border-top:3px solid rgba(255,255,255,.08); padding-top:12px;">
+              <div style="font-size:13px; text-transform:uppercase; letter-spacing:.2px; color:rgba(255,255,255,.78); font-weight:800;">Kvalifikacije</div>
+              <ul style="margin:10px 0 0; padding-left:18px; color:rgba(255,255,255,.74); line-height:1.6;">
+                ${(j.qualifications||[]).length ? (j.qualifications||[]).map(x=>`<li>${safe(x)}</li>`).join("") : `<li>Po dogovoru.</li>`}
               </ul>
             </div>
 
-            <div style="margin-top:10px;">
-              <div style="font-weight:800; margin-bottom:6px;">Benefiti</div>
-              <ul style="margin:0; padding-left:18px; color:rgba(255,255,255,.74); line-height:1.6;">
-                ${(j.benefits||[]).map(x=>`<li>${safe(x)}</li>`).join("") || `<li>Po dogovoru.</li>`}
+            <div style="border-top:3px solid rgba(255,255,255,.08); padding-top:12px;">
+              <div style="font-size:13px; text-transform:uppercase; letter-spacing:.2px; color:rgba(255,255,255,.78); font-weight:800;">Benefiti</div>
+              <ul style="margin:10px 0 0; padding-left:18px; color:rgba(255,255,255,.74); line-height:1.6;">
+                ${(j.benefits||[]).length ? (j.benefits||[]).map(x=>`<li>${safe(x)}</li>`).join("") : `<li>Po dogovoru.</li>`}
               </ul>
             </div>
           </div>
@@ -808,17 +1253,8 @@
         allJobsCache = merged;
 
         const { categories, types } = buildFilterStats(merged);
-        categoriesCache = categories;
-        typesCache = types;
-
-        // ✅ build category filter buttons from category column
-        populateCategoryButtons(categoriesCache);
-
-        // ✅ build type checkboxes from type column
-        populateTypeFilters(typesCache);
-
-        // ✅ post form selects
-        populatePostFormSelects(categoriesCache, typesCache);
+        populateCategoryFilters(categories);
+        populatePostFormSelects(categories, types);
 
         return merged;
       }
@@ -827,7 +1263,6 @@
         const listEl = el("jobList");
         if (!listEl) return;
 
-        // init once
         if (!allJobsCache.length) await initData();
 
         const data = filterJobs(allJobsCache);
@@ -857,20 +1292,15 @@
         node && node.addEventListener("input", ()=>{ page=1; render(); });
       });
       el("searchBtn")?.addEventListener("click", ()=>{ page=1; render(); });
-
       el("prev")?.addEventListener("click", ()=>{ if (page>1){ page--; render(); } });
       el("next")?.addEventListener("click", ()=>{ page++; render(); });
 
       el("clearFilters")?.addEventListener("click", ()=>{
         catSet.clear();
-        // remove active UI
-        const row = el("catChips");
-        row && [...row.querySelectorAll("button")].forEach(b=>b.classList.remove("active"));
+        document.querySelectorAll("#catFilters input").forEach(cb => cb.checked = false);
+        document.querySelectorAll("#catFilters .cbTile").forEach(tile => tile.classList.remove("checked"));
 
         ["q","loc","minPay","maxPay"].forEach((id)=>{ const e = el(id); if (e) e.value = ""; });
-
-        document.querySelectorAll("#typeFilters input").forEach(cb=>cb.checked=false);
-        document.querySelectorAll("#typeFilters .cbTile").forEach(tile=>tile.classList.remove("checked"));
 
         page = 1;
         render();
@@ -935,6 +1365,15 @@
         hideModal(postJobModal);
         toast("Oglas poslat na odobrenje ✅");
       });
+
+      el("yearSpan") && (el("yearSpan").textContent = new Date().getFullYear());
+
+      // blobs animation (optional, like original vibe)
+      const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (!reduced && window.anime){
+        anime({ targets:'#blob1', translateX:[0,18,-10,0], translateY:[0,-12,16,0], duration:9000, easing:'easeInOutSine', loop:true });
+        anime({ targets:'#blob2', translateX:[0,-14,10,0], translateY:[0,14,-10,0], duration:11000, easing:'easeInOutSine', loop:true });
+      }
 
       // first render
       render();
