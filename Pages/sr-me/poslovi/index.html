@@ -589,21 +589,20 @@
     }
     .jobTitle{margin:0; font-size:16px; letter-spacing:-.2px;}
     .jobMeta{margin-top:6px; color:rgba(255,255,255,.66); font-size:12px;}
-/* Job description preview: max 2 lines */
-.jobDesc{
-  margin-top:10px;
-  color:rgba(255,255,255,.74);
-  font-size:13px;
-  line-height:1.65;
 
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;   /* ✅ 2 reda */
-  overflow: hidden;
-}
-    
-    
-    
+    /* Job description preview: max 2 lines */
+    .jobDesc{
+      margin-top:10px;
+      color:rgba(255,255,255,.74);
+      font-size:13px;
+      line-height:1.65;
+
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 2;
+      overflow: hidden;
+    }
+
     .saveBtn{
       width:42px; height:42px;
       border-radius:10px;
@@ -1048,27 +1047,16 @@
           </div>
           <div class="inputRow">
             <div class="inputIcon" aria-hidden="true">🏷️</div>
+            <!-- ✅ dynamic categories -->
             <select id="cat">
               <option value="">Sve kategorije</option>
-              <option>Ugostiteljstvo</option>
-              <option>Marketing & Dizajn</option>
-              <option>Audio/Video & Produkcija</option>
-              <option>Event menadžment</option>
-              <option>IT & Digital</option>
-              <option>Administracija</option>
             </select>
           </div>
           <button id="searchBtn" class="btn primary" type="button"><span class="dot"></span> Pretraži</button>
         </div>
 
-        <div class="pillRow" style="margin-top:12px">
-          <button type="button" data-chip>Full-time</button>
-          <button type="button" data-chip>Part-time</button>
-          <button type="button" data-chip>Sezonski</button>
-          <button type="button" data-chip>Praksa</button>
-          <button type="button" data-chip>Remote</button>
-          <button type="button" data-chip>Freelance</button>
-        </div>
+        <!-- ✅ dynamic chips (filled from Jobs_Live "type") -->
+        <div class="pillRow" style="margin-top:12px" id="chipRow"></div>
       </div>
     </section>
 
@@ -1110,6 +1098,7 @@
 
           <div class="field">
             <label>Tip angažmana</label>
+            <!-- ✅ dynamic checkbox filters -->
             <div id="typeFilters"></div>
           </div>
 
@@ -1187,26 +1176,11 @@
           </div>
           <div class="field">
             <label>Kategorija</label>
-            <select name="category">
-              <option>Ugostiteljstvo</option>
-              <option>Marketing & Dizajn</option>
-              <option>Audio/Video & Produkcija</option>
-              <option>Event menadžment</option>
-              <option>IT & Digital</option>
-              <option>Administracija</option>
-            </select>
+            <select name="category" id="postCat"></select>
           </div>
           <div class="field">
             <label>Tip</label>
-            <select name="type">
-              <option>Full-time</option>
-              <option>Part-time</option>
-              <option>Praksa</option>
-              <option>Sezonski</option>
-              <option>Freelance</option>
-              <option>Remote</option>
-              <option>Free application</option>
-            </select>
+            <select name="type" id="postType"></select>
           </div>
 
           <div class="field">
@@ -1317,18 +1291,14 @@
 
   <script>
     window.addEventListener("DOMContentLoaded", () => {
-      // ✅ TVOJ WEB APP URL (CMS)
       const WEBAPP_URL = "https://script.google.com/macros/s/AKfycbwSwvILrfKoSaDYrOIegGY3E_4_eokard8yY9lurGfcEL7fQNsPxb5wT0ZRKwJfnC2_/exec";
       const SOURCE_LABEL = "Sindikat Poslovi – website";
 
-      let allJobsCache = []; // used for findJobById()
+      let allJobsCache = [];
 
       const safe = (v) => String(v ?? "")
         .replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;").replace(/'/g,"&#039;");
 
-      // supports:
-      // - newline separated (from forms)
-      // - pipe separated "a | b | c" (from Sheets storage)
       const splitLines = (t) => {
         const s = String(t || "").trim();
         if (!s) return [];
@@ -1347,7 +1317,6 @@
         setTimeout(()=>n.classList.remove("show"), 2600);
       };
 
-      // Prevent body scroll when any modal is open
       const setBodyLock = (locked) => {
         document.documentElement.style.overflow = locked ? "hidden" : "";
         document.body.style.overflow = locked ? "hidden" : "";
@@ -1367,16 +1336,13 @@
       }
 
       function normalizeJobFromSheet(j){
-        // Sheet columns are strings; normalize to match your UI expectations
-        const typeStr = String(j.type || "").trim();
-        const typeArr = typeStr ? typeStr.split("/").map(x=>x.trim()).filter(Boolean) : [];
         return {
           id: String(j.id || ""),
           title: String(j.title || ""),
           company: String(j.company || ""),
           location: String(j.location || ""),
           category: String(j.category || ""),
-          type: typeArr.length ? typeArr : (typeStr ? [typeStr] : []),
+          type: String(j.type || ""),
           pay: (j.pay === "" || j.pay === null || j.pay === undefined) ? "" : Number(j.pay),
           payType: String(j.payType || ""),
           posted: String(j.posted || new Date().toISOString().slice(0,10)),
@@ -1389,6 +1355,101 @@
         };
       }
 
+      // --- DYNAMIC FILTER OPTIONS (from Jobs_Live data) ---
+      function uniqueSorted(arr){
+        return [...new Set(arr.map(x => String(x || "").trim()).filter(Boolean))]
+          .sort((a,b)=> a.localeCompare(b, "sr"));
+      }
+
+      function parseTypeToArray(typeVal){
+        if (Array.isArray(typeVal)) return typeVal.map(x=>String(x).trim()).filter(Boolean);
+        const s = String(typeVal || "").trim();
+        if (!s) return [];
+        if (s.includes(" / ")) return s.split(" / ").map(x=>x.trim()).filter(Boolean);
+        if (s.includes("/")) return s.split("/").map(x=>x.trim()).filter(Boolean);
+        if (s.includes(" | ")) return s.split(" | ").map(x=>x.trim()).filter(Boolean);
+        if (s.includes("|")) return s.split("|").map(x=>x.trim()).filter(Boolean);
+        return [s];
+      }
+
+      function buildFilterStats(jobs){
+        const categories = uniqueSorted(jobs.map(j => j.category));
+        const types = uniqueSorted(jobs.flatMap(j => parseTypeToArray(j.type)));
+        return { categories, types };
+      }
+
+      function populateCategorySelect(categories){
+        const sel = el("cat");
+        if (!sel) return;
+        const current = sel.value || "";
+        sel.innerHTML = `<option value="">Sve kategorije</option>` +
+          categories.map(c => `<option value="${safe(c)}">${safe(c)}</option>`).join("");
+        if (current && categories.includes(current)) sel.value = current;
+      }
+
+      function populatePostFormSelects(categories, types){
+        const postCat = el("postCat");
+        const postType = el("postType");
+        if (postCat){
+          postCat.innerHTML = categories.length
+            ? categories.map(c => `<option>${safe(c)}</option>`).join("")
+            : `<option>Ugostiteljstvo</option>`;
+        }
+        if (postType){
+          postType.innerHTML = types.length
+            ? types.map(t => `<option>${safe(t)}</option>`).join("")
+            : `<option>Part-time</option>`;
+        }
+      }
+
+      function populateTypeFilters(typesArr){
+        const wrap = el("typeFilters");
+        if (!wrap) return;
+        const checked = new Set([...wrap.querySelectorAll("input:checked")].map(i=>i.value));
+        wrap.innerHTML = "";
+        typesArr.forEach((t)=>{
+          const tile = document.createElement("label");
+          tile.className = "cbTile";
+          tile.innerHTML = `<input type="checkbox" value="${t}"><span>${t}</span>`;
+          wrap.appendChild(tile);
+
+          const input = tile.querySelector("input");
+          input.checked = checked.has(t);
+          tile.classList.toggle("checked", input.checked);
+
+          input.addEventListener("change", ()=>{
+            tile.classList.toggle("checked", input.checked);
+            page = 1;
+            render();
+          });
+        });
+      }
+
+      function populateChips(typesArr){
+        const row = el("chipRow");
+        if (!row) return;
+
+        // preserve existing chip selections if still valid
+        const prev = new Set(chips);
+        chips = new Set([...prev].filter(v => typesArr.includes(v)));
+
+        row.innerHTML = "";
+        typesArr.forEach(t=>{
+          const b = document.createElement("button");
+          b.type = "button";
+          b.setAttribute("data-chip", "");
+          b.textContent = t;
+          if (chips.has(t)) b.classList.add("active");
+          b.addEventListener("click", ()=>{
+            if (chips.has(t)) { chips.delete(t); b.classList.remove("active"); }
+            else { chips.add(t); b.classList.add("active"); }
+            page = 1;
+            render();
+          });
+          row.appendChild(b);
+        });
+      }
+
       // ✅ 1 stalni posao VAN CMS-a
       const staticAlways = {
         id:"static_team",
@@ -1396,7 +1457,7 @@
         company:"Sindikat",
         location:"Crna Gora",
         category:"Event menadžment",
-        type:["Part-time","Sezonski","Freelance"],
+        type:"Part-time / Sezonski / Freelance",
         pay:"",
         payType:"",
         posted:"2026-01-01",
@@ -1421,7 +1482,7 @@
       const jobCard = (j) => {
         const saved = new Set(JSON.parse(localStorage.getItem("sindikat_saved") || "[]")).has(j.id);
 
-        const jobTypes = Array.isArray(j.type) ? j.type : String(j.type || "").split("/").map(x=>x.trim()).filter(Boolean);
+        const jobTypes = parseTypeToArray(j.type);
         const typeLabel = jobTypes.join(" / ");
 
         const img = j.img ? safe(j.img) : "https://images.unsplash.com/photo-1520975682038-fd29b3c0d409?auto=format&fit=crop&w=1200&q=70";
@@ -1484,33 +1545,7 @@
         </div>
       `;
 
-      const types = ["Full-time","Part-time","Sezonski","Praksa","Freelance","Remote","Free application"];
-      const typeFiltersWrap = el("typeFilters");
-      if (typeFiltersWrap){
-        types.forEach((t)=>{
-          const id = "t_" + t.replace(/[^a-z]/gi, "");
-          const tile = document.createElement("label");
-          tile.className = "cbTile";
-          tile.innerHTML = `<input type="checkbox" value="${safe(t)}" id="${id}" /><span>${safe(t)}</span>`;
-          typeFiltersWrap.appendChild(tile);
-
-          const input = tile.querySelector("input");
-          const sync = () => tile.classList.toggle("checked", input.checked);
-          input.addEventListener("change", sync);
-          sync();
-        });
-        typeFiltersWrap.addEventListener("change", ()=>{ page=1; render(); });
-      }
-
-      document.querySelectorAll("[data-chip]").forEach((c)=>{
-        c.addEventListener("click", ()=>{
-          const v = c.textContent.trim();
-          if (chips.has(v)) { chips.delete(v); c.classList.remove("active"); }
-          else { chips.add(v); c.classList.add("active"); }
-          page=1; render();
-        });
-      });
-
+      // input listeners
       ["q","loc","cat","minPay","maxPay"].forEach((id)=>{
         const node = el(id);
         if (!node) return;
@@ -1525,7 +1560,8 @@
 
       el("clearFilters")?.addEventListener("click", ()=>{
         chips.clear();
-        document.querySelectorAll("[data-chip]").forEach(c=>c.classList.remove("active"));
+        const chipRow = el("chipRow");
+        chipRow && [...chipRow.querySelectorAll("button")].forEach(b=>b.classList.remove("active"));
         ["q","loc","cat","minPay","maxPay"].forEach((id)=>{ const e = el(id); if (e) e.value = ""; });
         document.querySelectorAll("#typeFilters input").forEach(cb=>cb.checked=false);
         document.querySelectorAll("#typeFilters .cbTile").forEach(tile=>tile.classList.remove("checked"));
@@ -1550,7 +1586,7 @@
           const hitLoc = !f.loc || (j.location || "").toLowerCase().includes(f.loc);
           const hitCat = !f.cat || j.category === f.cat;
 
-          const jobTypes = Array.isArray(j.type) ? j.type : String(j.type || "").split("/").map(x => x.trim()).filter(Boolean);
+          const jobTypes = parseTypeToArray(j.type);
           const hitType = f.typeSet.size === 0 || jobTypes.some(t => f.typeSet.has(t));
 
           const hasPay = (j.pay !== "" && j.pay !== null && j.pay !== undefined && !Number.isNaN(Number(j.pay)));
@@ -1590,13 +1626,23 @@
         return (allJobsCache || []).find(x => String(x.id) === String(id));
       }
 
+      function openApply(id){
+        const j = findJobById(id);
+        showModal(applyModal);
+        const idInput = applyModal?.querySelector('[name="jobId"]');
+        const titleInput = applyModal?.querySelector('[name="jobTitle"]');
+        if (idInput) idInput.value = id;
+        if (titleInput) titleInput.value = j ? j.title : "";
+      }
+
       function openDetails(id){
         const j = findJobById(id);
         if (!j || !detailsBody) return;
 
-        const jobTypes = Array.isArray(j.type) ? j.type : splitLines(j.type);
+        const jobTypes = parseTypeToArray(j.type);
         const typeLabel = jobTypes.join(" / ");
         const img = j.img ? safe(j.img) : "https://images.unsplash.com/photo-1520975682038-fd29b3c0d409?auto=format&fit=crop&w=1200&q=70";
+
         const pay = (j.pay !== "" && j.pay !== null && j.pay !== undefined && !Number.isNaN(Number(j.pay)))
           ? `<span class="badge accent">${payText(j)}</span>`
           : `<span class="badge">Naknada: po dogovoru</span>`;
@@ -1666,10 +1712,9 @@
 
         showModal(detailsModal);
 
-        // Sync saved state
-        const savedSet = new Set(JSON.parse(localStorage.getItem("sindikat_saved") || "[]"));
         const ds = el("detailsSaveBtn");
         if (ds){
+          const savedSet = new Set(JSON.parse(localStorage.getItem("sindikat_saved") || "[]"));
           const isSaved = savedSet.has(String(j.id));
           ds.textContent = isSaved ? "★ Sačuvano" : "☆ Sačuvaj";
           ds.addEventListener("click", ()=>{
@@ -1683,17 +1728,6 @@
 
         el("detailsQuickApply")?.addEventListener("click", ()=>openApply(String(j.id)));
         el("detailsApplyBtn")?.addEventListener("click", ()=>openApply(String(j.id)));
-      }
-
-      function openApply(id){
-        const j = findJobById(id);
-        showModal(applyModal);
-
-        const idInput = applyModal?.querySelector('[name="jobId"]');
-        const titleInput = applyModal?.querySelector('[name="jobTitle"]');
-
-        if (idInput) idInput.value = id;
-        if (titleInput) titleInput.value = j ? j.title : "";
       }
 
       function bindRowActions(){
@@ -1732,6 +1766,14 @@
         const live = await fetchLiveJobs();
         const merged = [...live, staticAlways].sort((a,b)=> new Date(b.posted) - new Date(a.posted));
         allJobsCache = merged;
+
+        // ✅ build dynamic filters from actual sheet data
+        const { categories, types } = buildFilterStats(merged);
+        populateCategorySelect(categories);
+        populateTypeFilters(types);
+        populateChips(types);
+        populatePostFormSelects(categories, types);
+
         return merged;
       }
 
@@ -1796,13 +1838,11 @@
         });
       }
 
-      // ✅ Post job submit -> ide u SHEET Inbox (PENDING), nema localStorage
       el("postJobForm")?.addEventListener("submit", (e)=>{
         e.preventDefault();
         const fd = new FormData(e.target);
         const obj = Object.fromEntries(fd.entries());
 
-        // normalize for sheet storage
         const id = "p_" + Date.now();
         const posted = new Date().toISOString().slice(0,10);
 
@@ -1831,7 +1871,6 @@
         toast("Oglas poslat na odobrenje ✅");
       });
 
-      // Apply submit -> Applications sheet + mail
       el("applyForm")?.addEventListener("submit", (e)=>{
         e.preventDefault();
         const fd = new FormData(e.target);
@@ -1857,7 +1896,6 @@
         toast("Prijava poslata ✅");
       });
 
-      // Alerts submit (ostaje isto)
       el("alertsForm")?.addEventListener("submit", (e)=>{
         e.preventDefault();
         const fd = new FormData(e.target);
@@ -1943,7 +1981,7 @@
         });
       }, {passive:true});
 
-      // Partners marquee loop (auto-duplicate for seamless scroll)
+      // Partners marquee loop
       const partnersRow = document.getElementById('partnersRow');
       if (partnersRow && !partnersRow.dataset.cloned) {
         const items = Array.from(partnersRow.children);
