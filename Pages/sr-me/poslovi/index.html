@@ -1770,20 +1770,25 @@
         });
       }
 
-      async function readJobs(){
-        const live = await fetchLiveJobs();
-        const merged = [...live, staticAlways].sort((a,b)=> new Date(b.posted) - new Date(a.posted));
-        allJobsCache = merged;
+     async function readJobs(){
+  const live = await fetchLiveJobs();
+  const merged = [...live, staticAlways].sort((a,b)=> new Date(b.posted) - new Date(a.posted));
+  allJobsCache = merged;
 
-        // ✅ build dynamic filters from actual sheet data
-        const { categories, types } = buildFilterStats(merged);
-        populateCategorySelect(categories);
-        populateTypeFilters(types);
-populateCategoryChips(categories);
-        populatePostFormSelects(categories, types);
+  // ✅ napuni filtere iz Jobs_Live (category + type)
+  const { categories, types } = buildFilterStats(merged);
 
-        return merged;
-      }
+  // dropdown kategorije
+  populateCategorySelect(categories);
+
+  // checkbox tipovi (ako ih koristiš)
+  populateTypeFilters(types);
+
+  // ✅ dugmići = kategorije (ako si prebacila chipove na category)
+  populateCategoryChips(categories);
+
+  return merged;
+}
 
       async function render(){
         const listEl = el("jobList");
