@@ -1587,28 +1587,35 @@
   return { q, loc, cat, minPay, maxPay, typeSet, catSet };
 }
 
-      function filterJobs(list){
-        const f = getFilters();
-        return list.filter((j)=>{
-          const hitQ = !f.q || `${j.title} ${j.company} ${j.desc}`.toLowerCase().includes(f.q);
-          const hitLoc = !f.loc || (j.location || "").toLowerCase().includes(f.loc);
-          const hitCat = !f.cat || j.category === f.cat;
+     function filterJobs(list){
+  const f = getFilters();
 
-          const jobTypes = parseTypeToArray(j.type);
-          const hitType = f.typeSet.size === 0 || jobTypes.some(t => f.typeSet.has(t));
+  return list.filter((j)=>{
+    const hitQ = !f.q || `${j.title} ${j.company} ${j.desc}`.toLowerCase().includes(f.q);
+    const hitLoc = !f.loc || (j.location || "").toLowerCase().includes(f.loc);
 
-          const hasPay = (j.pay !== "" && j.pay !== null && j.pay !== undefined && !Number.isNaN(Number(j.pay)));
-          const payVal = hasPay ? Number(j.pay) : null;
+    // dropdown kategorija
+    const hitCatSelect = !f.cat || j.category === f.cat;
 
-          const payFilterActive = !(isNaN(f.minPay) && isNaN(f.maxPay));
-          if (payFilterActive && !hasPay) return false;
+    // chipovi kategorija (ako nijedan nije izabran -> true)
+    const hitCatChips = (f.catSet.size === 0) || f.catSet.has(j.category);
 
-          const hitPayMin = isNaN(f.minPay) || (payVal >= f.minPay);
-          const hitPayMax = isNaN(f.maxPay) || (payVal <= f.maxPay);
+    // checkbox tipovi
+    const jobTypes = parseTypeToArray(j.type);
+    const hitType = (f.typeSet.size === 0) || jobTypes.some(t => f.typeSet.has(t));
 
-          return hitQ && hitLoc && hitCat && hitType && hitPayMin && hitPayMax;
-        });
-      }
+    const hasPay = (j.pay !== "" && j.pay !== null && j.pay !== undefined && !Number.isNaN(Number(j.pay)));
+    const payVal = hasPay ? Number(j.pay) : null;
+
+    const payFilterActive = !(isNaN(f.minPay) && isNaN(f.maxPay));
+    if (payFilterActive && !hasPay) return false;
+
+    const hitPayMin = isNaN(f.minPay) || (payVal >= f.minPay);
+    const hitPayMax = isNaN(f.maxPay) || (payVal <= f.maxPay);
+
+    return hitQ && hitLoc && hitCatSelect && hitCatChips && hitType && hitPayMin && hitPayMax;
+  });
+}
 
       const detailsModal = el("detailsModal");
       const detailsBody = el("detailsBody");
@@ -1775,17 +1782,14 @@
   const merged = [...live, staticAlways].sort((a,b)=> new Date(b.posted) - new Date(a.posted));
   allJobsCache = merged;
 
-  // ✅ napuni filtere iz Jobs_Live (category + type)
   const { categories, types } = buildFilterStats(merged);
 
-  // dropdown kategorije
   populateCategorySelect(categories);
-
-  // checkbox tipovi (ako ih koristiš)
   populateTypeFilters(types);
-
-  // ✅ dugmići = kategorije (ako si prebacila chipove na category)
   populateCategoryChips(categories);
+
+  // ✅ ovo je falilo
+  populatePostFormSelects(categories, types);
 
   return merged;
 }
