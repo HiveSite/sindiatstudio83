@@ -940,11 +940,36 @@
         setTimeout(()=>n.classList.remove("show"), 2600);
       };
 
-      const setBodyLock = (locked) => {
-        document.documentElement.style.overflow = locked ? "hidden" : "";
-        document.body.style.overflow = locked ? "hidden" : "";
-        document.body.style.touchAction = locked ? "none" : "";
-      };
+     let __scrollY = 0;
+
+const setBodyLock = (locked) => {
+  if (locked) {
+    __scrollY = window.scrollY || document.documentElement.scrollTop || 0;
+
+    // "freeze" body without jumping
+    document.body.style.position = "fixed";
+    document.body.style.top = `-${__scrollY}px`;
+    document.body.style.left = "0";
+    document.body.style.right = "0";
+    document.body.style.width = "100%";
+
+    // optional (helps iOS)
+    document.body.style.overflow = "hidden";
+    document.body.style.touchAction = "none";
+  } else {
+    // restore
+    document.body.style.position = "";
+    document.body.style.top = "";
+    document.body.style.left = "";
+    document.body.style.right = "";
+    document.body.style.width = "";
+    document.body.style.overflow = "";
+    document.body.style.touchAction = "";
+
+    // jump back to previous scroll position
+    window.scrollTo(0, __scrollY);
+  }
+};
 
       // ✅ helpers: hide empty + "po dogovoru"
       function normText(v){
