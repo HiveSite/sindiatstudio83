@@ -325,7 +325,16 @@
       color:var(--text);
     }
 
-  /* overlay for mobile menu (NE prekriva bottom topbar) */
+    /* mobile overlay (kept invisible by default) */
+    #mobileOverlay{
+      position:fixed;
+      inset:0;
+      z-index:49; /* below topbar (50), above page */
+      background: rgba(0,0,0,.55);
+      opacity:0;
+      pointer-events:none;
+      transition: opacity .18s var(--ease);
+    }
 
     .section{
       padding:34px 0;
@@ -937,6 +946,29 @@
         document.body.style.touchAction = locked ? "none" : "";
       };
 
+      // ✅ helpers: hide empty + "po dogovoru"
+      function normText(v){
+        return String(v ?? "")
+          .replace(/\u00A0/g, " ")
+          .replace(/\s+/g, " ")
+          .trim()
+          .toLowerCase();
+      }
+      function isEmptyOrTbd(v){
+        const s = normText(v);
+        if (!s) return true;
+        const blacklist = new Set([
+          "po dogovoru","po dogovoru.","dogovor","dogovor.","u dogovoru","u dogovoru.",
+          "n/a","na","-","—","nije definisano","nije definisano.","tbd","tba"
+        ]);
+        return blacklist.has(s);
+      }
+      function cleanList(arr){
+        return (arr || [])
+          .map(x => String(x ?? "").trim())
+          .filter(x => x && !isEmptyOrTbd(x));
+      }
+
       // ✅ ORIGINAL mobile menu behavior
       const mobileBtn = el("hamburger");
       const mobileMenu = el("mobileMenu");
@@ -975,6 +1007,10 @@
       }
 
       function normalizeJobFromSheet(j){
+        // ✅ pay: if empty OR "po dogovoru" OR non-numeric => ""
+        const rawPay = String(j.pay ?? "").trim();
+        const pay = (!rawPay || isEmptyOrTbd(rawPay) || Number.isNaN(Number(rawPay))) ? "" : Number(rawPay);
+
         return {
           id: String(j.id || ""),
           title: String(j.title || ""),
@@ -982,10 +1018,11 @@
           location: String(j.location || ""),
           category: String(j.category || ""),
           type: String(j.type || ""),
-          pay: (j.pay === "" || j.pay === null || j.pay === undefined) ? "" : Number(j.pay),
+          pay,
           payType: String(j.payType || ""),
           posted: String(j.posted || new Date().toISOString().slice(0,10)),
           img: String(j.img || ""),
+          // ✅ desc: keep raw, but we'll hide it in UI if empty/tbd
           desc: String(j.desc || ""),
           responsibilities: splitLines(j.responsibilities),
           qualifications: splitLines(j.qualifications),
@@ -1001,11 +1038,11 @@
 
       function parseTypeToArray(typeVal){
         const s = String(typeVal || "").trim();
-        if (!s) return [];
-        if (s.includes(" / ")) return s.split(" / ").map(x=>x.trim()).filter(Boolean);
-        if (s.includes("/")) return s.split("/").map(x=>x.trim()).filter(Boolean);
-        if (s.includes(" | ")) return s.split(" | ").map(x=>x.trim()).filter(Boolean);
-        if (s.includes("|")) return s.split("|").map(x=>x.trim()).filter(Boolean);
+        if (!s || isEmptyOrTbd(s)) return [];
+        if (s.includes(" / ")) return s.split(" / ").map(x=>x.trim()).filter(x => x && !isEmptyOrTbd(x));
+        if (s.includes("/")) return s.split("/").map(x=>x.trim()).filter(x => x && !isEmptyOrTbd(x));
+        if (s.includes(" | ")) return s.split(" | ").map(x=>x.trim()).filter(x => x && !isEmptyOrTbd(x));
+        if (s.includes("|")) return s.split("|").map(x=>x.trim()).filter(x => x && !isEmptyOrTbd(x));
         return [s];
       }
 
@@ -1032,7 +1069,7 @@
       let catSet = new Set();
 
       function buildFilterStats(jobs){
-        const categories = uniqueSorted(jobs.map(j => j.category));
+        const categories = uniqueSorted(jobs.map(j => j.category).filter(c => !isEmptyOrTbd(c)));
         const types = uniqueSorted(jobs.flatMap(j => parseTypeToArray(j.type)));
         return { categories, types };
       }
@@ -1041,7 +1078,6 @@
         const wrap = el("catFilters");
         if (!wrap) return;
 
-        // keep selected values if still exist
         catSet = new Set([...catSet].filter(v => categories.includes(v)));
 
         wrap.innerHTML = "";
@@ -1105,7 +1141,6 @@
           const hitQ = !f.q || `${j.title} ${j.company} ${j.desc}`.toLowerCase().includes(f.q);
           const hitLoc = !f.loc || (j.location || "").toLowerCase().includes(f.loc);
 
-          // ✅ category tiles filter
           const hitCategory = (f.catSet.size === 0) || f.catSet.has(j.category);
 
           const hasPay = (j.pay !== "" && j.pay !== null && j.pay !== undefined && !Number.isNaN(Number(j.pay)));
@@ -1123,7 +1158,10 @@
 
       const jobCard = (j) => {
         const img = j.img ? safe(j.img) : "https://images.unsplash.com/photo-1520975682038-fd29b3c0d409?auto=format&fit=crop&w=1200&q=70";
-        const typeLabel = parseTypeToArray(j.type).join(" / ");
+        const typeArr = parseTypeToArray(j.type);
+        const typeLabel = typeArr.join(" / ");
+
+        const descOk = !isEmptyOrTbd(j.desc);
 
         return `
           <article class="card jobCard" tabindex="0" role="button" aria-label="Detalji oglasa: ${safe(j.title)}" data-open="${safe(j.id)}">
@@ -1142,12 +1180,10 @@
 
                 <div class="jobMetaLine" aria-label="Meta informacije oglasa">
                   <span class="pill">${safe(j.category)}</span>
-                  <span class="sep">•</span>
-                  <span class="pill">${safe(typeLabel)}</span>
 
-                  ${(j.pay !== "" && j.pay !== null && j.pay !== undefined && !Number.isNaN(Number(j.pay)))
-                    ? `<span class="sep">•</span><span class="pill">${payText(j)}</span>`
-                    : ``}
+                  ${typeLabel ? `<span class="sep">•</span><span class="pill">${safe(typeLabel)}</span>` : ``}
+
+                  ${payText(j) ? `<span class="sep">•</span><span class="pill">${payText(j)}</span>` : ``}
 
                   <span class="sep">•</span>
                   <span class="pill">Objavljeno: ${new Date(j.posted).toLocaleDateString()}</span>
@@ -1155,7 +1191,7 @@
               </div>
             </div>
 
-            <p class="jobDesc">${safe(j.desc || "")}</p>
+            ${descOk ? `<p class="jobDesc">${safe(j.desc)}</p>` : ``}
           </article>
         `;
       };
@@ -1184,6 +1220,13 @@
         const typeLabel = parseTypeToArray(j.type).join(" / ");
         const img = j.img ? safe(j.img) : "https://images.unsplash.com/photo-1520975682038-fd29b3c0d409?auto=format&fit=crop&w=1200&q=70";
 
+        const descOk = !isEmptyOrTbd(j.desc);
+
+        // ✅ clean lists: remove empty/"po dogovoru"
+        const responsibilities = cleanList(j.responsibilities);
+        const qualifications  = cleanList(j.qualifications);
+        const benefits        = cleanList(j.benefits);
+
         detailsBody.innerHTML = `
           <div style="display:grid; gap:10px;">
             <div style="display:grid; grid-template-columns: 140px 1fr; gap:12px; align-items:start;">
@@ -1195,38 +1238,46 @@
                 <div style="color:rgba(255,255,255,.72); margin-top:6px;">${safe(j.company)} • ${safe(j.location)}</div>
                 <div style="display:flex; flex-wrap:wrap; gap:8px; margin-top:10px;">
                   <span class="badge">${safe(j.category)}</span>
-                  <span class="badge">${safe(typeLabel)}</span>
+                  ${typeLabel ? `<span class="badge">${safe(typeLabel)}</span>` : ``}
                   ${payText(j) ? `<span class="badge" style="border-color:rgba(255,59,111,.45); background: rgba(255,59,111,.10); color:rgba(255,255,255,.92);">${payText(j)}</span>` : ``}
                   <span class="badge">Objavljeno: ${new Date(j.posted).toLocaleDateString()}</span>
                 </div>
               </div>
             </div>
 
-            <div style="border-top:3px solid rgba(255,255,255,.08); padding-top:12px; margin-top:6px;">
-              <div style="font-size:13px; text-transform:uppercase; letter-spacing:.2px; color:rgba(255,255,255,.78); font-weight:800;">Opis pozicije</div>
-              <div style="margin-top:10px; color:rgba(255,255,255,.74); line-height:1.65;">${safe(j.desc || "")}</div>
-            </div>
+            ${descOk ? `
+              <div style="border-top:3px solid rgba(255,255,255,.08); padding-top:12px; margin-top:6px;">
+                <div style="font-size:13px; text-transform:uppercase; letter-spacing:.2px; color:rgba(255,255,255,.78); font-weight:800;">Opis pozicije</div>
+                <div style="margin-top:10px; color:rgba(255,255,255,.74); line-height:1.65;">${safe(j.desc)}</div>
+              </div>
+            ` : ``}
 
-            <div style="border-top:3px solid rgba(255,255,255,.08); padding-top:12px;">
-              <div style="font-size:13px; text-transform:uppercase; letter-spacing:.2px; color:rgba(255,255,255,.78); font-weight:800;">Odgovornosti</div>
-              <ul style="margin:10px 0 0; padding-left:18px; color:rgba(255,255,255,.74); line-height:1.6;">
-                ${(j.responsibilities||[]).length ? (j.responsibilities||[]).map(x=>`<li>${safe(x)}</li>`).join("") : `<li>Po dogovoru.</li>`}
-              </ul>
-            </div>
+            ${responsibilities.length ? `
+              <div style="border-top:3px solid rgba(255,255,255,.08); padding-top:12px;">
+                <div style="font-size:13px; text-transform:uppercase; letter-spacing:.2px; color:rgba(255,255,255,.78); font-weight:800;">Odgovornosti</div>
+                <ul style="margin:10px 0 0; padding-left:18px; color:rgba(255,255,255,.74); line-height:1.6;">
+                  ${responsibilities.map(x=>`<li>${safe(x)}</li>`).join("")}
+                </ul>
+              </div>
+            ` : ``}
 
-            <div style="border-top:3px solid rgba(255,255,255,.08); padding-top:12px;">
-              <div style="font-size:13px; text-transform:uppercase; letter-spacing:.2px; color:rgba(255,255,255,.78); font-weight:800;">Kvalifikacije</div>
-              <ul style="margin:10px 0 0; padding-left:18px; color:rgba(255,255,255,.74); line-height:1.6;">
-                ${(j.qualifications||[]).length ? (j.qualifications||[]).map(x=>`<li>${safe(x)}</li>`).join("") : `<li>Po dogovoru.</li>`}
-              </ul>
-            </div>
+            ${qualifications.length ? `
+              <div style="border-top:3px solid rgba(255,255,255,.08); padding-top:12px;">
+                <div style="font-size:13px; text-transform:uppercase; letter-spacing:.2px; color:rgba(255,255,255,.78); font-weight:800;">Kvalifikacije</div>
+                <ul style="margin:10px 0 0; padding-left:18px; color:rgba(255,255,255,.74); line-height:1.6;">
+                  ${qualifications.map(x=>`<li>${safe(x)}</li>`).join("")}
+                </ul>
+              </div>
+            ` : ``}
 
-            <div style="border-top:3px solid rgba(255,255,255,.08); padding-top:12px;">
-              <div style="font-size:13px; text-transform:uppercase; letter-spacing:.2px; color:rgba(255,255,255,.78); font-weight:800;">Benefiti</div>
-              <ul style="margin:10px 0 0; padding-left:18px; color:rgba(255,255,255,.74); line-height:1.6;">
-                ${(j.benefits||[]).length ? (j.benefits||[]).map(x=>`<li>${safe(x)}</li>`).join("") : `<li>Po dogovoru.</li>`}
-              </ul>
-            </div>
+            ${benefits.length ? `
+              <div style="border-top:3px solid rgba(255,255,255,.08); padding-top:12px;">
+                <div style="font-size:13px; text-transform:uppercase; letter-spacing:.2px; color:rgba(255,255,255,.78); font-weight:800;">Benefiti</div>
+                <ul style="margin:10px 0 0; padding-left:18px; color:rgba(255,255,255,.74); line-height:1.6;">
+                  ${benefits.map(x=>`<li>${safe(x)}</li>`).join("")}
+                </ul>
+              </div>
+            ` : ``}
           </div>
         `;
 
@@ -1368,7 +1419,7 @@
 
       el("yearSpan") && (el("yearSpan").textContent = new Date().getFullYear());
 
-      // blobs animation (optional, like original vibe)
+      // blobs animation (optional)
       const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       if (!reduced && window.anime){
         anime({ targets:'#blob1', translateX:[0,18,-10,0], translateY:[0,-12,16,0], duration:9000, easing:'easeInOutSine', loop:true });
