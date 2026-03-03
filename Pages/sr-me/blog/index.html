@@ -15,21 +15,18 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
   <link rel="icon" type="image/png" href="/favicon.png">
 
-  <!-- ✅ Preconnect / DNS Prefetch (ubrzava first byte ka Apps Scriptu) -->
   <link rel="dns-prefetch" href="//script.google.com">
   <link rel="dns-prefetch" href="//script.googleusercontent.com">
   <link rel="dns-prefetch" href="//lh3.googleusercontent.com">
   <link rel="preconnect" href="https://script.google.com" crossorigin>
   <link rel="preconnect" href="https://script.googleusercontent.com" crossorigin>
 
-  <!-- SEO: osnovno -->
   <title>Blog | Meta oglasi, Google Ads i aktivacije — Sindikat Studio 83 (Podgorica)</title>
   <meta name="description" content="Blog za Crnu Goru: Meta oglasi, Google Ads, sadržaj za oglase, lokalni SEO i promotivne aktivacije. Praktični vodiči, preporuke i primjeri iz prakse — bez teorije." />
   <meta name="robots" content="index,follow" />
   <link rel="canonical" href="https://www.sindikatstudio83.me/sr-me/blog/" />
   <meta name="theme-color" content="#05010D" />
 
-  <!-- SEO: Open Graph -->
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Sindikat Studio 83" />
   <meta property="og:title" content="Blog | Meta oglasi, Google Ads i aktivacije — Sindikat Studio 83 (Podgorica)" />
@@ -37,18 +34,15 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   <meta property="og:url" content="https://www.sindikatstudio83.me/sr-me/blog/" />
   <meta property="og:image" content="https://www.sindikatstudio83.me/sr-me/assets/og-cover.jpg" />
 
-  <!-- SEO: Twitter -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Blog | Meta oglasi, Google Ads i aktivacije — Sindikat Studio 83 (Podgorica)" />
   <meta name="twitter:description" content="Blog za Crnu Goru: Meta oglasi, Google Ads, sadržaj za oglase, lokalni SEO i promotivne aktivacije. Praktični vodiči, preporuke i primjeri iz prakse — bez teorije." />
   <meta name="twitter:image" content="https://www.sindikatstudio83.me/studio83logo.png" />
 
-  <!-- SEO: Hreflang -->
   <link rel="alternate" href="https://www.sindikatstudio83.me/sr-me/blog" hreflang="sr-ME" />
   <link rel="alternate" href="https://www.sindikatstudio83.me/sr-me/blog" hreflang="sr" />
   <link rel="alternate" href="https://www.sindikatstudio83.me/sr-me/blog" hreflang="x-default" />
 
-  <!-- JSON-LD: Organization + WebSite + CollectionPage + ItemList -->
   <script type="application/ld+json">
   {
     "@context":"https://schema.org",
@@ -123,7 +117,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   }
   </script>
 
-  <!-- Anime.js -->
   <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
 
   <style>
@@ -174,7 +167,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       -moz-osx-font-smoothing: grayscale;
     }
 
-    /* Subtle grain */
     body:before{
       content:"";
       position:fixed; inset:0;
@@ -189,7 +181,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     img{max-width:100%; display:block}
     .wrap{max-width:var(--max); margin:0 auto; padding:22px 18px 120px; position:relative; z-index:2}
 
-    /* Backdrop glow */
     .heroBg{
       position:fixed;
       inset:0;
@@ -210,7 +201,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         linear-gradient(180deg, rgba(0,0,0,.25), rgba(6,1,13,.92) 62%, rgba(6,1,13,.98));
     }
 
-    /* Subtle animated blobs */
     .blob{
       position:fixed;
       z-index:1;
@@ -229,7 +219,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       opacity:.45;
     }
 
-    /* Topbar (bottom) */
     .topbar{
       position:fixed;
       bottom:0;
@@ -313,7 +302,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       border-color:rgba(255,59,111,.45);
     }
 
-    /* Buttons */
     .btn{
       display:inline-flex; align-items:center; justify-content:center;
       gap:10px;
@@ -345,7 +333,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       transform: rotate(8deg);
     }
 
-    /* Mobile nav */
     .hamburger{
       display:none;
       width:44px; height:44px;
@@ -395,7 +382,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       .mobileMenuInner{padding:12px 14px 16px}
     }
 
-    /* ✅ FIX: da CTA i hamburger budu U ISTOM REDU na mobu */
     @media (max-width: 520px){
       .topbarInner{
         flex-wrap: nowrap;
@@ -420,7 +406,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       }
     }
 
-    /* ✅ FLOATING LOGO */
     .floatingLogo{
       position:fixed;
       top:14px;
@@ -441,7 +426,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       .floatingLogo{ top:10px; left:10px; }
     }
 
-    /* Sections */
     .section{
       padding:58px 0;
       border-top:3px solid rgba(255,255,255,.08);
@@ -463,13 +447,12 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       max-width:76ch;
     }
 
-    /* Blog hero */
     .hero{
       padding:54px 0 26px;
     }
     .heroGrid{
       display:grid;
-      grid-template-columns: 1.1fr .9fr;
+      grid-template-columns: 1fr;
       gap:22px;
       align-items:stretch;
     }
@@ -498,66 +481,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       text-shadow: 0 10px 40px rgba(0,0,0,.35);
     }
 
-    /* “Kako koristiti blog” card */
-    .heroCard{
-      border:3px solid rgba(255,255,255,.14);
-      border-radius:var(--r3);
-      background:
-        radial-gradient(520px 260px at 20% 18%, rgba(255,59,111,.22), transparent 62%),
-        radial-gradient(520px 260px at 76% 22%, rgba(24,245,255,.14), transparent 62%),
-        linear-gradient(180deg, rgba(14,16,26,.92), rgba(7,8,19,.92));
-      box-shadow:var(--shadow);
-      padding:20px;
-      position:relative;
-      overflow:hidden;
-      display:flex;
-      flex-direction:column;
-      gap:12px;
-    }
-    .heroCard:before{
-      content:"";
-      position:absolute; inset:0;
-      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,0));
-      opacity:.55;
-      pointer-events:none;
-    }
-    .heroCard *{position:relative; z-index:2}
-    .heroCard .titleRow{
-      display:flex; align-items:center; justify-content:space-between; gap:12px;
-      font-size:12px; color:rgba(255,255,255,.70);
-      text-transform:uppercase; letter-spacing:1px;
-    }
-    .pillRow{
-      display:flex; flex-wrap:wrap; gap:10px;
-      color:rgba(255,255,255,.66);
-      font-size:12px;
-    }
-    .pillRow span{
-      border:2px solid rgba(255,255,255,.12);
-      background: rgba(8,10,16,.65);
-      padding:6px 10px;
-      border-radius:10px;
-    }
-    .mutedList{
-      margin:0;
-      padding-left:18px;
-      color:rgba(255,255,255,.72);
-      font-size:13px;
-      line-height:1.65;
-    }
-    .mutedList li{margin:6px 0}
-    .callout{
-      border:2px solid rgba(255,255,255,.12);
-      background: rgba(8,10,16,.65);
-      padding:12px 12px;
-      border-radius:12px;
-      color:rgba(255,255,255,.76);
-      font-size:13px;
-      line-height:1.6;
-    }
-    .callout strong{color:#fff}
-
-    /* Filters */
     .filterRow{
       display:flex;
       gap:10px;
@@ -585,7 +508,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       color:#fff;
     }
 
-    /* Blog grid: 2 columns */
     .postsGrid{
       display:grid;
       grid-template-columns: 1fr 1fr;
@@ -715,46 +637,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       background: rgba(8,10,16,.55);
     }
 
-    /* ✅ Skeleton shimmer */
-    .skeleton{
-      position:relative;
-      overflow:hidden;
-      cursor:default;
-    }
-    .skeleton:hover{ transform:none; box-shadow: var(--shadow2); border-color: rgba(255,255,255,.14); filter:none; }
-    .skeleton .thumb{ background: rgba(255,255,255,.06); }
-    .skLine{
-      height: 12px;
-      border-radius: 10px;
-      background: rgba(255,255,255,.08);
-    }
-    .skLine.lg{ height: 16px; }
-    .skLine.w80{ width: 80%; }
-    .skLine.w60{ width: 60%; }
-    .skLine.w45{ width: 45%; }
-    .skTag{
-      width: 72px;
-      height: 26px;
-      border-radius: 10px;
-      background: rgba(255,255,255,.08);
-      border: 2px solid rgba(255,255,255,.10);
-    }
-    .skRow{ display:flex; gap:8px; flex-wrap:wrap; }
-    .shimmer:before{
-      content:"";
-      position:absolute;
-      inset:-40%;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,.10), transparent);
-      transform: rotate(12deg);
-      animation: shimmer 1.15s linear infinite;
-      pointer-events:none;
-    }
-    @keyframes shimmer{
-      0%{ transform: translateX(-20%) rotate(12deg); }
-      100%{ transform: translateX(20%) rotate(12deg); }
-    }
-
-    /* Pagination */
     .pager{
       margin-top:18px;
       display:flex;
@@ -787,16 +669,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       cursor:pointer;
       transition: transform .18s var(--ease), border-color .18s var(--ease), color .18s var(--ease), background .18s var(--ease);
       user-select:none;
+      padding:0 14px;
     }
     .pageBtn:hover{transform:translateY(-2px); border-color:rgba(24,245,255,.35); color:#fff}
-    .pageBtn.active{
-      border-color:rgba(255,59,111,.55);
-      background: linear-gradient(180deg, rgba(255,59,111,.18), rgba(8,10,16,.62));
-      color:#fff;
-    }
     .pageBtn[disabled]{opacity:.45; cursor:not-allowed; transform:none}
 
-    /* CTA Band */
     .ctaBand{
       border:3px solid rgba(255,59,111,.55);
       background:
@@ -834,13 +711,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap;
     }
 
-    /* Reveal base */
     .reveal{opacity:0; transform:translateY(18px); will-change: transform, opacity;}
 
-    /* Responsive */
     @media (max-width: 980px){
       .hero{padding:38px 0 18px}
-      .heroGrid{grid-template-columns:1fr}
       h1{font-size:38px}
       .ctaBand{flex-direction:column; align-items:flex-start}
       .postsGrid{grid-template-columns:1fr}
@@ -855,7 +729,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     }
   </style>
 
-  <!-- (tvoja schema dupla ostaje, ne diram, ali realno ti je redundant; ostavila sam kako si poslala) -->
   <script type="application/ld+json" data-schema="org">
 {
   "@context": "https://schema.org",
@@ -889,24 +762,19 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 <body>
 
-  <!-- ✅ FLOATING LOGO (always visible, top-left) -->
   <a class="floatingLogo" href="/sr-me/pocetna" aria-label="Sindikat Studio 83 — Početna">
     <div class="mark" aria-hidden="true">
       <img class="markImg" src="/studio83logo.png" alt="">
     </div>
   </a>
 
-  <!-- Google Tag Manager (noscript) -->
   <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PBXVW3GK"
   height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-  <!-- End Google Tag Manager (noscript) -->
 
-  <!-- Background glow -->
   <div class="heroBg" id="heroBg" aria-hidden="true"></div>
   <div class="blob" id="blob1" aria-hidden="true"></div>
   <div class="blob b2" id="blob2" aria-hidden="true"></div>
 
-  <!-- Topbar -->
   <header class="topbar">
     <div class="topbarInner reveal">
       <div class="brand"></div>
@@ -940,7 +808,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   </header>
 
   <main class="wrap">
-    <!-- HERO -->
     <section class="hero" id="top">
       <div class="heroGrid">
         <div>
@@ -954,35 +821,13 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             Nije samo “sales” — ovdje su i preporuke, zanimljivosti i tips & tricks koje štede budžet i vrijeme.
           </p>
         </div>
-
-        <aside class="heroCard reveal" aria-label="Kako koristiti blog">
-          <div class="titleRow">
-            <span>Kako koristiti blog</span>
-            <span style="color:rgba(255,176,0,.9)">brzo</span>
-          </div>
-
-          <div class="pillRow">
-            <span>Strategija</span><span>Performance</span><span>Kreative</span><span>Aktivacije</span>
-          </div>
-
-          <ul class="mutedList">
-            <li>Izaberi kategoriju</li>
-            <li>Otvori tekst i uzmi checklistu</li>
-            <li>Primijeni jednu promjenu prije nego pojačaš budžet</li>
-          </ul>
-
-          <div class="callout">
-            <strong>Napomena:</strong> Ovo je za ljude koji vole jasnoću, primjere i konkretne korake — ne “motivacione” postove.
-          </div>
-        </aside>
       </div>
     </section>
 
-    <!-- POSTS -->
     <section class="section" id="posts">
       <div class="headRow">
         <h2 class="h2 reveal">Tekstovi</h2>
-        <div class="desc reveal">Prikazano je 6 tekstova po strani. Klikni karticu da otvoriš sadržaj.</div>
+        <div class="desc reveal">Prikazano je 6 tekstova. Klikni “Učitaj još” za sljedećih 6.</div>
       </div>
 
       <div class="filterRow reveal" id="filterRow" role="tablist" aria-label="Blog filter">
@@ -995,17 +840,13 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
       <div style="height:14px"></div>
 
-      <div class="postsGrid" id="postsGrid">
-        <!-- ✅ Skeleton će se ubaciti odmah preko JS -->
-      </div>
+      <div class="postsGrid" id="postsGrid"></div>
 
-      <!-- Pagination -->
       <div class="pager reveal" id="pager">
-        <div class="pagerLeft" id="pagerLeft">Strana 1</div>
+        <div class="pagerLeft" id="pagerLeft"></div>
         <div class="pagerBtns" id="pagerBtns"></div>
       </div>
 
-      <!-- CTA -->
       <div class="ctaBand reveal" id="offer">
         <div class="left">
           <div class="h2">Hoćeš da ovo uradimo umjesto tebe?</div>
@@ -1027,10 +868,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   </main>
 
   <script>
-    // Year
     document.getElementById('year').textContent = new Date().getFullYear();
 
-    // Mobile menu toggle
     const hamburger = document.getElementById('hamburger');
     const mobileMenu = document.getElementById('mobileMenu');
     if (hamburger && mobileMenu) {
@@ -1050,7 +889,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       });
     }
 
-    // Split hero title into words
     const titleEl = document.getElementById('heroTitle');
     const raw = titleEl.textContent.trim();
     const words = raw.split(/\s+/);
@@ -1063,7 +901,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       if (i < words.length - 1) titleEl.appendChild(document.createTextNode(' '));
     });
 
-    // Parallax + blobs
     const heroBg = document.getElementById('heroBg');
     const b1 = document.getElementById('blob1');
     const b2 = document.getElementById('blob2');
@@ -1110,7 +947,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       });
     }, {passive:true});
 
-    // ✅ Reveal observer (global)
     const io = new IntersectionObserver((entries)=>{
       entries.forEach(entry=>{
         if(!entry.isIntersecting) return;
@@ -1122,11 +958,83 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
     document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 
-    // ✅ BLOG POSTS FROM GOOGLE SHEET (WebApp)
     const API_URL = "https://script.google.com/macros/s/AKfycbzGf2MSW8mS-sm9ZUnszl7rfYoP2WRJ-3reuYdeMz-4PD0adX2L5ZzOz47Xaa-w-45N/exec?sheet=Posts&onlyPublished=1";
     const BLOG_BASE = "/sr-me/blog/";
 
-    let POSTS = [];
+    const PRELOADED_POSTS = [
+      {
+        id: "p01",
+        slug: "p01",
+        category: "strategija",
+        badge: "Strategija",
+        title: "Zašto kampanja u Podgorici propadne prije nego krene",
+        excerpt: "Ako nemaš precizan cilj i jednu ponudu, oglasi samo ubrzaju haos. Ovo je okvir koji postavlja temelje prije prvog eura.",
+        tags: ["Podgorica", "cilj", "ponuda"],
+        img: "https://images.unsplash.com/photo-1416339306562-f3d12fefd36f?auto=format&fit=crop&w=1600&q=80",
+        alt: "Planiranje marketinške strategije i ciljeva u timu"
+      },
+      {
+        id: "p02",
+        slug: "p02",
+        category: "performance",
+        badge: "Performance",
+        title: "Meta oglasi u Crnoj Gori: 5 grešaka koje ubiju rezultat",
+        excerpt: "Greške su uglavnom strukturalne: pogrešan funnel, loš event, preširok target i nema poruka po fazama.",
+        tags: ["Meta", "optimizacija", "budžet"],
+        img: "https://images.unsplash.com/photo-1557187666-4fd70cf76254?auto=format&fit=crop&w=1600&q=80",
+        alt: "Analitika i optimizacija kampanja na dashboardu"
+      },
+      {
+        id: "p03",
+        slug: "p03",
+        category: "kreative",
+        badge: "Kreative",
+        title: "Sadržaj za reklame: zašto ‘lijepo’ često ne radi",
+        excerpt: "Ads kreativa mora da nosi hook, poruku i dokaz. Feed estetika nije KPI. Evo strukture koja radi lokalno.",
+        tags: ["hook", "UGC", "poruka"],
+        img: "https://images.unsplash.com/photo-1522542550221-31fd19575a2d?auto=format&fit=crop&w=1600&q=80",
+        alt: "Produkcija sadržaja i kreativa za oglase"
+      },
+      {
+        id: "p04",
+        slug: "p04",
+        category: "dogadjaji",
+        badge: "Događaji",
+        title: "Koliko košta organizacija događaja u Podgorici (realan okvir)",
+        excerpt: "Ako nemaš okvir budžeta, event se pretvori u improvizaciju. Evo šta ulazi u cijenu i kako da kontrolišeš trošak.",
+        tags: ["event", "Podgorica", "budžet"],
+        img: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&w=1600&q=80",
+        alt: "Ambijent i publika na događaju u Podgorici"
+      },
+      {
+        id: "p05",
+        slug: "p05",
+        category: "aktivacije",
+        badge: "Aktivacije",
+        title: "Brend aktivacije u Crnoj Gori: kako da teren donese rezultat",
+        excerpt: "Aktivacija nije ‘dijeljenje letaka’. Ako nemaš jasnu poruku i mjerenje, dobiješ buku.",
+        tags: ["aktivacije", "promo", "mjerenje"],
+        img: "https://images.unsplash.com/photo-1504116468057-3951eae10a58?auto=format&fit=crop&w=1600&q=80",
+        alt: "Promo tim i brend aktivacija na terenu"
+      },
+      {
+        id: "p06",
+        slug: "p06",
+        category: "dogadjaji",
+        badge: "Događaji",
+        title: "Organizacija događaja u Podgorici: kompletan vodič (budžet, logistika, tim)",
+        excerpt: "Ako želiš event koji izgleda ‘lako’, moraš ga isplanirati kao sistem.",
+        tags: ["organizacija događaja", "Podgorica", "produkcija", "logistika"],
+        img: "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1600&q=80",
+        alt: "Organizacija događaja i koordinacija tima"
+      }
+    ];
+
+    let POSTS = PRELOADED_POSTS.slice();
+    let currentFilter = 'all';
+    const PAGE_SIZE = 6;
+    let visibleCount = PAGE_SIZE;
+    let userInteracted = false;
 
     function fromApiToUiPost(p){
       return {
@@ -1142,8 +1050,16 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       };
     }
 
-    async function loadPosts(){
-      // ✅ Abort ako baš dugo traje (da ne visi)
+    function mergeUniqueBySlug(pre, fetched){
+      const map = new Map();
+      [...pre, ...fetched].forEach(p => {
+        if(!p || !p.slug) return;
+        map.set(p.slug, p);
+      });
+      return Array.from(map.values());
+    }
+
+    async function loadPostsBackground(){
       const controller = new AbortController();
       const t = setTimeout(()=>controller.abort(), 12000);
 
@@ -1154,63 +1070,60 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       if(!data || !data.ok) throw new Error((data && data.error) ? data.error : "API error");
 
       const list = Array.isArray(data.posts) ? data.posts : [];
-      POSTS = list
-        .map(fromApiToUiPost)
-        .filter(p => p.slug && p.title);
+      const fetched = list.map(fromApiToUiPost).filter(p => p.slug && p.title);
+
+      POSTS = mergeUniqueBySlug(PRELOADED_POSTS, fetched);
+
+      if(!userInteracted){
+        renderGrid(false);
+      } else {
+        updateLoadMoreState();
+      }
     }
 
-    // Build + pagination
     const grid = document.getElementById('postsGrid');
     const pagerLeft = document.getElementById('pagerLeft');
     const pagerBtns = document.getElementById('pagerBtns');
-
-    const PAGE_SIZE = 6;
-    let currentPage = 1;
-    let currentFilter = 'all';
 
     function filteredPosts(){
       return POSTS.filter(p => currentFilter === 'all' ? true : p.category === currentFilter);
     }
 
-    function totalPages(){
-      return Math.max(1, Math.ceil(filteredPosts().length / PAGE_SIZE));
+    function ensureLoadMoreButton(){
+      pagerBtns.innerHTML = '';
+      const btn = document.createElement('button');
+      btn.className = 'pageBtn';
+      btn.id = 'loadMoreBtn';
+      btn.textContent = 'Učitaj još';
+      btn.addEventListener('click', ()=>{
+        userInteracted = true;
+        visibleCount += PAGE_SIZE;
+        renderGrid(true);
+      });
+      pagerBtns.appendChild(btn);
     }
 
-    function renderPager(){
-      const tp = totalPages();
-      currentPage = Math.min(currentPage, tp);
+    function updateLoadMoreState(){
+      const list = filteredPosts();
+      const total = list.length;
+      const btn = document.getElementById('loadMoreBtn');
 
-      pagerLeft.textContent = `Strana ${currentPage} / ${tp}`;
-      pagerBtns.innerHTML = '';
+      pagerLeft.textContent = total ? `Prikazano ${Math.min(visibleCount, total)} / ${total}` : '';
 
-      const prev = document.createElement('button');
-      prev.className = 'pageBtn';
-      prev.textContent = '‹';
-      prev.disabled = currentPage === 1;
-      prev.addEventListener('click', ()=>{ currentPage--; renderGrid(); });
-      pagerBtns.appendChild(prev);
+      if(!btn) return;
 
-      for(let i=1;i<=tp;i++){
-        const b = document.createElement('button');
-        b.className = 'pageBtn' + (i===currentPage ? ' active':'');
-        b.textContent = i;
-        b.addEventListener('click', ()=>{ currentPage = i; renderGrid(); });
-        pagerBtns.appendChild(b);
+      if(visibleCount >= total){
+        btn.style.display = 'none';
+      } else {
+        btn.style.display = 'inline-flex';
       }
-
-      const next = document.createElement('button');
-      next.className = 'pageBtn';
-      next.textContent = '›';
-      next.disabled = currentPage === tp;
-      next.addEventListener('click', ()=>{ currentPage++; renderGrid(); });
-      pagerBtns.appendChild(next);
     }
 
     function makeCard(p){
       const el = document.createElement('article');
       el.className = 'card reveal post';
       el.dataset.category = p.category;
-      el.id = p.id;
+      el.id = p.id || p.slug;
 
       el.innerHTML = `
         <div class="thumb">
@@ -1220,7 +1133,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         <div class="meta">
           <h3>${p.title}</h3>
           <p>${p.excerpt}</p>
-          <div class="miniK">${p.tags.map(t=>`<span>${t}</span>`).join('')}</div>
+          <div class="miniK">${(p.tags || []).map(t=>`<span>${t}</span>`).join('')}</div>
           <div class="readLink"><span class="chev">↗</span> Otvori tekst</div>
         </div>
       `;
@@ -1230,54 +1143,38 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       return el;
     }
 
-    // ✅ Skeleton cards (prikaži odmah)
-    function renderSkeleton(){
-      grid.innerHTML = '';
-      for(let i=0;i<6;i++){
-        const sk = document.createElement('article');
-        sk.className = 'card skeleton shimmer';
-        sk.innerHTML = `
-          <div class="thumb"></div>
-          <div class="meta">
-            <div class="skLine lg w80"></div>
-            <div class="skLine w60"></div>
-            <div class="skLine w45"></div>
-            <div class="skRow" style="margin-top:6px">
-              <div class="skTag"></div>
-              <div class="skTag"></div>
-              <div class="skTag"></div>
-            </div>
-            <div class="readLink" style="opacity:.55; margin-top:auto">
-              <span class="chev">↗</span> Učitavam...
-            </div>
+    function renderGrid(append){
+      const list = filteredPosts();
+      const total = list.length;
+
+      if(!append){
+        grid.innerHTML = '';
+      }
+
+      if(total === 0){
+        grid.innerHTML = `
+          <div style="opacity:.90; border:3px solid rgba(255,255,255,.14); border-radius:14px; padding:14px;">
+            Nema postova u ovoj kategoriji.
           </div>
         `;
-        grid.appendChild(sk);
+        pagerLeft.textContent = '';
+        pagerBtns.innerHTML = '';
+        return;
       }
-      pagerLeft.textContent = 'Učitavam...';
-      pagerBtns.innerHTML = '';
-    }
 
-    function renderGrid(){
-      grid.innerHTML = '';
+      const targetCount = Math.min(visibleCount, total);
+      const already = append ? grid.querySelectorAll('.post').length : 0;
 
-      const list = filteredPosts();
-      const tp = totalPages();
-      currentPage = Math.min(currentPage, tp);
-
-      const start = (currentPage - 1) * PAGE_SIZE;
-      const slice = list.slice(start, start + PAGE_SIZE);
-
-      slice.forEach(p => {
-        const card = makeCard(p);
+      for(let i = already; i < targetCount; i++){
+        const card = makeCard(list[i]);
         grid.appendChild(card);
-        io.observe(card); // ✅ samo novo dodate observe
-      });
+        io.observe(card);
+      }
 
-      renderPager();
+      ensureLoadMoreButton();
+      updateLoadMoreState();
     }
 
-    // Filter buttons
     const buttons = Array.from(document.querySelectorAll('.filterBtn'));
     function setActive(btn){
       buttons.forEach(b=>{
@@ -1287,42 +1184,21 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     }
     buttons.forEach(btn=>{
       btn.addEventListener('click', ()=>{
+        userInteracted = true;
         currentFilter = btn.dataset.filter;
-        currentPage = 1;
+        visibleCount = PAGE_SIZE;
         setActive(btn);
-
-        // ako nema postova još, samo skeleton dok se ne učita
-        if(!POSTS.length){
-          renderSkeleton();
-        } else {
-          renderGrid();
-        }
-
+        renderGrid(false);
         window.location.hash = '#posts';
       });
     });
 
-    // ✅ Init: pokaži skeleton odmah, pa zamijeni kad API stigne
-    renderSkeleton();
+    renderGrid(false);
 
-    loadPosts()
-      .then(() => {
-        // ako je filter već kliknut, renderGrid će to poštovati
-        renderGrid();
-      })
-      .catch(err => {
-        console.error(err);
-        grid.innerHTML = `
-          <div style="opacity:.90; border:3px solid rgba(255,255,255,.14); border-radius:14px; padding:14px;">
-            Ne mogu da učitam postove. Provjeri WebApp link / sheet name / prava pristupa.<br>
-            <div style="margin-top:8px; opacity:.8; font-size:12px;">${String(err.message || err)}</div>
-          </div>
-        `;
-        pagerLeft.textContent = 'Greška';
-        pagerBtns.innerHTML = '';
-      });
+    loadPostsBackground().catch(err => {
+      console.error(err);
+    });
 
-    // Hero title word stagger on load
     window.addEventListener('load', ()=>{
       anime({
         targets: '#heroTitle span',
@@ -1334,8 +1210,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       });
     });
   </script>
-
-
 
 </body>
 </html>
