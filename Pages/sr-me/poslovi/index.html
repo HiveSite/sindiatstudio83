@@ -4,7 +4,7 @@
   <!-- Google Tag Manager -->
   <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
   new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  j=d.getElementsByTagName(s)[0],dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
   })(window,document,'script','dataLayer','GTM-PBXVW3GK');</script>
   <!-- End Google Tag Manager -->
@@ -519,22 +519,26 @@
       margin-bottom:10px;
     }
     .jobThumb{
-      width:96px;
-      height:76px;
-      border-radius:12px;
-      overflow:hidden;
-      border:3px solid rgba(255,255,255,.12);
-      background: rgba(8,10,16,.65);
-      box-shadow: 0 14px 38px rgba(0,0,0,.28);
-      position:relative;
-    }
-    .jobThumb img{
-      width:100%;
-      height:100%;
-      object-fit:cover;
-      opacity:.92;
-      filter:saturate(1.05) contrast(1.12);
-      transform:scale(1.02);
+  width:96px;
+  aspect-ratio: 1 / 1;   /* ✅ uvijek kvadrat */
+  height:auto;           /* ✅ ne forsira pravougaonik */
+  border-radius:12px;
+  overflow:hidden;
+  border:3px solid rgba(255,255,255,.12);
+  background: rgba(8,10,16,.65);
+  box-shadow: 0 14px 38px rgba(0,0,0,.28);
+  position:relative;
+}
+
+.jobThumb img{
+  width:100%;
+  height:100%;
+  object-fit:cover;      /* ✅ crop, bez razvlačenja */
+  object-position:center;
+  opacity:.92;
+  filter:saturate(1.05) contrast(1.12);
+  transform:scale(1.02);
+}
     }
     .jobThumb:after{
       content:"";
@@ -571,6 +575,7 @@
       color: inherit;
     }
 
+    /* ✅ kept original style, but now used for "Load more" */
     .pager{
       display:flex;
       align-items:center;
@@ -679,11 +684,11 @@
       .pager{flex-direction: column; align-items: stretch; gap: 10px;}
       .pager .btn{ width: 100%; justify-content:center; }
 
-      .jobMedia{grid-template-columns: 1fr; }
-      .jobThumb{width:100%; height:160px;}
+      .jobMedia{grid-template-columns: 1 fr; }
+      .jobThumb{width:100%; aspect-ratio: 1 / 1; height:auto;}
     }
     @media (prefers-reduced-motion: reduce){
-      .card, .btn, nav a{transition:none !important;}
+      .card, .btn, nav a{transition:none !important;} 
       .card:hover, .btn:hover{transform:none !important;}
       .blob{display:none;}
     }
@@ -802,10 +807,10 @@
         <div class="grid" style="gap:14px">
           <div id="jobList" class="grid" style="gap:14px"></div>
 
+          <!-- ✅ Load more -->
           <div class="pager">
-            <button id="prev" class="btn" type="button">⟵ Prethodna</button>
             <div id="page"></div>
-            <button id="next" class="btn" type="button">Sljedeća ⟶</button>
+            <button id="loadMore" class="btn primary" type="button"><span class="dot"></span> Učitaj još</button>
           </div>
         </div>
       </div>
@@ -940,38 +945,30 @@
         setTimeout(()=>n.classList.remove("show"), 2600);
       };
 
-     let __scrollY = 0;
+      let __scrollY = 0;
 
-const setBodyLock = (locked) => {
-  if (locked) {
-    __scrollY = window.scrollY || document.documentElement.scrollTop || 0;
+      const setBodyLock = (locked) => {
+        if (locked) {
+          __scrollY = window.scrollY || document.documentElement.scrollTop || 0;
+          document.body.style.position = "fixed";
+          document.body.style.top = `-${__scrollY}px`;
+          document.body.style.left = "0";
+          document.body.style.right = "0";
+          document.body.style.width = "100%";
+          document.body.style.overflow = "hidden";
+          document.body.style.touchAction = "none";
+        } else {
+          document.body.style.position = "";
+          document.body.style.top = "";
+          document.body.style.left = "";
+          document.body.style.right = "";
+          document.body.style.width = "";
+          document.body.style.overflow = "";
+          document.body.style.touchAction = "";
+          window.scrollTo(0, __scrollY);
+        }
+      };
 
-    // "freeze" body without jumping
-    document.body.style.position = "fixed";
-    document.body.style.top = `-${__scrollY}px`;
-    document.body.style.left = "0";
-    document.body.style.right = "0";
-    document.body.style.width = "100%";
-
-    // optional (helps iOS)
-    document.body.style.overflow = "hidden";
-    document.body.style.touchAction = "none";
-  } else {
-    // restore
-    document.body.style.position = "";
-    document.body.style.top = "";
-    document.body.style.left = "";
-    document.body.style.right = "";
-    document.body.style.width = "";
-    document.body.style.overflow = "";
-    document.body.style.touchAction = "";
-
-    // jump back to previous scroll position
-    window.scrollTo(0, __scrollY);
-  }
-};
-
-      // ✅ helpers: hide empty + "po dogovoru"
       function normText(v){
         return String(v ?? "")
           .replace(/\u00A0/g, " ")
@@ -1032,7 +1029,6 @@ const setBodyLock = (locked) => {
       }
 
       function normalizeJobFromSheet(j){
-        // ✅ pay: if empty OR "po dogovoru" OR non-numeric => ""
         const rawPay = String(j.pay ?? "").trim();
         const pay = (!rawPay || isEmptyOrTbd(rawPay) || Number.isNaN(Number(rawPay))) ? "" : Number(rawPay);
 
@@ -1047,7 +1043,6 @@ const setBodyLock = (locked) => {
           payType: String(j.payType || ""),
           posted: String(j.posted || new Date().toISOString().slice(0,10)),
           img: String(j.img || ""),
-          // ✅ desc: keep raw, but we'll hide it in UI if empty/tbd
           desc: String(j.desc || ""),
           responsibilities: splitLines(j.responsibilities),
           qualifications: splitLines(j.qualifications),
@@ -1090,8 +1085,109 @@ const setBodyLock = (locked) => {
         apply:"sindikatevents@gmail.com"
       };
 
-      // ✅ category filter state (multi)
+      // ✅ PRELOADED (Hardkod) — tvoji (ne diramo / ne overridujemo)
+      const PRELOADED_JOBS = [
+        {
+          id:"j1",
+          posted:"2025-12-15",
+          title:"Hostesa / Promoter",
+          company:"Sindikat",
+          location:"Crna Gora (više gradova)",
+          category:"Event menadžment",
+          type:"Part-time Sezonski",
+          pay:"",
+          payType:"negotiable",
+          img:"https://images.pexels.com/photos/3183171/pexels-photo-3183171.jpeg",
+          desc:"Tražimo komunikativne hostese za događaje i promo aktivacije.",
+          responsibilities:["Komunikacija sa gostima","Promo aktivnosti","Rad na događajima"],
+          qualifications:["Poželjno iskustvo","Engleski jezik"],
+          benefits:["Dinamičan rad","Obezbijeđena uniforma"],
+          apply:"sindikatevents@gmail.com"
+        },
+        {
+          id:"j2",
+          posted:"2025-12-02",
+          title:"DJ za evente (freelance)",
+          company:"Sindikat",
+          location:"Podgorica / terenski",
+          category:"Audio/Video & Produkcija",
+          type:"Freelance",
+          pay:"",
+          payType:"negotiable",
+          img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQbwbN_uwF1TNRXPWNnDwPlhoCWvr2A4vCU0A&s",
+          desc:"Svirke na korporativnim i privatnim događajima.",
+          responsibilities:["Muzički nastupi","Priprema setova"],
+          qualifications:["Sopstvena oprema","Iskustvo"],
+          benefits:["Dogovor po eventu"],
+          apply:"sindikatevents@gmail.com"
+        },
+        {
+          id:"j3",
+          posted:"2025-12-05",
+          title:"Barmen / Event bar",
+          company:"Sindikat",
+          location:"Budva Podgorica Kotor",
+          category:"Ugostiteljstvo",
+          type:"Sezonski Part-time",
+          pay:900,
+          payType:"monthly",
+          img:"https://www.paletky.cz/wp-content/uploads/2020/04/BAR-klasik-3.jpg",
+          desc:"Rad na mobilnim barovima i koktelima.",
+          responsibilities:["Priprema pića","Rad sa gostima"],
+          qualifications:["Iskustvo u ugostiteljstvu"],
+          benefits:["Obuka","Event atmosfera"],
+          apply:"sindikatevents@gmail.com"
+        },
+        {
+          id:"j4",
+          posted:"2025-12-12",
+          title:"Social Media Manager (PT / remote)",
+          company:"Sindikat",
+          location:"Remote",
+          category:"Marketing & Dizajn",
+          type:"Part-time Remote",
+          pay:"",
+          payType:"negotiable",
+          img:"https://images.pexels.com/photos/3182749/pexels-photo-3182749.jpeg",
+          desc:"Vađenje i vođenje sadržaja za društvene mreže.",
+          responsibilities:["Content plan","Objave","Analitika"],
+          qualifications:["Iskustvo u social media"],
+          benefits:["Fleksibilno radno vrijeme"],
+          apply:"sindikatevents@gmail.com"
+        },
+        {
+          id:"j5",
+          posted:"2025-12-20",
+          title:"Otvorena prijava",
+          company:"Sindikat",
+          location:"Crna Gora",
+          category:"Sve kategorije",
+          type:"Free application",
+          pay:"",
+          payType:"negotiable",
+          img:"https://images.pexels.com/photos/374079/pexels-photo-374079.jpeg",
+          desc:"Otvorena prijava za buduće prilike.",
+          responsibilities:["Prezentacija profila"],
+          qualifications:["Motivacija","Spremnost za rad"],
+          benefits:["Različite prilike"],
+          apply:"sindikatevents@gmail.com"
+        }
+      ];
+
+      // ✅ hardkod + staticAlways su UVIJEK gore i NE prepisuju se
+      const HARD_IDS = new Set([...PRELOADED_JOBS.map(j=>String(j.id)), String(staticAlways.id)]);
+
+      // ✅ ui data
+      let allJobsCache = [];     // HARD + LIVE (bez duplikata po id, hard pobjeđuje)
+      const PAGE_SIZE = 25;      // "Učitaj još" dodaje 25
+      let visibleCount = PAGE_SIZE; // prikaz živih + hard? (računamo total render)
       let catSet = new Set();
+
+      const payText = (j) => {
+        if (j.pay === "" || j.pay === null || j.pay === undefined || Number.isNaN(Number(j.pay))) return "";
+        const label = (j.payType === "one-time") ? "jednokratno" : "mjesečno";
+        return `€ ${safe(j.pay)} • ${label}`;
+      };
 
       function buildFilterStats(jobs){
         const categories = uniqueSorted(jobs.map(j => j.category).filter(c => !isEmptyOrTbd(c)));
@@ -1120,8 +1216,8 @@ const setBodyLock = (locked) => {
             if (input.checked) catSet.add(c);
             else catSet.delete(c);
             tile.classList.toggle("checked", input.checked);
-            page = 1;
-            render();
+            visibleCount = PAGE_SIZE;
+            render(false);
           });
         });
       }
@@ -1140,17 +1236,6 @@ const setBodyLock = (locked) => {
             : `<option>Part-time</option>`;
         }
       }
-
-      // UI state
-      let allJobsCache = [];
-      const perPage = 5;
-      let page = 1;
-
-      const payText = (j) => {
-        if (j.pay === "" || j.pay === null || j.pay === undefined || Number.isNaN(Number(j.pay))) return "";
-        const label = (j.payType === "one-time") ? "jednokratno" : "mjesečno";
-        return `€ ${safe(j.pay)} • ${label}`;
-      };
 
       function getFilters(){
         const q = (el("q")?.value || "").trim().toLowerCase();
@@ -1247,7 +1332,6 @@ const setBodyLock = (locked) => {
 
         const descOk = !isEmptyOrTbd(j.desc);
 
-        // ✅ clean lists: remove empty/"po dogovoru"
         const responsibilities = cleanList(j.responsibilities);
         const qualifications  = cleanList(j.qualifications);
         const benefits        = cleanList(j.benefits);
@@ -1323,53 +1407,103 @@ const setBodyLock = (locked) => {
         });
       }
 
-      async function initData(){
-        const live = await fetchLiveJobs();
-        const merged = [...live, staticAlways].sort((a,b)=> new Date(b.posted) - new Date(a.posted));
-        allJobsCache = merged;
+      // ✅ combine: HARD always first; LIVE appended below; LIVE excludes ids that already exist in HARD
+      function buildCombinedList(live){
+        const hardTop = [...PRELOADED_JOBS, staticAlways]
+          .sort((a,b)=> new Date(b.posted) - new Date(a.posted));
 
-        const { categories, types } = buildFilterStats(merged);
-        populateCategoryFilters(categories);
-        populatePostFormSelects(categories, types);
+        const liveOnly = (live || [])
+          .filter(j => j && j.id && !HARD_IDS.has(String(j.id)))
+          .sort((a,b)=> new Date(b.posted) - new Date(a.posted));
 
-        return merged;
+        return { hardTop, liveOnly, combined: [...hardTop, ...liveOnly] };
       }
 
-      async function render(){
+      async function initData(){
+        // 1) odmah: samo HARD (instant)
+        const hardOnly = buildCombinedList([]).combined;
+        allJobsCache = hardOnly;
+
+        const stats0 = buildFilterStats(allJobsCache);
+        populateCategoryFilters(stats0.categories);
+        populatePostFormSelects(stats0.categories, stats0.types);
+
+        // 2) dodaj LIVE ispod (NE DIRAJ hardkodovane)
+        fetchLiveJobs().then((live)=>{
+          const built = buildCombinedList(live);
+          allJobsCache = built.combined;
+
+          const stats = buildFilterStats(allJobsCache);
+          populateCategoryFilters(stats.categories);
+          populatePostFormSelects(stats.categories, stats.types);
+
+          render(false);
+        }).catch(()=>{});
+
+        return allJobsCache;
+      }
+
+      async function render(append){
         const listEl = el("jobList");
         if (!listEl) return;
 
         if (!allJobsCache.length) await initData();
 
-        const data = filterJobs(allJobsCache);
-
-        const total = data.length;
-        const pages = Math.max(1, Math.ceil(total / perPage));
-        if (page > pages) page = pages;
-
-        const start = (page - 1) * perPage;
-        const slice = data.slice(start, start + perPage);
-
-        listEl.innerHTML = slice.map(jobCard).join("");
+        // filtriramo cijeli combined list
+        const filtered = filterJobs(allJobsCache);
+        const total = filtered.length;
 
         el("count") && (el("count").textContent = total);
-        el("page") && (el("page").textContent = `Strana ${page} / ${pages}`);
 
-        const prev = el("prev"), next = el("next");
-        prev && (prev.disabled = page === 1);
-        next && (next.disabled = page === pages);
+        if (!total){
+          listEl.innerHTML = `<div class="card">Nema rezultata za izabrane filtere.</div>`;
+          el("page") && (el("page").textContent = "");
+          el("loadMore") && (el("loadMore").style.display = "none");
+          return;
+        }
+
+        const target = Math.min(visibleCount, total);
+
+        if (!append){
+          listEl.innerHTML = "";
+        }
+
+        const already = append ? listEl.querySelectorAll(".jobCard").length : 0;
+
+        for (let i = already; i < target; i++){
+          const html = jobCard(filtered[i]);
+          const tmp = document.createElement("div");
+          tmp.innerHTML = html;
+          listEl.appendChild(tmp.firstElementChild);
+        }
 
         bindRowActions();
+
+        el("page") && (el("page").textContent = `Prikazano ${target} / ${total}`);
+
+        const lm = el("loadMore");
+        if (lm){
+          lm.style.display = (target >= total) ? "none" : "inline-flex";
+        }
       }
 
       // listeners
       ["q","loc","minPay","maxPay"].forEach((id)=>{
         const node = el(id);
-        node && node.addEventListener("input", ()=>{ page=1; render(); });
+        node && node.addEventListener("input", ()=>{
+          visibleCount = PAGE_SIZE;  // reset na 25
+          render(false);
+        });
       });
-      el("searchBtn")?.addEventListener("click", ()=>{ page=1; render(); });
-      el("prev")?.addEventListener("click", ()=>{ if (page>1){ page--; render(); } });
-      el("next")?.addEventListener("click", ()=>{ page++; render(); });
+      el("searchBtn")?.addEventListener("click", ()=>{
+        visibleCount = PAGE_SIZE;
+        render(false);
+      });
+
+      el("loadMore")?.addEventListener("click", ()=>{
+        visibleCount += PAGE_SIZE; // +25
+        render(true);
+      });
 
       el("clearFilters")?.addEventListener("click", ()=>{
         catSet.clear();
@@ -1378,8 +1512,8 @@ const setBodyLock = (locked) => {
 
         ["q","loc","minPay","maxPay"].forEach((id)=>{ const e = el(id); if (e) e.value = ""; });
 
-        page = 1;
-        render();
+        visibleCount = PAGE_SIZE;
+        render(false);
       });
 
       // modals close
@@ -1452,7 +1586,8 @@ const setBodyLock = (locked) => {
       }
 
       // first render
-      render();
+      visibleCount = PAGE_SIZE; // start: 25 ukupno prikazano (hard + dio live)
+      render(false);
     });
   </script>
 </body>
