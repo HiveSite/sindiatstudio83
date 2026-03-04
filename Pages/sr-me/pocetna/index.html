@@ -472,6 +472,107 @@
       gap:22px;
       align-items:stretch;
     }
+    /* ✅ HERO horizontal bar (replaces heroCard) */
+.heroBar{
+  margin-top: 16px;
+  border:3px solid rgba(255,255,255,.14);
+  border-radius: var(--r3);
+  background:
+    radial-gradient(520px 240px at 18% 20%, rgba(255,59,111,.18), transparent 62%),
+    radial-gradient(520px 240px at 82% 30%, rgba(24,245,255,.12), transparent 62%),
+    linear-gradient(180deg, rgba(14,16,26,.92), rgba(7,8,19,.92));
+  box-shadow: var(--shadow);
+  overflow:hidden;
+  display:grid;
+  grid-template-columns: 360px 1fr;
+}
+
+.heroBarImg{
+  border-right:3px solid rgba(255,255,255,.10);
+  background: rgba(0,0,0,.18);
+  min-height: 220px;
+}
+.heroBarImg img{
+  width:100%;
+  height:100%;
+  object-fit: cover;
+  display:block;
+}
+
+.heroBarBody{
+  padding: 16px 18px 16px;
+  display:flex;
+  flex-direction:column;
+  gap: 12px;
+}
+
+.heroBarTop{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap: 10px;
+}
+.heroBarTitle{
+  font-size:12px;
+  letter-spacing:1px;
+  text-transform:uppercase;
+  color: rgba(255,255,255,.70);
+}
+.heroBarStatus{
+  font-size:12px;
+  color: rgba(255,176,0,.9);
+  text-transform:uppercase;
+  letter-spacing:1px;
+}
+
+.heroBarStats{
+  display:grid;
+  grid-template-columns: repeat(4, minmax(0,1fr));
+  gap: 10px;
+}
+.hStat{
+  border:2px solid rgba(255,255,255,.12);
+  border-radius: var(--r2);
+  background: rgba(8,10,16,.70);
+  box-shadow: var(--shadow2);
+  padding: 12px 12px 10px;
+}
+.hNum{
+  font-size:22px;
+  font-weight:800;
+  letter-spacing:-.4px;
+}
+.hCap{
+  margin-top:6px;
+  color: rgba(255,255,255,.65);
+  font-size:12px;
+  line-height:1.35;
+}
+
+.heroBarFoot{
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+  flex-wrap:wrap;
+  color: rgba(255,255,255,.65);
+  font-size:12px;
+}
+
+/* responsive */
+@media (max-width: 980px){
+  .heroBar{ grid-template-columns: 1fr; }
+  .heroBarImg{
+    border-right:0;
+    border-bottom:3px solid rgba(255,255,255,.10);
+    min-height: 190px;
+  }
+  .heroBarStats{ grid-template-columns: repeat(2, minmax(0,1fr)); }
+}
+@media (max-width: 520px){
+  .heroBarImg{ min-height: 160px; }
+  .heroBarStats{ grid-template-columns: 1fr; }
+}
+    
     .kicker{
       display:flex; align-items:center; gap:10px;
       color:var(--muted);
@@ -597,6 +698,33 @@
       gap:10px;
       flex-wrap:wrap;
     }
+
+
+.heroCard .foot{
+  margin-top:16px;
+  display:flex; justify-content:space-between; align-items:center;
+  color:rgba(255,255,255,.65);
+  font-size:12px;
+  gap:10px;
+  flex-wrap:wrap;
+}
+
+/* ✅ OVDE UBACI */
+/* ✅ Hero image on the right (replaces heroCard) */
+.heroImg{ ... }
+...
+@media (max-width: 520px){
+  .heroImg{ min-height: 180px; }
+  .heroBarStats{ grid-template-columns: 1fr; }
+}
+
+/* Sections */
+.section{
+  padding:58px 0;
+  border-top:3px solid rgba(255,255,255,.08);
+}
+
+
 
     /* Sections */
     .section{
@@ -1038,17 +1166,14 @@
 
   <main class="wrap" role="main">
 <!-- HERO -->
+<!-- HERO -->
 <section class="hero">
   <div class="heroGrid">
     <div>
 
-                <div class="kicker reveal"></span></div>
-
       <div class="kicker reveal">
-        </span>
         <span class="dot"></span>
         Podgorica • kampanje • Meta i Google • promocije i aktivacije
-
       </div>
 
       <h1 class="heroTitle reveal" id="heroTitle">
@@ -1066,49 +1191,54 @@
         promotivne aktivacije i optimizacija landing stranica za lokalne biznise.
       </p>
 
-      <div class="heroActions reveal">
-
-      </div>
+      <div class="heroActions reveal"></div>
     </div>
+  </div>
 
-    <aside class="heroCard reveal" id="heroCard" aria-label="Studio snapshot">
-      <div>
-        <div class="label">
-          <span>Pregled rada</span>
-          <span style="color:rgba(255,176,0,.9)">U toku</span>
+ <aside class="heroImg reveal" aria-label="Naslovna slika">
+  <img src="/sr-me/assets/naslovna.png" alt="" loading="eager" decoding="async">
+</aside>
+
+    <div class="heroBarBody">
+      <div class="heroBarTop">
+        <span class="heroBarTitle">Pregled rada</span>
+        <span class="heroBarStatus">U toku</span>
+      </div>
+
+      <div class="heroBarStats">
+        <div class="hStat">
+          <div class="hNum"><span class="counter" data-value="160">0</span>+</div>
+          <div class="hCap">realizovanih događaja</div>
         </div>
 
-        <div class="statGrid">
-          <div class="stat">
-            <div class="num"><span class="counter" data-value="160">0</span>+</div>
-            <div class="cap">realizovanih događaja</div>
-          </div>
-          <div class="stat">
-            <div class="num"><span class="counter" data-value="48">0</span>h</div>
-            <div class="cap">do prve kampanje</div>
-          </div>
-          <div class="stat">
-            <div class="num"><span class="counter" data-value=200.000 ">0</span>€</div>
-            <div class="cap">više od </div>
-          </div>
-          <div class="stat">
-            <div class="num"><span class="counter" data-value="4">0</span></div>
-            <div class="cap">ključna servisa</div>
-          </div>
+        <div class="hStat">
+          <div class="hNum"><span class="counter" data-value="48">0</span>h</div>
+          <div class="hCap">do prve kampanje</div>
         </div>
 
-        <div class="progressRail" aria-label="Delivery progress">
-          <div class="progressFill" id="progressFill"></div>
+        <div class="hStat">
+          <div class="hNum"><span class="counter" data-value=" <200.000">0</span>€</div>
+          <div class="hCap">mjesečni budžet</div>
+        </div> 
+
+        <div class="hStat">
+          <div class="hNum"><span class="counter" data-value="4">0</span></div>
+          <div class="hCap">ključna servisa</div>
         </div>
       </div>
 
-      <div class="foot">
+      <div class="heroBarFoot">
         <span>Podgorica • Crna Gora</span>
         <span>Kampanje • Sadržaj • Aktivacije</span>
       </div>
-    </aside>
+
+      <div class="progressRail" aria-label="Delivery progress">
+        <div class="progressFill" id="progressFill"></div>
+      </div>
+    </div>
   </div>
 </section>
+
 
 
 <!-- PRODUCTS -->
@@ -1585,6 +1715,8 @@
         easing: 'easeInOutSine',
         delay: 900
       });
+      
+      
     });
 
     // Counters start when hero card is visible
@@ -1609,8 +1741,8 @@
         counterIO.disconnect();
       });
     }, {threshold: 0.25});
-    const heroCard = document.getElementById('heroCard');
-    if(heroCard) counterIO.observe(heroCard);
+   const heroBar = document.getElementById('heroBar');
+if(heroBar) counterIO.observe(heroBar);
 
     // Marquee loop
     anime({
