@@ -720,14 +720,26 @@
     .drop summary::-webkit-details-marker{display:none}
     .drop summary .tag{margin-left:auto}
     /* ✅ Smooth drops like FAQ */
-    .drop .dropBody{
-      height: 0;
-      overflow: hidden;
-      padding: 0 18px;
-    }
-    .drop .dropBodyInner{
-      padding: 16px 0 18px;
-    }
+    /* ✅ FAST drop animation: no measuring heights */
+.drop .dropBody{
+  padding: 0 18px;
+
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 260ms var(--ease2);
+
+  /* optional: malo “snappier” osjećaj */
+  will-change: grid-template-rows;
+}
+
+.drop[open] .dropBody{
+  grid-template-rows: 1fr;
+}
+
+.drop .dropBodyInner{
+  overflow: hidden;            /* bitno za 0fr */
+  padding: 16px 0 18px;
+}
     .drop[open]{ border-color:rgba(255,59,111,.55); box-shadow: var(--shadow); }
 
     .dropBodySplit{
@@ -737,20 +749,26 @@
       align-items:stretch;
     }
     .dropText p{margin:0}
-    .dropMedia{
-      border:3px solid rgba(255,255,255,.12);
-      border-radius: var(--r2);
-      overflow:hidden;
-      min-height: 240px;
-      background:
-        radial-gradient(520px 260px at 18% 20%, rgba(255,59,111,.22), transparent 60%),
-        radial-gradient(520px 260px at 82% 25%, rgba(24,245,255,.14), transparent 62%),
-        var(--img);
-      background-size: cover;
-      background-position: center;
-      box-shadow: var(--shadow2);
-      position:relative;
-    }
+   .dropMedia{
+  border:3px solid rgba(255,255,255,.12);
+  border-radius: var(--r2);
+  overflow:hidden;
+  min-height: 240px;
+  background:
+    radial-gradient(520px 260px at 18% 20%, rgba(255,59,111,.22), transparent 60%),
+    radial-gradient(520px 260px at 82% 25%, rgba(24,245,255,.14), transparent 62%),
+    var(--img);
+  background-size: cover;
+  background-position: center;
+  box-shadow: var(--shadow2);
+  position:relative;
+
+  /* ✅ perf */
+  content-visibility: auto;
+  contain-intrinsic-size: 240px;
+  transform: translateZ(0);
+  will-change: transform;
+}
     .dropMedia:after{ display:none; }
 
     /* Portfolio */
@@ -1642,77 +1660,26 @@
       });
     });
 
-   // ✅ DROPS accordion (Paketi u ponudi) — animate like FAQ (height)
+// ✅ DROPS accordion — no height measuring, CSS handles animation
 const drops = Array.from(document.querySelectorAll('details.drop'));
 
-function closeDrop(d){
-  const body = d.querySelector('.dropBody');
-  if(!body) { d.removeAttribute('open'); return; }
-
-  const current = body.getBoundingClientRect().height;
-
-  anime.remove(body);
-  anime({
-    targets: body,
-    height: [current, 0],
-    duration: 260,
-    easing: 'easeOutQuad',
-    complete: () => {
-      d.removeAttribute('open');
-      body.style.height = '0px';
-    }
-  });
-}
-
-function openDrop(d){
-  const body = d.querySelector('.dropBody');
-  const inner = d.querySelector('.dropBodyInner');
-  if(!body || !inner) { d.setAttribute('open',''); return; }
-
-  d.setAttribute('open','');
-
-  body.style.height = 'auto';
-  const full = inner.scrollHeight;
-  body.style.height = '0px';
-
-  anime.remove(body);
-  anime({
-    targets: body,
-    height: [0, full],
-    duration: 320,
-    easing: 'easeOutExpo',
-    complete: () => {
-      body.style.height = 'auto';
-    }
-  });
-}
-
-// init + click behaviour
-drops.forEach((d) => {
+drops.forEach(d => {
   const summary = d.querySelector('summary');
-  const body = d.querySelector('.dropBody');
-
-  // init height state
-  if (d.hasAttribute('open') && body) {
-    body.style.height = 'auto';
-  } else if (body) {
-    body.style.height = '0px';
-  }
-
-  if(!summary) return;
+  if (!summary) return;
 
   summary.addEventListener('click', (e) => {
     e.preventDefault();
-
+ 
     const isOpen = d.hasAttribute('open');
 
-    // close others (accordion)
-    drops.forEach((other) => {
-      if (other !== d && other.hasAttribute('open')) closeDrop(other);
+    // close others
+    drops.forEach(other => {
+      if (other !== d) other.removeAttribute('open');
     });
 
-    if (isOpen) closeDrop(d);
-    else openDrop(d);
+    // toggle this
+    if (isOpen) d.removeAttribute('open');
+    else d.setAttribute('open', '');
   });
 });
 
