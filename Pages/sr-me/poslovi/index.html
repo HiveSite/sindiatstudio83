@@ -4,7 +4,7 @@
   <!-- Google Tag Manager -->
   <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
   new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-  j=d.getElementsByTagName(s)[0],dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
   })(window,document,'script','dataLayer','GTM-PBXVW3GK');</script>
   <!-- End Google Tag Manager -->
@@ -518,28 +518,29 @@
       align-items:stretch;
       margin-bottom:10px;
     }
-    .jobThumb{
-  width:96px;
-  aspect-ratio: 1 / 1;   /* ✅ uvijek kvadrat */
-  height:auto;           /* ✅ ne forsira pravougaonik */
-  border-radius:12px;
-  overflow:hidden;
-  border:3px solid rgba(255,255,255,.12);
-  background: rgba(8,10,16,.65);
-  box-shadow: 0 14px 38px rgba(0,0,0,.28);
-  position:relative;
-}
 
-.jobThumb img{
-  width:100%;
-  height:100%;
-  object-fit:cover;      /* ✅ crop, bez razvlačenja */
-  object-position:center;
-  opacity:.92;
-  filter:saturate(1.05) contrast(1.12);
-  transform:scale(1.02);
-}
+    .jobThumb{
+      width:96px;
+      aspect-ratio: 1 / 1;   /* ✅ uvijek kvadrat */
+      height:auto;           /* ✅ ne forsira pravougaonik */
+      border-radius:12px;
+      overflow:hidden;
+      border:3px solid rgba(255,255,255,.12);
+      background: rgba(8,10,16,.65);
+      box-shadow: 0 14px 38px rgba(0,0,0,.28);
+      position:relative;
     }
+
+    .jobThumb img{
+      width:100%;
+      height:100%;
+      object-fit:cover;      /* ✅ crop, bez razvlačenja */
+      object-position:center;
+      opacity:.92;
+      filter:saturate(1.05) contrast(1.12);
+      transform:scale(1.02);
+    }
+
     .jobThumb:after{
       content:"";
       position:absolute; inset:0;
@@ -684,11 +685,26 @@
       .pager{flex-direction: column; align-items: stretch; gap: 10px;}
       .pager .btn{ width: 100%; justify-content:center; }
 
-      .jobMedia{grid-template-columns: 1 fr; }
-      .jobThumb{width:100%; aspect-ratio: 1 / 1; height:auto;}
+     .jobMedia{
+  grid-template-columns: 64px 1fr;  /* mala slika lijevo, tekst desno */
+  gap:10px;
+  align-items:center;
+}
+
+.jobThumb{
+  width:64px;
+  aspect-ratio: 1 / 1;
+  height:auto;
+  border-radius:10px;
+  border-width:2px;
+}
+
+.jobThumb img{
+  transform:none;
+}
     }
     @media (prefers-reduced-motion: reduce){
-      .card, .btn, nav a{transition:none !important;} 
+      .card, .btn, nav a{transition:none !important;}
       .card:hover, .btn:hover{transform:none !important;}
       .blob{display:none;}
     }
@@ -911,6 +927,54 @@
           <div class="formActions span2">
             <button type="button" class="btn" data-close>Otkaži</button>
             <button class="btn primary" type="submit"><span class="dot"></span> Pošalji</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Apply modal -->
+  <div id="applyModal" class="modal-bg" role="dialog" aria-modal="true" aria-label="Prijava na posao" aria-hidden="true">
+    <div class="modal">
+      <div class="modalHead">
+        <h3>Prijava na posao</h3>
+        <button class="xBtn" data-close type="button" aria-label="Close">✕</button>
+      </div>
+
+      <div class="modalBody">
+        <form id="applyForm" class="formGrid">
+          <!-- hidden job meta -->
+          <input type="hidden" name="jobId" />
+          <input type="hidden" name="jobTitle" />
+
+          <div class="field span2">
+            <label>Oglas</label>
+            <input id="applyJobTitle" type="text" disabled />
+          </div>
+
+          <div class="field">
+            <label>Ime i prezime</label>
+            <input name="name" required placeholder="npr. Ana Petrović" />
+          </div>
+
+          <div class="field">
+            <label>E-mail</label>
+            <input name="email" type="email" required placeholder="npr. ana@mail.com" />
+          </div>
+
+          <div class="field">
+            <label>Telefon</label>
+            <input name="phone" required placeholder="npr. +382 67 123 456" />
+          </div>
+
+          <div class="field span2">
+            <label>Kratka poruka (opciono)</label>
+            <textarea name="msg" rows="4" placeholder="Par rečenica o iskustvu i dostupnosti…"></textarea>
+          </div>
+
+          <div class="formActions span2">
+            <button type="button" class="btn" data-close>Otkaži</button>
+            <button class="btn primary" type="submit"><span class="dot"></span> Pošalji prijavu</button>
           </div>
         </form>
       </div>
@@ -1309,6 +1373,7 @@
       const detailsModal = el("detailsModal");
       const detailsBody = el("detailsBody");
       const postJobModal = el("postJobModal");
+      const applyModal = el("applyModal");
 
       function showModal(m){
         if (!m) return;
@@ -1321,6 +1386,21 @@
         m.classList.remove("show");
         m.setAttribute("aria-hidden","true");
         if (!document.querySelector(".modal-bg.show")) setBodyLock(false);
+      }
+
+      // ✅ NEW: openApply
+      function openApply(job){
+        if (!applyModal) return;
+
+        const form = el("applyForm");
+        const titlePreview = el("applyJobTitle");
+        if (!form) return;
+
+        form.querySelector('input[name="jobId"]').value = String(job?.id || "");
+        form.querySelector('input[name="jobTitle"]').value = String(job?.title || "");
+        if (titlePreview) titlePreview.value = String(job?.title || "");
+
+        showModal(applyModal);
       }
 
       function openDetails(id){
@@ -1387,8 +1467,28 @@
                 </ul>
               </div>
             ` : ``}
+
+            <!-- ✅ NEW: Apply CTA -->
+            <div style="border-top:3px solid rgba(255,255,255,.08); padding-top:12px; margin-top:10px; display:flex; gap:10px; flex-wrap:wrap;">
+              <button class="btn primary" type="button" id="applyBtnInDetails">
+                <span class="dot"></span> Prijavi se
+              </button>
+
+              ${j.apply && !isEmptyOrTbd(j.apply) ? `
+                <a class="btn" href="${safe(j.apply.startsWith('http') ? j.apply : 'mailto:' + j.apply)}" target="${j.apply.startsWith('http') ? '_blank' : '_self'}" rel="noopener">
+                  Direktan kontakt
+                </a>
+              ` : ``}
+            </div>
           </div>
         `;
+
+        // ✅ bind apply button
+        const applyBtn = el("applyBtnInDetails");
+        applyBtn?.addEventListener("click", ()=>{
+          hideModal(detailsModal);
+          openApply(j);
+        });
 
         showModal(detailsModal);
       }
@@ -1517,16 +1617,18 @@
       });
 
       // modals close
-      [detailsModal, postJobModal].forEach((m)=>{
+      [detailsModal, postJobModal, applyModal].forEach((m)=>{
         if (!m) return;
         m.addEventListener("click", (e)=>{
           if (e.target === m || e.target.hasAttribute("data-close")) hideModal(m);
         });
       });
+
       el("openPostJob")?.addEventListener("click", ()=> showModal(postJobModal));
+
       window.addEventListener("keydown", (e)=>{
         if (e.key === "Escape"){
-          [detailsModal, postJobModal].forEach((m)=> m?.classList.contains("show") && hideModal(m));
+          [detailsModal, postJobModal, applyModal].forEach((m)=> m?.classList.contains("show") && hideModal(m));
         }
       });
 
@@ -1574,6 +1676,29 @@
         e.target.reset();
         hideModal(postJobModal);
         toast("Oglas poslat na odobrenje ✅");
+      });
+
+      // ✅ NEW: apply submit
+      el("applyForm")?.addEventListener("submit", (e)=>{
+        e.preventDefault();
+
+        const fd = new FormData(e.target);
+        const obj = Object.fromEntries(fd.entries());
+
+        const payload = {
+          action: "apply",
+          jobId: obj.jobId || "",
+          jobTitle: obj.jobTitle || "",
+          name: obj.name || "",
+          email: obj.email || "",
+          phone: obj.phone || "",
+          msg: obj.msg || ""
+        };
+
+        sendToBackend(payload).catch(()=>{});
+        e.target.reset();
+        hideModal(applyModal);
+        toast("Prijava poslata ✅");
       });
 
       el("yearSpan") && (el("yearSpan").textContent = new Date().getFullYear());
