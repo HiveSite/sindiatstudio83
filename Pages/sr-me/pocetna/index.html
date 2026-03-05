@@ -511,13 +511,26 @@
     /* ✅ Slika desno (desktop) / ispod (mobile) */
     /* zamijeni postojeći blok */
 .heroImg{
-  border:0;
-  border-radius: var(--r3);
-  background: rgba(0,0,0,.18);
-  overflow:hidden;
-  min-height: 320px;
+  border:0 !important;
+  border-radius:0 !important;
+  background:transparent !important;
+  box-shadow:none !important;
+
+  overflow:visible !important;
+  padding:0 !important;
+  min-height:auto !important;
+
+  align-self:start; /* da stoji “top layer”, bez rastezanja */
 }
-   .heroImg img{ outline: none; }
+
+.heroImg img{
+  outline: none;
+  width:100%;
+  height:auto;
+  display:block;
+  object-fit:contain; /* čuva cijelu sliku, ne reže */
+  background:transparent;
+}
 
     /* ✅ Horizontalni bar ispod hero-a (bez slike) */
     .heroBar{
@@ -885,7 +898,6 @@
       .ctaBand{flex-direction:column; align-items:flex-start}
       .dropBodySplit{grid-template-columns:1fr;}
       .dropMedia{min-height: 190px;}
-      .heroImg{ min-height: 220px; }
       .heroBarStats{ grid-template-columns: repeat(2, minmax(0,1fr)); }
     }
     @media (max-width: 520px){
@@ -896,7 +908,6 @@
       .heroActions .btn{width:100%}
       .thumb{height:165px}
       .dropMedia{min-height:170px}
-      .heroImg{ min-height: 180px; }
       .heroBarStats{ grid-template-columns: 1fr; }
     }
   </style>
