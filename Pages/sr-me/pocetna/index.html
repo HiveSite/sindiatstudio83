@@ -511,19 +511,14 @@
     /* ✅ Slika desno (desktop) / ispod (mobile) */
     /* zamijeni postojeći blok */
 .heroImg{
-  border:1px solid rgba(255,255,255,.14);
+  border:0;
   border-radius: var(--r3);
   background: rgba(0,0,0,.18);
   box-shadow: var(--shadow);
   overflow:hidden;
   min-height: 320px;
 }
-    .heroImg img{
-      width:100%;
-      height:100%;
-      display:block;
-      object-fit: cover;
-    }
+   .heroImg img{ outline: none; }
 
     /* ✅ Horizontalni bar ispod hero-a (bez slike) */
     .heroBar{
