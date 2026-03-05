@@ -244,7 +244,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       "url": "https://www.sindikatstudio83.me/studio83logo.png"
     }
   },
-  "dateModified": "2026-03-05T17:44:38.922Z"
+  "dateModified": "2026-03-05T19:32:12.347Z"
 }
 </script>
 </head>
@@ -310,7 +310,67 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
 
     <article class="article" id="postContent">
-      <h2>Zašto “imamo analitiku” često ne znači ništa</h2><p>Mnogi imaju GA4 instaliran, ali ne mjere ono što je bitno: upit, poziv, DM ili submit forme. Bez toga kampanje uče pogrešno, a ti donosiš odluke na pogrešnim brojevima.</p><h2>Minimum koji moraš imati</h2><ul><li><strong>Konverzija:</strong> submit forme (lead)</li><li><strong>CTA klikovi:</strong> klik na “Kontakt”, “Pošalji upit”, “Pozovi”</li><li><strong>Outbound:</strong> klik na WhatsApp/DM link (ako koristiš)</li><li><strong>Scroll/engagement:</strong> da vidiš gdje ljudi odustaju</li></ul><h2>Kako da znaš da li tracking radi</h2><ul><li>Test upit (ti pošalješ formu) → vidi da li se event upisao</li><li>Provjeri izvore (source/medium) za taj test</li><li>Usporedi broj upita sa realnim inboxom/DM</li></ul><h2>Šta optimizuješ kad imaš mjerenje</h2><ul><li>Koji kanal donosi kvalitet (Meta vs Google)</li><li>Koja kreativa donosi upit</li><li>Koja strana/pasusi prave frikciju</li></ul><h2>Najčešće greške</h2><ul><li>Mjere “pageview” kao uspjeh</li><li>Nema konverzija uopšte</li><li>Dupli eventi (inflate brojke)</li></ul><h2>FAQ</h2><p><strong>Da li mi treba GTM ako imam GA4?</strong> GTM olakšava event tracking i održavanje. GA4 sam po sebi često nije dovoljan za precizne događaje.</p><p><strong>Šta je prvi event koji postavljam?</strong> Lead submit (forma) ili klik na poziv/DM - šta god je tvoja glavna konverzija.</p><div class="ref"><strong>Reference:</strong><br>• Google Search Central: mjerenje i kvalitet stranica - https://developers.google.com/search</div>
+      <p>Mnogi kažu “imamo analitiku”, a u praksi to znači da se mjeri samo pageview. To nije analitika, to je brojač posjeta. Ako ne mjeriš ono što je stvarno bitno za biznis, kampanje uče pogrešno, a ti donosiš odluke na pogrešnim brojevima. I onda se svi čude što “Meta troši” ili “Google je skup”, a zapravo niko ne vidi šta donosi upit i šta donosi kvalitetan upit.</p>
+
+<p>GA4 i GTM nijesu tu da praviš lijep dashboard. Tu su da odgovore na jedno pitanje: odakle dolaze upiti i zašto. Bez toga optimizuješ po osjećaju, a osjećaj u marketingu obično skupo košta.</p>
+
+<p><strong>Zašto imamo analitiku često ne znači ništa</strong></p>
+
+<p>Najčešći scenario u Crnoj Gori: GA4 je instaliran, ali ne postoji ni jedna prava konverzija. Ne mjeri se submit forme. Ne mjeri se klik na poziv. Ne mjeri se klik na WhatsApp ili Instagram DM. Ne znaš koja kampanja je donijela upit, koja stranica pravi frikciju, ni gdje ljudi odustaju. Rezultat je da kampanju “popravljaš” na osnovu CTR-a i CPC-a, a to su sekundarne metrike.</p>
+
+<p>Drugi scenario: konverzije postoje, ali su pogrešne. Mjeri se klik na dugme kao da je upit. Ili se mjeri pageview kao uspjeh. Ili se događaji dupliraju, pa izgleda kao da imaš 200 leadova, a u inboxu 20 poruka.</p>
+
+<p><strong>Minimum koji moraš imati</strong></p>
+
+<p>Ovo je minimum koji pokriva 80% realnih slučajeva za lokalne usluge i event vertikalu. Ako ovo imaš, optimizacija ima smisla.</p>
+
+<p><strong>1) Konverzija: lead submit</strong></p>
+<p>Submit forme je glavna konverzija ako koristiš formu. Ne klik na submit, nego potvrđeni submit. Idealno je da se event šalje na thank you page ili na potvrdu (da ne hvata lažne klikove).</p>
+
+<p><strong>2) CTA klikovi</strong></p>
+<p>Klik na kontakt, pošalji upit, pozovi. Ovo nije “finalni rezultat”, ali ti kaže da li ljudi uopšte pokušavaju da dođu do kontakta. Ako ima CTA klikova, a nema lead submit, problem je forma ili korak nakon klika.</p>
+
+<p><strong>3) Outbound klikovi</strong></p>
+<p>Ako koristiš WhatsApp link, Viber, mailto, tel, Instagram DM link ili neki eksterni booking, moraš mjeriti te klikove kao outbound. Kod lokalnih biznisa ovo često bude glavni put do upita.</p>
+
+<p><strong>4) Scroll i engagement</strong></p>
+<p>Ovo služi da vidiš gdje ljudi odustaju. Ako svi stanu na 25% skrola, znači da gornji dio stranice ne radi posao. Ako stanu prije FAQ-a, možda fali dokaz ili je ponuda nejasna. Ne treba ti 20 engagement eventova, treba ti par jasnih signala.</p>
+
+<p><strong>5) Izvori koji donose kvalitet</strong></p>
+<p>U GA4 moraš moći da vidiš source/medium i campaign koji su donijeli konverziju. Ne samo posjetu, nego upit. Bez toga ne možeš da kažeš da li je Meta bolja od Google-a, ili obrnuto, niti koja kampanja je stvarno radila.</p>
+
+<p><strong>Kako da znaš da tracking stvarno radi</strong></p>
+
+<p>Najjednostavniji test koji spašava živce:</p>
+
+<p>Pošalješ test upit kroz formu kao običan korisnik. Onda odmah provjeriš da li se event upisao u GA4 real-time. Provjeriš source/medium za taj test. I uporediš broj upita u GA4 sa realnim inboxom ili DM-om u istom periodu.</p>
+
+<p>Ako GA4 kaže 30 upita, a ti imaš 10 poruka, nešto je pogrešno. Ili dupli eventi, ili klikovi se računaju kao submit, ili se hvata refresh. Dok to ne središ, sve što optimizuješ je na pogrešnim brojevima.</p>
+
+<p><strong>Šta optimizuješ kad imaš mjerenje</strong></p>
+
+<p>Kad tracking radi, optimizacija postane normalna i mirna, jer više ne nagađaš.</p>
+
+<p>Možeš da vidiš koji kanal donosi kvalitet: Meta vs Google, i još važnije, koji tip kampanje donosi leadove koji imaju namjeru. Možeš da vidiš koja kreativa donosi upit, a koja donosi samo klik. Možeš da vidiš koja strana ili koji dio stranice pravi frikciju: da li ljudi otpadaju prije CTA-a, da li forma ubija konverziju, da li mobilna brzina pravi problem.</p>
+
+<p><strong>Najčešće greške</strong></p>
+
+<p>Mjeri se pageview kao uspjeh. Nema konverzija uopšte. Postoje dupli eventi pa se brojke naduvaju. Konverzija je postavljena na pogrešan signal, tipa click umjesto submit. UTM-ovi nijesu dosljedni pa se kampanje miješaju i ne možeš da povežeš izvor sa upitom.</p>
+
+<img src="https://images.unsplash.com/photo-1528872042734-8f50f9d3c59b?auto=format&fit=crop&w=1800&q=80" alt="Analitika i izvještaji na laptopu i bilješkama" loading="lazy" decoding="async" style="width:100%; height:auto; border-radius:14px; margin:18px 0 8px 0;">
+
+<p style="font-size:12px; line-height:1.35; opacity:.75; margin:0 0 18px 0;">Kad mjeriš pravu konverziju, prestaješ da pogađaš i počinješ da optimizuješ.</p>
+
+<p><strong>FAQ</strong></p>
+
+<p><strong>Da li mi treba GTM ako imam GA4?</strong> GTM olakšava event tracking i održavanje. GA4 sam po sebi često nije dovoljan za precizne događaje, posebno za klikove, outbound linkove i custom submit logiku.</p>
+
+<p><strong>Šta je prvi event koji postavljam?</strong> Lead submit ako ti je forma glavni put. Ako ti je glavni put poziv ili DM, onda klik na tel ili DM link. Prva konverzija mora biti ono što ti pravi posao.</p>
+
+<div class="ref" style="font-size:11px; line-height:1.35; opacity:.65; margin-top:18px;">
+  reference:<br>
+  google search central - mjerenje i kvalitet stranica - <a href="https://developers.google.com/search" target="_blank" rel="noopener">developers.google.com/search</a>
+</div>
     </article>
   </section>
 
