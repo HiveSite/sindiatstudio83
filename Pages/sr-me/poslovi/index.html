@@ -1474,11 +1474,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                 <span class="dot"></span> Prijavi se
               </button>
 
-              ${j.apply && !isEmptyOrTbd(j.apply) ? `
-                <a class="btn" href="${safe(j.apply.startsWith('http') ? j.apply : 'mailto:' + j.apply)}" target="${j.apply.startsWith('http') ? '_blank' : '_self'}" rel="noopener">
-                  Direktan kontakt
-                </a>
-              ` : ``}
+          
             </div>
           </div>
         `;
