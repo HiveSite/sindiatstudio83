@@ -1,18 +1,23 @@
 <!DOCTYPE html>
 <html lang="sr-ME">
 <head>
-
   <!-- Google Tag Manager -->
-  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-  })(window,document,'script','dataLayer','GTM-PBXVW3GK');</script>
+  <script>
+    (function(w,d,s,l,i){
+      w[l]=w[l]||[];
+      w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});
+      var f=d.getElementsByTagName(s)[0],
+          j=d.createElement(s),
+          dl=l!='dataLayer' ? '&l='+l : '';
+      j.async=true;
+      j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;
+      f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-PBXVW3GK');
+  </script>
   <!-- End Google Tag Manager -->
 
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
   <link rel="icon" type="image/png" href="/favicon.png">
 
   <!-- SEO -->
@@ -35,6 +40,12 @@
   <meta property="og:url" content="https://www.sindikatstudio83.me/sr-me/onama/" />
   <meta property="og:image" content="https://www.sindikatstudio83.me/sr-me/assets/og-cover.jpg" />
 
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="O nama | Sindikat — Performance &amp; Activation Studio (Podgorica)" />
+  <meta name="twitter:description" content="Sindikat je Performance &amp; Activation Studio iz Podgorice. Kampanje, sadržaj i aktivacije koje imaju jasan cilj i mjerljiv rezultat — online i na terenu." />
+  <meta name="twitter:image" content="https://www.sindikatstudio83.me/studio83logo.png" />
+
   <!-- Structured Data -->
   <script type="application/ld+json">
   {
@@ -45,7 +56,7 @@
         "@id":"https://www.sindikatstudio83.me/sr-me/#organization",
         "name":"Sindikat",
         "url":"https://www.sindikatstudio83.me/sr-me/",
-        "logo":"https://www.sindikatstudio83.me/sr-me/assets/logo.png",
+        "logo":"https://www.sindikatstudio83.me/studio83logo.png",
         "description":"Performance & Activation Studio iz Podgorice. Kampanje, sadržaj i aktivacije sa fokusom na rezultat.",
         "address":{
           "@type":"PostalAddress",
@@ -73,6 +84,19 @@
         "isPartOf":{"@id":"https://www.sindikatstudio83.me/sr-me/#website"},
         "about":{"@id":"https://www.sindikatstudio83.me/sr-me/#organization"},
         "inLanguage":"sr-ME"
+      },
+      {
+        "@type":"LocalBusiness",
+        "@id":"https://www.sindikatstudio83.me/#localbusiness",
+        "name":"Sindikat Studio 83",
+        "url":"https://www.sindikatstudio83.me/",
+        "image":"https://www.sindikatstudio83.me/studio83logo.png",
+        "address":{
+          "@type":"PostalAddress",
+          "addressLocality":"Podgorica",
+          "addressRegion":"Crna Gora",
+          "addressCountry":"ME"
+        }
       }
     ]
   }
@@ -87,7 +111,7 @@
       --bg2:#12011F;
       --panel:#0D0521;
       --panel2:#13072B;
-      --border:rgba(255,255,255,.2);
+      --border:rgba(255,255,255,.18);
       --border2:rgba(255,255,255,.12);
       --text:#FFFFFF;
       --muted:rgba(255,255,255,.78);
@@ -105,14 +129,15 @@
       --r2:14px;
       --r3:18px;
 
-      --max:1120px;
+      --max:1180px;
 
-      --ease: cubic-bezier(.2,.9,.2,1);
-      --ease2: cubic-bezier(.16,1,.3,1);
+      --ease:cubic-bezier(.2,.9,.2,1);
+      --ease2:cubic-bezier(.16,1,.3,1);
     }
 
     *{box-sizing:border-box}
     html,body{height:100%}
+
     body{
       margin:0;
       background:
@@ -122,17 +147,17 @@
         radial-gradient(680px 480px at 20% 70%, rgba(255,176,0,.12), transparent 62%),
         linear-gradient(180deg, var(--bg), var(--bg2));
       color:var(--text);
-      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      font-family:Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
       letter-spacing:.2px;
       overflow-x:hidden;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
     }
 
-    /* Subtle grain */
     body:before{
       content:"";
-      position:fixed; inset:0;
+      position:fixed;
+      inset:0;
       pointer-events:none;
       background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23n)' opacity='.23'/%3E%3C/svg%3E");
       opacity:.06;
@@ -142,9 +167,15 @@
 
     a{color:inherit; text-decoration:none}
     img{max-width:100%; display:block}
-    .wrap{max-width:var(--max); margin:0 auto; padding:22px 18px 120px; position:relative; z-index:2}
 
-    /* Backdrop glow */
+    .wrap{
+      max-width:var(--max);
+      margin:0 auto;
+      padding:34px 20px 120px;
+      position:relative;
+      z-index:2;
+    }
+
     .heroBg{
       position:fixed;
       inset:0;
@@ -156,98 +187,49 @@
         radial-gradient(900px 540px at 80% 10%, rgba(24,245,255,.14), transparent 60%),
         radial-gradient(720px 520px at 68% 55%, rgba(162,76,255,.16), transparent 60%);
     }
+
     .heroBg:after{
       content:"";
-      position:absolute; inset:0;
+      position:absolute;
+      inset:0;
       background:
         radial-gradient(700px 420px at 18% 20%, rgba(255,59,111,.26), transparent 60%),
         radial-gradient(900px 520px at 70% 12%, rgba(24,245,255,.2), transparent 58%),
         linear-gradient(180deg, rgba(0,0,0,.25), rgba(6,1,13,.92) 62%, rgba(6,1,13,.98));
     }
 
-    /* Background video */
-    .bgVideo{
-      position:fixed;
-      inset:0;
-      width:100%;
-      height:100%;
-      object-fit:cover;
-      z-index:0;
-      filter: saturate(1.1) contrast(1.08) brightness(.55);
-    }
-
-    /* Dark overlay for readability */
-    .bgVideoOverlay{
-      position:fixed;
-      inset:0;
-      z-index:1;
-      pointer-events:none;
-      background:
-        radial-gradient(900px 540px at 20% 20%, rgba(255,59,111,.12), transparent 60%),
-        radial-gradient(900px 540px at 80% 10%, rgba(24,245,255,.10), transparent 60%),
-        linear-gradient(180deg, rgba(0,0,0,.25), rgba(6,1,13,.82) 62%, rgba(6,1,13,.92));
-    }
-
-    /* Subtle animated blobs */
     .blob{
       position:fixed;
       z-index:1;
       pointer-events:none;
-      width:520px; height:520px;
+      width:520px;
+      height:520px;
       border-radius:999px;
       background: radial-gradient(circle at 35% 30%, rgba(255,59,111,.22), transparent 58%);
       filter: blur(18px);
       opacity:.55;
-      mix-blend-mode: screen;
-      transform: translate3d(0,0,0);
+      mix-blend-mode:screen;
+      transform:translate3d(0,0,0);
     }
+
     .blob.b2{
-      width:420px; height:420px;
+      width:420px;
+      height:420px;
       background: radial-gradient(circle at 40% 35%, rgba(24,245,255,.18), transparent 60%);
       opacity:.45;
     }
 
-    /* Topbar (bottom) */
-    .topbar{
+    .floatingLogo{
       position:fixed;
-      bottom:0;
-      left:0;
-      right:0;
-      z-index:50;
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      background: rgba(5,7,12,.88);
-      border-top:3px solid rgba(255,255,255,.12);
-      border-bottom:0;
-    }
-    .topbarInner{
-      max-width:var(--max);
-      margin:0 auto;
-      padding:12px 18px;
-      display:flex;
-      align-items:center;
-      gap:12px;
-      justify-content:flex-start;
-    }
-
-    .ctaCenter{margin:0;}
-    .navWrap{
-      margin-left:auto;
-      display:flex; align-items:center; gap:12px;
-      position:relative;
-    }
-
-    .brand{
-      display:flex; align-items:center; gap:12px;
-      font-weight:750;
-      letter-spacing:.9px;
-      text-transform:uppercase;
-      font-size:13px;
-      white-space:nowrap;
+      top:14px;
+      left:14px;
+      z-index:120;
+      display:block;
     }
 
     .mark{
-      width:176px; height:44px;
+      width:176px;
+      height:44px;
       border-radius:14px;
       border:1.5px solid rgba(255,59,111,.5);
       box-shadow:
@@ -260,6 +242,7 @@
       display:grid;
       place-items:center;
     }
+
     .markImg{
       width:100%;
       height:100%;
@@ -269,29 +252,88 @@
       filter: drop-shadow(0 10px 18px rgba(0,0,0,.45));
     }
 
+    .topbar{
+      position:fixed;
+      bottom:0;
+      left:0;
+      right:0;
+      z-index:50;
+      backdrop-filter:blur(12px);
+      -webkit-backdrop-filter:blur(12px);
+      background:rgba(5,7,12,.88);
+      border-top:3px solid rgba(255,255,255,.12);
+    }
+
+    .topbarInner{
+      max-width:var(--max);
+      margin:0 auto;
+      padding:12px 18px;
+      display:flex;
+      align-items:center;
+      gap:12px;
+      justify-content:flex-start;
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      font-weight:750;
+      letter-spacing:.9px;
+      text-transform:uppercase;
+      font-size:13px;
+      white-space:nowrap;
+      min-width:1px;
+    }
+
+    .ctaCenter{margin:0;}
+
+    .navWrap{
+      margin-left:auto;
+      display:flex;
+      align-items:center;
+      gap:12px;
+      position:relative;
+    }
+
     nav{
-      display:flex; gap:10px; flex-wrap:wrap;
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
       color:var(--muted);
       font-size:13px;
       align-items:center;
     }
+
     nav a{
       padding:9px 10px;
       border-radius:10px;
       border:2px solid transparent;
-      transition: background .2s var(--ease), color .2s var(--ease), transform .2s var(--ease), border-color .2s var(--ease);
-      transform: translateY(0);
+      transition:
+        background .2s var(--ease),
+        color .2s var(--ease),
+        transform .2s var(--ease),
+        border-color .2s var(--ease);
+      transform:translateY(0);
     }
-    nav a:hover{background:rgba(255,255,255,.05); color:var(--text); transform: translateY(-1px); border-color:rgba(24,245,255,.45)}
+
+    nav a:hover{
+      background:rgba(255,255,255,.05);
+      color:var(--text);
+      transform:translateY(-1px);
+      border-color:rgba(24,245,255,.45);
+    }
+
     nav a[aria-current="page"]{
       background:rgba(255,255,255,.05);
       color:#fff;
       border-color:rgba(255,59,111,.45);
     }
 
-    /* Buttons */
     .btn{
-      display:inline-flex; align-items:center; justify-content:center;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
       gap:10px;
       border-radius:10px;
       padding:12px 16px;
@@ -299,41 +341,59 @@
       border:3px solid var(--border);
       background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
       color:var(--text);
-      transition:transform .18s var(--ease), box-shadow .18s var(--ease), border-color .18s var(--ease), background .18s var(--ease);
+      transition:
+        transform .18s var(--ease),
+        box-shadow .18s var(--ease),
+        border-color .18s var(--ease),
+        background .18s var(--ease);
       white-space:nowrap;
       box-shadow: 0 12px 30px rgba(0,0,0,.28);
       cursor:pointer;
     }
-    .btn:hover{transform:translateY(-3px); box-shadow:var(--shadow2); border-color:rgba(255,59,111,.5)}
+
+    .btn:hover{
+      transform:translateY(-3px);
+      box-shadow:var(--shadow2);
+      border-color:rgba(255,59,111,.5);
+    }
+
     .btn.primary{
       background: linear-gradient(180deg, rgba(255,59,111,.35), rgba(255,59,111,.14));
       border-color:rgba(255,59,111,.6);
       box-shadow: 0 20px 60px rgba(255,59,111,.22), 0 10px 28px rgba(0,0,0,.28);
     }
+
     .dot{
-      width:8px; height:8px; border-radius:2px;
+      width:8px;
+      height:8px;
+      border-radius:2px;
       background:var(--accent);
       box-shadow:0 0 0 5px rgba(255,59,111,.22), 0 0 24px rgba(255,59,111,.48);
-      transform: rotate(8deg);
+      transform:rotate(8deg);
     }
 
-    /* Mobile nav */
     .hamburger{
       display:none;
-      width:44px; height:44px;
+      width:44px;
+      height:44px;
       border-radius:10px;
       border:3px solid var(--border);
       background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
-      align-items:center; justify-content:center;
+      align-items:center;
+      justify-content:center;
       gap:5px;
       flex-direction:column;
       cursor:pointer;
     }
+
     .hamburger span{
-      width:18px; height:2px; background:rgba(255,255,255,.8);
+      width:18px;
+      height:2px;
+      background:rgba(255,255,255,.8);
       border-radius:3px;
       display:block;
     }
+
     .mobileMenu{
       display:none;
       position:absolute;
@@ -343,6 +403,7 @@
       border-bottom:3px solid rgba(255,255,255,.10);
       background:rgba(5,7,12,.95);
     }
+
     .mobileMenuInner{
       max-width:var(--max);
       margin:0 auto;
@@ -350,6 +411,7 @@
       display:grid;
       gap:8px;
     }
+
     .mobileMenuInner a{
       padding:12px 12px;
       border:3px solid rgba(255,255,255,.12);
@@ -358,100 +420,63 @@
       color:var(--text);
     }
 
-    @media (max-width: 980px){
-      nav{display:none}
-      .hamburger{display:flex}
-    }
-    @media (max-width: 520px){
-      .topbarInner{padding:12px 14px}
-      .mobileMenuInner{padding:12px 14px 16px}
+    .hero{
+      padding:72px 0 28px;
+      min-height:calc(100vh - 160px);
+      display:flex;
+      align-items:center;
     }
 
-    /* ✅ FIX: da CTA i hamburger budu U ISTOM REDU na mobu */
-    @media (max-width: 520px){
-      .topbarInner{
-        flex-wrap: nowrap;
-        gap: 10px;
-      }
-      .ctaCenter{
-        margin: 0;
-        flex: 1;
-        display:flex;
-        justify-content:center;
-      }
-      .ctaCenter.btn{
-        padding: 10px 12px;
-        font-size: 12px;
-      }
-      .navWrap{
-        margin-left: 0;
-        flex: 0 0 auto;
-      }
-      .hamburger{
-        flex: 0 0 auto;
-      }
-    }
-
-    /* ✅ FLOATING LOGO: uvijek vidljiv gore lijevo + skala */
-    .floatingLogo{
-      position:fixed;
-      top:14px;
-      left:14px;
-      z-index:120;
-      display:block;
-      text-decoration:none;
-    }
-    .floatingLogo .mark{
-      width: 50vw;
-      max-width: 240px;
-      height: auto;
-      aspect-ratio: 176 / 44;
-      transform: rotate(-2deg);
-      transform-origin: top left;
-    }
-    @media (max-width: 480px){
-      .floatingLogo{ top:10px; left:10px; }
-    }
-
-    /* HERO (About page) */
-    .hero{ padding:54px 0 22px; }
     .heroGrid{
       display:grid;
-      grid-template-columns: 1.15fr .85fr;
-      gap:22px;
+      grid-template-columns:minmax(0, 1.15fr) minmax(360px, .85fr);
+      gap:26px;
       align-items:stretch;
+      width:100%;
     }
+
     .kicker{
-      display:flex; align-items:center; gap:10px;
+      display:flex;
+      align-items:center;
+      gap:10px;
       color:var(--muted);
       font-size:12px;
       text-transform:uppercase;
       letter-spacing:1.1px;
-      margin-bottom:14px;
+      margin-bottom:16px;
     }
+
     h1{
       margin:0;
-      font-size:54px;
-      line-height:1.05;
-      letter-spacing:-.8px;
-      max-width:18ch;
+      font-size:64px;
+      line-height:1.02;
+      letter-spacing:-1.2px;
+      max-width:12ch;
     }
-    .heroTitle span{display:inline-block; will-change: transform, opacity;}
+
+    .heroTitle span{
+      display:inline-block;
+      will-change:transform, opacity;
+    }
+
     .sub{
       margin-top:18px;
       color:rgba(255,255,255,.80);
-      font-size:16px;
-      line-height:1.65;
+      font-size:17px;
+      line-height:1.7;
       max-width:62ch;
-      text-shadow: 0 10px 40px rgba(0,0,0,.35);
+      text-shadow:0 10px 40px rgba(0,0,0,.35);
     }
-    .heroActions{display:flex; gap:12px; flex-wrap:wrap; margin-top:24px}
+
     .miniRow{
       margin-top:22px;
-      display:flex; gap:12px; flex-wrap:wrap;
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
       color:rgba(255,255,255,.70);
       font-size:12px;
     }
+
     .miniRow span{
       padding:8px 10px;
       border:2px solid rgba(255,255,255,.12);
@@ -460,7 +485,6 @@
       box-shadow: 0 10px 24px rgba(0,0,0,.22);
     }
 
-    /* Hero side card */
     .heroCard{
       border:3px solid rgba(255,255,255,.14);
       border-radius:var(--r3);
@@ -469,130 +493,164 @@
         radial-gradient(520px 260px at 76% 22%, rgba(24,245,255,.18), transparent 62%),
         linear-gradient(180deg, rgba(14,16,26,.92), rgba(7,8,19,.92));
       box-shadow:var(--shadow);
-      padding:22px;
-      display:flex; flex-direction:column; justify-content:space-between;
+      padding:24px;
+      display:flex;
+      flex-direction:column;
+      justify-content:space-between;
       min-height:100%;
       position:relative;
       overflow:hidden;
     }
+
     .heroCard:before{
       content:"";
-      position:absolute; inset:0;
+      position:absolute;
+      inset:0;
       background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,0));
       opacity:.55;
       pointer-events:none;
     }
+
     .heroCard:after{
       content:"";
       position:absolute;
       inset:-40%;
       background: radial-gradient(circle at 30% 30%, rgba(24,245,255,.26), transparent 60%);
       opacity:.35;
-      transform: rotate(8deg);
+      transform:rotate(8deg);
       pointer-events:none;
     }
-    .heroCard *{position:relative; z-index:2}
-    .heroCard .label{
-      display:flex; align-items:center; justify-content:space-between;
-      font-size:12px; color:rgba(255,255,255,.70);
-      text-transform:uppercase; letter-spacing:1px;
-      margin-bottom:12px;
+
+    .heroCard *{
+      position:relative;
+      z-index:2;
     }
+
+    .heroCard .label{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      font-size:12px;
+      color:rgba(255,255,255,.70);
+      text-transform:uppercase;
+      letter-spacing:1px;
+      margin-bottom:14px;
+    }
+
     .statGrid{
       display:grid;
       grid-template-columns:1fr 1fr;
       gap:12px;
       margin-top:10px;
     }
+
     .stat{
       border:2px solid rgba(255,255,255,.12);
       border-radius:var(--r2);
       padding:14px 14px 12px;
       background: rgba(8,10,16,.70);
-      box-shadow: var(--shadow2);
+      box-shadow:var(--shadow2);
       position:relative;
       overflow:hidden;
+      min-height:156px;
     }
+
     .stat:before{
       content:"";
       position:absolute;
       inset:-20%;
       background: linear-gradient(90deg, rgba(255,59,111,.0), rgba(255,59,111,.28), rgba(24,245,255,.2), rgba(255,59,111,.0));
-      transform: rotate(10deg);
+      transform:rotate(10deg);
       opacity:.25;
     }
+
     .stat .num{
-      font-size:26px;
+      font-size:28px;
       font-weight:800;
       letter-spacing:-.4px;
     }
+
     .stat .cap{
       margin-top:6px;
       color:rgba(255,255,255,.65);
       font-size:12px;
-      line-height:1.35;
+      line-height:1.4;
     }
+
     .progressRail{
       height:10px;
       border-radius:var(--r2);
       background:rgba(255,255,255,.12);
       overflow:hidden;
-      margin-top:16px;
+      margin-top:18px;
       border:2px solid rgba(255,255,255,.10);
     }
+
     .progressFill{
       height:100%;
       width:0%;
       background:linear-gradient(90deg, rgba(255,59,111,.95), rgba(24,245,255,.3), rgba(255,176,0,.6));
       border-radius:var(--r2);
-      box-shadow: 0 10px 28px rgba(255,59,111,.25);
+      box-shadow:0 10px 28px rgba(255,59,111,.25);
     }
+
     .heroCard .foot{
-      margin-top:16px;
-      display:flex; justify-content:space-between; align-items:center;
+      margin-top:18px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
       color:rgba(255,255,255,.65);
       font-size:12px;
       gap:10px;
       flex-wrap:wrap;
     }
 
-    /* Sections */
     .section{
-      padding:58px 0;
+      padding:64px 0;
       border-top:3px solid rgba(255,255,255,.08);
     }
+
     .headRow{
-      display:flex; align-items:flex-end; justify-content:space-between;
-      gap:16px; flex-wrap:wrap;
-      margin-bottom:22px;
+      display:flex;
+      align-items:flex-end;
+      justify-content:space-between;
+      gap:16px;
+      flex-wrap:wrap;
+      margin-bottom:24px;
     }
+
     .h2{
-      font-size:22px;
-      letter-spacing:-.2px;
+      font-size:24px;
+      letter-spacing:-.25px;
       margin:0;
     }
+
     .desc{
       color:rgba(255,255,255,.70);
-      font-size:13px;
-      line-height:1.65;
-      max-width:70ch;
+      font-size:14px;
+      line-height:1.7;
+      max-width:72ch;
     }
 
     .grid2{display:grid; grid-template-columns:repeat(2,1fr); gap:16px;}
-    .grid3{display:grid; grid-template-columns:repeat(3,1fr); gap:16px;}
     .grid4{display:grid; grid-template-columns:repeat(4,1fr); gap:16px;}
 
     .card{
       border:3px solid rgba(255,255,255,.14);
       border-radius:var(--r2);
       background: linear-gradient(180deg, rgba(14,16,26,.92), rgba(7,8,19,.92));
-      padding:18px;
-      box-shadow: var(--shadow2);
-      transition: transform .18s var(--ease), border-color .18s var(--ease), box-shadow .18s var(--ease), filter .18s var(--ease);
-      will-change: transform;
+      padding:20px;
+      box-shadow:var(--shadow2);
+      transition:
+        transform .18s var(--ease),
+        border-color .18s var(--ease),
+        box-shadow .18s var(--ease),
+        filter .18s var(--ease);
+      will-change:transform;
       position:relative;
       overflow:hidden;
     }
+
     .card:before{
       content:"";
       position:absolute;
@@ -601,9 +659,10 @@
         radial-gradient(circle at 25% 25%, rgba(255,59,111,.24), transparent 60%),
         radial-gradient(circle at 80% 30%, rgba(24,245,255,.18), transparent 60%);
       opacity:.5;
-      transform: rotate(8deg);
+      transform:rotate(8deg);
       pointer-events:none;
     }
+
     .card:after{
       content:"";
       position:absolute;
@@ -612,17 +671,24 @@
       opacity:.45;
       pointer-events:none;
     }
+
     .card:hover{
       transform:translateY(-6px);
       border-color:rgba(255,59,111,.5);
       box-shadow:var(--shadow);
-      filter: brightness(1.04);
+      filter:brightness(1.04);
     }
+
     .card .top{
-      display:flex; align-items:center; justify-content:space-between;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
       gap:12px;
       margin-bottom:10px;
+      position:relative;
+      z-index:2;
     }
+
     .tag{
       font-size:11px;
       color:rgba(255,176,0,.98);
@@ -632,24 +698,47 @@
       background:rgba(255,176,0,.14);
       white-space:nowrap;
     }
-    .card h3{margin:0; font-size:16px; letter-spacing:-.2px}
-    .card p{margin-top:10px; color:rgba(255,255,255,.72); font-size:13px; line-height:1.65}
+
+    .card h3{
+      margin:0;
+      font-size:17px;
+      letter-spacing:-.2px;
+      position:relative;
+      z-index:2;
+    }
+
+    .card p{
+      margin-top:10px;
+      color:rgba(255,255,255,.72);
+      font-size:13px;
+      line-height:1.7;
+      position:relative;
+      z-index:2;
+    }
 
     .bullets{
       margin-top:14px;
       padding-left:18px;
       color:rgba(255,255,255,.72);
       font-size:13px;
-      line-height:1.65;
+      line-height:1.7;
+      position:relative;
+      z-index:2;
     }
+
     .bullets li{margin:6px 0}
 
     .pillRow{
       margin-top:12px;
-      display:flex; flex-wrap:wrap; gap:10px;
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
       color:rgba(255,255,255,.66);
       font-size:12px;
+      position:relative;
+      z-index:2;
     }
+
     .pillRow span{
       border:2px solid rgba(255,255,255,.12);
       background: rgba(8,10,16,.65);
@@ -657,15 +746,15 @@
       border-radius:10px;
     }
 
-    /* Longform blocks */
     .prose{
       border:3px solid rgba(255,255,255,.14);
       border-radius:var(--r3);
       background: linear-gradient(180deg, rgba(14,16,26,.90), rgba(7,8,19,.90));
-      box-shadow: var(--shadow2);
+      box-shadow:var(--shadow2);
       overflow:hidden;
       position:relative;
     }
+
     .prose:before{
       content:"";
       position:absolute;
@@ -674,19 +763,22 @@
         radial-gradient(circle at 25% 25%, rgba(255,59,111,.22), transparent 60%),
         radial-gradient(circle at 78% 25%, rgba(24,245,255,.14), transparent 60%);
       opacity:.55;
-      transform: rotate(10deg);
+      transform:rotate(10deg);
       pointer-events:none;
     }
+
     .proseInner{
       position:relative;
       z-index:2;
-      padding:18px;
+      padding:20px;
     }
+
     .prose h3{
       margin:0;
       font-size:16px;
       letter-spacing:-.2px;
     }
+
     .prose .lead{
       color:rgba(255,255,255,.80);
       font-size:14px;
@@ -694,144 +786,211 @@
       margin:10px 0 0;
       max-width:80ch;
     }
+
     .divider{
       height:1px;
       background: rgba(255,255,255,.10);
       margin:16px 0;
     }
 
-    /* Step list */
-    .steps{ display:grid; gap:12px; }
+    .steps{
+      display:grid;
+      gap:12px;
+    }
+
     .step{
       border:2px solid rgba(255,255,255,.12);
       border-radius:var(--r2);
-      padding:14px;
+      padding:16px;
       background: rgba(8,10,16,.65);
-      box-shadow: var(--shadow2);
+      box-shadow:var(--shadow2);
       position:relative;
       overflow:hidden;
     }
+
     .step:before{
       content:"";
       position:absolute;
       inset:-30%;
       background: linear-gradient(90deg, transparent, rgba(255,59,111,.18), rgba(24,245,255,.12), transparent);
-      transform: rotate(8deg);
+      transform:rotate(8deg);
       opacity:.25;
       pointer-events:none;
     }
-    .step .t{font-weight:700; margin:0}
-    .step .d{margin:8px 0 0; color:rgba(255,255,255,.72); font-size:13px; line-height:1.65}
 
-    /* Media card (text + image) */
-    .mediaCard{ padding:0; overflow:hidden; }
+    .step .t{
+      font-weight:700;
+      margin:0;
+      position:relative;
+      z-index:2;
+    }
+
+    .step .d{
+      margin:8px 0 0;
+      color:rgba(255,255,255,.72);
+      font-size:13px;
+      line-height:1.7;
+      position:relative;
+      z-index:2;
+    }
+
+    .mediaCard{
+      padding:0;
+      overflow:hidden;
+    }
+
     .mediaGrid{
       display:grid;
-      grid-template-columns: 1.05fr .95fr;
+      grid-template-columns:1.05fr .95fr;
       gap:0;
       align-items:stretch;
     }
-    .mediaText{ padding:18px; }
+
+    .mediaText{
+      padding:22px;
+      position:relative;
+      z-index:2;
+    }
+
     .mediaImg{
       border-left:3px solid rgba(255,255,255,.12);
       background:#0a0b12;
-      min-height:240px;
+      min-height:280px;
       position:relative;
     }
+
     .mediaImg img{
       width:100%;
       height:100%;
       object-fit:cover;
       opacity:.92;
       filter:saturate(1.05) contrast(1.14);
-      transform: scale(1.03);
+      transform:scale(1.03);
     }
+
     .mediaImg:after{
       content:"";
-      position:absolute; inset:0;
+      position:absolute;
+      inset:0;
       background:
         radial-gradient(520px 240px at 18% 20%, rgba(255,59,111,.22), transparent 62%),
         radial-gradient(520px 240px at 82% 30%, rgba(24,245,255,.14), transparent 62%),
         linear-gradient(180deg, rgba(7,7,10,.08), rgba(7,7,10,.78));
-      opacity:1;
       pointer-events:none;
     }
 
-    /* Reveal base */
-    .reveal{ opacity:0; transform:translateY(18px); will-change: transform, opacity; }
+    .reveal{
+      opacity:0;
+      transform:translateY(18px);
+      will-change:transform, opacity;
+    }
 
     footer{
       border-top:3px solid rgba(255,255,255,.10);
       padding:28px 0 8px;
       color:rgba(255,255,255,.62);
       font-size:12px;
-      display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap;
+      display:flex;
+      justify-content:space-between;
+      gap:12px;
+      flex-wrap:wrap;
+    }
+
+    @media (min-width: 1200px){
+      h1{font-size:70px}
+      .heroGrid{gap:32px}
+      .sub{font-size:18px}
     }
 
     @media (max-width: 980px){
-      .hero{padding:38px 0 18px}
-      .heroGrid{grid-template-columns:1fr}
-      h1{font-size:42px}
-      .grid4{grid-template-columns:repeat(2,1fr)}
-      .grid3{grid-template-columns:1fr}
-      .grid2{grid-template-columns:1fr}
-      .mediaGrid{grid-template-columns:1fr}
+      nav{display:none}
+      .hamburger{display:flex}
+      .hero{
+        padding:44px 0 18px;
+        min-height:auto;
+      }
+      .heroGrid{
+        grid-template-columns:1fr;
+      }
+      h1{
+        font-size:44px;
+        max-width:14ch;
+      }
+      .grid4{
+        grid-template-columns:repeat(2,1fr);
+      }
+      .grid2{
+        grid-template-columns:1fr;
+      }
+      .mediaGrid{
+        grid-template-columns:1fr;
+      }
       .mediaImg{
         border-left:0;
         border-top:3px solid rgba(255,255,255,.12);
-        min-height:200px;
+        min-height:220px;
+      }
+      .stat{
+        min-height:unset;
       }
     }
+
     @media (max-width: 520px){
-      .wrap{padding:16px 14px 72px}
-      h1{font-size:36px}
-      .grid4{grid-template-columns:1fr}
-      .heroActions{gap:10px}
-      .heroActions .btn{width:100%}
-      .topbarInner{padding:12px 14px}
-      .mobileMenuInner{padding:12px 14px 16px}
+      .wrap{
+        padding:16px 14px 78px;
+      }
+      .floatingLogo{
+        top:10px;
+        left:10px;
+      }
+      .floatingLogo .mark{
+        width:50vw;
+        max-width:240px;
+        height:auto;
+        aspect-ratio:176 / 44;
+      }
+      .topbarInner{
+        padding:12px 14px;
+        flex-wrap:nowrap;
+        gap:10px;
+      }
+      .mobileMenuInner{
+        padding:12px 14px 16px;
+      }
+      .ctaCenter{
+        flex:1;
+        display:flex;
+        justify-content:center;
+      }
+      .ctaCenter.btn{
+        padding:10px 12px;
+        font-size:12px;
+      }
+      .navWrap{
+        margin-left:0;
+        flex:0 0 auto;
+      }
+      .hamburger{
+        flex:0 0 auto;
+      }
+      h1{
+        font-size:36px;
+      }
+      .grid4{
+        grid-template-columns:1fr;
+      }
+      .heroActions .btn{
+        width:100%;
+      }
+      .statGrid{
+        grid-template-columns:1fr;
+      }
     }
   </style>
-
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="O nama | Sindikat — Performance &amp; Activation Studio (Podgorica)" />
-  <meta name="twitter:description" content="Sindikat je Performance &amp; Activation Studio iz Podgorice. Kampanje, sadržaj i aktivacije koje imaju jasan cilj i mjerljiv rezultat — online i na terenu." />
-  <meta name="twitter:image" content="https://www.sindikatstudio83.me/studio83logo.png" />
-
-  <script type="application/ld+json" data-schema="org">
-{
-  "@context": "https://schema.org",
-  "@type": "Organization",
-  "@id": "https://www.sindikatstudio83.me/#org",
-  "name": "Sindikat Studio 83",
-  "url": "https://www.sindikatstudio83.me/",
-  "logo": {
-    "@type": "ImageObject",
-    "url": "https://www.sindikatstudio83.me/studio83logo.png"
-  }
-}
-</script>
-
-  <script type="application/ld+json" data-schema="localbusiness">
-{
-  "@context": "https://schema.org",
-  "@type": "LocalBusiness",
-  "@id": "https://www.sindikatstudio83.me/#localbusiness",
-  "name": "Sindikat Studio 83",
-  "url": "https://www.sindikatstudio83.me/",
-  "image": "https://www.sindikatstudio83.me/studio83logo.png",
-  "address": {
-    "@type": "PostalAddress",
-    "addressLocality": "Podgorica",
-    "addressRegion": "Crna Gora",
-    "addressCountry": "ME"
-  }
-}
-</script>
 </head>
 
 <body>
-  <!-- ✅ FLOATING LOGO (always visible, top-left) -->
+  <!-- Floating Logo -->
   <a class="floatingLogo" href="/sr-me/pocetna" aria-label="Sindikat Studio 83 — Početna">
     <div class="mark" aria-hidden="true">
       <img class="markImg" src="/studio83logo.png" alt="">
@@ -839,26 +998,25 @@
   </a>
 
   <!-- Google Tag Manager (noscript) -->
-  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PBXVW3GK"
-  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <noscript>
+    <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PBXVW3GK"
+      height="0" width="0" style="display:none;visibility:hidden"></iframe>
+  </noscript>
   <!-- End Google Tag Manager (noscript) -->
 
-  <!-- Background video -->
-  <!-- (ostavljeno kako je bilo - prazno) -->
-
-  <!-- Background glow -->
   <div class="heroBg" id="heroBg" aria-hidden="true"></div>
-
   <div class="blob" id="blob1" aria-hidden="true"></div>
   <div class="blob b2" id="blob2" aria-hidden="true"></div>
 
-  <!-- Topbar -->
+  <!-- Bottom bar -->
   <header class="topbar">
     <div class="topbarInner reveal">
-      <!-- ✅ removed logo from bar (now floating) -->
       <div class="brand"></div>
 
-      <a class="btn primary ctaCenter" href="/sr-me/kontakt"><span class="dot"></span>Kontaktiraj nas</a>
+      <a class="btn primary ctaCenter" href="/sr-me/kontakt">
+        <span class="dot"></span>
+        Kontaktiraj nas
+      </a>
 
       <div class="navWrap">
         <nav aria-label="Primary">
@@ -869,10 +1027,7 @@
           <a href="/sr-me/poslovi">Poslovi</a>
         </nav>
 
-        <button class="hamburger" id="hamburger"
-          aria-label="Open menu"
-          aria-expanded="false"
-          aria-controls="mobileMenu">
+        <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
           <span></span><span></span><span></span>
         </button>
       </div>
@@ -894,10 +1049,11 @@
     <section class="hero" id="about">
       <div class="heroGrid">
         <div>
-          <!-- ✅ fix: removed broken </span> -->
-          <div class="kicker reveal"><span class="dot"></span> Performance & Activation Studio</div>
+          <div class="kicker reveal">
+            <span class="dot"></span>
+            Performance & Activation Studio
+          </div>
 
-          <!-- Single H1 -->
           <h1 class="heroTitle reveal" id="heroTitle">O nama</h1>
 
           <p class="sub reveal">
@@ -913,95 +1069,57 @@
           <div class="miniRow reveal">
             <span>Cilj → sistem → rezultat</span>
             <span>Scope je zaključan</span>
-            <span>Rezultat > estetika</span>
+            <span>Rezultat &gt; estetika</span>
           </div>
         </div>
 
         <aside class="heroCard reveal" id="heroCard" aria-label="Studio snapshot">
-  <div>
-    <div class="label">
-      <span>Studio snapshot</span>
-      <span style="color:rgba(255,176,0,.9)">Live</span>
-    </div>
+          <div>
+            <div class="label">
+              <span>Studio snapshot</span>
+              <span style="color:rgba(255,176,0,.9)">Live</span>
+            </div>
 
-    <div class="statGrid">
+            <div class="statGrid">
+              <div class="stat">
+                <div class="num"><span class="counter" data-value="160">0</span>+</div>
+                <div class="cap">realizovanih događaja</div>
+                <div class="cap">Promotivni, prodajni i brend događaji u klubovima, hotelima i event prostorima.</div>
+              </div>
 
-      <div class="stat">
-        <div class="num"><span class="counter" data-value="160">0</span>+</div>
-        <div class="cap">realizovanih događaja</div>
-        <div class="cap">Promotivni, prodajni i brend događaji u klubovima, hotelima i event prostorima.</div>
-      </div>
+              <div class="stat">
+                <div class="num"><span class="counter" data-value="500">0</span>+</div>
+                <div class="cap">kreiranih digitalnih kampanja</div>
+                <div class="cap">Meta i Google kampanje za lokalne biznise i brendove.</div>
+              </div>
 
-      <div class="stat">
-        <div class="num"><span class="counter" data-value="500">0</span>+</div>
-        <div class="cap">kreiranih digitalnih kampanja</div>
-        <div class="cap">Meta i Google kampanje za lokalne biznise i brendove.</div>
-      </div>
+              <div class="stat">
+                <div class="num"><span class="counter" data-value="20">0</span>+</div>
+                <div class="cap">klijenata</div>
+                <div class="cap">Ugostiteljstvo, prodaja, turizam i event industrija.</div>
+              </div>
 
-      <div class="stat">
-        <div class="num"><span class="counter" data-value="20">0</span>+</div>
-        <div class="cap">klijenata</div>
-        <div class="cap">Ugostiteljstvo, prodaja, turizam i event industrija.</div>
-      </div>
+              <div class="stat">
+                <div class="num"><span class="counter" data-value="48">0</span>h</div>
+                <div class="cap">vrijeme do prve kampanje</div>
+                <div class="cap">Od dogovora i plana do pokretanja kampanje.</div>
+              </div>
+            </div>
 
-      <div class="stat">
-        <div class="num"><span class="counter" data-value="48">0</span>h</div>
-        <div class="cap">vrijeme do prve kampanje</div>
-        <div class="cap">Od dogovora i plana do pokretanja kampanje.</div>
-      </div>
-
-    </div>
-
-    <div class="progressRail" aria-label="Delivery progress">
-      <div class="progressFill" id="progressFill"></div>
-    </div>
-  </div>
-
-  <div class="foot">
-    <span>Podgorica • Crna Gora</span>
-    <span>Kampanje • Sadržaj • Aktivacije</span>
-  </div>
-</aside>
-
-    <!-- POSITIONING -->
-    <section class="section" id="positioning" aria-label="Pozicioniranje">
-      <div class="headRow">
-        <h2 class="h2 reveal">Šta jesmo (i šta nijesmo)</h2>
-        <div class="desc reveal">
-          Ako tražiš još jednu “full service” agenciju — nijesmo to. Ako tražiš tim koji preuzima odgovornost za rezultat — vjerovatno jesmo.
-        </div>
-      </div>
-
-      <div class="grid2">
-        <div class="card reveal">
-          <div class="top"><h3>Šta jesmo</h3><span class="tag">fokus</span></div>
-          <ul class="bullets">
-            <li>Studio za performans i aktivacije</li>
-            <li>Sistem: digital + sadržaj + teren</li>
-            <li>Jasan cilj, KPI i mjerljiv ishod</li>
-            <li>Brz delivery, bez improvizacije</li>
-          </ul>
-          <div class="pillRow">
-            <span>Meta/Google</span><span>Content</span><span>SEO osnove</span><span>Activation</span>
+            <div class="progressRail" aria-label="Delivery progress">
+              <div class="progressFill" id="progressFill"></div>
+            </div>
           </div>
-        </div>
 
-        <div class="card reveal">
-          <div class="top"><h3>Šta nijesmo</h3><span class="tag">filter</span></div>
-          <ul class="bullets">
-            <li>Event-only agencija</li>
-            <li>Social media “objave radi objava”</li>
-            <li>Produkcija bez plana distribucije</li>
-            <li>Full-service bez fokusa</li>
-            <li>Tim koji obećava sve svakome</li>
-          </ul>
-          <p style="margin-top:12px; color:rgba(255,255,255,.72); font-size:13px; line-height:1.65">
-            Ako tražiš količinu usluga — ima boljih opcija. Ako tražiš smisao i sistem — tu smo.
-          </p>
-        </div>
+          <div class="foot">
+            <span>Podgorica • Crna Gora</span>
+            <span>Kampanje • Sadržaj • Aktivacije</span>
+          </div>
+        </aside>
       </div>
     </section>
 
+ 
     <!-- ORIGIN -->
     <section class="section" id="origin" aria-label="Kako je nastao Sindikat">
       <div class="headRow">
@@ -1014,24 +1132,29 @@
       <div class="card mediaCard reveal">
         <div class="mediaGrid">
           <div class="mediaText">
-            <div class="top"><h3>Od eventa do sistema</h3><span class="tag">evolucija</span></div>
-            <p style="margin-top:10px; color:rgba(255,255,255,.72); font-size:13px; line-height:1.65">
+            <div class="top">
+              <h3>Od eventa do sistema</h3>
+              <span class="tag">evolucija</span>
+            </div>
+
+            <p>
               Sindikat je počeo kao tim koji organizuje događaje: produkcija, barovi, DJ-evi, logistika, ljudi na terenu.
               Ali vrlo brzo smo vidjeli problem: događaji bez kampanje ostaju prazni, a kampanje bez dobrog sadržaja i terena ostaju slabe.
             </p>
 
             <div class="divider"></div>
 
-            <p style="margin:0; color:rgba(255,255,255,.78); font-size:13px; line-height:1.65">
+            <p style="margin:0; color:rgba(255,255,255,.78); font-size:13px; line-height:1.7;">
               Zato smo počeli da povezujemo stvari:
             </p>
+
             <ul class="bullets" style="margin-top:10px">
               <li>event kao pojačivač pažnje</li>
               <li>sadržaj kao gorivo za kampanje</li>
               <li>kampanju kao sistem, ne kao trošak</li>
             </ul>
 
-            <p style="margin-top:12px; color:rgba(255,255,255,.72); font-size:13px; line-height:1.65">
+            <p style="margin-top:12px;">
               Tako je nastao Sindikat kakav je danas — studio koji gleda širu sliku i radi samo ono što ima smisla.
             </p>
           </div>
@@ -1059,19 +1182,34 @@
 
       <div class="grid4">
         <div class="card reveal">
-          <div class="top"><h3>Performance</h3><span class="tag">Meta/Google</span></div>
+          <div class="top">
+            <h3>Performance</h3>
+            <span class="tag">Meta/Google</span>
+          </div>
           <p>Postavljamo i vodimo kampanje koje dovode posjete, leadove ili prodaju — mjerljivo.</p>
         </div>
+
         <div class="card reveal">
-          <div class="top"><h3>Sadržaj za ads</h3><span class="tag">foto/video</span></div>
+          <div class="top">
+            <h3>Sadržaj za ads</h3>
+            <span class="tag">foto/video</span>
+          </div>
           <p>Hook → poruka → CTA. Foto, video, UGC i cut-down formati spremni za distribuciju.</p>
         </div>
+
         <div class="card reveal">
-          <div class="top"><h3>SEO osnove</h3><span class="tag">landing</span></div>
+          <div class="top">
+            <h3>SEO osnove</h3>
+            <span class="tag">landing</span>
+          </div>
           <p>On-page osnove, struktura landing stranica i sadržajni plan koji podržava kampanje.</p>
         </div>
+
         <div class="card reveal">
-          <div class="top"><h3>Aktivacije / eventi</h3><span class="tag">teren</span></div>
+          <div class="top">
+            <h3>Aktivacije / eventi</h3>
+            <span class="tag">teren</span>
+          </div>
           <p>Radimo teren kad ima ulogu u kampanji: digital → teren → digital, bez praznog “vibe-a”.</p>
         </div>
       </div>
@@ -1116,7 +1254,7 @@
 
         <div class="prose reveal">
           <div class="proseInner">
-            <h3>4) Rezultat > estetika</h3>
+            <h3>4) Rezultat &gt; estetika</h3>
             <p class="lead">
               Lijep dizajn je bonus. Konverzija, pažnja i učinak su obavezni.
             </p>
@@ -1136,7 +1274,10 @@
 
       <div class="grid2">
         <div class="card reveal">
-          <div class="top"><h3>Radimo sa</h3><span class="tag">fit</span></div>
+          <div class="top">
+            <h3>Radimo sa</h3>
+            <span class="tag">fit</span>
+          </div>
           <ul class="bullets">
             <li>brendovima koji imaju jasan cilj</li>
             <li>firmama koje razumiju budžet i rok</li>
@@ -1146,7 +1287,10 @@
         </div>
 
         <div class="card reveal">
-          <div class="top"><h3>Najčešće</h3><span class="tag">tipovi</span></div>
+          <div class="top">
+            <h3>Najčešće</h3>
+            <span class="tag">tipovi</span>
+          </div>
           <div class="pillRow">
             <span>launch kampanje</span>
             <span>retail i ugostiteljstvo</span>
@@ -1154,7 +1298,7 @@
             <span>brend aktivacije</span>
             <span>događaji sa jasnom svrhom</span>
           </div>
-          <p style="margin-top:12px; color:rgba(255,255,255,.72); font-size:13px; line-height:1.65">
+          <p style="margin-top:12px;">
             Ne nudimo sve svima. Biramo alate prema cilju — ne obrnuto.
           </p>
         </div>
@@ -1201,25 +1345,32 @@
 
       <div class="grid2">
         <div class="card reveal">
-          <div class="top"><h3>Ponekad to znači</h3><span class="tag">iskreno</span></div>
+          <div class="top">
+            <h3>Ponekad to znači</h3>
+            <span class="tag">iskreno</span>
+          </div>
           <ul class="bullets">
             <li>da ti kažemo da ne radiš event</li>
             <li>da ne trošiš budžet na pogrešan kanal</li>
             <li>da prvo središ ponudu, pa tek onda kampanju</li>
           </ul>
-          <p style="margin-top:12px; color:rgba(255,255,255,.72); font-size:13px; line-height:1.65">
-            To je dio posla.
-          </p>
+          <p style="margin-top:12px;">To je dio posla.</p>
         </div>
 
         <div class="card reveal">
-          <div class="top"><h3>Gdje radimo</h3><span class="tag">region</span></div>
+          <div class="top">
+            <h3>Gdje radimo</h3>
+            <span class="tag">region</span>
+          </div>
           <p>
             Sjedište nam je u Podgorici, ali radimo projekte širom Crne Gore i regiona.
             Digital nema granice — teren ima logistiku, ali i nju znamo.
           </p>
           <div class="pillRow" style="margin-top:12px">
-            <span>Podgorica</span><span>Crna Gora</span><span>Region</span><span>Online + teren</span>
+            <span>Podgorica</span>
+            <span>Crna Gora</span>
+            <span>Region</span>
+            <span>Online + teren</span>
           </div>
         </div>
       </div>
@@ -1236,7 +1387,7 @@
     const yearEl = document.getElementById('year');
     if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-    // Mobile menu toggle (proper state + nice UX)
+    // Mobile menu
     const hamburger = document.getElementById('hamburger');
     const mobileMenu = document.getElementById('mobileMenu');
 
@@ -1249,8 +1400,9 @@
     };
 
     if (hamburger && mobileMenu){
-      hamburger.addEventListener('click', ()=>{
+      hamburger.addEventListener('click', () => {
         const isOpen = mobileMenu.style.display === 'block';
+
         if (isOpen) {
           anime({
             targets: mobileMenu,
@@ -1273,23 +1425,24 @@
         }
       });
 
-      document.querySelectorAll('#mobileMenu a').forEach(a=>{
+      document.querySelectorAll('#mobileMenu a').forEach(a => {
         a.addEventListener('click', closeMobileMenu);
       });
 
-      document.addEventListener('click', (e)=>{
+      document.addEventListener('click', (e) => {
         if (mobileMenu.style.display !== 'block') return;
         const inside = mobileMenu.contains(e.target) || hamburger.contains(e.target);
         if (!inside) closeMobileMenu();
       });
     }
 
-    // Hero title split into words (safe)
+    // Hero title split
     const titleEl = document.getElementById('heroTitle');
     if (titleEl) {
       const raw = titleEl.textContent.trim();
       const words = raw.split(/\s+/);
       titleEl.textContent = '';
+
       words.forEach((w, i) => {
         const span = document.createElement('span');
         span.textContent = w;
@@ -1301,10 +1454,11 @@
 
     // Reveal observer
     const revealEls = document.querySelectorAll('.reveal');
-    const io = new IntersectionObserver((entries)=>{
-      entries.forEach(entry=>{
-        if(!entry.isIntersecting) return;
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
         const el = entry.target;
+
         anime({
           targets: el,
           opacity: [0,1],
@@ -1312,13 +1466,15 @@
           duration: 820,
           easing: 'easeOutExpo'
         });
+
         io.unobserve(el);
       });
-    }, {threshold: 0.14});
-    revealEls.forEach(el=>io.observe(el));
+    }, { threshold: 0.14 });
 
-    // Hero title word stagger + progress
-    window.addEventListener('load', ()=>{
+    revealEls.forEach(el => io.observe(el));
+
+    // Load anims
+    window.addEventListener('load', () => {
       anime({
         targets: '#heroTitle span',
         opacity: [0,1],
@@ -1345,16 +1501,16 @@
       });
     });
 
-    // Counters start when hero card is visible
+    // Counters
     const counters = document.querySelectorAll('.counter');
     let countersStarted = false;
 
-    const counterIO = new IntersectionObserver((entries)=>{
-      entries.forEach(entry=>{
-        if(!entry.isIntersecting || countersStarted) return;
+    const counterIO = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting || countersStarted) return;
         countersStarted = true;
 
-        counters.forEach((c)=>{
+        counters.forEach((c) => {
           const end = Number(c.dataset.value || 0);
           anime({
             targets: c,
@@ -1367,27 +1523,31 @@
 
         counterIO.disconnect();
       });
-    }, {threshold: 0.25});
+    }, { threshold: 0.25 });
 
     const heroCard = document.getElementById('heroCard');
-    if(heroCard) counterIO.observe(heroCard);
+    if (heroCard) counterIO.observe(heroCard);
 
-    // Blobs drift
+    // Blobs
     const heroBg = document.getElementById('heroBg');
     const b1 = document.getElementById('blob1');
     const b2 = document.getElementById('blob2');
 
     const setBlobsBase = () => {
-      const w = window.innerWidth, h = window.innerHeight;
-      if(b1){
-        b1.style.left = Math.max(12, w*0.06) + 'px';
-        b1.style.top  = Math.max(12, h*0.16) + 'px';
+      const w = window.innerWidth;
+      const h = window.innerHeight;
+
+      if (b1){
+        b1.style.left = Math.max(12, w * 0.06) + 'px';
+        b1.style.top  = Math.max(12, h * 0.16) + 'px';
       }
-      if(b2){
-        b2.style.left = Math.max(12, w*0.60) + 'px';
-        b2.style.top  = Math.max(12, h*0.08) + 'px';
+
+      if (b2){
+        b2.style.left = Math.max(12, w * 0.60) + 'px';
+        b2.style.top  = Math.max(12, h * 0.08) + 'px';
       }
     };
+
     setBlobsBase();
     window.addEventListener('resize', setBlobsBase);
 
@@ -1399,6 +1559,7 @@
       easing: 'easeInOutSine',
       loop: true
     });
+
     anime({
       targets: '#blob2',
       translateX: [0, -14, 10, 0],
@@ -1408,25 +1569,26 @@
       loop: true
     });
 
-    // scroll parallax (small)
+    // Parallax
     let ticking = false;
-    window.addEventListener('scroll', ()=>{
-      if(ticking) return;
+    window.addEventListener('scroll', () => {
+      if (ticking) return;
       ticking = true;
-      requestAnimationFrame(()=>{
+
+      requestAnimationFrame(() => {
         const y = window.scrollY || 0;
-        if(heroBg) heroBg.style.transform = `translateY(${y * 0.06}px)`;
+        if (heroBg) heroBg.style.transform = `translateY(${y * 0.06}px)`;
         ticking = false;
       });
-    }, {passive:true});
+    }, { passive:true });
 
-    // Subtle card tilt on desktop only
+    // Card tilt desktop only
     const tiltCards = document.querySelectorAll('.card');
     const canTilt = window.matchMedia('(hover:hover) and (pointer:fine)').matches;
 
-    if(canTilt){
-      tiltCards.forEach(card=>{
-        card.addEventListener('mousemove', (e)=>{
+    if (canTilt){
+      tiltCards.forEach(card => {
+        card.addEventListener('mousemove', (e) => {
           const r = card.getBoundingClientRect();
           const px = (e.clientX - r.left) / r.width;
           const py = (e.clientY - r.top) / r.height;
@@ -1434,7 +1596,8 @@
           const rotX = (0.5 - py) * 3.8;
           card.style.transform = `translateY(-3px) rotateX(${rotX}deg) rotateY(${rotY}deg)`;
         });
-        card.addEventListener('mouseleave', ()=>{
+
+        card.addEventListener('mouseleave', () => {
           card.style.transform = '';
         });
       });
