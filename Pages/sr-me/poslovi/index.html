@@ -694,6 +694,28 @@
         0 0 0 2px rgba(255,59,111,.08),
         0 0 42px rgba(255,59,111,.16);
     }
+    .openApplyClose{
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 34px;
+  height: 34px;
+  border-radius: 999px;
+  border: 2px solid rgba(255,255,255,.14);
+  background: rgba(8,10,16,.7);
+  color: rgba(255,255,255,.88);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 3;
+  font-size: 14px;
+  line-height: 1;
+}
+
+.openApplyClose:hover{
+  border-color: rgba(255,59,111,.5);
+}
 
     .openApplyFloatInner{
       display:grid;
@@ -848,8 +870,10 @@
   <div id="mobileOverlay" aria-hidden="true"></div>
 
   <!-- FLOATING OPEN APPLY -->
-  <aside class="openApplyFloat" id="openApplyFloat">
+<aside class="openApplyFloat" id="openApplyFloat">
   <div class="openApplyFloatBox">
+    <button class="openApplyClose" id="openApplyClose" type="button" aria-label="Zatvori">✕</button>
+
     <div class="openApplyFloatInner">
       <div class="badge" style="width:max-content;">Otvorena pozicija</div>
       <h3 style="margin:10px 0 8px; font-size:18px; line-height:1.2;">Prijavi se za buduće angažmane</h3>
@@ -864,7 +888,6 @@
     </div>
   </div>
 </aside>
-  </aside>
 
   <header class="topbar">
     <div class="topbarInner">
@@ -1778,13 +1801,18 @@
         anime({ targets:'#blob2', translateX:[0,-14,10,0], translateY:[0,14,-10,0], duration:11000, easing:'easeInOutSine', loop:true });
       }
 
-      el("openApplyFloatingBtn")?.addEventListener("click", ()=>{
+            el("openApplyFloatingBtn")?.addEventListener("click", ()=>{
         openApply({
           id: "open-application",
           title: "Otvorena pozicija",
           company: "Sindikat",
           location: "Crna Gora"
         });
+      });
+
+      el("openApplyClose")?.addEventListener("click", ()=>{
+        const banner = el("openApplyFloat");
+        if (banner) banner.style.display = "none";
       });
 
       visibleCount = PAGE_SIZE;
