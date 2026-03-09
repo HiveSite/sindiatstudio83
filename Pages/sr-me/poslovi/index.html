@@ -700,59 +700,132 @@
     }
 
     @media (max-width: 980px){
-      .gridJobs{grid-template-columns: 1fr;}
-      .searchGrid{grid-template-columns: 1fr; }
-      nav{display:none}
-      .hamburger{display:flex}
-      .wrap{padding:18px 14px 120px}
-      .heroTitle{font-size:38px}
-      .formGrid{grid-template-columns: 1fr;}
-      .formGrid .span2{grid-column: auto;}
-      body{ padding-bottom: 108px; }
+  .gridJobs{grid-template-columns: 1fr;}
+  .searchGrid{grid-template-columns: 1fr; }
+  nav{display:none}
+  .hamburger{display:flex}
+  .wrap{padding:18px 14px 120px}
+  .heroTitle{font-size:38px}
+  .formGrid{grid-template-columns: 1fr;}
+  .formGrid .span2{grid-column: auto;}
+  body{ padding-bottom: 108px; }
 
-      .gridJobs aside.card{position: relative !important; top: auto !important;}
-      .card{ padding: 14px; }
-      .pager{flex-direction: column; align-items: stretch; gap: 10px;}
-      .pager .btn{ width: 100%; justify-content:center; }
+  .gridJobs aside.card{position: relative !important; top: auto !important;}
+  .card{ padding: 14px; }
+  .pager{flex-direction: column; align-items: stretch; gap: 10px;}
+  .pager .btn{ width: 100%; justify-content:center; }
 
-      .jobMedia{
-        grid-template-columns: 64px 1fr;
-        gap:10px;
-        align-items:center;
-      }
+  .jobMedia{
+    grid-template-columns: 64px 1fr;
+    gap:10px;
+    align-items:center;
+  }
 
-      .jobThumb{
-        width:64px;
-        aspect-ratio: 1 / 1;
-        height:auto;
-        border-radius:10px;
-        border-width:2px;
-      }
+  .jobThumb{
+    width:64px;
+    aspect-ratio: 1 / 1;
+    height:auto;
+    border-radius:10px;
+    border-width:2px;
+  }
 
-      .jobThumb img{
-        transform:none;
-      }
+  .jobThumb img{
+    transform:none;
+  }
 
-      .openApplyFloat{
-        position: static;
-        width: 100%;
-        max-width: 100%;
-        margin: 0 0 16px 0;
-        padding: 0 14px;
-      }
+  .openApplyFloat{
+    position: fixed;
+    right: 14px;
+    bottom: 92px;
+    top: auto;
+    width: 64px;
+    height: 64px;
+    max-width: none;
+    z-index: 120;
+    margin: 0;
+    padding: 0;
+  }
 
-      .openApplyFloatBox{
-        padding: 14px;
-      }
-    }
+  .openApplyFloatBox{
+    width: 64px;
+    height: 64px;
+    border-radius: 999px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid rgba(255,59,111,.45);
+    background: linear-gradient(180deg, rgba(18,10,30,.98), rgba(8,8,19,.98));
+    box-shadow:
+      0 14px 34px rgba(0,0,0,.42),
+      0 0 0 2px rgba(255,59,111,.08),
+      0 0 28px rgba(255,59,111,.14);
+    overflow: hidden;
+  }
 
-    @media (prefers-reduced-motion: reduce){
-      .card, .btn, nav a{transition:none !important;}
-      .card:hover, .btn:hover{transform:none !important;}
-      .blob{display:none;}
-    }
+  .openApplyFloatInner{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+  }
+
+  .openApplyFloatInner .badge,
+  .openApplyFloatInner h3,
+  .openApplyFloatInner p{
+    display: none !important;
+  }
+
+  .openApplyFloatInner > div:last-child{
+    margin: 0 !important;
+    width: 100%;
+    height: 100%;
+    display: flex;
+  }
+
+  #openApplyFloatingBtn{
+    width: 100%;
+    height: 100%;
+    min-width: 0;
+    border-radius: 999px;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    box-shadow: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+    font-size: 0;
+  }
+
+  #openApplyFloatingBtn .dot{
+    display: none;
+  }
+
+  #openApplyFloatingBtn::before{
+    content: "🔔";
+    font-size: 28px;
+    line-height: 1;
+    color: #fff;
+    display: block;
+    transform: translateY(-1px);
+  }
+
+  #openApplyFloatingBtn span:not(.dot){
+    display: none !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce){
+  .card, .btn, nav a{transition:none !important;}
+  .card:hover, .btn:hover{transform:none !important;}
+  .blob{display:none;}
+}
   </style>
-</head>
+</head> 
 
 <body>
   <!-- Google Tag Manager (noscript) -->
@@ -775,20 +848,21 @@
 
   <!-- FLOATING OPEN APPLY -->
   <aside class="openApplyFloat" id="openApplyFloat">
-    <div class="openApplyFloatBox">
-      <div class="openApplyFloatInner">
-        <div class="badge" style="width:max-content;">Otvorena pozicija</div>
-        <h3 style="margin:10px 0 8px; font-size:18px; line-height:1.2;">Prijavi se za buduće angažmane</h3>
-        <p style="margin:0; color:rgba(255,255,255,.74); font-size:13px; line-height:1.65;">
-          Nemaš odgovarajući oglas trenutno? Pošalji otvorenu prijavu i kontaktiraćemo te kada se pojavi prilika koja odgovara tvom profilu.
-        </p>
-        <div style="margin-top:12px; display:flex; gap:10px; flex-wrap:wrap;">
-          <button class="btn primary" id="openApplyFloatingBtn" type="button">
-            <span class="dot"></span> Pošalji prijavu
-          </button>
-        </div>
+  <div class="openApplyFloatBox">
+    <div class="openApplyFloatInner">
+      <div class="badge" style="width:max-content;">Otvorena pozicija</div>
+      <h3 style="margin:10px 0 8px; font-size:18px; line-height:1.2;">Prijavi se za buduće angažmane</h3>
+      <p style="margin:0; color:rgba(255,255,255,.74); font-size:13px; line-height:1.65;">
+        Nemaš odgovarajući oglas trenutno? Pošalji otvorenu prijavu i kontaktiraćemo te kada se pojavi prilika koja odgovara tvom profilu.
+      </p>
+      <div style="margin-top:12px; display:flex; gap:10px; flex-wrap:wrap;">
+        <button class="btn primary" id="openApplyFloatingBtn" type="button">
+          <span class="dot"></span> Pošalji prijavu
+        </button>
       </div>
     </div>
+  </div>
+</aside>
   </aside>
 
   <header class="topbar">
