@@ -4,7 +4,7 @@
   <!-- Google Tag Manager -->
   <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
   new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
   })(window,document,'script','dataLayer','GTM-PBXVW3GK');</script>
   <!-- End Google Tag Manager -->
@@ -168,7 +168,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       opacity:.45;
     }
 
-    /* ✅ FLOATING LOGO */
     .floatingLogo{
       position:fixed;
       top:14px;
@@ -211,7 +210,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       .floatingLogo{ top:10px; left:10px; }
     }
 
-    /* ✅ ORIGINAL BOTTOM TOPBAR + HAMBURGER + MOBILE MENU */
     .topbar{
       position:fixed;
       bottom:0; left:0; right:0;
@@ -333,11 +331,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       color:var(--text);
     }
 
-    /* mobile overlay (kept invisible by default) */
     #mobileOverlay{
       position:fixed;
       inset:0;
-      z-index:49; /* below topbar (50), above page */
+      z-index:49;
       background: rgba(0,0,0,.55);
       opacity:0;
       pointer-events:none;
@@ -432,7 +429,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       flex:0 0 auto;
     }
 
-    /* ✅ SAME TILE STYLE, NOW USED FOR CATEGORY FILTERS */
     #catFilters{
       display:grid;
       grid-template-columns: repeat(2, 1fr);
@@ -487,7 +483,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       white-space:normal;
     }
 
-    /* JOB CARD */
     .jobCard{ cursor:pointer; }
     .jobCard:hover,
     .jobCard:focus-within{
@@ -529,8 +524,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
     .jobThumb{
       width:96px;
-      aspect-ratio: 1 / 1;   /* ✅ uvijek kvadrat */
-      height:auto;           /* ✅ ne forsira pravougaonik */
+      aspect-ratio: 1 / 1;
+      height:auto;
       border-radius:12px;
       overflow:hidden;
       border:3px solid rgba(255,255,255,.12);
@@ -542,7 +537,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     .jobThumb img{
       width:100%;
       height:100%;
-      object-fit:cover;      /* ✅ crop, bez razvlačenja */
+      object-fit:cover;
       object-position:center;
       opacity:.92;
       filter:saturate(1.05) contrast(1.12);
@@ -584,7 +579,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       color: inherit;
     }
 
-    /* ✅ kept original style, but now used for "Load more" */
     .pager{
       display:flex;
       align-items:center;
@@ -677,6 +671,34 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     }
     #toast.show{display:block;}
 
+    /* FLOATING OPEN APPLY */
+    .openApplyFloat{
+      position: fixed;
+      top: 96px;
+      right: 18px;
+      width: 320px;
+      max-width: calc(100vw - 36px);
+      z-index: 110;
+      display: block;
+    }
+
+    .openApplyFloatBox{
+      border: 3px solid rgba(255,255,255,.14);
+      border-radius: 14px;
+      padding: 18px;
+      background: linear-gradient(180deg, rgba(18,10,30,.96), rgba(8,8,19,.96));
+      border-color: rgba(255,59,111,.42);
+      box-shadow:
+        0 22px 75px rgba(0,0,0,.62),
+        0 0 0 2px rgba(255,59,111,.08),
+        0 0 42px rgba(255,59,111,.16);
+    }
+
+    .openApplyFloatInner{
+      display:grid;
+      gap:8px;
+    }
+
     @media (max-width: 980px){
       .gridJobs{grid-template-columns: 1fr;}
       .searchGrid{grid-template-columns: 1fr; }
@@ -693,24 +715,37 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       .pager{flex-direction: column; align-items: stretch; gap: 10px;}
       .pager .btn{ width: 100%; justify-content:center; }
 
-     .jobMedia{
-  grid-template-columns: 64px 1fr;  /* mala slika lijevo, tekst desno */
-  gap:10px;
-  align-items:center;
-}
+      .jobMedia{
+        grid-template-columns: 64px 1fr;
+        gap:10px;
+        align-items:center;
+      }
 
-.jobThumb{
-  width:64px;
-  aspect-ratio: 1 / 1;
-  height:auto;
-  border-radius:10px;
-  border-width:2px;
-}
+      .jobThumb{
+        width:64px;
+        aspect-ratio: 1 / 1;
+        height:auto;
+        border-radius:10px;
+        border-width:2px;
+      }
 
-.jobThumb img{
-  transform:none;
-}
+      .jobThumb img{
+        transform:none;
+      }
+
+      .openApplyFloat{
+        position: static;
+        width: 100%;
+        max-width: 100%;
+        margin: 0 0 16px 0;
+        padding: 0 14px;
+      }
+
+      .openApplyFloatBox{
+        padding: 14px;
+      }
     }
+
     @media (prefers-reduced-motion: reduce){
       .card, .btn, nav a{transition:none !important;}
       .card:hover, .btn:hover{transform:none !important;}
@@ -727,8 +762,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
   <div class="heroBg" id="heroBg" aria-hidden="true"></div>
 
-  <!-- ✅ FLOATING LOGO -->
-  <a class="floatingLogo" href="/sr-me/pocetna" aria-label="Sindikat Studio 83 — Poslovi">
+  <a class="floatingLogo" href="/sr-me/pocetna" aria-label="Sindikat Studio 83 — Početna">
     <div class="logoMark" aria-hidden="true">
       <img class="logoMarkImg" src="/studio83logo.png" alt="">
     </div>
@@ -737,10 +771,26 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   <div class="blob" id="blob1" aria-hidden="true"></div>
   <div class="blob b2" id="blob2" aria-hidden="true"></div>
 
-  <!-- ✅ mobile overlay (original) -->
   <div id="mobileOverlay" aria-hidden="true"></div>
 
-  <!-- ✅ ORIGINAL Topbar (bottom) -->
+  <!-- FLOATING OPEN APPLY -->
+  <aside class="openApplyFloat" id="openApplyFloat">
+    <div class="openApplyFloatBox">
+      <div class="openApplyFloatInner">
+        <div class="badge" style="width:max-content;">Otvorena pozicija</div>
+        <h3 style="margin:10px 0 8px; font-size:18px; line-height:1.2;">Prijavi se za buduće angažmane</h3>
+        <p style="margin:0; color:rgba(255,255,255,.74); font-size:13px; line-height:1.65;">
+          Nemaš odgovarajući oglas trenutno? Pošalji otvorenu prijavu i kontaktiraćemo te kada se pojavi prilika koja odgovara tvom profilu.
+        </p>
+        <div style="margin-top:12px; display:flex; gap:10px; flex-wrap:wrap;">
+          <button class="btn primary" id="openApplyFloatingBtn" type="button">
+            <span class="dot"></span> Pošalji prijavu
+          </button>
+        </div>
+      </div>
+    </div>
+  </aside>
+
   <header class="topbar">
     <div class="topbarInner">
       <a class="btn primary ctaCenter" href="/sr-me/kontakt"><span class="dot"></span>Kontaktiraj nas</a>
@@ -806,7 +856,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             <span class="badge">Scope</span>
           </div>
 
-          <!-- ✅ OVDJE SU SAD KATEGORIJE (Jobs_Live.category) -->
           <div class="field">
             <label>Kategorije (category)</label>
             <div id="catFilters"></div>
@@ -831,7 +880,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         <div class="grid" style="gap:14px">
           <div id="jobList" class="grid" style="gap:14px"></div>
 
-          <!-- ✅ Load more -->
           <div class="pager">
             <div id="page"></div>
             <button id="loadMore" class="btn primary" type="button"><span class="dot"></span> Učitaj još</button>
@@ -848,7 +896,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
   <div id="toast" role="status" aria-live="polite"></div>
 
-  <!-- Details modal -->
   <div id="detailsModal" class="modal-bg" role="dialog" aria-modal="true" aria-label="Detalji oglasa" aria-hidden="true">
     <div class="modal">
       <div class="modalHead">
@@ -859,7 +906,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     </div>
   </div>
 
-  <!-- Post modal -->
   <div id="postJobModal" class="modal-bg" role="dialog" aria-modal="true" aria-label="Pošalji oglas" aria-hidden="true">
     <div class="modal">
       <div class="modalHead">
@@ -941,7 +987,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     </div>
   </div>
 
-  <!-- Apply modal -->
   <div id="applyModal" class="modal-bg" role="dialog" aria-modal="true" aria-label="Prijava na posao" aria-hidden="true">
     <div class="modal">
       <div class="modalHead">
@@ -951,7 +996,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
       <div class="modalBody">
         <form id="applyForm" class="formGrid">
-          <!-- hidden job meta -->
           <input type="hidden" name="jobId" />
           <input type="hidden" name="jobTitle" />
 
@@ -991,7 +1035,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
   <script>
     window.addEventListener("DOMContentLoaded", () => {
-      // ✅ TVOJ WEB APP URL (CMS)
       const WEBAPP_URL = "https://script.google.com/macros/s/AKfycbwSwvILrfKoSaDYrOIegGY3E_4_eokard8yY9lurGfcEL7fQNsPxb5wT0ZRKwJfnC2_/exec";
       const SOURCE_LABEL = "Sindikat Poslovi – website";
 
@@ -1048,6 +1091,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           .trim()
           .toLowerCase();
       }
+
       function isEmptyOrTbd(v){
         const s = normText(v);
         if (!s) return true;
@@ -1057,13 +1101,13 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         ]);
         return blacklist.has(s);
       }
+
       function cleanList(arr){
         return (arr || [])
           .map(x => String(x ?? "").trim())
           .filter(x => x && !isEmptyOrTbd(x));
       }
 
-      // ✅ ORIGINAL mobile menu behavior
       const mobileBtn = el("hamburger");
       const mobileMenu = el("mobileMenu");
       const mobileOverlay = el("mobileOverlay");
@@ -1138,26 +1182,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         return [s];
       }
 
-      // ✅ static job
-      const staticAlways = {
-        id:"static_team",
-        title:"Prijava za Sindikat ekipu (stalno otvoreno)",
-        company:"Sindikat",
-        location:"Crna Gora",
-        category:"Event menadžment",
-        type:"Part-time / Sezonski / Freelance",
-        pay:"",
-        payType:"",
-        posted:"2026-01-01",
-        img:"https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1200&q=70",
-        desc:"Ako želiš da budeš dio Sindikat ekipe na eventima, ostavi prijavu — javljamo se kad se otvori najbliži angažman.",
-        responsibilities:["Event angažmani po kalendaru","Timski rad","Profesionalan nastup"],
-        qualifications:["Odgovornost i tačnost","Komunikativnost","Poželjno iskustvo (nije uslov)"],
-        benefits:["Kontinuirane prilike","Brifovi i checkliste","Rad sa brendovima"],
-        apply:"sindikatevents@gmail.com"
-      };
-
-      // ✅ PRELOADED (Hardkod) — tvoji (ne diramo / ne overridujemo)
       const PRELOADED_JOBS = [
         {
           id:"j1",
@@ -1226,33 +1250,14 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           qualifications:["Iskustvo u social media"],
           benefits:["Fleksibilno radno vrijeme"],
           apply:"sindikatevents@gmail.com"
-        },
-        {
-          id:"j5",
-          posted:"2025-12-20",
-          title:"Otvorena prijava",
-          company:"Sindikat",
-          location:"Crna Gora",
-          category:"Sve kategorije",
-          type:"Free application",
-          pay:"",
-          payType:"negotiable",
-          img:"https://images.pexels.com/photos/374079/pexels-photo-374079.jpeg",
-          desc:"Otvorena prijava za buduće prilike.",
-          responsibilities:["Prezentacija profila"],
-          qualifications:["Motivacija","Spremnost za rad"],
-          benefits:["Različite prilike"],
-          apply:"sindikatevents@gmail.com"
         }
       ];
 
-      // ✅ hardkod + staticAlways su UVIJEK gore i NE prepisuju se
-      const HARD_IDS = new Set([...PRELOADED_JOBS.map(j=>String(j.id)), String(staticAlways.id)]);
+      const HARD_IDS = new Set([...PRELOADED_JOBS.map(j=>String(j.id))]);
 
-      // ✅ ui data
-      let allJobsCache = [];     // HARD + LIVE (bez duplikata po id, hard pobjeđuje)
-      const PAGE_SIZE = 25;      // "Učitaj još" dodaje 25
-      let visibleCount = PAGE_SIZE; // prikaz živih + hard? (računamo total render)
+      let allJobsCache = [];
+      const PAGE_SIZE = 25;
+      let visibleCount = PAGE_SIZE;
       let catSet = new Set();
 
       const payText = (j) => {
@@ -1362,11 +1367,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
                 <div class="jobMetaLine" aria-label="Meta informacije oglasa">
                   <span class="pill">${safe(j.category)}</span>
-
                   ${typeLabel ? `<span class="sep">•</span><span class="pill">${safe(typeLabel)}</span>` : ``}
-
                   ${payText(j) ? `<span class="sep">•</span><span class="pill">${payText(j)}</span>` : ``}
-
                   <span class="sep">•</span>
                   <span class="pill">Objavljeno: ${new Date(j.posted).toLocaleDateString()}</span>
                 </div>
@@ -1389,6 +1391,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         m.setAttribute("aria-hidden","false");
         setBodyLock(true);
       }
+
       function hideModal(m){
         if (!m) return;
         m.classList.remove("show");
@@ -1396,7 +1399,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         if (!document.querySelector(".modal-bg.show")) setBodyLock(false);
       }
 
-      // ✅ NEW: openApply
       function openApply(job){
         if (!applyModal) return;
 
@@ -1419,7 +1421,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         const img = j.img ? safe(j.img) : "https://images.unsplash.com/photo-1520975682038-fd29b3c0d409?auto=format&fit=crop&w=1200&q=70";
 
         const descOk = !isEmptyOrTbd(j.desc);
-
         const responsibilities = cleanList(j.responsibilities);
         const qualifications  = cleanList(j.qualifications);
         const benefits        = cleanList(j.benefits);
@@ -1476,18 +1477,14 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
               </div>
             ` : ``}
 
-            <!-- ✅ NEW: Apply CTA -->
             <div style="border-top:3px solid rgba(255,255,255,.08); padding-top:12px; margin-top:10px; display:flex; gap:10px; flex-wrap:wrap;">
               <button class="btn primary" type="button" id="applyBtnInDetails">
                 <span class="dot"></span> Prijavi se
               </button>
-
-          
             </div>
           </div>
         `;
 
-        // ✅ bind apply button
         const applyBtn = el("applyBtnInDetails");
         applyBtn?.addEventListener("click", ()=>{
           hideModal(detailsModal);
@@ -1511,9 +1508,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         });
       }
 
-      // ✅ combine: HARD always first; LIVE appended below; LIVE excludes ids that already exist in HARD
       function buildCombinedList(live){
-        const hardTop = [...PRELOADED_JOBS, staticAlways]
+        const hardTop = [...PRELOADED_JOBS]
           .sort((a,b)=> new Date(b.posted) - new Date(a.posted));
 
         const liveOnly = (live || [])
@@ -1524,7 +1520,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       }
 
       async function initData(){
-        // 1) odmah: samo HARD (instant)
         const hardOnly = buildCombinedList([]).combined;
         allJobsCache = hardOnly;
 
@@ -1532,7 +1527,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         populateCategoryFilters(stats0.categories);
         populatePostFormSelects(stats0.categories, stats0.types);
 
-        // 2) dodaj LIVE ispod (NE DIRAJ hardkodovane)
         fetchLiveJobs().then((live)=>{
           const built = buildCombinedList(live);
           allJobsCache = built.combined;
@@ -1553,7 +1547,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
         if (!allJobsCache.length) await initData();
 
-        // filtriramo cijeli combined list
         const filtered = filterJobs(allJobsCache);
         const total = filtered.length;
 
@@ -1591,21 +1584,21 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         }
       }
 
-      // listeners
       ["q","loc","minPay","maxPay"].forEach((id)=>{
         const node = el(id);
         node && node.addEventListener("input", ()=>{
-          visibleCount = PAGE_SIZE;  // reset na 25
+          visibleCount = PAGE_SIZE;
           render(false);
         });
       });
+
       el("searchBtn")?.addEventListener("click", ()=>{
         visibleCount = PAGE_SIZE;
         render(false);
       });
 
       el("loadMore")?.addEventListener("click", ()=>{
-        visibleCount += PAGE_SIZE; // +25
+        visibleCount += PAGE_SIZE;
         render(true);
       });
 
@@ -1620,7 +1613,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         render(false);
       });
 
-      // modals close
       [detailsModal, postJobModal, applyModal].forEach((m)=>{
         if (!m) return;
         m.addEventListener("click", (e)=>{
@@ -1648,7 +1640,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         });
       }
 
-      // post job submit
       el("postJobForm")?.addEventListener("submit", (e)=>{
         e.preventDefault();
         const fd = new FormData(e.target);
@@ -1682,7 +1673,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         toast("Oglas poslat na odobrenje ✅");
       });
 
-      // ✅ NEW: apply submit
       el("applyForm")?.addEventListener("submit", (e)=>{
         e.preventDefault();
 
@@ -1707,15 +1697,22 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
       el("yearSpan") && (el("yearSpan").textContent = new Date().getFullYear());
 
-      // blobs animation (optional)
       const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       if (!reduced && window.anime){
         anime({ targets:'#blob1', translateX:[0,18,-10,0], translateY:[0,-12,16,0], duration:9000, easing:'easeInOutSine', loop:true });
         anime({ targets:'#blob2', translateX:[0,-14,10,0], translateY:[0,14,-10,0], duration:11000, easing:'easeInOutSine', loop:true });
       }
 
-      // first render
-      visibleCount = PAGE_SIZE; // start: 25 ukupno prikazano (hard + dio live)
+      el("openApplyFloatingBtn")?.addEventListener("click", ()=>{
+        openApply({
+          id: "open-application",
+          title: "Otvorena pozicija",
+          company: "Sindikat",
+          location: "Crna Gora"
+        });
+      });
+
+      visibleCount = PAGE_SIZE;
       render(false);
     });
   </script>
