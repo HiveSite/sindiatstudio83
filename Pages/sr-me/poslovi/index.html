@@ -722,8 +722,18 @@ display:grid;
 gap:8px;
 }
 
-    @media (max-width: 980px){
- @media (max-width: 980px){
+.mobileFiltersToggle{
+display:none;
+margin: 0 0 14px;
+width: 100%;
+justify-content: center;
+}
+
+.filtersPanel{
+display:block;
+}
+
+@media (max-width: 980px){
 .gridJobs{grid-template-columns: 1fr;}
 .searchGrid{grid-template-columns: 1fr; }
 nav{display:none}
@@ -734,7 +744,25 @@ nav{display:none}
 .formGrid .span2{grid-column: auto;}
 body{ padding-bottom: 108px; }
 
-.gridJobs aside.card{position: relative !important; top: auto !important;}
+.mobileFiltersToggle{
+display:inline-flex;
+}
+
+.gridJobs aside.card{
+position: relative !important;
+top: auto !important;
+}
+
+.filtersPanel{
+display:none;
+margin-bottom:14px;
+}
+
+.filtersPanel.open{
+display:block;
+animation: filterDrop .22s var(--ease);
+}
+
 .card{ padding: 14px; }
 .pager{flex-direction: column; align-items: stretch; gap: 10px;}
 .pager .btn{ width: 100%; justify-content:center; }
@@ -787,9 +815,9 @@ box-shadow:
 overflow: hidden;
 }
 
-  .openApplyClose{
-    display: none;
-  }
+.openApplyClose{
+display: none;
+}
 
 .openApplyFloatInner{
 width: 100%;
@@ -844,6 +872,17 @@ transform: translateY(-1px);
 
 #openApplyFloatingBtn span:not(.dot){
 display: none !important;
+}
+}
+
+@keyframes filterDrop{
+from{
+opacity:0;
+transform: translateY(-8px);
+}
+to{
+opacity:1;
+transform: translateY(0);
 }
 }
 
@@ -952,8 +991,18 @@ Part-time i sezonske prilike fokusirane na event industriju (bar, servis, promo,
 <div class="desc"><span id="count"></span> rezultata</div>
 </div>
 
+<button
+  id="mobileFiltersToggle"
+  class="btn mobileFiltersToggle"
+  type="button"
+  aria-expanded="false"
+  aria-controls="filtersPanel"
+>
+  <span class="dot"></span> Filteri
+</button>
+
 <div class="gridJobs">
-<aside class="card" style="position:sticky; top:18px">
+<aside id="filtersPanel" class="card filtersPanel" style="position:sticky; top:18px">
 <div style="display:flex; align-items:center; justify-content:space-between; gap:10px; margin-bottom:10px">
 <div style="font-weight:800; letter-spacing:-.2px">Filteri</div>
 <span class="badge">Scope</span>
@@ -1214,6 +1263,8 @@ return (arr || [])
 const mobileBtn = el("hamburger");
 const mobileMenu = el("mobileMenu");
 const mobileOverlay = el("mobileOverlay");
+const mobileFiltersToggle = el("mobileFiltersToggle");
+const filtersPanel = el("filtersPanel");
 
 function setMobile(open){
 if (!mobileMenu) return;
@@ -1234,6 +1285,36 @@ if (!inside) setMobile(false);
 });
 document.querySelectorAll("#mobileMenu a").forEach(a=> a.addEventListener("click", ()=> setMobile(false)));
 window.addEventListener("keydown", (e)=>{ if (e.key === "Escape") setMobile(false); });
+
+function setFiltersOpen(open){
+if (!filtersPanel || !mobileFiltersToggle) return;
+const isMobile = window.innerWidth <= 980;
+
+if (!isMobile){
+filtersPanel.classList.remove("open");
+filtersPanel.style.display = "";
+mobileFiltersToggle.setAttribute("aria-expanded", "false");
+return;
+}
+
+filtersPanel.classList.toggle("open", open);
+mobileFiltersToggle.setAttribute("aria-expanded", open ? "true" : "false");
+}
+
+mobileFiltersToggle?.addEventListener("click", ()=>{
+const isOpen = filtersPanel?.classList.contains("open");
+setFiltersOpen(!isOpen);
+});
+
+window.addEventListener("resize", ()=>{
+if (window.innerWidth > 980){
+if (filtersPanel){
+filtersPanel.classList.remove("open");
+filtersPanel.style.display = "";
+}
+mobileFiltersToggle?.setAttribute("aria-expanded", "false");
+}
+});
 
 async function fetchLiveJobs(){
 try{
@@ -1398,6 +1479,10 @@ else catSet.delete(c);
 tile.classList.toggle("checked", input.checked);
 visibleCount = PAGE_SIZE;
 render(false);
+
+if (window.innerWidth <= 980){
+setFiltersOpen(false);
+}
 });
 });
 }
@@ -1693,6 +1778,11 @@ node && node.addEventListener("input", ()=>{
 visibleCount = PAGE_SIZE;
 render(false);
 });
+node && node.addEventListener("change", ()=>{
+if (window.innerWidth <= 980 && (id === "minPay" || id === "maxPay")){
+setFiltersOpen(false);
+}
+});
 });
 
 el("searchBtn")?.addEventListener("click", ()=>{
@@ -1714,6 +1804,10 @@ document.querySelectorAll("#catFilters .cbTile").forEach(tile => tile.classList.
 
 visibleCount = PAGE_SIZE;
 render(false);
+
+if (window.innerWidth <= 980){
+setFiltersOpen(false);
+}
 });
 
 [detailsModal, postJobModal, applyModal].forEach((m)=>{
