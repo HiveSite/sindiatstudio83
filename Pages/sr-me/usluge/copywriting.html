@@ -1,0 +1,1499 @@
+<!DOCTYPE html>
+<html lang="sr-ME">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-NH2FL5SP1Y"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-NH2FL5SP1Y');
+  </script>
+
+  <!-- Google Tag Manager -->
+  <script>
+    (function(w,d,s,l,i){
+      w[l]=w[l]||[];
+      w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});
+      var f=d.getElementsByTagName(s)[0],
+          j=d.createElement(s),
+          dl=l!='dataLayer' ? '&l='+l : '';
+      j.async=true;
+      j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;
+      f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-PBXVW3GK');
+  </script>
+  <!-- End Google Tag Manager -->
+
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Copywriting & Content | Sindikat</title>
+  <meta name="description" content="Ads copy, landing copy i content plan koji pretvaraju pažnju u klik, upit i konverziju." />
+  <link rel="icon" type="image/png" href="/favicon.png">
+
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+
+  <style>
+    :root{
+      --bg:#05010D;
+      --bg2:#12011F;
+      --text:#FFFFFF;
+      --muted:rgba(255,255,255,.78);
+      --muted2:rgba(255,255,255,.62);
+      --border:rgba(255,255,255,.14);
+      --border2:rgba(255,255,255,.10);
+      --accent:#FF3B6F;
+      --accent2:#FFB000;
+      --cyan:#18F5FF;
+      --good:#2dd4bf;
+      --warn:#ffd166;
+
+      --shadow:0 22px 75px rgba(0,0,0,.68);
+      --shadow2:0 14px 38px rgba(0,0,0,.48);
+
+      --r2:14px;
+      --r3:18px;
+
+      --max:1120px;
+      --ease:cubic-bezier(.2,.9,.2,1);
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      background:
+        radial-gradient(820px 520px at 12% 10%, rgba(255,59,111,.22), transparent 60%),
+        radial-gradient(900px 520px at 88% 8%, rgba(24,245,255,.14), transparent 58%),
+        radial-gradient(760px 520px at 70% 28%, rgba(162,76,255,.12), transparent 60%),
+        radial-gradient(680px 480px at 20% 70%, rgba(255,176,0,.10), transparent 62%),
+        linear-gradient(180deg, var(--bg), var(--bg2));
+      color:var(--text);
+      font-family:Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      letter-spacing:.2px;
+      overflow-x:hidden;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+    }
+
+    body:before{
+      content:"";
+      position:fixed; inset:0;
+      pointer-events:none;
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23n)' opacity='.23'/%3E%3C/svg%3E");
+      opacity:.06;
+      mix-blend-mode:overlay;
+      z-index:0;
+    }
+
+    a{color:inherit;text-decoration:none}
+    .wrap{max-width:var(--max);margin:0 auto;padding:22px 18px 120px;position:relative;z-index:2}
+
+    .heroBg{
+      position:fixed;
+      inset:0;
+      z-index:1;
+      pointer-events:none;
+      overflow:hidden;
+      background:
+        radial-gradient(900px 540px at 20% 20%, rgba(255,59,111,.14), transparent 60%),
+        radial-gradient(900px 540px at 80% 10%, rgba(24,245,255,.10), transparent 60%),
+        radial-gradient(720px 520px at 68% 55%, rgba(162,76,255,.12), transparent 60%);
+    }
+    .heroBg:after{
+      content:"";
+      position:absolute; inset:0;
+      background:
+        radial-gradient(700px 420px at 18% 20%, rgba(255,59,111,.18), transparent 60%),
+        radial-gradient(900px 520px at 70% 12%, rgba(24,245,255,.14), transparent 58%),
+        linear-gradient(180deg, rgba(0,0,0,.18), rgba(6,1,13,.86) 62%, rgba(6,1,13,.96));
+    }
+
+    .blob{
+      position:fixed;
+      z-index:1;
+      pointer-events:none;
+      width:520px;height:520px;
+      border-radius:999px;
+      background: radial-gradient(circle at 35% 30%, rgba(255,59,111,.18), transparent 58%);
+      filter: blur(18px);
+      opacity:.55;
+      mix-blend-mode:screen;
+      transform:translate3d(0,0,0);
+    }
+    .blob.b2{
+      width:420px;height:420px;
+      background: radial-gradient(circle at 40% 35%, rgba(24,245,255,.14), transparent 60%);
+      opacity:.45;
+    }
+
+    .floatingLogo{
+      position:fixed;
+      top:14px;
+      left:14px;
+      z-index:120;
+      display:block;
+      text-decoration:none;
+    }
+    .logoMark{
+      width:176px;height:44px;
+      border-radius:14px;
+      border:1.5px solid rgba(255,59,111,.5);
+      box-shadow:
+        0 18px 34px rgba(0,0,0,.45),
+        0 0 0 3px rgba(0,0,0,.45) inset,
+        0 0 42px rgba(255,59,111,.22);
+      transform:rotate(-2deg);
+      overflow:hidden;
+      background:rgba(0,0,0,.18);
+      display:grid;
+      place-items:center;
+    }
+    .logoMarkImg{
+      width:100%;
+      height:100%;
+      object-fit:contain;
+      object-position:center;
+      padding:6px;
+      filter:drop-shadow(0 10px 18px rgba(0,0,0,.45));
+    }
+    .floatingLogo .logoMark{
+      width:50vw;
+      max-width:240px;
+      height:auto;
+      aspect-ratio:176 / 44;
+      transform:rotate(-2deg);
+      transform-origin:top left;
+    }
+
+    .topbar{
+      position:fixed;
+      bottom:0;
+      left:0;
+      right:0;
+      z-index:50;
+      backdrop-filter:blur(12px);
+      -webkit-backdrop-filter:blur(12px);
+      background:rgba(5,7,12,.88);
+      border-top:3px solid rgba(255,255,255,.12);
+    }
+    .topbarInner{
+      max-width:var(--max);
+      margin:0 auto;
+      padding:12px 18px;
+      display:flex;
+      align-items:center;
+      gap:12px;
+      justify-content:flex-start;
+    }
+    .ctaCenter{margin:0;}
+    .navWrap{
+      margin-left:auto;
+      display:flex;
+      align-items:center;
+      gap:12px;
+      position:relative;
+    }
+
+    nav{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      color:var(--muted);
+      font-size:13px;
+      align-items:center;
+    }
+    nav a{
+      padding:9px 10px;
+      border-radius:10px;
+      border:2px solid transparent;
+      transition: background .2s var(--ease), color .2s var(--ease), transform .2s var(--ease), border-color .2s var(--ease);
+      transform: translateY(0);
+    }
+    nav a:hover{
+      background:rgba(255,255,255,.05);
+      color:var(--text);
+      transform:translateY(-1px);
+      border-color:rgba(24,245,255,.35);
+    }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+      border-radius:10px;
+      padding:12px 16px;
+      font-size:13px;
+      border:3px solid rgba(255,255,255,.16);
+      background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+      color:var(--text);
+      transition:transform .18s var(--ease), box-shadow .18s var(--ease), border-color .18s var(--ease), background .18s var(--ease);
+      white-space:nowrap;
+      box-shadow:0 12px 30px rgba(0,0,0,.28);
+      cursor:pointer;
+    }
+    .btn:hover{transform:translateY(-3px);box-shadow:var(--shadow2);border-color:rgba(255,59,111,.5)}
+    .btn.primary{
+      background:linear-gradient(180deg, rgba(255,59,111,.35), rgba(255,59,111,.14));
+      border-color:rgba(255,59,111,.6);
+      box-shadow:0 20px 60px rgba(255,59,111,.20), 0 10px 28px rgba(0,0,0,.28);
+    }
+    .btn.small{padding:10px 12px;font-size:12px}
+    .dot{
+      width:8px;height:8px;border-radius:2px;
+      background:var(--accent);
+      box-shadow:0 0 0 5px rgba(255,59,111,.22), 0 0 24px rgba(255,59,111,.42);
+      transform:rotate(8deg);
+    }
+
+    .hamburger{
+      display:none;
+      width:44px;height:44px;
+      border-radius:10px;
+      border:3px solid rgba(255,255,255,.16);
+      background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+      align-items:center;justify-content:center;
+      gap:5px;
+      flex-direction:column;
+      cursor:pointer;
+    }
+    .hamburger span{
+      width:18px;height:2px;background:rgba(255,255,255,.8);
+      border-radius:3px;display:block;
+    }
+    .mobileMenu{
+      display:none;
+      position:absolute;
+      left:0; right:0;
+      bottom:100%;
+      border-bottom:3px solid rgba(255,255,255,.10);
+      background:rgba(5,7,12,.95);
+    }
+    .mobileMenuInner{
+      max-width:var(--max);
+      margin:0 auto;
+      padding:12px 18px 16px;
+      display:grid;
+      gap:8px;
+    }
+    .mobileMenuInner a{
+      padding:12px 12px;
+      border:3px solid rgba(255,255,255,.12);
+      border-radius:10px;
+      background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
+      color:var(--text);
+    }
+
+    .section{
+      padding:58px 0;
+      border-top:3px solid rgba(255,255,255,.08);
+    }
+    .hero{
+      padding:40px 0 24px;
+    }
+    .kicker{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      color:var(--muted);
+      font-size:12px;
+      text-transform:uppercase;
+      letter-spacing:1.1px;
+      margin-bottom:14px;
+    }
+    h1{
+      margin:0;
+      font-size:46px;
+      line-height:1.05;
+      letter-spacing:-.8px;
+      max-width:18ch;
+    }
+    .heroTitle span{display:inline-block;will-change:transform, opacity;}
+    .sub{
+      margin-top:14px;
+      color:rgba(255,255,255,.80);
+      font-size:15px;
+      line-height:1.65;
+      max-width:70ch;
+      text-shadow:0 10px 40px rgba(0,0,0,.35);
+    }
+    .heroActions{
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+      margin-top:18px;
+    }
+    .miniRow{
+      margin-top:18px;
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+      color:rgba(255,255,255,.70);
+      font-size:12px;
+    }
+    .miniRow span{
+      padding:8px 10px;
+      border:2px solid rgba(255,255,255,.12);
+      border-radius:10px;
+      background:rgba(10,12,18,.70);
+      box-shadow:0 10px 24px rgba(0,0,0,.22);
+    }
+
+    .headRow{
+      display:flex;
+      align-items:flex-end;
+      justify-content:space-between;
+      gap:16px;
+      flex-wrap:wrap;
+      margin-bottom:22px;
+    }
+    .h2{
+      font-size:22px;
+      letter-spacing:-.2px;
+      margin:0;
+    }
+    .desc{
+      color:rgba(255,255,255,.70);
+      font-size:13px;
+      line-height:1.65;
+      max-width:72ch;
+    }
+
+    .grid2{
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      gap:16px;
+    }
+    .grid3{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:16px;
+    }
+    .metricGrid{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:12px;
+      margin-top:16px;
+    }
+    .metric{
+      border:2px solid rgba(255,255,255,.12);
+      border-radius:14px;
+      background:rgba(8,10,16,.62);
+      padding:14px;
+      box-shadow:var(--shadow2);
+    }
+    .metric strong{
+      display:block;
+      font-size:22px;
+      margin-bottom:4px;
+    }
+    .metric span{
+      color:rgba(255,255,255,.66);
+      font-size:12px;
+      line-height:1.4;
+    }
+
+    .card{
+      border:3px solid rgba(255,255,255,.14);
+      border-radius:var(--r2);
+      background:linear-gradient(180deg, rgba(14,16,26,.92), rgba(7,8,19,.92));
+      box-shadow:var(--shadow2);
+      transition:transform .18s var(--ease), border-color .18s var(--ease), box-shadow .18s var(--ease), filter .18s var(--ease);
+      position:relative;
+      overflow:hidden;
+    }
+    .card:before{
+      content:"";
+      position:absolute;
+      inset:-35%;
+      background:
+        radial-gradient(circle at 25% 25%, rgba(255,59,111,.18), transparent 60%),
+        radial-gradient(circle at 80% 30%, rgba(24,245,255,.12), transparent 60%);
+      opacity:.5;
+      transform:rotate(8deg);
+      pointer-events:none;
+      z-index:0;
+    }
+    .card:after{
+      content:"";
+      position:absolute;
+      inset:0;
+      border:1px solid rgba(255,59,111,.18);
+      opacity:.45;
+      pointer-events:none;
+      z-index:0;
+    }
+    .card:hover{
+      transform:translateY(-6px);
+      border-color:rgba(255,59,111,.5);
+      box-shadow:var(--shadow);
+      filter:brightness(1.04);
+    }
+    .cardBody{
+      padding:18px;
+      position:relative;
+      z-index:2;
+    }
+
+    .bulletList{
+      margin:0;
+      padding-left:18px;
+      color:rgba(255,255,255,.74);
+      font-size:13px;
+      line-height:1.7;
+    }
+    .bulletList li{margin:6px 0}
+
+    .demoShell{
+      border:3px solid rgba(255,255,255,.12);
+      border-radius:18px;
+      overflow:hidden;
+      background:linear-gradient(180deg, rgba(12,14,24,.95), rgba(8,9,18,.95));
+      box-shadow:var(--shadow);
+    }
+    .demoToolbar{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      padding:12px 14px;
+      border-bottom:3px solid rgba(255,255,255,.08);
+      background:rgba(255,255,255,.03);
+    }
+    .demoToolbarLeft{
+      display:flex;
+      align-items:center;
+      gap:8px;
+    }
+    .demoDot{
+      width:10px;
+      height:10px;
+      border-radius:50%;
+      background:rgba(255,255,255,.18);
+    }
+    .demoToolbarTitle{
+      font-size:12px;
+      color:rgba(255,255,255,.62);
+      margin-left:8px;
+    }
+    .demoViewport{
+      padding:18px;
+      background:
+        radial-gradient(620px 220px at 20% 0%, rgba(255,59,111,.12), transparent 55%),
+        radial-gradient(620px 220px at 80% 0%, rgba(24,245,255,.08), transparent 55%),
+        linear-gradient(180deg, rgba(10,10,18,.95), rgba(8,9,16,.98));
+    }
+
+    .switchRow{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-bottom:16px;
+    }
+    .switchBtn{
+      border:2px solid rgba(255,255,255,.12);
+      background:rgba(255,255,255,.04);
+      color:#fff;
+      border-radius:12px;
+      padding:10px 12px;
+      font-size:12px;
+      cursor:pointer;
+      transition:.18s var(--ease);
+    }
+    .switchBtn.active{
+      border-color:rgba(255,59,111,.52);
+      background:rgba(255,59,111,.16);
+    }
+
+    .copyGrid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:16px;
+    }
+    .copyCard{
+      border:2px solid rgba(255,255,255,.10);
+      border-radius:16px;
+      background:rgba(255,255,255,.04);
+      padding:16px;
+    }
+    .copyCard.active{
+      border-color:rgba(255,59,111,.52);
+      background:rgba(255,59,111,.10);
+    }
+    .copyMeta{
+      display:flex;
+      justify-content:space-between;
+      gap:10px;
+      align-items:center;
+      margin-bottom:12px;
+      font-size:11px;
+      color:rgba(255,255,255,.58);
+    }
+    .copyLabel{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-width:28px;
+      height:28px;
+      border-radius:10px;
+      border:2px solid rgba(255,255,255,.12);
+      background:rgba(255,255,255,.04);
+      font-weight:800;
+      font-size:12px;
+      color:#fff;
+    }
+    .copyCard h3{
+      margin:0 0 10px;
+      font-size:20px;
+      line-height:1.2;
+      letter-spacing:-.4px;
+    }
+    .copyCard p{
+      margin:0 0 14px;
+      font-size:13px;
+      line-height:1.6;
+      color:rgba(255,255,255,.72);
+    }
+
+    .adMock{
+      border:2px solid rgba(255,255,255,.08);
+      border-radius:14px;
+      background:rgba(255,255,255,.03);
+      padding:14px;
+    }
+    .adMockTop{
+      display:flex;
+      justify-content:space-between;
+      gap:10px;
+      margin-bottom:10px;
+      font-size:11px;
+      color:rgba(255,255,255,.58);
+    }
+    .adMockTitle{
+      font-size:15px;
+      line-height:1.35;
+      margin:0 0 8px;
+      letter-spacing:-.2px;
+    }
+    .adMockBody{
+      margin:0;
+      font-size:12px;
+      line-height:1.6;
+      color:rgba(255,255,255,.7);
+    }
+
+    .resultGrid{
+      display:grid;
+      grid-template-columns:1.15fr .85fr;
+      gap:16px;
+      margin-top:16px;
+    }
+    .resultPanel{
+      border:2px solid rgba(255,255,255,.10);
+      border-radius:16px;
+      background:rgba(255,255,255,.04);
+      padding:16px;
+    }
+
+    .scoreBig{
+      font-size:36px;
+      line-height:1;
+      margin:0 0 8px;
+      letter-spacing:-1px;
+    }
+    .smallMuted{
+      font-size:12px;
+      color:rgba(255,255,255,.64);
+      line-height:1.5;
+    }
+
+    .scoreBars{
+      display:grid;
+      gap:10px;
+      margin-top:14px;
+    }
+    .barRow{
+      display:grid;
+      gap:6px;
+    }
+    .barLabel{
+      display:flex;
+      justify-content:space-between;
+      gap:10px;
+      font-size:12px;
+      color:rgba(255,255,255,.68);
+    }
+    .barTrack{
+      height:12px;
+      border-radius:999px;
+      overflow:hidden;
+      background:rgba(255,255,255,.06);
+      border:1px solid rgba(255,255,255,.08);
+    }
+    .barFill{
+      height:100%;
+      width:0%;
+      transition:width .45s ease;
+      background:linear-gradient(90deg, rgba(255,59,111,.98), rgba(24,245,255,.9));
+    }
+
+    .miniStats{
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      gap:12px;
+      margin-top:16px;
+    }
+    .miniStat{
+      border:2px solid rgba(255,255,255,.08);
+      border-radius:14px;
+      background:rgba(255,255,255,.03);
+      padding:12px;
+    }
+    .miniStat strong{
+      display:block;
+      font-size:22px;
+      margin-bottom:4px;
+    }
+    .miniStat span{
+      color:rgba(255,255,255,.64);
+      font-size:12px;
+      line-height:1.4;
+    }
+
+    .landingPreview{
+      margin-top:16px;
+      border:2px solid rgba(255,255,255,.10);
+      border-radius:16px;
+      overflow:hidden;
+      background:rgba(11,12,20,.98);
+    }
+    .landingHero{
+      padding:18px;
+      border-bottom:2px solid rgba(255,255,255,.08);
+      background:
+        radial-gradient(420px 180px at 10% 0%, rgba(255,59,111,.12), transparent 60%),
+        radial-gradient(420px 180px at 90% 0%, rgba(24,245,255,.08), transparent 60%),
+        rgba(12,13,22,.98);
+    }
+    .landingHero h4{
+      margin:0;
+      font-size:24px;
+      line-height:1.1;
+      letter-spacing:-.4px;
+      max-width:13ch;
+    }
+    .landingHero p{
+      margin:10px 0 0;
+      color:rgba(255,255,255,.72);
+      font-size:12px;
+      line-height:1.6;
+      max-width:42ch;
+    }
+    .landingBody{
+      padding:16px 18px 18px;
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:12px;
+    }
+    .landingBlock{
+      border:2px solid rgba(255,255,255,.08);
+      border-radius:14px;
+      background:rgba(255,255,255,.03);
+      padding:12px;
+    }
+    .landingBlock h5{
+      margin:0 0 8px;
+      font-size:12px;
+      letter-spacing:.2px;
+    }
+    .landingBlock p{
+      margin:0;
+      color:rgba(255,255,255,.68);
+      font-size:12px;
+      line-height:1.55;
+    }
+
+    .noteBox{
+      margin-top:16px;
+      border:2px solid rgba(45,212,191,.22);
+      background:rgba(45,212,191,.08);
+      border-radius:14px;
+      padding:14px;
+      color:#eafffb;
+      font-size:13px;
+      line-height:1.6;
+    }
+
+    footer{
+      border-top:3px solid rgba(255,255,255,.10);
+      padding:28px 0 8px;
+      color:rgba(255,255,255,.62);
+      font-size:12px;
+      display:flex;
+      justify-content:space-between;
+      gap:12px;
+      flex-wrap:wrap;
+      margin-top:42px;
+    }
+
+    .reveal{opacity:0;transform:translateY(18px);will-change:transform, opacity;}
+
+    @media (max-width:980px){
+      h1{font-size:40px}
+      .grid2,
+      .grid3,
+      .metricGrid,
+      .copyGrid,
+      .resultGrid,
+      .landingBody{grid-template-columns:1fr}
+      nav{display:none}
+      .hamburger{display:flex}
+    }
+    @media (max-width:520px){
+      .wrap{padding:16px 14px 72px}
+      h1{font-size:34px}
+      .heroActions{gap:10px}
+      .heroActions .btn{width:100%}
+      .topbarInner{padding:12px 14px}
+      .mobileMenuInner{padding:12px 14px 16px}
+    }
+    @media (max-width:520px){
+      .topbarInner{
+        flex-wrap:nowrap;
+        gap:10px;
+      }
+      .ctaCenter{
+        margin:0;
+        flex:1;
+        display:flex;
+        justify-content:center;
+      }
+      .ctaCenter.btn{
+        padding:10px 12px;
+        font-size:12px;
+      }
+      .navWrap{
+        margin-left:0;
+        flex:0 0 auto;
+      }
+      .hamburger{
+        flex:0 0 auto;
+      }
+    }
+  </style>
+
+  <link rel="canonical" href="https://www.sindikatstudio83.me/sr-me/usluge/copywriting-content/" />
+  <meta name="robots" content="index,follow" />
+  <meta property="og:url" content="https://www.sindikatstudio83.me/sr-me/usluge/copywriting-content/" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta property="og:image" content="https://www.sindikatstudio83.me/studio83logo.png" />
+  <meta property="og:title" content="Copywriting & Content | Sindikat" />
+  <meta property="og:description" content="Ads copy, landing copy i content plan koji pretvaraju pažnju u klik, upit i konverziju." />
+  <meta name="twitter:title" content="Copywriting & Content | Sindikat" />
+  <meta name="twitter:description" content="Ads copy, landing copy i content plan koji pretvaraju pažnju u klik, upit i konverziju." />
+  <meta name="twitter:image" content="https://www.sindikatstudio83.me/studio83logo.png" />
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"Service",
+    "@id":"https://www.sindikatstudio83.me/sr-me/usluge/copywriting-content/#service",
+    "name":"Copywriting & Content",
+    "description":"Ads copy, landing copy i content plan koji pretvaraju pažnju u klik, upit i konverziju.",
+    "provider":{
+      "@type":"Organization",
+      "name":"Sindikat Studio 83",
+      "url":"https://www.sindikatstudio83.me/",
+      "logo":"https://www.sindikatstudio83.me/studio83logo.png"
+    },
+    "areaServed":["Podgorica","Crna Gora"]
+  }
+  </script>
+</head>
+
+<body>
+  <a class="floatingLogo" href="/sr-me/pocetna" aria-label="Sindikat Studio 83 - Početna">
+    <div class="logoMark" aria-hidden="true">
+      <img class="logoMarkImg" src="/studio83logo.png" alt="">
+    </div>
+  </a>
+
+  <noscript>
+    <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PBXVW3GK" height="0" width="0" style="display:none;visibility:hidden"></iframe>
+  </noscript>
+
+  <div class="heroBg" id="heroBg" aria-hidden="true"></div>
+  <div class="blob" id="blob1" aria-hidden="true"></div>
+  <div class="blob b2" id="blob2" aria-hidden="true"></div>
+
+  <header class="topbar">
+    <div class="topbarInner reveal">
+      <a class="btn primary ctaCenter" href="/sr-me/kontakt">
+        <span class="dot"></span>Kontaktiraj nas
+      </a>
+
+      <div class="navWrap">
+        <nav aria-label="Primary">
+          <a href="/sr-me/pocetna">Početna</a>
+          <a href="/sr-me/usluge" aria-current="page">Usluge</a>
+          <a href="/sr-me/onama">O nama</a>
+          <a href="/sr-me/blog">Blog</a>
+          <a href="/sr-me/poslovi">Poslovi</a>
+        </nav>
+
+        <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+
+    <div class="mobileMenu" id="mobileMenu" aria-label="Mobile menu">
+      <div class="mobileMenuInner">
+        <a href="/sr-me/pocetna">Početna</a>
+        <a href="/sr-me/usluge" aria-current="page">Usluge</a>
+        <a href="/sr-me/onama">O nama</a>
+        <a href="/sr-me/blog">Blog</a>
+        <a href="/sr-me/poslovi">Poslovi</a>
+      </div>
+    </div>
+  </header>
+
+  <div class="wrap">
+    <section class="hero" id="top">
+      <div class="kicker reveal"><span class="dot"></span> Copywriting &amp; Content • Podgorica / Crna Gora</div>
+
+      <h1 class="heroTitle reveal" id="heroTitle">Poruka koja vodi do klika, ne do skrolovanja dalje.</h1>
+
+      <p class="sub reveal">
+        Dobar copy nije ukras. On objašnjava ponudu, hvata pažnju i vodi korisnika ka akciji.
+        Ads copy, landing copy i content plan radimo tako da podržavaju isti cilj:
+        <strong>klik</strong>, <strong>upit</strong>, <strong>rezervaciju</strong> ili <strong>prodaju</strong>.
+      </p>
+
+      <div class="miniRow reveal">
+        <span>hook</span>
+        <span>headline</span>
+        <span>CTA</span>
+        <span>varijante za test</span>
+      </div>
+
+      <div class="heroActions reveal">
+        <a class="btn primary" href="/sr-me/kontakt"><span class="dot"></span> Traži preporuku</a>
+        <a class="btn" href="#demo">Pogledaj primjer</a>
+      </div>
+
+      <div class="metricGrid reveal">
+        <div class="metric">
+          <strong>7–14</strong>
+          <span>dana za copy set i osnovni content okvir</span>
+        </div>
+        <div class="metric">
+          <strong>2+</strong>
+          <span>varijante poruke za testiranje</span>
+        </div>
+        <div class="metric">
+          <strong>1</strong>
+          <span>jasan cilj po sadržaju i CTA-u</span>
+        </div>
+        <div class="metric">
+          <strong>fit</strong>
+          <span>copy mora da odgovara ads-u i landing-u</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="demo">
+      <div class="headRow">
+        <h2 class="h2 reveal">Primjer</h2>
+        <div class="desc reveal">
+          Ispod je pojednostavljen A/B prikaz. Prebacuj scenarije i vidi kako se mijenjaju poruka, ugao i rezultat.
+        </div>
+      </div>
+
+      <div class="demoShell reveal">
+        <div class="demoToolbar">
+          <div class="demoToolbarLeft">
+            <span class="demoDot"></span>
+            <span class="demoDot"></span>
+            <span class="demoDot"></span>
+            <span class="demoToolbarTitle">copy-preview.me</span>
+          </div>
+        </div>
+
+        <div class="demoViewport">
+          <div class="switchRow">
+            <button class="switchBtn active" type="button" data-scenario="booking">Rezervacije</button>
+            <button class="switchBtn" type="button" data-scenario="lead">Lead forma</button>
+            <button class="switchBtn" type="button" data-scenario="promo">Promo ponuda</button>
+          </div>
+
+          <div class="copyGrid">
+            <div class="copyCard" id="copyA">
+              <div class="copyMeta">
+                <span class="copyLabel">A</span>
+                <span>kontrola</span>
+              </div>
+              <h3 id="copyATitle">Rezerviši sto za večeras.</h3>
+              <p id="copyABody">Jednostavna poruka bez jakog razloga za klik i bez dodatne vrijednosti koja odvaja oglas od drugih.</p>
+
+              <div class="adMock">
+                <div class="adMockTop">
+                  <span>Meta Feed</span>
+                  <span id="copyACTA">Rezerviši</span>
+                </div>
+                <div class="adMockTitle" id="copyAAdTitle">Rezerviši sto za večeras.</div>
+                <p class="adMockBody" id="copyAAdBody">Kratka i čista poruka, ali bez dovoljno jakog razloga da osoba baš sada klikne.</p>
+              </div>
+            </div>
+
+            <div class="copyCard active" id="copyB">
+              <div class="copyMeta">
+                <span class="copyLabel">B</span>
+                <span>test varijanta</span>
+              </div>
+              <h3 id="copyBTitle">Rezerviši sto večeras i dobiješ welcome drink.</h3>
+              <p id="copyBBody">Ista akcija, ali sa konkretnim benefitom i boljim razlogom da korisnik reaguje odmah.</p>
+
+              <div class="adMock">
+                <div class="adMockTop">
+                  <span>Meta Feed</span>
+                  <span id="copyBCTA">Rezerviši sad</span>
+                </div>
+                <div class="adMockTitle" id="copyBAdTitle">Rezerviši sto večeras i dobiješ welcome drink.</div>
+                <p class="adMockBody" id="copyBAdBody">Poruka daje jasan benefit, podiže interes i lakše vodi do klika.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="resultGrid">
+            <div class="resultPanel">
+              <h3 class="scoreBig" id="winnerTitle">B varijanta vodi.</h3>
+              <div class="smallMuted" id="winnerText">
+                Benefit i konkretan razlog za klik prave veću razliku nego “čist” ali prazan tekst.
+              </div>
+
+              <div class="scoreBars">
+                <div class="barRow">
+                  <div class="barLabel">
+                    <span>A varijanta</span>
+                    <span id="barALabel">3.2% CTR</span>
+                  </div>
+                  <div class="barTrack">
+                    <div class="barFill" id="barA"></div>
+                  </div>
+                </div>
+
+                <div class="barRow">
+                  <div class="barLabel">
+                    <span>B varijanta</span>
+                    <span id="barBLabel">5.1% CTR</span>
+                  </div>
+                  <div class="barTrack">
+                    <div class="barFill" id="barB"></div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="miniStats">
+                <div class="miniStat">
+                  <strong id="statImprovement">+59%</strong>
+                  <span>bolji CTR</span>
+                </div>
+                <div class="miniStat">
+                  <strong id="statCvr">+28%</strong>
+                  <span>bolja stopa leada</span>
+                </div>
+              </div>
+
+              <div class="noteBox" id="copyInsight">
+                Dobar copy ne zvuči samo “lijepo” — on smanjuje nejasnoću i daje razlog za reakciju.
+              </div>
+            </div>
+
+            <div class="resultPanel">
+              <h3 style="margin:0 0 12px;font-size:15px;">Landing nastavak</h3>
+
+              <div class="landingPreview">
+                <div class="landingHero">
+                  <h4 id="landingTitle">Rezerviši sto i dobiješ welcome drink.</h4>
+                  <p id="landingText">
+                    Ako oglas obeća benefit, landing mora da nastavi istu priču. Tu se copy ili raspada ili zatvara klik.
+                  </p>
+                </div>
+                <div class="landingBody">
+                  <div class="landingBlock">
+                    <h5>Naslov</h5>
+                    <p id="landingBlock1">
+                      Poruka sa oglasa nastavlja se odmah na hero sekciji bez prekida i bez promjene ugla.
+                    </p>
+                  </div>
+                  <div class="landingBlock">
+                    <h5>CTA</h5>
+                    <p id="landingBlock2">
+                      Korisnik odmah vidi šta dobija i šta treba da uradi dalje.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="headRow">
+        <h2 class="h2 reveal">Šta je uključeno</h2>
+        <div class="desc reveal">
+          Copy nije samo headline. Radi se kroz cijeli put korisnika: oglas, landing, CTA i sadržaj koji podržava istu poruku.
+        </div>
+      </div>
+
+      <div class="grid3">
+        <div class="card reveal">
+          <div class="cardBody">
+            <h3>Ads copy</h3>
+            <ul class="bulletList">
+              <li>hook varijante</li>
+              <li>headline i primary text</li>
+              <li>CTA logika</li>
+              <li>uglovi za testiranje</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="card reveal">
+          <div class="cardBody">
+            <h3>Landing copy</h3>
+            <ul class="bulletList">
+              <li>hero naslov i podnaslov</li>
+              <li>benefit sekcije</li>
+              <li>FAQ i uklanjanje sumnji</li>
+              <li>forma i CTA copy</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="card reveal">
+          <div class="cardBody">
+            <h3>Content plan</h3>
+            <ul class="bulletList">
+              <li>teme i uglovi sadržaja</li>
+              <li>kratki caption / objava pravci</li>
+              <li>poruke koje hrane funnel</li>
+              <li>usklađivanje sa kampanjom</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="headRow">
+        <h2 class="h2 reveal">Kako radimo</h2>
+        <div class="desc reveal">
+          Poruka se ne piše iz praznog prostora. Mora da odgovara publici, ponudi i mjestu gdje je korisnik vidi.
+        </div>
+      </div>
+
+      <div class="grid2">
+        <div class="card reveal">
+          <div class="cardBody">
+            <h3>1. Definišemo vrijednost</h3>
+            <p>
+              Prvo razdvajamo šta je stvarna korist za korisnika, a šta je samo opis proizvoda ili usluge.
+            </p>
+          </div>
+        </div>
+
+        <div class="card reveal">
+          <div class="cardBody">
+            <h3>2. Biramo uglove poruke</h3>
+            <p>
+              Testiramo više smislenih pristupa: benefit, hitnost, uklanjanje sumnje, konkretna ponuda ili društveni dokaz.
+            </p>
+          </div>
+        </div>
+
+        <div class="card reveal">
+          <div class="cardBody">
+            <h3>3. Spajamo sa landing-om</h3>
+            <p>
+              Oglas i landing moraju da pričaju istu priču. Ako se poruka prekine, klik pada u prazno.
+            </p>
+          </div>
+        </div>
+
+        <div class="card reveal">
+          <div class="cardBody">
+            <h3>4. Gledamo šta pobjeđuje</h3>
+            <p>
+              Dobar copy se ne procjenjuje po osjećaju nego po reakciji: CTR, lead rate, scroll depth i završena akcija.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="headRow">
+        <h2 class="h2 reveal">Za koga je ovo</h2>
+        <div class="desc reveal">
+          Najviše smisla ima kad već postoji ponuda, ali poruka još nije dovoljno jasna, jaka ili usklađena sa funnel-om.
+        </div>
+      </div>
+
+      <div class="grid2">
+        <div class="card reveal">
+          <div class="cardBody">
+            <h3>Idealno za</h3>
+            <ul class="bulletList">
+              <li>Meta i Google kampanje</li>
+              <li>landing stranice i forme</li>
+              <li>rezervacije i lead capture</li>
+              <li>biznise sa više poruka koje treba pojednostaviti</li>
+              <li>content koji treba da podrži prodaju</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="card reveal">
+          <div class="cardBody">
+            <h3>Ne radi kad</h3>
+            <ul class="bulletList">
+              <li>ponuda nije jasna</li>
+              <li>želiš da kažeš “sve odjednom”</li>
+              <li>nemaš definisan CTA</li>
+              <li>copy nije povezan sa landing-om ili kampanjom</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="card reveal">
+        <div class="cardBody">
+          <div class="headRow" style="margin-bottom:12px;">
+            <h2 class="h2" style="margin:0;">Treba ti poruka koja vodi do reakcije?</h2>
+            <div class="desc" style="max-width:42ch;">
+              Ako hoćeš da oglasi, landing i sadržaj pričaju istu priču i vode do klika ili upita, možemo složiti pravi copy sistem.
+            </div>
+          </div>
+
+          <div class="heroActions" style="margin-top:0;">
+            <a class="btn primary" href="/sr-me/kontakt"><span class="dot"></span> Traži preporuku</a>
+            <a class="btn" href="/sr-me/usluge">Nazad na usluge</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div>© <span id="year"></span> Sindikat - Performance & Activation Studio</div>
+      <div>Podgorica • Crna Gora • @sindikat_events</div>
+    </footer>
+  </div>
+
+  <script>
+    const yearEl = document.getElementById('year');
+    if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+
+    const closeMobileMenu = () => {
+      if (!mobileMenu) return;
+      mobileMenu.style.display = 'none';
+      mobileMenu.style.opacity = '';
+      mobileMenu.style.transform = '';
+      if (hamburger) hamburger.setAttribute('aria-expanded','false');
+    };
+
+    if (hamburger && mobileMenu) {
+      hamburger.addEventListener('click', ()=>{
+        const isOpen = mobileMenu.style.display === 'block';
+        if (isOpen) {
+          anime({
+            targets: mobileMenu,
+            opacity: [1,0],
+            translateY: [0,6],
+            duration: 220,
+            easing: 'easeOutQuad',
+            complete: closeMobileMenu
+          });
+        } else {
+          mobileMenu.style.display = 'block';
+          hamburger.setAttribute('aria-expanded','true');
+          anime({
+            targets: mobileMenu,
+            opacity: [0,1],
+            translateY: [6,0],
+            duration: 260,
+            easing: 'easeOutQuad'
+          });
+        }
+      });
+
+      document.querySelectorAll('#mobileMenu a').forEach(a=>{
+        a.addEventListener('click', closeMobileMenu);
+      });
+
+      document.addEventListener('click', (e)=>{
+        if (mobileMenu.style.display !== 'block') return;
+        const inside = mobileMenu.contains(e.target) || hamburger.contains(e.target);
+        if (!inside) closeMobileMenu();
+      });
+    }
+
+    const titleEl = document.getElementById('heroTitle');
+    if (titleEl) {
+      const raw = titleEl.textContent.trim();
+      const words = raw.split(/\s+/);
+      titleEl.textContent = '';
+      words.forEach((w, i) => {
+        const span = document.createElement('span');
+        span.textContent = w;
+        titleEl.appendChild(span);
+        if (i !== words.length - 1) titleEl.appendChild(document.createTextNode(' '));
+      });
+    }
+
+    const revealEls = document.querySelectorAll('.reveal');
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(entry=>{
+        if(!entry.isIntersecting) return;
+        const el = entry.target;
+        anime({ targets: el, opacity:[0,1], translateY:[18,0], duration:820, easing:'easeOutExpo' });
+        io.unobserve(el);
+      });
+    }, {threshold:0.14});
+    revealEls.forEach(el=>io.observe(el));
+
+    window.addEventListener('load', ()=>{
+      anime({
+        targets:'#heroTitle span',
+        opacity:[0,1],
+        translateY:[16,0],
+        delay: anime.stagger(45),
+        duration:900,
+        easing:'easeOutExpo'
+      });
+    });
+
+    const heroBg = document.getElementById('heroBg');
+    const b1 = document.getElementById('blob1');
+    const b2 = document.getElementById('blob2');
+
+    const setBlobsBase = () => {
+      if (!b1 || !b2) return;
+      const w = window.innerWidth, h = window.innerHeight;
+      b1.style.left = Math.max(12, w*0.06) + 'px';
+      b1.style.top  = Math.max(12, h*0.16) + 'px';
+      b2.style.left = Math.max(12, w*0.60) + 'px';
+      b2.style.top  = Math.max(12, h*0.08) + 'px';
+    };
+    setBlobsBase();
+    window.addEventListener('resize', setBlobsBase);
+
+    anime({
+      targets:'#blob1',
+      translateX:[0,18,-10,0],
+      translateY:[0,-12,16,0],
+      duration:9000,
+      easing:'easeInOutSine',
+      loop:true
+    });
+    anime({
+      targets:'#blob2',
+      translateX:[0,-14,10,0],
+      translateY:[0,14,-10,0],
+      duration:11000,
+      easing:'easeInOutSine',
+      loop:true
+    });
+
+    let ticking = false;
+    window.addEventListener('scroll', ()=>{
+      if(ticking) return;
+      ticking = true;
+      requestAnimationFrame(()=>{
+        const y = window.scrollY || 0;
+        if(heroBg) heroBg.style.transform = `translateY(${y * 0.06}px)`;
+        ticking = false;
+      });
+    }, {passive:true});
+
+    const scenarios = {
+      booking: {
+        aTitle: 'Rezerviši sto za večeras.',
+        aBody: 'Jednostavna poruka bez jakog razloga za klik i bez dodatne vrijednosti koja odvaja oglas od drugih.',
+        aCTA: 'Rezerviši',
+        aAdTitle: 'Rezerviši sto za večeras.',
+        aAdBody: 'Kratka i čista poruka, ali bez dovoljno jakog razloga da osoba baš sada klikne.',
+
+        bTitle: 'Rezerviši sto večeras i dobiješ welcome drink.',
+        bBody: 'Ista akcija, ali sa konkretnim benefitom i boljim razlogom da korisnik reaguje odmah.',
+        bCTA: 'Rezerviši sad',
+        bAdTitle: 'Rezerviši sto večeras i dobiješ welcome drink.',
+        bAdBody: 'Poruka daje jasan benefit, podiže interes i lakše vodi do klika.',
+
+        winnerTitle: 'B varijanta vodi.',
+        winnerText: 'Benefit i konkretan razlog za klik prave veću razliku nego “čist” ali prazan tekst.',
+        aCtr: 3.2,
+        bCtr: 5.1,
+        improvement: '+59%',
+        cvr: '+28%',
+        insight: 'Dobar copy ne zvuči samo “lijepo” — on smanjuje nejasnoću i daje razlog za reakciju.',
+
+        landingTitle: 'Rezerviši sto i dobiješ welcome drink.',
+        landingText: 'Ako oglas obeća benefit, landing mora da nastavi istu priču. Tu se copy ili raspada ili zatvara klik.',
+        landing1: 'Poruka sa oglasa nastavlja se odmah na hero sekciji bez prekida i bez promjene ugla.',
+        landing2: 'Korisnik odmah vidi šta dobija i šta treba da uradi dalje.'
+      },
+
+      lead: {
+        aTitle: 'Pošalji upit i javićemo ti se.',
+        aBody: 'Korektno, ali generički. Korisnik ne vidi brzinu, konkretan benefit ni razlog da reaguje sad.',
+        aCTA: 'Pošalji',
+        aAdTitle: 'Pošalji upit i javićemo ti se.',
+        aAdBody: 'Poruka je funkcionalna, ali ne daje dovoljno razloga da se osoba izdvoji iz skrola.',
+
+        bTitle: 'Ostavi broj i javljamo ti se u najkraćem roku.',
+        bBody: 'Uklanja neizvjesnost i daje osjećaj brzog odgovora, što često diže stopu prijave.',
+        bCTA: 'Pošalji broj',
+        bAdTitle: 'Ostavi broj i javljamo ti se u najkraćem roku.',
+        bAdBody: 'Konkretna korist je brz odgovor, ne samo “upit” kao apstraktna akcija.',
+
+        winnerTitle: 'B varijanta vodi.',
+        winnerText: 'Kad smanjiš neizvjesnost i kažeš šta tačno slijedi, korisnik lakše ostavlja kontakt.',
+        aCtr: 2.8,
+        bCtr: 4.4,
+        improvement: '+57%',
+        cvr: '+34%',
+        insight: 'Lead copy često pada jer traži akciju prije nego što objasni šta korisnik dobija zauzvrat.',
+
+        landingTitle: 'Ostavi broj i javljamo ti se brzo.',
+        landingText: 'Landing mora da potvrdi brzinu i jednostavnost koju je oglas već obećao.',
+        landing1: 'Hero ponavlja glavnu korist: brz odgovor i mali broj koraka.',
+        landing2: 'Forma djeluje kao logičan sledeći korak, ne kao dodatni napor.'
+      },
+
+      promo: {
+        aTitle: 'Iskoristi našu ponudu.',
+        aBody: 'Previše opšte. Ne govori jasno ni šta je ponuda ni zašto je bitna baš sada.',
+        aCTA: 'Saznaj više',
+        aAdTitle: 'Iskoristi našu ponudu.',
+        aAdBody: 'Poruka je slaba jer ne govori dovoljno konkretno o koristi ili vremenu reakcije.',
+
+        bTitle: 'Preuzmi ponudu prije nego što se zatvori.',
+        bBody: 'Kombinuje vrijednost i hitnost, pa djeluje jače i jasnije u istom prostoru.',
+        bCTA: 'Preuzmi ponudu',
+        bAdTitle: 'Preuzmi ponudu prije nego što se zatvori.',
+        bAdBody: 'Konkretna akcija i vremenski okvir zajedno pojačavaju interes i klik.',
+
+        winnerTitle: 'B varijanta vodi.',
+        winnerText: 'Kad copy spoji jasnu akciju i osjećaj hitnosti, obično dobije bolju reakciju.',
+        aCtr: 2.4,
+        bCtr: 4.3,
+        improvement: '+79%',
+        cvr: '+21%',
+        insight: 'Promo copy pada kada je “lijep”, ali neodređen. Korisniku treba razlog i trenutak za reakciju.',
+
+        landingTitle: 'Preuzmi ponudu prije zatvaranja.',
+        landingText: 'Oglas i landing rade zajedno kad korisnik odmah shvati šta dobija i koliko dugo to traje.',
+        landing1: 'Naslov drži isti intenzitet i ne gubi hitnost između oglasa i landing-a.',
+        landing2: 'CTA ostaje konkretan i ne traži od korisnika da ponovo pogađa šta treba da uradi.'
+      }
+    };
+
+    const switchBtns = document.querySelectorAll('.switchBtn');
+    let currentScenario = 'booking';
+
+    const copyA = document.getElementById('copyA');
+    const copyB = document.getElementById('copyB');
+
+    const copyATitle = document.getElementById('copyATitle');
+    const copyABody = document.getElementById('copyABody');
+    const copyACTA = document.getElementById('copyACTA');
+    const copyAAdTitle = document.getElementById('copyAAdTitle');
+    const copyAAdBody = document.getElementById('copyAAdBody');
+
+    const copyBTitle = document.getElementById('copyBTitle');
+    const copyBBody = document.getElementById('copyBBody');
+    const copyBCTA = document.getElementById('copyBCTA');
+    const copyBAdTitle = document.getElementById('copyBAdTitle');
+    const copyBAdBody = document.getElementById('copyBAdBody');
+
+    const winnerTitle = document.getElementById('winnerTitle');
+    const winnerText = document.getElementById('winnerText');
+    const barA = document.getElementById('barA');
+    const barB = document.getElementById('barB');
+    const barALabel = document.getElementById('barALabel');
+    const barBLabel = document.getElementById('barBLabel');
+    const statImprovement = document.getElementById('statImprovement');
+    const statCvr = document.getElementById('statCvr');
+    const copyInsight = document.getElementById('copyInsight');
+
+    const landingTitle = document.getElementById('landingTitle');
+    const landingText = document.getElementById('landingText');
+    const landingBlock1 = document.getElementById('landingBlock1');
+    const landingBlock2 = document.getElementById('landingBlock2');
+
+    function setScenario(key){
+      const s = scenarios[key];
+
+      copyATitle.textContent = s.aTitle;
+      copyABody.textContent = s.aBody;
+      copyACTA.textContent = s.aCTA;
+      copyAAdTitle.textContent = s.aAdTitle;
+      copyAAdBody.textContent = s.aAdBody;
+
+      copyBTitle.textContent = s.bTitle;
+      copyBBody.textContent = s.bBody;
+      copyBCTA.textContent = s.bCTA;
+      copyBAdTitle.textContent = s.bAdTitle;
+      copyBAdBody.textContent = s.bAdBody;
+
+      winnerTitle.textContent = s.winnerTitle;
+      winnerText.textContent = s.winnerText;
+      statImprovement.textContent = s.improvement;
+      statCvr.textContent = s.cvr;
+      copyInsight.textContent = s.insight;
+
+      landingTitle.textContent = s.landingTitle;
+      landingText.textContent = s.landingText;
+      landingBlock1.textContent = s.landing1;
+      landingBlock2.textContent = s.landing2;
+
+      barALabel.textContent = s.aCtr.toFixed(1) + '% CTR';
+      barBLabel.textContent = s.bCtr.toFixed(1) + '% CTR';
+
+      barA.style.width = '0%';
+      barB.style.width = '0%';
+
+      requestAnimationFrame(()=>{
+        barA.style.width = Math.min(s.aCtr * 12, 100) + '%';
+        barB.style.width = Math.min(s.bCtr * 12, 100) + '%';
+      });
+
+      copyA.classList.remove('active');
+      copyB.classList.add('active');
+    }
+
+    switchBtns.forEach(btn=>{
+      btn.addEventListener('click', ()=>{
+        switchBtns.forEach(b=>b.classList.remove('active'));
+        btn.classList.add('active');
+        currentScenario = btn.getAttribute('data-scenario');
+        setScenario(currentScenario);
+      });
+    });
+
+    setScenario(currentScenario);
+  </script>
+</body>
+</html>
