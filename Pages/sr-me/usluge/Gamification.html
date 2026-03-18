@@ -1,0 +1,1335 @@
+<!DOCTYPE html>
+<html lang="sr-ME">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-NH2FL5SP1Y"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-NH2FL5SP1Y');
+  </script>
+
+  <!-- Google Tag Manager -->
+  <script>
+    (function(w,d,s,l,i){
+      w[l]=w[l]||[];
+      w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});
+      var f=d.getElementsByTagName(s)[0],
+          j=d.createElement(s),
+          dl=l!='dataLayer' ? '&l='+l : '';
+      j.async=true;
+      j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;
+      f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-PBXVW3GK');
+  </script>
+  <!-- End Google Tag Manager -->
+
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sindikat - Gamification</title>
+  <meta name="description" content="Interaktivne gamification kampanje i mini igre koje dižu angažman." />
+  <link rel="icon" type="image/png" href="/favicon.png">
+
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+
+  <style>
+    :root{
+      --bg:#05010D;
+      --bg2:#12011F;
+      --text:#FFFFFF;
+      --muted:rgba(255,255,255,.78);
+      --muted2:rgba(255,255,255,.62);
+      --accent:#FF3B6F;
+      --accent2:#FFB000;
+      --cyan:#18F5FF;
+      --good:#2dd4bf;
+
+      --shadow: 0 22px 75px rgba(0,0,0,.68);
+      --shadow2: 0 14px 38px rgba(0,0,0,.48);
+
+      --r2:14px;
+      --max:1120px;
+      --ease: cubic-bezier(.2,.9,.2,1);
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      background:
+        radial-gradient(820px 520px at 12% 10%, rgba(255,59,111,.22), transparent 60%),
+        radial-gradient(900px 520px at 88% 8%, rgba(24,245,255,.14), transparent 58%),
+        radial-gradient(760px 520px at 70% 28%, rgba(162,76,255,.12), transparent 60%),
+        radial-gradient(680px 480px at 20% 70%, rgba(255,176,0,.10), transparent 62%),
+        linear-gradient(180deg, var(--bg), var(--bg2));
+      color:var(--text);
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      letter-spacing:.2px;
+      overflow-x:hidden;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    body:before{
+      content:"";
+      position:fixed; inset:0;
+      pointer-events:none;
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23n)' opacity='.23'/%3E%3C/svg%3E");
+      opacity:.06;
+      mix-blend-mode:overlay;
+      z-index:0;
+    }
+
+    a{color:inherit; text-decoration:none}
+    .wrap{max-width:var(--max); margin:0 auto; padding:22px 18px 120px; position:relative; z-index:2}
+
+    .heroBg{
+      position:fixed;
+      inset:0;
+      z-index:1;
+      pointer-events:none;
+      overflow:hidden;
+      background:
+        radial-gradient(900px 540px at 20% 20%, rgba(255,59,111,.14), transparent 60%),
+        radial-gradient(900px 540px at 80% 10%, rgba(24,245,255,.10), transparent 60%),
+        radial-gradient(720px 520px at 68% 55%, rgba(162,76,255,.12), transparent 60%);
+    }
+    .heroBg:after{
+      content:"";
+      position:absolute; inset:0;
+      background:
+        radial-gradient(700px 420px at 18% 20%, rgba(255,59,111,.18), transparent 60%),
+        radial-gradient(900px 520px at 70% 12%, rgba(24,245,255,.14), transparent 58%),
+        linear-gradient(180deg, rgba(0,0,0,.18), rgba(6,1,13,.86) 62%, rgba(6,1,13,.96));
+    }
+
+    .blob{
+      position:fixed;
+      z-index:1;
+      pointer-events:none;
+      width:520px; height:520px;
+      border-radius:999px;
+      background: radial-gradient(circle at 35% 30%, rgba(255,59,111,.18), transparent 58%);
+      filter: blur(18px);
+      opacity:.55;
+      mix-blend-mode: screen;
+      transform: translate3d(0,0,0);
+    }
+    .blob.b2{
+      width:420px; height:420px;
+      background: radial-gradient(circle at 40% 35%, rgba(24,245,255,.14), transparent 60%);
+      opacity:.45;
+    }
+
+    .floatingLogo{
+      position:fixed;
+      top:14px;
+      left:14px;
+      z-index:120;
+      display:block;
+      text-decoration:none;
+    }
+    .logoMark{
+      width:176px; height:44px;
+      border-radius:14px;
+      border:1.5px solid rgba(255,59,111,.5);
+      box-shadow:
+        0 18px 34px rgba(0,0,0,.45),
+        0 0 0 3px rgba(0,0,0,.45) inset,
+        0 0 42px rgba(255,59,111,.22);
+      transform: rotate(-2deg);
+      overflow:hidden;
+      background: rgba(0,0,0,.18);
+      display:grid;
+      place-items:center;
+    }
+    .logoMarkImg{
+      width:100%;
+      height:100%;
+      object-fit:contain;
+      object-position:center;
+      padding:6px;
+      filter: drop-shadow(0 10px 18px rgba(0,0,0,.45));
+    }
+    .floatingLogo .logoMark{
+      width:50vw;
+      max-width:240px;
+      height:auto;
+      aspect-ratio:176 / 44;
+      transform: rotate(-2deg);
+      transform-origin: top left;
+    }
+    @media (max-width: 480px){
+      .floatingLogo{ top:10px; left:10px; }
+    }
+
+    .topbar{
+      position:fixed;
+      bottom:0;
+      left:0;
+      right:0;
+      z-index:50;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      background: rgba(5,7,12,.88);
+      border-top:3px solid rgba(255,255,255,.12);
+    }
+    .topbarInner{
+      max-width:var(--max);
+      margin:0 auto;
+      padding:12px 18px;
+      display:flex; align-items:center; gap:12px;
+      justify-content:flex-start;
+    }
+    .ctaCenter{margin:0;}
+    .navWrap{
+      margin-left:auto;
+      display:flex; align-items:center; gap:12px;
+      position:relative;
+    }
+    nav{
+      display:flex; gap:10px; flex-wrap:wrap;
+      color:var(--muted);
+      font-size:13px;
+      align-items:center;
+    }
+    nav a{
+      padding:9px 10px;
+      border-radius:10px;
+      border:2px solid transparent;
+      transition: background .2s var(--ease), color .2s var(--ease), transform .2s var(--ease), border-color .2s var(--ease);
+      transform: translateY(0);
+    }
+    nav a:hover{background:rgba(255,255,255,.05); color:var(--text); transform: translateY(-1px); border-color:rgba(24,245,255,.35)}
+
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center;
+      gap:10px;
+      border-radius:10px;
+      padding:12px 16px;
+      font-size:13px;
+      border:3px solid rgba(255,255,255,.16);
+      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+      color:var(--text);
+      transition:transform .18s var(--ease), box-shadow .18s var(--ease), border-color .18s var(--ease), background .18s var(--ease);
+      white-space:nowrap;
+      box-shadow: 0 12px 30px rgba(0,0,0,.28);
+      cursor:pointer;
+    }
+    .btn:hover{transform:translateY(-3px); box-shadow:var(--shadow2); border-color:rgba(255,59,111,.5)}
+    .btn.primary{
+      background: linear-gradient(180deg, rgba(255,59,111,.35), rgba(255,59,111,.14));
+      border-color:rgba(255,59,111,.6);
+      box-shadow: 0 20px 60px rgba(255,59,111,.20), 0 10px 28px rgba(0,0,0,.28);
+    }
+    .btn.small{padding:10px 12px; font-size:12px;}
+    .dot{
+      width:8px; height:8px; border-radius:2px;
+      background:var(--accent);
+      box-shadow:0 0 0 5px rgba(255,59,111,.22), 0 0 24px rgba(255,59,111,.42);
+      transform: rotate(8deg);
+    }
+
+    .hamburger{
+      display:none;
+      width:44px; height:44px;
+      border-radius:10px;
+      border:3px solid rgba(255,255,255,.16);
+      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+      align-items:center; justify-content:center;
+      gap:5px;
+      flex-direction:column;
+      cursor:pointer;
+    }
+    .hamburger span{
+      width:18px; height:2px; background:rgba(255,255,255,.8);
+      border-radius:3px;
+      display:block;
+    }
+    .mobileMenu{
+      display:none;
+      position:absolute;
+      left:0;
+      right:0;
+      bottom:100%;
+      border-bottom:3px solid rgba(255,255,255,.10);
+      background:rgba(5,7,12,.95);
+    }
+    .mobileMenuInner{
+      max-width:var(--max);
+      margin:0 auto;
+      padding:12px 18px 16px;
+      display:grid;
+      gap:8px;
+    }
+    .mobileMenuInner a{
+      padding:12px 12px;
+      border:3px solid rgba(255,255,255,.12);
+      border-radius:10px;
+      background: linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
+      color:var(--text);
+    }
+
+    .hero{ padding:44px 0 26px; }
+    .kicker{
+      display:flex; align-items:center; gap:10px;
+      color:var(--muted);
+      font-size:12px;
+      text-transform:uppercase;
+      letter-spacing:1.1px;
+      margin-bottom:14px;
+    }
+    h1{
+      margin:0;
+      font-size:44px;
+      line-height:1.03;
+      letter-spacing:-.8px;
+      max-width:16ch;
+    }
+    .heroTitle span{display:inline-block; will-change: transform, opacity;}
+    .sub{
+      margin-top:14px;
+      color:rgba(255,255,255,.80);
+      font-size:15px;
+      line-height:1.65;
+      max-width:62ch;
+      text-shadow: 0 10px 40px rgba(0,0,0,.35);
+    }
+    .heroActions{display:flex; gap:12px; flex-wrap:wrap; margin-top:18px}
+
+    .section{
+      padding:28px 0 58px;
+      border-top:3px solid rgba(255,255,255,.08);
+    }
+
+    .grid3{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:16px;
+    }
+
+    .card{
+      border:3px solid rgba(255,255,255,.14);
+      border-radius:var(--r2);
+      background: linear-gradient(180deg, rgba(14,16,26,.92), rgba(7,8,19,.92));
+      box-shadow: var(--shadow2);
+      transition: transform .18s var(--ease), border-color .18s var(--ease), box-shadow .18s var(--ease), filter .18s var(--ease);
+      position:relative;
+      overflow:hidden;
+    }
+    .card:before{
+      content:"";
+      position:absolute;
+      inset:-35%;
+      background:
+        radial-gradient(circle at 25% 25%, rgba(255,59,111,.18), transparent 60%),
+        radial-gradient(circle at 80% 30%, rgba(24,245,255,.12), transparent 60%);
+      opacity:.5;
+      transform: rotate(8deg);
+      pointer-events:none;
+      z-index:0;
+    }
+    .card:after{
+      content:"";
+      position:absolute;
+      inset:0;
+      border:1px solid rgba(255,59,111,.18);
+      opacity:.45;
+      pointer-events:none;
+      z-index:0;
+    }
+    .card:hover{
+      transform:translateY(-6px);
+      border-color:rgba(255,59,111,.5);
+      box-shadow:var(--shadow);
+      filter: brightness(1.04);
+    }
+
+    .cardBody{
+      padding:18px;
+      position:relative;
+      z-index:2;
+    }
+    .cardTop{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      margin-bottom:10px;
+    }
+    .cardTitle{
+      margin:0;
+      font-size:16px;
+      letter-spacing:-.2px;
+    }
+    .tag{
+      font-size:11px;
+      color:rgba(255,176,0,.98);
+      border:2px solid rgba(255,176,0,.32);
+      padding:6px 10px;
+      border-radius:10px;
+      background:rgba(255,176,0,.14);
+      white-space:nowrap;
+    }
+    .cardIntro{
+      margin:0;
+      color:rgba(255,255,255,.72);
+      font-size:13px;
+      line-height:1.6;
+    }
+
+    .gameArea{
+      margin-top:14px;
+      border:2px solid rgba(255,255,255,.12);
+      border-radius:14px;
+      background: rgba(8,10,16,.62);
+      padding:12px;
+      box-shadow: var(--shadow2);
+      min-height:260px;
+    }
+    .gameStatus{
+      margin-top:12px;
+      padding:10px 12px;
+      border-radius:12px;
+      border:2px solid rgba(255,255,255,.10);
+      background:rgba(255,255,255,.04);
+      color:#fff;
+      min-height:44px;
+      font-size:13px;
+      line-height:1.45;
+    }
+    .gameTools{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      align-items:center;
+      margin-top:12px;
+    }
+    .gameNote{
+      font-size:12px;
+      color:rgba(255,255,255,.62);
+    }
+
+    .wheelWrap{display:flex; justify-content:center; padding:8px 0 2px;}
+    .wheelShell{position:relative; width:180px; height:180px;}
+    .wheelPointer{
+      position:absolute; top:-4px; left:50%; transform:translateX(-50%);
+      width:0; height:0; border-left:12px solid transparent; border-right:12px solid transparent; border-bottom:22px solid #fff; z-index:3;
+      filter: drop-shadow(0 8px 14px rgba(0,0,0,.35));
+    }
+    .wheelDisc{
+      width:100%; height:100%; border-radius:50%;
+      border:8px solid rgba(255,255,255,.16);
+      box-shadow: inset 0 0 0 5px rgba(0,0,0,.12);
+      transition: transform 4.8s cubic-bezier(.16,.72,.13,1);
+      background: conic-gradient(
+        #ff3b6f 0deg 60deg,
+        #18f5ff 60deg 120deg,
+        #ffb000 120deg 180deg,
+        #7e57ff 180deg 240deg,
+        #2dd4bf 240deg 300deg,
+        #ff7a45 300deg 360deg
+      );
+    }
+
+    .scratchArea{
+      height:180px;
+      border-radius:14px;
+      overflow:hidden;
+      position:relative;
+      display:grid;
+      place-items:center;
+      text-align:center;
+      background:linear-gradient(135deg, rgba(255,59,111,.18), rgba(24,245,255,.14));
+      border:2px solid rgba(255,255,255,.12);
+    }
+    .scratchReveal{
+      font-size:24px;
+      font-weight:800;
+      line-height:1.1;
+      padding:10px;
+      color:#fff;
+    }
+    .scratchCover{
+      position:absolute; inset:0;
+      display:grid; place-items:center;
+      background:linear-gradient(135deg, #c7ccd4, #7d8596);
+      color:#111;
+      font-weight:800;
+      cursor:pointer;
+      transition:opacity .3s ease;
+    }
+    .scratchCover.hidden{opacity:0; pointer-events:none;}
+
+    .quizAnswers{display:grid; gap:10px;}
+    .quizAnswer{
+      padding:12px 14px;
+      border-radius:12px;
+      border:2px solid rgba(255,255,255,.12);
+      background:rgba(255,255,255,.05);
+      cursor:pointer;
+      transition:.18s var(--ease);
+      font-size:13px;
+    }
+    .quizAnswer:hover{transform:translateY(-2px); border-color:rgba(255,59,111,.4);}
+
+    .memoryGrid{display:grid; grid-template-columns:repeat(4,1fr); gap:8px;}
+    .memoryCard{
+      aspect-ratio:1/1;
+      border-radius:12px;
+      border:2px solid rgba(255,255,255,.12);
+      background:rgba(255,255,255,.06);
+      display:grid; place-items:center;
+      cursor:pointer;
+      font-size:22px;
+      user-select:none;
+    }
+    .memoryCard.revealed{background:rgba(255,59,111,.18);}
+    .memoryCard.matched{background:rgba(45,212,191,.18); border-color:rgba(45,212,191,.35);}
+
+    .reactionArea{
+      height:180px;
+      border-radius:14px;
+      border:2px solid rgba(255,255,255,.12);
+      background:rgba(255,255,255,.05);
+      display:grid;
+      place-items:center;
+      text-align:center;
+      cursor:pointer;
+      font-weight:800;
+      padding:14px;
+      font-size:18px;
+    }
+    .reactionArea.wait{background:rgba(255,176,0,.15);}
+    .reactionArea.go{background:rgba(45,212,191,.18);}
+
+    .tapZone{
+      position:relative;
+      height:180px;
+      border-radius:14px;
+      border:2px solid rgba(255,255,255,.12);
+      background:rgba(255,255,255,.05);
+      overflow:hidden;
+    }
+    .tapTarget{
+      position:absolute;
+      width:52px; height:52px;
+      border-radius:50%;
+      display:grid; place-items:center;
+      background:linear-gradient(135deg, rgba(255,59,111,.96), rgba(255,176,0,.9));
+      color:#fff;
+      font-weight:800;
+      cursor:pointer;
+      box-shadow:0 12px 28px rgba(255,59,111,.32);
+      user-select:none;
+    }
+
+    .pickGrid{display:grid; grid-template-columns:repeat(3,1fr); gap:10px;}
+    .pickBox{
+      padding:22px 8px;
+      border-radius:12px;
+      border:2px solid rgba(255,255,255,.12);
+      background:rgba(255,255,255,.05);
+      text-align:center;
+      cursor:pointer;
+      font-weight:800;
+      user-select:none;
+      font-size:13px;
+    }
+    .pickBox.opened{background:rgba(24,245,255,.15);}
+
+    .progressShell{
+      width:100%;
+      height:16px;
+      border-radius:999px;
+      overflow:hidden;
+      border:2px solid rgba(255,255,255,.10);
+      background:rgba(255,255,255,.06);
+    }
+    .progressFill{
+      height:100%;
+      width:0%;
+      background:linear-gradient(90deg, rgba(255,59,111,.98), rgba(24,245,255,.9));
+      transition:width .24s ease;
+    }
+
+    .hiddenArea{
+      position:relative;
+      height:180px;
+      border-radius:14px;
+      border:2px solid rgba(255,255,255,.12);
+      background:
+        radial-gradient(circle at 20% 30%, rgba(255,255,255,.06), transparent 16%),
+        radial-gradient(circle at 75% 45%, rgba(255,255,255,.04), transparent 15%),
+        radial-gradient(circle at 52% 78%, rgba(255,255,255,.04), transparent 14%),
+        rgba(255,255,255,.04);
+      overflow:hidden;
+    }
+    .hiddenToken{
+      position:absolute;
+      width:38px; height:38px;
+      border-radius:50%;
+      display:grid; place-items:center;
+      background:linear-gradient(135deg, #ffd166, #ff7a45);
+      color:#111;
+      font-weight:800;
+      cursor:pointer;
+      box-shadow:0 12px 28px rgba(255,176,0,.28);
+      user-select:none;
+    }
+
+    footer{
+      border-top:3px solid rgba(255,255,255,.10);
+      padding:28px 0 8px;
+      color:rgba(255,255,255,.62);
+      font-size:12px;
+      display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap;
+      margin-top:42px;
+    }
+
+    .reveal{opacity:0; transform:translateY(18px); will-change: transform, opacity;}
+
+    @media (max-width: 980px){
+      h1{font-size:40px}
+      .grid3{grid-template-columns:1fr 1fr}
+      nav{display:none}
+      .hamburger{display:flex}
+    }
+    @media (max-width: 720px){
+      .grid3{grid-template-columns:1fr}
+    }
+    @media (max-width: 520px){
+      .wrap{padding:16px 14px 72px}
+      h1{font-size:34px}
+      .heroActions{gap:10px}
+      .heroActions .btn{width:100%}
+      .topbarInner{padding:12px 14px}
+      .mobileMenuInner{padding:12px 14px 16px}
+    }
+    @media (max-width: 520px){
+      .topbarInner{
+        flex-wrap: nowrap;
+        gap: 10px;
+      }
+      .ctaCenter{
+        margin: 0;
+        flex: 1;
+        display:flex;
+        justify-content:center;
+      }
+      .ctaCenter.btn{
+        padding: 10px 12px;
+        font-size: 12px;
+      }
+      .navWrap{
+        margin-left: 0;
+        flex: 0 0 auto;
+      }
+      .hamburger{
+        flex: 0 0 auto;
+      }
+    }
+  </style>
+
+  <link rel="canonical" href="https://www.sindikatstudio83.me/sr-me/gamification/" />
+  <meta name="robots" content="index,follow" />
+  <meta property="og:url" content="https://www.sindikatstudio83.me/sr-me/gamification/" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta property="og:image" content="https://www.sindikatstudio83.me/studio83logo.png" />
+  <meta property="og:title" content="Sindikat - Gamification" />
+  <meta property="og:description" content="Interaktivne kampanje i mini igre koje dižu angažman." />
+  <meta name="twitter:title" content="Sindikat - Gamification" />
+  <meta name="twitter:description" content="Interaktivne kampanje i mini igre koje dižu angažman." />
+  <meta name="twitter:image" content="https://www.sindikatstudio83.me/studio83logo.png" />
+</head>
+
+<body>
+  <a class="floatingLogo" href="/sr-me/pocetna" aria-label="Sindikat Studio 83 - Početna">
+    <div class="logoMark" aria-hidden="true">
+      <img class="logoMarkImg" src="/studio83logo.png" alt="">
+    </div>
+  </a>
+
+  <noscript>
+    <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PBXVW3GK" height="0" width="0" style="display:none;visibility:hidden"></iframe>
+  </noscript>
+
+  <div class="heroBg" id="heroBg" aria-hidden="true"></div>
+  <div class="blob" id="blob1" aria-hidden="true"></div>
+  <div class="blob b2" id="blob2" aria-hidden="true"></div>
+
+  <header class="topbar">
+    <div class="topbarInner reveal">
+      <a class="btn primary ctaCenter" href="/sr-me/kontakt">
+        <span class="dot"></span>Kontaktiraj nas
+      </a>
+
+      <div class="navWrap">
+        <nav aria-label="Primary">
+          <a href="/sr-me/pocetna">Početna</a>
+          <a href="/sr-me/usluge">Usluge</a>
+          <a href="/sr-me/onama">O nama</a>
+          <a href="/sr-me/blog">Blog</a>
+          <a href="/sr-me/poslovi">Poslovi</a>
+        </nav>
+
+        <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+
+    <div class="mobileMenu" id="mobileMenu" aria-label="Mobile menu">
+      <div class="mobileMenuInner">
+        <a href="/sr-me/pocetna">Početna</a>
+        <a href="/sr-me/usluge">Usluge</a>
+        <a href="/sr-me/onama">O nama</a>
+        <a href="/sr-me/blog">Blog</a>
+        <a href="/sr-me/poslovi">Poslovi</a>
+      </div>
+    </div>
+  </header>
+
+  <div class="wrap">
+    <section class="hero" id="top">
+      <div class="kicker reveal"><span class="dot"></span> Interaktivne kampanje</div>
+      <h1 class="heroTitle reveal" id="heroTitle">Gamification</h1>
+      <p class="sub reveal">
+        Mini formati koji uvode korisnika u interakciju odmah, bez dodatnih koraka.
+      </p>
+      <div class="heroActions reveal">
+        <a class="btn primary" href="#games"><span class="dot"></span> Pogledaj</a>
+        <a class="btn" href="/sr-me/kontakt">Traži kampanju</a>
+      </div>
+    </section>
+
+    <section class="section" id="games">
+      <div class="grid3">
+
+        <div class="card reveal">
+          <div class="cardBody">
+            <div class="cardTop">
+              <h3 class="cardTitle">Spin to Win</h3>
+              <span class="tag">reward</span>
+            </div>
+            <p class="cardIntro">Točak za popust, free drink ili bonus.</p>
+            <div class="gameArea">
+              <div class="wheelWrap">
+                <div class="wheelShell">
+                  <div class="wheelPointer"></div>
+                  <div class="wheelDisc" id="wheelDisc"></div>
+                </div>
+              </div>
+              <div class="gameTools">
+                <button class="btn primary small" id="spinBtn"><span class="dot"></span> Zavrti</button>
+                <div class="gameNote">Jedno okretanje</div>
+              </div>
+              <div class="gameStatus" id="spinStatus">Klikni i zavrti točak.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card reveal">
+          <div class="cardBody">
+            <div class="cardTop">
+              <h3 class="cardTitle">Scratch Card</h3>
+              <span class="tag">instant</span>
+            </div>
+            <p class="cardIntro">Brzo otkrivanje nagrade direktno na kartici.</p>
+            <div class="gameArea">
+              <div class="scratchArea">
+                <div class="scratchReveal" id="scratchReveal">FREE DRINK</div>
+                <div class="scratchCover" id="scratchCover">SCRATCH</div>
+              </div>
+              <div class="gameTools">
+                <button class="btn small" id="scratchReset">Nova kartica</button>
+              </div>
+              <div class="gameStatus" id="scratchStatus">Klikni na karticu i otkrij reward.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card reveal">
+          <div class="cardBody">
+            <div class="cardTop">
+              <h3 class="cardTitle">Mini Quiz</h3>
+              <span class="tag">filter</span>
+            </div>
+            <p class="cardIntro">Kratak izbor sa personalizovanim rezultatom.</p>
+            <div class="gameArea">
+              <div class="quizAnswers" id="quizAnswers">
+                <div class="quizAnswer" data-result="🔥 Party rezultat: preporuka za event + welcome drink">Noćni izlazak</div>
+                <div class="quizAnswer" data-result="🍔 Food rezultat: preporuka za combo ponudu">Hrana i chill</div>
+                <div class="quizAnswer" data-result="🎟️ VIP rezultat: rezervacija + bonus perk">VIP iskustvo</div>
+              </div>
+              <div class="gameStatus" id="quizStatus">Odaberi jedan odgovor.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card reveal">
+          <div class="cardBody">
+            <div class="cardTop">
+              <h3 class="cardTitle">Memory Match</h3>
+              <span class="tag">engagement</span>
+            </div>
+            <p class="cardIntro">Spoji sve parove i završi rundu.</p>
+            <div class="gameArea">
+              <div class="memoryGrid" id="memoryGrid"></div>
+              <div class="gameTools">
+                <button class="btn small" id="memoryReset">Resetuj</button>
+              </div>
+              <div class="gameStatus" id="memoryStatus">Nađi sve parove.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card reveal">
+          <div class="cardBody">
+            <div class="cardTop">
+              <h3 class="cardTitle">Reaction Test</h3>
+              <span class="tag">score</span>
+            </div>
+            <p class="cardIntro">Sačekaj signal i klikni što brže možeš.</p>
+            <div class="gameArea">
+              <div class="reactionArea" id="reactionArea">Klikni za start</div>
+              <div class="gameTools">
+                <button class="btn small" id="reactionReset">Restart</button>
+              </div>
+              <div class="gameStatus" id="reactionStatus">Najbrži dobijaju benefit.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card reveal">
+          <div class="cardBody">
+            <div class="cardTop">
+              <h3 class="cardTitle">Tap Challenge</h3>
+              <span class="tag">akcija</span>
+            </div>
+            <p class="cardIntro">Uhvati metu u roku i skupi dovoljno pogodaka.</p>
+            <div class="gameArea">
+              <div class="tapZone" id="tapZone"></div>
+              <div class="gameTools">
+                <button class="btn primary small" id="tapStart"><span class="dot"></span> Start</button>
+                <button class="btn small" id="tapReset">Reset</button>
+              </div>
+              <div class="gameStatus" id="tapStatus">Skupi 8 pogodaka za reward.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card reveal">
+          <div class="cardBody">
+            <div class="cardTop">
+              <h3 class="cardTitle">Lucky Pick</h3>
+              <span class="tag">choice</span>
+            </div>
+            <p class="cardIntro">Tri kutije, jedan izbor, jedan reward.</p>
+            <div class="gameArea">
+              <div class="pickGrid" id="pickGrid">
+                <div class="pickBox">BOX 1</div>
+                <div class="pickBox">BOX 2</div>
+                <div class="pickBox">BOX 3</div>
+              </div>
+              <div class="gameTools">
+                <button class="btn small" id="pickReset">Nova runda</button>
+              </div>
+              <div class="gameStatus" id="pickStatus">Odaberi jednu kutiju.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card reveal">
+          <div class="cardBody">
+            <div class="cardTop">
+              <h3 class="cardTitle">Progress Unlock</h3>
+              <span class="tag">loyalty</span>
+            </div>
+            <p class="cardIntro">Napuni progress i otključaj benefit.</p>
+            <div class="gameArea">
+              <div class="progressShell">
+                <div class="progressFill" id="progressFill"></div>
+              </div>
+              <div class="gameTools">
+                <button class="btn primary small" id="progressBtn"><span class="dot"></span> Dodaj korak</button>
+                <div class="gameNote" id="progressText">0 / 5 koraka</div>
+              </div>
+              <div class="gameStatus" id="progressStatus">Sakupi 5 koraka za unlock.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card reveal">
+          <div class="cardBody">
+            <div class="cardTop">
+              <h3 class="cardTitle">Hidden Token</h3>
+              <span class="tag">hunt</span>
+            </div>
+            <p class="cardIntro">Nađi skriveni token na kartici.</p>
+            <div class="gameArea">
+              <div class="hiddenArea" id="hiddenArea">
+                <div class="hiddenToken" id="hiddenToken">★</div>
+              </div>
+              <div class="gameTools">
+                <button class="btn small" id="hiddenReset">Nova pozicija</button>
+              </div>
+              <div class="gameStatus" id="hiddenStatus">Pronađi skriveni token.</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <footer>
+      <div>© <span id="year"></span> Sindikat - Performance & Activation Studio</div>
+      <div>Podgorica • Crna Gora • @sindikat_events</div>
+    </footer>
+  </div>
+
+  <script>
+    const yearEl = document.getElementById('year');
+    if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+
+    const closeMobileMenu = () => {
+      if (!mobileMenu) return;
+      mobileMenu.style.display = 'none';
+      mobileMenu.style.opacity = '';
+      mobileMenu.style.transform = '';
+      if (hamburger) hamburger.setAttribute('aria-expanded','false');
+    };
+
+    if (hamburger && mobileMenu) {
+      hamburger.addEventListener('click', ()=>{
+        const isOpen = mobileMenu.style.display === 'block';
+        if (isOpen) {
+          anime({
+            targets: mobileMenu,
+            opacity: [1,0],
+            translateY: [0,6],
+            duration: 220,
+            easing: 'easeOutQuad',
+            complete: closeMobileMenu
+          });
+        } else {
+          mobileMenu.style.display = 'block';
+          hamburger.setAttribute('aria-expanded','true');
+          anime({
+            targets: mobileMenu,
+            opacity: [0,1],
+            translateY: [6,0],
+            duration: 260,
+            easing: 'easeOutQuad'
+          });
+        }
+      });
+
+      document.querySelectorAll('#mobileMenu a').forEach(a=>{
+        a.addEventListener('click', closeMobileMenu);
+      });
+
+      document.addEventListener('click', (e)=>{
+        if (mobileMenu.style.display !== 'block') return;
+        const inside = mobileMenu.contains(e.target) || hamburger.contains(e.target);
+        if (!inside) closeMobileMenu();
+      });
+    }
+
+    const titleEl = document.getElementById('heroTitle');
+    if (titleEl) {
+      const raw = titleEl.textContent.trim();
+      const words = raw.split(/\s+/);
+      titleEl.textContent = '';
+      words.forEach((w, i) => {
+        const span = document.createElement('span');
+        span.textContent = w;
+        titleEl.appendChild(span);
+        if (i !== words.length - 1) titleEl.appendChild(document.createTextNode(' '));
+      });
+    }
+
+    const revealEls = document.querySelectorAll('.reveal');
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(entry=>{
+        if(!entry.isIntersecting) return;
+        const el = entry.target;
+        anime({ targets: el, opacity:[0,1], translateY:[18,0], duration: 820, easing:'easeOutExpo' });
+        io.unobserve(el);
+      });
+    }, {threshold: 0.14});
+    revealEls.forEach(el=>io.observe(el));
+
+    window.addEventListener('load', ()=>{
+      anime({
+        targets: '#heroTitle span',
+        opacity: [0,1],
+        translateY: [16,0],
+        delay: anime.stagger(45),
+        duration: 900,
+        easing: 'easeOutExpo'
+      });
+    });
+
+    const heroBg = document.getElementById('heroBg');
+    const b1 = document.getElementById('blob1');
+    const b2 = document.getElementById('blob2');
+
+    const setBlobsBase = () => {
+      if (!b1 || !b2) return;
+      const w = window.innerWidth, h = window.innerHeight;
+      b1.style.left = Math.max(12, w*0.06) + 'px';
+      b1.style.top  = Math.max(12, h*0.16) + 'px';
+      b2.style.left = Math.max(12, w*0.60) + 'px';
+      b2.style.top  = Math.max(12, h*0.08) + 'px';
+    };
+    setBlobsBase();
+    window.addEventListener('resize', setBlobsBase);
+
+    anime({
+      targets: '#blob1',
+      translateX: [0, 18, -10, 0],
+      translateY: [0, -12, 16, 0],
+      duration: 9000,
+      easing: 'easeInOutSine',
+      loop: true
+    });
+    anime({
+      targets: '#blob2',
+      translateX: [0, -14, 10, 0],
+      translateY: [0, 14, -10, 0],
+      duration: 11000,
+      easing: 'easeInOutSine',
+      loop: true
+    });
+
+    let ticking = false;
+    window.addEventListener('scroll', ()=>{
+      if(ticking) return;
+      ticking = true;
+      requestAnimationFrame(()=>{
+        const y = window.scrollY || 0;
+        if(heroBg) heroBg.style.transform = `translateY(${y * 0.06}px)`;
+        ticking = false;
+      });
+    }, {passive:true});
+
+    function shuffle(arr){
+      return [...arr].sort(() => Math.random() - 0.5);
+    }
+
+    /* 1 SPIN */
+    const spinBtn = document.getElementById('spinBtn');
+    const spinStatus = document.getElementById('spinStatus');
+    const wheelDisc = document.getElementById('wheelDisc');
+    const spinRewards = ['10% POPUSTA','FREE DRINK','TRY AGAIN','VIP ENTRY','FREE DESSERT','15% POPUSTA'];
+    let spinRotation = 0;
+    let spinLocked = false;
+
+    spinBtn.addEventListener('click', ()=>{
+      if (spinLocked) return;
+      spinLocked = true;
+      spinBtn.disabled = true;
+      spinBtn.textContent = 'Vrti se...';
+
+      const segmentAngle = 360 / spinRewards.length;
+      const winIndex = Math.floor(Math.random() * spinRewards.length);
+      const targetAngle = 360 - (winIndex * segmentAngle) - (segmentAngle / 2);
+      spinRotation += 360 * 6 + targetAngle;
+      wheelDisc.style.transform = `rotate(${spinRotation}deg)`;
+
+      setTimeout(()=>{
+        spinStatus.innerHTML = `Osvojeno: <strong>${spinRewards[winIndex]}</strong>`;
+        spinBtn.textContent = 'Odigrano';
+      }, 4900);
+    });
+
+    /* 2 SCRATCH */
+    const scratchReveal = document.getElementById('scratchReveal');
+    const scratchCover = document.getElementById('scratchCover');
+    const scratchReset = document.getElementById('scratchReset');
+    const scratchStatus = document.getElementById('scratchStatus');
+    const scratchRewards = ['FREE DRINK','10% OFF','TRY AGAIN','VIP PERK','FREE DESSERT'];
+
+    function setScratchReward(){
+      scratchReveal.textContent = scratchRewards[Math.floor(Math.random() * scratchRewards.length)];
+    }
+    setScratchReward();
+
+    scratchCover.addEventListener('click', ()=>{
+      scratchCover.classList.add('hidden');
+      scratchStatus.innerHTML = 'Reward otkriven.';
+    });
+    scratchReset.addEventListener('click', ()=>{
+      scratchCover.classList.remove('hidden');
+      setScratchReward();
+      scratchStatus.textContent = 'Klikni na karticu i otkrij reward.';
+    });
+
+    /* 3 QUIZ */
+    const quizStatus = document.getElementById('quizStatus');
+    document.querySelectorAll('#quizAnswers .quizAnswer').forEach(a=>{
+      a.addEventListener('click', ()=>{
+        quizStatus.innerHTML = a.dataset.result;
+      });
+    });
+
+    /* 4 MEMORY */
+    const memoryGrid = document.getElementById('memoryGrid');
+    const memoryReset = document.getElementById('memoryReset');
+    const memoryStatus = document.getElementById('memoryStatus');
+    const memorySymbols = ['🍔','🍔','🍹','🍹','🎟️','🎟️','🎧','🎧'];
+    let memoryOpen = [];
+    let memoryLock = false;
+    let memoryMatches = 0;
+
+    function buildMemory(){
+      memoryGrid.innerHTML = '';
+      memoryOpen = [];
+      memoryLock = false;
+      memoryMatches = 0;
+      memoryStatus.textContent = 'Nađi sve parove.';
+
+      const shuffled = shuffle(memorySymbols);
+      shuffled.forEach(symbol => {
+        const card = document.createElement('div');
+        card.className = 'memoryCard';
+        card.dataset.symbol = symbol;
+        card.dataset.revealed = 'false';
+        card.textContent = '?';
+
+        card.addEventListener('click', ()=>{
+          if (memoryLock) return;
+          if (card.classList.contains('matched')) return;
+          if (card.dataset.revealed === 'true') return;
+
+          card.dataset.revealed = 'true';
+          card.classList.add('revealed');
+          card.textContent = symbol;
+          memoryOpen.push(card);
+
+          if (memoryOpen.length === 2) {
+            memoryLock = true;
+            const [c1, c2] = memoryOpen;
+
+            if (c1.dataset.symbol === c2.dataset.symbol) {
+              c1.classList.add('matched');
+              c2.classList.add('matched');
+              memoryOpen = [];
+              memoryLock = false;
+              memoryMatches++;
+
+              if (memoryMatches === 4) {
+                memoryStatus.innerHTML = 'Završeno: <strong>reward unlocked</strong>';
+              } else {
+                memoryStatus.textContent = `Par pronađen. Još ${4 - memoryMatches}.`;
+              }
+            } else {
+              setTimeout(()=>{
+                [c1, c2].forEach(c=>{
+                  c.dataset.revealed = 'false';
+                  c.classList.remove('revealed');
+                  c.textContent = '?';
+                });
+                memoryOpen = [];
+                memoryLock = false;
+              }, 700);
+            }
+          }
+        });
+
+        memoryGrid.appendChild(card);
+      });
+    }
+    buildMemory();
+    memoryReset.addEventListener('click', buildMemory);
+
+    /* 5 REACTION */
+    const reactionArea = document.getElementById('reactionArea');
+    const reactionReset = document.getElementById('reactionReset');
+    const reactionStatus = document.getElementById('reactionStatus');
+    let reactionState = 'idle';
+    let reactionStart = 0;
+    let reactionTimer = null;
+
+    function resetReaction(){
+      reactionState = 'idle';
+      clearTimeout(reactionTimer);
+      reactionArea.className = 'reactionArea';
+      reactionArea.textContent = 'Klikni za start';
+      reactionStatus.textContent = 'Najbrži dobijaju benefit.';
+    }
+    resetReaction();
+
+    reactionArea.addEventListener('click', ()=>{
+      if (reactionState === 'idle') {
+        reactionState = 'waiting';
+        reactionArea.className = 'reactionArea wait';
+        reactionArea.textContent = 'Sačekaj zeleno...';
+        const delay = 1200 + Math.random() * 2200;
+
+        reactionTimer = setTimeout(()=>{
+          reactionState = 'go';
+          reactionStart = performance.now();
+          reactionArea.className = 'reactionArea go';
+          reactionArea.textContent = 'KLIKNI SAD!';
+        }, delay);
+      } else if (reactionState === 'waiting') {
+        clearTimeout(reactionTimer);
+        reactionState = 'idle';
+        reactionArea.className = 'reactionArea';
+        reactionArea.textContent = 'Prerano!';
+        reactionStatus.textContent = 'Klik je bio prerano.';
+      } else if (reactionState === 'go') {
+        const ms = Math.round(performance.now() - reactionStart);
+        reactionState = 'done';
+        reactionArea.className = 'reactionArea';
+        reactionArea.textContent = `${ms} ms`;
+        reactionStatus.innerHTML = `Rezultat: <strong>${ms} ms</strong>`;
+      }
+    });
+    reactionReset.addEventListener('click', resetReaction);
+
+    /* 6 TAP */
+    const tapZone = document.getElementById('tapZone');
+    const tapStart = document.getElementById('tapStart');
+    const tapReset = document.getElementById('tapReset');
+    const tapStatus = document.getElementById('tapStatus');
+    let tapScore = 0;
+    let tapRunning = false;
+    let tapCountdown = null;
+    let tapTimer = null;
+    let tapSeconds = 8;
+
+    function placeTapTarget(){
+      tapZone.innerHTML = '';
+      const target = document.createElement('div');
+      target.className = 'tapTarget';
+      target.textContent = '⚡';
+
+      const maxX = tapZone.clientWidth - 52;
+      const maxY = tapZone.clientHeight - 52;
+      target.style.left = Math.max(0, Math.random() * maxX) + 'px';
+      target.style.top = Math.max(0, Math.random() * maxY) + 'px';
+
+      target.addEventListener('click', ()=>{
+        if (!tapRunning) return;
+        tapScore++;
+        tapStatus.textContent = `Score: ${tapScore} | Vrijeme: ${tapSeconds}s`;
+        placeTapTarget();
+      });
+
+      tapZone.appendChild(target);
+    }
+
+    function resetTap(){
+      tapRunning = false;
+      tapScore = 0;
+      tapSeconds = 8;
+      clearInterval(tapCountdown);
+      clearTimeout(tapTimer);
+      tapZone.innerHTML = '';
+      tapStatus.textContent = 'Skupi 8 pogodaka za reward.';
+    }
+    resetTap();
+
+    tapStart.addEventListener('click', ()=>{
+      if (tapRunning) return;
+      tapRunning = true;
+      tapScore = 0;
+      tapSeconds = 8;
+      placeTapTarget();
+      tapStatus.textContent = 'Score: 0 | Vrijeme: 8s';
+
+      tapCountdown = setInterval(()=>{
+        tapSeconds--;
+        if (tapSeconds >= 0 && tapRunning) {
+          tapStatus.textContent = `Score: ${tapScore} | Vrijeme: ${tapSeconds}s`;
+        }
+      }, 1000);
+
+      tapTimer = setTimeout(()=>{
+        tapRunning = false;
+        clearInterval(tapCountdown);
+        tapZone.innerHTML = '';
+        if (tapScore >= 8) {
+          tapStatus.innerHTML = `Završeno: <strong>${tapScore} pogodaka — reward unlocked</strong>`;
+        } else {
+          tapStatus.textContent = `Kraj igre. Score: ${tapScore}.`;
+        }
+      }, 8000);
+    });
+    tapReset.addEventListener('click', resetTap);
+
+    /* 7 PICK */
+    const pickGrid = document.getElementById('pickGrid');
+    const pickStatus = document.getElementById('pickStatus');
+    const pickReset = document.getElementById('pickReset');
+    const pickRewards = ['10% POPUSTA','FREE DRINK','TRY AGAIN'];
+
+    function setupPick(){
+      pickStatus.textContent = 'Odaberi jednu kutiju.';
+      const items = shuffle(pickRewards);
+      [...pickGrid.children].forEach((box, i)=>{
+        box.className = 'pickBox';
+        box.textContent = `BOX ${i + 1}`;
+        box.dataset.reward = items[i];
+        box.onclick = ()=>{
+          if ([...pickGrid.children].some(b => b.classList.contains('opened'))) return;
+          box.classList.add('opened');
+          box.textContent = box.dataset.reward;
+          pickStatus.innerHTML = `Otvoreno: <strong>${box.dataset.reward}</strong>`;
+        };
+      });
+    }
+    setupPick();
+    pickReset.addEventListener('click', setupPick);
+
+    /* 8 PROGRESS */
+    const progressBtn = document.getElementById('progressBtn');
+    const progressFill = document.getElementById('progressFill');
+    const progressText = document.getElementById('progressText');
+    const progressStatus = document.getElementById('progressStatus');
+    let progressCount = 0;
+    const progressMax = 5;
+
+    progressBtn.addEventListener('click', ()=>{
+      if (progressCount >= progressMax) return;
+      progressCount++;
+      const pct = (progressCount / progressMax) * 100;
+      progressFill.style.width = pct + '%';
+      progressText.textContent = `${progressCount} / ${progressMax} koraka`;
+
+      if (progressCount === progressMax) {
+        progressStatus.innerHTML = 'Otključano: <strong>VIP perk / bonus reward</strong>';
+      } else {
+        progressStatus.textContent = `Još ${progressMax - progressCount} koraka do unlock-a.`;
+      }
+    });
+
+    /* 9 HIDDEN */
+    const hiddenArea = document.getElementById('hiddenArea');
+    const hiddenToken = document.getElementById('hiddenToken');
+    const hiddenStatus = document.getElementById('hiddenStatus');
+    const hiddenReset = document.getElementById('hiddenReset');
+
+    function placeHiddenToken(){
+      const maxX = hiddenArea.clientWidth - 38;
+      const maxY = hiddenArea.clientHeight - 38;
+      hiddenToken.style.left = Math.random() * maxX + 'px';
+      hiddenToken.style.top = Math.random() * maxY + 'px';
+      hiddenStatus.textContent = 'Pronađi skriveni token.';
+    }
+    hiddenToken.addEventListener('click', ()=>{
+      hiddenStatus.innerHTML = 'Pronađen token: <strong>reward unlocked</strong>';
+    });
+    hiddenReset.addEventListener('click', placeHiddenToken);
+    window.addEventListener('load', placeHiddenToken);
+    window.addEventListener('resize', placeHiddenToken);
+  </script>
+</body>
+</html>
