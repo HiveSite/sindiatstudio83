@@ -1,0 +1,1513 @@
+<!DOCTYPE html>
+<html lang="sr-ME">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-NH2FL5SP1Y"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-NH2FL5SP1Y');
+  </script>
+
+  <!-- Google Tag Manager -->
+  <script>
+    (function(w,d,s,l,i){
+      w[l]=w[l]||[];
+      w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});
+      var f=d.getElementsByTagName(s)[0],
+          j=d.createElement(s),
+          dl=l!='dataLayer' ? '&l='+l : '';
+      j.async=true;
+      j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;
+      f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-PBXVW3GK');
+  </script>
+  <!-- End Google Tag Manager -->
+
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Analytics & Tracking | Sindikat</title>
+  <meta name="description" content="GA4, GTM i event tracking za leadove, pozive, forme i funnel. Mjerenje koje pokazuje šta radi, a šta ne." />
+  <link rel="icon" type="image/png" href="/favicon.png">
+
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+
+  <style>
+    :root{
+      --bg:#05010D;
+      --bg2:#12011F;
+      --text:#FFFFFF;
+      --muted:rgba(255,255,255,.78);
+      --muted2:rgba(255,255,255,.62);
+      --border:rgba(255,255,255,.14);
+      --border2:rgba(255,255,255,.10);
+      --accent:#FF3B6F;
+      --accent2:#FFB000;
+      --cyan:#18F5FF;
+      --good:#2dd4bf;
+      --warn:#ffd166;
+
+      --shadow:0 22px 75px rgba(0,0,0,.68);
+      --shadow2:0 14px 38px rgba(0,0,0,.48);
+
+      --r2:14px;
+      --r3:18px;
+
+      --max:1120px;
+      --ease:cubic-bezier(.2,.9,.2,1);
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      background:
+        radial-gradient(820px 520px at 12% 10%, rgba(255,59,111,.22), transparent 60%),
+        radial-gradient(900px 520px at 88% 8%, rgba(24,245,255,.14), transparent 58%),
+        radial-gradient(760px 520px at 70% 28%, rgba(162,76,255,.12), transparent 60%),
+        radial-gradient(680px 480px at 20% 70%, rgba(255,176,0,.10), transparent 62%),
+        linear-gradient(180deg, var(--bg), var(--bg2));
+      color:var(--text);
+      font-family:Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      letter-spacing:.2px;
+      overflow-x:hidden;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+    }
+
+    body:before{
+      content:"";
+      position:fixed; inset:0;
+      pointer-events:none;
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23n)' opacity='.23'/%3E%3C/svg%3E");
+      opacity:.06;
+      mix-blend-mode:overlay;
+      z-index:0;
+    }
+
+    a{color:inherit;text-decoration:none}
+    .wrap{max-width:var(--max);margin:0 auto;padding:22px 18px 120px;position:relative;z-index:2}
+
+    .heroBg{
+      position:fixed;
+      inset:0;
+      z-index:1;
+      pointer-events:none;
+      overflow:hidden;
+      background:
+        radial-gradient(900px 540px at 20% 20%, rgba(255,59,111,.14), transparent 60%),
+        radial-gradient(900px 540px at 80% 10%, rgba(24,245,255,.10), transparent 60%),
+        radial-gradient(720px 520px at 68% 55%, rgba(162,76,255,.12), transparent 60%);
+    }
+    .heroBg:after{
+      content:"";
+      position:absolute; inset:0;
+      background:
+        radial-gradient(700px 420px at 18% 20%, rgba(255,59,111,.18), transparent 60%),
+        radial-gradient(900px 520px at 70% 12%, rgba(24,245,255,.14), transparent 58%),
+        linear-gradient(180deg, rgba(0,0,0,.18), rgba(6,1,13,.86) 62%, rgba(6,1,13,.96));
+    }
+
+    .blob{
+      position:fixed;
+      z-index:1;
+      pointer-events:none;
+      width:520px;height:520px;
+      border-radius:999px;
+      background: radial-gradient(circle at 35% 30%, rgba(255,59,111,.18), transparent 58%);
+      filter: blur(18px);
+      opacity:.55;
+      mix-blend-mode:screen;
+      transform:translate3d(0,0,0);
+    }
+    .blob.b2{
+      width:420px;height:420px;
+      background: radial-gradient(circle at 40% 35%, rgba(24,245,255,.14), transparent 60%);
+      opacity:.45;
+    }
+
+    .floatingLogo{
+      position:fixed;
+      top:14px;
+      left:14px;
+      z-index:120;
+      display:block;
+      text-decoration:none;
+    }
+    .logoMark{
+      width:176px;height:44px;
+      border-radius:14px;
+      border:1.5px solid rgba(255,59,111,.5);
+      box-shadow:
+        0 18px 34px rgba(0,0,0,.45),
+        0 0 0 3px rgba(0,0,0,.45) inset,
+        0 0 42px rgba(255,59,111,.22);
+      transform:rotate(-2deg);
+      overflow:hidden;
+      background:rgba(0,0,0,.18);
+      display:grid;
+      place-items:center;
+    }
+    .logoMarkImg{
+      width:100%;
+      height:100%;
+      object-fit:contain;
+      object-position:center;
+      padding:6px;
+      filter:drop-shadow(0 10px 18px rgba(0,0,0,.45));
+    }
+    .floatingLogo .logoMark{
+      width:50vw;
+      max-width:240px;
+      height:auto;
+      aspect-ratio:176 / 44;
+      transform:rotate(-2deg);
+      transform-origin:top left;
+    }
+
+    .topbar{
+      position:fixed;
+      bottom:0;
+      left:0;
+      right:0;
+      z-index:50;
+      backdrop-filter:blur(12px);
+      -webkit-backdrop-filter:blur(12px);
+      background:rgba(5,7,12,.88);
+      border-top:3px solid rgba(255,255,255,.12);
+    }
+    .topbarInner{
+      max-width:var(--max);
+      margin:0 auto;
+      padding:12px 18px;
+      display:flex;
+      align-items:center;
+      gap:12px;
+      justify-content:flex-start;
+    }
+    .ctaCenter{margin:0;}
+    .navWrap{
+      margin-left:auto;
+      display:flex;
+      align-items:center;
+      gap:12px;
+      position:relative;
+    }
+
+    nav{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      color:var(--muted);
+      font-size:13px;
+      align-items:center;
+    }
+    nav a{
+      padding:9px 10px;
+      border-radius:10px;
+      border:2px solid transparent;
+      transition: background .2s var(--ease), color .2s var(--ease), transform .2s var(--ease), border-color .2s var(--ease);
+      transform: translateY(0);
+    }
+    nav a:hover{
+      background:rgba(255,255,255,.05);
+      color:var(--text);
+      transform:translateY(-1px);
+      border-color:rgba(24,245,255,.35);
+    }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+      border-radius:10px;
+      padding:12px 16px;
+      font-size:13px;
+      border:3px solid rgba(255,255,255,.16);
+      background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+      color:var(--text);
+      transition:transform .18s var(--ease), box-shadow .18s var(--ease), border-color .18s var(--ease), background .18s var(--ease);
+      white-space:nowrap;
+      box-shadow:0 12px 30px rgba(0,0,0,.28);
+      cursor:pointer;
+    }
+    .btn:hover{transform:translateY(-3px);box-shadow:var(--shadow2);border-color:rgba(255,59,111,.5)}
+    .btn.primary{
+      background:linear-gradient(180deg, rgba(255,59,111,.35), rgba(255,59,111,.14));
+      border-color:rgba(255,59,111,.6);
+      box-shadow:0 20px 60px rgba(255,59,111,.20), 0 10px 28px rgba(0,0,0,.28);
+    }
+    .btn.small{padding:10px 12px;font-size:12px}
+    .dot{
+      width:8px;height:8px;border-radius:2px;
+      background:var(--accent);
+      box-shadow:0 0 0 5px rgba(255,59,111,.22), 0 0 24px rgba(255,59,111,.42);
+      transform:rotate(8deg);
+    }
+
+    .hamburger{
+      display:none;
+      width:44px;height:44px;
+      border-radius:10px;
+      border:3px solid rgba(255,255,255,.16);
+      background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+      align-items:center;justify-content:center;
+      gap:5px;
+      flex-direction:column;
+      cursor:pointer;
+    }
+    .hamburger span{
+      width:18px;height:2px;background:rgba(255,255,255,.8);
+      border-radius:3px;display:block;
+    }
+    .mobileMenu{
+      display:none;
+      position:absolute;
+      left:0; right:0;
+      bottom:100%;
+      border-bottom:3px solid rgba(255,255,255,.10);
+      background:rgba(5,7,12,.95);
+    }
+    .mobileMenuInner{
+      max-width:var(--max);
+      margin:0 auto;
+      padding:12px 18px 16px;
+      display:grid;
+      gap:8px;
+    }
+    .mobileMenuInner a{
+      padding:12px 12px;
+      border:3px solid rgba(255,255,255,.12);
+      border-radius:10px;
+      background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
+      color:var(--text);
+    }
+
+    .section{
+      padding:58px 0;
+      border-top:3px solid rgba(255,255,255,.08);
+    }
+    .hero{
+      padding:40px 0 24px;
+    }
+    .kicker{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      color:var(--muted);
+      font-size:12px;
+      text-transform:uppercase;
+      letter-spacing:1.1px;
+      margin-bottom:14px;
+    }
+    h1{
+      margin:0;
+      font-size:46px;
+      line-height:1.05;
+      letter-spacing:-.8px;
+      max-width:18ch;
+    }
+    .heroTitle span{display:inline-block;will-change:transform, opacity;}
+    .sub{
+      margin-top:14px;
+      color:rgba(255,255,255,.80);
+      font-size:15px;
+      line-height:1.65;
+      max-width:70ch;
+      text-shadow:0 10px 40px rgba(0,0,0,.35);
+    }
+    .heroActions{
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+      margin-top:18px;
+    }
+    .miniRow{
+      margin-top:18px;
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+      color:rgba(255,255,255,.70);
+      font-size:12px;
+    }
+    .miniRow span{
+      padding:8px 10px;
+      border:2px solid rgba(255,255,255,.12);
+      border-radius:10px;
+      background:rgba(10,12,18,.70);
+      box-shadow:0 10px 24px rgba(0,0,0,.22);
+    }
+
+    .headRow{
+      display:flex;
+      align-items:flex-end;
+      justify-content:space-between;
+      gap:16px;
+      flex-wrap:wrap;
+      margin-bottom:22px;
+    }
+    .h2{
+      font-size:22px;
+      letter-spacing:-.2px;
+      margin:0;
+    }
+    .desc{
+      color:rgba(255,255,255,.70);
+      font-size:13px;
+      line-height:1.65;
+      max-width:72ch;
+    }
+
+    .grid2{
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      gap:16px;
+    }
+    .grid3{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:16px;
+    }
+    .metricGrid{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:12px;
+      margin-top:16px;
+    }
+    .metric{
+      border:2px solid rgba(255,255,255,.12);
+      border-radius:14px;
+      background:rgba(8,10,16,.62);
+      padding:14px;
+      box-shadow:var(--shadow2);
+    }
+    .metric strong{
+      display:block;
+      font-size:22px;
+      margin-bottom:4px;
+    }
+    .metric span{
+      color:rgba(255,255,255,.66);
+      font-size:12px;
+      line-height:1.4;
+    }
+
+    .card{
+      border:3px solid rgba(255,255,255,.14);
+      border-radius:var(--r2);
+      background:linear-gradient(180deg, rgba(14,16,26,.92), rgba(7,8,19,.92));
+      box-shadow:var(--shadow2);
+      transition:transform .18s var(--ease), border-color .18s var(--ease), box-shadow .18s var(--ease), filter .18s var(--ease);
+      position:relative;
+      overflow:hidden;
+    }
+    .card:before{
+      content:"";
+      position:absolute;
+      inset:-35%;
+      background:
+        radial-gradient(circle at 25% 25%, rgba(255,59,111,.18), transparent 60%),
+        radial-gradient(circle at 80% 30%, rgba(24,245,255,.12), transparent 60%);
+      opacity:.5;
+      transform:rotate(8deg);
+      pointer-events:none;
+      z-index:0;
+    }
+    .card:after{
+      content:"";
+      position:absolute;
+      inset:0;
+      border:1px solid rgba(255,59,111,.18);
+      opacity:.45;
+      pointer-events:none;
+      z-index:0;
+    }
+    .card:hover{
+      transform:translateY(-6px);
+      border-color:rgba(255,59,111,.5);
+      box-shadow:var(--shadow);
+      filter:brightness(1.04);
+    }
+    .cardBody{
+      padding:18px;
+      position:relative;
+      z-index:2;
+    }
+
+    .bulletList{
+      margin:0;
+      padding-left:18px;
+      color:rgba(255,255,255,.74);
+      font-size:13px;
+      line-height:1.7;
+    }
+    .bulletList li{margin:6px 0}
+
+    .demoShell{
+      border:3px solid rgba(255,255,255,.12);
+      border-radius:18px;
+      overflow:hidden;
+      background:linear-gradient(180deg, rgba(12,14,24,.95), rgba(8,9,18,.95));
+      box-shadow:var(--shadow);
+    }
+    .demoToolbar{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      padding:12px 14px;
+      border-bottom:3px solid rgba(255,255,255,.08);
+      background:rgba(255,255,255,.03);
+    }
+    .demoToolbarLeft{
+      display:flex;
+      align-items:center;
+      gap:8px;
+    }
+    .demoDot{
+      width:10px;
+      height:10px;
+      border-radius:50%;
+      background:rgba(255,255,255,.18);
+    }
+    .demoToolbarTitle{
+      font-size:12px;
+      color:rgba(255,255,255,.62);
+      margin-left:8px;
+    }
+    .demoViewport{
+      padding:18px;
+      background:
+        radial-gradient(620px 220px at 20% 0%, rgba(255,59,111,.12), transparent 55%),
+        radial-gradient(620px 220px at 80% 0%, rgba(24,245,255,.08), transparent 55%),
+        linear-gradient(180deg, rgba(10,10,18,.95), rgba(8,9,16,.98));
+    }
+
+    .dashTop{
+      display:grid;
+      grid-template-columns:1.3fr .7fr;
+      gap:16px;
+      margin-bottom:16px;
+    }
+    .dashMain,
+    .dashSide,
+    .dashCard{
+      border:2px solid rgba(255,255,255,.10);
+      border-radius:16px;
+      background:rgba(255,255,255,.04);
+      padding:16px;
+    }
+
+    .switchRow{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-bottom:14px;
+    }
+    .switchBtn{
+      border:2px solid rgba(255,255,255,.12);
+      background:rgba(255,255,255,.04);
+      color:#fff;
+      border-radius:12px;
+      padding:10px 12px;
+      font-size:12px;
+      cursor:pointer;
+      transition:.18s var(--ease);
+    }
+    .switchBtn.active{
+      border-color:rgba(255,59,111,.52);
+      background:rgba(255,59,111,.16);
+    }
+
+    .bigNumber{
+      font-size:36px;
+      line-height:1;
+      margin:0 0 8px;
+      letter-spacing:-1px;
+    }
+    .smallMuted{
+      font-size:12px;
+      color:rgba(255,255,255,.64);
+      line-height:1.5;
+    }
+
+    .statsGrid{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:12px;
+      margin-top:14px;
+    }
+    .miniStat{
+      border:2px solid rgba(255,255,255,.08);
+      border-radius:14px;
+      background:rgba(255,255,255,.03);
+      padding:12px;
+    }
+    .miniStat strong{
+      display:block;
+      font-size:22px;
+      margin-bottom:4px;
+    }
+    .miniStat span{
+      color:rgba(255,255,255,.64);
+      font-size:12px;
+      line-height:1.4;
+    }
+
+    .barGroup{
+      display:grid;
+      gap:10px;
+      margin-top:14px;
+    }
+    .barRow{
+      display:grid;
+      gap:6px;
+    }
+    .barLabel{
+      display:flex;
+      justify-content:space-between;
+      gap:10px;
+      font-size:12px;
+      color:rgba(255,255,255,.68);
+    }
+    .barTrack{
+      height:12px;
+      border-radius:999px;
+      overflow:hidden;
+      background:rgba(255,255,255,.06);
+      border:1px solid rgba(255,255,255,.08);
+    }
+    .barFill{
+      height:100%;
+      width:0%;
+      transition:width .45s ease;
+      background:linear-gradient(90deg, rgba(255,59,111,.98), rgba(24,245,255,.9));
+    }
+
+    .funnelGrid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:16px;
+      margin-top:16px;
+    }
+    .funnelStage{
+      display:grid;
+      gap:10px;
+    }
+    .funnelStep{
+      border:2px solid rgba(255,255,255,.08);
+      border-radius:14px;
+      background:rgba(255,255,255,.03);
+      padding:12px 14px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+    }
+    .funnelStep strong{
+      display:block;
+      font-size:13px;
+      margin-bottom:3px;
+    }
+    .funnelStep span{
+      display:block;
+      font-size:12px;
+      color:rgba(255,255,255,.64);
+      line-height:1.45;
+    }
+    .funnelValue{
+      min-width:88px;
+      text-align:center;
+      border:2px solid rgba(255,255,255,.10);
+      background:rgba(255,255,255,.04);
+      border-radius:12px;
+      padding:8px 10px;
+      font-size:12px;
+    }
+
+    .eventList{
+      display:grid;
+      gap:10px;
+    }
+    .eventItem{
+      border:2px solid rgba(255,255,255,.08);
+      background:rgba(255,255,255,.03);
+      border-radius:14px;
+      padding:12px 14px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+    }
+    .eventItem strong{
+      display:block;
+      font-size:13px;
+      margin-bottom:3px;
+    }
+    .eventItem span{
+      display:block;
+      font-size:12px;
+      color:rgba(255,255,255,.64);
+      line-height:1.45;
+    }
+    .eventCount{
+      min-width:64px;
+      text-align:center;
+      border-radius:12px;
+      padding:8px 10px;
+      background:rgba(255,255,255,.05);
+      border:2px solid rgba(255,255,255,.10);
+      font-size:12px;
+    }
+
+    .dashActions{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top:16px;
+    }
+
+    .noteBox{
+      margin-top:16px;
+      border:2px solid rgba(45,212,191,.22);
+      background:rgba(45,212,191,.08);
+      border-radius:14px;
+      padding:14px;
+      color:#eafffb;
+      font-size:13px;
+      line-height:1.6;
+    }
+
+    footer{
+      border-top:3px solid rgba(255,255,255,.10);
+      padding:28px 0 8px;
+      color:rgba(255,255,255,.62);
+      font-size:12px;
+      display:flex;
+      justify-content:space-between;
+      gap:12px;
+      flex-wrap:wrap;
+      margin-top:42px;
+    }
+
+    .reveal{opacity:0;transform:translateY(18px);will-change:transform, opacity;}
+
+    @media (max-width:980px){
+      h1{font-size:40px}
+      .grid2,
+      .grid3,
+      .metricGrid,
+      .dashTop,
+      .statsGrid,
+      .funnelGrid{grid-template-columns:1fr}
+      nav{display:none}
+      .hamburger{display:flex}
+    }
+    @media (max-width:520px){
+      .wrap{padding:16px 14px 72px}
+      h1{font-size:34px}
+      .heroActions{gap:10px}
+      .heroActions .btn{width:100%}
+      .topbarInner{padding:12px 14px}
+      .mobileMenuInner{padding:12px 14px 16px}
+    }
+    @media (max-width:520px){
+      .topbarInner{
+        flex-wrap:nowrap;
+        gap:10px;
+      }
+      .ctaCenter{
+        margin:0;
+        flex:1;
+        display:flex;
+        justify-content:center;
+      }
+      .ctaCenter.btn{
+        padding:10px 12px;
+        font-size:12px;
+      }
+      .navWrap{
+        margin-left:0;
+        flex:0 0 auto;
+      }
+      .hamburger{
+        flex:0 0 auto;
+      }
+    }
+  </style>
+
+  <link rel="canonical" href="https://www.sindikatstudio83.me/sr-me/usluge/analytics-tracking/" />
+  <meta name="robots" content="index,follow" />
+  <meta property="og:url" content="https://www.sindikatstudio83.me/sr-me/usluge/analytics-tracking/" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta property="og:image" content="https://www.sindikatstudio83.me/studio83logo.png" />
+  <meta property="og:title" content="Analytics & Tracking | Sindikat" />
+  <meta property="og:description" content="GA4, GTM i event tracking za leadove, pozive, forme i funnel." />
+  <meta name="twitter:title" content="Analytics & Tracking | Sindikat" />
+  <meta name="twitter:description" content="GA4, GTM i event tracking za leadove, pozive, forme i funnel." />
+  <meta name="twitter:image" content="https://www.sindikatstudio83.me/studio83logo.png" />
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"Service",
+    "@id":"https://www.sindikatstudio83.me/sr-me/usluge/analytics-tracking/#service",
+    "name":"Analytics & Tracking",
+    "description":"GA4, GTM i event tracking za leadove, pozive, forme i funnel. Mjerenje koje pokazuje šta radi, a šta ne.",
+    "provider":{
+      "@type":"Organization",
+      "name":"Sindikat Studio 83",
+      "url":"https://www.sindikatstudio83.me/",
+      "logo":"https://www.sindikatstudio83.me/studio83logo.png"
+    },
+    "areaServed":["Podgorica","Crna Gora"]
+  }
+  </script>
+</head>
+
+<body>
+  <a class="floatingLogo" href="/sr-me/pocetna" aria-label="Sindikat Studio 83 - Početna">
+    <div class="logoMark" aria-hidden="true">
+      <img class="logoMarkImg" src="/studio83logo.png" alt="">
+    </div>
+  </a>
+
+  <noscript>
+    <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PBXVW3GK" height="0" width="0" style="display:none;visibility:hidden"></iframe>
+  </noscript>
+
+  <div class="heroBg" id="heroBg" aria-hidden="true"></div>
+  <div class="blob" id="blob1" aria-hidden="true"></div>
+  <div class="blob b2" id="blob2" aria-hidden="true"></div>
+
+  <header class="topbar">
+    <div class="topbarInner reveal">
+      <a class="btn primary ctaCenter" href="/sr-me/kontakt">
+        <span class="dot"></span>Kontaktiraj nas
+      </a>
+
+      <div class="navWrap">
+        <nav aria-label="Primary">
+          <a href="/sr-me/pocetna">Početna</a>
+          <a href="/sr-me/usluge" aria-current="page">Usluge</a>
+          <a href="/sr-me/onama">O nama</a>
+          <a href="/sr-me/blog">Blog</a>
+          <a href="/sr-me/poslovi">Poslovi</a>
+        </nav>
+
+        <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+
+    <div class="mobileMenu" id="mobileMenu" aria-label="Mobile menu">
+      <div class="mobileMenuInner">
+        <a href="/sr-me/pocetna">Početna</a>
+        <a href="/sr-me/usluge" aria-current="page">Usluge</a>
+        <a href="/sr-me/onama">O nama</a>
+        <a href="/sr-me/blog">Blog</a>
+        <a href="/sr-me/poslovi">Poslovi</a>
+      </div>
+    </div>
+  </header>
+
+  <div class="wrap">
+    <section class="hero" id="top">
+      <div class="kicker reveal"><span class="dot"></span> Analytics &amp; Tracking • Podgorica / Crna Gora</div>
+
+      <h1 class="heroTitle reveal" id="heroTitle">Bez mjerenja nema optimizacije.</h1>
+
+      <p class="sub reveal">
+        Analytics i tracking postavljamo tako da znaš <strong>odakle dolaze leadovi</strong>,
+        <strong>gdje korisnici odustaju</strong> i <strong>šta stvarno pravi rezultat</strong>.
+        GA4, GTM i event logika nijesu tu da “postoje”, nego da vode odluke.
+      </p>
+
+      <div class="miniRow reveal">
+        <span>GA4</span>
+        <span>GTM</span>
+        <span>event tracking</span>
+        <span>funnel</span>
+      </div>
+
+      <div class="heroActions reveal">
+        <a class="btn primary" href="/sr-me/kontakt"><span class="dot"></span> Traži preporuku</a>
+        <a class="btn" href="#demo">Pogledaj primjer</a>
+      </div>
+
+      <div class="metricGrid reveal">
+        <div class="metric">
+          <strong>3–7</strong>
+          <span>dana za setup i provjeru osnove</span>
+        </div>
+        <div class="metric">
+          <strong>events</strong>
+          <span>klik, forma, poziv, lead i funnel koraci</span>
+        </div>
+        <div class="metric">
+          <strong>source</strong>
+          <span>tačno vidiš odakle dolazi rezultat</span>
+        </div>
+        <div class="metric">
+          <strong>odluke</strong>
+          <span>manje nagađanja, više optimizacije</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="demo">
+      <div class="headRow">
+        <h2 class="h2 reveal">Primjer</h2>
+        <div class="desc reveal">
+          Ispod je pojednostavljen dashboard prikaz. Izaberi scenario i vidi kako se mijenjaju source podaci, funnel i eventi.
+        </div>
+      </div>
+
+      <div class="demoShell reveal">
+        <div class="demoToolbar">
+          <div class="demoToolbarLeft">
+            <span class="demoDot"></span>
+            <span class="demoDot"></span>
+            <span class="demoDot"></span>
+            <span class="demoToolbarTitle">analytics-preview.me</span>
+          </div>
+        </div>
+
+        <div class="demoViewport">
+          <div class="switchRow">
+            <button class="switchBtn active" type="button" data-scenario="leads">Lead kampanja</button>
+            <button class="switchBtn" type="button" data-scenario="booking">Rezervacije</button>
+            <button class="switchBtn" type="button" data-scenario="retarget">Retargeting</button>
+          </div>
+
+          <div class="dashTop">
+            <div class="dashMain">
+              <h3 class="bigNumber" id="mainNumber">183</h3>
+              <div class="smallMuted" id="mainText">ukupno leadova u periodu</div>
+
+              <div class="statsGrid">
+                <div class="miniStat">
+                  <strong id="statSessions">1,240</strong>
+                  <span>sesije</span>
+                </div>
+                <div class="miniStat">
+                  <strong id="statUsers">1,018</strong>
+                  <span>korisnici</span>
+                </div>
+                <div class="miniStat">
+                  <strong id="statConv">14.7%</strong>
+                  <span>konverzija</span>
+                </div>
+                <div class="miniStat">
+                  <strong id="statCpl">€4.20</strong>
+                  <span>cijena po leadu</span>
+                </div>
+              </div>
+
+              <div class="barGroup">
+                <div class="barRow">
+                  <div class="barLabel">
+                    <span>Meta</span>
+                    <span id="barMetaLabel">48%</span>
+                  </div>
+                  <div class="barTrack">
+                    <div class="barFill" id="barMeta"></div>
+                  </div>
+                </div>
+
+                <div class="barRow">
+                  <div class="barLabel">
+                    <span>Google</span>
+                    <span id="barGoogleLabel">31%</span>
+                  </div>
+                  <div class="barTrack">
+                    <div class="barFill" id="barGoogle"></div>
+                  </div>
+                </div>
+
+                <div class="barRow">
+                  <div class="barLabel">
+                    <span>Organic / Direct</span>
+                    <span id="barOrganicLabel">21%</span>
+                  </div>
+                  <div class="barTrack">
+                    <div class="barFill" id="barOrganic"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="dashSide">
+              <h3 style="margin:0 0 10px;font-size:15px;">Šta vidiš iz podataka</h3>
+              <div class="smallMuted" id="insightText">
+                Meta trenutno nosi najveći obim, ali nije automatski i najbolji izvor dok ne vidiš kvalitet leadova i završenu akciju.
+              </div>
+
+              <div class="dashActions">
+                <button class="btn primary small" id="runDashboardBtn"><span class="dot"></span> Učitaj podatke</button>
+                <button class="btn small" id="resetDashboardBtn">Resetuj</button>
+              </div>
+
+              <div class="noteBox" id="noteBox">
+                Dobar tracking ne pokazuje samo “promet”, nego šta tačno vodi do rezultata i gdje funnel puca.
+              </div>
+            </div>
+          </div>
+
+          <div class="funnelGrid">
+            <div class="dashCard">
+              <h3 style="margin:0 0 12px;font-size:15px;">Funnel</h3>
+              <div class="funnelStage">
+                <div class="funnelStep">
+                  <div>
+                    <strong>Landing view</strong>
+                    <span>ulaz na stranicu</span>
+                  </div>
+                  <div class="funnelValue" id="funnelView">0</div>
+                </div>
+                <div class="funnelStep">
+                  <div>
+                    <strong>CTA click</strong>
+                    <span>klik na glavno dugme</span>
+                  </div>
+                  <div class="funnelValue" id="funnelCta">0</div>
+                </div>
+                <div class="funnelStep">
+                  <div>
+                    <strong>Form start</strong>
+                    <span>početak unosa</span>
+                  </div>
+                  <div class="funnelValue" id="funnelStart">0</div>
+                </div>
+                <div class="funnelStep">
+                  <div>
+                    <strong>Lead submit</strong>
+                    <span>završena akcija</span>
+                  </div>
+                  <div class="funnelValue" id="funnelLead">0</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="dashCard">
+              <h3 style="margin:0 0 12px;font-size:15px;">Eventi</h3>
+              <div class="eventList">
+                <div class="eventItem">
+                  <div>
+                    <strong>click_phone</strong>
+                    <span>klik na broj telefona</span>
+                  </div>
+                  <div class="eventCount" id="eventPhone">0</div>
+                </div>
+                <div class="eventItem">
+                  <div>
+                    <strong>click_whatsapp</strong>
+                    <span>klik na WhatsApp CTA</span>
+                  </div>
+                  <div class="eventCount" id="eventWhats">0</div>
+                </div>
+                <div class="eventItem">
+                  <div>
+                    <strong>form_submit</strong>
+                    <span>uspješno poslata forma</span>
+                  </div>
+                  <div class="eventCount" id="eventForm">0</div>
+                </div>
+                <div class="eventItem">
+                  <div>
+                    <strong>scroll_75</strong>
+                    <span>duboki engagement</span>
+                  </div>
+                  <div class="eventCount" id="eventScroll">0</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="noteBox" id="resultBox">
+            Učitavanjem scenarija vidiš kako tracking pretvara “osjećaj” u konkretne brojeve: izvor, korak i rezultat.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="headRow">
+        <h2 class="h2 reveal">Šta je uključeno</h2>
+        <div class="desc reveal">
+          Ne postavljamo tracking “reda radi”, nego mapiramo šta treba mjeriti da bi kampanje, landing i prodaja imali smisla.
+        </div>
+      </div>
+
+      <div class="grid3">
+        <div class="card reveal">
+          <div class="cardBody">
+            <h3>Setup</h3>
+            <ul class="bulletList">
+              <li>GA4 provjera i konfiguracija</li>
+              <li>GTM container i osnovna logika</li>
+              <li>UTM standard i naming</li>
+              <li>osnovna struktura izvještavanja</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="card reveal">
+          <div class="cardBody">
+            <h3>Eventi</h3>
+            <ul class="bulletList">
+              <li>klik na CTA</li>
+              <li>poziv i WhatsApp klikovi</li>
+              <li>form start / submit</li>
+              <li>ključni funnel koraci</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="card reveal">
+          <div class="cardBody">
+            <h3>Rezultat</h3>
+            <ul class="bulletList">
+              <li>izvor leadova i upita</li>
+              <li>drop-off tačke u funnel-u</li>
+              <li>jasnije odluke za ads i UX</li>
+              <li>manje lutanja u optimizaciji</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="headRow">
+        <h2 class="h2 reveal">Kako radimo</h2>
+        <div class="desc reveal">
+          Mjerenje mora biti jednostavno za razumjeti, ali dovoljno precizno da vodi sledeći potez.
+        </div>
+      </div>
+
+      <div class="grid2">
+        <div class="card reveal">
+          <div class="cardBody">
+            <h3>1. Mapiramo cilj</h3>
+            <p>
+              Prvo definišemo šta je stvarni rezultat: lead, rezervacija, poziv, checkout ili neki drugi ishod. Bez toga nema smislenog trackinga.
+            </p>
+          </div>
+        </div>
+
+        <div class="card reveal">
+          <div class="cardBody">
+            <h3>2. Određujemo evente</h3>
+            <p>
+              Biramo koje tačke treba pratiti da vidiš put korisnika: ulaz, klik, start forme, završetak, kontakt ili povratak.
+            </p>
+          </div>
+        </div>
+
+        <div class="card reveal">
+          <div class="cardBody">
+            <h3>3. Spajamo sa kampanjom</h3>
+            <p>
+              Tracking nije odvojen od oglasa i landing-a. Tek kad spojiš source, poruku i akciju, podaci postaju korisni.
+            </p>
+          </div>
+        </div>
+
+        <div class="card reveal">
+          <div class="cardBody">
+            <h3>4. Tumačimo šta dalje</h3>
+            <p>
+              Nije dovoljno samo “vidjeti broj”. Poenta je da znaš da li treba mijenjati oglas, landing, CTA ili korak u funnel-u.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="headRow">
+        <h2 class="h2 reveal">Za koga je ovo</h2>
+        <div class="desc reveal">
+          Tracking najviše vrijedi kad se već ulaže u ads, SEO, landing ili bilo kakav kanal koji treba da vodi do mjerljive akcije.
+        </div>
+      </div>
+
+      <div class="grid2">
+        <div class="card reveal">
+          <div class="cardBody">
+            <h3>Idealno za</h3>
+            <ul class="bulletList">
+              <li>lead kampanje</li>
+              <li>landing stranice i forme</li>
+              <li>pozive i rezervacije</li>
+              <li>lokalne usluge i evente</li>
+              <li>biznise koji već ulažu u saobraćaj</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="card reveal">
+          <div class="cardBody">
+            <h3>Nije dovoljno samo</h3>
+            <ul class="bulletList">
+              <li>imati GA4 instaliran</li>
+              <li>gledati broj posjeta bez događaja</li>
+              <li>ne razlikovati klik od stvarnog lead-a</li>
+              <li>voditi kampanju bez funnel logike</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="card reveal">
+        <div class="cardBody">
+          <div class="headRow" style="margin-bottom:12px;">
+            <h2 class="h2" style="margin:0;">Treba ti mjerenje koje vodi odluke?</h2>
+            <div class="desc" style="max-width:42ch;">
+              Ako želiš da znaš odakle dolaze leadovi i gdje funnel gubi korisnike, možemo postaviti tracking koji stvarno pomaže.
+            </div>
+          </div>
+
+          <div class="heroActions" style="margin-top:0;">
+            <a class="btn primary" href="/sr-me/kontakt"><span class="dot"></span> Traži preporuku</a>
+            <a class="btn" href="/sr-me/usluge">Nazad na usluge</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div>© <span id="year"></span> Sindikat - Performance & Activation Studio</div>
+      <div>Podgorica • Crna Gora • @sindikat_events</div>
+    </footer>
+  </div>
+
+  <script>
+    const yearEl = document.getElementById('year');
+    if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+
+    const closeMobileMenu = () => {
+      if (!mobileMenu) return;
+      mobileMenu.style.display = 'none';
+      mobileMenu.style.opacity = '';
+      mobileMenu.style.transform = '';
+      if (hamburger) hamburger.setAttribute('aria-expanded','false');
+    };
+
+    if (hamburger && mobileMenu) {
+      hamburger.addEventListener('click', ()=>{
+        const isOpen = mobileMenu.style.display === 'block';
+        if (isOpen) {
+          anime({
+            targets: mobileMenu,
+            opacity: [1,0],
+            translateY: [0,6],
+            duration: 220,
+            easing: 'easeOutQuad',
+            complete: closeMobileMenu
+          });
+        } else {
+          mobileMenu.style.display = 'block';
+          hamburger.setAttribute('aria-expanded','true');
+          anime({
+            targets: mobileMenu,
+            opacity: [0,1],
+            translateY: [6,0],
+            duration: 260,
+            easing: 'easeOutQuad'
+          });
+        }
+      });
+
+      document.querySelectorAll('#mobileMenu a').forEach(a=>{
+        a.addEventListener('click', closeMobileMenu);
+      });
+
+      document.addEventListener('click', (e)=>{
+        if (mobileMenu.style.display !== 'block') return;
+        const inside = mobileMenu.contains(e.target) || hamburger.contains(e.target);
+        if (!inside) closeMobileMenu();
+      });
+    }
+
+    const titleEl = document.getElementById('heroTitle');
+    if (titleEl) {
+      const raw = titleEl.textContent.trim();
+      const words = raw.split(/\s+/);
+      titleEl.textContent = '';
+      words.forEach((w, i) => {
+        const span = document.createElement('span');
+        span.textContent = w;
+        titleEl.appendChild(span);
+        if (i !== words.length - 1) titleEl.appendChild(document.createTextNode(' '));
+      });
+    }
+
+    const revealEls = document.querySelectorAll('.reveal');
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(entry=>{
+        if(!entry.isIntersecting) return;
+        const el = entry.target;
+        anime({ targets: el, opacity:[0,1], translateY:[18,0], duration:820, easing:'easeOutExpo' });
+        io.unobserve(el);
+      });
+    }, {threshold:0.14});
+    revealEls.forEach(el=>io.observe(el));
+
+    window.addEventListener('load', ()=>{
+      anime({
+        targets:'#heroTitle span',
+        opacity:[0,1],
+        translateY:[16,0],
+        delay: anime.stagger(45),
+        duration:900,
+        easing:'easeOutExpo'
+      });
+    });
+
+    const heroBg = document.getElementById('heroBg');
+    const b1 = document.getElementById('blob1');
+    const b2 = document.getElementById('blob2');
+
+    const setBlobsBase = () => {
+      if (!b1 || !b2) return;
+      const w = window.innerWidth, h = window.innerHeight;
+      b1.style.left = Math.max(12, w*0.06) + 'px';
+      b1.style.top  = Math.max(12, h*0.16) + 'px';
+      b2.style.left = Math.max(12, w*0.60) + 'px';
+      b2.style.top  = Math.max(12, h*0.08) + 'px';
+    };
+    setBlobsBase();
+    window.addEventListener('resize', setBlobsBase);
+
+    anime({
+      targets:'#blob1',
+      translateX:[0,18,-10,0],
+      translateY:[0,-12,16,0],
+      duration:9000,
+      easing:'easeInOutSine',
+      loop:true
+    });
+    anime({
+      targets:'#blob2',
+      translateX:[0,-14,10,0],
+      translateY:[0,14,-10,0],
+      duration:11000,
+      easing:'easeInOutSine',
+      loop:true
+    });
+
+    let ticking = false;
+    window.addEventListener('scroll', ()=>{
+      if(ticking) return;
+      ticking = true;
+      requestAnimationFrame(()=>{
+        const y = window.scrollY || 0;
+        if(heroBg) heroBg.style.transform = `translateY(${y * 0.06}px)`;
+        ticking = false;
+      });
+    }, {passive:true});
+
+    const scenarios = {
+      leads: {
+        main: 183,
+        mainText: 'ukupno leadova u periodu',
+        sessions: 1240,
+        users: 1018,
+        conv: 14.7,
+        cpl: '€4.20',
+        meta: 48,
+        google: 31,
+        organic: 21,
+        funnel: [1240, 612, 284, 183],
+        events: [67, 39, 183, 418],
+        insight: 'Meta trenutno nosi najveći obim, ali stvarna vrijednost dolazi tek kad vidiš koliko tih klikova prelazi u završeni lead.',
+        note: 'Lead tracking ti pokazuje ne samo broj prijava, nego i gdje ljudi otpadaju između CTA-a i završetka forme.',
+        result: 'U ovom scenariju vidiš kako source i funnel zajedno objašnjavaju kvalitet kampanje.'
+      },
+      booking: {
+        main: 96,
+        mainText: 'ukupno rezervacija u periodu',
+        sessions: 880,
+        users: 742,
+        conv: 10.9,
+        cpl: '€6.10',
+        meta: 36,
+        google: 42,
+        organic: 22,
+        funnel: [880, 420, 178, 96],
+        events: [84, 22, 96, 305],
+        insight: 'Google ovdje nosi jaču namjeru jer korisnik već traži rješenje. To često znači manji obim, ali bolju namjeru.',
+        note: 'Kod rezervacija je bitno pratiti ne samo form_submit, nego i click_phone i click_whatsapp jer dio korisnika ne ide kroz formu.',
+        result: 'Booking tracking otkriva koliko stvarnih rezervacija dolazi iz svakog izvora, ne samo koliko ljudi klikne.'
+      },
+      retarget: {
+        main: 158,
+        mainText: 'ukupno povratnih leadova',
+        sessions: 690,
+        users: 508,
+        conv: 22.9,
+        cpl: '€2.90',
+        meta: 61,
+        google: 18,
+        organic: 21,
+        funnel: [690, 401, 246, 158],
+        events: [41, 58, 158, 266],
+        insight: 'Retargeting često ima manji obim, ali bolju završnu stopu jer radiš sa publikom koja te već vidjela.',
+        note: 'Ako ne pratiš povratne korisnike i njihov završetak akcije, lako potcijeniš stvarni efekat retargetinga.',
+        result: 'Retargeting scenario pokazuje kako toplija publika često donosi bolju stopu završene akcije.'
+      }
+    };
+
+    let currentScenario = 'leads';
+
+    const switchBtns = document.querySelectorAll('.switchBtn');
+    const mainNumber = document.getElementById('mainNumber');
+    const mainText = document.getElementById('mainText');
+    const statSessions = document.getElementById('statSessions');
+    const statUsers = document.getElementById('statUsers');
+    const statConv = document.getElementById('statConv');
+    const statCpl = document.getElementById('statCpl');
+    const barMeta = document.getElementById('barMeta');
+    const barGoogle = document.getElementById('barGoogle');
+    const barOrganic = document.getElementById('barOrganic');
+    const barMetaLabel = document.getElementById('barMetaLabel');
+    const barGoogleLabel = document.getElementById('barGoogleLabel');
+    const barOrganicLabel = document.getElementById('barOrganicLabel');
+    const insightText = document.getElementById('insightText');
+    const noteBox = document.getElementById('noteBox');
+    const resultBox = document.getElementById('resultBox');
+
+    const funnelView = document.getElementById('funnelView');
+    const funnelCta = document.getElementById('funnelCta');
+    const funnelStart = document.getElementById('funnelStart');
+    const funnelLead = document.getElementById('funnelLead');
+
+    const eventPhone = document.getElementById('eventPhone');
+    const eventWhats = document.getElementById('eventWhats');
+    const eventForm = document.getElementById('eventForm');
+    const eventScroll = document.getElementById('eventScroll');
+
+    const runDashboardBtn = document.getElementById('runDashboardBtn');
+    const resetDashboardBtn = document.getElementById('resetDashboardBtn');
+
+    function formatNum(num){
+      return new Intl.NumberFormat('sr-ME').format(num);
+    }
+
+    function animateNumber(el, end, suffix=''){
+      const obj = { val: 0 };
+      anime({
+        targets: obj,
+        val: end,
+        round: 1,
+        duration: 900,
+        easing: 'easeOutExpo',
+        update: () => {
+          el.textContent = formatNum(obj.val) + suffix;
+        }
+      });
+    }
+
+    function animatePercent(el, end){
+      const obj = { val: 0 };
+      anime({
+        targets: obj,
+        val: end,
+        duration: 900,
+        easing: 'easeOutExpo',
+        update: () => {
+          el.textContent = obj.val.toFixed(1) + '%';
+        }
+      });
+    }
+
+    function setScenarioText(key){
+      const s = scenarios[key];
+      mainText.textContent = s.mainText;
+      insightText.textContent = s.insight;
+      noteBox.textContent = s.note;
+      resultBox.textContent = s.result;
+    }
+
+    function resetDashboard(){
+      mainNumber.textContent = '0';
+      statSessions.textContent = '0';
+      statUsers.textContent = '0';
+      statConv.textContent = '0%';
+      statCpl.textContent = '€0';
+      funnelView.textContent = '0';
+      funnelCta.textContent = '0';
+      funnelStart.textContent = '0';
+      funnelLead.textContent = '0';
+      eventPhone.textContent = '0';
+      eventWhats.textContent = '0';
+      eventForm.textContent = '0';
+      eventScroll.textContent = '0';
+      barMeta.style.width = '0%';
+      barGoogle.style.width = '0%';
+      barOrganic.style.width = '0%';
+      barMetaLabel.textContent = '0%';
+      barGoogleLabel.textContent = '0%';
+      barOrganicLabel.textContent = '0%';
+      resultBox.textContent = 'Učitavanjem scenarija vidiš kako tracking pretvara “osjećaj” u konkretne brojeve: izvor, korak i rezultat.';
+    }
+
+    switchBtns.forEach(btn=>{
+      btn.addEventListener('click', ()=>{
+        switchBtns.forEach(b=>b.classList.remove('active'));
+        btn.classList.add('active');
+        currentScenario = btn.getAttribute('data-scenario');
+        setScenarioText(currentScenario);
+        resetDashboard();
+      });
+    });
+
+    runDashboardBtn.addEventListener('click', ()=>{
+      const s = scenarios[currentScenario];
+
+      animateNumber(mainNumber, s.main);
+      setTimeout(()=> animateNumber(statSessions, s.sessions), 100);
+      setTimeout(()=> animateNumber(statUsers, s.users), 180);
+      setTimeout(()=> animatePercent(statConv, s.conv), 260);
+      setTimeout(()=> { statCpl.textContent = s.cpl; }, 320);
+
+      setTimeout(()=> animateNumber(funnelView, s.funnel[0]), 120);
+      setTimeout(()=> animateNumber(funnelCta, s.funnel[1]), 220);
+      setTimeout(()=> animateNumber(funnelStart, s.funnel[2]), 320);
+      setTimeout(()=> animateNumber(funnelLead, s.funnel[3]), 420);
+
+      setTimeout(()=> animateNumber(eventPhone, s.events[0]), 200);
+      setTimeout(()=> animateNumber(eventWhats, s.events[1]), 280);
+      setTimeout(()=> animateNumber(eventForm, s.events[2]), 360);
+      setTimeout(()=> animateNumber(eventScroll, s.events[3]), 440);
+
+      setTimeout(()=>{
+        barMeta.style.width = s.meta + '%';
+        barGoogle.style.width = s.google + '%';
+        barOrganic.style.width = s.organic + '%';
+        barMetaLabel.textContent = s.meta + '%';
+        barGoogleLabel.textContent = s.google + '%';
+        barOrganicLabel.textContent = s.organic + '%';
+      }, 420);
+
+      resultBox.textContent = s.result;
+    });
+
+    resetDashboardBtn.addEventListener('click', resetDashboard);
+
+    setScenarioText(currentScenario);
+    resetDashboard();
+  </script>
+</body>
+</html>
