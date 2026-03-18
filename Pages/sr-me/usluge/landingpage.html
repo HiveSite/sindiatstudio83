@@ -1,0 +1,1449 @@
+<!DOCTYPE html>
+<html lang="sr-ME">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-NH2FL5SP1Y"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-NH2FL5SP1Y');
+  </script>
+
+  <!-- Google Tag Manager -->
+  <script>
+    (function(w,d,s,l,i){
+      w[l]=w[l]||[];
+      w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});
+      var f=d.getElementsByTagName(s)[0],
+          j=d.createElement(s),
+          dl=l!='dataLayer' ? '&l='+l : '';
+      j.async=true;
+      j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;
+      f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-PBXVW3GK');
+  </script>
+  <!-- End Google Tag Manager -->
+
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Web sajtovi & Landing page | Sindikat</title>
+  <meta name="description" content="Landing stranice i web sajtovi koji pretvaraju posjetu u upit, rezervaciju ili prodaju. Jasna ponuda, CTA, forma i tracking." />
+  <link rel="icon" type="image/png" href="/favicon.png">
+
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+
+  <style>
+    :root{
+      --bg:#05010D;
+      --bg2:#12011F;
+      --text:#FFFFFF;
+      --muted:rgba(255,255,255,.78);
+      --muted2:rgba(255,255,255,.62);
+      --border:rgba(255,255,255,.14);
+      --border2:rgba(255,255,255,.10);
+      --accent:#FF3B6F;
+      --accent2:#FFB000;
+      --cyan:#18F5FF;
+      --good:#2dd4bf;
+      --bad:#ff6b6b;
+
+      --shadow:0 22px 75px rgba(0,0,0,.68);
+      --shadow2:0 14px 38px rgba(0,0,0,.48);
+
+      --r2:14px;
+      --r3:18px;
+
+      --max:1120px;
+      --ease:cubic-bezier(.2,.9,.2,1);
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      background:
+        radial-gradient(820px 520px at 12% 10%, rgba(255,59,111,.22), transparent 60%),
+        radial-gradient(900px 520px at 88% 8%, rgba(24,245,255,.14), transparent 58%),
+        radial-gradient(760px 520px at 70% 28%, rgba(162,76,255,.12), transparent 60%),
+        radial-gradient(680px 480px at 20% 70%, rgba(255,176,0,.10), transparent 62%),
+        linear-gradient(180deg, var(--bg), var(--bg2));
+      color:var(--text);
+      font-family:Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      letter-spacing:.2px;
+      overflow-x:hidden;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+    }
+
+    body:before{
+      content:"";
+      position:fixed; inset:0;
+      pointer-events:none;
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23n)' opacity='.23'/%3E%3C/svg%3E");
+      opacity:.06;
+      mix-blend-mode:overlay;
+      z-index:0;
+    }
+
+    a{color:inherit;text-decoration:none}
+    img{max-width:100%;display:block}
+    .wrap{max-width:var(--max);margin:0 auto;padding:22px 18px 120px;position:relative;z-index:2}
+
+    .heroBg{
+      position:fixed;
+      inset:0;
+      z-index:1;
+      pointer-events:none;
+      overflow:hidden;
+      background:
+        radial-gradient(900px 540px at 20% 20%, rgba(255,59,111,.14), transparent 60%),
+        radial-gradient(900px 540px at 80% 10%, rgba(24,245,255,.10), transparent 60%),
+        radial-gradient(720px 520px at 68% 55%, rgba(162,76,255,.12), transparent 60%);
+    }
+    .heroBg:after{
+      content:"";
+      position:absolute; inset:0;
+      background:
+        radial-gradient(700px 420px at 18% 20%, rgba(255,59,111,.18), transparent 60%),
+        radial-gradient(900px 520px at 70% 12%, rgba(24,245,255,.14), transparent 58%),
+        linear-gradient(180deg, rgba(0,0,0,.18), rgba(6,1,13,.86) 62%, rgba(6,1,13,.96));
+    }
+
+    .blob{
+      position:fixed;
+      z-index:1;
+      pointer-events:none;
+      width:520px;height:520px;
+      border-radius:999px;
+      background: radial-gradient(circle at 35% 30%, rgba(255,59,111,.18), transparent 58%);
+      filter: blur(18px);
+      opacity:.55;
+      mix-blend-mode:screen;
+      transform:translate3d(0,0,0);
+    }
+    .blob.b2{
+      width:420px;height:420px;
+      background: radial-gradient(circle at 40% 35%, rgba(24,245,255,.14), transparent 60%);
+      opacity:.45;
+    }
+
+    .floatingLogo{
+      position:fixed;
+      top:14px;
+      left:14px;
+      z-index:120;
+      display:block;
+      text-decoration:none;
+    }
+    .logoMark{
+      width:176px;height:44px;
+      border-radius:14px;
+      border:1.5px solid rgba(255,59,111,.5);
+      box-shadow:
+        0 18px 34px rgba(0,0,0,.45),
+        0 0 0 3px rgba(0,0,0,.45) inset,
+        0 0 42px rgba(255,59,111,.22);
+      transform:rotate(-2deg);
+      overflow:hidden;
+      background:rgba(0,0,0,.18);
+      display:grid;
+      place-items:center;
+    }
+    .logoMarkImg{
+      width:100%;
+      height:100%;
+      object-fit:contain;
+      object-position:center;
+      padding:6px;
+      filter:drop-shadow(0 10px 18px rgba(0,0,0,.45));
+    }
+    .floatingLogo .logoMark{
+      width:50vw;
+      max-width:240px;
+      height:auto;
+      aspect-ratio:176 / 44;
+      transform:rotate(-2deg);
+      transform-origin:top left;
+    }
+    @media (max-width:480px){
+      .floatingLogo{top:10px;left:10px;}
+    }
+
+    .topbar{
+      position:fixed;
+      bottom:0;
+      left:0;
+      right:0;
+      z-index:50;
+      backdrop-filter:blur(12px);
+      -webkit-backdrop-filter:blur(12px);
+      background:rgba(5,7,12,.88);
+      border-top:3px solid rgba(255,255,255,.12);
+    }
+    .topbarInner{
+      max-width:var(--max);
+      margin:0 auto;
+      padding:12px 18px;
+      display:flex;
+      align-items:center;
+      gap:12px;
+      justify-content:flex-start;
+    }
+    .ctaCenter{margin:0;}
+    .navWrap{
+      margin-left:auto;
+      display:flex;
+      align-items:center;
+      gap:12px;
+      position:relative;
+    }
+
+    nav{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      color:var(--muted);
+      font-size:13px;
+      align-items:center;
+    }
+    nav a{
+      padding:9px 10px;
+      border-radius:10px;
+      border:2px solid transparent;
+      transition:background .2s var(--ease), color .2s var(--ease), transform .2s var(--ease), border-color .2s var(--ease);
+      transform:translateY(0);
+    }
+    nav a:hover{
+      background:rgba(255,255,255,.05);
+      color:var(--text);
+      transform:translateY(-1px);
+      border-color:rgba(24,245,255,.35);
+    }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+      border-radius:10px;
+      padding:12px 16px;
+      font-size:13px;
+      border:3px solid rgba(255,255,255,.16);
+      background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+      color:var(--text);
+      transition:transform .18s var(--ease), box-shadow .18s var(--ease), border-color .18s var(--ease), background .18s var(--ease);
+      white-space:nowrap;
+      box-shadow:0 12px 30px rgba(0,0,0,.28);
+      cursor:pointer;
+    }
+    .btn:hover{transform:translateY(-3px);box-shadow:var(--shadow2);border-color:rgba(255,59,111,.5)}
+    .btn.primary{
+      background:linear-gradient(180deg, rgba(255,59,111,.35), rgba(255,59,111,.14));
+      border-color:rgba(255,59,111,.6);
+      box-shadow:0 20px 60px rgba(255,59,111,.20), 0 10px 28px rgba(0,0,0,.28);
+    }
+    .btn.small{padding:10px 12px;font-size:12px}
+    .dot{
+      width:8px;height:8px;border-radius:2px;
+      background:var(--accent);
+      box-shadow:0 0 0 5px rgba(255,59,111,.22), 0 0 24px rgba(255,59,111,.42);
+      transform:rotate(8deg);
+    }
+
+    .hamburger{
+      display:none;
+      width:44px;height:44px;
+      border-radius:10px;
+      border:3px solid rgba(255,255,255,.16);
+      background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+      align-items:center;justify-content:center;
+      gap:5px;
+      flex-direction:column;
+      cursor:pointer;
+    }
+    .hamburger span{
+      width:18px;height:2px;background:rgba(255,255,255,.8);
+      border-radius:3px;display:block;
+    }
+    .mobileMenu{
+      display:none;
+      position:absolute;
+      left:0; right:0;
+      bottom:100%;
+      border-bottom:3px solid rgba(255,255,255,.10);
+      background:rgba(5,7,12,.95);
+    }
+    .mobileMenuInner{
+      max-width:var(--max);
+      margin:0 auto;
+      padding:12px 18px 16px;
+      display:grid;
+      gap:8px;
+    }
+    .mobileMenuInner a{
+      padding:12px 12px;
+      border:3px solid rgba(255,255,255,.12);
+      border-radius:10px;
+      background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
+      color:var(--text);
+    }
+
+    .section{
+      padding:58px 0;
+      border-top:3px solid rgba(255,255,255,.08);
+    }
+    .hero{
+      padding:40px 0 24px;
+    }
+    .kicker{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      color:var(--muted);
+      font-size:12px;
+      text-transform:uppercase;
+      letter-spacing:1.1px;
+      margin-bottom:14px;
+    }
+    h1{
+      margin:0;
+      font-size:46px;
+      line-height:1.05;
+      letter-spacing:-.8px;
+      max-width:18ch;
+    }
+    .heroTitle span{display:inline-block;will-change:transform, opacity;}
+    .sub{
+      margin-top:14px;
+      color:rgba(255,255,255,.80);
+      font-size:15px;
+      line-height:1.65;
+      max-width:70ch;
+      text-shadow:0 10px 40px rgba(0,0,0,.35);
+    }
+    .heroActions{
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+      margin-top:18px;
+    }
+    .miniRow{
+      margin-top:18px;
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+      color:rgba(255,255,255,.70);
+      font-size:12px;
+    }
+    .miniRow span{
+      padding:8px 10px;
+      border:2px solid rgba(255,255,255,.12);
+      border-radius:10px;
+      background:rgba(10,12,18,.70);
+      box-shadow:0 10px 24px rgba(0,0,0,.22);
+    }
+
+    .headRow{
+      display:flex;
+      align-items:flex-end;
+      justify-content:space-between;
+      gap:16px;
+      flex-wrap:wrap;
+      margin-bottom:22px;
+    }
+    .h2{
+      font-size:22px;
+      letter-spacing:-.2px;
+      margin:0;
+    }
+    .desc{
+      color:rgba(255,255,255,.70);
+      font-size:13px;
+      line-height:1.65;
+      max-width:72ch;
+    }
+
+    .grid2{
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      gap:16px;
+    }
+    .grid3{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:16px;
+    }
+
+    .card{
+      border:3px solid rgba(255,255,255,.14);
+      border-radius:var(--r2);
+      background:linear-gradient(180deg, rgba(14,16,26,.92), rgba(7,8,19,.92));
+      box-shadow:var(--shadow2);
+      transition:transform .18s var(--ease), border-color .18s var(--ease), box-shadow .18s var(--ease), filter .18s var(--ease);
+      position:relative;
+      overflow:hidden;
+    }
+    .card:before{
+      content:"";
+      position:absolute;
+      inset:-35%;
+      background:
+        radial-gradient(circle at 25% 25%, rgba(255,59,111,.18), transparent 60%),
+        radial-gradient(circle at 80% 30%, rgba(24,245,255,.12), transparent 60%);
+      opacity:.5;
+      transform:rotate(8deg);
+      pointer-events:none;
+      z-index:0;
+    }
+    .card:after{
+      content:"";
+      position:absolute;
+      inset:0;
+      border:1px solid rgba(255,59,111,.18);
+      opacity:.45;
+      pointer-events:none;
+      z-index:0;
+    }
+    .card:hover{
+      transform:translateY(-6px);
+      border-color:rgba(255,59,111,.5);
+      box-shadow:var(--shadow);
+      filter:brightness(1.04);
+    }
+
+    .cardBody{
+      padding:18px;
+      position:relative;
+      z-index:2;
+    }
+
+    .metricGrid{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:12px;
+      margin-top:16px;
+    }
+    .metric{
+      border:2px solid rgba(255,255,255,.12);
+      border-radius:14px;
+      background:rgba(8,10,16,.62);
+      padding:14px;
+      box-shadow:var(--shadow2);
+    }
+    .metric strong{
+      display:block;
+      font-size:22px;
+      margin-bottom:4px;
+    }
+    .metric span{
+      color:rgba(255,255,255,.66);
+      font-size:12px;
+      line-height:1.4;
+    }
+
+    .demoShell{
+      border:3px solid rgba(255,255,255,.12);
+      border-radius:18px;
+      overflow:hidden;
+      background:linear-gradient(180deg, rgba(12,14,24,.95), rgba(8,9,18,.95));
+      box-shadow:var(--shadow);
+    }
+
+    .demoToolbar{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      padding:12px 14px;
+      border-bottom:3px solid rgba(255,255,255,.08);
+      background:rgba(255,255,255,.03);
+    }
+    .demoToolbarLeft{
+      display:flex;
+      align-items:center;
+      gap:8px;
+    }
+    .demoDot{
+      width:10px;
+      height:10px;
+      border-radius:50%;
+      background:rgba(255,255,255,.18);
+    }
+    .demoToolbarTitle{
+      font-size:12px;
+      color:rgba(255,255,255,.62);
+      margin-left:8px;
+    }
+
+    .demoViewport{
+      padding:18px;
+      min-height:560px;
+      background:
+        radial-gradient(620px 220px at 20% 0%, rgba(255,59,111,.12), transparent 55%),
+        radial-gradient(620px 220px at 80% 0%, rgba(24,245,255,.08), transparent 55%),
+        linear-gradient(180deg, rgba(10,10,18,.95), rgba(8,9,16,.98));
+    }
+
+    .switchRow{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+    .switchBtn{
+      border:2px solid rgba(255,255,255,.12);
+      background:rgba(255,255,255,.04);
+      color:#fff;
+      border-radius:12px;
+      padding:10px 12px;
+      font-size:12px;
+      cursor:pointer;
+      transition:.18s var(--ease);
+    }
+    .switchBtn.active{
+      border-color:rgba(255,59,111,.52);
+      background:rgba(255,59,111,.16);
+    }
+
+    .demoState{
+      display:none;
+    }
+    .demoState.active{
+      display:block;
+      animation:fadeIn .25s ease;
+    }
+    @keyframes fadeIn{
+      from{opacity:0;transform:translateY(6px)}
+      to{opacity:1;transform:translateY(0)}
+    }
+
+    .badPage{
+      border:2px solid rgba(255,255,255,.08);
+      border-radius:16px;
+      background:#0f1118;
+      overflow:hidden;
+    }
+    .badHeader{
+      padding:14px;
+      border-bottom:2px solid rgba(255,255,255,.08);
+      background:rgba(255,255,255,.03);
+    }
+    .badHeader h3{
+      margin:0;
+      font-size:14px;
+      letter-spacing:.2px;
+    }
+    .badHeader p{
+      margin:8px 0 0;
+      color:rgba(255,255,255,.62);
+      font-size:12px;
+      line-height:1.5;
+    }
+    .badBody{
+      padding:14px;
+      display:grid;
+      gap:12px;
+    }
+    .badBlock{
+      border:2px solid rgba(255,255,255,.08);
+      background:rgba(255,255,255,.03);
+      border-radius:12px;
+      padding:12px;
+    }
+    .badLine{
+      height:10px;
+      border-radius:999px;
+      background:rgba(255,255,255,.08);
+      margin-bottom:8px;
+    }
+    .badLine.short{width:46%}
+    .badLine.mid{width:72%}
+    .badLine.long{width:100%}
+    .badButtons{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+    .badBtn{
+      padding:10px 12px;
+      border-radius:10px;
+      background:rgba(255,255,255,.06);
+      border:2px solid rgba(255,255,255,.08);
+      color:rgba(255,255,255,.62);
+      font-size:12px;
+    }
+    .badForm{
+      display:grid;
+      gap:10px;
+    }
+    .badInput{
+      height:42px;
+      border-radius:12px;
+      background:rgba(255,255,255,.04);
+      border:2px solid rgba(255,255,255,.08);
+    }
+
+    .goodPage{
+      border:2px solid rgba(255,255,255,.10);
+      border-radius:16px;
+      background:
+        radial-gradient(420px 180px at 12% 0%, rgba(255,59,111,.12), transparent 60%),
+        radial-gradient(420px 180px at 88% 0%, rgba(24,245,255,.08), transparent 60%),
+        rgba(11,12,20,.98);
+      overflow:hidden;
+    }
+    .goodHero{
+      padding:22px;
+      border-bottom:2px solid rgba(255,255,255,.08);
+    }
+    .goodBadge{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:8px 10px;
+      border-radius:999px;
+      border:2px solid rgba(255,255,255,.10);
+      background:rgba(255,255,255,.04);
+      color:rgba(255,255,255,.72);
+      font-size:11px;
+      margin-bottom:12px;
+    }
+    .goodHero h3{
+      margin:0;
+      font-size:28px;
+      line-height:1.05;
+      letter-spacing:-.5px;
+      max-width:12ch;
+    }
+    .goodHero p{
+      margin:12px 0 0;
+      color:rgba(255,255,255,.74);
+      font-size:13px;
+      line-height:1.65;
+      max-width:52ch;
+    }
+    .goodHeroActions{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top:14px;
+    }
+    .goodPillRow{
+      margin-top:14px;
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+    .goodPill{
+      border:2px solid rgba(255,255,255,.10);
+      background:rgba(255,255,255,.04);
+      border-radius:10px;
+      padding:8px 10px;
+      font-size:11px;
+      color:rgba(255,255,255,.72);
+    }
+
+    .goodBody{
+      padding:18px 22px 22px;
+      display:grid;
+      grid-template-columns:1.1fr .9fr;
+      gap:16px;
+    }
+    .goodCol{
+      display:grid;
+      gap:12px;
+    }
+    .goodPanel{
+      border:2px solid rgba(255,255,255,.10);
+      border-radius:14px;
+      background:rgba(255,255,255,.04);
+      padding:14px;
+    }
+    .goodPanel h4{
+      margin:0 0 8px;
+      font-size:13px;
+      letter-spacing:.1px;
+    }
+    .goodPanel p{
+      margin:0;
+      color:rgba(255,255,255,.7);
+      font-size:12px;
+      line-height:1.6;
+    }
+
+    .quoteBox{
+      border:2px solid rgba(45,212,191,.22);
+      background:rgba(45,212,191,.08);
+      border-radius:14px;
+      padding:14px;
+    }
+    .quoteBox strong{
+      display:block;
+      margin-bottom:6px;
+      font-size:13px;
+    }
+    .quoteBox span{
+      color:rgba(255,255,255,.74);
+      font-size:12px;
+      line-height:1.55;
+    }
+
+    .leadForm{
+      display:grid;
+      gap:10px;
+    }
+    .leadForm input,
+    .leadForm textarea{
+      width:100%;
+      border-radius:12px;
+      border:2px solid rgba(255,255,255,.10);
+      background:rgba(255,255,255,.04);
+      color:#fff;
+      padding:12px 13px;
+      font:inherit;
+      outline:none;
+    }
+    .leadForm textarea{
+      min-height:88px;
+      resize:vertical;
+    }
+    .leadForm input::placeholder,
+    .leadForm textarea::placeholder{
+      color:rgba(255,255,255,.38);
+    }
+
+    .formSuccess{
+      display:none;
+      border:2px solid rgba(45,212,191,.22);
+      background:rgba(45,212,191,.10);
+      border-radius:14px;
+      padding:14px;
+      color:#eafffb;
+      font-size:13px;
+      line-height:1.55;
+    }
+    .formSuccess.active{display:block}
+
+    .scoreBoard{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:12px;
+      margin-top:16px;
+    }
+    .score{
+      border:2px solid rgba(255,255,255,.10);
+      border-radius:14px;
+      background:rgba(255,255,255,.04);
+      padding:14px;
+    }
+    .score strong{
+      display:block;
+      font-size:22px;
+      margin-bottom:4px;
+    }
+    .score span{
+      font-size:12px;
+      color:rgba(255,255,255,.66);
+    }
+
+    .bulletList{
+      margin:0;
+      padding-left:18px;
+      color:rgba(255,255,255,.74);
+      font-size:13px;
+      line-height:1.7;
+    }
+    .bulletList li{margin:6px 0}
+
+    .stack{
+      display:grid;
+      gap:16px;
+    }
+
+    footer{
+      border-top:3px solid rgba(255,255,255,.10);
+      padding:28px 0 8px;
+      color:rgba(255,255,255,.62);
+      font-size:12px;
+      display:flex;
+      justify-content:space-between;
+      gap:12px;
+      flex-wrap:wrap;
+      margin-top:42px;
+    }
+
+    .reveal{opacity:0;transform:translateY(18px);will-change:transform, opacity;}
+
+    @media (max-width:980px){
+      h1{font-size:40px}
+      .grid2,
+      .grid3,
+      .goodBody,
+      .metricGrid,
+      .scoreBoard{grid-template-columns:1fr}
+      nav{display:none}
+      .hamburger{display:flex}
+    }
+    @media (max-width:520px){
+      .wrap{padding:16px 14px 72px}
+      h1{font-size:34px}
+      .heroActions{gap:10px}
+      .heroActions .btn{width:100%}
+      .topbarInner{padding:12px 14px}
+      .mobileMenuInner{padding:12px 14px 16px}
+    }
+    @media (max-width:520px){
+      .topbarInner{
+        flex-wrap:nowrap;
+        gap:10px;
+      }
+      .ctaCenter{
+        margin:0;
+        flex:1;
+        display:flex;
+        justify-content:center;
+      }
+      .ctaCenter.btn{
+        padding:10px 12px;
+        font-size:12px;
+      }
+      .navWrap{
+        margin-left:0;
+        flex:0 0 auto;
+      }
+      .hamburger{
+        flex:0 0 auto;
+      }
+    }
+  </style>
+
+  <link rel="canonical" href="https://www.sindikatstudio83.me/sr-me/usluge/web-sajtovi-landing-page/" />
+  <meta name="robots" content="index,follow" />
+  <meta property="og:url" content="https://www.sindikatstudio83.me/sr-me/usluge/web-sajtovi-landing-page/" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta property="og:image" content="https://www.sindikatstudio83.me/studio83logo.png" />
+  <meta property="og:title" content="Web sajtovi & Landing page | Sindikat" />
+  <meta property="og:description" content="Landing stranice i web sajtovi koji pretvaraju posjetu u upit, rezervaciju ili prodaju." />
+  <meta name="twitter:title" content="Web sajtovi & Landing page | Sindikat" />
+  <meta name="twitter:description" content="Landing stranice i web sajtovi koji pretvaraju posjetu u upit, rezervaciju ili prodaju." />
+  <meta name="twitter:image" content="https://www.sindikatstudio83.me/studio83logo.png" />
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"Service",
+    "@id":"https://www.sindikatstudio83.me/sr-me/usluge/web-sajtovi-landing-page/#service",
+    "name":"Web sajtovi & Landing page",
+    "description":"Landing stranice i web sajtovi koji pretvaraju posjetu u upit, rezervaciju ili prodaju. Jasna ponuda, CTA, forma i tracking.",
+    "provider":{
+      "@type":"Organization",
+      "name":"Sindikat Studio 83",
+      "url":"https://www.sindikatstudio83.me/",
+      "logo":"https://www.sindikatstudio83.me/studio83logo.png"
+    },
+    "areaServed":["Podgorica","Crna Gora"]
+  }
+  </script>
+</head>
+
+<body>
+  <a class="floatingLogo" href="/sr-me/pocetna" aria-label="Sindikat Studio 83 - Početna">
+    <div class="logoMark" aria-hidden="true">
+      <img class="logoMarkImg" src="/studio83logo.png" alt="">
+    </div>
+  </a>
+
+  <!-- Google Tag Manager (noscript) -->
+  <noscript>
+    <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PBXVW3GK" height="0" width="0" style="display:none;visibility:hidden"></iframe>
+  </noscript>
+
+  <div class="heroBg" id="heroBg" aria-hidden="true"></div>
+  <div class="blob" id="blob1" aria-hidden="true"></div>
+  <div class="blob b2" id="blob2" aria-hidden="true"></div>
+
+  <header class="topbar">
+    <div class="topbarInner reveal">
+      <a class="btn primary ctaCenter" href="/sr-me/kontakt">
+        <span class="dot"></span>Kontaktiraj nas
+      </a>
+
+      <div class="navWrap">
+        <nav aria-label="Primary">
+          <a href="/sr-me/pocetna">Početna</a>
+          <a href="/sr-me/usluge" aria-current="page">Usluge</a>
+          <a href="/sr-me/onama">O nama</a>
+          <a href="/sr-me/blog">Blog</a>
+          <a href="/sr-me/poslovi">Poslovi</a>
+        </nav>
+
+        <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+
+    <div class="mobileMenu" id="mobileMenu" aria-label="Mobile menu">
+      <div class="mobileMenuInner">
+        <a href="/sr-me/pocetna">Početna</a>
+        <a href="/sr-me/usluge" aria-current="page">Usluge</a>
+        <a href="/sr-me/onama">O nama</a>
+        <a href="/sr-me/blog">Blog</a>
+        <a href="/sr-me/poslovi">Poslovi</a>
+      </div>
+    </div>
+  </header>
+
+  <div class="wrap">
+    <section class="hero" id="top">
+      <div class="kicker reveal"><span class="dot"></span> Web sajtovi &amp; Landing page • Podgorica / Crna Gora</div>
+
+      <h1 class="heroTitle reveal" id="heroTitle">Landing stranice i web sajtovi</h1>
+
+      <p class="sub reveal">
+        Landing i web stranice radimo tako da budu jasne, brze i usmjerene na cilj:
+        <strong>upit</strong>, <strong>rezervacija</strong>, <strong>poziv</strong> ili <strong>prodaja</strong>.
+        Ne gradimo “lijep ekran” bez funkcije. Gradimo putanju od klika do konverzije.
+      </p>
+
+      <div class="miniRow reveal">
+        <span>Hero + ponuda</span>
+        <span>CTA + forma</span>
+        <span>Mobile first</span>
+        <span>Tracking spreman</span>
+      </div>
+
+      <div class="heroActions reveal">
+        <a class="btn primary" href="/sr-me/kontakt"><span class="dot"></span> Traži preporuku</a>
+        <a class="btn" href="#demo">Pogledaj primjer</a>
+      </div>
+
+      <div class="metricGrid reveal">
+        <div class="metric">
+          <strong>10–21</strong>
+          <span>dana za izradu, u zavisnosti od scope-a</span>
+        </div>
+        <div class="metric">
+          <strong>1</strong>
+          <span>jasan cilj po stranici, bez rasipanja pažnje</span>
+        </div>
+        <div class="metric">
+          <strong>mobile</strong>
+          <span>prioritet u strukturi, CTA-u i formi</span>
+        </div>
+        <div class="metric">
+          <strong>GA4</strong>
+          <span>spremno za tracking i optimizaciju</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="demo">
+      <div class="headRow">
+        <h2 class="h2 reveal">Primjer</h2>
+        <div class="desc reveal">
+          Ispod je uprošćen prikaz razlike između loše i dobre landing logike.
+          Nije stvar u “šminki”, nego u tome da korisnik odmah razumije šta dobija i šta treba da uradi dalje.
+        </div>
+      </div>
+
+      <div class="stack">
+        <div class="switchRow reveal">
+          <button class="switchBtn active" type="button" data-state="before">Prije</button>
+          <button class="switchBtn" type="button" data-state="after">Poslije</button>
+        </div>
+
+        <div class="demoShell reveal">
+          <div class="demoToolbar">
+            <div class="demoToolbarLeft">
+              <span class="demoDot"></span>
+              <span class="demoDot"></span>
+              <span class="demoDot"></span>
+              <span class="demoToolbarTitle">landing-preview.me</span>
+            </div>
+          </div>
+
+          <div class="demoViewport">
+            <div class="demoState active" id="state-before">
+              <div class="badPage">
+                <div class="badHeader">
+                  <h3>Dobrodošli na naš sajt</h3>
+                  <p>Previše opšti naslov, bez jasne ponude i bez razloga da korisnik uradi bilo šta odmah.</p>
+                </div>
+
+                <div class="badBody">
+                  <div class="badBlock">
+                    <div class="badLine short"></div>
+                    <div class="badLine long"></div>
+                    <div class="badLine mid"></div>
+                    <div class="badButtons">
+                      <div class="badBtn">Saznaj više</div>
+                      <div class="badBtn">Kontakt</div>
+                      <div class="badBtn">Usluge</div>
+                    </div>
+                  </div>
+
+                  <div class="badBlock">
+                    <div class="badLine short"></div>
+                    <div class="badLine long"></div>
+                    <div class="badLine long"></div>
+                    <div class="badLine mid"></div>
+                  </div>
+
+                  <div class="badBlock">
+                    <div class="badLine short"></div>
+                    <div class="badForm">
+                      <div class="badInput"></div>
+                      <div class="badInput"></div>
+                      <div class="badInput"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="scoreBoard">
+                <div class="score">
+                  <strong>slabo</strong>
+                  <span>nejasan naslov</span>
+                </div>
+                <div class="score">
+                  <strong>više CTA</strong>
+                  <span>bez prioriteta</span>
+                </div>
+                <div class="score">
+                  <strong>trenje</strong>
+                  <span>forma bez konteksta</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="demoState" id="state-after">
+              <div class="goodPage">
+                <div class="goodHero">
+                  <div class="goodBadge">Landing demo • rezervacije • Podgorica</div>
+                  <h3>Rezerviši termin bez komplikacije.</h3>
+                  <p>
+                    Jasna ponuda, kratak dokaz, jednostavna forma i jedan prioritetni CTA.
+                    Korisnik odmah zna šta dobija i šta treba da uradi dalje.
+                  </p>
+
+                  <div class="goodHeroActions">
+                    <button class="btn primary small" id="demoPrimaryBtn"><span class="dot"></span> Zatraži termin</button>
+                    <button class="btn small" id="demoScrollBtn">Pogledaj detalje</button>
+                  </div>
+
+                  <div class="goodPillRow">
+                    <span class="goodPill">Brz odgovor</span>
+                    <span class="goodPill">Jedna forma</span>
+                    <span class="goodPill">Jasan CTA</span>
+                  </div>
+                </div>
+
+                <div class="goodBody">
+                  <div class="goodCol">
+                    <div class="goodPanel">
+                      <h4>Šta korisnik vidi odmah</h4>
+                      <p>
+                        Ko si, šta tačno nudiš, zašto je to korisno i kako najlakše da te kontaktira.
+                        Bez skrolanja kroz prazne opise.
+                      </p>
+                    </div>
+
+                    <div class="quoteBox">
+                      <strong>Zašto ovo radi</strong>
+                      <span>
+                        Prva sekunda odlučuje da li korisnik ostaje ili odlazi. Zato hero mora da objasni ponudu,
+                        ukloni sumnju i da konkretan sledeći korak.
+                      </span>
+                    </div>
+
+                    <div class="goodPanel">
+                      <h4>Benefit blok</h4>
+                      <p>
+                        Kratke koristi, društveni dokaz i jasan CTA vode korisnika dalje bez rasipanja pažnje.
+                      </p>
+                    </div>
+                  </div>
+
+                  <div class="goodCol" id="formAnchor">
+                    <div class="goodPanel">
+                      <h4>Pošalji upit</h4>
+                      <form class="leadForm" id="demoForm">
+                        <input type="text" id="demoName" placeholder="Ime i prezime">
+                        <input type="tel" id="demoPhone" placeholder="Telefon">
+                        <textarea id="demoMsg" placeholder="Napiši ukratko šta ti treba"></textarea>
+                        <button class="btn primary" type="submit"><span class="dot"></span> Pošalji upit</button>
+                      </form>
+                      <div class="formSuccess" id="formSuccess">
+                        Upit je zabilježen. U pravoj verziji ovdje ide slanje forme, event tracking i potvrda uspješno poslatog zahtjeva.
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="scoreBoard">
+                <div class="score">
+                  <strong>jasno</strong>
+                  <span>jedna ponuda</span>
+                </div>
+                <div class="score">
+                  <strong>jedan CTA</strong>
+                  <span>manje konfuzije</span>
+                </div>
+                <div class="score">
+                  <strong>veća šansa</strong>
+                  <span>za upit i konverziju</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="headRow">
+        <h2 class="h2 reveal">Šta je uključeno</h2>
+        <div class="desc reveal">
+          Scope se zaključava unaprijed. Ne radi se “sve po malo”, nego tačno ono što stranici treba da bi imala rezultat.
+        </div>
+      </div>
+
+      <div class="grid3">
+        <div class="card reveal">
+          <div class="cardBody">
+            <h3>Struktura</h3>
+            <ul class="bulletList">
+              <li>hero sekcija</li>
+              <li>benefit blokovi</li>
+              <li>društveni dokaz / reference</li>
+              <li>FAQ i CTA logika</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="card reveal">
+          <div class="cardBody">
+            <h3>Copy & UX</h3>
+            <ul class="bulletList">
+              <li>naslovi koji objašnjavaju ponudu</li>
+              <li>CTA tekstovi i forma</li>
+              <li>mobile-first raspored</li>
+              <li>smanjenje trenja u toku korisnika</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="card reveal">
+          <div class="cardBody">
+            <h3>Tehnička osnova</h3>
+            <ul class="bulletList">
+              <li>responsive izrada</li>
+              <li>osnovna SEO struktura</li>
+              <li>brzina i čista arhitektura</li>
+              <li>spremno za GA4 / GTM / pixel</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="headRow">
+        <h2 class="h2 reveal">Kako radimo</h2>
+        <div class="desc reveal">
+          Fokus je da stranica bude razumljiva, upotrebljiva i mjerljiva — ne samo estetski “lijepa”.
+        </div>
+      </div>
+
+      <div class="grid2">
+        <div class="card reveal">
+          <div class="cardBody">
+            <h3>1. Brief i cilj</h3>
+            <p>
+              Definišemo kome se obraćaš, šta je tačno ponuda i koji je primarni cilj stranice.
+              Jedna stranica = jedan glavni ishod.
+            </p>
+          </div>
+        </div>
+
+        <div class="card reveal">
+          <div class="cardBody">
+            <h3>2. Struktura i poruka</h3>
+            <p>
+              Slažemo redosled sekcija, pišemo naslov, benefit i CTA logiku tako da korisnik ne mora da pogađa šta slijedi.
+            </p>
+          </div>
+        </div>
+
+        <div class="card reveal">
+          <div class="cardBody">
+            <h3>3. Dizajn i build</h3>
+            <p>
+              Pravimo responsive stranicu, optimizujemo raspored za mobilni i pazimo da forma i CTA budu laki za korišćenje.
+            </p>
+          </div>
+        </div>
+
+        <div class="card reveal">
+          <div class="cardBody">
+            <h3>4. Tracking i launch</h3>
+            <p>
+              Povezujemo mjerenje, postavljamo evente i ostavljamo stranicu spremnu za kampanje, optimizaciju i dalje testove.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="headRow">
+        <h2 class="h2 reveal">Za koga je ovo</h2>
+        <div class="desc reveal">
+          Najviše smisla ima kad ti treba stranica koja treba da uradi nešto konkretno — ne samo da “postoji”.
+        </div>
+      </div>
+
+      <div class="grid2">
+        <div class="card reveal">
+          <div class="cardBody">
+            <h3>Idealno za</h3>
+            <ul class="bulletList">
+              <li>uslužne biznise</li>
+              <li>rezervacije i prijave</li>
+              <li>promocije i kampanje</li>
+              <li>evente i aktivacije</li>
+              <li>prodajne ili lead landing stranice</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="card reveal">
+          <div class="cardBody">
+            <h3>Nije prioritet kad</h3>
+            <ul class="bulletList">
+              <li>nemaš jasnu ponudu</li>
+              <li>ne znaš šta je glavni cilj stranice</li>
+              <li>želiš “sve za svakoga” na jednoj stranici</li>
+              <li>nije spreman budžet za saobraćaj ili SEO rad poslije</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="card reveal">
+        <div class="cardBody">
+          <div class="headRow" style="margin-bottom:12px;">
+            <h2 class="h2" style="margin:0;">Treba ti landing koji radi?</h2>
+            <div class="desc" style="max-width:42ch;">
+              Ako već imaš kampanju ili tek krećeš, možemo definisati koja vrsta stranice ti stvarno treba.
+            </div>
+          </div>
+
+          <div class="heroActions" style="margin-top:0;">
+            <a class="btn primary" href="/sr-me/kontakt"><span class="dot"></span> Traži preporuku</a>
+            <a class="btn" href="/sr-me/usluge">Nazad na usluge</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div>© <span id="year"></span> Sindikat - Performance & Activation Studio</div>
+      <div>Podgorica • Crna Gora • @sindikat_events</div>
+    </footer>
+  </div>
+
+  <script>
+    const yearEl = document.getElementById('year');
+    if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+
+    const closeMobileMenu = () => {
+      if (!mobileMenu) return;
+      mobileMenu.style.display = 'none';
+      mobileMenu.style.opacity = '';
+      mobileMenu.style.transform = '';
+      if (hamburger) hamburger.setAttribute('aria-expanded','false');
+    };
+
+    if (hamburger && mobileMenu) {
+      hamburger.addEventListener('click', ()=>{
+        const isOpen = mobileMenu.style.display === 'block';
+        if (isOpen) {
+          anime({
+            targets: mobileMenu,
+            opacity: [1,0],
+            translateY: [0,6],
+            duration: 220,
+            easing: 'easeOutQuad',
+            complete: closeMobileMenu
+          });
+        } else {
+          mobileMenu.style.display = 'block';
+          hamburger.setAttribute('aria-expanded','true');
+          anime({
+            targets: mobileMenu,
+            opacity: [0,1],
+            translateY: [6,0],
+            duration: 260,
+            easing: 'easeOutQuad'
+          });
+        }
+      });
+
+      document.querySelectorAll('#mobileMenu a').forEach(a=>{
+        a.addEventListener('click', closeMobileMenu);
+      });
+
+      document.addEventListener('click', (e)=>{
+        if (mobileMenu.style.display !== 'block') return;
+        const inside = mobileMenu.contains(e.target) || hamburger.contains(e.target);
+        if (!inside) closeMobileMenu();
+      });
+    }
+
+    const titleEl = document.getElementById('heroTitle');
+    if (titleEl) {
+      const raw = titleEl.textContent.trim();
+      const words = raw.split(/\s+/);
+      titleEl.textContent = '';
+      words.forEach((w, i) => {
+        const span = document.createElement('span');
+        span.textContent = w;
+        titleEl.appendChild(span);
+        if (i !== words.length - 1) titleEl.appendChild(document.createTextNode(' '));
+      });
+    }
+
+    const revealEls = document.querySelectorAll('.reveal');
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(entry=>{
+        if(!entry.isIntersecting) return;
+        const el = entry.target;
+        anime({ targets: el, opacity:[0,1], translateY:[18,0], duration:820, easing:'easeOutExpo' });
+        io.unobserve(el);
+      });
+    }, {threshold:0.14});
+    revealEls.forEach(el=>io.observe(el));
+
+    window.addEventListener('load', ()=>{
+      anime({
+        targets:'#heroTitle span',
+        opacity:[0,1],
+        translateY:[16,0],
+        delay: anime.stagger(45),
+        duration:900,
+        easing:'easeOutExpo'
+      });
+    });
+
+    const heroBg = document.getElementById('heroBg');
+    const b1 = document.getElementById('blob1');
+    const b2 = document.getElementById('blob2');
+
+    const setBlobsBase = () => {
+      if (!b1 || !b2) return;
+      const w = window.innerWidth, h = window.innerHeight;
+      b1.style.left = Math.max(12, w*0.06) + 'px';
+      b1.style.top  = Math.max(12, h*0.16) + 'px';
+      b2.style.left = Math.max(12, w*0.60) + 'px';
+      b2.style.top  = Math.max(12, h*0.08) + 'px';
+    };
+    setBlobsBase();
+    window.addEventListener('resize', setBlobsBase);
+
+    anime({
+      targets:'#blob1',
+      translateX:[0,18,-10,0],
+      translateY:[0,-12,16,0],
+      duration:9000,
+      easing:'easeInOutSine',
+      loop:true
+    });
+    anime({
+      targets:'#blob2',
+      translateX:[0,-14,10,0],
+      translateY:[0,14,-10,0],
+      duration:11000,
+      easing:'easeInOutSine',
+      loop:true
+    });
+
+    let ticking = false;
+    window.addEventListener('scroll', ()=>{
+      if(ticking) return;
+      ticking = true;
+      requestAnimationFrame(()=>{
+        const y = window.scrollY || 0;
+        if(heroBg) heroBg.style.transform = `translateY(${y * 0.06}px)`;
+        ticking = false;
+      });
+    }, {passive:true});
+
+    /* before/after switch */
+    const switchBtns = document.querySelectorAll('.switchBtn');
+    const states = {
+      before: document.getElementById('state-before'),
+      after: document.getElementById('state-after')
+    };
+
+    switchBtns.forEach(btn=>{
+      btn.addEventListener('click', ()=>{
+        switchBtns.forEach(b=>b.classList.remove('active'));
+        btn.classList.add('active');
+
+        const state = btn.getAttribute('data-state');
+        Object.values(states).forEach(el=>el.classList.remove('active'));
+        if (states[state]) states[state].classList.add('active');
+      });
+    });
+
+    /* demo buttons */
+    const demoPrimaryBtn = document.getElementById('demoPrimaryBtn');
+    const demoScrollBtn = document.getElementById('demoScrollBtn');
+    const formAnchor = document.getElementById('formAnchor');
+
+    if (demoPrimaryBtn && formAnchor) {
+      demoPrimaryBtn.addEventListener('click', ()=>{
+        formAnchor.scrollIntoView({ behavior:'smooth', block:'center' });
+      });
+    }
+
+    if (demoScrollBtn && formAnchor) {
+      demoScrollBtn.addEventListener('click', ()=>{
+        formAnchor.scrollIntoView({ behavior:'smooth', block:'center' });
+      });
+    }
+
+    /* demo form */
+    const demoForm = document.getElementById('demoForm');
+    const formSuccess = document.getElementById('formSuccess');
+    const demoName = document.getElementById('demoName');
+    const demoPhone = document.getElementById('demoPhone');
+
+    if (demoForm) {
+      demoForm.addEventListener('submit', (e)=>{
+        e.preventDefault();
+
+        const name = demoName.value.trim();
+        const phone = demoPhone.value.trim();
+
+        if (!name || !phone) {
+          alert('Unesi ime i telefon.');
+          return;
+        }
+
+        demoForm.style.display = 'none';
+        formSuccess.classList.add('active');
+      });
+    }
+  </script>
+</body>
+</html>
