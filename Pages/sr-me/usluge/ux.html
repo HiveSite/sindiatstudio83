@@ -1,0 +1,1528 @@
+<!DOCTYPE html>
+<html lang="sr-ME">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-NH2FL5SP1Y"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-NH2FL5SP1Y');
+  </script>
+
+  <!-- Google Tag Manager -->
+  <script>
+    (function(w,d,s,l,i){
+      w[l]=w[l]||[];
+      w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});
+      var f=d.getElementsByTagName(s)[0],
+          j=d.createElement(s),
+          dl=l!='dataLayer' ? '&l='+l : '';
+      j.async=true;
+      j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;
+      f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-PBXVW3GK');
+  </script>
+  <!-- End Google Tag Manager -->
+
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>UX optimizacija (Conversion) | Sindikat</title>
+  <meta name="description" content="UX optimizacija koja smanjuje trenje i povećava klikove, forme, pozive i konverzije." />
+  <link rel="icon" type="image/png" href="/favicon.png">
+
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+
+  <style>
+    :root{
+      --bg:#05010D;
+      --bg2:#12011F;
+      --text:#FFFFFF;
+      --muted:rgba(255,255,255,.78);
+      --muted2:rgba(255,255,255,.62);
+      --accent:#FF3B6F;
+      --accent2:#FFB000;
+      --cyan:#18F5FF;
+      --good:#2dd4bf;
+      --warn:#ffd166;
+      --bad:#ff6b6b;
+
+      --shadow:0 22px 75px rgba(0,0,0,.68);
+      --shadow2:0 14px 38px rgba(0,0,0,.48);
+
+      --r2:14px;
+      --r3:18px;
+
+      --max:1120px;
+      --ease:cubic-bezier(.2,.9,.2,1);
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      background:
+        radial-gradient(820px 520px at 12% 10%, rgba(255,59,111,.22), transparent 60%),
+        radial-gradient(900px 520px at 88% 8%, rgba(24,245,255,.14), transparent 58%),
+        radial-gradient(760px 520px at 70% 28%, rgba(162,76,255,.12), transparent 60%),
+        radial-gradient(680px 480px at 20% 70%, rgba(255,176,0,.10), transparent 62%),
+        linear-gradient(180deg, var(--bg), var(--bg2));
+      color:var(--text);
+      font-family:Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      letter-spacing:.2px;
+      overflow-x:hidden;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+    }
+
+    body:before{
+      content:"";
+      position:fixed; inset:0;
+      pointer-events:none;
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23n)' opacity='.23'/%3E%3C/svg%3E");
+      opacity:.06;
+      mix-blend-mode:overlay;
+      z-index:0;
+    }
+
+    a{color:inherit;text-decoration:none}
+    .wrap{max-width:var(--max);margin:0 auto;padding:22px 18px 120px;position:relative;z-index:2}
+
+    .heroBg{
+      position:fixed;
+      inset:0;
+      z-index:1;
+      pointer-events:none;
+      overflow:hidden;
+      background:
+        radial-gradient(900px 540px at 20% 20%, rgba(255,59,111,.14), transparent 60%),
+        radial-gradient(900px 540px at 80% 10%, rgba(24,245,255,.10), transparent 60%),
+        radial-gradient(720px 520px at 68% 55%, rgba(162,76,255,.12), transparent 60%);
+    }
+    .heroBg:after{
+      content:"";
+      position:absolute; inset:0;
+      background:
+        radial-gradient(700px 420px at 18% 20%, rgba(255,59,111,.18), transparent 60%),
+        radial-gradient(900px 520px at 70% 12%, rgba(24,245,255,.14), transparent 58%),
+        linear-gradient(180deg, rgba(0,0,0,.18), rgba(6,1,13,.86) 62%, rgba(6,1,13,.96));
+    }
+
+    .blob{
+      position:fixed;
+      z-index:1;
+      pointer-events:none;
+      width:520px;height:520px;
+      border-radius:999px;
+      background: radial-gradient(circle at 35% 30%, rgba(255,59,111,.18), transparent 58%);
+      filter: blur(18px);
+      opacity:.55;
+      mix-blend-mode:screen;
+      transform:translate3d(0,0,0);
+    }
+    .blob.b2{
+      width:420px;height:420px;
+      background: radial-gradient(circle at 40% 35%, rgba(24,245,255,.14), transparent 60%);
+      opacity:.45;
+    }
+
+    .floatingLogo{
+      position:fixed;
+      top:14px;
+      left:14px;
+      z-index:120;
+      display:block;
+      text-decoration:none;
+    }
+    .logoMark{
+      width:176px;height:44px;
+      border-radius:14px;
+      border:1.5px solid rgba(255,59,111,.5);
+      box-shadow:
+        0 18px 34px rgba(0,0,0,.45),
+        0 0 0 3px rgba(0,0,0,.45) inset,
+        0 0 42px rgba(255,59,111,.22);
+      transform:rotate(-2deg);
+      overflow:hidden;
+      background:rgba(0,0,0,.18);
+      display:grid;
+      place-items:center;
+    }
+    .logoMarkImg{
+      width:100%;
+      height:100%;
+      object-fit:contain;
+      object-position:center;
+      padding:6px;
+      filter:drop-shadow(0 10px 18px rgba(0,0,0,.45));
+    }
+    .floatingLogo .logoMark{
+      width:50vw;
+      max-width:240px;
+      height:auto;
+      aspect-ratio:176 / 44;
+      transform:rotate(-2deg);
+      transform-origin:top left;
+    }
+
+    .topbar{
+      position:fixed;
+      bottom:0;
+      left:0;
+      right:0;
+      z-index:50;
+      backdrop-filter:blur(12px);
+      -webkit-backdrop-filter:blur(12px);
+      background:rgba(5,7,12,.88);
+      border-top:3px solid rgba(255,255,255,.12);
+    }
+    .topbarInner{
+      max-width:var(--max);
+      margin:0 auto;
+      padding:12px 18px;
+      display:flex;
+      align-items:center;
+      gap:12px;
+      justify-content:flex-start;
+    }
+    .ctaCenter{margin:0;}
+    .navWrap{
+      margin-left:auto;
+      display:flex;
+      align-items:center;
+      gap:12px;
+      position:relative;
+    }
+
+    nav{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      color:var(--muted);
+      font-size:13px;
+      align-items:center;
+    }
+    nav a{
+      padding:9px 10px;
+      border-radius:10px;
+      border:2px solid transparent;
+      transition: background .2s var(--ease), color .2s var(--ease), transform .2s var(--ease), border-color .2s var(--ease);
+      transform: translateY(0);
+    }
+    nav a:hover{
+      background:rgba(255,255,255,.05);
+      color:var(--text);
+      transform:translateY(-1px);
+      border-color:rgba(24,245,255,.35);
+    }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+      border-radius:10px;
+      padding:12px 16px;
+      font-size:13px;
+      border:3px solid rgba(255,255,255,.16);
+      background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+      color:var(--text);
+      transition:transform .18s var(--ease), box-shadow .18s var(--ease), border-color .18s var(--ease), background .18s var(--ease);
+      white-space:nowrap;
+      box-shadow:0 12px 30px rgba(0,0,0,.28);
+      cursor:pointer;
+    }
+    .btn:hover{transform:translateY(-3px);box-shadow:var(--shadow2);border-color:rgba(255,59,111,.5)}
+    .btn.primary{
+      background:linear-gradient(180deg, rgba(255,59,111,.35), rgba(255,59,111,.14));
+      border-color:rgba(255,59,111,.6);
+      box-shadow:0 20px 60px rgba(255,59,111,.20), 0 10px 28px rgba(0,0,0,.28);
+    }
+    .btn.small{padding:10px 12px;font-size:12px}
+    .dot{
+      width:8px;height:8px;border-radius:2px;
+      background:var(--accent);
+      box-shadow:0 0 0 5px rgba(255,59,111,.22), 0 0 24px rgba(255,59,111,.42);
+      transform:rotate(8deg);
+    }
+
+    .hamburger{
+      display:none;
+      width:44px;height:44px;
+      border-radius:10px;
+      border:3px solid rgba(255,255,255,.16);
+      background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+      align-items:center;justify-content:center;
+      gap:5px;
+      flex-direction:column;
+      cursor:pointer;
+    }
+    .hamburger span{
+      width:18px;height:2px;background:rgba(255,255,255,.8);
+      border-radius:3px;display:block;
+    }
+    .mobileMenu{
+      display:none;
+      position:absolute;
+      left:0; right:0;
+      bottom:100%;
+      border-bottom:3px solid rgba(255,255,255,.10);
+      background:rgba(5,7,12,.95);
+    }
+    .mobileMenuInner{
+      max-width:var(--max);
+      margin:0 auto;
+      padding:12px 18px 16px;
+      display:grid;
+      gap:8px;
+    }
+    .mobileMenuInner a{
+      padding:12px 12px;
+      border:3px solid rgba(255,255,255,.12);
+      border-radius:10px;
+      background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
+      color:var(--text);
+    }
+
+    .section{
+      padding:58px 0;
+      border-top:3px solid rgba(255,255,255,.08);
+    }
+    .hero{
+      padding:40px 0 24px;
+    }
+    .kicker{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      color:var(--muted);
+      font-size:12px;
+      text-transform:uppercase;
+      letter-spacing:1.1px;
+      margin-bottom:14px;
+    }
+    h1{
+      margin:0;
+      font-size:46px;
+      line-height:1.05;
+      letter-spacing:-.8px;
+      max-width:18ch;
+    }
+    .heroTitle span{display:inline-block;will-change:transform, opacity;}
+    .sub{
+      margin-top:14px;
+      color:rgba(255,255,255,.80);
+      font-size:15px;
+      line-height:1.65;
+      max-width:70ch;
+      text-shadow:0 10px 40px rgba(0,0,0,.35);
+    }
+    .heroActions{
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+      margin-top:18px;
+    }
+    .miniRow{
+      margin-top:18px;
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+      color:rgba(255,255,255,.70);
+      font-size:12px;
+    }
+    .miniRow span{
+      padding:8px 10px;
+      border:2px solid rgba(255,255,255,.12);
+      border-radius:10px;
+      background:rgba(10,12,18,.70);
+      box-shadow:0 10px 24px rgba(0,0,0,.22);
+    }
+
+    .headRow{
+      display:flex;
+      align-items:flex-end;
+      justify-content:space-between;
+      gap:16px;
+      flex-wrap:wrap;
+      margin-bottom:22px;
+    }
+    .h2{
+      font-size:22px;
+      letter-spacing:-.2px;
+      margin:0;
+    }
+    .desc{
+      color:rgba(255,255,255,.70);
+      font-size:13px;
+      line-height:1.65;
+      max-width:72ch;
+    }
+
+    .grid2{
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      gap:16px;
+    }
+    .grid3{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:16px;
+    }
+    .metricGrid{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:12px;
+      margin-top:16px;
+    }
+    .metric{
+      border:2px solid rgba(255,255,255,.12);
+      border-radius:14px;
+      background:rgba(8,10,16,.62);
+      padding:14px;
+      box-shadow:var(--shadow2);
+    }
+    .metric strong{
+      display:block;
+      font-size:22px;
+      margin-bottom:4px;
+    }
+    .metric span{
+      color:rgba(255,255,255,.66);
+      font-size:12px;
+      line-height:1.4;
+    }
+
+    .card{
+      border:3px solid rgba(255,255,255,.14);
+      border-radius:var(--r2);
+      background:linear-gradient(180deg, rgba(14,16,26,.92), rgba(7,8,19,.92));
+      box-shadow:var(--shadow2);
+      transition:transform .18s var(--ease), border-color .18s var(--ease), box-shadow .18s var(--ease), filter .18s var(--ease);
+      position:relative;
+      overflow:hidden;
+    }
+    .card:before{
+      content:"";
+      position:absolute;
+      inset:-35%;
+      background:
+        radial-gradient(circle at 25% 25%, rgba(255,59,111,.18), transparent 60%),
+        radial-gradient(circle at 80% 30%, rgba(24,245,255,.12), transparent 60%);
+      opacity:.5;
+      transform:rotate(8deg);
+      pointer-events:none;
+      z-index:0;
+    }
+    .card:after{
+      content:"";
+      position:absolute;
+      inset:0;
+      border:1px solid rgba(255,59,111,.18);
+      opacity:.45;
+      pointer-events:none;
+      z-index:0;
+    }
+    .card:hover{
+      transform:translateY(-6px);
+      border-color:rgba(255,59,111,.5);
+      box-shadow:var(--shadow);
+      filter:brightness(1.04);
+    }
+    .cardBody{
+      padding:18px;
+      position:relative;
+      z-index:2;
+    }
+
+    .bulletList{
+      margin:0;
+      padding-left:18px;
+      color:rgba(255,255,255,.74);
+      font-size:13px;
+      line-height:1.7;
+    }
+    .bulletList li{margin:6px 0}
+
+    .demoShell{
+      border:3px solid rgba(255,255,255,.12);
+      border-radius:18px;
+      overflow:hidden;
+      background:linear-gradient(180deg, rgba(12,14,24,.95), rgba(8,9,18,.95));
+      box-shadow:var(--shadow);
+    }
+    .demoToolbar{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      padding:12px 14px;
+      border-bottom:3px solid rgba(255,255,255,.08);
+      background:rgba(255,255,255,.03);
+    }
+    .demoToolbarLeft{
+      display:flex;
+      align-items:center;
+      gap:8px;
+    }
+    .demoDot{
+      width:10px;
+      height:10px;
+      border-radius:50%;
+      background:rgba(255,255,255,.18);
+    }
+    .demoToolbarTitle{
+      font-size:12px;
+      color:rgba(255,255,255,.62);
+      margin-left:8px;
+    }
+    .demoViewport{
+      padding:18px;
+      background:
+        radial-gradient(620px 220px at 20% 0%, rgba(255,59,111,.12), transparent 55%),
+        radial-gradient(620px 220px at 80% 0%, rgba(24,245,255,.08), transparent 55%),
+        linear-gradient(180deg, rgba(10,10,18,.95), rgba(8,9,16,.98));
+    }
+
+    .switchRow{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-bottom:16px;
+    }
+    .switchBtn{
+      border:2px solid rgba(255,255,255,.12);
+      background:rgba(255,255,255,.04);
+      color:#fff;
+      border-radius:12px;
+      padding:10px 12px;
+      font-size:12px;
+      cursor:pointer;
+      transition:.18s var(--ease);
+    }
+    .switchBtn.active{
+      border-color:rgba(255,59,111,.52);
+      background:rgba(255,59,111,.16);
+    }
+
+    .beforeAfterGrid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:16px;
+    }
+    .uiCard{
+      border:2px solid rgba(255,255,255,.10);
+      border-radius:16px;
+      background:rgba(255,255,255,.04);
+      padding:16px;
+    }
+    .uiCard.before{
+      border-color:rgba(255,255,255,.10);
+    }
+    .uiCard.after{
+      border-color:rgba(45,212,191,.26);
+      background:rgba(45,212,191,.08);
+    }
+    .uiMeta{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      margin-bottom:12px;
+      font-size:11px;
+      color:rgba(255,255,255,.58);
+    }
+    .uiLabel{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-width:34px;
+      height:28px;
+      border-radius:10px;
+      border:2px solid rgba(255,255,255,.12);
+      background:rgba(255,255,255,.04);
+      font-weight:800;
+      font-size:12px;
+      color:#fff;
+    }
+    .uiMock{
+      border:2px solid rgba(255,255,255,.08);
+      border-radius:16px;
+      overflow:hidden;
+      background:rgba(10,11,18,.96);
+    }
+    .uiHero{
+      padding:18px;
+      border-bottom:2px solid rgba(255,255,255,.08);
+      background:
+        radial-gradient(420px 180px at 10% 0%, rgba(255,59,111,.10), transparent 60%),
+        radial-gradient(420px 180px at 90% 0%, rgba(24,245,255,.08), transparent 60%),
+        rgba(12,13,22,.98);
+    }
+    .uiHero h3{
+      margin:0;
+      font-size:24px;
+      line-height:1.1;
+      letter-spacing:-.4px;
+      max-width:13ch;
+    }
+    .uiHero p{
+      margin:10px 0 0;
+      color:rgba(255,255,255,.72);
+      font-size:12px;
+      line-height:1.6;
+      max-width:42ch;
+    }
+    .uiBody{
+      padding:16px 18px 18px;
+      display:grid;
+      gap:12px;
+    }
+    .uiBlock{
+      border:2px solid rgba(255,255,255,.08);
+      border-radius:14px;
+      background:rgba(255,255,255,.03);
+      padding:12px;
+    }
+    .uiBlock h4{
+      margin:0 0 8px;
+      font-size:12px;
+      letter-spacing:.2px;
+    }
+    .uiBlock p{
+      margin:0;
+      color:rgba(255,255,255,.68);
+      font-size:12px;
+      line-height:1.55;
+    }
+    .fakeForm{
+      display:grid;
+      gap:10px;
+    }
+    .fakeInput{
+      height:42px;
+      border-radius:12px;
+      background:rgba(255,255,255,.04);
+      border:2px solid rgba(255,255,255,.08);
+    }
+    .fakeButton{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      padding:11px 12px;
+      border-radius:12px;
+      border:2px solid rgba(255,59,111,.45);
+      background:rgba(255,59,111,.18);
+      font-size:12px;
+      color:#fff;
+      font-weight:700;
+    }
+    .fakeButton.weak{
+      border-color:rgba(255,255,255,.12);
+      background:rgba(255,255,255,.05);
+      color:rgba(255,255,255,.62);
+    }
+    .ctaRow{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+
+    .resultGrid{
+      display:grid;
+      grid-template-columns:1.15fr .85fr;
+      gap:16px;
+      margin-top:16px;
+    }
+    .resultPanel{
+      border:2px solid rgba(255,255,255,.10);
+      border-radius:16px;
+      background:rgba(255,255,255,.04);
+      padding:16px;
+    }
+    .scoreBig{
+      font-size:36px;
+      line-height:1;
+      margin:0 0 8px;
+      letter-spacing:-1px;
+    }
+    .smallMuted{
+      font-size:12px;
+      color:rgba(255,255,255,.64);
+      line-height:1.5;
+    }
+
+    .scoreBars{
+      display:grid;
+      gap:10px;
+      margin-top:14px;
+    }
+    .barRow{
+      display:grid;
+      gap:6px;
+    }
+    .barLabel{
+      display:flex;
+      justify-content:space-between;
+      gap:10px;
+      font-size:12px;
+      color:rgba(255,255,255,.68);
+    }
+    .barTrack{
+      height:12px;
+      border-radius:999px;
+      overflow:hidden;
+      background:rgba(255,255,255,.06);
+      border:1px solid rgba(255,255,255,.08);
+    }
+    .barFill{
+      height:100%;
+      width:0%;
+      transition:width .45s ease;
+      background:linear-gradient(90deg, rgba(255,59,111,.98), rgba(24,245,255,.9));
+    }
+
+    .miniStats{
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      gap:12px;
+      margin-top:16px;
+    }
+    .miniStat{
+      border:2px solid rgba(255,255,255,.08);
+      border-radius:14px;
+      background:rgba(255,255,255,.03);
+      padding:12px;
+    }
+    .miniStat strong{
+      display:block;
+      font-size:22px;
+      margin-bottom:4px;
+    }
+    .miniStat span{
+      color:rgba(255,255,255,.64);
+      font-size:12px;
+      line-height:1.4;
+    }
+
+    .fixList{
+      display:grid;
+      gap:10px;
+    }
+    .fixItem{
+      border:2px solid rgba(255,255,255,.08);
+      background:rgba(255,255,255,.03);
+      border-radius:14px;
+      padding:12px 14px;
+    }
+    .fixItem strong{
+      display:block;
+      font-size:13px;
+      margin-bottom:4px;
+    }
+    .fixItem span{
+      display:block;
+      font-size:12px;
+      color:rgba(255,255,255,.64);
+      line-height:1.5;
+    }
+
+    .noteBox{
+      margin-top:16px;
+      border:2px solid rgba(45,212,191,.22);
+      background:rgba(45,212,191,.08);
+      border-radius:14px;
+      padding:14px;
+      color:#eafffb;
+      font-size:13px;
+      line-height:1.6;
+    }
+
+    footer{
+      border-top:3px solid rgba(255,255,255,.10);
+      padding:28px 0 8px;
+      color:rgba(255,255,255,.62);
+      font-size:12px;
+      display:flex;
+      justify-content:space-between;
+      gap:12px;
+      flex-wrap:wrap;
+      margin-top:42px;
+    }
+
+    .reveal{opacity:0;transform:translateY(18px);will-change:transform, opacity;}
+
+    @media (max-width:980px){
+      h1{font-size:40px}
+      .grid2,
+      .grid3,
+      .metricGrid,
+      .beforeAfterGrid,
+      .resultGrid{grid-template-columns:1fr}
+      nav{display:none}
+      .hamburger{display:flex}
+    }
+    @media (max-width:520px){
+      .wrap{padding:16px 14px 72px}
+      h1{font-size:34px}
+      .heroActions{gap:10px}
+      .heroActions .btn{width:100%}
+      .topbarInner{padding:12px 14px}
+      .mobileMenuInner{padding:12px 14px 16px}
+    }
+    @media (max-width:520px){
+      .topbarInner{
+        flex-wrap:nowrap;
+        gap:10px;
+      }
+      .ctaCenter{
+        margin:0;
+        flex:1;
+        display:flex;
+        justify-content:center;
+      }
+      .ctaCenter.btn{
+        padding:10px 12px;
+        font-size:12px;
+      }
+      .navWrap{
+        margin-left:0;
+        flex:0 0 auto;
+      }
+      .hamburger{
+        flex:0 0 auto;
+      }
+    }
+  </style>
+
+  <link rel="canonical" href="https://www.sindikatstudio83.me/sr-me/usluge/ux-optimizacija-conversion/" />
+  <meta name="robots" content="index,follow" />
+  <meta property="og:url" content="https://www.sindikatstudio83.me/sr-me/usluge/ux-optimizacija-conversion/" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta property="og:image" content="https://www.sindikatstudio83.me/studio83logo.png" />
+  <meta property="og:title" content="UX optimizacija (Conversion) | Sindikat" />
+  <meta property="og:description" content="UX optimizacija koja smanjuje trenje i povećava klikove, forme, pozive i konverzije." />
+  <meta name="twitter:title" content="UX optimizacija (Conversion) | Sindikat" />
+  <meta name="twitter:description" content="UX optimizacija koja smanjuje trenje i povećava klikove, forme, pozive i konverzije." />
+  <meta name="twitter:image" content="https://www.sindikatstudio83.me/studio83logo.png" />
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"Service",
+    "@id":"https://www.sindikatstudio83.me/sr-me/usluge/ux-optimizacija-conversion/#service",
+    "name":"UX optimizacija (Conversion)",
+    "description":"UX optimizacija koja smanjuje trenje i povećava klikove, forme, pozive i konverzije.",
+    "provider":{
+      "@type":"Organization",
+      "name":"Sindikat Studio 83",
+      "url":"https://www.sindikatstudio83.me/",
+      "logo":"https://www.sindikatstudio83.me/studio83logo.png"
+    },
+    "areaServed":["Podgorica","Crna Gora"]
+  }
+  </script>
+</head>
+
+<body>
+  <a class="floatingLogo" href="/sr-me/pocetna" aria-label="Sindikat Studio 83 - Početna">
+    <div class="logoMark" aria-hidden="true">
+      <img class="logoMarkImg" src="/studio83logo.png" alt="">
+    </div>
+  </a>
+
+  <noscript>
+    <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PBXVW3GK" height="0" width="0" style="display:none;visibility:hidden"></iframe>
+  </noscript>
+
+  <div class="heroBg" id="heroBg" aria-hidden="true"></div>
+  <div class="blob" id="blob1" aria-hidden="true"></div>
+  <div class="blob b2" id="blob2" aria-hidden="true"></div>
+
+  <header class="topbar">
+    <div class="topbarInner reveal">
+      <a class="btn primary ctaCenter" href="/sr-me/kontakt">
+        <span class="dot"></span>Kontaktiraj nas
+      </a>
+
+      <div class="navWrap">
+        <nav aria-label="Primary">
+          <a href="/sr-me/pocetna">Početna</a>
+          <a href="/sr-me/usluge" aria-current="page">Usluge</a>
+          <a href="/sr-me/onama">O nama</a>
+          <a href="/sr-me/blog">Blog</a>
+          <a href="/sr-me/poslovi">Poslovi</a>
+        </nav>
+
+        <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+
+    <div class="mobileMenu" id="mobileMenu" aria-label="Mobile menu">
+      <div class="mobileMenuInner">
+        <a href="/sr-me/pocetna">Početna</a>
+        <a href="/sr-me/usluge" aria-current="page">Usluge</a>
+        <a href="/sr-me/onama">O nama</a>
+        <a href="/sr-me/blog">Blog</a>
+        <a href="/sr-me/poslovi">Poslovi</a>
+      </div>
+    </div>
+  </header>
+
+  <div class="wrap">
+    <section class="hero" id="top">
+      <div class="kicker reveal"><span class="dot"></span> UX optimizacija (Conversion) • Podgorica / Crna Gora</div>
+
+      <h1 class="heroTitle reveal" id="heroTitle">Manje trenja. Više klikova, formi i poziva.</h1>
+
+      <p class="sub reveal">
+        UX optimizacija nije “ulepšavanje”.  
+        To je uklanjanje konfuzije, smanjenje nepotrebnih koraka i slaganje stranice tako da korisnik
+        lakše dođe do akcije: <strong>klik</strong>, <strong>upit</strong>, <strong>poziv</strong> ili <strong>rezervacija</strong>.
+      </p>
+
+      <div class="miniRow reveal">
+        <span>user flow</span>
+        <span>CTA logika</span>
+        <span>mobilni prioritet</span>
+        <span>manje odustajanja</span>
+      </div>
+
+      <div class="heroActions reveal">
+        <a class="btn primary" href="/sr-me/kontakt"><span class="dot"></span> Traži preporuku</a>
+        <a class="btn" href="#demo">Pogledaj primjer</a>
+      </div>
+
+      <div class="metricGrid reveal">
+        <div class="metric">
+          <strong>5–10</strong>
+          <span>dana za audit i predlog izmjena</span>
+        </div>
+        <div class="metric">
+          <strong>1</strong>
+          <span>glavni cilj po stranici</span>
+        </div>
+        <div class="metric">
+          <strong>mobile</strong>
+          <span>prioritet u stvarnom ponašanju korisnika</span>
+        </div>
+        <div class="metric">
+          <strong>više</strong>
+          <span>akcija iz istog saobraćaja</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="demo">
+      <div class="headRow">
+        <h2 class="h2 reveal">Primjer</h2>
+        <div class="desc reveal">
+          Ispod je before/after logika. Prebacuj scenario i vidi kako male UX izmjene mijenjaju rezultat.
+        </div>
+      </div>
+
+      <div class="demoShell reveal">
+        <div class="demoToolbar">
+          <div class="demoToolbarLeft">
+            <span class="demoDot"></span>
+            <span class="demoDot"></span>
+            <span class="demoDot"></span>
+            <span class="demoToolbarTitle">ux-preview.me</span>
+          </div>
+        </div>
+
+        <div class="demoViewport">
+          <div class="switchRow">
+            <button class="switchBtn active" type="button" data-scenario="booking">Rezervacije</button>
+            <button class="switchBtn" type="button" data-scenario="lead">Lead forma</button>
+            <button class="switchBtn" type="button" data-scenario="menu">Ponuda / meni</button>
+          </div>
+
+          <div class="beforeAfterGrid">
+            <div class="uiCard before">
+              <div class="uiMeta">
+                <span class="uiLabel">Prije</span>
+                <span>više trenja</span>
+              </div>
+
+              <div class="uiMock">
+                <div class="uiHero">
+                  <h3 id="beforeTitle">Dobrodošli na naš sajt.</h3>
+                  <p id="beforeText">Previše opšti naslov, više smjerova i slab CTA prioritet.</p>
+                </div>
+
+                <div class="uiBody">
+                  <div class="uiBlock">
+                    <h4>Problem</h4>
+                    <p id="beforeBlock1">Korisnik ne zna odmah šta dobija ni koji je sledeći korak.</p>
+                  </div>
+
+                  <div class="uiBlock">
+                    <h4>CTA</h4>
+                    <div class="ctaRow">
+                      <div class="fakeButton weak">Saznaj više</div>
+                      <div class="fakeButton weak">Kontakt</div>
+                      <div class="fakeButton weak">Pogledaj još</div>
+                    </div>
+                  </div>
+
+                  <div class="uiBlock">
+                    <h4>Forma</h4>
+                    <div class="fakeForm">
+                      <div class="fakeInput"></div>
+                      <div class="fakeInput"></div>
+                      <div class="fakeInput"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="uiCard after">
+              <div class="uiMeta">
+                <span class="uiLabel">Poslije</span>
+                <span>jasniji flow</span>
+              </div>
+
+              <div class="uiMock">
+                <div class="uiHero">
+                  <h3 id="afterTitle">Rezerviši sto u nekoliko klikova.</h3>
+                  <p id="afterText">Jedna poruka, jedan glavni CTA i lakši put do završetka akcije.</p>
+                </div>
+
+                <div class="uiBody">
+                  <div class="uiBlock">
+                    <h4>Rješenje</h4>
+                    <p id="afterBlock1">Ponuda i benefit su jasni odmah, bez dodatnog traženja po stranici.</p>
+                  </div>
+
+                  <div class="uiBlock">
+                    <h4>CTA</h4>
+                    <div class="ctaRow">
+                      <div class="fakeButton">Rezerviši odmah</div>
+                    </div>
+                  </div>
+
+                  <div class="uiBlock">
+                    <h4>Forma</h4>
+                    <div class="fakeForm">
+                      <div class="fakeInput"></div>
+                      <div class="fakeInput"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="resultGrid">
+            <div class="resultPanel">
+              <h3 class="scoreBig" id="winnerTitle">Manje trenja = više akcije.</h3>
+              <div class="smallMuted" id="winnerText">
+                Kad korisnik ne mora da pogađa šta dalje, veća je šansa da klikne, pošalje formu ili pozove.
+              </div>
+
+              <div class="scoreBars">
+                <div class="barRow">
+                  <div class="barLabel">
+                    <span>Prije</span>
+                    <span id="barBeforeLabel">2.9% stopa akcije</span>
+                  </div>
+                  <div class="barTrack">
+                    <div class="barFill" id="barBefore"></div>
+                  </div>
+                </div>
+
+                <div class="barRow">
+                  <div class="barLabel">
+                    <span>Poslije</span>
+                    <span id="barAfterLabel">5.6% stopa akcije</span>
+                  </div>
+                  <div class="barTrack">
+                    <div class="barFill" id="barAfter"></div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="miniStats">
+                <div class="miniStat">
+                  <strong id="statIncrease">+93%</strong>
+                  <span>više glavnih akcija</span>
+                </div>
+                <div class="miniStat">
+                  <strong id="statDrop">-34%</strong>
+                  <span>manje odustajanja</span>
+                </div>
+              </div>
+
+              <div class="noteBox" id="uxInsight">
+                Najveći problemi često nijesu “veliki”, nego mali prekidi: nejasan naslov, previše CTA-a i nepotrebni koraci.
+              </div>
+            </div>
+
+            <div class="resultPanel">
+              <h3 style="margin:0 0 12px;font-size:15px;">Šta smo popravili</h3>
+
+              <div class="fixList">
+                <div class="fixItem">
+                  <strong id="fix1Title">Jasniji hero</strong>
+                  <span id="fix1Text">Prva sekunda mora da objasni šta korisnik dobija i zašto da ostane.</span>
+                </div>
+
+                <div class="fixItem">
+                  <strong id="fix2Title">Jedan glavni CTA</strong>
+                  <span id="fix2Text">Kad ima previše smjerova, korisnik lakše odustaje nego što bira.</span>
+                </div>
+
+                <div class="fixItem">
+                  <strong id="fix3Title">Kraća forma</strong>
+                  <span id="fix3Text">Traži se samo ono što stvarno treba da bi akcija bila laka.</span>
+                </div>
+
+                <div class="fixItem">
+                  <strong id="fix4Title">Bolji mobilni raspored</strong>
+                  <span id="fix4Text">Većina realnih problema se dešava na telefonu, ne na desktopu.</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="headRow">
+        <h2 class="h2 reveal">Šta je uključeno</h2>
+        <div class="desc reveal">
+          UX optimizacija nije nagađanje. Gledamo konkretne tačke gdje korisnik zapinje i predlažemo jasne izmjene.
+        </div>
+      </div>
+
+      <div class="grid3">
+        <div class="card reveal">
+          <div class="cardBody">
+            <h3>Audit</h3>
+            <ul class="bulletList">
+              <li>user flow analiza</li>
+              <li>CTA prioritet</li>
+              <li>sekcije i redosled informacija</li>
+              <li>trenje u formi i akciji</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="card reveal">
+          <div class="cardBody">
+            <h3>Izmjene</h3>
+            <ul class="bulletList">
+              <li>jasniji hero i benefit blok</li>
+              <li>manje konfuzije u navigaciji</li>
+              <li>jednostavniji CTA put</li>
+              <li>kraće i smislenije forme</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="card reveal">
+          <div class="cardBody">
+            <h3>Rezultat</h3>
+            <ul class="bulletList">
+              <li>više klikova iz istog saobraćaja</li>
+              <li>više leadova i poziva</li>
+              <li>manje drop-off tačaka</li>
+              <li>bolja osnova za ads i SEO</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="headRow">
+        <h2 class="h2 reveal">Kako radimo</h2>
+        <div class="desc reveal">
+          Cilj nije da stranica bude samo “urednija”, nego da korisnik lakše stigne do onoga što treba da uradi.
+        </div>
+      </div>
+
+      <div class="grid2">
+        <div class="card reveal">
+          <div class="cardBody">
+            <h3>1. Tražimo gdje puca flow</h3>
+            <p>
+              Gledamo gdje korisnik staje, gdje se zbuni i koji koraci mu oduzimaju energiju prije akcije.
+            </p>
+          </div>
+        </div>
+
+        <div class="card reveal">
+          <div class="cardBody">
+            <h3>2. Postavljamo hijerarhiju</h3>
+            <p>
+              Sve ne može biti jednako važno. Zato slažemo redosled informacija i CTA-a tako da prvi signal bude najbitniji.
+            </p>
+          </div>
+        </div>
+
+        <div class="card reveal">
+          <div class="cardBody">
+            <h3>3. Smanjujemo trenje</h3>
+            <p>
+              Skraćujemo forme, pojednostavljujemo akcije i izbacujemo nepotrebne elemente koji usporavaju odluku.
+            </p>
+          </div>
+        </div>
+
+        <div class="card reveal">
+          <div class="cardBody">
+            <h3>4. Povezujemo sa mjerenjem</h3>
+            <p>
+              UX izmjene imaju smisla tek kad se mogu pratiti kroz klik, formu, poziv ili drugi jasan rezultat.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="headRow">
+        <h2 class="h2 reveal">Za koga je ovo</h2>
+        <div class="desc reveal">
+          Najviše smisla ima kad već imaš posjete, ali osjećaš da stranica ne izvlači maksimum iz tog saobraćaja.
+        </div>
+      </div>
+
+      <div class="grid2">
+        <div class="card reveal">
+          <div class="cardBody">
+            <h3>Idealno za</h3>
+            <ul class="bulletList">
+              <li>landing stranice</li>
+              <li>lead forme i prijave</li>
+              <li>rezervacije i pozive</li>
+              <li>biznise koji ulažu u oglase</li>
+              <li>stranice sa velikim drop-off-om</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="card reveal">
+          <div class="cardBody">
+            <h3>Problem je obično kad</h3>
+            <ul class="bulletList">
+              <li>ima previše CTA-a</li>
+              <li>ponuda nije jasna odmah</li>
+              <li>forma traži previše</li>
+              <li>mobilni raspored otežava akciju</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="card reveal">
+        <div class="cardBody">
+          <div class="headRow" style="margin-bottom:12px;">
+            <h2 class="h2" style="margin:0;">Treba ti više rezultata iz istog saobraćaja?</h2>
+            <div class="desc" style="max-width:42ch;">
+              Ako ti stranica već ima posjete, ali ne daje dovoljno akcija, možemo složiti UX izmjene koje uklanjaju trenje.
+            </div>
+          </div>
+
+          <div class="heroActions" style="margin-top:0;">
+            <a class="btn primary" href="/sr-me/kontakt"><span class="dot"></span> Traži preporuku</a>
+            <a class="btn" href="/sr-me/usluge">Nazad na usluge</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div>© <span id="year"></span> Sindikat - Performance & Activation Studio</div>
+      <div>Podgorica • Crna Gora • @sindikat_events</div>
+    </footer>
+  </div>
+
+  <script>
+    const yearEl = document.getElementById('year');
+    if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+
+    const closeMobileMenu = () => {
+      if (!mobileMenu) return;
+      mobileMenu.style.display = 'none';
+      mobileMenu.style.opacity = '';
+      mobileMenu.style.transform = '';
+      if (hamburger) hamburger.setAttribute('aria-expanded','false');
+    };
+
+    if (hamburger && mobileMenu) {
+      hamburger.addEventListener('click', ()=>{
+        const isOpen = mobileMenu.style.display === 'block';
+        if (isOpen) {
+          anime({
+            targets: mobileMenu,
+            opacity: [1,0],
+            translateY: [0,6],
+            duration: 220,
+            easing: 'easeOutQuad',
+            complete: closeMobileMenu
+          });
+        } else {
+          mobileMenu.style.display = 'block';
+          hamburger.setAttribute('aria-expanded','true');
+          anime({
+            targets: mobileMenu,
+            opacity: [0,1],
+            translateY: [6,0],
+            duration: 260,
+            easing: 'easeOutQuad'
+          });
+        }
+      });
+
+      document.querySelectorAll('#mobileMenu a').forEach(a=>{
+        a.addEventListener('click', closeMobileMenu);
+      });
+
+      document.addEventListener('click', (e)=>{
+        if (mobileMenu.style.display !== 'block') return;
+        const inside = mobileMenu.contains(e.target) || hamburger.contains(e.target);
+        if (!inside) closeMobileMenu();
+      });
+    }
+
+    const titleEl = document.getElementById('heroTitle');
+    if (titleEl) {
+      const raw = titleEl.textContent.trim();
+      const words = raw.split(/\s+/);
+      titleEl.textContent = '';
+      words.forEach((w, i) => {
+        const span = document.createElement('span');
+        span.textContent = w;
+        titleEl.appendChild(span);
+        if (i !== words.length - 1) titleEl.appendChild(document.createTextNode(' '));
+      });
+    }
+
+    const revealEls = document.querySelectorAll('.reveal');
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(entry=>{
+        if(!entry.isIntersecting) return;
+        const el = entry.target;
+        anime({ targets: el, opacity:[0,1], translateY:[18,0], duration:820, easing:'easeOutExpo' });
+        io.unobserve(el);
+      });
+    }, {threshold:0.14});
+    revealEls.forEach(el=>io.observe(el));
+
+    window.addEventListener('load', ()=>{
+      anime({
+        targets:'#heroTitle span',
+        opacity:[0,1],
+        translateY:[16,0],
+        delay: anime.stagger(45),
+        duration:900,
+        easing:'easeOutExpo'
+      });
+    });
+
+    const heroBg = document.getElementById('heroBg');
+    const b1 = document.getElementById('blob1');
+    const b2 = document.getElementById('blob2');
+
+    const setBlobsBase = () => {
+      if (!b1 || !b2) return;
+      const w = window.innerWidth, h = window.innerHeight;
+      b1.style.left = Math.max(12, w*0.06) + 'px';
+      b1.style.top  = Math.max(12, h*0.16) + 'px';
+      b2.style.left = Math.max(12, w*0.60) + 'px';
+      b2.style.top  = Math.max(12, h*0.08) + 'px';
+    };
+    setBlobsBase();
+    window.addEventListener('resize', setBlobsBase);
+
+    anime({
+      targets:'#blob1',
+      translateX:[0,18,-10,0],
+      translateY:[0,-12,16,0],
+      duration:9000,
+      easing:'easeInOutSine',
+      loop:true
+    });
+    anime({
+      targets:'#blob2',
+      translateX:[0,-14,10,0],
+      translateY:[0,14,-10,0],
+      duration:11000,
+      easing:'easeInOutSine',
+      loop:true
+    });
+
+    let ticking = false;
+    window.addEventListener('scroll', ()=>{
+      if(ticking) return;
+      ticking = true;
+      requestAnimationFrame(()=>{
+        const y = window.scrollY || 0;
+        if(heroBg) heroBg.style.transform = `translateY(${y * 0.06}px)`;
+        ticking = false;
+      });
+    }, {passive:true});
+
+    const scenarios = {
+      booking: {
+        beforeTitle: 'Dobrodošli na naš sajt.',
+        beforeText: 'Previše opšti naslov, više smjerova i slab CTA prioritet.',
+        beforeBlock1: 'Korisnik ne zna odmah šta dobija ni koji je sledeći korak.',
+        afterTitle: 'Rezerviši sto u nekoliko klikova.',
+        afterText: 'Jedna poruka, jedan glavni CTA i lakši put do završetka akcije.',
+        afterBlock1: 'Ponuda i benefit su jasni odmah, bez dodatnog traženja po stranici.',
+        winnerTitle: 'Manje trenja = više rezervacija.',
+        winnerText: 'Kad korisnik ne mora da bira između više smjerova, lakše završava akciju.',
+        beforeRate: 2.9,
+        afterRate: 5.6,
+        increase: '+93%',
+        drop: '-34%',
+        insight: 'Najveći problemi često nijesu “veliki”, nego mali prekidi: nejasan naslov, previše CTA-a i nepotrebni koraci.',
+        fixes: [
+          ['Jasniji hero', 'Prva sekunda mora da objasni šta korisnik dobija i zašto da ostane.'],
+          ['Jedan glavni CTA', 'Kad ima previše smjerova, korisnik lakše odustaje nego što bira.'],
+          ['Kraća forma', 'Traži se samo ono što stvarno treba da bi akcija bila laka.'],
+          ['Bolji mobilni raspored', 'Većina realnih problema se dešava na telefonu, ne na desktopu.']
+        ]
+      },
+
+      lead: {
+        beforeTitle: 'Pošaljite upit.',
+        beforeText: 'Generička poruka, previše polja i slab osjećaj šta korisnik dobija zauzvrat.',
+        beforeBlock1: 'Forma djeluje kao obaveza, ne kao lak sledeći korak.',
+        afterTitle: 'Ostavi broj i javljamo ti se brzo.',
+        afterText: 'Jasna vrijednost, manje polja i veća sigurnost šta slijedi poslije klika.',
+        afterBlock1: 'Korisnik vidi da je proces brz, jednostavan i bez viška unosa.',
+        winnerTitle: 'Manje polja = više leadova.',
+        winnerText: 'Kad forma traži samo nužno i CTA obeća jasan ishod, raste stopa završetka.',
+        beforeRate: 3.1,
+        afterRate: 6.2,
+        increase: '+100%',
+        drop: '-41%',
+        insight: 'Kod lead formi UX često puca zbog viška unosa, slabog CTA-a i nejasnog obećanja šta korisnik dobija.',
+        fixes: [
+          ['Smanjen broj polja', 'Korisnik lakše završava formu kad ne tražiš više nego što treba.'],
+          ['Jasniji CTA tekst', 'CTA treba da objasni ishod, ne samo akciju.'],
+          ['Bolji redosled informacija', 'Prvo vrijednost, pa onda unos podataka.'],
+          ['Manje vizuelnog šuma', 'Kad je fokus jači, forma djeluje lakše za završetak.']
+        ]
+      },
+
+      menu: {
+        beforeTitle: 'Pogledaj naš meni.',
+        beforeText: 'Previše sekcija, slab fokus i premalo prioriteta za glavne proizvode ili akcije.',
+        beforeBlock1: 'Korisnik skroluje dugo prije nego što vidi šta je stvarno bitno.',
+        afterTitle: 'Najtraženije ponude odmah na vrhu.',
+        afterText: 'Prioritetni proizvodi i jasne kategorije olakšavaju izbor i ubrzavaju odluku.',
+        afterBlock1: 'Najvažnije opcije izlaze prve, bez rasipanja pažnje po cijeloj stranici.',
+        winnerTitle: 'Bolja hijerarhija = više klikova na ponudu.',
+        winnerText: 'Kad je sadržaj pravilno složen, korisnik brže nalazi ono što traži i lakše klikne.',
+        beforeRate: 4.0,
+        afterRate: 7.1,
+        increase: '+77%',
+        drop: '-29%',
+        insight: 'UX nije samo forma — često je problem u tome što korisnik ne vidi dovoljno brzo najbitniju ponudu ili kategoriju.',
+        fixes: [
+          ['Jači prioritet sekcija', 'Najvažnije informacije moraju biti bliže vrhu.'],
+          ['Jasnije grupe sadržaja', 'Kategorije i blokovi treba da vode korisnika, ne da ga zatrpaju.'],
+          ['Brži CTA put', 'Klik do ponude mora da bude kratak i očigledan.'],
+          ['Manje vizuelnog rasipanja', 'Kad je manje šuma, korisnik brže odlučuje.']
+        ]
+      }
+    };
+
+    const switchBtns = document.querySelectorAll('.switchBtn');
+    let currentScenario = 'booking';
+
+    const beforeTitle = document.getElementById('beforeTitle');
+    const beforeText = document.getElementById('beforeText');
+    const beforeBlock1 = document.getElementById('beforeBlock1');
+    const afterTitle = document.getElementById('afterTitle');
+    const afterText = document.getElementById('afterText');
+    const afterBlock1 = document.getElementById('afterBlock1');
+
+    const winnerTitle = document.getElementById('winnerTitle');
+    const winnerText = document.getElementById('winnerText');
+    const barBefore = document.getElementById('barBefore');
+    const barAfter = document.getElementById('barAfter');
+    const barBeforeLabel = document.getElementById('barBeforeLabel');
+    const barAfterLabel = document.getElementById('barAfterLabel');
+    const statIncrease = document.getElementById('statIncrease');
+    const statDrop = document.getElementById('statDrop');
+    const uxInsight = document.getElementById('uxInsight');
+
+    const fix1Title = document.getElementById('fix1Title');
+    const fix1Text = document.getElementById('fix1Text');
+    const fix2Title = document.getElementById('fix2Title');
+    const fix2Text = document.getElementById('fix2Text');
+    const fix3Title = document.getElementById('fix3Title');
+    const fix3Text = document.getElementById('fix3Text');
+    const fix4Title = document.getElementById('fix4Title');
+    const fix4Text = document.getElementById('fix4Text');
+
+    function setScenario(key){
+      const s = scenarios[key];
+
+      beforeTitle.textContent = s.beforeTitle;
+      beforeText.textContent = s.beforeText;
+      beforeBlock1.textContent = s.beforeBlock1;
+
+      afterTitle.textContent = s.afterTitle;
+      afterText.textContent = s.afterText;
+      afterBlock1.textContent = s.afterBlock1;
+
+      winnerTitle.textContent = s.winnerTitle;
+      winnerText.textContent = s.winnerText;
+      statIncrease.textContent = s.increase;
+      statDrop.textContent = s.drop;
+      uxInsight.textContent = s.insight;
+
+      barBeforeLabel.textContent = s.beforeRate.toFixed(1) + '% stopa akcije';
+      barAfterLabel.textContent = s.afterRate.toFixed(1) + '% stopa akcije';
+
+      barBefore.style.width = '0%';
+      barAfter.style.width = '0%';
+
+      requestAnimationFrame(()=>{
+        barBefore.style.width = Math.min(s.beforeRate * 12, 100) + '%';
+        barAfter.style.width = Math.min(s.afterRate * 12, 100) + '%';
+      });
+
+      fix1Title.textContent = s.fixes[0][0];
+      fix1Text.textContent = s.fixes[0][1];
+      fix2Title.textContent = s.fixes[1][0];
+      fix2Text.textContent = s.fixes[1][1];
+      fix3Title.textContent = s.fixes[2][0];
+      fix3Text.textContent = s.fixes[2][1];
+      fix4Title.textContent = s.fixes[3][0];
+      fix4Text.textContent = s.fixes[3][1];
+    }
+
+    switchBtns.forEach(btn=>{
+      btn.addEventListener('click', ()=>{
+        switchBtns.forEach(b=>b.classList.remove('active'));
+        btn.classList.add('active');
+        currentScenario = btn.getAttribute('data-scenario');
+        setScenario(currentScenario);
+      });
+    });
+
+    setScenario(currentScenario);
+  </script>
+</body>
+</html>
