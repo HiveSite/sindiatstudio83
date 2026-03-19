@@ -1,0 +1,1461 @@
+<!DOCTYPE html>
+<html lang="sr-ME">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-NH2FL5SP1Y"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-NH2FL5SP1Y');
+  </script>
+
+  <!-- Google Tag Manager -->
+  <script>
+    (function(w,d,s,l,i){
+      w[l]=w[l]||[];
+      w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});
+      var f=d.getElementsByTagName(s)[0],
+          j=d.createElement(s),
+          dl=l!='dataLayer' ? '&l='+l : '';
+      j.async=true;
+      j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;
+      f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-PBXVW3GK');
+  </script>
+  <!-- End Google Tag Manager -->
+
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>SEO sistem (On-page + Sadržaj) | Sindikat</title>
+  <meta name="description" content="SEO sistem koji spaja strukturu sajta, ključne riječi, sadržaj i interne linkove da bi donosio upite, a ne samo posjete." />
+  <link rel="icon" type="image/png" href="/favicon.png">
+
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+
+  <style>
+    :root{
+      --bg:#05010D;
+      --bg2:#12011F;
+      --text:#FFFFFF;
+      --muted:rgba(255,255,255,.78);
+      --muted2:rgba(255,255,255,.62);
+      --accent:#FF3B6F;
+      --accent2:#FFB000;
+      --cyan:#18F5FF;
+      --good:#2dd4bf;
+      --warn:#ffd166;
+
+      --shadow:0 22px 75px rgba(0,0,0,.68);
+      --shadow2:0 14px 38px rgba(0,0,0,.48);
+
+      --r2:14px;
+      --r3:18px;
+
+      --max:1120px;
+      --ease:cubic-bezier(.2,.9,.2,1);
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      background:
+        radial-gradient(820px 520px at 12% 10%, rgba(255,59,111,.22), transparent 60%),
+        radial-gradient(900px 520px at 88% 8%, rgba(24,245,255,.14), transparent 58%),
+        radial-gradient(760px 520px at 70% 28%, rgba(162,76,255,.12), transparent 60%),
+        radial-gradient(680px 480px at 20% 70%, rgba(255,176,0,.10), transparent 62%),
+        linear-gradient(180deg, var(--bg), var(--bg2));
+      color:var(--text);
+      font-family:Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      letter-spacing:.2px;
+      overflow-x:hidden;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+    }
+
+    body:before{
+      content:"";
+      position:fixed; inset:0;
+      pointer-events:none;
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23n)' opacity='.23'/%3E%3C/svg%3E");
+      opacity:.06;
+      mix-blend-mode:overlay;
+      z-index:0;
+    }
+
+    a{color:inherit;text-decoration:none}
+    .wrap{max-width:var(--max);margin:0 auto;padding:22px 18px 120px;position:relative;z-index:2}
+
+    .heroBg{
+      position:fixed;
+      inset:0;
+      z-index:1;
+      pointer-events:none;
+      overflow:hidden;
+      background:
+        radial-gradient(900px 540px at 20% 20%, rgba(255,59,111,.14), transparent 60%),
+        radial-gradient(900px 540px at 80% 10%, rgba(24,245,255,.10), transparent 60%),
+        radial-gradient(720px 520px at 68% 55%, rgba(162,76,255,.12), transparent 60%);
+    }
+    .heroBg:after{
+      content:"";
+      position:absolute; inset:0;
+      background:
+        radial-gradient(700px 420px at 18% 20%, rgba(255,59,111,.18), transparent 60%),
+        radial-gradient(900px 520px at 70% 12%, rgba(24,245,255,.14), transparent 58%),
+        linear-gradient(180deg, rgba(0,0,0,.18), rgba(6,1,13,.86) 62%, rgba(6,1,13,.96));
+    }
+
+    .blob{
+      position:fixed;
+      z-index:1;
+      pointer-events:none;
+      width:520px;height:520px;
+      border-radius:999px;
+      background: radial-gradient(circle at 35% 30%, rgba(255,59,111,.18), transparent 58%);
+      filter: blur(18px);
+      opacity:.55;
+      mix-blend-mode:screen;
+      transform:translate3d(0,0,0);
+    }
+    .blob.b2{
+      width:420px;height:420px;
+      background: radial-gradient(circle at 40% 35%, rgba(24,245,255,.14), transparent 60%);
+      opacity:.45;
+    }
+
+    .floatingLogo{
+      position:fixed;
+      top:14px;
+      left:14px;
+      z-index:120;
+      display:block;
+      text-decoration:none;
+    }
+    .logoMark{
+      width:176px;height:44px;
+      border-radius:14px;
+      border:1.5px solid rgba(255,59,111,.5);
+      box-shadow:
+        0 18px 34px rgba(0,0,0,.45),
+        0 0 0 3px rgba(0,0,0,.45) inset,
+        0 0 42px rgba(255,59,111,.22);
+      transform:rotate(-2deg);
+      overflow:hidden;
+      background:rgba(0,0,0,.18);
+      display:grid;
+      place-items:center;
+    }
+    .logoMarkImg{
+      width:100%;
+      height:100%;
+      object-fit:contain;
+      object-position:center;
+      padding:6px;
+      filter:drop-shadow(0 10px 18px rgba(0,0,0,.45));
+    }
+    .floatingLogo .logoMark{
+      width:50vw;
+      max-width:240px;
+      height:auto;
+      aspect-ratio:176 / 44;
+      transform:rotate(-2deg);
+      transform-origin:top left;
+    }
+
+    .topbar{
+      position:fixed;
+      bottom:0;
+      left:0;
+      right:0;
+      z-index:50;
+      backdrop-filter:blur(12px);
+      -webkit-backdrop-filter:blur(12px);
+      background:rgba(5,7,12,.88);
+      border-top:3px solid rgba(255,255,255,.12);
+    }
+    .topbarInner{
+      max-width:var(--max);
+      margin:0 auto;
+      padding:12px 18px;
+      display:flex;
+      align-items:center;
+      gap:12px;
+      justify-content:flex-start;
+    }
+    .ctaCenter{margin:0;}
+    .navWrap{
+      margin-left:auto;
+      display:flex;
+      align-items:center;
+      gap:12px;
+      position:relative;
+    }
+
+    nav{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      color:var(--muted);
+      font-size:13px;
+      align-items:center;
+    }
+    nav a{
+      padding:9px 10px;
+      border-radius:10px;
+      border:2px solid transparent;
+      transition: background .2s var(--ease), color .2s var(--ease), transform .2s var(--ease), border-color .2s var(--ease);
+      transform: translateY(0);
+    }
+    nav a:hover{
+      background:rgba(255,255,255,.05);
+      color:var(--text);
+      transform:translateY(-1px);
+      border-color:rgba(24,245,255,.35);
+    }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+      border-radius:10px;
+      padding:12px 16px;
+      font-size:13px;
+      border:3px solid rgba(255,255,255,.16);
+      background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+      color:var(--text);
+      transition:transform .18s var(--ease), box-shadow .18s var(--ease), border-color .18s var(--ease), background .18s var(--ease);
+      white-space:nowrap;
+      box-shadow:0 12px 30px rgba(0,0,0,.28);
+      cursor:pointer;
+    }
+    .btn:hover{transform:translateY(-3px);box-shadow:var(--shadow2);border-color:rgba(255,59,111,.5)}
+    .btn.primary{
+      background:linear-gradient(180deg, rgba(255,59,111,.35), rgba(255,59,111,.14));
+      border-color:rgba(255,59,111,.6);
+      box-shadow:0 20px 60px rgba(255,59,111,.20), 0 10px 28px rgba(0,0,0,.28);
+    }
+    .btn.small{padding:10px 12px;font-size:12px}
+    .dot{
+      width:8px;height:8px;border-radius:2px;
+      background:var(--accent);
+      box-shadow:0 0 0 5px rgba(255,59,111,.22), 0 0 24px rgba(255,59,111,.42);
+      transform:rotate(8deg);
+    }
+
+    .hamburger{
+      display:none;
+      width:44px;height:44px;
+      border-radius:10px;
+      border:3px solid rgba(255,255,255,.16);
+      background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+      align-items:center;justify-content:center;
+      gap:5px;
+      flex-direction:column;
+      cursor:pointer;
+    }
+    .hamburger span{
+      width:18px;height:2px;background:rgba(255,255,255,.8);
+      border-radius:3px;display:block;
+    }
+    .mobileMenu{
+      display:none;
+      position:absolute;
+      left:0; right:0;
+      bottom:100%;
+      border-bottom:3px solid rgba(255,255,255,.10);
+      background:rgba(5,7,12,.95);
+    }
+    .mobileMenuInner{
+      max-width:var(--max);
+      margin:0 auto;
+      padding:12px 18px 16px;
+      display:grid;
+      gap:8px;
+    }
+    .mobileMenuInner a{
+      padding:12px 12px;
+      border:3px solid rgba(255,255,255,.12);
+      border-radius:10px;
+      background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
+      color:var(--text);
+    }
+
+    .section{
+      padding:58px 0;
+      border-top:3px solid rgba(255,255,255,.08);
+    }
+    .hero{
+      padding:40px 0 24px;
+    }
+    .kicker{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      color:var(--muted);
+      font-size:12px;
+      text-transform:uppercase;
+      letter-spacing:1.1px;
+      margin-bottom:14px;
+    }
+    h1{
+      margin:0;
+      font-size:46px;
+      line-height:1.05;
+      letter-spacing:-.8px;
+      max-width:18ch;
+    }
+    .heroTitle span{display:inline-block;will-change:transform, opacity;}
+    .sub{
+      margin-top:14px;
+      color:rgba(255,255,255,.80);
+      font-size:15px;
+      line-height:1.65;
+      max-width:72ch;
+      text-shadow:0 10px 40px rgba(0,0,0,.35);
+    }
+    .heroActions{
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+      margin-top:18px;
+    }
+    .miniRow{
+      margin-top:18px;
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+      color:rgba(255,255,255,.70);
+      font-size:12px;
+    }
+    .miniRow span{
+      padding:8px 10px;
+      border:2px solid rgba(255,255,255,.12);
+      border-radius:10px;
+      background:rgba(10,12,18,.70);
+      box-shadow:0 10px 24px rgba(0,0,0,.22);
+    }
+
+    .headRow{
+      display:flex;
+      align-items:flex-end;
+      justify-content:space-between;
+      gap:16px;
+      flex-wrap:wrap;
+      margin-bottom:22px;
+    }
+    .h2{
+      font-size:22px;
+      letter-spacing:-.2px;
+      margin:0;
+    }
+    .desc{
+      color:rgba(255,255,255,.70);
+      font-size:13px;
+      line-height:1.65;
+      max-width:72ch;
+    }
+
+    .grid2{
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      gap:16px;
+    }
+    .grid3{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:16px;
+    }
+    .metricGrid{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:12px;
+      margin-top:16px;
+    }
+    .metric{
+      border:2px solid rgba(255,255,255,.12);
+      border-radius:14px;
+      background:rgba(8,10,16,.62);
+      padding:14px;
+      box-shadow:var(--shadow2);
+    }
+    .metric strong{
+      display:block;
+      font-size:22px;
+      margin-bottom:4px;
+    }
+    .metric span{
+      color:rgba(255,255,255,.66);
+      font-size:12px;
+      line-height:1.4;
+    }
+
+    .card{
+      border:3px solid rgba(255,255,255,.14);
+      border-radius:var(--r2);
+      background:linear-gradient(180deg, rgba(14,16,26,.92), rgba(7,8,19,.92));
+      box-shadow:var(--shadow2);
+      transition:transform .18s var(--ease), border-color .18s var(--ease), box-shadow .18s var(--ease), filter .18s var(--ease);
+      position:relative;
+      overflow:hidden;
+    }
+    .card:before{
+      content:"";
+      position:absolute;
+      inset:-35%;
+      background:
+        radial-gradient(circle at 25% 25%, rgba(255,59,111,.18), transparent 60%),
+        radial-gradient(circle at 80% 30%, rgba(24,245,255,.12), transparent 60%);
+      opacity:.5;
+      transform:rotate(8deg);
+      pointer-events:none;
+      z-index:0;
+    }
+    .card:after{
+      content:"";
+      position:absolute;
+      inset:0;
+      border:1px solid rgba(255,59,111,.18);
+      opacity:.45;
+      pointer-events:none;
+      z-index:0;
+    }
+    .card:hover{
+      transform:translateY(-6px);
+      border-color:rgba(255,59,111,.5);
+      box-shadow:var(--shadow);
+      filter:brightness(1.04);
+    }
+    .cardBody{
+      padding:18px;
+      position:relative;
+      z-index:2;
+    }
+
+    .bulletList{
+      margin:0;
+      padding-left:18px;
+      color:rgba(255,255,255,.74);
+      font-size:13px;
+      line-height:1.7;
+    }
+    .bulletList li{margin:6px 0}
+
+    .demoShell{
+      border:3px solid rgba(255,255,255,.12);
+      border-radius:18px;
+      overflow:hidden;
+      background:linear-gradient(180deg, rgba(12,14,24,.95), rgba(8,9,18,.95));
+      box-shadow:var(--shadow);
+    }
+    .demoToolbar{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      padding:12px 14px;
+      border-bottom:3px solid rgba(255,255,255,.08);
+      background:rgba(255,255,255,.03);
+    }
+    .demoToolbarLeft{
+      display:flex;
+      align-items:center;
+      gap:8px;
+    }
+    .demoDot{
+      width:10px;
+      height:10px;
+      border-radius:50%;
+      background:rgba(255,255,255,.18);
+    }
+    .demoToolbarTitle{
+      font-size:12px;
+      color:rgba(255,255,255,.62);
+      margin-left:8px;
+    }
+    .demoViewport{
+      padding:18px;
+      background:
+        radial-gradient(620px 220px at 20% 0%, rgba(255,59,111,.12), transparent 55%),
+        radial-gradient(620px 220px at 80% 0%, rgba(24,245,255,.08), transparent 55%),
+        linear-gradient(180deg, rgba(10,10,18,.95), rgba(8,9,16,.98));
+    }
+
+    .switchRow{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-bottom:16px;
+    }
+    .switchBtn{
+      border:2px solid rgba(255,255,255,.12);
+      background:rgba(255,255,255,.04);
+      color:#fff;
+      border-radius:12px;
+      padding:10px 12px;
+      font-size:12px;
+      cursor:pointer;
+      transition:.18s var(--ease);
+    }
+    .switchBtn.active{
+      border-color:rgba(255,59,111,.52);
+      background:rgba(255,59,111,.16);
+    }
+
+    .seoGrid{
+      display:grid;
+      grid-template-columns:1.05fr .95fr;
+      gap:16px;
+    }
+    .seoPanel{
+      border:2px solid rgba(255,255,255,.10);
+      border-radius:16px;
+      background:rgba(255,255,255,.04);
+      padding:16px;
+    }
+
+    .mapBox{
+      display:grid;
+      gap:12px;
+    }
+    .mapNode{
+      border:2px solid rgba(255,255,255,.08);
+      border-radius:14px;
+      background:rgba(255,255,255,.03);
+      padding:12px 14px;
+      position:relative;
+    }
+    .mapNode.main{
+      border-color:rgba(45,212,191,.26);
+      background:rgba(45,212,191,.08);
+    }
+    .mapNode strong{
+      display:block;
+      font-size:14px;
+      margin-bottom:4px;
+    }
+    .mapNode span{
+      display:block;
+      font-size:12px;
+      color:rgba(255,255,255,.66);
+      line-height:1.5;
+    }
+
+    .clusterGrid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:10px;
+      margin-top:10px;
+    }
+    .clusterItem{
+      border:2px solid rgba(255,255,255,.08);
+      border-radius:14px;
+      background:rgba(255,255,255,.03);
+      padding:12px;
+    }
+    .clusterItem strong{
+      display:block;
+      font-size:13px;
+      margin-bottom:4px;
+    }
+    .clusterItem span{
+      display:block;
+      font-size:12px;
+      color:rgba(255,255,255,.64);
+      line-height:1.45;
+    }
+
+    .scoreBig{
+      font-size:36px;
+      line-height:1;
+      margin:0 0 8px;
+      letter-spacing:-1px;
+    }
+    .smallMuted{
+      font-size:12px;
+      color:rgba(255,255,255,.64);
+      line-height:1.5;
+    }
+
+    .statGrid{
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      gap:12px;
+      margin-top:16px;
+    }
+    .statCard{
+      border:2px solid rgba(255,255,255,.08);
+      border-radius:14px;
+      background:rgba(255,255,255,.03);
+      padding:12px;
+    }
+    .statCard strong{
+      display:block;
+      font-size:22px;
+      margin-bottom:4px;
+    }
+    .statCard span{
+      display:block;
+      color:rgba(255,255,255,.64);
+      font-size:12px;
+      line-height:1.4;
+    }
+
+    .barGroup{
+      display:grid;
+      gap:10px;
+      margin-top:14px;
+    }
+    .barRow{
+      display:grid;
+      gap:6px;
+    }
+    .barLabel{
+      display:flex;
+      justify-content:space-between;
+      gap:10px;
+      font-size:12px;
+      color:rgba(255,255,255,.68);
+    }
+    .barTrack{
+      height:12px;
+      border-radius:999px;
+      overflow:hidden;
+      background:rgba(255,255,255,.06);
+      border:1px solid rgba(255,255,255,.08);
+    }
+    .barFill{
+      height:100%;
+      width:0%;
+      transition:width .45s ease;
+      background:linear-gradient(90deg, rgba(255,59,111,.98), rgba(24,245,255,.9));
+    }
+
+    .pageMock{
+      margin-top:16px;
+      border:2px solid rgba(255,255,255,.10);
+      border-radius:16px;
+      overflow:hidden;
+      background:rgba(11,12,20,.98);
+    }
+    .pageMockHead{
+      padding:16px 18px;
+      border-bottom:2px solid rgba(255,255,255,.08);
+      background:
+        radial-gradient(420px 180px at 10% 0%, rgba(255,59,111,.12), transparent 60%),
+        radial-gradient(420px 180px at 90% 0%, rgba(24,245,255,.08), transparent 60%),
+        rgba(12,13,22,.98);
+    }
+    .pageMockHead h4{
+      margin:0;
+      font-size:22px;
+      line-height:1.1;
+      letter-spacing:-.4px;
+      max-width:14ch;
+    }
+    .pageMockHead p{
+      margin:10px 0 0;
+      color:rgba(255,255,255,.72);
+      font-size:12px;
+      line-height:1.6;
+      max-width:42ch;
+    }
+    .pageMockBody{
+      padding:16px 18px 18px;
+      display:grid;
+      gap:12px;
+    }
+    .pageMockBlock{
+      border:2px solid rgba(255,255,255,.08);
+      border-radius:14px;
+      background:rgba(255,255,255,.03);
+      padding:12px;
+    }
+    .pageMockBlock h5{
+      margin:0 0 8px;
+      font-size:12px;
+      letter-spacing:.2px;
+    }
+    .pageMockBlock p{
+      margin:0;
+      color:rgba(255,255,255,.68);
+      font-size:12px;
+      line-height:1.55;
+    }
+
+    .noteBox{
+      margin-top:16px;
+      border:2px solid rgba(45,212,191,.22);
+      background:rgba(45,212,191,.08);
+      border-radius:14px;
+      padding:14px;
+      color:#eafffb;
+      font-size:13px;
+      line-height:1.6;
+    }
+
+    footer{
+      border-top:3px solid rgba(255,255,255,.10);
+      padding:28px 0 8px;
+      color:rgba(255,255,255,.62);
+      font-size:12px;
+      display:flex;
+      justify-content:space-between;
+      gap:12px;
+      flex-wrap:wrap;
+      margin-top:42px;
+    }
+
+    .reveal{opacity:0;transform:translateY(18px);will-change:transform, opacity;}
+
+    @media (max-width:980px){
+      h1{font-size:40px}
+      .grid2,
+      .grid3,
+      .metricGrid,
+      .seoGrid,
+      .clusterGrid,
+      .statGrid{grid-template-columns:1fr}
+      nav{display:none}
+      .hamburger{display:flex}
+    }
+    @media (max-width:520px){
+      .wrap{padding:16px 14px 72px}
+      h1{font-size:34px}
+      .heroActions{gap:10px}
+      .heroActions .btn{width:100%}
+      .topbarInner{padding:12px 14px}
+      .mobileMenuInner{padding:12px 14px 16px}
+    }
+    @media (max-width:520px){
+      .topbarInner{
+        flex-wrap:nowrap;
+        gap:10px;
+      }
+      .ctaCenter{
+        margin:0;
+        flex:1;
+        display:flex;
+        justify-content:center;
+      }
+      .ctaCenter.btn{
+        padding:10px 12px;
+        font-size:12px;
+      }
+      .navWrap{
+        margin-left:0;
+        flex:0 0 auto;
+      }
+      .hamburger{
+        flex:0 0 auto;
+      }
+    }
+  </style>
+
+  <link rel="canonical" href="https://www.sindikatstudio83.me/sr-me/usluge/seo-sistem-onpage-sadrzaj/" />
+  <meta name="robots" content="index,follow" />
+  <meta property="og:url" content="https://www.sindikatstudio83.me/sr-me/usluge/seo-sistem-onpage-sadrzaj/" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta property="og:image" content="https://www.sindikatstudio83.me/studio83logo.png" />
+  <meta property="og:title" content="SEO sistem (On-page + Sadržaj) | Sindikat" />
+  <meta property="og:description" content="SEO sistem koji spaja strukturu sajta, ključne riječi, sadržaj i interne linkove da bi donosio upite, a ne samo posjete." />
+  <meta name="twitter:title" content="SEO sistem (On-page + Sadržaj) | Sindikat" />
+  <meta name="twitter:description" content="SEO sistem koji spaja strukturu sajta, ključne riječi, sadržaj i interne linkove da bi donosio upite, a ne samo posjete." />
+  <meta name="twitter:image" content="https://www.sindikatstudio83.me/studio83logo.png" />
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"Service",
+    "@id":"https://www.sindikatstudio83.me/sr-me/usluge/seo-sistem-onpage-sadrzaj/#service",
+    "name":"SEO sistem (On-page + Sadržaj)",
+    "description":"SEO sistem koji spaja strukturu sajta, ključne riječi, sadržaj i interne linkove da bi donosio upite, a ne samo posjete.",
+    "provider":{
+      "@type":"Organization",
+      "name":"Sindikat Studio 83",
+      "url":"https://www.sindikatstudio83.me/",
+      "logo":"https://www.sindikatstudio83.me/studio83logo.png"
+    },
+    "areaServed":["Podgorica","Crna Gora"]
+  }
+  </script>
+</head>
+
+<body>
+  <a class="floatingLogo" href="/sr-me/pocetna" aria-label="Sindikat Studio 83 - Početna">
+    <div class="logoMark" aria-hidden="true">
+      <img class="logoMarkImg" src="/studio83logo.png" alt="">
+    </div>
+  </a>
+
+  <noscript>
+    <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PBXVW3GK" height="0" width="0" style="display:none;visibility:hidden"></iframe>
+  </noscript>
+
+  <div class="heroBg" id="heroBg" aria-hidden="true"></div>
+  <div class="blob" id="blob1" aria-hidden="true"></div>
+  <div class="blob b2" id="blob2" aria-hidden="true"></div>
+
+  <header class="topbar">
+    <div class="topbarInner reveal">
+      <a class="btn primary ctaCenter" href="/sr-me/kontakt">
+        <span class="dot"></span>Kontaktiraj nas
+      </a>
+
+      <div class="navWrap">
+        <nav aria-label="Primary">
+          <a href="/sr-me/pocetna">Početna</a>
+          <a href="/sr-me/usluge" aria-current="page">Usluge</a>
+          <a href="/sr-me/onama">O nama</a>
+          <a href="/sr-me/blog">Blog</a>
+          <a href="/sr-me/poslovi">Poslovi</a>
+        </nav>
+
+        <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+
+    <div class="mobileMenu" id="mobileMenu" aria-label="Mobile menu">
+      <div class="mobileMenuInner">
+        <a href="/sr-me/pocetna">Početna</a>
+        <a href="/sr-me/usluge" aria-current="page">Usluge</a>
+        <a href="/sr-me/onama">O nama</a>
+        <a href="/sr-me/blog">Blog</a>
+        <a href="/sr-me/poslovi">Poslovi</a>
+      </div>
+    </div>
+  </header>
+
+  <div class="wrap">
+    <section class="hero" id="top">
+      <div class="kicker reveal"><span class="dot"></span> SEO sistem • Podgorica / Crna Gora</div>
+
+      <h1 class="heroTitle reveal" id="heroTitle">SEO koji vodi do upita, ne samo do prometa.</h1>
+
+      <p class="sub reveal">
+        SEO sistem nije samo ubacivanje ključnih riječi.  
+        On povezuje <strong>strukturu sajta</strong>, <strong>stranice usluga</strong>, <strong>blog teme</strong>,
+        <strong>interne linkove</strong> i <strong>namjeru korisnika</strong> da bi organski saobraćaj imao smisla za biznis.
+      </p>
+
+      <div class="miniRow reveal">
+        <span>on-page</span>
+        <span>struktura sajta</span>
+        <span>content cluster</span>
+        <span>Search Console</span>
+      </div>
+
+      <div class="heroActions reveal">
+        <a class="btn primary" href="/sr-me/kontakt"><span class="dot"></span> Traži preporuku</a>
+        <a class="btn" href="#demo">Pogledaj primjer</a>
+      </div>
+
+      <div class="metricGrid reveal">
+        <div class="metric">
+          <strong>14–21</strong>
+          <span>dana za prvi SEO okvir i prioritete</span>
+        </div>
+        <div class="metric">
+          <strong>1</strong>
+          <span>glavna usluga + povezane teme</span>
+        </div>
+        <div class="metric">
+          <strong>intent</strong>
+          <span>fokus na kupovnu i tražilačku namjeru</span>
+        </div>
+        <div class="metric">
+          <strong>cluster</strong>
+          <span>struktura koja hrani glavne stranice</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="demo">
+      <div class="headRow">
+        <h2 class="h2 reveal">Primjer</h2>
+        <div class="desc reveal">
+          Ispod je uprošćen prikaz kako SEO sistem može da izgleda: glavna stranica usluge, povezane teme i sadržaj koji je gura naviše.
+        </div>
+      </div>
+
+      <div class="demoShell reveal">
+        <div class="demoToolbar">
+          <div class="demoToolbarLeft">
+            <span class="demoDot"></span>
+            <span class="demoDot"></span>
+            <span class="demoDot"></span>
+            <span class="demoToolbarTitle">seo-preview.me</span>
+          </div>
+        </div>
+
+        <div class="demoViewport">
+          <div class="switchRow">
+            <button class="switchBtn active" type="button" data-scenario="landing">Landing stranice</button>
+            <button class="switchBtn" type="button" data-scenario="ads">Oglašavanje</button>
+            <button class="switchBtn" type="button" data-scenario="events">Aktivacije</button>
+          </div>
+
+          <div class="seoGrid">
+            <div class="seoPanel">
+              <h3 class="scoreBig" id="mainPageTitle">Landing stranice Podgorica</h3>
+              <div class="smallMuted" id="mainPageText">
+                Glavna service stranica treba da bude centar klastera: komercijalna namjera, jasan CTA i interne veze prema podržavajućim temama.
+              </div>
+
+              <div class="mapBox" style="margin-top:16px;">
+                <div class="mapNode main">
+                  <strong id="serviceNode">/usluge/landing-stranice</strong>
+                  <span id="serviceNodeText">Glavna prodajna stranica za ključni pojam i varijacije sa kupovnom namjerom.</span>
+                </div>
+
+                <div class="clusterGrid">
+                  <div class="clusterItem">
+                    <strong id="cluster1Title">Šta je dobra landing stranica</strong>
+                    <span id="cluster1Text">Edukativna tema koja uvodi korisnika i linkuje ka glavnoj usluzi.</span>
+                  </div>
+                  <div class="clusterItem">
+                    <strong id="cluster2Title">Kako povećati konverziju stranice</strong>
+                    <span id="cluster2Text">Tema sa jačom poslovnom namjerom i internim linkom ka ponudi.</span>
+                  </div>
+                  <div class="clusterItem">
+                    <strong id="cluster3Title">Primjeri landing stranica</strong>
+                    <span id="cluster3Text">Dokazni sadržaj koji podržava glavnu uslugu i produžava vrijeme na sajtu.</span>
+                  </div>
+                  <div class="clusterItem">
+                    <strong id="cluster4Title">Landing stranica cijena</strong>
+                    <span id="cluster4Text">Tema bliža odluci, koja vodi direktno ka upitu ili kontaktu.</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="pageMock">
+                <div class="pageMockHead">
+                  <h4 id="mockTitle">Landing stranice koje donose upite.</h4>
+                  <p id="mockText">
+                    Ovo je primjer glavne stranice koja nije samo “opis usluge”, nego SEO i prodajna stranica u isto vrijeme.
+                  </p>
+                </div>
+                <div class="pageMockBody">
+                  <div class="pageMockBlock">
+                    <h5>Namjera</h5>
+                    <p id="mockBlock1">Stranica cilja korisnika koji već traži rješenje, ne samo opšte informacije.</p>
+                  </div>
+                  <div class="pageMockBlock">
+                    <h5>Interno linkovanje</h5>
+                    <p id="mockBlock2">Blog i supporting teme guraju autoritet i relevanciju glavnoj stranici.</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="noteBox" id="seoInsight">
+                SEO radi bolje kad glavna stranica i supporting sadržaj rade zajedno, umjesto da svaki tekst stoji sam za sebe.
+              </div>
+            </div>
+
+            <div class="seoPanel">
+              <h3 style="margin:0 0 12px;font-size:15px;">Šta mjerimo</h3>
+
+              <div class="statGrid">
+                <div class="statCard">
+                  <strong id="statClicks">284</strong>
+                  <span>organski klikovi</span>
+                </div>
+                <div class="statCard">
+                  <strong id="statImpr">7.2k</strong>
+                  <span>impresije</span>
+                </div>
+                <div class="statCard">
+                  <strong id="statAvgPos">11.4</strong>
+                  <span>prosječna pozicija</span>
+                </div>
+                <div class="statCard">
+                  <strong id="statLeads">23</strong>
+                  <span>upiti sa SEO-a</span>
+                </div>
+              </div>
+
+              <div class="barGroup">
+                <div class="barRow">
+                  <div class="barLabel">
+                    <span>Glavna service stranica</span>
+                    <span id="barMainLabel">52%</span>
+                  </div>
+                  <div class="barTrack">
+                    <div class="barFill" id="barMain"></div>
+                  </div>
+                </div>
+
+                <div class="barRow">
+                  <div class="barLabel">
+                    <span>Supporting blog teme</span>
+                    <span id="barBlogLabel">33%</span>
+                  </div>
+                  <div class="barTrack">
+                    <div class="barFill" id="barBlog"></div>
+                  </div>
+                </div>
+
+                <div class="barRow">
+                  <div class="barLabel">
+                    <span>Brand / ostalo</span>
+                    <span id="barBrandLabel">15%</span>
+                  </div>
+                  <div class="barTrack">
+                    <div class="barFill" id="barBrand"></div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="noteBox" id="resultBox">
+                Najbitnije nije samo da rankaš, nego da znaš koje stranice stvarno donose upite i gdje treba dodati više sadržaja ili jače linkovanje.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="headRow">
+        <h2 class="h2 reveal">Šta je uključeno</h2>
+        <div class="desc reveal">
+          SEO radimo kao sistem: struktura, sadržaj, stranice usluga i mjerenje, a ne kao skup nepovezanih zadataka.
+        </div>
+      </div>
+
+      <div class="grid3">
+        <div class="card reveal">
+          <div class="cardBody">
+            <h3>On-page osnova</h3>
+            <ul class="bulletList">
+              <li>title i meta opis</li>
+              <li>H struktura</li>
+              <li>URL logika</li>
+              <li>interne veze i prioritet stranica</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="card reveal">
+          <div class="cardBody">
+            <h3>Content plan</h3>
+            <ul class="bulletList">
+              <li>teme po namjeri</li>
+              <li>supporting članci</li>
+              <li>service page cluster</li>
+              <li>redosled objava po prioritetu</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="card reveal">
+          <div class="cardBody">
+            <h3>Mjerenje</h3>
+            <ul class="bulletList">
+              <li>Search Console pregled</li>
+              <li>klikovi i impresije</li>
+              <li>stranice koje nose rezultat</li>
+              <li>upiti i konverzije iz organskog saobraćaja</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="headRow">
+        <h2 class="h2 reveal">Kako radimo</h2>
+        <div class="desc reveal">
+          SEO nije samo “piši blog”. Prvo gradimo logiku sajta, pa onda sadržaj koji jača najvažnije stranice.
+        </div>
+      </div>
+
+      <div class="grid2">
+        <div class="card reveal">
+          <div class="cardBody">
+            <h3>1. Biramo prioritetne stranice</h3>
+            <p>
+              Ne optimizujemo sve odjednom. Prvo određujemo koje service stranice imaju najveći poslovni smisao.
+            </p>
+          </div>
+        </div>
+
+        <div class="card reveal">
+          <div class="cardBody">
+            <h3>2. Mapiramo namjeru</h3>
+            <p>
+              Razdvajamo teme na informativne, uporedne i kupovne da bi sadržaj vodio korisnika ka pravom koraku.
+            </p>
+          </div>
+        </div>
+
+        <div class="card reveal">
+          <div class="cardBody">
+            <h3>3. Povezujemo sadržaj</h3>
+            <p>
+              Blog nije tu da bude sam sebi svrha. On treba da podrži glavne stranice i šalje im relevanciju.
+            </p>
+          </div>
+        </div>
+
+        <div class="card reveal">
+          <div class="cardBody">
+            <h3>4. Mjerimo šta nosi rezultat</h3>
+            <p>
+              Ne gledamo samo rast klikova, nego i koje teme i stranice stvarno vode do upita i poslovne vrijednosti.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="headRow">
+        <h2 class="h2 reveal">Za koga je ovo</h2>
+        <div class="desc reveal">
+          SEO najviše ima smisla kad želiš dugoročniji kanal rasta i kad je sajt spreman da pretvori organsku posjetu u upit ili prodaju.
+        </div>
+      </div>
+
+      <div class="grid2">
+        <div class="card reveal">
+          <div class="cardBody">
+            <h3>Idealno za</h3>
+            <ul class="bulletList">
+              <li>service biznise</li>
+              <li>sajtove sa više usluga</li>
+              <li>lokalni SEO i Podgorica upite</li>
+              <li>blog + service page sistem</li>
+              <li>biznise koji žele dugoročniji organski kanal</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="card reveal">
+          <div class="cardBody">
+            <h3>Ne radi dobro kad</h3>
+            <ul class="bulletList">
+              <li>sajt nema jasnu strukturu</li>
+              <li>sve teme su nasumične</li>
+              <li>nema service stranica koje “primaju” saobraćaj</li>
+              <li>mjeriš samo promet, a ne poslovni rezultat</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="card reveal">
+        <div class="cardBody">
+          <div class="headRow" style="margin-bottom:12px;">
+            <h2 class="h2" style="margin:0;">Treba ti SEO koji vodi do upita?</h2>
+            <div class="desc" style="max-width:42ch;">
+              Ako želiš da service stranice i blog rade kao jedan sistem, možemo složiti SEO okvir koji ima poslovnu logiku.
+            </div>
+          </div>
+
+          <div class="heroActions" style="margin-top:0;">
+            <a class="btn primary" href="/sr-me/kontakt"><span class="dot"></span> Traži preporuku</a>
+            <a class="btn" href="/sr-me/usluge">Nazad na usluge</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div>© <span id="year"></span> Sindikat - Performance & Activation Studio</div>
+      <div>Podgorica • Crna Gora • @sindikat_events</div>
+    </footer>
+  </div>
+
+  <script>
+    const yearEl = document.getElementById('year');
+    if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+
+    const closeMobileMenu = () => {
+      if (!mobileMenu) return;
+      mobileMenu.style.display = 'none';
+      mobileMenu.style.opacity = '';
+      mobileMenu.style.transform = '';
+      if (hamburger) hamburger.setAttribute('aria-expanded','false');
+    };
+
+    if (hamburger && mobileMenu) {
+      hamburger.addEventListener('click', ()=>{
+        const isOpen = mobileMenu.style.display === 'block';
+        if (isOpen) {
+          anime({
+            targets: mobileMenu,
+            opacity: [1,0],
+            translateY: [0,6],
+            duration: 220,
+            easing: 'easeOutQuad',
+            complete: closeMobileMenu
+          });
+        } else {
+          mobileMenu.style.display = 'block';
+          hamburger.setAttribute('aria-expanded','true');
+          anime({
+            targets: mobileMenu,
+            opacity: [0,1],
+            translateY: [6,0],
+            duration: 260,
+            easing: 'easeOutQuad'
+          });
+        }
+      });
+
+      document.querySelectorAll('#mobileMenu a').forEach(a=>{
+        a.addEventListener('click', closeMobileMenu);
+      });
+
+      document.addEventListener('click', (e)=>{
+        if (mobileMenu.style.display !== 'block') return;
+        const inside = mobileMenu.contains(e.target) || hamburger.contains(e.target);
+        if (!inside) closeMobileMenu();
+      });
+    }
+
+    const titleEl = document.getElementById('heroTitle');
+    if (titleEl) {
+      const raw = titleEl.textContent.trim();
+      const words = raw.split(/\s+/);
+      titleEl.textContent = '';
+      words.forEach((w, i) => {
+        const span = document.createElement('span');
+        span.textContent = w;
+        titleEl.appendChild(span);
+        if (i !== words.length - 1) titleEl.appendChild(document.createTextNode(' '));
+      });
+    }
+
+    const revealEls = document.querySelectorAll('.reveal');
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(entry=>{
+        if(!entry.isIntersecting) return;
+        const el = entry.target;
+        anime({ targets: el, opacity:[0,1], translateY:[18,0], duration:820, easing:'easeOutExpo' });
+        io.unobserve(el);
+      });
+    }, {threshold:0.14});
+    revealEls.forEach(el=>io.observe(el));
+
+    window.addEventListener('load', ()=>{
+      anime({
+        targets:'#heroTitle span',
+        opacity:[0,1],
+        translateY:[16,0],
+        delay: anime.stagger(45),
+        duration:900,
+        easing:'easeOutExpo'
+      });
+    });
+
+    const heroBg = document.getElementById('heroBg');
+    const b1 = document.getElementById('blob1');
+    const b2 = document.getElementById('blob2');
+
+    const setBlobsBase = () => {
+      if (!b1 || !b2) return;
+      const w = window.innerWidth, h = window.innerHeight;
+      b1.style.left = Math.max(12, w*0.06) + 'px';
+      b1.style.top  = Math.max(12, h*0.16) + 'px';
+      b2.style.left = Math.max(12, w*0.60) + 'px';
+      b2.style.top  = Math.max(12, h*0.08) + 'px';
+    };
+    setBlobsBase();
+    window.addEventListener('resize', setBlobsBase);
+
+    anime({
+      targets:'#blob1',
+      translateX:[0,18,-10,0],
+      translateY:[0,-12,16,0],
+      duration:9000,
+      easing:'easeInOutSine',
+      loop:true
+    });
+    anime({
+      targets:'#blob2',
+      translateX:[0,-14,10,0],
+      translateY:[0,14,-10,0],
+      duration:11000,
+      easing:'easeInOutSine',
+      loop:true
+    });
+
+    let ticking = false;
+    window.addEventListener('scroll', ()=>{
+      if(ticking) return;
+      ticking = true;
+      requestAnimationFrame(()=>{
+        const y = window.scrollY || 0;
+        if(heroBg) heroBg.style.transform = `translateY(${y * 0.06}px)`;
+        ticking = false;
+      });
+    }, {passive:true});
+
+    const scenarios = {
+      landing: {
+        mainPageTitle: 'Landing stranice Podgorica',
+        mainPageText: 'Glavna service stranica treba da bude centar klastera: komercijalna namjera, jasan CTA i interne veze prema podržavajućim temama.',
+        serviceNode: '/usluge/landing-stranice',
+        serviceNodeText: 'Glavna prodajna stranica za ključni pojam i varijacije sa kupovnom namjerom.',
+        cluster: [
+          ['Šta je dobra landing stranica', 'Edukativna tema koja uvodi korisnika i linkuje ka glavnoj usluzi.'],
+          ['Kako povećati konverziju stranice', 'Tema sa jačom poslovnom namjerom i internim linkom ka ponudi.'],
+          ['Primjeri landing stranica', 'Dokazni sadržaj koji podržava glavnu uslugu i produžava vrijeme na sajtu.'],
+          ['Landing stranica cijena', 'Tema bliža odluci, koja vodi direktno ka upitu ili kontaktu.']
+        ],
+        mockTitle: 'Landing stranice koje donose upite.',
+        mockText: 'Ovo je primjer glavne stranice koja nije samo “opis usluge”, nego SEO i prodajna stranica u isto vrijeme.',
+        mockBlock1: 'Stranica cilja korisnika koji već traži rješenje, ne samo opšte informacije.',
+        mockBlock2: 'Blog i supporting teme guraju autoritet i relevanciju glavnoj stranici.',
+        insight: 'SEO radi bolje kad glavna stranica i supporting sadržaj rade zajedno, umjesto da svaki tekst stoji sam za sebe.',
+        stats: ['284', '7.2k', '11.4', '23'],
+        bars: [52, 33, 15],
+        result: 'Najbitnije nije samo da rankaš, nego da znaš koje stranice stvarno donose upite i gdje treba dodati više sadržaja ili jače linkovanje.'
+      },
+      ads: {
+        mainPageTitle: 'Meta i Google oglašavanje',
+        mainPageText: 'SEO oko performance usluge treba da pokrije i prodajne upite i supporting teme koje pomažu korisniku da razumije šta kupuje.',
+        serviceNode: '/usluge/oglasavanje-performance',
+        serviceNodeText: 'Glavna stranica cilja korisnika koji već traži ads uslugu ili performance partnera.',
+        cluster: [
+          ['Meta oglasi za biznise', 'Tema koja podržava glavnu stranicu kroz konkretan use case.'],
+          ['Google Ads za leadove', 'Jača relevanciju za kanal i namjeru korisnika.'],
+          ['Koliko košta oglašavanje', 'Tema bliža odluci, korisna za pre-quote fazu.'],
+          ['Kako mjeriti kampanje', 'Supporting sadržaj koji povezuje ads i tracking sistem.']
+        ],
+        mockTitle: 'Oglašavanje koje vodi do leadova.',
+        mockText: 'Service stranica mora da nosi komercijalnu namjeru, a supporting teme da je guraju i objašnjavaju vrijednost usluge.',
+        mockBlock1: 'Glavna stranica mora imati jasnu ponudu i CTA, ne samo informativni tekst.',
+        mockBlock2: 'Supporting sadržaj pomaže da SEO ne zavisi od jedne stranice ili jednog pojma.',
+        insight: 'Kad je service stranica jaka, blog teme joj ne uzimaju fokus — nego je hrane relevancijom i internim linkovima.',
+        stats: ['198', '5.6k', '13.1', '17'],
+        bars: [49, 37, 14],
+        result: 'SEO za ads usluge najbolje radi kad glavna stranica cilja kupovnu namjeru, a supporting teme grade povjerenje i širinu pokrivenosti.'
+      },
+      events: {
+        mainPageTitle: 'Aktivacije i događaji',
+        mainPageText: 'Kod event usluga SEO sistem treba da poveže glavnu uslugu sa temama koje hvataju informativne i lokalne pretrage.',
+        serviceNode: '/usluge/aktivacije-dogadjaji',
+        serviceNodeText: 'Glavna stranica hvata komercijalne upite za organizaciju, aktivacije i branded događaje.',
+        cluster: [
+          ['Ideje za brend aktivacije', 'Teme koje hvataju raniju fazu istraživanja i vode ka usluzi.'],
+          ['Organizacija događaja Podgorica', 'Lokalna i uslužna namjera bliska glavnoj stranici.'],
+          ['Kako napraviti promo aktivaciju', 'Edukativna tema sa internim linkom ka konkretnoj ponudi.'],
+          ['Event produkcija cijena', 'Tema koja hvata korisnike bliže odluci.']
+        ],
+        mockTitle: 'Aktivacije koje prave buzz i rezultat.',
+        mockText: 'SEO ovdje nije samo “event” promet, nego gradnja autoriteta oko usluge i lokalne vidljivosti.',
+        mockBlock1: 'Lokalni pojmovi i uslužne varijacije pomažu da glavna stranica hvata relevantne upite.',
+        mockBlock2: 'Supporting članci šire ulazne tačke i šalju dodatnu težinu glavnoj stranici.',
+        insight: 'Kod event i activation SEO-a, sistem bolje radi kad kombinujemo lokalne, uslužne i edukativne teme.',
+        stats: ['166', '4.8k', '12.6', '14'],
+        bars: [46, 39, 15],
+        result: 'Za event i activation SEO, dobar rezultat dolazi kad service stranica i lokalno-informativne teme rade kao mreža, ne kao izolovani tekstovi.'
+      }
+    };
+
+    const switchBtns = document.querySelectorAll('.switchBtn');
+    let currentScenario = 'landing';
+
+    const mainPageTitle = document.getElementById('mainPageTitle');
+    const mainPageText = document.getElementById('mainPageText');
+    const serviceNode = document.getElementById('serviceNode');
+    const serviceNodeText = document.getElementById('serviceNodeText');
+    const cluster1Title = document.getElementById('cluster1Title');
+    const cluster1Text = document.getElementById('cluster1Text');
+    const cluster2Title = document.getElementById('cluster2Title');
+    const cluster2Text = document.getElementById('cluster2Text');
+    const cluster3Title = document.getElementById('cluster3Title');
+    const cluster3Text = document.getElementById('cluster3Text');
+    const cluster4Title = document.getElementById('cluster4Title');
+    const cluster4Text = document.getElementById('cluster4Text');
+
+    const mockTitle = document.getElementById('mockTitle');
+    const mockText = document.getElementById('mockText');
+    const mockBlock1 = document.getElementById('mockBlock1');
+    const mockBlock2 = document.getElementById('mockBlock2');
+    const seoInsight = document.getElementById('seoInsight');
+
+    const statClicks = document.getElementById('statClicks');
+    const statImpr = document.getElementById('statImpr');
+    const statAvgPos = document.getElementById('statAvgPos');
+    const statLeads = document.getElementById('statLeads');
+
+    const barMain = document.getElementById('barMain');
+    const barBlog = document.getElementById('barBlog');
+    const barBrand = document.getElementById('barBrand');
+    const barMainLabel = document.getElementById('barMainLabel');
+    const barBlogLabel = document.getElementById('barBlogLabel');
+    const barBrandLabel = document.getElementById('barBrandLabel');
+    const resultBox = document.getElementById('resultBox');
+
+    function setScenario(key){
+      const s = scenarios[key];
+
+      mainPageTitle.textContent = s.mainPageTitle;
+      mainPageText.textContent = s.mainPageText;
+      serviceNode.textContent = s.serviceNode;
+      serviceNodeText.textContent = s.serviceNodeText;
+
+      cluster1Title.textContent = s.cluster[0][0];
+      cluster1Text.textContent = s.cluster[0][1];
+      cluster2Title.textContent = s.cluster[1][0];
+      cluster2Text.textContent = s.cluster[1][1];
+      cluster3Title.textContent = s.cluster[2][0];
+      cluster3Text.textContent = s.cluster[2][1];
+      cluster4Title.textContent = s.cluster[3][0];
+      cluster4Text.textContent = s.cluster[3][1];
+
+      mockTitle.textContent = s.mockTitle;
+      mockText.textContent = s.mockText;
+      mockBlock1.textContent = s.mockBlock1;
+      mockBlock2.textContent = s.mockBlock2;
+
+      seoInsight.textContent = s.insight;
+      statClicks.textContent = s.stats[0];
+      statImpr.textContent = s.stats[1];
+      statAvgPos.textContent = s.stats[2];
+      statLeads.textContent = s.stats[3];
+
+      barMain.style.width = '0%';
+      barBlog.style.width = '0%';
+      barBrand.style.width = '0%';
+
+      requestAnimationFrame(()=>{
+        barMain.style.width = s.bars[0] + '%';
+        barBlog.style.width = s.bars[1] + '%';
+        barBrand.style.width = s.bars[2] + '%';
+      });
+
+      barMainLabel.textContent = s.bars[0] + '%';
+      barBlogLabel.textContent = s.bars[1] + '%';
+      barBrandLabel.textContent = s.bars[2] + '%';
+
+      resultBox.textContent = s.result;
+    }
+
+    switchBtns.forEach(btn=>{
+      btn.addEventListener('click', ()=>{
+        switchBtns.forEach(b=>b.classList.remove('active'));
+        btn.classList.add('active');
+        currentScenario = btn.getAttribute('data-scenario');
+        setScenario(currentScenario);
+      });
+    });
+
+    setScenario(currentScenario);
+  </script>
+</body>
+</html>
