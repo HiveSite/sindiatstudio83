@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Lane Dodge</title>
+  <title>Bubble Pop</title>
   <style>
     * {
       box-sizing: border-box;
@@ -17,7 +17,7 @@
       width: 100%;
       height: 100%;
       overflow: hidden;
-      background: #0f1117;
+      background: #10131a;
       font-family: Arial, Helvetica, sans-serif;
       color: white;
     }
@@ -26,8 +26,7 @@
       display: block;
       width: 100vw;
       height: 100vh;
-      background:
-        linear-gradient(to bottom, #171b24 0%, #0d1016 100%);
+      background: linear-gradient(to bottom, #1b2130 0%, #121723 60%, #0d1118 100%);
     }
 
     .hud {
@@ -44,8 +43,8 @@
     }
 
     .panel {
-      background: rgba(255,255,255,0.07);
-      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.1);
       border-radius: 14px;
       padding: 10px 14px;
       backdrop-filter: blur(6px);
@@ -67,25 +66,25 @@
     }
 
     .card {
-      width: min(92vw, 460px);
+      width: min(92vw, 520px);
       padding: 28px;
       border-radius: 24px;
-      background: #171b24;
+      background: #171c28;
       border: 1px solid rgba(255,255,255,0.08);
       text-align: center;
       box-shadow: 0 18px 60px rgba(0,0,0,0.35);
     }
 
     h1 {
-      font-size: clamp(34px, 7vw, 54px);
+      font-size: clamp(32px, 7vw, 52px);
       margin-bottom: 12px;
     }
 
     p {
       font-size: 15px;
       line-height: 1.6;
-      color: #d7dbe7;
-      margin-bottom: 12px;
+      color: #d8ddea;
+      margin-bottom: 10px;
     }
 
     .btn {
@@ -97,31 +96,44 @@
       border-radius: 999px;
       cursor: pointer;
       font-size: 15px;
-      margin-top: 8px;
+      margin-top: 10px;
     }
 
     .small {
       margin-top: 12px;
       font-size: 13px;
-      color: #9ca3b5;
+      color: #98a2b8;
     }
 
     .touch {
       position: fixed;
       inset: 0;
       z-index: 4;
+      pointer-events: none;
     }
 
     .zone {
       position: absolute;
-      top: 0;
       bottom: 0;
-      width: 50%;
+      height: 26vh;
+      pointer-events: auto;
       opacity: 0;
     }
 
-    #leftZone { left: 0; }
-    #rightZone { right: 0; }
+    #leftZone {
+      left: 0;
+      width: 34vw;
+    }
+
+    #shootZone {
+      left: 34vw;
+      width: 32vw;
+    }
+
+    #rightZone {
+      right: 0;
+      width: 34vw;
+    }
   </style>
 </head>
 <body>
@@ -129,17 +141,20 @@
 
   <div class="hud">
     <div class="panel">Score: <span id="score">0</span></div>
+    <div class="panel">Lives: <span id="lives">3</span></div>
+    <div class="panel">Level: <span id="level">1</span></div>
     <div class="panel">Best: <span id="best">0</span></div>
   </div>
 
   <div class="screen" id="startScreen">
     <div class="card">
-      <h1>Lane Dodge</h1>
-      <p>Pomjeraj blok lijevo i desno i izbjegavaj prepreke koje padaju.</p>
-      <p><strong>Desktop:</strong> A/D ili ←/→</p>
-      <p><strong>Telefon:</strong> tap lijeva ili desna polovina ekrana</p>
+      <h1>Bubble Pop</h1>
+      <p>Bubble Trouble inspirisana mini igrica.</p>
+      <p><strong>A / D</strong> ili <strong>← / →</strong> za kretanje</p>
+      <p><strong>Space</strong> za harpun</p>
+      <p>Pogodi loptu da se podijeli na manje. Očisti sve lopte za sledeći nivo.</p>
       <button class="btn" id="startBtn">Pokreni</button>
-      <div class="small">Što duže preživiš, igra ide brže.</div>
+      <div class="small">Telefon: lijevo / pucaj / desno zone na dnu ekrana.</div>
     </div>
   </div>
 
@@ -149,12 +164,13 @@
       <p id="finalScore">Score: 0</p>
       <p id="finalBest">Best: 0</p>
       <button class="btn" id="restartBtn">Igraj opet</button>
-      <div class="small">Space ili Enter takođe restartuju.</div>
+      <div class="small">Enter ili Space za restart.</div>
     </div>
   </div>
 
   <div class="touch">
     <div class="zone" id="leftZone"></div>
+    <div class="zone" id="shootZone"></div>
     <div class="zone" id="rightZone"></div>
   </div>
 
@@ -163,15 +179,20 @@
     const ctx = canvas.getContext("2d");
 
     const scoreEl = document.getElementById("score");
+    const livesEl = document.getElementById("lives");
+    const levelEl = document.getElementById("level");
     const bestEl = document.getElementById("best");
     const finalScoreEl = document.getElementById("finalScore");
     const finalBestEl = document.getElementById("finalBest");
+
     const startScreen = document.getElementById("startScreen");
     const gameOverScreen = document.getElementById("gameOverScreen");
     const startBtn = document.getElementById("startBtn");
     const restartBtn = document.getElementById("restartBtn");
+
     const leftZone = document.getElementById("leftZone");
     const rightZone = document.getElementById("rightZone");
+    const shootZone = document.getElementById("shootZone");
 
     function resize() {
       const dpr = Math.min(window.devicePixelRatio || 1, 2);
@@ -188,174 +209,321 @@
       running: false,
       over: false,
       score: 0,
-      best: parseInt(localStorage.getItem("laneDodgeBest") || "0", 10),
-      speed: 280,
-      spawnTimer: 0,
+      lives: 3,
+      level: 1,
+      best: parseInt(localStorage.getItem("bubblePopBest") || "0", 10),
       lastTime: 0,
-      obstacles: []
+      bubbles: [],
+      harpoon: null,
+      invulnerable: 0
     };
+
+    const player = {
+      x: 0,
+      y: 0,
+      w: 44,
+      h: 24,
+      speed: 360,
+      moveLeft: false,
+      moveRight: false
+    };
+
+    const gravity = 980;
+    const floorH = 44;
 
     bestEl.textContent = game.best;
 
-    const player = {
-      lane: 1,
-      size: 42
-    };
-
-    function laneX(lane) {
-      const w = window.innerWidth;
-      return w * (0.25 + lane * 0.25);
+    function resetPlayer() {
+      player.x = window.innerWidth / 2;
+      player.y = window.innerHeight - floorH - player.h / 2;
+      player.moveLeft = false;
+      player.moveRight = false;
     }
 
-    function roadTop() {
-      return 90;
+    function spawnLevel(level) {
+      game.bubbles = [];
+      game.harpoon = null;
+
+      const count = Math.min(1 + level, 4);
+
+      for (let i = 0; i < count; i++) {
+        const radius = 42;
+        const x = 100 + i * ((window.innerWidth - 200) / Math.max(1, count - 1));
+        game.bubbles.push({
+          x: Math.max(radius + 10, Math.min(window.innerWidth - radius - 10, x)),
+          y: 160 + (i % 2) * 40,
+          vx: i % 2 === 0 ? 180 : -180,
+          vy: -260 - Math.random() * 90,
+          r: radius,
+          level: 3
+        });
+      }
     }
 
-    function roadBottom() {
-      return window.innerHeight - 60;
-    }
-
-    function resetGame() {
+    function startGame() {
       game.running = true;
       game.over = false;
       game.score = 0;
-      game.speed = 280;
-      game.spawnTimer = 0.8;
-      game.obstacles = [];
-      player.lane = 1;
-      scoreEl.textContent = "0";
+      game.lives = 3;
+      game.level = 1;
+      game.invulnerable = 0;
+      resetPlayer();
+      spawnLevel(game.level);
+      updateHud();
       startScreen.classList.add("hidden");
       gameOverScreen.classList.add("hidden");
     }
 
-    function moveLeft() {
-      if (!game.running || game.over) return;
-      player.lane = Math.max(0, player.lane - 1);
+    function restartGame() {
+      startGame();
     }
 
-    function moveRight() {
+    function shootHarpoon() {
       if (!game.running || game.over) return;
-      player.lane = Math.min(2, player.lane + 1);
+      if (game.harpoon) return;
+
+      game.harpoon = {
+        x: player.x,
+        y: player.y - player.h / 2,
+        speed: 700
+      };
     }
 
-    function spawnObstacle() {
-      const blockedLane = Math.floor(Math.random() * 3);
-      game.obstacles.push({
-        lane: blockedLane,
-        y: -60,
-        size: 40
-      });
+    function splitBubble(index) {
+      const bubble = game.bubbles[index];
+      game.score += 10 * (4 - bubble.level + 1);
+
+      if (bubble.level > 1) {
+        const newRadius = bubble.r * 0.65;
+        const newLevel = bubble.level - 1;
+        const boost = 170 + (3 - newLevel) * 25;
+
+        game.bubbles.push({
+          x: bubble.x - 8,
+          y: bubble.y,
+          vx: -boost,
+          vy: -260,
+          r: newRadius,
+          level: newLevel
+        });
+
+        game.bubbles.push({
+          x: bubble.x + 8,
+          y: bubble.y,
+          vx: boost,
+          vy: -260,
+          r: newRadius,
+          level: newLevel
+        });
+      }
+
+      game.bubbles.splice(index, 1);
+    }
+
+    function loseLife() {
+      if (game.invulnerable > 0) return;
+
+      game.lives -= 1;
+      game.invulnerable = 2;
+
+      if (game.lives <= 0) {
+        endGame();
+        return;
+      }
+
+      resetPlayer();
+      game.harpoon = null;
     }
 
     function endGame() {
       game.running = false;
       game.over = true;
 
-      const final = Math.floor(game.score);
-      if (final > game.best) {
-        game.best = final;
-        localStorage.setItem("laneDodgeBest", String(final));
+      if (game.score > game.best) {
+        game.best = game.score;
+        localStorage.setItem("bubblePopBest", String(game.best));
       }
 
       bestEl.textContent = game.best;
-      finalScoreEl.textContent = "Score: " + final;
+      finalScoreEl.textContent = "Score: " + game.score;
       finalBestEl.textContent = "Best: " + game.best;
       gameOverScreen.classList.remove("hidden");
+    }
+
+    function nextLevel() {
+      game.level += 1;
+      game.harpoon = null;
+      resetPlayer();
+      spawnLevel(game.level);
+    }
+
+    function updateHud() {
+      scoreEl.textContent = game.score;
+      livesEl.textContent = game.lives;
+      levelEl.textContent = game.level;
+      bestEl.textContent = game.best;
+    }
+
+    function circleRectCollision(cx, cy, cr, rx, ry, rw, rh) {
+      const closestX = Math.max(rx, Math.min(cx, rx + rw));
+      const closestY = Math.max(ry, Math.min(cy, ry + rh));
+      const dx = cx - closestX;
+      const dy = cy - closestY;
+      return dx * dx + dy * dy < cr * cr;
     }
 
     function update(dt) {
       if (!game.running || game.over) return;
 
-      game.score += dt * 10;
-      game.speed += dt * 8;
-      game.spawnTimer -= dt;
+      game.invulnerable = Math.max(0, game.invulnerable - dt);
 
-      if (game.spawnTimer <= 0) {
-        spawnObstacle();
-        game.spawnTimer = Math.max(0.32, 0.82 - game.score * 0.003);
+      if (player.moveLeft) {
+        player.x -= player.speed * dt;
+      }
+      if (player.moveRight) {
+        player.x += player.speed * dt;
       }
 
-      for (let i = game.obstacles.length - 1; i >= 0; i--) {
-        const obs = game.obstacles[i];
-        obs.y += game.speed * dt;
+      const minX = player.w / 2 + 8;
+      const maxX = window.innerWidth - player.w / 2 - 8;
+      player.x = Math.max(minX, Math.min(maxX, player.x));
 
-        if (obs.y > window.innerHeight + 80) {
-          game.obstacles.splice(i, 1);
-          continue;
-        }
-
-        const playerX = laneX(player.lane);
-        const playerY = roadBottom();
-        const sameLane = obs.lane === player.lane;
-
-        if (
-          sameLane &&
-          obs.y + obs.size / 2 > playerY - player.size / 2 &&
-          obs.y - obs.size / 2 < playerY + player.size / 2
-        ) {
-          endGame();
-          return;
+      if (game.harpoon) {
+        game.harpoon.y -= game.harpoon.speed * dt;
+        if (game.harpoon.y < 0) {
+          game.harpoon = null;
         }
       }
 
-      scoreEl.textContent = Math.floor(game.score);
-      bestEl.textContent = game.best;
+      for (let i = game.bubbles.length - 1; i >= 0; i--) {
+        const b = game.bubbles[i];
+
+        b.vy += gravity * dt;
+        b.x += b.vx * dt;
+        b.y += b.vy * dt;
+
+        if (b.x - b.r <= 0) {
+          b.x = b.r;
+          b.vx *= -1;
+        }
+        if (b.x + b.r >= window.innerWidth) {
+          b.x = window.innerWidth - b.r;
+          b.vx *= -1;
+        }
+
+        const floorY = window.innerHeight - floorH;
+        if (b.y + b.r >= floorY) {
+          b.y = floorY - b.r;
+          b.vy = -Math.max(420 - b.r * 2, 250);
+        }
+
+        if (game.harpoon) {
+          const harpoonX = game.harpoon.x;
+          const harpoonTop = game.harpoon.y;
+          const harpoonBottom = player.y;
+
+          if (
+            harpoonX >= b.x - b.r &&
+            harpoonX <= b.x + b.r &&
+            harpoonTop <= b.y + b.r &&
+            harpoonBottom >= b.y - b.r
+          ) {
+            game.harpoon = null;
+            splitBubble(i);
+            break;
+          }
+        }
+
+        const playerRectX = player.x - player.w / 2;
+        const playerRectY = player.y - player.h / 2;
+        if (circleRectCollision(b.x, b.y, b.r, playerRectX, playerRectY, player.w, player.h)) {
+          loseLife();
+        }
+      }
+
+      if (game.bubbles.length === 0) {
+        nextLevel();
+      }
+
+      updateHud();
     }
 
     function drawBackground() {
       const w = window.innerWidth;
       const h = window.innerHeight;
 
-      ctx.fillStyle = "#0f1117";
+      ctx.fillStyle = "#141926";
       ctx.fillRect(0, 0, w, h);
 
-      const roadW = Math.min(420, w * 0.82);
-      const x = (w - roadW) / 2;
+      ctx.fillStyle = "#0d1118";
+      ctx.fillRect(0, h - floorH, w, floorH);
 
-      ctx.fillStyle = "#171b24";
-      ctx.fillRect(x, roadTop(), roadW, h - roadTop());
-
-      ctx.strokeStyle = "rgba(255,255,255,0.12)";
-      ctx.lineWidth = 2;
-      ctx.strokeRect(x, roadTop(), roadW, h - roadTop());
-
-      const lane1 = x + roadW / 3;
-      const lane2 = x + (roadW / 3) * 2;
-
-      ctx.setLineDash([18, 16]);
-      ctx.strokeStyle = "rgba(255,255,255,0.16)";
-      ctx.beginPath();
-      ctx.moveTo(lane1, roadTop());
-      ctx.lineTo(lane1, h);
-      ctx.moveTo(lane2, roadTop());
-      ctx.lineTo(lane2, h);
-      ctx.stroke();
-      ctx.setLineDash([]);
+      ctx.strokeStyle = "rgba(255,255,255,0.06)";
+      ctx.lineWidth = 1;
+      for (let i = 0; i < w; i += 48) {
+        ctx.beginPath();
+        ctx.moveTo(i, h - floorH);
+        ctx.lineTo(i + 24, h - floorH + floorH);
+        ctx.stroke();
+      }
     }
 
     function drawPlayer() {
-      const x = laneX(player.lane);
-      const y = roadBottom();
-      const s = player.size;
+      ctx.save();
+
+      if (game.invulnerable > 0) {
+        ctx.globalAlpha = Math.sin(performance.now() * 0.03) > 0 ? 0.35 : 1;
+      }
+
+      const x = player.x - player.w / 2;
+      const y = player.y - player.h / 2;
 
       ctx.fillStyle = "#ffffff";
-      ctx.fillRect(x - s / 2, y - s / 2, s, s);
+      ctx.fillRect(x, y, player.w, player.h);
+
+      ctx.fillStyle = "#111";
+      ctx.fillRect(player.x - 3, y - 12, 6, 12);
+
+      ctx.restore();
     }
 
-    function drawObstacles() {
-      for (const obs of game.obstacles) {
-        const x = laneX(obs.lane);
-        const s = obs.size;
+    function drawHarpoon() {
+      if (!game.harpoon) return;
 
-        ctx.fillStyle = "#ff5a5a";
-        ctx.fillRect(x - s / 2, obs.y - s / 2, s, s);
+      ctx.strokeStyle = "#ffffff";
+      ctx.lineWidth = 3;
+      ctx.beginPath();
+      ctx.moveTo(game.harpoon.x, player.y);
+      ctx.lineTo(game.harpoon.x, game.harpoon.y);
+      ctx.stroke();
+
+      ctx.beginPath();
+      ctx.moveTo(game.harpoon.x, game.harpoon.y);
+      ctx.lineTo(game.harpoon.x - 8, game.harpoon.y + 10);
+      ctx.moveTo(game.harpoon.x, game.harpoon.y);
+      ctx.lineTo(game.harpoon.x + 8, game.harpoon.y + 10);
+      ctx.stroke();
+    }
+
+    function drawBubbles() {
+      for (const b of game.bubbles) {
+        ctx.beginPath();
+        ctx.fillStyle = b.level === 3 ? "#ff6b6b" : b.level === 2 ? "#ffd166" : "#7bdff2";
+        ctx.arc(b.x, b.y, b.r, 0, Math.PI * 2);
+        ctx.fill();
+
+        ctx.beginPath();
+        ctx.fillStyle = "rgba(255,255,255,0.28)";
+        ctx.arc(b.x - b.r * 0.28, b.y - b.r * 0.28, b.r * 0.28, 0, Math.PI * 2);
+        ctx.fill();
       }
     }
 
     function render() {
       ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
       drawBackground();
-      drawObstacles();
+      drawHarpoon();
+      drawBubbles();
       drawPlayer();
     }
 
@@ -372,30 +540,59 @@
     window.addEventListener("keydown", (e) => {
       const key = e.key.toLowerCase();
 
-      if (key === "a" || key === "arrowleft") moveLeft();
-      if (key === "d" || key === "arrowright") moveRight();
-
-      if ((key === "enter" || key === " ") && !game.running) {
-        if (game.over) resetGame();
+      if (key === "a" || key === "arrowleft") player.moveLeft = true;
+      if (key === "d" || key === "arrowright") player.moveRight = true;
+      if (key === " ") {
+        e.preventDefault();
+        if (game.over) restartGame();
+        else shootHarpoon();
+      }
+      if (key === "enter" && game.over) {
+        restartGame();
       }
     });
 
-    leftZone.addEventListener("touchstart", (e) => {
-      e.preventDefault();
-      moveLeft();
-    }, { passive: false });
+    window.addEventListener("keyup", (e) => {
+      const key = e.key.toLowerCase();
+      if (key === "a" || key === "arrowleft") player.moveLeft = false;
+      if (key === "d" || key === "arrowright") player.moveRight = false;
+    });
 
-    rightZone.addEventListener("touchstart", (e) => {
-      e.preventDefault();
-      moveRight();
-    }, { passive: false });
+    function bindTouch(el, onStart, onEnd) {
+      el.addEventListener("touchstart", (e) => {
+        e.preventDefault();
+        onStart();
+      }, { passive: false });
 
-    leftZone.addEventListener("mousedown", moveLeft);
-    rightZone.addEventListener("mousedown", moveRight);
+      el.addEventListener("touchend", (e) => {
+        e.preventDefault();
+        if (onEnd) onEnd();
+      }, { passive: false });
 
-    startBtn.addEventListener("click", resetGame);
-    restartBtn.addEventListener("click", resetGame);
+      el.addEventListener("touchcancel", (e) => {
+        e.preventDefault();
+        if (onEnd) onEnd();
+      }, { passive: false });
 
+      el.addEventListener("mousedown", onStart);
+      if (onEnd) {
+        el.addEventListener("mouseup", onEnd);
+        el.addEventListener("mouseleave", onEnd);
+      }
+    }
+
+    bindTouch(leftZone, () => player.moveLeft = true, () => player.moveLeft = false);
+    bindTouch(rightZone, () => player.moveRight = true, () => player.moveRight = false);
+    bindTouch(shootZone, () => {
+      if (game.over) restartGame();
+      else shootHarpoon();
+    });
+
+    startBtn.addEventListener("click", startGame);
+    restartBtn.addEventListener("click", restartGame);
+
+    resetPlayer();
+    updateHud();
     requestAnimationFrame(loop);
   </script>
 </body>
