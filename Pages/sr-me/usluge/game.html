@@ -26,7 +26,7 @@
       display: block;
       width: 100vw;
       height: 100vh;
-      background: linear-gradient(to bottom, #1b2130 0%, #121723 60%, #0d1118 100%);
+      background: linear-gradient(to bottom, #141926 0%, #0f131d 100%);
     }
 
     .hud {
@@ -36,6 +36,8 @@
       right: 14px;
       display: flex;
       justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 8px;
       z-index: 5;
       pointer-events: none;
       font-weight: 700;
@@ -152,7 +154,7 @@
       <p>Bubble Trouble inspirisana mini igrica.</p>
       <p><strong>A / D</strong> ili <strong>← / →</strong> za kretanje</p>
       <p><strong>Space</strong> za harpun</p>
-      <p>Pogodi loptu da se podijeli na manje. Očisti sve lopte za sledeći nivo.</p>
+      <p>Kuglice se više odbijaju, a svaki nivo može imati random prepreke koje mijenjaju njihov tok.</p>
       <button class="btn" id="startBtn">Pokreni</button>
       <div class="small">Telefon: lijevo / pucaj / desno zone na dnu ekrana.</div>
     </div>
@@ -194,6 +196,9 @@
     const rightZone = document.getElementById("rightZone");
     const shootZone = document.getElementById("shootZone");
 
+    const bgImage = new Image();
+    bgImage.src = "Pages/studio83logo.png";
+
     function resize() {
       const dpr = Math.min(window.devicePixelRatio || 1, 2);
       canvas.width = Math.floor(window.innerWidth * dpr);
@@ -215,7 +220,8 @@
       lastTime: 0,
       bubbles: [],
       harpoon: null,
-      invulnerable: 0
+      invulnerable: 0,
+      obstacles: []
     };
 
     const player = {
@@ -230,6 +236,7 @@
 
     const gravity = 980;
     const floorH = 44;
+    const floorBounce = 720;
 
     bestEl.textContent = game.best;
 
@@ -240,20 +247,41 @@
       player.moveRight = false;
     }
 
+    function createRandomObstacles(level) {
+      const obstacles = [];
+      const count = Math.min(1 + Math.floor(level / 2), 4);
+
+      for (let i = 0; i < count; i++) {
+        const w = 90 + Math.random() * 120;
+        const h = 16 + Math.random() * 12;
+        const x = 40 + Math.random() * (window.innerWidth - w - 80);
+        const y = 130 + Math.random() * (window.innerHeight - 320);
+
+        const safeDistanceFromPlayer = Math.abs((x + w / 2) - (window.innerWidth / 2)) > 60;
+        if (!safeDistanceFromPlayer) continue;
+
+        obstacles.push({ x, y, w, h });
+      }
+
+      return obstacles;
+    }
+
     function spawnLevel(level) {
       game.bubbles = [];
       game.harpoon = null;
+      game.obstacles = createRandomObstacles(level);
 
       const count = Math.min(1 + level, 4);
 
       for (let i = 0; i < count; i++) {
         const radius = 42;
         const x = 100 + i * ((window.innerWidth - 200) / Math.max(1, count - 1));
+
         game.bubbles.push({
           x: Math.max(radius + 10, Math.min(window.innerWidth - radius - 10, x)),
-          y: 160 + (i % 2) * 40,
-          vx: i % 2 === 0 ? 180 : -180,
-          vy: -260 - Math.random() * 90,
+          y: 150 + (i % 2) * 40,
+          vx: i % 2 === 0 ? 240 : -240,
+          vy: -420 - Math.random() * 100,
           r: radius,
           level: 3
         });
@@ -285,7 +313,7 @@
       game.harpoon = {
         x: player.x,
         y: player.y - player.h / 2,
-        speed: 700
+        speed: 760
       };
     }
 
@@ -296,13 +324,14 @@
       if (bubble.level > 1) {
         const newRadius = bubble.r * 0.65;
         const newLevel = bubble.level - 1;
-        const boost = 170 + (3 - newLevel) * 25;
+        const boostX = 250 + (3 - newLevel) * 40;
+        const boostY = -520;
 
         game.bubbles.push({
           x: bubble.x - 8,
           y: bubble.y,
-          vx: -boost,
-          vy: -260,
+          vx: -boostX,
+          vy: boostY,
           r: newRadius,
           level: newLevel
         });
@@ -310,8 +339,8 @@
         game.bubbles.push({
           x: bubble.x + 8,
           y: bubble.y,
-          vx: boost,
-          vy: -260,
+          vx: boostX,
+          vy: boostY,
           r: newRadius,
           level: newLevel
         });
@@ -372,17 +401,44 @@
       return dx * dx + dy * dy < cr * cr;
     }
 
+    function resolveBubbleObstacleCollision(b, o) {
+      const closestX = Math.max(o.x, Math.min(b.x, o.x + o.w));
+      const closestY = Math.max(o.y, Math.min(b.y, o.y + o.h));
+      const dx = b.x - closestX;
+      const dy = b.y - closestY;
+      const distSq = dx * dx + dy * dy;
+
+      if (distSq >= b.r * b.r) return;
+
+      const overlapLeft = Math.abs((b.x + b.r) - o.x);
+      const overlapRight = Math.abs((o.x + o.w) - (b.x - b.r));
+      const overlapTop = Math.abs((b.y + b.r) - o.y);
+      const overlapBottom = Math.abs((o.y + o.h) - (b.y - b.r));
+
+      const minOverlap = Math.min(overlapLeft, overlapRight, overlapTop, overlapBottom);
+
+      if (minOverlap === overlapTop) {
+        b.y = o.y - b.r;
+        b.vy = -Math.max(Math.abs(b.vy) * 1.03, 520);
+      } else if (minOverlap === overlapBottom) {
+        b.y = o.y + o.h + b.r;
+        b.vy = Math.max(Math.abs(b.vy) * 0.98, 320);
+      } else if (minOverlap === overlapLeft) {
+        b.x = o.x - b.r;
+        b.vx = -Math.abs(b.vx) * 1.02;
+      } else {
+        b.x = o.x + o.w + b.r;
+        b.vx = Math.abs(b.vx) * 1.02;
+      }
+    }
+
     function update(dt) {
       if (!game.running || game.over) return;
 
       game.invulnerable = Math.max(0, game.invulnerable - dt);
 
-      if (player.moveLeft) {
-        player.x -= player.speed * dt;
-      }
-      if (player.moveRight) {
-        player.x += player.speed * dt;
-      }
+      if (player.moveLeft) player.x -= player.speed * dt;
+      if (player.moveRight) player.x += player.speed * dt;
 
       const minX = player.w / 2 + 8;
       const maxX = window.innerWidth - player.w / 2 - 8;
@@ -404,17 +460,26 @@
 
         if (b.x - b.r <= 0) {
           b.x = b.r;
-          b.vx *= -1;
+          b.vx = Math.abs(b.vx) * 1.01;
         }
         if (b.x + b.r >= window.innerWidth) {
           b.x = window.innerWidth - b.r;
-          b.vx *= -1;
+          b.vx = -Math.abs(b.vx) * 1.01;
         }
 
         const floorY = window.innerHeight - floorH;
         if (b.y + b.r >= floorY) {
           b.y = floorY - b.r;
-          b.vy = -Math.max(420 - b.r * 2, 250);
+          b.vy = -Math.max(floorBounce - b.r * 1.8, 480);
+        }
+
+        if (b.y - b.r <= 0) {
+          b.y = b.r;
+          b.vy = Math.abs(b.vy) * 0.98;
+        }
+
+        for (const obstacle of game.obstacles) {
+          resolveBubbleObstacleCollision(b, obstacle);
         }
 
         if (game.harpoon) {
@@ -455,6 +520,20 @@
       ctx.fillStyle = "#141926";
       ctx.fillRect(0, 0, w, h);
 
+      if (bgImage.complete && bgImage.naturalWidth > 0) {
+        ctx.save();
+        ctx.globalAlpha = 0.10;
+
+        const imgW = 420;
+        const ratio = bgImage.naturalHeight / bgImage.naturalWidth;
+        const imgH = imgW * ratio;
+        const x = (w - imgW) / 2;
+        const y = (h - imgH) / 2 - 30;
+
+        ctx.drawImage(bgImage, x, y, imgW, imgH);
+        ctx.restore();
+      }
+
       ctx.fillStyle = "#0d1118";
       ctx.fillRect(0, h - floorH, w, floorH);
 
@@ -465,6 +544,17 @@
         ctx.moveTo(i, h - floorH);
         ctx.lineTo(i + 24, h - floorH + floorH);
         ctx.stroke();
+      }
+    }
+
+    function drawObstacles() {
+      for (const o of game.obstacles) {
+        ctx.fillStyle = "rgba(255,255,255,0.14)";
+        ctx.fillRect(o.x, o.y, o.w, o.h);
+
+        ctx.strokeStyle = "rgba(255,255,255,0.25)";
+        ctx.lineWidth = 2;
+        ctx.strokeRect(o.x, o.y, o.w, o.h);
       }
     }
 
@@ -508,7 +598,10 @@
     function drawBubbles() {
       for (const b of game.bubbles) {
         ctx.beginPath();
-        ctx.fillStyle = b.level === 3 ? "#ff6b6b" : b.level === 2 ? "#ffd166" : "#7bdff2";
+        ctx.fillStyle =
+          b.level === 3 ? "#ff6b6b" :
+          b.level === 2 ? "#ffd166" :
+          "#7bdff2";
         ctx.arc(b.x, b.y, b.r, 0, Math.PI * 2);
         ctx.fill();
 
@@ -522,6 +615,7 @@
     function render() {
       ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
       drawBackground();
+      drawObstacles();
       drawHarpoon();
       drawBubbles();
       drawPlayer();
