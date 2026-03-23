@@ -1,210 +1,104 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
+  <!-- ROOT -->
   <url>
     <loc>https://www.sindikatstudio83.me/</loc>
-    <lastmod>2026-03-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
   </url>
 
   <url>
     <loc>https://www.sindikatstudio83.me/sr-me/</loc>
-    <lastmod>2026-03-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
   </url>
 
-  <url>
-    <loc>https://www.sindikatstudio83.me/sr-me/blog/</loc>
-    <lastmod>2026-03-20</lastmod>
-  </url>
-
-  <url>
-    <loc>https://www.sindikatstudio83.me/sr-me/blog/p01/</loc>
-    <lastmod>2026-03-20</lastmod>
-  </url>
-  <url>
-    <loc>https://www.sindikatstudio83.me/sr-me/blog/p02/</loc>
-    <lastmod>2026-03-20</lastmod>
-  </url>
-  <url>
-    <loc>https://www.sindikatstudio83.me/sr-me/blog/p03/</loc>
-    <lastmod>2026-03-20</lastmod>
-  </url>
-  <url>
-    <loc>https://www.sindikatstudio83.me/sr-me/blog/p04/</loc>
-    <lastmod>2026-03-20</lastmod>
-  </url>
-  <url>
-    <loc>https://www.sindikatstudio83.me/sr-me/blog/p05/</loc>
-    <lastmod>2026-03-20</lastmod>
-  </url>
-  <url>
-    <loc>https://www.sindikatstudio83.me/sr-me/blog/p06/</loc>
-    <lastmod>2026-03-20</lastmod>
-  </url>
-  <url>
-    <loc>https://www.sindikatstudio83.me/sr-me/blog/p07/</loc>
-    <lastmod>2026-03-20</lastmod>
-  </url>
-  <url>
-    <loc>https://www.sindikatstudio83.me/sr-me/blog/p08/</loc>
-    <lastmod>2026-03-20</lastmod>
-  </url>
-  <url>
-    <loc>https://www.sindikatstudio83.me/sr-me/blog/p09/</loc>
-    <lastmod>2026-03-20</lastmod>
-  </url>
-  <url>
-    <loc>https://www.sindikatstudio83.me/sr-me/blog/p10/</loc>
-    <lastmod>2026-03-20</lastmod>
-  </url>
-  <url>
-    <loc>https://www.sindikatstudio83.me/sr-me/blog/p11/</loc>
-    <lastmod>2026-03-20</lastmod>
-  </url>
-  <url>
-    <loc>https://www.sindikatstudio83.me/sr-me/blog/p12/</loc>
-    <lastmod>2026-03-20</lastmod>
-  </url>
-  <url>
-    <loc>https://www.sindikatstudio83.me/sr-me/blog/p13/</loc>
-    <lastmod>2026-03-20</lastmod>
-  </url>
-  <url>
-    <loc>https://www.sindikatstudio83.me/sr-me/blog/p14/</loc>
-    <lastmod>2026-03-20</lastmod>
-  </url>
-  <url>
-    <loc>https://www.sindikatstudio83.me/sr-me/blog/p15/</loc>
-    <lastmod>2026-03-20</lastmod>
-  </url>
-  <url>
-    <loc>https://www.sindikatstudio83.me/sr-me/blog/p16/</loc>
-    <lastmod>2026-03-20</lastmod>
-  </url>
-  <url>
-    <loc>https://www.sindikatstudio83.me/sr-me/blog/p17/</loc>
-    <lastmod>2026-03-20</lastmod>
-  </url>
-  <url>
-    <loc>https://www.sindikatstudio83.me/sr-me/blog/p18/</loc>
-    <lastmod>2026-03-20</lastmod>
-  </url>
-  <url>
-    <loc>https://www.sindikatstudio83.me/sr-me/blog/p19/</loc>
-    <lastmod>2026-03-20</lastmod>
-  </url>
-  <url>
-    <loc>https://www.sindikatstudio83.me/sr-me/blog/p20/</loc>
-    <lastmod>2026-03-20</lastmod>
-  </url>
-  <url>
-    <loc>https://www.sindikatstudio83.me/sr-me/blog/p21/</loc>
-    <lastmod>2026-03-20</lastmod>
-  </url>
-  <url>
-    <loc>https://www.sindikatstudio83.me/sr-me/blog/p22/</loc>
-    <lastmod>2026-03-20</lastmod>
-  </url>
-  <url>
-    <loc>https://www.sindikatstudio83.me/sr-me/blog/p23/</loc>
-    <lastmod>2026-03-20</lastmod>
-  </url>
-  <url>
-    <loc>https://www.sindikatstudio83.me/sr-me/blog/p24/</loc>
-    <lastmod>2026-03-20</lastmod>
-  </url>
-  <url>
-    <loc>https://www.sindikatstudio83.me/sr-me/blog/p25/</loc>
-    <lastmod>2026-03-20</lastmod>
-  </url>
-  <url>
-    <loc>https://www.sindikatstudio83.me/sr-me/blog/p26/</loc>
-    <lastmod>2026-03-20</lastmod>
-  </url>
-  <url>
-    <loc>https://www.sindikatstudio83.me/sr-me/blog/p27/</loc>
-    <lastmod>2026-03-20</lastmod>
-  </url>
-  <url>
-    <loc>https://www.sindikatstudio83.me/sr-me/blog/p28/</loc>
-    <lastmod>2026-03-20</lastmod>
-  </url>
-  <url>
-    <loc>https://www.sindikatstudio83.me/sr-me/blog/p29/</loc>
-    <lastmod>2026-03-20</lastmod>
-  </url>
-  <url>
-    <loc>https://www.sindikatstudio83.me/sr-me/blog/p30/</loc>
-    <lastmod>2026-03-20</lastmod>
-  </url>
-
-  <url>
-    <loc>https://www.sindikatstudio83.me/sr-me/kontakt/</loc>
-    <lastmod>2026-03-20</lastmod>
-  </url>
-
-  <url>
-    <loc>https://www.sindikatstudio83.me/sr-me/onama/</loc>
-    <lastmod>2026-03-20</lastmod>
-  </url>
-
-  <url>
-    <loc>https://www.sindikatstudio83.me/sr-me/onama/cn.html</loc>
-    <lastmod>2026-03-20</lastmod>
-  </url>
-
+  <!-- CORE -->
   <url>
     <loc>https://www.sindikatstudio83.me/sr-me/pocetna/</loc>
-    <lastmod>2026-03-20</lastmod>
-  </url>
-
-  <url>
-    <loc>https://www.sindikatstudio83.me/sr-me/poslovi/</loc>
-    <lastmod>2026-03-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
   </url>
 
   <url>
     <loc>https://www.sindikatstudio83.me/sr-me/usluge/</loc>
-    <lastmod>2026-03-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
   </url>
 
   <url>
-    <loc>https://www.sindikatstudio83.me/sr-me/usluge/Gamification.html</loc>
-    <lastmod>2026-03-20</lastmod>
+    <loc>https://www.sindikatstudio83.me/sr-me/onama/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
   </url>
 
   <url>
-    <loc>https://www.sindikatstudio83.me/sr-me/usluge/analitika.html</loc>
-    <lastmod>2026-03-20</lastmod>
+    <loc>https://www.sindikatstudio83.me/sr-me/kontakt/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
   </url>
 
   <url>
-    <loc>https://www.sindikatstudio83.me/sr-me/usluge/copywriting.html</loc>
-    <lastmod>2026-03-20</lastmod>
+    <loc>https://www.sindikatstudio83.me/sr-me/poslovi/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
   </url>
 
+  <!-- BLOG LIST -->
   <url>
-    <loc>https://www.sindikatstudio83.me/sr-me/usluge/game.html</loc>
-    <lastmod>2026-03-20</lastmod>
+    <loc>https://www.sindikatstudio83.me/sr-me/blog/</loc>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
   </url>
 
-  <url>
-    <loc>https://www.sindikatstudio83.me/sr-me/usluge/landingpage.html</loc>
-    <lastmod>2026-03-20</lastmod>
-  </url>
+  <!-- BLOG POSTS -->
+  <url><loc>https://www.sindikatstudio83.me/sr-me/blog/p01/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://www.sindikatstudio83.me/sr-me/blog/p02/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://www.sindikatstudio83.me/sr-me/blog/p03/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://www.sindikatstudio83.me/sr-me/blog/p04/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://www.sindikatstudio83.me/sr-me/blog/p05/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://www.sindikatstudio83.me/sr-me/blog/p06/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://www.sindikatstudio83.me/sr-me/blog/p07/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://www.sindikatstudio83.me/sr-me/blog/p08/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://www.sindikatstudio83.me/sr-me/blog/p09/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://www.sindikatstudio83.me/sr-me/blog/p10/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://www.sindikatstudio83.me/sr-me/blog/p11/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://www.sindikatstudio83.me/sr-me/blog/p12/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://www.sindikatstudio83.me/sr-me/blog/p13/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://www.sindikatstudio83.me/sr-me/blog/p14/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://www.sindikatstudio83.me/sr-me/blog/p15/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://www.sindikatstudio83.me/sr-me/blog/p16/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://www.sindikatstudio83.me/sr-me/blog/p17/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://www.sindikatstudio83.me/sr-me/blog/p18/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://www.sindikatstudio83.me/sr-me/blog/p19/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://www.sindikatstudio83.me/sr-me/blog/p20/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://www.sindikatstudio83.me/sr-me/blog/p21/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://www.sindikatstudio83.me/sr-me/blog/p22/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://www.sindikatstudio83.me/sr-me/blog/p23/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://www.sindikatstudio83.me/sr-me/blog/p24/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://www.sindikatstudio83.me/sr-me/blog/p25/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://www.sindikatstudio83.me/sr-me/blog/p26/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://www.sindikatstudio83.me/sr-me/blog/p27/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://www.sindikatstudio83.me/sr-me/blog/p28/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://www.sindikatstudio83.me/sr-me/blog/p29/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://www.sindikatstudio83.me/sr-me/blog/p30/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
 
-  <url>
-    <loc>https://www.sindikatstudio83.me/sr-me/usluge/oglasavanje.html</loc>
-    <lastmod>2026-03-20</lastmod>
-  </url>
+  <!-- USLUGE -->
+  <url><loc>https://www.sindikatstudio83.me/sr-me/usluge/oglasavanje.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://www.sindikatstudio83.me/sr-me/usluge/seo.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://www.sindikatstudio83.me/sr-me/usluge/ux.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://www.sindikatstudio83.me/sr-me/usluge/analitika.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://www.sindikatstudio83.me/sr-me/usluge/copywriting.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://www.sindikatstudio83.me/sr-me/usluge/landingpage.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://www.sindikatstudio83.me/sr-me/usluge/game.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://www.sindikatstudio83.me/sr-me/usluge/Gamification.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
 
+  <!-- EXTRA -->
   <url>
-    <loc>https://www.sindikatstudio83.me/sr-me/usluge/seo.html</loc>
-    <lastmod>2026-03-20</lastmod>
-  </url>
-
-  <url>
-    <loc>https://www.sindikatstudio83.me/sr-me/usluge/ux.html</loc>
-    <lastmod>2026-03-20</lastmod>
+    <loc>https://www.sindikatstudio83.me/sr-me/onama/cn.html</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
   </url>
 
 </urlset>
