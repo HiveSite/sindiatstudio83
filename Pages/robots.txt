@@ -1,13 +1,8 @@
 User-agent: *
 Allow: /
 
-# Ako imaš privatne fajlove / foldere, ovdje ih stavi (primjeri):
-# Disallow: /admin/
-# Disallow: /private/
-# Disallow: /drafts/
-
-# (Opcionalno) blokiraj “ružne” parametre ako ih budeš imao
-# Disallow: /*?*
+# Development/template paths (prevent accidental crawl)
+Disallow: /sr-me/blog/_templates/
+Disallow: /sr-me/blog/<slug>/
 
 Sitemap: https://www.sindikatstudio83.me/sitemap.xml
-Host: www.sindikatstudio83.me
