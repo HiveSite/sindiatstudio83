@@ -1,4 +1,0 @@
-Detected language directories: sr-me
-HTML files checked: 49
-Files without issues: 49
-Files with issues: 0
