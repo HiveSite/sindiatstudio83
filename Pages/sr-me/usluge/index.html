@@ -68,7 +68,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       -moz-osx-font-smoothing: grayscale;
     }
 
-    /* Subtle grain */
     body:before{
       content:"";
       position:fixed; inset:0;
@@ -83,7 +82,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     img{max-width:100%; display:block}
     .wrap{max-width:var(--max); margin:0 auto; padding:22px 18px 120px; position:relative; z-index:2}
 
-    /* Backdrop glow */
     .heroBg{
       position:fixed;
       inset:0;
@@ -104,7 +102,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         linear-gradient(180deg, rgba(0,0,0,.18), rgba(6,1,13,.86) 62%, rgba(6,1,13,.96));
     }
 
-    /* Subtle animated blobs */
     .blob{
       position:fixed;
       z-index:1;
@@ -123,7 +120,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       opacity:.45;
     }
 
-    /* ✅ FLOATING LOGO (same behavior as Kontakt) */
     .floatingLogo{
       position:fixed;
       top:14px;
@@ -166,7 +162,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       .floatingLogo{ top:10px; left:10px; }
     }
 
-    /* Topbar (bottom) */
     .topbar{
       position:fixed;
       bottom:0;
@@ -241,7 +236,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       transform: rotate(8deg);
     }
 
-    /* Mobile nav */
     .hamburger{
       display:none;
       width:44px; height:44px;
@@ -282,7 +276,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       color:var(--text);
     }
 
-    /* Sections */
     .section{
       padding:58px 0;
       border-top:3px solid rgba(255,255,255,.08);
@@ -304,7 +297,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       max-width:72ch;
     }
 
-    /* Group titles */
     .groupHeader{
       margin:18px 0 12px;
       display:flex;
@@ -333,7 +325,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       margin:18px 0 6px;
     }
 
-    /* HERO */
     .hero{ padding:40px 0 22px; }
     .kicker{
       display:flex; align-items:center; gap:10px;
@@ -374,7 +365,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       box-shadow: 0 10px 24px rgba(0,0,0,.22);
     }
 
-    /* Cards */
     .grid2{display:grid; grid-template-columns:repeat(2,1fr); gap:16px;}
     .card{
       border:3px solid rgba(255,255,255,.14);
@@ -416,7 +406,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       filter: brightness(1.04);
     }
 
-    /* media (image) inside card */
     .cardMedia{
       height:128px;
       position:relative;
@@ -508,6 +497,28 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     }
     .bullets li{margin:6px 0}
 
+    .serviceAction{
+      margin-top:16px;
+      display:flex;
+      flex-direction:column;
+      align-items:flex-start;
+      gap:10px;
+    }
+
+    .serviceLink{
+      font-size:12px;
+      color:rgba(255,255,255,.72);
+      border-bottom:1px solid rgba(255,255,255,.18);
+      padding-bottom:2px;
+      transition: color .18s var(--ease), border-color .18s var(--ease), transform .18s var(--ease);
+    }
+
+    .serviceLink:hover{
+      color:#fff;
+      border-color:rgba(255,59,111,.45);
+      transform:translateX(2px);
+    }
+
     .reveal{opacity:0; transform:translateY(18px); will-change: transform, opacity;}
 
     footer{
@@ -519,7 +530,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       margin-top:42px;
     }
 
-    /* Modal */
     .modal{
       position:fixed;
       inset:0;
@@ -627,9 +637,14 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       .heroActions .btn{width:100%}
       .topbarInner{padding:12px 14px}
       .mobileMenuInner{padding:12px 14px 16px}
+      .serviceAction{
+        width:100%;
+      }
+      .serviceAction .btn{
+        width:100%;
+      }
     }
 
-    /* ✅ FIX: CTA + hamburger in same row (Kontakt behavior) */
     @media (max-width: 520px){
       .topbarInner{
         flex-wrap: nowrap;
@@ -703,7 +718,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 }
 </script>
 
-  <!-- ✅ Services schema aligned with REAL services on this page -->
   <script type="application/ld+json" data-schema="services">
 {
   "@context": "https://schema.org",
@@ -724,183 +738,58 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   "hasPart": [
     {
       "@type": "Service",
-      "@id": "https://www.sindikatstudio83.me/sr-me/usluge/#event-produkcija",
-      "name": "Organizacija i produkcija događaja",
-      "description": "Plan i realizacija događaja: koncept, budžet, logistika, koordinacija tima i isporuka na terenu.",
-      "url": "https://www.sindikatstudio83.me/sr-me/usluge/#event-produkcija",
-      "provider": {
-        "@id": "https://www.sindikatstudio83.me/#org"
-      },
-      "areaServed": [
-        "Podgorica",
-        "Crna Gora"
-      ]
+      "name": "Oglašavanje",
+      "description": "Meta i Google kampanje za upite, rezervacije i prodaju."
     },
     {
       "@type": "Service",
-      "@id": "https://www.sindikatstudio83.me/sr-me/usluge/#brand-aktivacije",
-      "name": "Brend aktivacije i promotivne kampanje",
-      "description": "Aktivacije na terenu + digitalna podrška: promo tim, brending, sampling, fotke/video i reporting.",
-      "url": "https://www.sindikatstudio83.me/sr-me/usluge/#brand-aktivacije",
-      "provider": {
-        "@id": "https://www.sindikatstudio83.me/#org"
-      },
-      "areaServed": [
-        "Podgorica",
-        "Crna Gora"
-      ]
-    },
-    {
-      "@type": "Service",
-      "@id": "https://www.sindikatstudio83.me/sr-me/usluge/#promo-timovi",
-      "name": "Promo timovi (hostese, promoteri)",
-      "description": "Angažman i vođenje promo osoblja: selekcija, obuka, smjene, komunikacija i kontrola kvaliteta.",
-      "url": "https://www.sindikatstudio83.me/sr-me/usluge/#promo-timovi",
-      "provider": {
-        "@id": "https://www.sindikatstudio83.me/#org"
-      },
-      "areaServed": [
-        "Podgorica",
-        "Crna Gora"
-      ]
-    },
-    {
-      "@type": "Service",
-      "@id": "https://www.sindikatstudio83.me/sr-me/usluge/#tehnicka-produkcija",
-      "name": "Tehnička produkcija (audio/rasvjeta/tehnika)",
-      "description": "Tehnička podrška za event: ozvučenje, rasvjeta, setup, tehničari i koordinacija tokom programa.",
-      "url": "https://www.sindikatstudio83.me/sr-me/usluge/#tehnicka-produkcija",
-      "provider": {
-        "@id": "https://www.sindikatstudio83.me/#org"
-      },
-      "areaServed": [
-        "Podgorica",
-        "Crna Gora"
-      ]
-    },
-    {
-      "@type": "Service",
-      "@id": "https://www.sindikatstudio83.me/sr-me/usluge/#program-booking",
-      "name": "Program i booking (DJ / sadržaj / tok događaja)",
-      "description": "Kreiranje programa i toka večeri: DJ/program, dinamika, vođenje i koordinacija izvođača.",
-      "url": "https://www.sindikatstudio83.me/sr-me/usluge/#program-booking",
-      "provider": {
-        "@id": "https://www.sindikatstudio83.me/#org"
-      },
-      "areaServed": [
-        "Podgorica",
-        "Crna Gora"
-      ]
-    },
-    {
-      "@type": "Service",
-      "@id": "https://www.sindikatstudio83.me/sr-me/usluge/#meta-oglasi",
-      "name": "Meta oglasi (Facebook & Instagram)",
-      "description": "Planiranje i vođenje Meta kampanja: kreativa, targetiranje, optimizacija budžeta i konverzija.",
-      "url": "https://www.sindikatstudio83.me/sr-me/usluge/#meta-oglasi",
-      "provider": {
-        "@id": "https://www.sindikatstudio83.me/#org"
-      },
-      "areaServed": [
-        "Podgorica",
-        "Crna Gora"
-      ]
-    },
-    {
-      "@type": "Service",
-      "@id": "https://www.sindikatstudio83.me/sr-me/usluge/#google-ads",
-      "name": "Google Ads (Search, Display, YouTube)",
-      "description": "Kampanje za upite i prodaju: ključne riječi, oglasi, landing struktura i optimizacija performansi.",
-      "url": "https://www.sindikatstudio83.me/sr-me/usluge/#google-ads",
-      "provider": {
-        "@id": "https://www.sindikatstudio83.me/#org"
-      },
-      "areaServed": [
-        "Podgorica",
-        "Crna Gora"
-      ]
-    },
-    {
-      "@type": "Service",
-      "@id": "https://www.sindikatstudio83.me/sr-me/usluge/#seo-local-seo",
-      "name": "SEO & Local SEO",
-      "description": "On-page SEO, struktura sajta, sadržaj i lokalno rangiranje (Podgorica/Crna Gora).",
-      "url": "https://www.sindikatstudio83.me/sr-me/usluge/#seo-local-seo",
-      "provider": {
-        "@id": "https://www.sindikatstudio83.me/#org"
-      },
-      "areaServed": [
-        "Podgorica",
-        "Crna Gora"
-      ]
-    },
-    {
-      "@type": "Service",
-      "@id": "https://www.sindikatstudio83.me/sr-me/usluge/#landing-web",
       "name": "Landing stranice & Web",
-      "description": "Stranice koje konvertuju: jasna ponuda, brza forma, praćenje i optimizacija.",
-      "url": "https://www.sindikatstudio83.me/sr-me/usluge/#landing-web",
-      "provider": {
-        "@id": "https://www.sindikatstudio83.me/#org"
-      },
-      "areaServed": [
-        "Podgorica",
-        "Crna Gora"
-      ]
+      "description": "Stranice koje konvertuju: jasna ponuda, brza forma, praćenje i optimizacija."
     },
     {
       "@type": "Service",
-      "@id": "https://www.sindikatstudio83.me/sr-me/usluge/#sadrzaj-kreativa",
-      "name": "Sadržaj i kreativa (copy + oglasi)",
-      "description": "Copy i kreativa za oglase: hook, ponuda, varijacije, A/B testovi i optimizacija na osnovu rezultata.",
-      "url": "https://www.sindikatstudio83.me/sr-me/usluge/#sadrzaj-kreativa",
-      "provider": {
-        "@id": "https://www.sindikatstudio83.me/#org"
-      },
-      "areaServed": [
-        "Podgorica",
-        "Crna Gora"
-      ]
+      "name": "Analitika i mjerenje",
+      "description": "Postavka praćenja i mjerenja: događaji, konverzije, izvještaji i optimizacija na osnovu podataka."
     },
     {
       "@type": "Service",
-      "@id": "https://www.sindikatstudio83.me/sr-me/usluge/#analitika-mjerenje",
-      "name": "Analitika i mjerenje (GTM / GA4)",
-      "description": "Postavka praćenja i mjerenja: događaji, konverzije, izvještaji i optimizacija na osnovu podataka.",
-      "url": "https://www.sindikatstudio83.me/sr-me/usluge/#analitika-mjerenje",
-      "provider": {
-        "@id": "https://www.sindikatstudio83.me/#org"
-      },
-      "areaServed": [
-        "Podgorica",
-        "Crna Gora"
-      ]
+      "name": "Copywriting i sadržaj",
+      "description": "Copy, sadržaj i vođenje mreža kao podrška oglasima i konverzijama."
+    },
+    {
+      "@type": "Service",
+      "name": "UX optimizacija",
+      "description": "Optimizacija toka, CTA elemenata i formi za više konverzija."
+    },
+    {
+      "@type": "Service",
+      "name": "SEO sistem",
+      "description": "On-page SEO i sadržaj fokusiran na stranice koje prodaju."
+    },
+    {
+      "@type": "Service",
+      "name": "Gamification i interaktivne kampanje",
+      "description": "Interaktivne kampanje, mehanike i lead capture."
     }
   ]
 }
 </script>
-
-  <!-- SEO: Hreflang -->
 </head>
 
 <body>
-  <!-- ✅ FLOATING LOGO -->
   <a class="floatingLogo" href="/sr-me/pocetna" aria-label="Sindikat Studio 83 - Početna">
     <div class="logoMark" aria-hidden="true">
       <img class="logoMarkImg" src="/studio83logo.png" alt="">
     </div>
   </a>
 
-  <!-- Google Tag Manager (noscript) -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PBXVW3GK"
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PBXVW3GK"
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-<!-- End Google Tag Manager (noscript) -->
 
   <div class="heroBg" id="heroBg" aria-hidden="true"></div>
   <div class="blob" id="blob1" aria-hidden="true"></div>
   <div class="blob b2" id="blob2" aria-hidden="true"></div>
 
-  <!-- ✅ Bottom Topbar -->
   <header class="topbar">
     <div class="topbarInner reveal">
       <div class="brand"></div>
@@ -936,10 +825,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </header>
 
   <div class="wrap">
-    <!-- HERO -->
     <section class="hero" id="top">
-      <div class="kicker reveal"></span></div>
-
       <div class="kicker reveal"><span class="dot"></span> Performance &amp; Activation sistem • Podgorica / Crna Gora</div>
 
       <h1 class="heroTitle reveal" id="heroTitle">Marketing koji pretvara pažnju u upite i prodaju.</h1>
@@ -961,7 +847,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </div>
     </section>
 
-    <!-- SERVICES -->
     <section class="section" id="services">
       <div class="headRow">
         <h2 class="h2 reveal">Usluge</h2>
@@ -971,7 +856,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </div>
       </div>
 
-      <!-- CORE -->
       <div class="groupHeader reveal">
         <h3 class="gTitle">Core</h3>
         <span class="gHint">osnova koja donosi rezultat</span>
@@ -979,7 +863,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
       <div class="grid2">
 
-        <!-- 2) Ads (CORE) -->
         <div class="card reveal" id="ads-performance">
           <div class="cardMedia">
             <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1600&q=80" alt="Oglašavanje">
@@ -994,12 +877,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             </div>
             <p>Meta + Google kampanje uz strukturu testiranja i optimizaciju. Fokus: <strong>leadovi / prodaja / posjete</strong> + jasan mjesečni plan narednih poteza.</p>
             <div class="pillRow"><span>Meta</span><span>Google</span><span>retarget</span><span>report</span></div>
-            <div style="height:14px"></div>
-            <button class="btn primary" data-modal="modal-ads"><span class="dot"></span> Detaljnije</button>
+            <div class="serviceAction">
+              <a class="btn primary" href="oglasavanje.html"><span class="dot"></span> Otvori stranicu usluge</a>
+              <a class="serviceLink" href="oglasavanje.html">Posebna stranica →</a>
+            </div>
           </div>
         </div>
 
-        <!-- 3) Web (CORE) -->
         <div class="card reveal" id="landing-web">
           <div class="cardMedia">
             <img src="https://images.unsplash.com/photo-1522542550221-31fd19575a2d?auto=format&fit=crop&w=1600&q=80" alt="Web sajtovi">
@@ -1014,12 +898,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             </div>
             <p>Stranice koje pretvaraju posjete u akciju: jasna ponuda, dokaz, CTA i tracking - da se budžet iz oglasa ne “prosipa”.</p>
             <div class="pillRow"><span>landing</span><span>UX</span><span>copy</span><span>konverzija</span></div>
-            <div style="height:14px"></div>
-            <button class="btn primary" data-modal="modal-web"><span class="dot"></span> Detaljnije</button>
+            <div class="serviceAction">
+              <a class="btn primary" href="landingpage.html"><span class="dot"></span> Otvori stranicu usluge</a>
+              <a class="serviceLink" href="landingpage.html">Posebna stranica →</a>
+            </div>
           </div>
         </div>
 
-        <!-- 6) Analytics (CORE) -->
         <div class="card reveal" id="analytics-tracking">
           <div class="cardMedia">
             <img src="https://images.unsplash.com/photo-1556155092-8707de31f9c4?auto=format&fit=crop&w=1600&q=80" alt="Analytics">
@@ -1034,8 +919,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             </div>
             <p>GA4 + event tracking: mjerimo ono što je bitno (klik, poziv, forma, lead) i optimizujemo na osnovu podataka - bez nagađanja.</p>
             <div class="pillRow"><span>GA4</span><span>events</span><span>funnel</span><span>dashboard</span></div>
-            <div style="height:14px"></div>
-            <button class="btn primary" data-modal="modal-analytics"><span class="dot"></span> Detaljnije</button>
+            <div class="serviceAction">
+              <a class="btn primary" href="analitika.html"><span class="dot"></span> Otvori stranicu usluge</a>
+              <a class="serviceLink" href="analitika.html">Posebna stranica →</a>
+            </div>
           </div>
         </div>
 
@@ -1043,7 +930,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
       <div class="groupDivider reveal"></div>
 
-      <!-- BOOSTER -->
       <div class="groupHeader reveal">
         <h3 class="gTitle">Booster</h3>
         <span class="gHint">pojačava učinak core-a</span>
@@ -1051,7 +937,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
       <div class="grid2">
 
-        <!-- 4) Copy (BOOSTER) -->
         <div class="card reveal" id="copy-content">
           <div class="cardMedia">
             <img src="https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&fit=crop&w=1600&q=80" alt="Copywriting">
@@ -1064,14 +949,15 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
               <h3>Copywriting &amp; Content</h3>
               <span class="tag">7–14 dana</span>
             </div>
-            <p>Poruke koje hvataju pažnju i vode do upita: ads copy, landing copy i content plan - sa varijantama za test.</p>
+            <p>Poruke koje hvataju pažnju i vode do upita: ads copy, landing copy, content plan i vođenje mreža - sa varijantama za test.</p>
             <div class="pillRow"><span>hook → poruka</span><span>CTA</span><span>varijante</span></div>
-            <div style="height:14px"></div>
-            <button class="btn primary" data-modal="modal-copy"><span class="dot"></span> Detaljnije</button>
+            <div class="serviceAction">
+              <a class="btn primary" href="copywriting.html"><span class="dot"></span> Otvori stranicu usluge</a>
+              <a class="serviceLink" href="copywriting.html">Posebna stranica →</a>
+            </div>
           </div>
         </div>
 
-        <!-- 5) UX (BOOSTER) -->
         <div class="card reveal" id="ux-conversion">
           <div class="cardMedia">
             <img src="https://images.unsplash.com/photo-1559028012-481c04fa702d?auto=format&fit=crop&w=1600&q=80" alt="UX optimizacija">
@@ -1086,12 +972,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             </div>
             <p>Ispravljamo tok i trenje: manje konfuzije, više klikova, više formi i poziva - da isti saobraćaj donosi više rezultata.</p>
             <div class="pillRow"><span>user flow</span><span>sekcije</span><span>forme</span><span>CTA</span></div>
-            <div style="height:14px"></div>
-            <button class="btn primary" data-modal="modal-ux"><span class="dot"></span> Detaljnije</button>
+            <div class="serviceAction">
+              <a class="btn primary" href="ux.html"><span class="dot"></span> Otvori stranicu usluge</a>
+              <a class="serviceLink" href="ux.html">Posebna stranica →</a>
+            </div>
           </div>
         </div>
 
-        <!-- 8) SEO (BOOSTER) -->
         <div class="card reveal" id="seo-system">
           <div class="cardMedia">
             <img src="https://images.unsplash.com/photo-1557804506-669a67965ba0?auto=format&fit=crop&w=1600&q=80" alt="SEO">
@@ -1106,8 +993,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             </div>
             <p>Organski upiti kroz strukturu sajta, ključne riječi, interne linkove i sadržaj - fokus na stranice koje prodaju, ne “prazan promet”.</p>
             <div class="pillRow"><span>audit</span><span>on-page</span><span>content plan</span><span>Search Console</span></div>
-            <div style="height:14px"></div>
-            <button class="btn primary" data-modal="modal-seo"><span class="dot"></span> Detaljnije</button>
+            <div class="serviceAction">
+              <a class="btn primary" href="seo.html"><span class="dot"></span> Otvori stranicu usluge</a>
+              <a class="serviceLink" href="seo.html">Posebna stranica →</a>
+            </div>
           </div>
         </div>
 
@@ -1115,7 +1004,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
       <div class="groupDivider reveal"></div>
 
-      <!-- SIGNATURE -->
       <div class="groupHeader reveal">
         <h3 class="gTitle">Signature</h3>
         <span class="gHint">ono što nas diferencira</span>
@@ -1123,7 +1011,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
       <div class="grid2">
 
-        <!-- 7) Events (SIGNATURE) -->
         <div class="card reveal" id="events-activations">
           <div class="cardMedia">
             <img src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&w=1600&q=80" alt="Aktivacije">
@@ -1138,12 +1025,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             </div>
             <p>Digital → teren → digital. Aktivacija kao pojačivač kampanje, plus sadržaj koji poslije koristiš za retarget i prodaju.</p>
             <div class="pillRow"><span>koncept</span><span>logistika</span><span>sadržaj</span><span>retarget</span></div>
-            <div style="height:14px"></div>
-            <button class="btn primary" data-modal="modal-events"><span class="dot"></span> Detaljnije</button>
+            <div class="serviceAction">
+              <button class="btn primary" data-modal="modal-events"><span class="dot"></span> Detaljnije</button>
+            </div>
           </div>
         </div>
 
-        <!-- 9) Gamification (SIGNATURE) -->
         <div class="card reveal" id="gamification">
           <div class="cardMedia">
             <img src="https://cdn.prod.website-files.com/6425b3d54d3c3834d11bef95/650ae87e0cc39516a91b7b17_gamification-featured-01.png" alt="Gamification">
@@ -1158,8 +1045,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             </div>
             <p>Mehanike koje podižu angažman i prave buzz: kviz, promo igra, interaktivna akcija - uz lead capture i nastavak u funnel-u.</p>
             <div class="pillRow"><span>koncept</span><span>mehanika</span><span>nagrade</span><span>lead capture</span></div>
-            <div style="height:14px"></div>
-            <button class="btn primary" data-modal="modal-gamification"><span class="dot"></span> Detaljnije</button>
+            <div class="serviceAction">
+              <a class="btn primary" href="Gamification.html"><span class="dot"></span> Otvori stranicu usluge</a>
+              <a class="serviceLink" href="Gamification.html">Posebna stranica →</a>
+            </div>
           </div>
         </div>
 
@@ -1167,7 +1056,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
       <div class="groupDivider reveal"></div>
 
-      <!-- LIMITED / BY REQUEST -->
       <div class="groupHeader reveal">
         <h3 class="gTitle">Limited / po upitu</h3>
         <span class="gHint">radimo selektivno</span>
@@ -1175,7 +1063,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
       <div class="grid2">
 
-        <!-- 1) Branding (LIMITED) -->
         <div class="card reveal" id="branding">
           <div class="cardMedia">
             <img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1600&q=80" alt="Branding">
@@ -1190,12 +1077,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             </div>
             <p>Vizuelni i komunikacijski identitet koji radi u digitalu: jasno, prepoznatljivo, prodajno (brand kit + pravila upotrebe).</p>
             <div class="pillRow"><span>logo + vizuelni sistem</span><span>tone of voice</span><span>brand kit</span></div>
-            <div style="height:14px"></div>
-            <button class="btn primary" data-modal="modal-branding"><span class="dot"></span> Detaljnije</button>
+            <div class="serviceAction">
+              <button class="btn primary" data-modal="modal-branding"><span class="dot"></span> Detaljnije</button>
+            </div>
           </div>
         </div>
 
-        <!-- 10) Custom (LIMITED) -->
         <div class="card reveal" id="custom">
           <div class="cardMedia">
             <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1600&q=80" alt="Custom rješenja">
@@ -1210,12 +1097,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             </div>
             <p>Posebne funkcionalnosti i alati za kampanje: kalkulatori, napredne forme, integracije i automatizacije - kad donose realan efekat.</p>
             <div class="pillRow"><span>web alati</span><span>MVP</span><span>integracije</span><span>automatizacije</span></div>
-            <div style="height:14px"></div>
-            <button class="btn primary" data-modal="modal-custom"><span class="dot"></span> Detaljnije</button>
+            <div class="serviceAction">
+              <button class="btn primary" data-modal="modal-custom"><span class="dot"></span> Detaljnije</button>
+            </div>
           </div>
         </div>
 
-        <!-- 11) Mobile (LIMITED) -->
         <div class="card reveal" id="mobile-mvp">
           <div class="cardMedia">
             <img src="https://images.unsplash.com/photo-1556656793-08538906a9f8?auto=format&fit=crop&w=1600&q=8" alt="Mobile MVP">
@@ -1230,8 +1117,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             </div>
             <p>Prva verzija aplikacije: koncept, UX prototip i MVP plan (za validaciju ideje) - radimo selektivno.</p>
             <div class="pillRow"><span>prototip</span><span>MVP scope</span><span>validacija</span></div>
-            <div style="height:14px"></div>
-            <button class="btn primary" data-modal="modal-mobile"><span class="dot"></span> Detaljnije</button>
+            <div class="serviceAction">
+              <button class="btn primary" data-modal="modal-mobile"><span class="dot"></span> Detaljnije</button>
+            </div>
           </div>
         </div>
 
@@ -1239,16 +1127,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
     </section>
 
-    <!-- FOOTER -->
     <footer>
       <div>© <span id="year"></span> Sindikat - Performance & Activation Studio</div>
       <div>Podgorica • Crna Gora • @sindikat_events</div>
     </footer>
   </div>
 
-  <!-- ✅ MODALS (unchanged content structure; kept your original ids/logic) -->
-
-  <!-- Branding -->
   <div class="modal" id="modal-branding" aria-hidden="true">
     <div class="modalBackdrop" data-close></div>
     <div class="modalPanel" role="dialog" aria-modal="true" aria-label="Branding & Digital identitet">
@@ -1287,202 +1171,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
   </div>
 
-  <!-- Ads -->
-  <div class="modal" id="modal-ads" aria-hidden="true">
-    <div class="modalBackdrop" data-close></div>
-    <div class="modalPanel" role="dialog" aria-modal="true" aria-label="Oglašavanje (Performance)">
-      <div class="modalTop">
-        <h3 class="modalTitle">Oglašavanje (Performance)</h3>
-        <button class="modalClose" type="button" data-close aria-label="Zatvori">×</button>
-      </div>
-      <div class="modalBody">
-        <p>Kampanje koje se ne rade “reda radi” - nego da donesu upite, pozive, rezervacije ili prodaju. Meta + Google, sa testiranjem i optimizacijom.</p>
-
-        <div class="modalGrid">
-          <div class="modalBlock">
-            <h4>Šta radimo</h4>
-            <ul class="bullets">
-              <li>Setup kampanja + struktura (ACQ / RET)</li>
-              <li>Test creative-a (varijante poruka i vizuala)</li>
-              <li>Optimizacija budžeta i publika</li>
-              <li>Mjesečni report: šta radi / šta ne radi / šta dalje</li>
-            </ul>
-          </div>
-          <div class="modalBlock">
-            <h4>Uslov da radi</h4>
-            <ul class="bullets">
-              <li>Jasan cilj (lead / prodaja / posjeta)</li>
-              <li>Dobra landing stranica (ili je napravimo)</li>
-              <li>Tracking (GA4 / pixel / conversion events)</li>
-              <li>Budžet za test (da ne nagađamo)</li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="modalActions">
-          <a class="btn primary" href="/sr-me/kontakt"><span class="dot"></span> Traži ponudu</a>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Web -->
-  <div class="modal" id="modal-web" aria-hidden="true">
-    <div class="modalBackdrop" data-close></div>
-    <div class="modalPanel" role="dialog" aria-modal="true" aria-label="Web sajtovi & Landing page">
-      <div class="modalTop">
-        <h3 class="modalTitle">Web sajtovi & Landing page</h3>
-        <button class="modalClose" type="button" data-close aria-label="Zatvori">×</button>
-      </div>
-      <div class="modalBody">
-        <p>Ne pravimo “lijep sajt”. Pravimo stranicu koja vodi korisnika: problem → dokaz → rješenje → CTA.</p>
-
-        <div class="modalGrid">
-          <div class="modalBlock">
-            <h4>Uključeno</h4>
-            <ul class="bullets">
-              <li>Struktura sekcija (hero, benefit, dokaz, FAQ, CTA)</li>
-              <li>Copy koji objašnjava i prodaje (bez praznih fraza)</li>
-              <li>Responsive dizajn (mobilni prioritet)</li>
-              <li>Osnove SEO + performanse</li>
-            </ul>
-          </div>
-          <div class="modalBlock">
-            <h4>Najčešći ishodi</h4>
-            <ul class="bullets">
-              <li>Više upita sa istog broja posjeta</li>
-              <li>Manje “zbunjenih” korisnika</li>
-              <li>Jasniji CTA i bolji flow</li>
-              <li>Bolja osnova za oglase i SEO</li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="modalActions">
-          <a class="btn primary" href="/sr-me/kontakt"><span class="dot"></span> Hoću landing</a>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Copy -->
-  <div class="modal" id="modal-copy" aria-hidden="true">
-    <div class="modalBackdrop" data-close></div>
-    <div class="modalPanel" role="dialog" aria-modal="true" aria-label="Copywriting & Content">
-      <div class="modalTop">
-        <h3 class="modalTitle">Copywriting & Content</h3>
-        <button class="modalClose" type="button" data-close aria-label="Zatvori">×</button>
-      </div>
-      <div class="modalBody">
-        <p>Poruke koje “režu” kroz šum. U oglasu, na landing-u i u sadržaju - da ljudi razumiju i kliknu.</p>
-
-        <div class="modalGrid">
-          <div class="modalBlock">
-            <h4>Šta dobijaš</h4>
-            <ul class="bullets">
-              <li>Hook varijante (više uglova)</li>
-              <li>Ads copy set (headline / primary text)</li>
-              <li>Landing copy (sekcije + CTA)</li>
-              <li>Mini content plan (teme + format)</li>
-            </ul>
-          </div>
-          <div class="modalBlock">
-            <h4>Kako radimo</h4>
-            <ul class="bullets">
-              <li>Brzi intervju + ponuda (value)</li>
-              <li>Analiza publike (šta ih stvarno boli)</li>
-              <li>Varijante i test (bez vezivanja za jednu ideju)</li>
-              <li>Final: dokument + “šta testirati prvo”</li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="modalActions">
-          <a class="btn primary" href="/sr-me/kontakt"><span class="dot"></span> Treba mi copy</a>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- UX -->
-  <div class="modal" id="modal-ux" aria-hidden="true">
-    <div class="modalBackdrop" data-close></div>
-    <div class="modalPanel" role="dialog" aria-modal="true" aria-label="UX optimizacija (Conversion)">
-      <div class="modalTop">
-        <h3 class="modalTitle">UX optimizacija (Conversion)</h3>
-        <button class="modalClose" type="button" data-close aria-label="Zatvori">×</button>
-      </div>
-      <div class="modalBody">
-        <p>Uklanjamo trenje: gdje ljudi odustaju, gdje se zbune i zašto ne kliknu. Cilj je više akcija bez većeg budžeta.</p>
-
-        <div class="modalGrid">
-          <div class="modalBlock">
-            <h4>Šta analiziramo</h4>
-            <ul class="bullets">
-              <li>Flow: ulaz → ponuda → CTA</li>
-              <li>Hijerarhija informacija (šta je prvo/bitno)</li>
-              <li>Forme i mikro-CTA</li>
-              <li>Mobilni UX (90% realnosti)</li>
-            </ul>
-          </div>
-          <div class="modalBlock">
-            <h4>Šta dobijaš</h4>
-            <ul class="bullets">
-              <li>Lista tačnih izmjena (prioritet + razlog)</li>
-              <li>Brze pobjede (quick wins)</li>
-              <li>Predlog novih sekcija / reda</li>
-              <li>Prije/poslije logika + mjerenje</li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="modalActions">
-          <a class="btn primary" href="/sr-me/kontakt"><span class="dot"></span> Hoću audit</a>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Analytics -->
-  <div class="modal" id="modal-analytics" aria-hidden="true">
-    <div class="modalBackdrop" data-close></div>
-    <div class="modalPanel" role="dialog" aria-modal="true" aria-label="Analytics & Tracking">
-      <div class="modalTop">
-        <h3 class="modalTitle">Analytics & Tracking</h3>
-        <button class="modalClose" type="button" data-close aria-label="Zatvori">×</button>
-      </div>
-      <div class="modalBody">
-        <p>Bez mjerenja nema optimizacije. Postavljamo tracking tako da znaš šta tačno donosi upite i prodaju.</p>
-
-        <div class="modalGrid">
-          <div class="modalBlock">
-            <h4>Uključeno</h4>
-            <ul class="bullets">
-              <li>GA4 setup i provjera</li>
-              <li>Eventi: klik, forma, poziv, lead, kupovina (po potrebi)</li>
-              <li>UTM standard + naming</li>
-              <li>Osnovni dashboard (jasno, bez šuma)</li>
-            </ul>
-          </div>
-          <div class="modalBlock">
-            <h4>Rezultat</h4>
-            <ul class="bullets">
-              <li>Tačno znaš odakle dolaze leadovi</li>
-              <li>Funnel i drop-off tačke</li>
-              <li>Podaci spremni za ads optimizaciju</li>
-              <li>Manje “osjećaja”, više odluka</li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="modalActions">
-          <a class="btn primary" href="/sr-me/kontakt"><span class="dot"></span> Sredi tracking</a>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Events -->
   <div class="modal" id="modal-events" aria-hidden="true">
     <div class="modalBackdrop" data-close></div>
     <div class="modalPanel" role="dialog" aria-modal="true" aria-label="Aktivacije & Događaji">
@@ -1521,85 +1209,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
   </div>
 
-  <!-- SEO -->
-  <div class="modal" id="modal-seo" aria-hidden="true">
-    <div class="modalBackdrop" data-close></div>
-    <div class="modalPanel" role="dialog" aria-modal="true" aria-label="SEO sistem (On-page + Sadržaj)">
-      <div class="modalTop">
-        <h3 class="modalTitle">SEO sistem (On-page + Sadržaj)</h3>
-        <button class="modalClose" type="button" data-close aria-label="Zatvori">×</button>
-      </div>
-      <div class="modalBody">
-        <p>SEO kao sistem: struktura sajta + ključne riječi + interne veze + sadržaj koji donosi upite (ne samo posjete).</p>
-
-        <div class="modalGrid">
-          <div class="modalBlock">
-            <h4>On-page osnova</h4>
-            <ul class="bullets">
-              <li>Struktura stranica i linkovanje</li>
-              <li>Title/description, H tagovi, schema (osnove)</li>
-              <li>Brzina + tehničke provjere</li>
-              <li>Search Console setup i monitoring</li>
-            </ul>
-          </div>
-          <div class="modalBlock">
-            <h4>Sadržaj koji radi</h4>
-            <ul class="bullets">
-              <li>Plan tema (namjera: kupujem / tražim / upoređujem)</li>
-              <li>Struktura bloga (kategorije + interne veze)</li>
-              <li>Prioritet: stranice koje prodaju</li>
-              <li>Mjerenje: upiti i konverzije</li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="modalActions">
-          <a class="btn primary" href="/sr-me/kontakt"><span class="dot"></span> Hoću SEO plan</a>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Gamification -->
-  <div class="modal" id="modal-gamification" aria-hidden="true">
-    <div class="modalBackdrop" data-close></div>
-    <div class="modalPanel" role="dialog" aria-modal="true" aria-label="Gamification & Interaktivne kampanje">
-      <div class="modalTop">
-        <h3 class="modalTitle">Gamification & Interaktivne kampanje</h3>
-        <button class="modalClose" type="button" data-close aria-label="Zatvori">×</button>
-      </div>
-      <div class="modalBody">
-        <p>Interakcija koja pravi “priču”: ljudi učestvuju, dijele, ostavljaju podatke i ulaze u funnel bez agresivnog prodavanja.</p>
-
-        <div class="modalGrid">
-          <div class="modalBlock">
-            <h4>Primjeri mehanika</h4>
-            <ul class="bullets">
-              <li>Kviz / test / “koji si tip”</li>
-              <li>Spin / scratch / mini igra</li>
-              <li>Takmičenje (UGC) + nagrade</li>
-              <li>Lead capture + automatski follow-up</li>
-            </ul>
-          </div>
-          <div class="modalBlock">
-            <h4>Šta dobijaš</h4>
-            <ul class="bullets">
-              <li>Koncept + pravila (jasno i fer)</li>
-              <li>UX prototip + flow</li>
-              <li>Copy + vizuelni okvir</li>
-              <li>Plan promocije + retarget</li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="modalActions">
-          <a class="btn primary" href="/sr-me/kontakt"><span class="dot"></span> Hoću kampanju</a>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Custom -->
   <div class="modal" id="modal-custom" aria-hidden="true">
     <div class="modalBackdrop" data-close></div>
     <div class="modalPanel" role="dialog" aria-modal="true" aria-label="Custom digital rješenja">
@@ -1638,7 +1247,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
   </div>
 
-  <!-- Mobile MVP -->
   <div class="modal" id="modal-mobile" aria-hidden="true">
     <div class="modalBackdrop" data-close></div>
     <div class="modalPanel" role="dialog" aria-modal="true" aria-label="Mobile MVP & Prototip (ograničeno)">
@@ -1678,11 +1286,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 
   <script>
-    // Year (safe)
     const yearEl = document.getElementById('year');
     if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-    // Mobile menu toggle (with proper state)
     const hamburger = document.getElementById('hamburger');
     const mobileMenu = document.getElementById('mobileMenu');
 
@@ -1723,7 +1329,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         a.addEventListener('click', closeMobileMenu);
       });
 
-      // Close on outside click (nice UX)
       document.addEventListener('click', (e)=>{
         if (mobileMenu.style.display !== 'block') return;
         const inside = mobileMenu.contains(e.target) || hamburger.contains(e.target);
@@ -1731,7 +1336,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       });
     }
 
-    // Split hero title into words (keeps spaces)
     const titleEl = document.getElementById('heroTitle');
     if (titleEl) {
       const raw = titleEl.textContent.trim();
@@ -1745,7 +1349,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       });
     }
 
-    // Reveal observer
     const revealEls = document.querySelectorAll('.reveal');
     const io = new IntersectionObserver((entries)=>{
       entries.forEach(entry=>{
@@ -1757,7 +1360,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     }, {threshold: 0.14});
     revealEls.forEach(el=>io.observe(el));
 
-    // Hero title word stagger
     window.addEventListener('load', ()=>{
       anime({
         targets: '#heroTitle span',
@@ -1769,7 +1371,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       });
     });
 
-    // Blobs base + drift
     const heroBg = document.getElementById('heroBg');
     const b1 = document.getElementById('blob1');
     const b2 = document.getElementById('blob2');
@@ -1802,7 +1403,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       loop: true
     });
 
-    // Parallax glow
     let ticking = false;
     window.addEventListener('scroll', ()=>{
       if(ticking) return;
@@ -1814,7 +1414,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       });
     }, {passive:true});
 
-    // Modals
     let savedScrollY = 0;
 
     const lockScroll = () => {
