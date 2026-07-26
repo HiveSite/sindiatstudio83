@@ -40,10 +40,6 @@
   <!-- Canonical / hreflang -->
   <link rel="canonical" href="https://www.sindikatstudio83.me/sr-me/onama/" />
   <link rel="alternate" href="https://www.sindikatstudio83.me/sr-me/onama/" hreflang="sr-ME" />
-  <link rel="alternate" href="https://www.sindikatstudio83.me/en/about/" hreflang="en" />
-  <link rel="alternate" href="https://www.sindikatstudio83.me/zh-cn/guanyu/" hreflang="zh-CN" />
-  <link rel="alternate" href="https://www.sindikatstudio83.me/tr/hakkimizda/" hreflang="tr" />
-  <link rel="alternate" href="https://www.sindikatstudio83.me/ru/o-nas/" hreflang="ru" />
   <link rel="alternate" href="https://www.sindikatstudio83.me/sr-me/pocetna/" hreflang="x-default" />
 
   <!-- Open Graph -->
@@ -52,7 +48,7 @@
   <meta property="og:title" content="O nama | Sindikat - Performance &amp; Activation Studio (Podgorica)" />
   <meta property="og:description" content="Sindikat je Performance &amp; Activation Studio iz Podgorice. Kampanje, sadržaj i aktivacije koje imaju jasan cilj i mjerljiv rezultat - online i na terenu." />
   <meta property="og:url" content="https://www.sindikatstudio83.me/sr-me/onama/" />
-  <meta property="og:image" content="https://www.sindikatstudio83.me/sr-me/assets/og-cover.jpg" />
+  <meta property="og:image" content="https://www.sindikatstudio83.me/sr-me/assets/og-cover.png" />
 
   <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image" />
@@ -1030,11 +1026,12 @@
   }
 }
 </script>
+<noscript><style>.reveal{opacity:1 !important;transform:none !important}.heroImg,.heroBar{opacity:1 !important}</style></noscript>
 </head>
 
 <body>
   <!-- Floating Logo -->
-  <a class="floatingLogo" href="/sr-me/pocetna" aria-label="Sindikat Studio 83 - Početna">
+  <a class="floatingLogo" href="/sr-me/pocetna/" aria-label="Sindikat Studio 83 - Početna">
     <div class="mark" aria-hidden="true">
       <img class="markImg" src="/studio83logo.png" alt="">
     </div>
@@ -1056,18 +1053,18 @@
     <div class="topbarInner reveal">
       <div class="brand"></div>
 
-      <a class="btn primary ctaCenter" href="/sr-me/kontakt">
+      <a class="btn primary ctaCenter" href="/sr-me/kontakt/">
         <span class="dot"></span>
         Kontaktiraj nas
       </a>
 
       <div class="navWrap">
         <nav aria-label="Primary">
-          <a href="/sr-me/pocetna">Početna</a>
-          <a href="/sr-me/usluge">Usluge</a>
-          <a href="/sr-me/onama" aria-current="page">O nama</a>
-          <a href="/sr-me/blog">Blog</a>
-          <a href="/sr-me/poslovi">Poslovi</a>
+          <a href="/sr-me/pocetna/">Početna</a>
+          <a href="/sr-me/usluge/">Usluge</a>
+          <a href="/sr-me/onama/" aria-current="page">O nama</a>
+          <a href="/sr-me/blog/">Blog</a>
+          <a href="/sr-me/poslovi/">Poslovi</a>
         </nav>
 
         <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
@@ -1078,11 +1075,11 @@
 
     <div class="mobileMenu" id="mobileMenu" aria-label="Mobile menu">
       <div class="mobileMenuInner">
-        <a href="/sr-me/pocetna">Početna</a>
-        <a href="/sr-me/usluge">Usluge</a>
-        <a href="/sr-me/onama" aria-current="page">O nama</a>
-        <a href="/sr-me/blog">Blog</a>
-        <a href="/sr-me/poslovi">Poslovi</a>
+        <a href="/sr-me/pocetna/">Početna</a>
+        <a href="/sr-me/usluge/">Usluge</a>
+        <a href="/sr-me/onama/" aria-current="page">O nama</a>
+        <a href="/sr-me/blog/">Blog</a>
+        <a href="/sr-me/poslovi/">Poslovi</a>
       </div>
     </div>
   </header>
@@ -1646,5 +1643,6 @@
       });
     }
   </script>
+<script>/* fallback: ako IntersectionObserver/anime zakaže, sadržaj i brojači moraju biti vidljivi/tačni */setTimeout(function(){try{document.querySelectorAll(".reveal").forEach(function(e){if(getComputedStyle(e).opacity==="0"){e.style.opacity=1;e.style.transform="none";}});document.querySelectorAll(".counter").forEach(function(c){var v=c.getAttribute("data-value");if(v&&(c.textContent==="0"||c.textContent.trim()===""))c.textContent=v;});}catch(_){}} ,1500);</script>
 </body>
 </html>

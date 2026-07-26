@@ -1,8 +1,6 @@
 User-agent: *
 Allow: /
 
-# Development/template paths (prevent accidental crawl)
 Disallow: /sr-me/blog/_templates/
-Disallow: /sr-me/blog/<slug>/
 
 Sitemap: https://www.sindikatstudio83.me/sitemap.xml

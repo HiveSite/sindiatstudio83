@@ -258,10 +258,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   "dateModified": "2026-03-13T12:58:50.733Z"
 }
 </script>
+<noscript><style>.reveal{opacity:1 !important;transform:none !important}.heroImg,.heroBar{opacity:1 !important}</style></noscript>
 </head>
 
 <body>
-<a class="floatingLogo" href="/sr-me/pocetna" aria-label="Sindikat Studio 83 — Početna">
+<a class="floatingLogo" href="/sr-me/pocetna/" aria-label="Sindikat Studio 83 — Početna">
   <div class="mark" aria-hidden="true"><img class="markImg" src="/studio83logo.png" alt=""></div>
 </a>
 
@@ -274,17 +275,17 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <div class="topbarInner">
     <div class="brand"></div>
 
-    <a class="btn primary ctaCenter" href="/sr-me/kontakt">
+    <a class="btn primary ctaCenter" href="/sr-me/kontakt/">
       <span class="dot"></span>Kontaktiraj nas
     </a>
 
     <div class="navWrap">
       <nav aria-label="Primary">
-        <a href="/sr-me/pocetna">Početna</a>
-        <a href="/sr-me/usluge">Usluge</a>
-        <a href="/sr-me/onama">O nama</a>
-        <a href="/sr-me/blog" aria-current="page">Blog</a>
-        <a href="/sr-me/poslovi">Poslovi</a>
+        <a href="/sr-me/pocetna/">Početna</a>
+        <a href="/sr-me/usluge/">Usluge</a>
+        <a href="/sr-me/onama/">O nama</a>
+        <a href="/sr-me/blog/" aria-current="page">Blog</a>
+        <a href="/sr-me/poslovi/">Poslovi</a>
       </nav>
 
       <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
@@ -295,11 +296,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
   <div class="mobileMenu" id="mobileMenu" aria-hidden="true">
     <div class="mobileMenuInner">
-      <a href="/sr-me/pocetna">Početna</a>
-      <a href="/sr-me/usluge">Usluge</a>
-      <a href="/sr-me/onama">O nama</a>
-      <a href="/sr-me/blog" aria-current="page">Blog</a>
-      <a href="/sr-me/poslovi">Poslovi</a>
+      <a href="/sr-me/pocetna/">Početna</a>
+      <a href="/sr-me/usluge/">Usluge</a>
+      <a href="/sr-me/onama/">O nama</a>
+      <a href="/sr-me/blog/" aria-current="page">Blog</a>
+      <a href="/sr-me/poslovi/">Poslovi</a>
     </div>
   </div>
 </header>
@@ -316,7 +317,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <h1>Koliko košta organizacija događaja u Podgorici (realan okvir)</h1>
         <p class="sub">Umjesto jedne cifre, treba ti struktura budžeta. Kad znaš stavke i tipične greške, možeš brzo procijeniti event u Podgorici i spriječiti da trošak “curi” na sitnice i zadnji minut.</p>
         <div class="miniK" id="tagRow"></div>
-        <a class="backLink" href="/sr-me/blog"><span class="chev">←</span> Nazad na blog</a>
+        <a class="backLink" href="/sr-me/blog/"><span class="chev">←</span> Nazad na blog</a>
       </div>
     </div>
 
@@ -385,7 +386,7 @@ schema.org - service struktura - <a href="https://schema.org/Service" target="_b
     const tags = (p.tags||[]).slice(0,3).map(t=>`<span>${t}</span>`).join('');
     el.innerHTML = `
       <div class="thumb">
-        <img src="${img}" alt="${p.cover_alt || p.title}" loading="lazy" />
+        <img src="/sr-me/blog/covers/p04.svg" alt="${p.cover_alt || p.title}" loading="lazy" />
         <div class="badge">${p.badge}</div>
       </div>
       <div class="meta">
@@ -521,5 +522,6 @@ schema.org - service struktura - <a href="https://schema.org/Service" target="_b
     });
   }
 </script>
+<script>/* fallback: ako IntersectionObserver/anime zakaže, sadržaj i brojači moraju biti vidljivi/tačni */setTimeout(function(){try{document.querySelectorAll(".reveal").forEach(function(e){if(getComputedStyle(e).opacity==="0"){e.style.opacity=1;e.style.transform="none";}});document.querySelectorAll(".counter").forEach(function(c){var v=c.getAttribute("data-value");if(v&&(c.textContent==="0"||c.textContent.trim()===""))c.textContent=v;});}catch(_){}} ,1500);</script>
 </body>
 </html>

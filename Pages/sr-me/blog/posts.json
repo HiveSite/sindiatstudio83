@@ -7,14 +7,14 @@
     "status": "published",
     "category": "strategija",
     "date": "",
-    "cover_image": "https://images.prismic.io/atdigital-io/Z252DJbqstJ982X8_role-of-ppc-marketing.jpg?auto=format,compress",
+    "cover_image": "/sr-me/blog/covers/p01.svg",
     "cover_alt": "Planiranje kampanje i definisanje cilja prije pokretanja oglasa u Podgorici",
     "tags": [
       "Podgorica",
       "cilj",
       "ponuda"
     ],
-    "og_image": "https://probella.com/wp-content/uploads/2019/10/Failed-Marketing-Campaigns.png"
+    "og_image": "/sr-me/blog/covers/p01.svg"
   },
   {
     "slug": "p02",
@@ -24,14 +24,14 @@
     "status": "published",
     "category": "performance",
     "date": "",
-    "cover_image": "https://warrendigital.com.au/wp-content/uploads/2025/02/Does-Ad-Fatigue-Impact-Google-Ads-Effectiveness.jpg",
+    "cover_image": "/sr-me/blog/covers/p02.svg",
     "cover_alt": "Analitika i optimizacija kampanja na dashboardu",
     "tags": [
       "Meta",
       "optimizacija",
       "budžet"
     ],
-    "og_image": "https://paintedrobot.com/wp-content/uploads/2023/03/Unlocking-the-Power-of-B2B-Websites.webp"
+    "og_image": "/sr-me/blog/covers/p02.svg"
   },
   {
     "slug": "p03",
@@ -41,14 +41,14 @@
     "status": "published",
     "category": "kreative",
     "date": "",
-    "cover_image": "https://pretty-smartcosmetics.com/cdn/shop/files/Bundle-purpleBG-2.jpg?v=1746469987",
+    "cover_image": "/sr-me/blog/covers/p03.svg",
     "cover_alt": "Produkcija sadržaja i ads kreativa za reklame u Crnoj Gori",
     "tags": [
       "hook",
       "UGC",
       "poruka"
     ],
-    "og_image": "https://i.pinimg.com/736x/ba/c5/da/bac5daf2a61d73c9c92c557f7584b71e.jpg"
+    "og_image": "/sr-me/blog/covers/p03.svg"
   },
   {
     "slug": "p04",
@@ -58,14 +58,14 @@
     "status": "published",
     "category": "dogadjaji",
     "date": "",
-    "cover_image": "https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&w=1600&q=80",
+    "cover_image": "/sr-me/blog/covers/p04.svg",
     "cover_alt": "Ambijent i publika na događaju u Podgorici",
     "tags": [
       "event",
       "Podgorica",
       "budžet"
     ],
-    "og_image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTuCuCcW8Q_uWumYBbVfwJhMsqnUWuM9x__5w&s"
+    "og_image": "/sr-me/blog/covers/p04.svg"
   },
   {
     "slug": "p05",
@@ -75,14 +75,14 @@
     "status": "published",
     "category": "aktivacije",
     "date": "",
-    "cover_image": "https://marketingfancier.com/wp-content/uploads/2018/03/Brend-ili-robna-marka.jpg",
+    "cover_image": "/sr-me/blog/covers/p05.svg",
     "cover_alt": "Promo tim i brend aktivacija na terenu u Crnoj Gori",
     "tags": [
       "aktivacije",
       "promo",
       "mjerenje"
     ],
-    "og_image": "https://solarweb.agency/wp-content/uploads/2022/09/tak-li-vazhen-brend-dlya-kompanii-svezhaya-statistika.jpg"
+    "og_image": "/sr-me/blog/covers/p05.svg"
   },
   {
     "slug": "p06",
@@ -92,7 +92,7 @@
     "status": "published",
     "category": "dogadjaji",
     "date": "",
-    "cover_image": "https://www.wtcmanila.com.ph/wp-content/uploads/2022/08/rear-view-of-audience-in-the-conference-hall-or-se-2021-08-30-06-51-57-utc-1.jpg",
+    "cover_image": "/sr-me/blog/covers/p06.svg",
     "cover_alt": "Organizacija događaja i koordinacija tima u Podgorici",
     "tags": [
       "organizacija događaja",
@@ -100,7 +100,7 @@
       "produkcija",
       "logistika"
     ],
-    "og_image": "https://images.ctfassets.net/63bmaubptoky/ppxmJVn2VbIN8e0YnNmCK3JZTOr1jLuyzgRGtu8iayo/8eba8e1226c17fc63092d7d329bff1ef/Comment-organiser-un-_v_nement-professionnel-un-guide-en-10-_tapes.png"
+    "og_image": "/sr-me/blog/covers/p06.svg"
   },
   {
     "slug": "p07",
@@ -110,7 +110,7 @@
     "status": "published",
     "category": "dogadjaji",
     "date": "",
-    "cover_image": "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=1600&q=80",
+    "cover_image": "/sr-me/blog/covers/p07.svg",
     "cover_alt": "Budžetiranje i planiranje produkcije događaja u Crnoj Gori",
     "tags": [
       "cijena događaja",
@@ -118,7 +118,7 @@
       "budžet",
       "Crna Gora"
     ],
-    "og_image": "https://images.unsplash.com/photo-1504204267155-aaad8e81290d?auto=format&fit=crop&w=1800&q=80"
+    "og_image": "/sr-me/blog/covers/p07.svg"
   },
   {
     "slug": "p08",
@@ -128,7 +128,7 @@
     "status": "published",
     "category": "dogadjaji",
     "date": "",
-    "cover_image": "https://images.unsplash.com/photo-1502920970741-47c1bafc8d49?auto=format&fit=crop&w=1600&q=80",
+    "cover_image": "/sr-me/blog/covers/p08.svg",
     "cover_alt": "Checklista i planiranje korporativnog događaja u Podgorici",
     "tags": [
       "corporate event",
@@ -136,7 +136,7 @@
       "rider",
       "protokol"
     ],
-    "og_image": "https://images.unsplash.com/photo-1488645411773-a3b09ea07e29?auto=format&fit=crop&w=1800&q=80"
+    "og_image": "/sr-me/blog/covers/p08.svg"
   },
   {
     "slug": "p09",
@@ -146,7 +146,7 @@
     "status": "published",
     "category": "aktivacije",
     "date": "",
-    "cover_image": "https://images.unsplash.com/photo-1509664158680-07c5032b51e5?auto=format&fit=crop&w=1600&q=80",
+    "cover_image": "/sr-me/blog/covers/p09.svg",
     "cover_alt": "Interakcija brenda i publike tokom aktivacije u Crnoj Gori",
     "tags": [
       "aktivacije",
@@ -154,7 +154,24 @@
       "strategija",
       "mjerenje"
     ],
-    "og_image": "https://images.unsplash.com/photo-1530488586170-43cf29d7705b?auto=format&fit=crop&w=1800&q=80"
+    "og_image": "/sr-me/blog/covers/p09.svg"
+  },
+  {
+    "slug": "p10",
+    "status": "published",
+    "category": "performance",
+    "title": "Landing stranica: 9 elemenata koji pretvaraju posjetu u upit",
+    "description": "Ako šalješ promet na stranicu bez jedne radnje, gubiš. Ovo je landing formula za lokalni biznis u CG.",
+    "excerpt": "Ako šalješ promet na stranicu bez jedne radnje, gubiš. Ovo je landing formula za lokalni biznis u CG.",
+    "cover_alt": "Landing stranica koja pretvara posjetu u upit",
+    "tags": [
+      "landing",
+      "konverzija",
+      "CG"
+    ],
+    "date": "",
+    "cover_image": "/sr-me/blog/covers/p10.svg",
+    "og_image": "/sr-me/blog/covers/p10.svg"
   },
   {
     "slug": "p11",
@@ -164,7 +181,7 @@
     "status": "published",
     "category": "dogadjaji",
     "date": "",
-    "cover_image": "https://images.unsplash.com/photo-1544185310-0b3cf501672b?auto=format&fit=crop&w=1600&q=80",
+    "cover_image": "/sr-me/blog/covers/p11.svg",
     "cover_alt": "Ozvučenje i rasvjeta na događaju u Podgorici i Crnoj Gori",
     "tags": [
       "ozvučenje",
@@ -172,7 +189,7 @@
       "event",
       "greške"
     ],
-    "og_image": "https://images.unsplash.com/photo-1543920039-41159fccdb19?auto=format&fit=crop&w=1800&q=80"
+    "og_image": "/sr-me/blog/covers/p11.svg"
   },
   {
     "slug": "p12",
@@ -182,7 +199,7 @@
     "status": "published",
     "category": "aktivacije",
     "date": "",
-    "cover_image": "https://images.unsplash.com/photo-1557004396-66e4174d7bf6?auto=format&fit=crop&w=1600&q=80",
+    "cover_image": "/sr-me/blog/covers/p12.svg",
     "cover_alt": "Mjerenje rezultata aktivacije i KPI metrike u Crnoj Gori",
     "tags": [
       "mjerenje",
@@ -190,7 +207,7 @@
       "leadovi",
       "UGC"
     ],
-    "og_image": "https://images.unsplash.com/photo-1554224155-1696413565d3?auto=format&fit=crop&w=1800&q=80"
+    "og_image": "/sr-me/blog/covers/p12.svg"
   },
   {
     "slug": "p13",
@@ -200,7 +217,7 @@
     "status": "published",
     "category": "aktivacije",
     "date": "",
-    "cover_image": "https://images.unsplash.com/photo-1508280783688-f4c819e564a3?auto=format&fit=crop&w=1600&q=80",
+    "cover_image": "/sr-me/blog/covers/p13.svg",
     "cover_alt": "Aktivacija u baru ili klubu sa publikom u Podgorici i Crnoj Gori",
     "tags": [
       "barovi",
@@ -208,7 +225,7 @@
       "aktivacije",
       "rezervacije"
     ],
-    "og_image": "https://images.unsplash.com/photo-1509679708047-e0e562d21e44?auto=format&fit=crop&w=1800&q=80"
+    "og_image": "/sr-me/blog/covers/p13.svg"
   },
   {
     "slug": "p14",
@@ -218,7 +235,7 @@
     "status": "published",
     "category": "strategija",
     "date": "",
-    "cover_image": "https://cdn.prod.website-files.com/5cb38cc646fa443cadc1d341/654fa45b10d296a5303bd210_What%20is%20event%20marketing.png",
+    "cover_image": "/sr-me/blog/covers/p14.svg",
     "cover_alt": "Event marketing i digital kampanja u sinergiji u Crnoj Gori",
     "tags": [
       "event marketing",
@@ -226,7 +243,7 @@
       "remarketing",
       "upiti"
     ],
-    "og_image": "https://images.unsplash.com/photo-1508215302842-8a015a452a20?auto=format&fit=crop&w=1800&q=80"
+    "og_image": "/sr-me/blog/covers/p14.svg"
   },
   {
     "slug": "p15",
@@ -236,7 +253,7 @@
     "status": "published",
     "category": "aktivacije",
     "date": "",
-    "cover_image": "https://images.unsplash.com/photo-1517032880222-1afedf8c9d0d?auto=format&fit=crop&w=1600&q=80",
+    "cover_image": "/sr-me/blog/covers/p15.svg",
     "cover_alt": "Analiza rezultata aktivacije i case study retrospektiva",
     "tags": [
       "case study",
@@ -244,7 +261,7 @@
       "proces",
       "rezultat"
     ],
-    "og_image": "https://images.unsplash.com/photo-1420316078344-6149cb82b2c7?auto=format&fit=crop&w=1800&q=80"
+    "og_image": "/sr-me/blog/covers/p15.svg"
   },
   {
     "slug": "p16",
@@ -254,7 +271,7 @@
     "status": "published",
     "category": "strategija",
     "date": "",
-    "cover_image": "https://images.unsplash.com/photo-1520176501380-9a174bf7c783?auto=format&fit=crop&w=1600&q=80",
+    "cover_image": "/sr-me/blog/covers/p16.svg",
     "cover_alt": "Meta oglasi za lokalni biznis u Podgorici: plan i optimizacija",
     "tags": [
       "Meta Ads",
@@ -262,7 +279,7 @@
       "funnel",
       "lokalni biznis"
     ],
-    "og_image": "https://images.unsplash.com/photo-1609220136736-443140cffec2?auto=format&fit=crop&w=1800&q=80"
+    "og_image": "/sr-me/blog/covers/p16.svg"
   },
   {
     "slug": "p17",
@@ -272,7 +289,7 @@
     "status": "published",
     "category": "performance",
     "date": "",
-    "cover_image": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1600&q=80",
+    "cover_image": "/sr-me/blog/covers/p17.svg",
     "cover_alt": "Google pretraga i ključne riječi za leadove u Crnoj Gori",
     "tags": [
       "Google Ads",
@@ -280,7 +297,7 @@
       "leadovi",
       "usluge"
     ],
-    "og_image": "https://images.unsplash.com/photo-1697226864554-1100b2cce246?auto=format&fit=crop&w=1800&q=80"
+    "og_image": "/sr-me/blog/covers/p17.svg"
   },
   {
     "slug": "p18",
@@ -290,7 +307,7 @@
     "status": "published",
     "category": "kreative",
     "date": "",
-    "cover_image": "https://images.unsplash.com/photo-1490750967868-88aa4486c946?auto=format&fit=crop&w=1600&q=80",
+    "cover_image": "/sr-me/blog/covers/p18.svg",
     "cover_alt": "Kampanja bez upita: analiza konverzija i frikcije na sajtu",
     "tags": [
       "upiti",
@@ -298,7 +315,7 @@
       "poruka",
       "optimizacija"
     ],
-    "og_image": "https://images.unsplash.com/photo-1512295767273-ac109ac3acfa?auto=format&fit=crop&w=1800&q=80"
+    "og_image": "/sr-me/blog/covers/p18.svg"
   },
   {
     "slug": "p19",
@@ -308,7 +325,7 @@
     "status": "published",
     "category": "performance",
     "date": "",
-    "cover_image": "https://images.unsplash.com/photo-1485470733090-0aae1788d5af?auto=format&fit=crop&w=1600&q=80",
+    "cover_image": "/sr-me/blog/covers/p19.svg",
     "cover_alt": "Dizajn landing stranice za konverziju i upite u Crnoj Gori",
     "tags": [
       "landing page",
@@ -316,7 +333,7 @@
       "CTA",
       "struktura"
     ],
-    "og_image": "https://images.unsplash.com/photo-1560410547-7293038b88ec?auto=format&fit=crop&w=1800&q=80"
+    "og_image": "/sr-me/blog/covers/p19.svg"
   },
   {
     "slug": "p20",
@@ -326,7 +343,7 @@
     "status": "published",
     "category": "strategija",
     "date": "",
-    "cover_image": "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1600&q=80",
+    "cover_image": "/sr-me/blog/covers/p20.svg",
     "cover_alt": "Planiranje budžeta i optimizacija digital kampanje u Crnoj Gori",
     "tags": [
       "budžet",
@@ -334,7 +351,7 @@
       "Google",
       "rezultati"
     ],
-    "og_image": "https://images.unsplash.com/photo-1511689774932-3aca18459e68?auto=format&fit=crop&w=1800&q=80"
+    "og_image": "/sr-me/blog/covers/p20.svg"
   },
   {
     "slug": "p21",
@@ -344,7 +361,7 @@
     "status": "published",
     "category": "performance",
     "date": "",
-    "cover_image": "https://images.unsplash.com/photo-1556155092-8707de31f9c4?auto=format&fit=crop&w=1600&q=80",
+    "cover_image": "/sr-me/blog/covers/p21.svg",
     "cover_alt": "Remarketing i retargeting tok za povrat publike",
     "tags": [
       "remarketing",
@@ -352,7 +369,7 @@
       "Google",
       "prodaja"
     ],
-    "og_image": "https://images.unsplash.com/photo-1667453466807-0032aaf8f1b7?auto=format&fit=crop&w=1800&q=80"
+    "og_image": "/sr-me/blog/covers/p21.svg"
   },
   {
     "slug": "p22",
@@ -362,7 +379,7 @@
     "status": "published",
     "category": "kreative",
     "date": "",
-    "cover_image": "https://images.unsplash.com/photo-1501386761578-eac5c94b800a?auto=format&fit=crop&w=1600&q=80",
+    "cover_image": "/sr-me/blog/covers/p22.svg",
     "cover_alt": "Kreativni brainstorming za oglase i poruke",
     "tags": [
       "kreativa",
@@ -370,7 +387,7 @@
       "hook",
       "oglasi"
     ],
-    "og_image": "https://images.unsplash.com/photo-1583860116534-4116dfb2cfa1?auto=format&fit=crop&w=1800&q=80"
+    "og_image": "/sr-me/blog/covers/p22.svg"
   },
   {
     "slug": "p23",
@@ -380,7 +397,7 @@
     "status": "published",
     "category": "performance",
     "date": "",
-    "cover_image": "https://images.unsplash.com/photo-1587471577460-bdb4891711ce?auto=format&fit=crop&w=1600&q=80",
+    "cover_image": "/sr-me/blog/covers/p23.svg",
     "cover_alt": "Metrike CPC i CPL u analizi kampanje",
     "tags": [
       "CPC",
@@ -388,7 +405,7 @@
       "upiti",
       "metrike"
     ],
-    "og_image": "https://images.unsplash.com/photo-1528668638375-51eae2f5b1ce?auto=format&fit=crop&w=1800&q=80"
+    "og_image": "/sr-me/blog/covers/p23.svg"
   },
   {
     "slug": "p24",
@@ -398,7 +415,7 @@
     "status": "published",
     "category": "performance",
     "date": "",
-    "cover_image": "https://images.unsplash.com/photo-1587732608058-5ccfedd3ea63?auto=format&fit=crop&w=1600&q=80",
+    "cover_image": "/sr-me/blog/covers/p24.svg",
     "cover_alt": "GA4 i GTM mjerenje događaja i konverzija",
     "tags": [
       "GA4",
@@ -406,7 +423,7 @@
       "mjerenje",
       "konverzije"
     ],
-    "og_image": "https://images.unsplash.com/photo-1528872042734-8f50f9d3c59b?auto=format&fit=crop&w=1800&q=80"
+    "og_image": "/sr-me/blog/covers/p24.svg"
   },
   {
     "slug": "p25",
@@ -416,7 +433,7 @@
     "status": "published",
     "category": "strategija",
     "date": "",
-    "cover_image": "https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=1600&q=80",
+    "cover_image": "/sr-me/blog/covers/p25.svg",
     "cover_alt": "SEO i oglasi kao kombinovana strategija rasta",
     "tags": [
       "SEO",
@@ -424,7 +441,7 @@
       "strategija",
       "upiti"
     ],
-    "og_image": "https://images.unsplash.com/photo-1517466787929-bc90951d0974?auto=format&fit=crop&w=1800&q=80"
+    "og_image": "/sr-me/blog/covers/p25.svg"
   },
   {
     "slug": "p26",
@@ -434,7 +451,7 @@
     "status": "published",
     "category": "performance",
     "date": "",
-    "cover_image": "https://refinery89.com/wp-content/uploads/2023/11/SEO.png",
+    "cover_image": "/sr-me/blog/covers/p26.svg",
     "cover_alt": "Local SEO i Google Maps pozicioniranje u gradu",
     "tags": [
       "Local SEO",
@@ -442,7 +459,7 @@
       "Google Maps",
       "upiti"
     ],
-    "og_image": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1800&q=80"
+    "og_image": "/sr-me/blog/covers/p26.svg"
   },
   {
     "slug": "p27",
@@ -452,7 +469,7 @@
     "status": "published",
     "category": "aktivacije",
     "date": "",
-    "cover_image": "https://images.unsplash.com/photo-1523952578875-1b4c2c0b4b5e?auto=format&fit=crop&w=1600&q=80",
+    "cover_image": "/sr-me/blog/covers/p27.svg",
     "cover_alt": "Google Business profil i upravljanje recenzijama",
     "tags": [
       "Google Business",
@@ -460,7 +477,7 @@
       "ranking",
       "local"
     ],
-    "og_image": "https://images.unsplash.com/photo-1613250414035-42b9b7f7b74d?auto=format&fit=crop&w=1800&q=80"
+    "og_image": "/sr-me/blog/covers/p27.svg"
   },
   {
     "slug": "p28",
@@ -470,7 +487,7 @@
     "status": "published",
     "category": "strategija",
     "date": "",
-    "cover_image": "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1600&q=80",
+    "cover_image": "/sr-me/blog/covers/p28.svg",
     "cover_alt": "Tehnički SEO audit: kod, greške i performanse",
     "tags": [
       "SEO greške",
@@ -478,7 +495,7 @@
       "Crna Gora",
       "struktura"
     ],
-    "og_image": "https://images.unsplash.com/photo-1620321023374-d1a68fbc720d?auto=format&fit=crop&w=1800&q=80"
+    "og_image": "/sr-me/blog/covers/p28.svg"
   },
   {
     "slug": "p29",
@@ -488,7 +505,7 @@
     "status": "published",
     "category": "performance",
     "date": "",
-    "cover_image": "https://images.unsplash.com/photo-1585059895524-72359e06133a?auto=format&fit=crop&w=1600&q=80",
+    "cover_image": "/sr-me/blog/covers/p29.svg",
     "cover_alt": "Servisna landing stranica za upite i leadove",
     "tags": [
       "service landing",
@@ -496,7 +513,7 @@
       "upiti",
       "konverzija"
     ],
-    "og_image": "https://images.unsplash.com/photo-1515266569482-860c46d1deff?auto=format&fit=crop&w=1800&q=80"
+    "og_image": "/sr-me/blog/covers/p29.svg"
   },
   {
     "slug": "p30",
@@ -506,7 +523,7 @@
     "status": "published",
     "category": "kreative",
     "date": "",
-    "cover_image": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1600&q=80",
+    "cover_image": "/sr-me/blog/covers/p30.svg",
     "cover_alt": "Pisanje i strukturiranje stranice Usluge",
     "tags": [
       "usluge",
@@ -514,6 +531,6 @@
       "SEO",
       "ponuda"
     ],
-    "og_image": "https://images.unsplash.com/photo-1567515004627-219c11d31f2e?auto=format&fit=crop&w=1800&q=80"
+    "og_image": "/sr-me/blog/covers/p30.svg"
   }
 ]

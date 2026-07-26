@@ -258,10 +258,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   "dateModified": "2026-03-13T12:58:50.734Z"
 }
 </script>
+<noscript><style>.reveal{opacity:1 !important;transform:none !important}.heroImg,.heroBar{opacity:1 !important}</style></noscript>
 </head>
 
 <body>
-<a class="floatingLogo" href="/sr-me/pocetna" aria-label="Sindikat Studio 83 — Početna">
+<a class="floatingLogo" href="/sr-me/pocetna/" aria-label="Sindikat Studio 83 — Početna">
   <div class="mark" aria-hidden="true"><img class="markImg" src="/studio83logo.png" alt=""></div>
 </a>
 
@@ -274,17 +275,17 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <div class="topbarInner">
     <div class="brand"></div>
 
-    <a class="btn primary ctaCenter" href="/sr-me/kontakt">
+    <a class="btn primary ctaCenter" href="/sr-me/kontakt/">
       <span class="dot"></span>Kontaktiraj nas
     </a>
 
     <div class="navWrap">
       <nav aria-label="Primary">
-        <a href="/sr-me/pocetna">Početna</a>
-        <a href="/sr-me/usluge">Usluge</a>
-        <a href="/sr-me/onama">O nama</a>
-        <a href="/sr-me/blog" aria-current="page">Blog</a>
-        <a href="/sr-me/poslovi">Poslovi</a>
+        <a href="/sr-me/pocetna/">Početna</a>
+        <a href="/sr-me/usluge/">Usluge</a>
+        <a href="/sr-me/onama/">O nama</a>
+        <a href="/sr-me/blog/" aria-current="page">Blog</a>
+        <a href="/sr-me/poslovi/">Poslovi</a>
       </nav>
 
       <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
@@ -295,11 +296,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
   <div class="mobileMenu" id="mobileMenu" aria-hidden="true">
     <div class="mobileMenuInner">
-      <a href="/sr-me/pocetna">Početna</a>
-      <a href="/sr-me/usluge">Usluge</a>
-      <a href="/sr-me/onama">O nama</a>
-      <a href="/sr-me/blog" aria-current="page">Blog</a>
-      <a href="/sr-me/poslovi">Poslovi</a>
+      <a href="/sr-me/pocetna/">Početna</a>
+      <a href="/sr-me/usluge/">Usluge</a>
+      <a href="/sr-me/onama/">O nama</a>
+      <a href="/sr-me/blog/" aria-current="page">Blog</a>
+      <a href="/sr-me/poslovi/">Poslovi</a>
     </div>
   </div>
 </header>
@@ -310,13 +311,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
     <div class="postHeader">
       <div class="postCover">
-        <img src="https://www.wtcmanila.com.ph/wp-content/uploads/2022/08/rear-view-of-audience-in-the-conference-hall-or-se-2021-08-30-06-51-57-utc-1.jpg" alt="Organizacija događaja i koordinacija tima u Podgorici" loading="eager" />
+        <img src="/sr-me/blog/covers/p06.svg" alt="Organizacija događaja i koordinacija tima u Podgorici" loading="eager" />
       </div>
       <div class="postHeadInner">
         <h1>Organizacija događaja u Podgorici: kompletan vodič (budžet, logistika, tim)</h1>
         <p class="sub">Ako želiš event koji izgleda “lako”, moraš ga isplanirati kao sistem. Ovaj vodič pokriva ono što ljudi u Podgorici stvarno pitaju: budžet po stavkama, logistiku, tim, tehniku, tok i plan B.</p>
         <div class="miniK" id="tagRow"></div>
-        <a class="backLink" href="/sr-me/blog"><span class="chev">←</span> Nazad na blog</a>
+        <a class="backLink" href="/sr-me/blog/"><span class="chev">←</span> Nazad na blog</a>
       </div>
     </div>
 
@@ -341,7 +342,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <p>Rezervna stavka nije luksuz. To je jedina stvar koja te štiti od “još samo ovo” momenta koji se desi na svakom eventu: produži se satnica, zatreba dodatna osoba, promijeni se tok, zatreba još rasvjete, zatreba transport u zadnji minut. Bez rezerve, svaka promjena boli.</p>
 
-<img src="https://event-centar.rs/images/Fabrika_event_centar_01(1).jpg" alt="Detalji event produkcije i rasvjete na sceni" loading="lazy" decoding="async" style="width:100%; height:auto; border-radius:14px; margin:18px 0 8px 0;">
+<img src="/sr-me/assets/covers/generic.svg" alt="Detalji event produkcije i rasvjete na sceni" loading="lazy" decoding="async" style="width:100%; height:auto; border-radius:14px; margin:18px 0 8px 0;">
 
 <p style="font-size:12px; line-height:1.35; opacity:.75; margin:0 0 18px 0;">Dobra produkcija se ne vidi kao “tehnika”. Vidi se kao miran tok i sigurnost da sve radi.</p>
 
@@ -449,7 +450,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     const tags = (p.tags||[]).slice(0,3).map(t=>`<span>${t}</span>`).join('');
     el.innerHTML = `
       <div class="thumb">
-        <img src="${img}" alt="${p.cover_alt || p.title}" loading="lazy" />
+        <img src="/sr-me/assets/covers/generic.svg" alt="${p.cover_alt || p.title}" loading="lazy" />
         <div class="badge">${p.badge}</div>
       </div>
       <div class="meta">
@@ -585,5 +586,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     });
   }
 </script>
+<script>/* fallback: ako IntersectionObserver/anime zakaže, sadržaj i brojači moraju biti vidljivi/tačni */setTimeout(function(){try{document.querySelectorAll(".reveal").forEach(function(e){if(getComputedStyle(e).opacity==="0"){e.style.opacity=1;e.style.transform="none";}});document.querySelectorAll(".counter").forEach(function(c){var v=c.getAttribute("data-value");if(v&&(c.textContent==="0"||c.textContent.trim()===""))c.textContent=v;});}catch(_){}} ,1500);</script>
 </body>
 </html>
