@@ -11,6 +11,7 @@ const required = [
   'public/_redirects', 'public/_headers',
 ]
 const failures = []
+const warnings = []
 for (const file of required) if (!fs.existsSync(path.join(root, file))) failures.push(`Missing required file: ${file}`)
 
 const blogPath = path.join(root, 'src/data/blog-posts.json')
@@ -22,6 +23,11 @@ for (const [index, post] of posts.entries()) {
   slugs.add(post.slug)
   const asset = path.join(root, 'public', String(post.cover).replace(/^\//, ''))
   if (!fs.existsSync(asset)) failures.push(`Missing blog cover: ${post.cover}`)
+
+  if (!post.date) warnings.push(`Blog post has no publication date: ${post.slug}`)
+  if (String(post.description || '').length > 165) warnings.push(`Long meta description (${post.description.length} chars): ${post.slug}`)
+  if (/[\u0400-\u04FF]/.test(`${post.title} ${post.description} ${post.excerpt}`)) warnings.push(`Cyrillic character found in Latin-script metadata: ${post.slug}`)
+  if (/<(script|iframe|object|embed|form)\b/i.test(String(post.body || ''))) warnings.push(`Potentially unsafe HTML in blog body: ${post.slug}`)
 }
 
 const sourceFiles = []
@@ -52,6 +58,7 @@ for (const requiredRedirect of ['/sr-me/ / 301!', '/sr-me/kontakt/ /kontakt/ 301
   if (!redirects.includes(requiredRedirect)) failures.push(`Missing redirect rule: ${requiredRedirect}`)
 }
 
+if (warnings.length) console.warn(`Content warnings:\n${warnings.map((item) => `- ${item}`).join('\n')}`)
 if (failures.length) {
   console.error(failures.map((item) => `- ${item}`).join('\n'))
   process.exit(1)
