@@ -10,7 +10,7 @@ export const legalPages = {
       ['Svrha', 'Podatke koristimo da odgovorimo na upit, organizujemo projekat ili prijavu, vodimo evidenciju komunikacije, razumijemo učinak sajta i spriječimo zloupotrebu formi.'],
       ['Servisi trećih strana', 'Sajt koristi Google Analytics, Google Tag Manager i postojeće Google Apps Script endpointove za kontakt, blog i angažmane. Njihova obrada može biti uređena i pravilima tih servisa.'],
       ['Čuvanje i prava', `Podatke čuvamo onoliko koliko je razumno potrebno za svrhu zbog koje su poslati, ugovorne obaveze i zakonske zahtjeve. Za pristup, ispravku ili brisanje piši na`],
-      ['Važna napomena', 'Ovo je operativna politika pripremljena za sajt. Prije javne objave treba da je pregleda lokalni pravnik ili lice odgovorno za zaštitu podataka i uskladi sa stvarnim internim procesima.'],
+      ['Kontakt i zahtjevi', `Za pitanja o obradi podataka, pristup, ispravku ili brisanje možeš pisati na ${site.email}. Zahtjev ćemo obraditi u razumnom roku i u skladu sa primjenjivim pravilima.`],
     ],
   },
   kolacici: {
@@ -20,8 +20,8 @@ export const legalPages = {
       ['Uvod', 'Sajt koristi lokalnu memoriju i analitičke tehnologije radi funkcionisanja, pamćenja izbora i mjerenja korišćenja.'],
       ['Neophodna memorija', 'Koristimo je da zapamtimo izbor u vezi sa kolačićima i kampanjske parametre tokom sesije.'],
       ['Analitika', 'Na sajtu su zadržani postojeći Google Analytics 4 identifikator i Google Tag Manager kontejner. Oni mogu prikupljati podatke o posjetama i događajima u skladu sa konfiguracijom tih naloga.'],
-      ['Promjena izbora', 'Izbor se čuva u lokalnoj memoriji pregledača. Možeš obrisati podatke sajta u podešavanjima pregledača da bi se izbor ponovo prikazao.'],
-      ['Produkcijska provjera', 'Prije objave potrebno je provjeriti koje oznake se stvarno aktiviraju kroz GTM i uskladiti banner sa pravnom osnovom i stvarnom konfiguracijom.'],
+      ['Promjena izbora', 'Izbor možeš ponovo otvoriti kroz link Podešavanja kolačića u dnu sajta. Podatke sajta možeš obrisati i kroz podešavanja pregledača.'],
+      ['Alati koje koristimo', 'Google Analytics 4 i Google Tag Manager koriste se u skladu sa izborom posjetioca i stvarnom konfiguracijom oznaka. Neophodna lokalna memorija ostaje aktivna radi pamćenja izbora i osnovnog funkcionisanja.'],
     ],
   },
   'uslovi-koriscenja': {
