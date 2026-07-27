@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { site } from '@/data/site'
-import { CookieBanner } from './cookie-banner'
+import { CookieBanner, CookieSettingsButton } from './cookie-banner'
 
 export function Footer() {
   return (
@@ -40,7 +40,7 @@ export function Footer() {
         </div>
         <div className="container footer-bottom">
           <span>© {new Date().getFullYear()} Sindikat Studio 83</span>
-          <div><Link href="/privatnost/">Privatnost</Link><Link href="/kolacici/">Kolačići</Link><Link href="/uslovi-koriscenja/">Uslovi</Link></div>
+          <div><Link href="/privatnost/">Privatnost</Link><Link href="/kolacici/">Kolačići</Link><Link href="/uslovi-koriscenja/">Uslovi</Link><CookieSettingsButton /></div>
         </div>
       </footer>
       <div className="mobile-cta"><Link className="button button-primary" href="/kontakt/" data-track="mobile_sticky_lead">Zatraži plan</Link></div>
