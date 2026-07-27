@@ -2,36 +2,15 @@
 
 import Image from 'next/image'
 import Link from 'next/link'
-import { type ChangeEvent, useEffect, useMemo, useState } from 'react'
+import { type ChangeEvent, useMemo, useState } from 'react'
 import type { BlogPost } from '@/types/content'
 import { categoryLabels } from '@/data/blog'
-import { site } from '@/data/site'
 
 export function BlogExplorer({ initialPosts }: { initialPosts: BlogPost[] }) {
-  const [posts, setPosts] = useState(initialPosts)
+  const [posts] = useState(initialPosts)
   const [active, setActive] = useState('all')
   const [query, setQuery] = useState('')
   const categories = useMemo(() => [...new Set(initialPosts.map((post) => post.category))], [initialPosts])
-
-  useEffect(() => {
-    const controller = new AbortController()
-    fetch(site.integrations.blogEndpoint, { cache: 'no-store', signal: controller.signal })
-      .then((response) => response.json())
-      .then((data: { posts?: Array<Partial<BlogPost>> }) => {
-        const live = Array.isArray(data?.posts) ? data.posts : []
-        let matched = 0
-        setPosts((current) => current.map((post) => {
-          const update = live.find((candidate) => String(candidate.slug || '') === post.slug)
-          if (!update) return post
-          matched += 1
-          return { ...post, title: update.title || post.title, excerpt: update.excerpt || post.excerpt }
-        }))
-        window.dataLayer = window.dataLayer || []
-        window.dataLayer.push({ event: 'blog_feed_sync', matched_posts: matched })
-      })
-      .catch(() => undefined)
-    return () => controller.abort()
-  }, [])
 
   const filtered = posts.filter((post) => {
     const categoryMatch = active === 'all' || post.category === active

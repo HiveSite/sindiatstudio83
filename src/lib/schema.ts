@@ -13,12 +13,20 @@ export function organizationSchema(): JsonLdValue {
     logo: `${site.domain}/images/brand/logo.png`,
     image: `${site.domain}/images/brand/og-cover.png`,
     email: site.email,
+    contactPoint: {
+      '@type': 'ContactPoint',
+      contactType: 'customer support',
+      email: site.email,
+      availableLanguage: ['sr-Latn', 'en'],
+      areaServed: 'ME',
+    },
     address: {
       '@type': 'PostalAddress',
       addressLocality: 'Podgorica',
       addressCountry: 'ME',
     },
     areaServed: { '@type': 'Country', name: 'Montenegro' },
+    knowsLanguage: ['sr-Latn-ME', 'en'],
     sameAs: [site.instagram],
   }
 }

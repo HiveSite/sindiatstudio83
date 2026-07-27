@@ -17,6 +17,10 @@ export function CookieBanner() {
   useEffect(() => {
     const choice = localStorage.getItem('sindikat_cookie_choice') as Choice | null
     if (!choice) setVisible(true)
+
+    const openSettings = () => setVisible(true)
+    window.addEventListener('sindikat:open-cookie-settings', openSettings)
+    return () => window.removeEventListener('sindikat:open-cookie-settings', openSettings)
   }, [])
 
   const setConsent = (choice: Choice) => {
@@ -35,12 +39,25 @@ export function CookieBanner() {
   if (!visible) return null
 
   return (
-    <div className="cookie-banner" data-cookie-banner>
-      <div><strong>Kolačići i analitika</strong><p>Koristimo analitiku da razumijemo kako sajt radi. Izbor možeš kasnije promijeniti.</p></div>
+    <div className="cookie-banner" role="dialog" aria-label="Podešavanja kolačića">
+      <div><strong>Kolačići i analitika</strong><p>Koristimo analitiku da razumijemo kako sajt radi. Izbor možeš kasnije promijeniti kroz link u dnu sajta.</p></div>
       <div className="cookie-actions">
         <button className="button button-ghost button-small" type="button" onClick={() => setConsent('rejected')}>Odbij</button>
         <button className="button button-primary button-small" type="button" onClick={() => setConsent('accepted')}>Prihvati</button>
       </div>
     </div>
+  )
+}
+
+export function CookieSettingsButton() {
+  return (
+    <button
+      className="footer-cookie-button"
+      type="button"
+      style={{ border: 0, padding: 0, background: 'none', color: 'inherit', fontSize: 'inherit', cursor: 'pointer' }}
+      onClick={() => window.dispatchEvent(new Event('sindikat:open-cookie-settings'))}
+    >
+      Podešavanja kolačića
+    </button>
   )
 }
