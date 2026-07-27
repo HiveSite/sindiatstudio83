@@ -1,6 +1,0 @@
-User-agent: *
-Allow: /
-
-Disallow: /sr-me/blog/_templates/
-
-Sitemap: https://www.sindikatstudio83.me/sitemap.xml
