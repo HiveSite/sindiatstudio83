@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation'
 import { site } from '@/data/site'
 
 function getCampaignData() {
-  const keys = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term', 'gclid', 'fbclid']
+  const keys = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term', 'gclid', 'fbclid', 'usluga', 'industrija']
   return Object.fromEntries(keys.map((key) => [key, new URLSearchParams(window.location.search).get(key) || sessionStorage.getItem(`sindikat_${key}`) || '']))
 }
 
