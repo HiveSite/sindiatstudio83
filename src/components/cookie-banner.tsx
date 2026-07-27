@@ -54,6 +54,7 @@ export function CookieSettingsButton() {
     <button
       className="footer-cookie-button"
       type="button"
+      style={{ border: 0, padding: 0, background: 'none', color: 'inherit', fontSize: 'inherit', cursor: 'pointer' }}
       onClick={() => window.dispatchEvent(new Event('sindikat:open-cookie-settings'))}
     >
       Podešavanja kolačića
