@@ -5,6 +5,8 @@ import { cases } from '@/data/cases'
 import { blogPosts } from '@/data/blog'
 import { site } from '@/data/site'
 
+export const dynamic = 'force-static'
+
 export default function sitemap(): MetadataRoute.Sitemap {
   const routes = [
     '/', '/usluge/', ...services.map((item) => `/usluge/${item.slug}/`),
