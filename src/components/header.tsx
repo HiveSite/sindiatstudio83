@@ -9,6 +9,9 @@ import { navigation } from '@/data/site'
 export function Header() {
   const pathname = usePathname()
   const normalizedPath = pathname.endsWith('/') ? pathname : `${pathname}/`
+  const activeHref = navigation
+    .filter((item) => normalizedPath.startsWith(item.href))
+    .sort((a, b) => b.href.length - a.href.length)[0]?.href
   const [open, setOpen] = useState(false)
 
   useEffect(() => {
@@ -42,18 +45,18 @@ export function Header() {
           </Link>
           <nav className="desktop-nav" aria-label="Glavna navigacija">
             {navigation.map((item) => {
-              const active = normalizedPath.startsWith(item.href)
+              const active = activeHref === item.href
               return <Link key={item.href} href={item.href} className={active ? 'is-active' : undefined} aria-current={active ? 'page' : undefined}>{item.label}</Link>
             })}
           </nav>
           <div className="nav-actions">
             <Link className="button button-primary button-small" href="/kontakt/" data-track="header_lead">Zatraži plan</Link>
-            <button className="menu-toggle" type="button" aria-label={open ? 'Zatvori meni' : 'Otvori meni'} aria-expanded={open} onClick={toggleMenu}>
+            <button className="menu-toggle" type="button" aria-label={open ? 'Zatvori meni' : 'Otvori meni'} aria-expanded={open} aria-controls="mobile-navigation" onClick={toggleMenu}>
               <span /><span /><span />
             </button>
           </div>
         </div>
-        <div className={`mobile-panel${open ? ' is-open' : ''}`} data-mobile-menu>
+        <div id="mobile-navigation" className={`mobile-panel${open ? ' is-open' : ''}`} data-mobile-menu hidden={!open}>
           <nav aria-label="Mobilna navigacija">
             {navigation.map((item) => <Link key={item.href} href={item.href}>{item.label}</Link>)}
             <Link href="/postani-dio-tima/">Postani dio tima</Link>
