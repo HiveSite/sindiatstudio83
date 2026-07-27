@@ -33,13 +33,14 @@ function RuntimeEffects() {
       const target = event.target as HTMLElement | null
       const tracked = target?.closest<HTMLElement>('[data-track]')
       const trackedEvent = tracked?.dataset.track || ''
-      if (trackedEvent) {
-        window.dataLayer.push({
-          event: trackedEvent,
-          link_url: tracked instanceof HTMLAnchorElement ? tracked.href : '',
-          link_text: tracked.textContent?.trim() || '',
-        })
-      }
+
+if (tracked && trackedEvent) {
+  window.dataLayer.push({
+    event: trackedEvent,
+    link_url: tracked instanceof HTMLAnchorElement ? tracked.href : '',
+    link_text: tracked.textContent?.trim() || '',
+  })
+}
       const anchor = target?.closest<HTMLAnchorElement>('a[href]')
       const href = anchor?.getAttribute('href') || ''
       if (href.startsWith('mailto:') && trackedEvent !== 'email_click') window.dataLayer.push({ event: 'email_click', link_url: href })
