@@ -1,0 +1,11 @@
+SINDIKAT STUDIO 83 - SAMO IZMJENE v2.1.0
+
+1. Raspakuj ZIP.
+2. Kopiraj sve fajlove i foldere preko postojećeg Next.js repoa.
+3. Dozvoli zamjenu postojećih fajlova.
+4. Obriši fajlove navedene u DELETE_FILES.txt, ako postoje.
+5. Commituj promjene i pushuj na main.
+6. Netlify: Build command = npm run build, Publish directory = out.
+7. Pokreni Clear cache and deploy site.
+
+Ovaj paket sadrži samo nove i izmijenjene tehničke fajlove, bez kompletnog projekta.

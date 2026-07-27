@@ -3,29 +3,39 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { navigation } from '@/data/site'
 
 export function Header() {
   const pathname = usePathname()
   const normalizedPath = pathname.endsWith('/') ? pathname : `${pathname}/`
+  const [open, setOpen] = useState(false)
+  const toggleRef = useRef<HTMLButtonElement | null>(null)
+
   const activeHref = navigation
     .filter((item) => normalizedPath.startsWith(item.href))
     .sort((a, b) => b.href.length - a.href.length)[0]?.href
-  const [open, setOpen] = useState(false)
 
-  useEffect(() => {
+  const closeMenu = (restoreFocus = false) => {
     setOpen(false)
     document.body.style.overflow = ''
+    if (restoreFocus) window.requestAnimationFrame(() => toggleRef.current?.focus())
+  }
+
+  useEffect(() => {
+    closeMenu(false)
   }, [pathname])
 
   useEffect(() => {
     const onKeyDown = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') setOpen(false)
+      if (event.key === 'Escape' && open) closeMenu(true)
     }
     window.addEventListener('keydown', onKeyDown)
-    return () => window.removeEventListener('keydown', onKeyDown)
-  }, [])
+    return () => {
+      window.removeEventListener('keydown', onKeyDown)
+      document.body.style.overflow = ''
+    }
+  }, [open])
 
   const toggleMenu = () => {
     setOpen((current) => {
@@ -50,18 +60,18 @@ export function Header() {
             })}
           </nav>
           <div className="nav-actions">
-            <Link className="button button-primary button-small" href="/kontakt/" data-track="header_lead">Zatraži plan</Link>
-            <button className="menu-toggle" type="button" aria-label={open ? 'Zatvori meni' : 'Otvori meni'} aria-expanded={open} aria-controls="mobile-navigation" onClick={toggleMenu}>
+            <Link className="button button-primary button-small" href="/kontakt/?izvor=header" data-track="header_lead">Zatraži plan</Link>
+            <button ref={toggleRef} className="menu-toggle" type="button" aria-label={open ? 'Zatvori meni' : 'Otvori meni'} aria-expanded={open} aria-controls="mobile-navigation" onClick={toggleMenu}>
               <span /><span /><span />
             </button>
           </div>
         </div>
         <div id="mobile-navigation" className={`mobile-panel${open ? ' is-open' : ''}`} data-mobile-menu hidden={!open}>
           <nav aria-label="Mobilna navigacija">
-            {navigation.map((item) => <Link key={item.href} href={item.href}>{item.label}</Link>)}
+            {navigation.map((item) => <Link key={item.href} href={item.href} aria-current={activeHref === item.href ? 'page' : undefined}>{item.label}</Link>)}
             <Link href="/postani-dio-tima/">Postani dio tima</Link>
           </nav>
-          <Link className="button button-primary" href="/kontakt/">Zatraži plan i procjenu</Link>
+          <Link className="button button-primary" href="/kontakt/?izvor=mobile-menu" data-track="mobile_menu_lead">Zatraži plan i procjenu</Link>
         </div>
       </header>
     </>

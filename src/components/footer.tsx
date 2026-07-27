@@ -1,7 +1,8 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { site } from '@/data/site'
-import { CookieBanner, CookieSettingsButton } from './cookie-banner'
+import { CookieBanner } from './cookie-banner'
+import { CookieSettingsButton } from './cookie-settings-button'
 
 export function Footer() {
   return (
@@ -35,15 +36,16 @@ export function Footer() {
             <h2>Kontakt</h2>
             <p>{site.location}</p>
             <a href={`mailto:${site.email}`}>{site.email}</a>
-            <Link href="/kontakt/">Pošalji upit</Link>
+            <p>{site.responseTime}</p>
+            <Link href="/kontakt/?izvor=footer">Pošalji upit</Link>
           </div>
         </div>
         <div className="container footer-bottom">
           <span>© {new Date().getFullYear()} Sindikat Studio 83</span>
-          <div><Link href="/privatnost/">Privatnost</Link><Link href="/kolacici/">Kolačići</Link><Link href="/uslovi-koriscenja/">Uslovi</Link><CookieSettingsButton /></div>
+          <div><Link href="/privatnost/">Privatnost</Link><Link href="/kolacici/">Kolačići</Link><CookieSettingsButton /><Link href="/uslovi-koriscenja/">Uslovi</Link></div>
         </div>
       </footer>
-      <div className="mobile-cta"><Link className="button button-primary" href="/kontakt/" data-track="mobile_sticky_lead">Zatraži plan</Link></div>
+      <div className="mobile-cta"><Link className="button button-primary" href="/kontakt/?izvor=mobile-sticky" data-track="mobile_sticky_lead">Zatraži plan</Link></div>
       <CookieBanner />
     </>
   )

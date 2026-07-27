@@ -24,3 +24,10 @@
 /sr-me/blog/ /blog/ 301!
 /sr-me/blog/:slug/ /blog/:slug/ 301!
 /sr-me/blog/:slug/index.html /blog/:slug/ 301!
+/index.html / 301!
+/kontakt.html /kontakt/ 301!
+/o-nama.html /o-nama/ 301!
+/usluge.html /usluge/ 301!
+/industrije.html /industrije/ 301!
+/radovi.html /radovi/ 301!
+/blog.html /blog/ 301!

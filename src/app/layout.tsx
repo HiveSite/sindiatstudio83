@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from 'next'
+import type { ReactNode } from 'react'
 import { Header } from '@/components/header'
 import { Footer } from '@/components/footer'
 import { AnalyticsScripts, GoogleTagManagerNoScript } from '@/components/analytics'
@@ -16,18 +17,21 @@ export const metadata: Metadata = {
   authors: [{ name: site.name, url: site.domain }],
   creator: site.name,
   publisher: site.name,
-  icons: { icon: '/favicon.png', apple: '/favicon.png' },
+  category: 'marketing',
+  icons: { icon: '/favicon.png', apple: '/icons/icon-192.png' },
+  manifest: '/manifest.webmanifest',
   formatDetection: { telephone: true, email: true, address: false },
 }
 
 export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
+  viewportFit: 'cover',
   themeColor: '#08080b',
   colorScheme: 'dark',
 }
 
-export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
+export default function RootLayout({ children }: Readonly<{ children: ReactNode }>) {
   return (
     <html lang={site.locale}>
       <body>

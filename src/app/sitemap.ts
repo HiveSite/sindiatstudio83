@@ -8,27 +8,27 @@ import { site } from '@/data/site'
 export const dynamic = 'force-static'
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const defaultLastModified = new Date(site.updatedAt)
   const staticRoutes = [
-    '/', '/usluge/', ...services.map((item) => `/usluge/${item.slug}/`),
-    '/industrije/', ...industries.map((item) => `/industrije/${item.slug}/`),
-    '/radovi/', ...cases.map((item) => `/radovi/${item.slug}/`),
-    '/o-nama/', '/blog/', '/kontakt/', '/postani-dio-tima/', '/privatnost/', '/kolacici/', '/uslovi-koriscenja/',
+    '/', '/usluge/', '/industrije/', '/radovi/', '/o-nama/', '/blog/', '/kontakt/',
+    '/postani-dio-tima/', '/privatnost/', '/kolacici/', '/uslovi-koriscenja/',
   ]
+  const contentDate = new Date(`${site.contentUpdatedAt}T00:00:00.000Z`)
 
-  const staticEntries: MetadataRoute.Sitemap = staticRoutes.map((route) => ({
-    url: new URL(route, site.domain).toString(),
-    lastModified: defaultLastModified,
-    changeFrequency: route === '/' ? 'weekly' : 'monthly',
-    priority: route === '/' ? 1 : route.split('/').filter(Boolean).length === 1 ? 0.8 : 0.7,
-  }))
-
-  const blogEntries: MetadataRoute.Sitemap = blogPosts.map((post) => ({
-    url: new URL(`/blog/${post.slug}/`, site.domain).toString(),
-    lastModified: post.date ? new Date(post.date) : defaultLastModified,
-    changeFrequency: 'monthly',
-    priority: 0.7,
-  }))
-
-  return [...staticEntries, ...blogEntries]
+  return [
+    ...staticRoutes.map((route) => ({
+      url: new URL(route, site.domain).toString(),
+      lastModified: contentDate,
+      changeFrequency: route === '/' ? 'weekly' as const : 'monthly' as const,
+      priority: route === '/' ? 1 : route.split('/').filter(Boolean).length === 1 ? 0.8 : 0.6,
+    })),
+    ...services.map((item) => ({ url: `${site.domain}/usluge/${item.slug}/`, lastModified: contentDate, changeFrequency: 'monthly' as const, priority: 0.8 })),
+    ...industries.map((item) => ({ url: `${site.domain}/industrije/${item.slug}/`, lastModified: contentDate, changeFrequency: 'monthly' as const, priority: 0.7 })),
+    ...cases.map((item) => ({ url: `${site.domain}/radovi/${item.slug}/`, lastModified: contentDate, changeFrequency: 'monthly' as const, priority: 0.7 })),
+    ...blogPosts.map((item) => ({
+      url: `${site.domain}/blog/${item.slug}/`,
+      lastModified: new Date(`${item.date || site.contentUpdatedAt}T00:00:00.000Z`),
+      changeFrequency: 'monthly' as const,
+      priority: 0.6,
+    })),
+  ]
 }
