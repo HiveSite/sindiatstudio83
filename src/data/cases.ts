@@ -1,49 +1,239 @@
-export const cases = [
-  {
-    slug: 'sistem-za-terenske-angazmane',
-    type: 'Operacije + aktivacije',
-    title: 'Sistem za terenske angažmane širom Crne Gore',
-    summary: 'Od izbora ljudi do isplate - roster, koordinacija, vođe smjene i izvještavanje za promotivne i event angažmane.',
-    metrics: [
-      ['150+', 'ljudi u rosteru'],
-      ['15+', 'klijenata'],
-      ['20.000 €+', 'isplaćeno angažovanima u četiri mjeseca']
-    ],
-    challenge: 'Klijentima nije potreban samo spisak ljudi. Potrebni su pouzdani dolasci, jasne smjene, zamjene, priprema, kontrola i izvještaj bez svakodnevnog operativnog haosa.',
-    solution: 'Postavljen je operativni sistem sa izborom ljudi, rosterom, promo liderima, evidencijom dolaska i odlaska, odgovornošću po lokaciji i standardizovanim izvještajem.',
-    result: 'Sindikat može organizovati promotivne i event timove u Podgorici i drugim gradovima, uz jasnu evidenciju i centralnu komunikaciju sa klijentom.',
-    services: ['Aktivacije i eventi', 'Kampanje za zapošljavanje', 'Operativna koordinacija']
-  },
-  {
-    slug: 'battlebots-arena',
-    type: 'Edukativni događaj + produkcija',
-    title: 'BattleBots Arena - program kroz četiri opštine',
-    summary: 'Višemjesečni STEAM program, radionice, lokalne aktivnosti i trodnevno finale povezani kroz jednu produkcijsku i komunikacionu cjelinu.',
-    metrics: [
-      ['4', 'opštine'],
-      ['150+', 'učesnika'],
-      ['10', 'finalnih timova']
-    ],
-    challenge: 'Program je zahtijevao koordinaciju partnera, predavača, učesnika, lokacija, radionica, produkcije finala i komunikacije kroz više mjeseci.',
-    solution: 'Napravljen je fazni plan sa info danima, radionicama, lokalnim koordinacijama, finalnom selekcijom i centralnim događajem u Mtel Digitalnoj fabrici.',
-    result: 'Program je završen sa deset finalnih timova i jasnim tokom od prve prijave do finalnog takmičenja.',
-    services: ['Event produkcija', 'Projektna koordinacija', 'Sadržaj i komunikacija']
-  },
+import type { CaseStudy } from '@/types/content'
+
+export const cases: CaseStudy[] = [
   {
     slug: 'imaposla-digitalni-proizvod',
     type: 'Digitalni proizvod + rast',
-    title: 'ImaPosla.me - platforma i distribucioni sistem za poslove',
-    summary: 'Web platforma, stranice za firme, profili kandidata, oglasi, SEO, Viber zajednica i društveni kanali povezani u lokalni proizvod za zapošljavanje.',
+    title: 'ImaPosla.me - platforma za oglase, radnike i brze angažmane',
+    summary: 'Lokalni digitalni proizvod koji povezuje oglase, profile firmi i kandidata, brze poslove, SEO stranice i distribuciju kroz društvene kanale i Viber zajednicu.',
     metrics: [
-      ['Web', 'platforma za firme i kandidate'],
+      ['Web', 'platforma i mobilno iskustvo'],
       ['3.000+', 'članova Viber zajednice'],
-      ['CG', 'lokalno fokusiran proizvod']
+      ['CG', 'lokalni fokus proizvoda'],
     ],
-    challenge: 'Oglasi, kandidati i komunikacija bili su rasuti kroz društvene mreže i poruke, bez centralnog mjesta za pretragu, prijavu i upravljanje.',
-    solution: 'Razvijen je sistem sa rutama za oglase, gradove, kategorije, firme, profile, brze poslove i administratorske procese, uz kanale za distribuciju.',
-    result: 'Nastao je proizvod koji kombinuje platformu, zajednicu i promotivnu infrastrukturu i može da podrži kampanje za zapošljavanje klijenata.',
-    services: ['Web i konverzije', 'Kampanje za zapošljavanje', 'SEO i distribucija']
-  }
+    challenge: 'Oglasi, kandidati i komunikacija bili su rasuti kroz društvene mreže i poruke, bez centralnog mjesta za pretragu, prijavu, profile i upravljanje sadržajem.',
+    solution: 'Razvijen je proizvod sa oglasima, gradovima, kategorijama, firmama, profilima radnika, brzim angažmanima i posebnim tokovima za kandidate, kompanije i administraciju. Platforma je povezana sa SEO strukturom, društvenim kanalima i Viber zajednicom.',
+    result: 'Nastao je lokalni ekosistem za zapošljavanje koji objedinjuje platformu, zajednicu i distribuciju. Sistem može podržati organski rast, plaćene kampanje i direktnu saradnju sa poslodavcima.',
+    services: ['Strategija digitalnog proizvoda', 'UX/UI i web razvoj', 'SEO i sadržajna struktura', 'Distribucija i rast zajednice'],
+    scope: [
+      'Pozicioniranje i struktura proizvoda',
+      'Korisnički tokovi za firme i kandidate',
+      'Oglasi, profili radnika i brzi angažmani',
+      'SEO stranice po gradovima i kategorijama',
+      'Povezivanje sajta, društvenih mreža i Viber zajednice',
+    ],
+    coverMark: 'IP',
+    coverLabel: 'Platforma za zapošljavanje u Crnoj Gori',
+    links: [{ label: 'Pogledaj ImaPosla.me', href: 'https://www.imaposla.me/' }],
+    gallery: [
+      { label: 'Naslovna stranica i pretraga oglasa', kind: 'Screenshot', aspect: 'wide' },
+      { label: 'Lista i detalj oglasa', kind: 'Screenshot', aspect: 'landscape' },
+      { label: 'Profili dostupnih radnika i brzi poslovi', kind: 'Screenshot', aspect: 'landscape' },
+      { label: 'Mobilno iskustvo platforme', kind: 'Screenshot', aspect: 'portrait' },
+    ],
+  },
+  {
+    slug: 'battlebots-arena',
+    type: 'STEAM program + event produkcija',
+    title: 'BattleBots Arena - nacionalni program od radionica do finalne arene',
+    summary: 'Višemjesečni STEAM projekat koji je povezao prijave, edukativne radionice, mentorski rad, izradu robota, komunikaciju i finalno takmičenje pred publikom.',
+    metrics: [
+      ['10', 'finalnih timova'],
+      ['4', 'tematske radionice'],
+      ['6 mj.', 'trajanje programa'],
+    ],
+    challenge: 'Projekat je zahtijevao koordinaciju učesnika, mentora, partnera, radionica, lokacija, komunikacije i finalne produkcije kroz više mjeseci, uz jasan i bezbjedan tok od prijave do arene.',
+    solution: 'Postavljen je fazni program sa prijavama, edukacijom, mentorskom podrškom, razvojem timova, produkcijom sadržaja i završnim događajem. Sajt i komunikacioni materijali povezali su sve faze u jednu prepoznatljivu cjelinu.',
+    result: 'Program je dobio jasnu strukturu, javnu vidljivost i završnicu koja je spojila obrazovanje, tehnologiju, timski rad i događaj uživo.',
+    services: ['Projektna koordinacija', 'Event produkcija', 'Web i prijavni tokovi', 'Brending i komunikacija'],
+    scope: [
+      'Koncept i fazni plan programa',
+      'Sajt, prijave i informisanje učesnika',
+      'Koordinacija radionica, mentora i partnera',
+      'Produkcija finalne arene i protokola',
+      'Sadržaj, izvještavanje i dokumentovanje projekta',
+    ],
+    coverMark: 'BB',
+    coverLabel: 'Nacionalni STEAM program i finalna arena',
+    links: [{ label: 'Pogledaj BattleBotsArena.me', href: 'https://battlebotsarena.me/' }],
+    gallery: [
+      { label: 'Finalna arena i centralna produkcija', kind: 'Fotografija', aspect: 'wide' },
+      { label: 'Radionica i mentorski rad', kind: 'Fotografija', aspect: 'landscape' },
+      { label: 'Izrada i testiranje robota', kind: 'Fotografija', aspect: 'landscape' },
+      { label: 'Timovi i učesnici programa', kind: 'Fotografija', aspect: 'landscape' },
+      { label: 'Finalisti, pobjednici i partneri', kind: 'Fotografija', aspect: 'landscape' },
+    ],
+    note: 'Broj učesnika i geografski obuhvat biće zaključani nakon interne provjere finalnog izvještaja.',
+  },
+  {
+    slug: 'mini-sajtovi-i-digitalni-alati',
+    type: 'Web produkcija + digitalni alati',
+    title: 'Mini-sajtovi i digitalni alati za partnerske biznise',
+    summary: 'Brza izrada mobilno prilagođenih prezentacija i praktičnih digitalnih alata unutar Sindikat Events ekosistema - od DJ portfolija do smještaja i grafičkih mapa.',
+    metrics: [
+      ['3', 'različita digitalna rješenja'],
+      ['Mobile', 'prvo korisničko iskustvo'],
+      ['Direct', 'kontakt, rezervacija ili navigacija'],
+    ],
+    challenge: 'Manjim biznisima i pojedinačnim profesionalcima često nije potreban veliki sajt, već jednostavna, vizuelno jasna stranica koja brzo objašnjava ponudu i vodi korisnika ka konkretnoj radnji.',
+    solution: 'Napravljen je modularni sistem mini-sajtova i alata koji koristi postojeći domen, prilagođava sadržaj svakoj ponudi i prioritizuje mobilno iskustvo, brzinu i direktan kontakt.',
+    result: 'Partneri su dobili samostalne digitalne prezentacije bez komplikovane infrastrukture, dok je Sindikat dobio ponovljiv model za brzu izradu novih partnerskih stranica.',
+    services: ['UX/UI dizajn', 'Frontend razvoj', 'Mobilna optimizacija', 'Direktni kontakt i navigacija'],
+    scope: [
+      'Struktura i prodajni tok mini-sajta',
+      'Vizuelni sistem prilagođen svakom partneru',
+      'Mobilni prikaz i jasne kontakt radnje',
+      'Smještaj unutar postojećeg domena i održavanje',
+    ],
+    coverMark: '3X',
+    coverLabel: 'DJ portfolio, smještaj i grafičke mape',
+    links: [
+      { label: 'DJ Miqelly', href: 'https://sindikatevents.me/dj/miqelly/' },
+      { label: 'Stan na dan', href: 'https://sindikatevents.me/partneri/stannadan/' },
+      { label: 'Grafičke MART mape', href: 'https://sindikatevents.me/maps/' },
+    ],
+    subprojects: [
+      {
+        title: 'DJ Miqelly',
+        summary: 'Portfolio mini-sajt za predstavljanje muzičkog identiteta, tipova događaja i direktnog kontakta za angažovanje.',
+        link: { label: 'Otvori mini-sajt', href: 'https://sindikatevents.me/dj/miqelly/' },
+      },
+      {
+        title: 'Stan na dan',
+        summary: 'Prodajna stranica za smještaj sa jasnim prikazom prostora, lokacije, pogodnosti i direktnog upita.',
+        link: { label: 'Otvori mini-sajt', href: 'https://sindikatevents.me/partneri/stannadan/' },
+      },
+      {
+        title: 'Grafičke MART mape',
+        summary: 'Digitalni alat za pregled lokacija i jednostavniju orijentaciju, optimizovan za korišćenje na telefonu.',
+        link: { label: 'Otvori alat', href: 'https://sindikatevents.me/maps/' },
+      },
+    ],
+    gallery: [
+      { label: 'Zajednički prikaz tri digitalna rješenja', kind: 'Screenshot', aspect: 'wide' },
+      { label: 'DJ Miqelly - desktop naslovna', kind: 'Screenshot', aspect: 'landscape' },
+      { label: 'DJ Miqelly - mobilni prikaz', kind: 'Screenshot', aspect: 'portrait' },
+      { label: 'Stan na dan - desktop prezentacija', kind: 'Screenshot', aspect: 'landscape' },
+      { label: 'Stan na dan - mobilni kontakt tok', kind: 'Screenshot', aspect: 'portrait' },
+      { label: 'Grafičke MART mape - kompletna mapa', kind: 'Screenshot', aspect: 'landscape' },
+      { label: 'Grafičke MART mape - detalj ili mobilni prikaz', kind: 'Screenshot', aspect: 'portrait' },
+    ],
+  },
+  {
+    slug: 'sistem-za-terenske-angazmane',
+    type: 'Promo timovi + logistika',
+    title: 'Promo timovi i logistika za više lokacija',
+    summary: 'Od izbora ljudi do završnog izvještaja - roster, briefing, rasporedi, transport, vođe smjene, zamjene i kontrola realizacije za promotivne i event angažmane.',
+    metrics: [
+      ['150+', 'ljudi u operativnom rosteru'],
+      ['15+', 'klijenata i partnerskih timova'],
+      ['20.000 €+', 'isplaćeno angažovanim ljudima u prva četiri mjeseca'],
+    ],
+    challenge: 'Klijentima nije potreban samo spisak ljudi. Potrebni su pouzdani dolasci, jasne smjene, zamjene, priprema, transport, kontrola standarda i jedna odgovorna tačka komunikacije.',
+    solution: 'Postavljen je operativni sistem sa selekcijom ljudi, rosterom, promo liderima, evidencijom dolaska i odlaska, odgovornošću po lokaciji, planom zamjena i standardizovanim izvještajem.',
+    result: 'Sindikat može organizovati timove u Podgorici i drugim gradovima, koordinisati više smjena i lokacija i klijentu isporučiti kontrolisanu realizaciju bez svakodnevnog operativnog haosa.',
+    services: ['Selekcija i roster', 'Operativna koordinacija', 'Transport i rasporedi', 'Supervizija i izvještavanje'],
+    scope: [
+      'Izbor i provjera ljudi prema briefu',
+      'Obuka, poruka i standard ponašanja',
+      'Raspored smjena, lokacija i transporta',
+      'Promo lideri, check-in i plan zamjena',
+      'Foto-dokaz i završni operativni izvještaj',
+    ],
+    coverMark: 'OPS',
+    coverLabel: 'Ljudi, smjene, lokacije i kontrola realizacije',
+    subprojects: [
+      {
+        title: 'Višelokacijske promocije',
+        summary: 'Koordinacija timova, smjena i supervizije za klijente sa većim brojem aktivnih lokacija.',
+      },
+      {
+        title: 'Regulisani 18+ brendovi',
+        summary: 'Operativna podrška za punoljetne timove i regulisane brendove, sa fokusom na standarde, odgovornost i dokumentovanje realizacije.',
+      },
+      {
+        title: 'Event i hospitality angažmani',
+        summary: 'Hostese, promoteri, pomoćno osoblje i vođe smjene za događaje, ugostiteljstvo i posebne projekte.',
+      },
+    ],
+    gallery: [
+      { label: 'Kompletan promo tim na lokaciji', kind: 'Fotografija', aspect: 'wide' },
+      { label: 'Briefing i priprema prije smjene', kind: 'Fotografija', aspect: 'landscape' },
+      { label: 'Realizacija na više pozicija', kind: 'Fotografija', aspect: 'landscape' },
+      { label: 'Logistika, supervizija ili izvještavanje', kind: 'Fotografija', aspect: 'landscape' },
+    ],
+    note: 'Kod regulisanih 18+ kategorija javni portfolio ostaje fokusiran na organizaciju ljudi, logistiku i standarde realizacije.',
+  },
+  {
+    slug: 'aktivacije-regulisanih-brendova',
+    type: 'Brend aktivacije + teren',
+    title: 'Aktivacije regulisanih 18+ brendova',
+    summary: 'Organizacija punoljetnih promo timova, briefing, brendirana postavka, koordinacija na lokaciji i foto-dokumentacija za projekte u ugostiteljstvu i noćnoj ekonomiji.',
+    metrics: [
+      ['18+', 'punoljetni timovi i publika'],
+      ['2', 'referentna međunarodna brenda'],
+      ['1', 'standard pripreme i kontrole'],
+    ],
+    challenge: 'Aktivacije regulisanih brendova zahtijevaju pouzdan tim, dosljedan vizuelni standard, jasna pravila komunikacije i kontrolu realizacije u dinamičnom ugostiteljskom okruženju.',
+    solution: 'Timovi se biraju prema briefu, prolaze pripremu, dobijaju jasne pozicije i odgovornosti, a realizacija se prati kroz lidera smjene i dogovoreni foto-izvještaj.',
+    result: 'Klijent dobija profesionalno izvedenu aktivaciju sa kontrolisanim timom, urednom postavkom i dokazom da je dogovoreni standard primijenjen na lokaciji.',
+    services: ['Promo timovi', 'Briefing i standardi', 'Koordinacija lokacije', 'Foto-dokumentacija'],
+    scope: [
+      'Odabir punoljetnog promo tima',
+      'Priprema poruke, uniforme i pozicija',
+      'Koordinacija sa lokalom i predstavnikom brenda',
+      'Kontrola realizacije i završni dokaz',
+    ],
+    coverMark: '18+',
+    coverLabel: 'Profesionalna realizacija uz jasne standarde',
+    subprojects: [
+      {
+        title: 'Međunarodni ugostiteljski brend - aktivacija A',
+        summary: 'Promo timovi i brendirana realizacija u ugostiteljskim objektima, uz punoljetnu publiku i definisane standarde nastupa.',
+      },
+      {
+        title: 'Međunarodni ugostiteljski brend - aktivacija B',
+        summary: 'Koordinacija tima, postavke i dokumentovanja realizacije kroz dogovoreni operativni proces.',
+      },
+    ],
+    gallery: [
+      { label: 'Glavna brendirana postavka', kind: 'Fotografija', aspect: 'wide' },
+      { label: 'Promo tim i priprema', kind: 'Fotografija', aspect: 'landscape' },
+      { label: 'Realizacija u prostoru', kind: 'Fotografija', aspect: 'landscape' },
+      { label: 'Detalj postavke i završni dokaz', kind: 'Fotografija', aspect: 'landscape' },
+    ],
+    note: 'Portfolio ne promoviše konzumaciju. Fokus je na operativi, punoljetnim timovima i profesionalnoj realizaciji.',
+  },
+  {
+    slug: 'privatni-i-korporativni-dogadjaji',
+    type: 'Event produkcija + koordinacija',
+    title: 'Privatne i korporativne proslave - od postavke do završetka',
+    summary: 'Koordinacija prostora, muzike, DJ programa, bara, hostesa, tehničke opreme, foto/video tima i operativnog toka događaja kroz jednu odgovornu tačku.',
+    metrics: [
+      ['1', 'centralna koordinacija'],
+      ['Više', 'izvođača i dobavljača'],
+      ['Plan B', 'za ključne tačke događaja'],
+    ],
+    challenge: 'Događaj često uključuje više dobavljača, izvođača i tehničkih elemenata. Bez jasnog plana, satnice i odgovornosti, sitni problemi lako postaju vidljivi gostima.',
+    solution: 'Pravimo produkcijsku mapu događaja, definišemo dobavljače i odgovornosti, koordiniramo postavku i tok programa i držimo rezervni plan za ključne tačke realizacije.',
+    result: 'Organizator i gosti dobijaju skladno iskustvo, dok se logistika, promjene i komunikacija rješavaju iza scene kroz jedan operativni sistem.',
+    services: ['Event koordinacija', 'DJ i muzički program', 'Bar, hostese i osoblje', 'Tehnika i foto/video'],
+    scope: [
+      'Koncept, budžetski okvir i satnica',
+      'Koordinacija prostora, dobavljača i izvođača',
+      'Postavka, doček gostiju i tok programa',
+      'Operativno vođenje događaja i plan B',
+    ],
+    coverMark: 'EVT',
+    coverLabel: 'Privatne proslave, korporativni događaji i posebne prilike',
+    links: [{ label: 'Pogledaj Sindikat Events', href: 'https://sindikatevents.me/' }],
+    gallery: [
+      { label: 'Završena postavka prostora', kind: 'Fotografija', aspect: 'wide' },
+      { label: 'DJ, bar ili tehnička realizacija', kind: 'Fotografija', aspect: 'landscape' },
+      { label: 'Atmosfera i tok događaja', kind: 'Fotografija', aspect: 'landscape' },
+      { label: 'Tim, backstage ili koordinacija', kind: 'Fotografija', aspect: 'landscape' },
+    ],
+  },
 ]
 
-export const caseBySlug = Object.fromEntries(cases.map(item => [item.slug, item]))
+export const caseBySlug = Object.fromEntries(cases.map((item) => [item.slug, item])) as Record<string, CaseStudy>

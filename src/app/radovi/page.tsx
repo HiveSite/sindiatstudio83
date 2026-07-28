@@ -8,8 +8,8 @@ import { createMetadata } from '@/lib/metadata'
 import { breadcrumbSchema } from '@/lib/schema'
 
 export const metadata: Metadata = createMetadata({
-  title: 'Radovi i case studies',
-  description: 'Odabrani projekti Sindikat Studio 83: terenski angažmani, event produkcija i razvoj lokalnih digitalnih proizvoda.',
+  title: 'Radovi - digitalni proizvodi, događaji i terenske operacije',
+  description: 'Odabrani projekti Sindikat Studio 83: digitalne platforme, STEAM programi, mini-sajtovi, promo timovi, aktivacije i event produkcija.',
   path: '/radovi/',
 })
 
@@ -17,8 +17,8 @@ export default function WorksPage() {
   const crumbs = [{ label: 'Radovi', href: '/radovi/' }]
   return <>
     <JsonLd data={breadcrumbSchema(crumbs)} />
-    <section className="page-hero"><div className="container"><Breadcrumbs items={crumbs} /><div className="page-hero-grid"><div><span className="eyebrow">Radovi</span><h1>Projekti sa konkretnim obimom, procesom i dokazom.</h1><p className="lead">Ne predstavljamo zamišljene rezultate kao case study. Ovdje su projekti za koje možemo jasno objasniti problem, sistem i ishod.</p></div><aside className="page-hero-aside"><strong>Šta prikazujemo</strong><ul><li>stvarni obim projekta</li><li>potvrđene javne brojke</li><li>ulogu Sindikata</li><li>šta je sistem omogućio</li></ul></aside></div></div></section>
+    <section className="page-hero"><div className="container"><Breadcrumbs items={crumbs} /><div className="page-hero-grid"><div><span className="eyebrow">Radovi</span><h1>Digitalni proizvodi, ljudi i događaji u stvarnoj realizaciji.</h1><p className="lead">Od razvoja platforme i mini-sajta do višemjesečnog programa, promo operacije ili privatnog događaja - prikazujemo šta je bio problem, kako je postavljen sistem i šta je projekat omogućio.</p></div><aside className="page-hero-aside"><strong>Šta je obuhvaćeno</strong><ul><li>digitalni proizvodi i web alati</li><li>projektna i event produkcija</li><li>promo timovi i logistika</li><li>aktivacije i koordinacija na terenu</li></ul></aside></div></div></section>
     <section className="section section-dark"><div className="container"><div className="case-grid">{cases.map((item) => <CaseCard key={item.slug} item={item} />)}</div></div></section>
-    <FinalCta title="Treba ti sličan sistem?" text="Nećemo kopirati projekat jedan na jedan. Uzećemo logiku koja radi i prilagoditi je tvom cilju, timu i tržištu." />
+    <FinalCta title="Treba ti sličan sistem?" text="Ne kopiramo projekat jedan na jedan. Uzimamo logiku koja radi i prilagođavamo je tvom cilju, timu, budžetu i tržištu." />
   </>
 }

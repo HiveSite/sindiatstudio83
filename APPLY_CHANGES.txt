@@ -1,7 +1,17 @@
-Raspakuj ZIP u root repoa i dozvoli zamjenu postojećeg fajla.
+SINDIKAT STUDIO 83 - CASE STUDY SADRZAJ I PLACEHOLDERI
 
-Mijenja se samo:
-src/app/manifest.ts
+1. Raspakuj ZIP u root postojećeg Next.js repoa.
+2. Dozvoli zamjenu postojećih fajlova.
+3. Novi fajl koji se dodaje:
+   src/components/case-media.tsx
+4. Pokreni Netlify deploy:
+   Deploys -> Trigger deploy -> Clear cache and deploy site
 
-Greška je ispravljena tako što je nevažeća vrijednost purpose: 'any maskable'
-razdvojena na dvije validne manifest stavke: purpose: 'any' i purpose: 'maskable'.
+ZIP ne sadrzi slike. Dodaje:
+- 6 kompletnih case study projekata
+- 28 brendiranih vizuelnih placeholdera
+- direktne linkove ka digitalnim projektima
+- mobilno prilagodjen prikaz
+- prosirenu Radovi stranicu i detaljne projektne stranice
+
+Postojeci slugovi za ImaPosla, BattleBots i terenske angazmane ostaju isti.

@@ -328,3 +328,52 @@ details>div p{margin:0}
   .hero-node{backdrop-filter:none}
   .footer-bottom div{align-items:flex-start;flex-wrap:wrap}
 }
+
+/* Case content expansion and temporary media placeholders */
+.case-cover-copy{position:relative;z-index:4;display:flex;flex-direction:column;align-items:flex-start;max-width:82%}
+.case-cover-copy>span{font-size:11px;font-weight:900;letter-spacing:.12em;text-transform:uppercase;border:1px solid var(--line);border-radius:999px;padding:8px 12px;background:rgba(8,8,11,.68)}
+.case-cover-copy>strong{font-size:clamp(72px,10vw,144px);line-height:.84;letter-spacing:-.09em;margin:36px 0 18px;color:#fff;text-shadow:0 12px 45px rgba(0,0,0,.25)}
+.case-cover-copy>small{font-size:15px;font-weight:800;line-height:1.45;color:#d7d5dc}
+.case-visual-large{min-height:520px;border-radius:26px;border:1px solid var(--line)}
+.case-detail-hero{align-items:center}
+.case-project-links{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}
+.case-scope-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:38px}
+.case-scope-grid article{min-height:160px;padding:24px;border:1px solid rgba(0,0,0,.12);border-radius:18px;background:#fff;display:flex;flex-direction:column;color:var(--ink)}
+.case-scope-grid article span{font-size:11px;font-weight:950;color:var(--pink);letter-spacing:.14em}
+.case-scope-grid article strong{font-size:18px;line-height:1.35;margin-top:auto}
+.case-subproject-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:15px;margin-top:38px}
+.case-subproject-grid article{min-height:270px;border:1px solid var(--line);border-radius:20px;padding:26px;background:rgba(255,255,255,.025);display:flex;flex-direction:column}
+.case-subproject-mark{width:38px;height:38px;border-radius:50%;border:1px solid var(--line);position:relative;margin-bottom:42px}
+.case-subproject-mark:after{content:"";position:absolute;inset:9px;border-radius:50%;background:linear-gradient(135deg,var(--pink),var(--cyan))}
+.case-subproject-grid h3{font-size:26px}.case-subproject-grid p{font-size:15px}.case-subproject-grid a{margin-top:auto;padding-top:18px;border-top:1px solid var(--line);font-weight:900;color:var(--cyan)}
+.case-media-grid{display:grid;grid-template-columns:repeat(12,1fr);gap:14px;margin-top:38px}
+.case-media-placeholder{grid-column:span 6;min-height:290px;border:1px solid var(--line);border-radius:22px;overflow:hidden;position:relative;background:radial-gradient(circle at 18% 15%,rgba(245,0,98,.22),transparent 25rem),radial-gradient(circle at 82% 85%,rgba(0,217,232,.16),transparent 22rem),linear-gradient(145deg,#17171f,#0b0b10)}
+.case-media-placeholder[data-aspect="wide"]{grid-column:1/-1;min-height:420px}
+.case-media-placeholder[data-aspect="portrait"]{grid-column:span 4;min-height:430px}
+.case-media-placeholder[data-aspect="square"]{grid-column:span 4;min-height:360px}
+.case-media-placeholder:before{content:"";position:absolute;width:260px;height:260px;border:38px solid rgba(255,255,255,.07);border-radius:50%;right:-80px;top:-90px}
+.case-media-placeholder:after{content:"";position:absolute;inset:20px;border:1px dashed rgba(255,255,255,.12);border-radius:16px}
+.case-media-placeholder-inner{position:absolute;z-index:2;left:34px;right:34px;bottom:32px;display:flex;flex-direction:column;gap:10px}
+.case-media-placeholder-inner span{width:max-content;border:1px solid var(--line);border-radius:999px;padding:7px 10px;font-size:10px;font-weight:950;letter-spacing:.14em;text-transform:uppercase;background:rgba(8,8,11,.68);color:var(--cyan)}
+.case-media-placeholder-inner strong{font-size:clamp(22px,3vw,38px);max-width:760px;line-height:1.06}
+.case-note{margin:26px 0 0;padding:18px 20px;border-left:3px solid var(--cyan);background:rgba(0,217,232,.06);border-radius:0 14px 14px 0;color:#cfccd5}
+.case-visual-mini-sajtovi-i-digitalni-alati:before{border-color:var(--cyan);border-width:70px}
+.case-visual-sistem-za-terenske-angazmane:before{border-color:var(--pink);border-width:54px}
+.case-visual-aktivacije-regulisanih-brendova:before{border-color:var(--yellow);border-width:50px}
+.case-visual-privatni-i-korporativni-dogadjaji:before{border-color:#8f6bff;border-width:66px}
+
+@media(max-width:900px){
+  .case-scope-grid,.case-subproject-grid{grid-template-columns:1fr 1fr}
+  .case-media-placeholder,.case-media-placeholder[data-aspect="portrait"],.case-media-placeholder[data-aspect="square"]{grid-column:span 6}
+  .case-media-placeholder[data-aspect="wide"]{min-height:340px}
+}
+
+@media(max-width:620px){
+  .case-cover-copy{max-width:94%}.case-cover-copy>strong{font-size:86px}.case-cover-copy>small{font-size:13px}
+  .case-visual-large{min-height:360px}
+  .case-scope-grid,.case-subproject-grid{grid-template-columns:1fr}
+  .case-media-grid{grid-template-columns:1fr}
+  .case-media-placeholder,.case-media-placeholder[data-aspect="wide"],.case-media-placeholder[data-aspect="portrait"],.case-media-placeholder[data-aspect="square"]{grid-column:auto;min-height:280px}
+  .case-media-placeholder-inner{left:24px;right:24px;bottom:24px}
+  .case-media-placeholder-inner strong{font-size:25px}
+}

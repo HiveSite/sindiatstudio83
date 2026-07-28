@@ -29,6 +29,23 @@ export interface Industry {
   cta: string
 }
 
+export interface CaseStudyLink {
+  label: string
+  href: string
+}
+
+export interface CaseStudyMedia {
+  label: string
+  kind: 'Fotografija' | 'Screenshot'
+  aspect?: 'wide' | 'landscape' | 'portrait' | 'square'
+}
+
+export interface CaseStudySubproject {
+  title: string
+  summary: string
+  link?: CaseStudyLink
+}
+
 export interface CaseStudy {
   slug: string
   type: string
@@ -39,6 +56,13 @@ export interface CaseStudy {
   solution: string
   result: string
   services: string[]
+  scope: string[]
+  coverMark: string
+  coverLabel: string
+  links?: CaseStudyLink[]
+  gallery: CaseStudyMedia[]
+  subprojects?: CaseStudySubproject[]
+  note?: string
 }
 
 export interface BlogPost {

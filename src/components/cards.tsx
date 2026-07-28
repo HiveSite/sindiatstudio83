@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import type { CaseStudy, Industry, Service } from '@/types/content'
+import { CaseCoverPlaceholder } from '@/components/case-media'
 
 export function ServiceCard({ service, featured = false }: { service: Service; featured?: boolean }) {
   return (
@@ -16,7 +17,7 @@ export function ServiceCard({ service, featured = false }: { service: Service; f
 export function CaseCard({ item }: { item: CaseStudy }) {
   return (
     <article className="case-card">
-      <div className={`case-visual case-visual-${item.slug}`}><span>{item.type}</span><div className="case-orbit" /></div>
+      <CaseCoverPlaceholder item={item} />
       <div className="case-card-copy">
         <span className="eyebrow">{item.type}</span><h3>{item.title}</h3><p>{item.summary}</p>
         <div className="case-mini-metrics">{item.metrics.slice(0, 3).map(([value, label]) => <div key={`${value}-${label}`}><strong>{value}</strong><span>{label}</span></div>)}</div>
