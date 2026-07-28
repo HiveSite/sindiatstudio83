@@ -14,7 +14,7 @@ export const site = {
   email: publicEnv(process.env.NEXT_PUBLIC_CONTACT_EMAIL, 'sindikatevents@gmail.com'),
   instagram: 'https://www.instagram.com/sindikat_studio83/',
   imaposla: 'https://imaposla.me/',
-  contentUpdatedAt: '2026-07-27',
+  contentUpdatedAt: '2026-07-28',
   responseTime: 'Odgovaramo u roku od jednog radnog dana.',
   consentVersion: '2026-07-27',
   analytics: {

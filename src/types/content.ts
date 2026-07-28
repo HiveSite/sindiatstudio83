@@ -1,8 +1,7 @@
 export type Metric = readonly [value: string, label: string]
 
-export interface ServicePrice {
+export interface ServiceEngagement {
   name: string
-  price: string
   text: string
 }
 
@@ -15,7 +14,7 @@ export interface Service {
   outcomes: string[]
   includes: string[]
   process: string[][]
-  pricing: ServicePrice[]
+  engagements: ServiceEngagement[]
   faq: string[][]
   accent: string
 }
@@ -28,6 +27,13 @@ export interface Industry {
   solutions: string[]
   cta: string
 }
+
+export type CaseCategory =
+  | 'digitalni-proizvodi'
+  | 'web-i-mini-sajtovi'
+  | 'aktivacije-i-promo-timovi'
+  | 'dogadjaji-i-produkcija'
+  | 'edukacija-i-community'
 
 export interface CaseStudyLink {
   label: string
@@ -51,18 +57,19 @@ export interface CaseStudy {
   type: string
   title: string
   summary: string
-  metrics: string[][]
+  metrics?: string[][]
   challenge: string
   solution: string
   result: string
   services: string[]
+  serviceSlugs: string[]
+  categories: CaseCategory[]
   scope: string[]
   coverMark: string
   coverLabel: string
   links?: CaseStudyLink[]
   gallery: CaseStudyMedia[]
   subprojects?: CaseStudySubproject[]
-  note?: string
 }
 
 export interface BlogPost {

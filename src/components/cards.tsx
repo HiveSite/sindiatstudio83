@@ -15,13 +15,32 @@ export function ServiceCard({ service, featured = false }: { service: Service; f
 }
 
 export function CaseCard({ item }: { item: CaseStudy }) {
+  const metrics = item.metrics?.slice(0, 3) || []
   return (
     <article className="case-card">
       <CaseCoverPlaceholder item={item} />
       <div className="case-card-copy">
-        <span className="eyebrow">{item.type}</span><h3>{item.title}</h3><p>{item.summary}</p>
-        <div className="case-mini-metrics">{item.metrics.slice(0, 3).map(([value, label]) => <div key={`${value}-${label}`}><strong>{value}</strong><span>{label}</span></div>)}</div>
+        <span className="eyebrow">{item.type}</span>
+        <h3>{item.title}</h3>
+        <p>{item.summary}</p>
+        {metrics.length ? <div className="case-mini-metrics">
+          {metrics.map(([value, label]) => <div key={`${value}-${label}`}><strong>{value}</strong><span>{label}</span></div>)}
+        </div> : null}
         <Link href={`/radovi/${item.slug}/`}>Pogledaj projekat <span>↗</span></Link>
+      </div>
+    </article>
+  )
+}
+
+export function CasePreviewCard({ item }: { item: CaseStudy }) {
+  return (
+    <article className="case-preview-card">
+      <CaseCoverPlaceholder item={item} />
+      <div className="case-preview-copy">
+        <span>{item.type}</span>
+        <h3>{item.title}</h3>
+        <p>{item.summary}</p>
+        <Link href={`/radovi/${item.slug}/`}>Pogledaj projekat ↗</Link>
       </div>
     </article>
   )

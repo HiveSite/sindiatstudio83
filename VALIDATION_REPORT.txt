@@ -1,0 +1,15 @@
+VALIDATION REPORT
+
+PASSED:
+- source validation: 46 TS/TSX files
+- TypeScript semantic check with local framework stubs
+- duplicate/invalid public price cleanup check
+- „Grafičke MART mape“ occurrence check: 0
+- required security.txt present in working baseline
+
+KNOWN NON-BLOCKING WARNINGS:
+- 30 blog posts still have no confirmed publication date
+
+NOTE:
+A full local Next.js production build was not run because project dependencies were not available in the isolated runtime.
+Netlify should perform the authoritative production build after upload.

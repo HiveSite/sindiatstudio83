@@ -2,9 +2,14 @@ src/app/globals.css
 src/app/page.tsx
 src/app/radovi/page.tsx
 src/app/radovi/[slug]/page.tsx
+src/app/usluge/[slug]/page.tsx
 src/components/cards.tsx
-src/components/case-media.tsx
+src/components/lead-form.tsx
+src/components/work-filter.tsx
 src/data/cases.ts
+src/data/services.ts
+src/data/site.ts
 src/types/content.ts
 APPLY_CHANGES.txt
-PLACEHOLDER_IMAGE_PLAN.md
+PREMIUM_UPDATE_SUMMARY.md
+VALIDATION_REPORT.txt

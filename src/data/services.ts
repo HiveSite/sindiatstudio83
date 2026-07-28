@@ -1,4 +1,6 @@
-export const services = [
+import type { Service } from '@/types/content'
+
+export const services: Service[] = [
   {
     slug: 'performance-marketing',
     eyebrow: 'Performance sistem',
@@ -12,58 +14,58 @@ export const services = [
       'postavljanje Meta Ads i/ili Google Ads kampanja',
       'GA4, GTM i mjerenje događaja konverzije',
       'kreative, tekstovi oglasa i varijante za testiranje',
-      'sedmična optimizacija i jasan mjesečni izvještaj'
+      'sedmična optimizacija i jasan mjesečni izvještaj',
     ],
     process: [
       ['Dijagnostika', 'Provjeravamo ponudu, podatke, budžet, konkurenciju i gdje trenutno curi konverzija.'],
       ['Postavka', 'Sređujemo mjerenje, publike, kampanje, landing stranicu i kreativne varijante.'],
       ['Test', 'Pokrećemo kontrolisane testove i ne donosimo zaključke na osnovu nekoliko klikova.'],
-      ['Optimizacija', 'Budžet pomjeramo prema izvorima i porukama koje daju kvalitetniji rezultat.']
+      ['Optimizacija', 'Budžet pomjeramo prema izvorima i porukama koje daju kvalitetniji rezultat.'],
     ],
-    pricing: [
-      { name: 'Dijagnostika', price: 'od 190 €', text: 'Jednokratni pregled i akcioni plan.' },
-      { name: 'Postavka kampanje', price: 'od 300 €', text: 'Mjerenje, struktura, oglasi i pokretanje.' },
-      { name: 'Mjesečno vođenje', price: 'od 400 €', text: 'Optimizacija, testovi i izvještavanje. Medijski budžet nije uključen.' }
+    engagements: [
+      { name: 'Dijagnostički sprint', text: 'Audit ponude, podataka i prodajnog toka sa jasnim prioritetima i planom narednih poteza.' },
+      { name: 'Postavka kampanje', text: 'Mjerenje, struktura, kreative, odredišna stranica i kontrolisano pokretanje.' },
+      { name: 'Kontinuirana optimizacija', text: 'Redovan ritam testiranja, raspodjele budžeta, učenja i izvještavanja.' },
     ],
     faq: [
-      ['Koliki budžet ima smisla?', 'Zavisi od cilja, marže i tržišta. Za lokalne kampanje često je važnije da postoji dovoljno budžeta za stabilan test nego da se odmah ide široko. Budžet definišemo nakon dijagnostike.'],
+      ['Koliki budžet ima smisla?', 'Zavisi od cilja, marže i tržišta. Budžet definišemo nakon provjere ponude, publike i minimalnog obima potrebnog za stabilan test.'],
       ['Da li radite samo Meta oglase?', 'Ne. Koristimo Meta, Google i druge kanale kada imaju smisla, ali ne uvodimo kanal samo zato što je popularan.'],
-      ['Možete li raditi sa postojećim sajtom?', 'Da. Prvo provjeravamo brzinu, poruku, poziv na akciju i mjerenje. Nekad je dovoljna optimizacija, a nekad je isplativije napraviti namjensku landing stranicu.']
+      ['Možete li raditi sa postojećim sajtom?', 'Da. Prvo provjeravamo brzinu, poruku, poziv na akciju i mjerenje. Nekad je dovoljna optimizacija, a nekad je isplativije napraviti namjensku landing stranicu.'],
     ],
-    accent: 'pink'
+    accent: 'pink',
   },
   {
     slug: 'aktivacije-i-eventi',
     eyebrow: 'Teren + digital',
     title: 'Aktivacije i događaji koji ostavljaju mjerljiv trag',
     shortTitle: 'Aktivacije i eventi',
-    summary: 'Planiramo koncept, tim, logistiku i sadržaj sa terena. Aktivaciju povezujemo sa QR kodovima, kontaktima, kuponima, ponovnim oglašavanjem i izvještajem.',
+    summary: 'Planiramo koncept, tim, logistiku i sadržaj sa terena. Aktivaciju povezujemo sa jasnom radnjom, evidencijom i izvještajem.',
     outcomes: ['organizovan tim i logistika', 'mjerljiva interakcija na terenu', 'sadržaj za nastavak kampanje'],
     includes: [
       'koncept i mehanika aktivacije',
       'izbor i koordinacija promotera, hostesa i event tima',
       'priprema, raspored, evidencija dolaska i kontrola realizacije',
-      'podjela uzoraka, prikupljanje kontakata, QR ili kupon mehanika',
+      'QR, kontakt, kupon ili druga dogovorena mehanika',
       'foto i video sadržaj sa terena',
-      'izvještaj nakon događaja i digitalni nastavak'
+      'izvještaj nakon događaja i preporuka za nastavak',
     ],
     process: [
-      ['Cilj', 'Definišemo šta osoba treba da uradi i kako se ta radnja broji.'],
+      ['Cilj', 'Definišemo šta osoba treba da uradi i kako se ta radnja bilježi.'],
       ['Plan terena', 'Lokacije, termini, broj ljudi, oprema, rizici i plan B ulaze u jednu operativnu mapu.'],
-      ['Priprema tima', 'Biramo ljude, radimo pripremu i postavljamo jasnu odgovornost po smjeni.'],
-      ['Realizacija i izvještaj', 'Pratimo prisustvo, učinak, materijal i nalaze koji pomažu narednoj kampanji.']
+      ['Priprema tima', 'Biramo ljude, radimo briefing i postavljamo jasnu odgovornost po smjeni.'],
+      ['Realizacija i izvještaj', 'Pratimo prisustvo, učinak, materijal i nalaze koji pomažu narednom potezu.'],
     ],
-    pricing: [
-      { name: 'Plan aktivacije', price: 'od 500 €', text: 'Koncept, operativni plan i budžetska struktura.' },
-      { name: 'Produkcija i koordinacija', price: 'od 1.500 €', text: 'Agencijska naknada zavisi od broja lokacija, ljudi i dana.' },
-      { name: 'Kompletna kampanja', price: 'po ponudi', text: 'Digital, produkcija, ljudi, teren i izvještavanje.' }
+    engagements: [
+      { name: 'Plan aktivacije', text: 'Koncept, mehanika, operativna mapa, odgovornosti i budžetska struktura.' },
+      { name: 'Produkcija i koordinacija', text: 'Ljudi, smjene, lokacije, oprema, supervizija i završni izvještaj.' },
+      { name: 'Integrisana kampanja', text: 'Digitalna distribucija, sadržaj, teren i mjerenje objedinjeni kroz jedan cilj.' },
     ],
     faq: [
       ['Radite li van Podgorice?', 'Da. Radimo širom Crne Gore. Transport, smještaj i dodatna logistika van Podgorice definišu se u ponudi.'],
       ['Ko obezbjeđuje uniforme i materijal?', 'Možemo preuzeti nabavku i produkciju ili raditi sa materijalom koji klijent već ima. U oba slučaja koristimo kontrolnu listu prije izlaska na teren.'],
-      ['Kako mjerite aktivaciju?', 'Zavisno od cilja koristimo broj interakcija, podijeljenih uzoraka, QR skenova, prijava, kupona, posjeta, sadržaja publike i kvalitativni izvještaj tima.']
+      ['Kako mjerite aktivaciju?', 'Zavisno od cilja koristimo broj interakcija, QR skenova, prijava, kupona, posjeta, sadržaja publike i kvalitativni izvještaj tima.'],
     ],
-    accent: 'cyan'
+    accent: 'cyan',
   },
   {
     slug: 'web-i-konverzije',
@@ -78,25 +80,25 @@ export const services = [
       'prilagodljiv dizajn i produkcijski frontend',
       'forme, integracije i stranica potvrde',
       'tehnički SEO i strukturisani podaci',
-      'GA4/GTM mjerenje događaja i završna provjera'
+      'GA4/GTM mjerenje događaja i završna provjera',
     ],
     process: [
       ['Struktura', 'Definišemo ko dolazi, šta mora da razumije i koju radnju treba da uradi.'],
       ['Prototip', 'Pravimo ključne ekrane i prodajni redosljed prije finalnog razvoja.'],
       ['Produkcija', 'Implementiramo prilagodljiv, pristupačan i brz frontend sa svim integracijama.'],
-      ['Provjera i objava', 'Testiramo linkove, forme, mjerenje, SEO, mobilni prikaz i preusmjerenja.']
+      ['Provjera i objava', 'Testiramo linkove, forme, mjerenje, SEO, mobilni prikaz i preusmjerenja.'],
     ],
-    pricing: [
-      { name: 'Landing stranica', price: 'od 550 €', text: 'Jedna prodajna stranica sa mjerenjem i formom.' },
-      { name: 'Premium mini-sajt', price: 'od 900 €', text: 'Više sekcija ili stranica, sadržaj i lokalni SEO.' },
-      { name: 'Kompleksniji web sistem', price: 'po specifikaciji', text: 'Integracije, korisnički tok i posebna logika.' }
+    engagements: [
+      { name: 'Landing stranica', text: 'Jedna fokusirana prodajna stranica sa jasnim pozivom na akciju, formom i mjerenjem.' },
+      { name: 'Premium mini-sajt', text: 'Kompaktna prezentacija usluge, prostora, izvođača ili partnera sa mobilnim prioritetom.' },
+      { name: 'Digitalni proizvod', text: 'Kompleksniji korisnički tok, integracije, uloge i posebna poslovna logika.' },
     ],
     faq: [
       ['Da li dobijam kod?', 'Da. Predajemo produkcijski repo, dokumentaciju i pristupe koji pripadaju klijentu.'],
       ['Radite li održavanje?', 'Da. Može biti mjesečno ili po potrebi. Jasno razdvajamo održavanje od novih funkcionalnosti.'],
-      ['Možete li povezati postojeće forme i analitiku?', 'Da. Prije migracije mapiramo sve postojeće endpointove, događaje i preusmjerenja kako se funkcionalnost ne bi izgubila.']
+      ['Možete li povezati postojeće forme i analitiku?', 'Da. Prije migracije mapiramo postojeće endpointove, događaje i preusmjerenja kako se funkcionalnost ne bi izgubila.'],
     ],
-    accent: 'yellow'
+    accent: 'yellow',
   },
   {
     slug: 'sadrzaj-za-kampanje',
@@ -111,25 +113,25 @@ export const services = [
       'foto, video, sadržaj korisnika i terenski materijal',
       'prilagođavanje za Meta, Google i društvene mreže',
       'varijante naslova, poziva na akciju i uvodnih kadrova',
-      'arhiva materijala i plan ponovne upotrebe'
+      'arhiva materijala i plan ponovne upotrebe',
     ],
     process: [
       ['Poruka', 'Iz ponude izvlačimo nekoliko uglova koji odgovaraju različitim motivima publike.'],
       ['Produkcioni plan', 'Definišemo scene, kadrove, formate, ljude, lokacije i rokove.'],
       ['Izvedba', 'Snimamo ili dizajniramo materijal u paketima spremnim za distribuciju.'],
-      ['Test i dorada', 'Najbolje poruke razvijamo dalje, a slabe ne branimo iz estetskih razloga.']
+      ['Test i dorada', 'Najbolje poruke razvijamo dalje, a slabe ne branimo iz estetskih razloga.'],
     ],
-    pricing: [
-      { name: 'Plan kreativa', price: 'od 250 €', text: 'Poruke, uglovi, formati i produkcioni plan.' },
-      { name: 'Paket kreativa za oglase', price: 'od 400 €', text: 'Obim zavisi od broja formata i produkcije.' },
-      { name: 'Kontinuirana produkcija', price: 'od 700 €', text: 'Mjesečni sistem materijala i dorada.' }
+    engagements: [
+      { name: 'Kreativni sprint', text: 'Poruke, uglovi, formati i produkcioni plan za konkretan cilj ili kampanju.' },
+      { name: 'Produkcioni paket', text: 'Dogovoreni set foto, video i dizajn materijala spremnih za distribuciju.' },
+      { name: 'Kontinuirani sistem', text: 'Redovan ritam produkcije, testiranja, dorade i ponovne upotrebe materijala.' },
     ],
     faq: [
       ['Radite li vođenje društvenih mreža?', 'Da, kada mreže imaju jasnu ulogu u prodajnom ili reputacionom sistemu. Ne prodajemo samo broj objava bez cilja.'],
       ['Da li snimate na lokaciji?', 'Da. Produkcija na lokaciji se planira posebno i može se povezati sa aktivacijom ili događajem.'],
-      ['Dobijamo li izvorne fajlove?', 'Predaja se definiše ponudom. Finalni izvozi su standard, a izvorni fajlovi se mogu uključiti kada su klijentu potrebni.']
+      ['Dobijamo li izvorne fajlove?', 'Predaja se definiše ponudom. Finalni izvozi su standard, a izvorni fajlovi se mogu uključiti kada su klijentu potrebni.'],
     ],
-    accent: 'pink'
+    accent: 'pink',
   },
   {
     slug: 'recruitment-kampanje',
@@ -144,26 +146,26 @@ export const services = [
       'Meta kampanja za kandidate',
       'distribucija kroz ImaPosla i relevantne zajednice',
       'početna pitanja i organizacija prijava',
-      'sadržaj poslodavca i izvještavanje'
+      'sadržaj poslodavca i izvještavanje',
     ],
     process: [
       ['Profil kandidata', 'Preciziramo ko je potreban, šta je minimum i zbog čega bi kandidat izabrao ponudu.'],
       ['Ponuda i prijava', 'Sređujemo oglas, benefite, prijavu i pitanja koja smanjuju nepotrebnu obradu kandidata.'],
       ['Distribucija', 'Pokrećemo kampanje i koristimo kanale koji imaju pristup lokalnim kandidatima.'],
-      ['Optimizacija', 'Pratimo kvalitet, izvor i brzinu odgovora, a ne samo broj prijava.']
+      ['Optimizacija', 'Pratimo kvalitet, izvor i brzinu odgovora, a ne samo broj prijava.'],
     ],
-    pricing: [
-      { name: 'Recruitment sprint', price: 'od 400 €', text: 'Oglas, landing ili prijava, distribucija i kampanjska postavka.' },
-      { name: 'Sezonska kampanja', price: 'od 800 €', text: 'Više pozicija, kreativni paket i kontinuirana optimizacija.' },
-      { name: 'Sistem zapošljavanja', price: 'po ponudi', text: 'Brend poslodavca, sadržaj, baza i kontinuirani proces zapošljavanja.' }
+    engagements: [
+      { name: 'Kampanja za poziciju', text: 'Ponuda poslodavca, oglas, prijavni tok, distribucija i početno mjerenje.' },
+      { name: 'Sezonsko zapošljavanje', text: 'Više pozicija, lokacija i kreativnih pravaca organizovanih po prioritetima.' },
+      { name: 'Kontinuirani sistem kandidata', text: 'Brend poslodavca, sadržaj, baza, distribucija i redovan proces zapošljavanja.' },
     ],
     faq: [
       ['Da li garantujete zaposlenje kandidata?', 'Ne. Možemo povećati broj i kvalitet prijava i pomoći procesu, ali konačna odluka zavisi od ponude, uslova i selekcije kompanije.'],
       ['Možete li raditi više pozicija odjednom?', 'Da. Strukturu pravimo po prioritetima, lokacijama i razlikama između profila kandidata.'],
-      ['Da li je ImaPosla obavezno?', 'Nije, ali je koristan kanal kada ciljna grupa odgovara publici platforme i zajednice.']
+      ['Da li je ImaPosla obavezno?', 'Nije, ali je koristan kanal kada ciljna grupa odgovara publici platforme i zajednice.'],
     ],
-    accent: 'cyan'
-  }
+    accent: 'cyan',
+  },
 ]
 
-export const serviceBySlug = Object.fromEntries(services.map(service => [service.slug, service]))
+export const serviceBySlug = Object.fromEntries(services.map((service) => [service.slug, service])) as Record<string, Service>

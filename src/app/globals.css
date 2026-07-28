@@ -377,3 +377,48 @@ details>div p{margin:0}
   .case-media-placeholder-inner{left:24px;right:24px;bottom:24px}
   .case-media-placeholder-inner strong{font-size:25px}
 }
+
+/* Premium portfolio, engagement models and thematic discovery */
+.engagement-panel{border:1px solid var(--line);border-radius:30px;padding:52px;background:linear-gradient(135deg,rgba(245,0,98,.08),rgba(0,217,232,.04));display:grid;grid-template-columns:.78fr 1.22fr;gap:50px}
+.engagement-list{display:grid;gap:12px}
+.engagement-card{padding:23px;border-radius:16px;border:1px solid var(--line);background:rgba(8,8,11,.62)}
+.engagement-card h3{font-size:20px;margin-bottom:7px}
+.engagement-card p{font-size:14px;margin-bottom:18px}
+.engagement-card span{display:inline-flex;border:1px solid var(--line);border-radius:999px;padding:7px 10px;color:#d8d6de;font-size:11px;font-weight:850}
+
+.work-explorer{display:grid;gap:34px}
+.work-filter{display:flex;align-items:center;justify-content:space-between;gap:20px;padding-bottom:24px;border-bottom:1px solid var(--line)}
+.work-filter-scroll{display:flex;flex-wrap:wrap;gap:8px}
+.work-result-count{flex:none;color:#8e8b96;font-size:12px;font-weight:800}
+
+.case-preview-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.case-preview-card{border:1px solid rgba(0,0,0,.12);border-radius:22px;overflow:hidden;background:#fff;color:var(--ink);display:flex;flex-direction:column;min-width:0}
+.case-preview-card .case-visual{min-height:250px;padding:22px}
+.case-preview-card .case-cover-copy{max-width:92%}
+.case-preview-card .case-cover-copy>span{font-size:9px}
+.case-preview-card .case-cover-copy>strong{font-size:58px;margin:24px 0 12px}
+.case-preview-card .case-cover-copy>small{font-size:12px}
+.case-preview-copy{padding:24px;display:flex;flex-direction:column;flex:1}
+.case-preview-copy>span{font-size:10px;font-weight:900;letter-spacing:.12em;text-transform:uppercase;color:var(--pink)}
+.case-preview-copy h3{font-size:25px;margin:16px 0 12px}
+.case-preview-copy p{font-size:14px;color:#6d6973}
+.case-preview-copy a{margin-top:auto;padding-top:18px;border-top:1px solid rgba(0,0,0,.12);font-weight:900}
+
+.case-visual-hive-agency-platforma:before{border-color:#f4c84f;border-width:58px}
+.case-visual-student-connect-mini-festival:before{border-color:#8f6bff;border-width:52px}
+.case-visual-kucica-na-podgorickom-pazaru:before{border-color:#35d07f;border-width:62px}
+
+@media(max-width:900px){
+  .engagement-panel{grid-template-columns:1fr}
+  .case-preview-grid{grid-template-columns:1fr 1fr}
+}
+
+@media(max-width:620px){
+  .engagement-panel{padding:26px}
+  .work-filter{display:block}
+  .work-filter-scroll{overflow-x:auto;flex-wrap:nowrap;margin-inline:-12px;padding:2px 12px 12px;scrollbar-width:none}
+  .work-filter-scroll::-webkit-scrollbar{display:none}
+  .work-filter-scroll .filter-button{flex:none;white-space:nowrap}
+  .work-result-count{display:block;margin-top:10px}
+  .case-preview-grid{grid-template-columns:1fr}
+}

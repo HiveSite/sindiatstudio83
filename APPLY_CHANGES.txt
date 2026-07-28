@@ -1,17 +1,14 @@
-SINDIKAT STUDIO 83 - CASE STUDY SADRZAJ I PLACEHOLDERI
+SINDIKAT STUDIO 83 - PREMIUM SELLING UPDATE
 
-1. Raspakuj ZIP u root postojećeg Next.js repoa.
-2. Dozvoli zamjenu postojećih fajlova.
+1. Raspakuj ZIP u root postojećeg Next.js repoa.
+2. Dozvoli zamjenu postojećih fajlova.
 3. Novi fajl koji se dodaje:
-   src/components/case-media.tsx
+   src/components/work-filter.tsx
 4. Pokreni Netlify deploy:
    Deploys -> Trigger deploy -> Clear cache and deploy site
 
-ZIP ne sadrzi slike. Dodaje:
-- 6 kompletnih case study projekata
-- 28 brendiranih vizuelnih placeholdera
-- direktne linkove ka digitalnim projektima
-- mobilno prilagodjen prikaz
-- prosirenu Radovi stranicu i detaljne projektne stranice
-
-Postojeci slugovi za ImaPosla, BattleBots i terenske angazmane ostaju isti.
+Ovaj ZIP:
+- ne mijenja package.json niti Netlify konfiguraciju
+- ne sadrži slike
+- ne sadrži node_modules
+- ne dira GitHub automatski
