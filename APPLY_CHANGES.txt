@@ -1,5 +1,7 @@
-Raspakuj ZIP u root GitHub repoa i dozvoli zamjenu/dodavanje fajlova.
-Mora nastati ova putanja:
-public/.well-known/security.txt
+Raspakuj ZIP u root repoa i dozvoli zamjenu postojećeg fajla.
 
-Zatim pokreni novi Netlify deploy.
+Mijenja se samo:
+src/app/manifest.ts
+
+Greška je ispravljena tako što je nevažeća vrijednost purpose: 'any maskable'
+razdvojena na dvije validne manifest stavke: purpose: 'any' i purpose: 'maskable'.
