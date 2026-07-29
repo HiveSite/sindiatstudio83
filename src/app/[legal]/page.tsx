@@ -24,6 +24,6 @@ export default async function LegalPage({ params }: { params: Promise<{ legal: s
   const crumbs = [{ label: page.title, href: route }]
   return <>
     <JsonLd data={breadcrumbSchema(crumbs)} />
-    <section className="section"><div className="container legal"><Breadcrumbs items={crumbs} /><span className="eyebrow" style={{ marginTop: 42 }}>Pravni dokument</span><h1>{page.title}</h1><p className="lead">{page.description}</p>{page.sections.map(([title, text], index) => <div key={title}>{index > 0 ? <h2>{title}</h2> : null}<p>{text}</p></div>)}<p className="legal-updated">Posljednje ažuriranje: 27. jul 2026.</p></div></section>
+    <section className="section"><div className="container legal"><Breadcrumbs items={crumbs} /><span className="eyebrow" style={{ marginTop: 42 }}>Pravni dokument</span><h1>{page.title}</h1><p className="lead">{page.description}</p>{page.sections.map(([title, text], index) => <div key={title}>{index > 0 ? <h2>{title}</h2> : null}<p>{text}</p></div>)}<p className="legal-updated">Posljednje ažuriranje: 29. jul 2026.</p></div></section>
   </>
 }

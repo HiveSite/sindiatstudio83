@@ -6,11 +6,15 @@ import { usePathname } from 'next/navigation'
 import { useEffect, useRef, useState } from 'react'
 import { navigation } from '@/data/site'
 
+const desktopMediaQuery = '(min-width: 1041px)'
+const focusableSelector = 'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])'
+
 export function Header() {
   const pathname = usePathname()
   const normalizedPath = pathname.endsWith('/') ? pathname : `${pathname}/`
   const [open, setOpen] = useState(false)
   const toggleRef = useRef<HTMLButtonElement | null>(null)
+  const panelRef = useRef<HTMLDivElement | null>(null)
 
   const activeHref = navigation
     .filter((item) => normalizedPath.startsWith(item.href))
@@ -27,9 +31,44 @@ export function Header() {
   }, [pathname])
 
   useEffect(() => {
-    const onKeyDown = (event: KeyboardEvent) => {
-      if (event.key === 'Escape' && open) closeMenu(true)
+    const media = window.matchMedia(desktopMediaQuery)
+    const closeOnDesktop = () => {
+      if (media.matches) closeMenu(false)
     }
+    media.addEventListener('change', closeOnDesktop)
+    return () => media.removeEventListener('change', closeOnDesktop)
+  }, [])
+
+  useEffect(() => {
+    if (!open) return
+
+    const panel = panelRef.current
+    document.body.style.overflow = 'hidden'
+    window.requestAnimationFrame(() => panel?.querySelector<HTMLElement>(focusableSelector)?.focus())
+
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        event.preventDefault()
+        closeMenu(true)
+        return
+      }
+
+      if (event.key !== 'Tab' || !panel) return
+      const focusable = Array.from(panel.querySelectorAll<HTMLElement>(focusableSelector))
+        .filter((element) => !element.hasAttribute('hidden'))
+      if (!focusable.length) return
+
+      const first = focusable[0]
+      const last = focusable[focusable.length - 1]
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault()
+        last.focus()
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault()
+        first.focus()
+      }
+    }
+
     window.addEventListener('keydown', onKeyDown)
     return () => {
       window.removeEventListener('keydown', onKeyDown)
@@ -37,13 +76,7 @@ export function Header() {
     }
   }, [open])
 
-  const toggleMenu = () => {
-    setOpen((current) => {
-      const next = !current
-      document.body.style.overflow = next ? 'hidden' : ''
-      return next
-    })
-  }
+  const toggleMenu = () => setOpen((current) => !current)
 
   return (
     <>
@@ -60,20 +93,29 @@ export function Header() {
             })}
           </nav>
           <div className="nav-actions">
-            <Link className="button button-primary button-small" href="/kontakt/?izvor=header" data-track="header_lead">Zatraži plan</Link>
+            <Link className="button button-primary button-small" href="/kontakt/?izvor=header" data-track="header_lead">Pošalji brief</Link>
             <button ref={toggleRef} className="menu-toggle" type="button" aria-label={open ? 'Zatvori meni' : 'Otvori meni'} aria-expanded={open} aria-controls="mobile-navigation" onClick={toggleMenu}>
               <span /><span /><span />
             </button>
           </div>
         </div>
-        <div id="mobile-navigation" className={`mobile-panel${open ? ' is-open' : ''}`} data-mobile-menu hidden={!open}>
+        <div
+          ref={panelRef}
+          id="mobile-navigation"
+          className={`mobile-panel${open ? ' is-open' : ''}`}
+          role="dialog"
+          aria-modal="true"
+          aria-label="Mobilna navigacija"
+          hidden={!open}
+        >
           <nav aria-label="Mobilna navigacija">
             {navigation.map((item) => <Link key={item.href} href={item.href} aria-current={activeHref === item.href ? 'page' : undefined}>{item.label}</Link>)}
             <Link href="/postani-dio-tima/">Postani dio tima</Link>
           </nav>
-          <Link className="button button-primary" href="/kontakt/?izvor=mobile-menu" data-track="mobile_menu_lead">Zatraži plan i procjenu</Link>
+          <Link className="button button-primary" href="/kontakt/?izvor=mobile-menu" data-track="mobile_menu_lead">Pošalji brief</Link>
         </div>
       </header>
+      <button className="mobile-menu-scrim" type="button" aria-label="Zatvori meni" tabIndex={-1} hidden={!open} onClick={() => closeMenu(true)} />
     </>
   )
 }

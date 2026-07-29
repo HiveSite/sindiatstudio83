@@ -1,6 +1,7 @@
 'use client'
 
 import { useMemo, useState } from 'react'
+import { trackEvent } from '@/lib/tracking'
 import { CaseCard } from '@/components/cards'
 import { caseCategories } from '@/data/cases'
 import type { CaseCategory, CaseStudy } from '@/types/content'
@@ -9,6 +10,11 @@ type FilterValue = 'sve' | CaseCategory
 
 export function WorkFilter({ items }: { items: CaseStudy[] }) {
   const [active, setActive] = useState<FilterValue>('sve')
+  const selectCategory = (category: FilterValue) => {
+    setActive(category)
+    trackEvent('work_filter', { category })
+  }
+
   const visibleItems = useMemo(
     () => active === 'sve' ? items : items.filter((item) => item.categories.includes(active)),
     [active, items],
@@ -18,7 +24,7 @@ export function WorkFilter({ items }: { items: CaseStudy[] }) {
 
   return (
     <div className="work-explorer" id="projekti">
-      <div className="work-filter" aria-label="Filtriraj projekte po temi">
+      <div className="work-filter" role="group" aria-label="Filtriraj projekte po temi">
         <div className="work-filter-scroll">
           {caseCategories.map((category) => (
             <button
@@ -26,7 +32,8 @@ export function WorkFilter({ items }: { items: CaseStudy[] }) {
               type="button"
               className={`filter-button${active === category.slug ? ' is-active' : ''}`}
               aria-pressed={active === category.slug}
-              onClick={() => setActive(category.slug)}
+              aria-controls="work-results"
+              onClick={() => selectCategory(category.slug)}
             >
               {category.label}
             </button>
@@ -36,7 +43,7 @@ export function WorkFilter({ items }: { items: CaseStudy[] }) {
           {visibleItems.length} {countLabel}
         </span>
       </div>
-      <div className="case-grid">
+      <div className="case-grid" id="work-results">
         {visibleItems.map((item) => <CaseCard key={item.slug} item={item} />)}
       </div>
     </div>

@@ -1,14 +1,22 @@
-SINDIKAT STUDIO 83 - PREMIUM SELLING UPDATE
+SINDIKAT STUDIO 83 - RESPONSIVE I TEHNICKA PRIPREMA
 
-1. Raspakuj ZIP u root postojećeg Next.js repoa.
-2. Dozvoli zamjenu postojećih fajlova.
-3. Novi fajl koji se dodaje:
-   src/components/work-filter.tsx
-4. Pokreni Netlify deploy:
-   Deploys -> Trigger deploy -> Clear cache and deploy site
+1. Raspakuj ZIP u root postojeceg Next.js repoa.
+2. Dozvoli zamjenu postojecih fajlova i dodavanje novih fajlova.
+3. Ne mijenjaj Netlify podesavanja:
+   - Build command: npm run build
+   - Publish directory: out
+   - Base directory: prazno
+4. Pokreni:
+   Netlify -> Deploys -> Trigger deploy -> Clear cache and deploy site
 
-Ovaj ZIP:
-- ne mijenja package.json niti Netlify konfiguraciju
-- ne sadrži slike
-- ne sadrži node_modules
-- ne dira GitHub automatski
+Novi fajlovi:
+- scripts/validate-responsive.mjs
+- scripts/validate-site-integrity.mjs
+
+ZIP ne sadrzi:
+- node_modules
+- slike
+- privremene QA fajlove
+- Git istoriju
+
+GitHub nije mijenjan direktno.

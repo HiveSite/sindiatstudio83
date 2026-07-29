@@ -4,13 +4,15 @@
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
-    "build": "node scripts/validate-project.mjs && next build",
+    "build": "node scripts/validate-project.mjs && node scripts/validate-responsive.mjs && node scripts/validate-site-integrity.mjs && next build",
     "typecheck": "tsc --noEmit",
     "validate:source": "node scripts/validate-project.mjs",
-    "check": "npm run typecheck && npm run build",
+    "check": "npm run typecheck && npm run validate:source && npm run validate:responsive && npm run validate:integrity && next build",
     "sync:blog": "node scripts/sync-blog.mjs",
     "preview": "python3 -m http.server 4173 -d out",
-    "audit:source": "node scripts/validate-project.mjs"
+    "audit:source": "node scripts/validate-project.mjs",
+    "validate:responsive": "node scripts/validate-responsive.mjs",
+    "validate:integrity": "node scripts/validate-site-integrity.mjs"
   },
   "dependencies": {
     "next": "16.1.6",

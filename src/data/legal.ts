@@ -29,7 +29,7 @@ export const legalPages = {
     description: 'Osnovni uslovi korišćenja sajta Sindikat Studio 83.',
     sections: [
       ['Uvod', 'Sadržaj sajta služi za predstavljanje usluga, projekata, vodiča i mogućnosti angažmana.'],
-      ['Ponude i cijene', 'Prikazani rasponi su orijentacioni. Obavezujući obim, rokovi i cijena postoje tek nakon pisane ponude i prihvatanja.'],
+      ['Ponude i cijene', 'Opis usluga i modela saradnje nije obavezujuća ponuda. Konačni obim, rokovi, odgovornosti i cijena postoje tek nakon pisane ponude i prihvatanja.'],
       ['Prijave i angažmani', 'Slanje prijave ne garantuje angažman. Uslovi, naknada, lokacija i obaveze potvrđuju se posebno za svaki projekat.'],
       ['Sadržaj', 'Tekstovi i vodiči nijesu pravni, poreski ili finansijski savjet. Korisnik je odgovoran da odluke prilagodi sopstvenoj situaciji.'],
       ['Odgovornost', 'Nastojimo da informacije budu tačne, ali ne garantujemo da će svaki eksterni servis, forma ili link biti dostupan bez prekida.'],

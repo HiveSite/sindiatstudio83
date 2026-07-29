@@ -1,15 +1,41 @@
-VALIDATION REPORT
+VALIDATION REPORT - 29. JUL 2026.
 
-PASSED:
-- source validation: 46 TS/TSX files
-- TypeScript semantic check with local framework stubs
-- duplicate/invalid public price cleanup check
-- „Grafičke MART mape“ occurrence check: 0
-- required security.txt present in working baseline
+PROSLO:
+- Source validation:
+  46 TS/TSX fajlova
+  30 blog tekstova
+  14 obaveznih fajlova
 
-KNOWN NON-BLOCKING WARNINGS:
-- 30 blog posts still have no confirmed publication date
+- Responsive validation:
+  breakpointi
+  overflow zastita
+  safe-area
+  mobilna navigacija
+  filteri
+  forme i modal
 
-NOTE:
-A full local Next.js production build was not run because project dependencies were not available in the isolated runtime.
-Netlify should perform the authoritative production build after upload.
+- Site integrity validation:
+  67 ruta
+  37 literalnih internih linkova
+  33 redirect pravila
+  sitemap, robots i manifest
+  tracking i SEO provjere
+  kontrola javnih nepotvrdjenih cijena
+
+- TypeScript semantic QA:
+  proslo sa lokalnim framework stubovima
+
+- Vizuelni responsive QA:
+  320x700
+  375x812
+  768x1024
+  1024x900
+  1440x1000
+  dokument-level horizontal overflow: 0
+
+NEBLOKIRAJUCA UPOZORENJA:
+- 30 blog tekstova jos nema potvrden datum objave.
+
+OGRANICENJE LOKALNE PROVJERE:
+- Puni lokalni Next.js produkcijski build nije pokrenut jer registry zavisnosti nije bio dostupan u izolovanom runtimeu.
+- Netlify build nakon uploadovanja je autoritativna finalna provjera.

@@ -200,10 +200,10 @@ export function JobsBoard() {
           <div className="modal-header"><div><span className="eyebrow">Prijava</span><h2 id="apply-title">Pošalji podatke</h2></div><button ref={closeRef} className="modal-close" type="button" onClick={closeApplication} aria-label="Zatvori">×</button></div>
           <form className="lead-form" onSubmit={submitApplication} aria-busy={applying}>
             <label><span>Pozicija</span><input name="jobTitle" readOnly value={selected?.title || ''} /></label>
-            <div className="form-grid" style={{ marginTop: 16 }}>
+            <div className="form-grid form-grid-spaced">
               <label><span>Ime i prezime *</span><input name="name" required autoComplete="name" maxLength={120} /></label>
               <label><span>Email *</span><input name="email" type="email" required autoComplete="email" maxLength={180} /></label>
-              <label><span>Telefon *</span><input name="phone" required autoComplete="tel" maxLength={40} /></label>
+              <label><span>Telefon *</span><input name="phone" type="tel" inputMode="tel" required autoComplete="tel" maxLength={40} /></label>
               <label className="form-span"><span>Grad, dostupnost i kratko iskustvo</span><textarea name="msg" rows={4} maxLength={1500} /></label>
             </div>
             <div className="form-submit"><button className="button button-primary" type="submit" disabled={applying}>{applying ? 'Šaljem...' : 'Pošalji prijavu'}</button><p>Prijava se prosljeđuje u postojeći Sindikat sistem.</p></div>

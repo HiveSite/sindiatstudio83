@@ -26,7 +26,7 @@ export function BlogExplorer({ initialPosts }: { initialPosts: BlogPost[] }) {
   return (
     <>
       <div className="blog-toolbar">
-        <div className="filter-row" role="group" aria-label="Filtriraj tekstove po kategoriji">
+        <div className="filter-row filter-row-scroll" role="group" aria-label="Filtriraj tekstove po kategoriji">
           <button className={`filter-button${active === 'all' ? ' is-active' : ''}`} type="button" aria-pressed={active === 'all'} onClick={() => selectCategory('all')}>Sve</button>
           {categories.map((category) => <button key={category} className={`filter-button${active === category ? ' is-active' : ''}`} type="button" aria-pressed={active === category} onClick={() => selectCategory(category)}>{categoryLabels[category] || category}</button>)}
         </div>
