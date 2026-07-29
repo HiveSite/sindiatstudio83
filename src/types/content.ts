@@ -12,6 +12,9 @@ export interface Service {
   shortTitle: string
   summary: string
   outcomes: string[]
+  bestFor: string[]
+  clientInputs: string[]
+  successSignals: string[]
   includes: string[]
   process: string[][]
   engagements: ServiceEngagement[]
@@ -25,6 +28,10 @@ export interface Industry {
   summary: string
   problems: string[]
   solutions: string[]
+  bestFor: string[]
+  successSignals: string[]
+  timing: string
+  caseSlugs: string[]
   cta: string
 }
 
@@ -57,6 +64,7 @@ export interface CaseStudy {
   type: string
   title: string
   summary: string
+  role: string
   metrics?: string[][]
   challenge: string
   solution: string

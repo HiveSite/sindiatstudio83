@@ -1,44 +1,171 @@
-export const industries = [
+import type { Industry } from '@/types/content'
+
+export const industries: Industry[] = [
   {
     slug: 'ugostiteljstvo-i-turizam',
     title: 'Ugostiteljstvo i turizam',
-    summary: 'Kampanje, direktne rezervacije, priprema sezone, Google prisustvo, sadržaj i aktivacije na lokaciji.',
-    problems: ['zavisnost od posrednika i platformi', 'slaba popunjenost van udarnih termina', 'nejasna ponuda za strane i domaće goste'],
-    solutions: ['sezonski plan rasta', 'Google Search i lokalna vidljivost', 'Meta kampanje i ponovno oglašavanje', 'landing stranica na više jezika', 'QR sistem za recenzije i povratak gosta'],
-    cta: 'Planiraj sezonu'
+    summary: 'Kampanje, direktni upiti, priprema sezone, sadržaj, lokalna vidljivost i operativna podrška za hotele, restorane, beach barove, smještaj i turističke programe.',
+    problems: [
+      'ponuda je rasuta kroz mreže i platforme, bez jasnog mjesta za direktan kontakt',
+      'kampanje donose interesovanje, ali put do rezervacije ili upita ima previše koraka',
+      'sezonska promocija kreće kasno, kada su sadržaj, osoblje i kapacitet već pod pritiskom',
+      'digitalna komunikacija ne prati stvarno stanje ponude, termina i lokacije',
+    ],
+    solutions: [
+      'sezonski plan ponude, sadržaja, kampanja i kapaciteta',
+      'landing ili mini-sajt sa direktnim upitom, lokacijom i jasnim informacijama',
+      'Google i Meta kampanje povezane sa mjerenjem rezervacije ili kontakta',
+      'foto i video produkcija na lokaciji sa materijalom za više kanala',
+      'promo, event ili hospitality timovi kada digitalna kampanja ima nastavak na terenu',
+    ],
+    bestFor: [
+      'objekte koji žele više direktnih upita i manju zavisnost od posrednika',
+      'sezonske ponude kojima treba priprema prije vrhunca potražnje',
+      'nove lokacije, programe ili događaje koje publika još ne poznaje',
+      'biznise kojima uz marketing treba sadržaj, mini-sajt ili tim na lokaciji',
+    ],
+    successSignals: [
+      'više direktnih upita, poziva, rezervacija ili navigacija prema lokaciji',
+      'poznat trošak i kvalitet kontakta po kampanji i ponudi',
+      'jasna vidljivost termina, kapaciteta i sadržaja koji stvarno pokreće reakciju',
+      'materijal i sistem koji se mogu ponovo koristiti u narednoj sezoni',
+    ],
+    timing: 'Za ozbiljnu sezonu najbolje je krenuti dok još postoji vrijeme da se ponuda, sadržaj, sajt i kapacitet tima usklade. Kampanja pokrenuta u posljednjem trenutku ne može ispraviti operativni problem koji nije riješen unaprijed.',
+    caseSlugs: ['mini-sajtovi-i-digitalni-alati', 'privatni-i-korporativni-dogadjaji', 'hive-agency-platforma'],
+    cta: 'Planiraj sezonu',
   },
   {
     slug: 'retail-i-fmcg',
     title: 'Maloprodaja i FMCG',
-    summary: 'Promocije, podjela uzoraka, lansiranje proizvoda, prodajna mjesta, promo timovi i digitalni nastavak kampanje.',
-    problems: ['aktivacija bez mjerljivog ishoda', 'neujednačena realizacija po lokacijama', 'materijal sa terena se ne koristi dalje'],
-    solutions: ['operativni plan po lokacijama', 'promoteri i promo lideri', 'podjela uzoraka i kupon mehanike', 'foto i video dokaz realizacije', 'ponovno oglašavanje i sadržaj nakon aktivacije'],
-    cta: 'Planiraj aktivaciju'
+    summary: 'Lansiranja, promocije na prodajnim mjestima, promo timovi, višelokacijska logistika, sadržaj i digitalni nastavak kampanje.',
+    problems: [
+      'aktivacija se završi bez jasne evidencije šta je realizovano i šta je publika uradila',
+      'standard nije isti na svim lokacijama, smjenama ili partnerskim objektima',
+      'timovi dobijaju nepotpun briefing i improvizuju poruku na terenu',
+      'foto i video materijal ostaje neorganizovan i ne koristi se nakon aktivacije',
+    ],
+    solutions: [
+      'operativna mapa po lokacijama, terminima, materijalu i odgovornostima',
+      'selekcija, briefing i koordinacija promotera i vođa smjena',
+      'mehanika interakcije usklađena sa ciljem i pravilima brenda',
+      'foto-dokumentacija i evidencija realizacije po lokaciji',
+      'digitalna distribucija i sadržaj koji produžavaju život kampanje',
+    ],
+    bestFor: [
+      'brendove koji aktiviraju više lokacija ili rade u kratkim intenzivnim periodima',
+      'lansiranja novih proizvoda i kampanje koje traže direktan kontakt sa publikom',
+      'promocije kojima treba kontrola tima, materijala i standarda realizacije',
+      'projekte koji žele povezati teren sa QR radnjom, prijavom, sadržajem ili ponovnim kontaktom',
+    ],
+    successSignals: [
+      'svaka lokacija ima potvrđen tim, materijal, odgovornost i dokaz realizacije',
+      'odstupanja i problemi se bilježe i rješavaju tokom projekta, ne tek nakon završetka',
+      'klijent može uporediti lokacije, termine i tipove interakcije',
+      'materijal sa terena ulazi u naredni kampanjski ili sadržajni ciklus',
+    ],
+    timing: 'Plan treba zaključati prije nego što materijal i timovi krenu na lokacije. Najviše grešaka nastaje kada se kreativna ideja odobri, a operativni dio ostane za posljednju sedmicu.',
+    caseSlugs: ['sistem-za-terenske-angazmane', 'aktivacije-regulisanih-brendova'],
+    cta: 'Planiraj aktivaciju',
   },
   {
     slug: 'eventi-i-venue',
     title: 'Događaji i prostori',
-    summary: 'Popunjavanje događaja, prodaja ulaznica, tok gostiju, produkcija, tim i sadržaj prije, tokom i nakon događaja.',
-    problems: ['promocija kreće kasno', 'ne postoji jasan put do kupovine ili prijave', 'produkcija i marketing rade odvojeno'],
-    solutions: ['plan pokretanja i kampanja', 'prodajna stranica ili sistem za ulaznice', 'event osoblje i koordinacija', 'sadržaj uživo i sadržaj publike', 'ponovno oglašavanje nakon događaja'],
-    cta: 'Pokreni event kampanju'
+    summary: 'Koncept, promocija, prijave ili prodaja, produkcija, osoblje, tok gostiju i sadržaj za privatne, korporativne, edukativne i community događaje.',
+    problems: [
+      'promocija počinje prije nego što su program, kapacitet i korisnički tok spremni',
+      'marketing, izvođači, tehnički tim i osoblje rade po različitim informacijama',
+      'ne postoji jedna produkcijska mapa sa rokovima, vlasnicima i planom B',
+      'događaj završi bez uredne dokumentacije i sadržaja za naredni ciklus',
+    ],
+    solutions: [
+      'programska i produkcijska struktura sa jasnim odgovornostima',
+      'landing, prijava, ulaznice ili drugi odgovarajući put do učešća',
+      'kampanja i sadržaj usklađeni sa stvarnim kapacitetom događaja',
+      'event osoblje, dobavljači, tehnika i protokol u jednoj operativnoj mapi',
+      'foto, video, izvještaj i plan nastavka nakon događaja',
+    ],
+    bestFor: [
+      'kompanije koje organizuju korporativni događaj, team building ili internu aktivaciju',
+      'edukativne i community programe sa više učesnika, partnera i programskih blokova',
+      'venue i ugostiteljske prostore kojima treba popunjavanje događaja i uredan tok gostiju',
+      'privatne događaje kod kojih domaćin želi jednu tačku za koordinaciju više dobavljača',
+    ],
+    successSignals: [
+      'program, produkcija, komunikacija i logistika koriste isti raspored i verziju informacija',
+      'publika lako dolazi do prijave, lokacije i ključnih informacija',
+      'problemi imaju unaprijed definisanog vlasnika i rezervno rješenje',
+      'nakon događaja ostaju uredan izvještaj, materijal i jasni naredni potezi',
+    ],
+    timing: 'Vrijeme pripreme zavisi od formata, ali promocija ne treba da krene prije nego što su zaključani ključni program, kapacitet, lokacija i proces prijave. Produkcija i komunikacija moraju se razvijati paralelno.',
+    caseSlugs: ['battlebots-arena', 'student-connect-mini-festival', 'privatni-i-korporativni-dogadjaji'],
+    cta: 'Pokreni događaj',
   },
   {
     slug: 'nekretnine-i-premium-usluge',
     title: 'Nekretnine i premium usluge',
-    summary: 'Kampanje za upite, kvalifikacione forme, jasna prezentacija ponude i praćenje kvaliteta kontakata.',
-    problems: ['mnogo nekvalitetnih upita', 'spora obrada kontakata', 'sajt ne objašnjava dovoljno vrijednost i naredni korak'],
-    solutions: ['kampanje za upite', 'landing stranica po projektu ili ponudi', 'kvalifikaciona pitanja', 'CRM ili email integracija', 'praćenje izvora i kvaliteta kontakata'],
-    cta: 'Sredi sistem upita'
+    summary: 'Jasna digitalna prezentacija, kampanje za kvalitetne upite, kvalifikaciona pitanja i praćenje kontakata za ponude sa dužim procesom odluke.',
+    problems: [
+      'kampanja generiše mnogo kontakata koji nijesu ozbiljni ili ne razumiju ponudu',
+      'sajt prikazuje karakteristike, ali ne objašnjava vrijednost, proces i naredni korak',
+      'upiti dolaze kroz više kanala i gube se bez uredne evidencije',
+      'prodajni tim prekasno dobija informaciju o izvoru i interesovanju kontakta',
+    ],
+    solutions: [
+      'landing ili mini-sajt prema konkretnoj ponudi, lokaciji ili segmentu kupaca',
+      'kampanje sa porukama koje filtriraju interesovanje prije kontakta',
+      'kvalifikaciona pitanja i jasan izbor načina komunikacije',
+      'tracking izvora, statusa i kvaliteta kontakata',
+      'sadržaj koji objašnjava proces, standard, povjerenje i razliku u ponudi',
+    ],
+    bestFor: [
+      'nekretnine, smještaj i usluge gdje odluka zahtijeva više informacija i povjerenja',
+      'ponude sa ograničenim kapacitetom ili većom vrijednošću pojedinačnog klijenta',
+      'timove koji žele manje, ali relevantnije upite',
+      'biznise kojima je potreban premium mini-sajt umjesto velike i komplikovane web prezentacije',
+    ],
+    successSignals: [
+      'korisnik prije kontakta razumije ponudu, okvir procesa i očekivani naredni korak',
+      'prodajni tim vidi izvor, interesovanje i osnovni kontekst upita',
+      'kampanja se optimizuje prema kvalitetu kontakta, ne samo prema cijeni forme',
+      'mobilni prikaz, forma i direktni kontakt rade bez prepreka',
+    ],
+    timing: 'Najbolji trenutak za početak je prije intenzivnog perioda prodaje ili objave nove ponude. Struktura stranice, materijal i način obrade upita treba da budu spremni prije povećanja budžeta.',
+    caseSlugs: ['mini-sajtovi-i-digitalni-alati', 'hive-agency-platforma'],
+    cta: 'Sredi sistem upita',
   },
   {
     slug: 'poslodavci-i-zaposljavanje',
     title: 'Poslodavci i zapošljavanje',
-    summary: 'Kampanje za zapošljavanje, ponuda poslodavca, jednostavna prijava, distribucija i sezonsko angažovanje.',
-    problems: ['premalo relevantnih prijava', 'oglas ne objašnjava stvarne uslove', 'kandidati odustaju zbog sporog procesa'],
-    solutions: ['jasna ponuda poslodavca', 'oglasi i kreativni paket', 'brza prijava bez komplikacija', 'ImaPosla i distribucija kroz zajednice', 'početna selekcija i izvještavanje'],
-    cta: 'Pokreni kampanju za zapošljavanje'
-  }
+    summary: 'Ponuda poslodavca, kampanje, jednostavna prijava, ImaPosla distribucija i organizacija početnog toka za sezonske, operativne i druge pozicije.',
+    problems: [
+      'oglas ne objašnjava uslove i privlači kandidate sa pogrešnim očekivanjima',
+      'prijava je preduga ili neprilagođena telefonu',
+      'kandidati čekaju odgovor i odustaju prije prvog razgovora',
+      'tim prati samo broj prijava, bez izvora, kvaliteta i ishoda',
+    ],
+    solutions: [
+      'jasna ponuda poslodavca i poruka prilagođena profilu kandidata',
+      'oglas, kreativni paket i kratka prijava sa potrebnim početnim pitanjima',
+      'Meta kampanje, ImaPosla i distribucija kroz relevantne zajednice',
+      'organizacija prijava, statusa i brzine prvog odgovora',
+      'izvještavanje prema kvalitetu kandidata i ishodu procesa',
+    ],
+    bestFor: [
+      'sezonsko zapošljavanje i pozicije sa kratkim rokom za popunjavanje',
+      'više pozicija ili lokacija koje treba organizovati po prioritetu',
+      'poslodavce koji dobijaju premalo ili previše nerelevantnih prijava',
+      'timove koji žele povezati employer sadržaj, oglase i lokalnu distribuciju',
+    ],
+    successSignals: [
+      'kandidat razumije posao, lokaciju, uslove i način prijave prije slanja podataka',
+      'poznat je izvor relevantnih prijava i vrijeme do prvog odgovora',
+      'poslodavac ima pregledan tok umjesto nepovezanih poruka i CV-eva',
+      'kampanja se mijenja prema ishodu selekcije, a ne samo prema količini prijava',
+    ],
+    timing: 'Kod sezonskih i operativnih pozicija kampanja treba da počne dovoljno rano da ostane vrijeme za odgovor, selekciju i zamjene. Veći budžet ne može nadoknaditi spor proces nakon prijave.',
+    caseSlugs: ['imaposla-digitalni-proizvod', 'sistem-za-terenske-angazmane'],
+    cta: 'Pokreni zapošljavanje',
+  },
 ]
 
-export const industryBySlug = Object.fromEntries(industries.map(industry => [industry.slug, industry]))
+export const industryBySlug = Object.fromEntries(industries.map((industry) => [industry.slug, industry])) as Record<string, Industry>

@@ -26,7 +26,7 @@ export function LeadForm({ compact = false, source = 'contact-page' }: { compact
     const params = new URLSearchParams(window.location.search)
     const nextContext = { service: params.get('usluga') || '', industry: params.get('industrija') || '', source: params.get('izvor') || source }
     setQueryContext(nextContext)
-    if (nextContext.service || nextContext.industry) setStatus('Kontekst upita je prepoznat. Dodaj kontakt i najvažnije detalje.')
+    if (nextContext.service || nextContext.industry) setStatus('Prepoznali smo stranicu sa koje dolaziš. Dodaj kontakt, rok i najvažniji kontekst.')
   }, [source])
 
   const startTracking = () => {
@@ -79,7 +79,7 @@ export function LeadForm({ compact = false, source = 'contact-page' }: { compact
     }
 
     setState('loading')
-    setStatus('Slanje u toku...')
+    setStatus('Šaljemo brief...')
     const controller = new AbortController()
     const timeout = window.setTimeout(() => controller.abort(), requestTimeoutMs)
 
@@ -121,16 +121,16 @@ export function LeadForm({ compact = false, source = 'contact-page' }: { compact
   return (
     <form ref={formRef} className={`lead-form${compact ? ' lead-form-compact' : ''}`} onInput={startTracking} onSubmit={submit} noValidate aria-busy={state === 'loading'}>
       <div className="form-grid">
-        <label><span>Ime i firma *</span><input name="name" autoComplete="name" required maxLength={120} placeholder="Marko / Naziv firme" /></label>
+        <label><span>Ime i firma *</span><input name="name" autoComplete="name" required maxLength={120} placeholder="Ime / Naziv firme ili projekta" /></label>
         <label><span>Email *</span><input name="email" type="email" autoComplete="email" required maxLength={180} placeholder="marko@email.com" /></label>
         <label><span>Telefon</span><input name="phone" type="tel" autoComplete="tel" inputMode="tel" maxLength={40} placeholder="+382..." /></label>
-        <label><span>Šta želiš da postigneš? *</span><select name="goal" required defaultValue=""><option value="">Izaberi cilj</option><option>Više upita ili prodaje</option><option>Aktivacija ili događaj</option><option>Novi sajt ili landing</option><option>Recruitment i kandidati</option><option>Sezonska kampanja</option><option>Drugo</option></select></label>
-        <label><span>Status budžeta</span><select name="budget" defaultValue=""><option value="">Još nije definisan</option><option>Treba mi okvirna procjena</option><option>Budžet je okvirno odobren</option><option>Treba mi fazni plan</option></select></label>
-        <label><span>Kada želiš da kreneš?</span><select name="deadline" defaultValue=""><option value="">Izaberi okvir</option><option>Što prije</option><option>U narednih 30 dana</option><option>Za 1-3 mjeseca</option><option>Kasnije / planiranje</option></select></label>
-        <label className="form-span"><span>Kratak opis projekta</span><textarea name="message" rows={5} maxLength={3000} placeholder="Napiši šta već postoji, rok, lokaciju i najvažniji problem." /></label>
+        <label><span>Koji je glavni cilj? *</span><select name="goal" required defaultValue=""><option value="">Izaberi najbližu opciju</option><option>Novi digitalni proizvod ili sajt</option><option>Više kvalitetnih upita ili prodaje</option><option>Aktivacija, promo tim ili događaj</option><option>Sadržaj i kampanjska produkcija</option><option>Zapošljavanje i kandidati</option><option>Audit, plan ili druga situacija</option></select></label>
+        <label><span>Status projekta</span><select name="budget" defaultValue=""><option value="">Tek istražujemo mogućnosti</option><option>Treba nam okvir i procjena</option><option>Imamo odobren okvir i tražimo partnera</option><option>Projekat treba podijeliti u faze</option></select></label>
+        <label><span>Kada projekat treba da krene?</span><select name="deadline" defaultValue=""><option value="">Rok još nije zaključan</option><option>Što prije</option><option>U narednih 30 dana</option><option>Za 1-3 mjeseca</option><option>Kasnije / priprema unaprijed</option></select></label>
+        <label className="form-span"><span>Kontekst projekta</span><textarea name="message" rows={6} maxLength={3000} placeholder="Šta želiš da promijeniš? Napiši rok, lokaciju, šta već postoji, ko je uključen i gdje trenutno zapinje." /></label>
         <label className="honeypot" aria-hidden="true">Website<input name="website" tabIndex={-1} autoComplete="off" /></label>
       </div>
-      <div className="form-submit"><button className="button button-primary" type="submit" disabled={state === 'loading'}>{state === 'loading' ? 'Šaljem...' : 'Pošalji upit'}</button><p>Slanjem forme prihvataš <Link href="/privatnost/">pravila privatnosti</Link>. {site.responseTime}</p></div>
+      <div className="form-submit"><button className="button button-primary" type="submit" disabled={state === 'loading'}>{state === 'loading' ? 'Šaljem...' : 'Pošalji brief'}</button><p>Slanjem briefa prihvataš <Link href="/privatnost/">pravila privatnosti</Link>. {site.responseTime}</p></div>
       <div className={`form-status${state === 'error' ? ' is-error' : state === 'success' ? ' is-success' : ''}`} role="status" aria-live="polite">{status}</div>
     </form>
   )

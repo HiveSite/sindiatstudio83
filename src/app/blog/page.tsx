@@ -8,8 +8,8 @@ import { createMetadata } from '@/lib/metadata'
 import { breadcrumbSchema } from '@/lib/schema'
 
 export const metadata: Metadata = createMetadata({
-  title: 'Blog i vodiči',
-  description: 'Praktični vodiči o Meta i Google kampanjama, eventima, aktivacijama, sadržaju, SEO-u i konverzijama u Crnoj Gori.',
+  title: 'Resursi - kampanje, web, aktivacije i lokalna realizacija',
+  description: 'Praktični vodiči o kampanjama, aktivacijama, događajima, sadržaju, web konverzijama i zapošljavanju u Crnoj Gori.',
   path: '/blog/',
 })
 
@@ -17,8 +17,8 @@ export default function BlogPage() {
   const crumbs = [{ label: 'Resursi', href: '/blog/' }]
   return <>
     <JsonLd data={breadcrumbSchema(crumbs)} />
-    <section className="page-hero"><div className="container"><Breadcrumbs items={crumbs} /><div className="page-hero-grid"><div><span className="eyebrow">Resursi</span><h1>Praktični vodiči za kampanje, aktivacije i lokalni rast.</h1><p className="lead">Tekstovi su namijenjeni vlasnicima i timovima koji žele da razumiju šta se stvarno radi, koliko djelova sistem ima i gdje najčešće nastaje problem.</p></div><aside className="page-hero-aside"><strong>Teme</strong><ul><li>Meta i Google kampanje</li><li>produkcija događaja i budžeti</li><li>aktivacije i mjerenje</li><li>landing, SEO i konverzije</li></ul></aside></div></div></section>
+    <section className="page-hero"><div className="container"><Breadcrumbs items={crumbs} /><div className="page-hero-grid"><div><span className="eyebrow">Resursi</span><h1>Praktični vodiči za timove koji moraju donijeti stvarnu odluku.</h1><p className="lead">Tekstovi razdvajaju problem, proces, trošak, rizik i mjerenje. Cilj nije da svaka tema završi prodajom usluge, već da lakše procijeniš šta treba raditi, kojim redom i šta može čekati.</p></div><aside className="page-hero-aside"><strong>Glavne teme</strong><ul><li>Meta, Google i mjerenje kampanja</li><li>landing stranice, SEO i konverzije</li><li>aktivacije, promo timovi i događaji</li><li>sadržaj, produkcija i zapošljavanje</li></ul></aside></div></div></section>
     <section className="section"><div className="container"><BlogExplorer initialPosts={blogPosts} /></div></section>
-    <FinalCta title="Treba ti primjena, ne još jedan tekst?" text="Pošalji konkretnu situaciju i cilj. Pretvorićemo temu u prioritetni plan za tvoj biznis." />
+    <FinalCta title="Treba ti primjena na stvarnu situaciju?" text="Pošalji postojeći setup, cilj i rok. Izdvojićemo prioritetne korake, informacije koje nedostaju i dio koji još nije spreman za ulaganje." />
   </>
 }

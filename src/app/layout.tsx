@@ -12,7 +12,7 @@ import './globals.css'
 export const metadata: Metadata = {
   metadataBase: new URL(site.domain),
   title: { default: site.name, template: `%s | ${site.name}` },
-  description: 'Performance kampanje, aktivacije, sadržaj, web i recruitment u Crnoj Gori.',
+  description: 'Digitalni proizvodi, kampanje, sadržaj, promo timovi, aktivacije i događaji u Crnoj Gori.',
   applicationName: site.name,
   authors: [{ name: site.name, url: site.domain }],
   creator: site.name,

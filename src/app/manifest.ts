@@ -7,7 +7,7 @@ export default function manifest(): MetadataRoute.Manifest {
   return {
     name: site.name,
     short_name: site.shortName,
-    description: 'Performance kampanje, aktivacije, sadržaj, web i recruitment u Crnoj Gori.',
+    description: 'Digitalni proizvodi, kampanje, sadržaj, promo timovi, aktivacije i događaji u Crnoj Gori.',
     start_url: '/',
     display: 'standalone',
     background_color: '#08080b',

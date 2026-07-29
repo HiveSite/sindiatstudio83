@@ -1,41 +1,15 @@
 VALIDATION REPORT - 29. JUL 2026.
 
 PROSLO:
-- Source validation:
-  46 TS/TSX fajlova
-  30 blog tekstova
-  14 obaveznih fajlova
-
-- Responsive validation:
-  breakpointi
-  overflow zastita
-  safe-area
-  mobilna navigacija
-  filteri
-  forme i modal
-
-- Site integrity validation:
-  67 ruta
-  37 literalnih internih linkova
-  33 redirect pravila
-  sitemap, robots i manifest
-  tracking i SEO provjere
-  kontrola javnih nepotvrdjenih cijena
-
-- TypeScript semantic QA:
-  proslo sa lokalnim framework stubovima
-
-- Vizuelni responsive QA:
-  320x700
-  375x812
-  768x1024
-  1024x900
-  1440x1000
-  dokument-level horizontal overflow: 0
+- source validation: 46 TS/TSX fajlova, 30 blog tekstova, 14 obaveznih fajlova
+- responsive validation: breakpointi, overflow zastita, safe-area, mobilni meni, filteri i forme
+- site integrity: 67 ruta, 41 literalni interni link, 33 redirect pravila, SEO i tracking provjere
+- semanticka TypeScript provjera sa lokalnim Next/React ambient tipovima
+- provjera javnog teksta: nema radnih napomena, lorem/TODO teksta ili nepotvrdjenih javnih cijena usluga
 
 NEBLOKIRAJUCA UPOZORENJA:
-- 30 blog tekstova jos nema potvrden datum objave.
+- 30 blog tekstova nema potvrden datum objave
 
 OGRANICENJE LOKALNE PROVJERE:
-- Puni lokalni Next.js produkcijski build nije pokrenut jer registry zavisnosti nije bio dostupan u izolovanom runtimeu.
-- Netlify build nakon uploadovanja je autoritativna finalna provjera.
+- puni lokalni Next.js produkcijski build nije mogao biti pokrenut jer izolovano okruzenje nema instalirane Next/React zavisnosti
+- Netlify produkcijski build nakon uploadovanja je finalna autoritativna provjera

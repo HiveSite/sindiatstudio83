@@ -6,7 +6,7 @@ export const legalPages = {
     description: 'Kako Sindikat Studio 83 obrađuje podatke poslate kroz kontakt i prijavne forme.',
     sections: [
       ['Uvod', 'Ova politika opisuje kako Sindikat Studio 83 obrađuje podatke koje dobrovoljno pošalješ kroz kontakt forme, prijave za angažmane i druge kanale na sajtu.'],
-      ['Podaci koje prikupljamo', 'Možemo obraditi ime, naziv firme, email, telefon, cilj projekta, budžetski okvir, poruku, podatke iz prijave za angažman, URL stranice, referrer i kampanjske parametre.'],
+      ['Podaci koje prikupljamo', 'Možemo obraditi ime, naziv firme, email, telefon, cilj projekta, status i okvir projekta, poruku, podatke iz prijave za angažman, URL stranice, referrer i kampanjske parametre.'],
       ['Svrha', 'Podatke koristimo da odgovorimo na upit, organizujemo projekat ili prijavu, vodimo evidenciju komunikacije, razumijemo učinak sajta i spriječimo zloupotrebu formi.'],
       ['Servisi trećih strana', 'Sajt koristi Google Analytics, Google Tag Manager i Google Apps Script endpointove za kontakt i angažmane. Obrada podataka kroz te servise uređena je i njihovim pravilima.'],
       ['Čuvanje i prava', `Podatke čuvamo onoliko koliko je potrebno za svrhu zbog koje su poslati i primjenjive obaveze. Za pristup, ispravku ili brisanje piši na ${site.email}.`],

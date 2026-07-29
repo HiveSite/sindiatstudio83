@@ -329,7 +329,7 @@ details>div p{margin:0}
   .footer-bottom div{align-items:flex-start;flex-wrap:wrap}
 }
 
-/* Case content expansion and temporary media placeholders */
+/* Case content expansion and visual media frames */
 .case-cover-copy{position:relative;z-index:4;display:flex;flex-direction:column;align-items:flex-start;max-width:82%}
 .case-cover-copy>span{font-size:11px;font-weight:900;letter-spacing:.12em;text-transform:uppercase;border:1px solid var(--line);border-radius:999px;padding:8px 12px;background:rgba(8,8,11,.68)}
 .case-cover-copy>strong{font-size:clamp(72px,10vw,144px);line-height:.84;letter-spacing:-.09em;margin:36px 0 18px;color:#fff;text-shadow:0 12px 45px rgba(0,0,0,.25)}

@@ -1,7 +1,7 @@
-SINDIKAT STUDIO 83 - RESPONSIVE I TEHNICKA PRIPREMA
+SINDIKAT STUDIO 83 - KOMPLETAN SADRZAJNI DRAFT
 
 1. Raspakuj ZIP u root postojeceg Next.js repoa.
-2. Dozvoli zamjenu postojecih fajlova i dodavanje novih fajlova.
+2. Dozvoli zamjenu postojecih fajlova.
 3. Ne mijenjaj Netlify podesavanja:
    - Build command: npm run build
    - Publish directory: out
@@ -9,14 +9,8 @@ SINDIKAT STUDIO 83 - RESPONSIVE I TEHNICKA PRIPREMA
 4. Pokreni:
    Netlify -> Deploys -> Trigger deploy -> Clear cache and deploy site
 
-Novi fajlovi:
-- scripts/validate-responsive.mjs
-- scripts/validate-site-integrity.mjs
-
-ZIP ne sadrzi:
-- node_modules
-- slike
-- privremene QA fajlove
-- Git istoriju
-
-GitHub nije mijenjan direktno.
+Ovaj ZIP:
+- sadrzi samo izmijenjene izvorne fajlove i dokumentaciju za pregled
+- ne sadrzi node_modules, slike, build output ili Git istoriju
+- ne mijenja GitHub direktno
+- ne dodaje nepotvrdjene javne cijene

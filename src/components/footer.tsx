@@ -11,7 +11,7 @@ export function Footer() {
         <div className="container footer-grid">
           <div className="footer-brand">
             <Image src="/images/brand/logo.png" width={180} height={180} alt="Sindikat Studio 83" />
-            <p>Kampanje, sadržaj, ljudi i teren povezani kroz isti cilj.</p>
+            <p>Digitalni proizvodi, kampanje, sadržaj, ljudi i teren povezani kroz jedan cilj i jednu odgovornu realizaciju.</p>
             <div className="footer-socials">
               <a href={site.instagram} target="_blank" rel="noopener noreferrer" data-track="instagram_click">Instagram</a>
               <a href={`mailto:${site.email}`} data-track="email_click">Email</a>
@@ -21,7 +21,8 @@ export function Footer() {
             <h2>Usluge</h2>
             <Link href="/usluge/performance-marketing/">Performance marketing</Link>
             <Link href="/usluge/aktivacije-i-eventi/">Aktivacije i eventi</Link>
-            <Link href="/usluge/web-i-konverzije/">Web i konverzije</Link>
+            <Link href="/usluge/web-i-konverzije/">Web i digitalni proizvodi</Link>
+            <Link href="/usluge/sadrzaj-za-kampanje/">Sadržaj za kampanje</Link>
             <Link href="/usluge/recruitment-kampanje/">Recruitment kampanje</Link>
           </div>
           <div>
@@ -35,9 +36,9 @@ export function Footer() {
           <div>
             <h2>Kontakt</h2>
             <p>{site.location}</p>
-            <a href={`mailto:${site.email}`}>{site.email}</a>
+            <a href={`mailto:${site.email}`} data-track="email_click">{site.email}</a>
             <p>{site.responseTime}</p>
-            <Link href="/kontakt/?izvor=footer">Pošalji upit</Link>
+            <Link href="/kontakt/?izvor=footer" data-track="footer_lead">Pošalji brief</Link>
           </div>
         </div>
         <div className="container footer-bottom">
@@ -45,7 +46,7 @@ export function Footer() {
           <div><Link href="/privatnost/">Privatnost</Link><Link href="/kolacici/">Kolačići</Link><CookieSettingsButton /><Link href="/uslovi-koriscenja/">Uslovi</Link></div>
         </div>
       </footer>
-      <div className="mobile-cta"><Link className="button button-primary" href="/kontakt/?izvor=mobile-sticky" data-track="mobile_sticky_lead">Zatraži plan</Link></div>
+      <div className="mobile-cta"><Link className="button button-primary" href="/kontakt/?izvor=mobile-sticky" data-track="mobile_sticky_lead">Pošalji brief</Link></div>
       <CookieBanner />
     </>
   )
