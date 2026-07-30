@@ -1,16 +1,11 @@
-SINDIKAT STUDIO 83 - KOMPLETAN SADRZAJNI DRAFT
+Raspakuj ZIP u root postojećeg repoa i dozvoli zamjenu fajlova.
 
-1. Raspakuj ZIP u root postojeceg Next.js repoa.
-2. Dozvoli zamjenu postojecih fajlova.
-3. Ne mijenjaj Netlify podesavanja:
-   - Build command: npm run build
-   - Publish directory: out
-   - Base directory: prazno
-4. Pokreni:
-   Netlify -> Deploys -> Trigger deploy -> Clear cache and deploy site
+Mijenjaju se samo:
+- src/app/page.tsx
+- src/app/globals.css
 
-Ovaj ZIP:
-- sadrzi samo izmijenjene izvorne fajlove i dokumentaciju za pregled
-- ne sadrzi node_modules, slike, build output ili Git istoriju
-- ne mijenja GitHub direktno
-- ne dodaje nepotvrdjene javne cijene
+Rezultat:
+- blok „Radovi i sistemi“ na početnoj postaje horizontalna skrol traka
+- kartice koriste scroll snap
+- na telefonu se vidi dio sljedeće kartice
+- stranica Radovi i ostali gridovi ostaju nepromijenjeni

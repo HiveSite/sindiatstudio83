@@ -669,3 +669,45 @@ body{overflow-x:clip}
 @media (max-width:900px){
   .article-layout{grid-template-columns:minmax(0,1fr)}
 }
+
+
+/* Homepage featured work rail */
+.case-grid-home-scroll{
+  display:grid;
+  grid-auto-flow:column;
+  grid-auto-columns:min(88%,900px);
+  gap:24px;
+  overflow-x:auto;
+  overscroll-behavior-inline:contain;
+  scroll-snap-type:x mandatory;
+  scroll-padding-inline:2px;
+  padding:2px 2px 20px;
+  scrollbar-width:thin;
+  scrollbar-color:var(--pink) rgba(255,255,255,.09);
+  -webkit-overflow-scrolling:touch;
+}
+.case-grid-home-scroll::-webkit-scrollbar{height:8px}
+.case-grid-home-scroll::-webkit-scrollbar-track{background:rgba(255,255,255,.08);border-radius:999px}
+.case-grid-home-scroll::-webkit-scrollbar-thumb{background:linear-gradient(90deg,var(--pink),var(--cyan));border-radius:999px}
+.case-grid-home-scroll>.case-card{scroll-snap-align:start;scroll-snap-stop:always;height:100%}
+.case-grid-home-scroll:focus-visible{outline:3px solid var(--cyan);outline-offset:8px;border-radius:4px}
+
+@media (max-width:960px){
+  .case-grid-home-scroll{grid-auto-columns:min(90%,720px);gap:18px}
+}
+
+@media (max-width:620px){
+  .case-grid-home-scroll{
+    grid-auto-columns:calc(100% - 24px);
+    gap:14px;
+    margin-inline:-12px;
+    padding-inline:12px;
+    scroll-padding-inline:12px;
+    scrollbar-width:none;
+  }
+  .case-grid-home-scroll::-webkit-scrollbar{display:none}
+}
+
+@media (max-width:420px){
+  .case-grid-home-scroll{grid-auto-columns:calc(100% - 18px);margin-inline:-10px;padding-inline:10px;scroll-padding-inline:10px}
+}
