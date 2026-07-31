@@ -202,3 +202,72 @@
     animation: none;
   }
 }
+
+/* Full media display audit corrections - v2.3 */
+.coverWithImage{
+  min-width:0;
+}
+.coverImage{
+  max-width:none;
+}
+.coverWithImage :global(.case-cover-copy){
+  width:100%;
+  min-width:0;
+}
+.coverWithImage :global(.case-cover-copy > span),
+.coverWithImage :global(.case-cover-copy > small){
+  max-width:100%;
+  white-space:normal;
+  overflow-wrap:anywhere;
+}
+
+.mediaItem{
+  height:auto;
+  min-height:0 !important;
+}
+.mediaFrame{
+  display:grid;
+  place-items:center;
+  flex:0 0 auto;
+  width:100%;
+  min-width:0;
+  min-height:0;
+}
+.mediaItem[data-aspect='wide'] .mediaFrame{aspect-ratio:16/8.5}
+.mediaItem[data-aspect='landscape'] .mediaFrame{aspect-ratio:16/10}
+.mediaItem[data-aspect='portrait'] .mediaFrame{aspect-ratio:4/5}
+.mediaItem[data-aspect='square'] .mediaFrame{aspect-ratio:1}
+.mediaFrame img{
+  width:100%;
+  height:100%;
+  max-width:100%;
+  object-fit:contain;
+}
+.screenshot .mediaFrame img{
+  object-fit:contain;
+}
+.mediaCaption{
+  flex:0 0 auto;
+  min-width:0;
+  height:auto;
+}
+.mediaCaption span,
+.mediaCaption strong{
+  max-width:100%;
+  white-space:normal;
+  overflow-wrap:anywhere;
+}
+
+@media (max-width:760px){
+  .mediaItem[data-aspect='wide'] .mediaFrame,
+  .mediaItem[data-aspect='landscape'] .mediaFrame{aspect-ratio:16/10}
+  .mediaItem[data-aspect='portrait'] .mediaFrame{aspect-ratio:4/5}
+  .mediaCaption{backdrop-filter:none}
+}
+
+@media (max-width:420px){
+  .mediaItem[data-aspect='wide'] .mediaFrame,
+  .mediaItem[data-aspect='landscape'] .mediaFrame{aspect-ratio:4/3}
+  .mediaItem[data-aspect='portrait'] .mediaFrame{aspect-ratio:3/4}
+  .screenshot .mediaFrame{padding:10px}
+}

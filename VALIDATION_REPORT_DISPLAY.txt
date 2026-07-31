@@ -1,0 +1,24 @@
+RESPONSIVE I DISPLAY VALIDATION - 31. JUL 2026.
+
+PROSLO:
+- 46 TS/TSX fajlova: sintaksna TypeScript provjera
+- 30 blog tekstova: source provjera
+- 67 ruta
+- 41 literalni interni link
+- 33 redirect pravila
+- finalni responsive cascade za 320/375/420/620/760/900/1040/1440 px
+- mobilna jedna kolona za pet usluga
+- automatsko sirenje kartica i boxova prema tekstu
+- galerijske slike bez cropovanja
+- provjera 31 data-referencirane slike
+- stvarne dimenzije svih 31 slika odgovaraju width/height podacima u kodu
+- CSS zagrade i obavezni breakpointi
+- mobilna navigacija, focus trap, Escape i backdrop
+- forme, modal, filteri, safe-area i dynamic viewport
+
+NEBLOKIRAJUCE:
+- 30 blog tekstova jos nema potvrdjen datum objave.
+
+OGRANICENJE:
+- puni lokalni Next.js build nije pokrenut jer npm registry nije dostupan u izolovanom runtimeu.
+- Netlify produkcijski build ostaje finalna potvrda framework kompilacije.

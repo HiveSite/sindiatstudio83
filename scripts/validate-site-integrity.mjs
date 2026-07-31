@@ -68,6 +68,11 @@ for (const match of source.matchAll(/\bsrc=["'](\/[^"']+)["']/g)) {
   if (!fs.existsSync(path.join(root, 'public', asset.replace(/^\//, '')))) fail(`Missing referenced public asset: ${asset}`)
 }
 
+for (const match of source.matchAll(/\bsrc:\s*["'](\/images\/[^"']+)["']/g)) {
+  const asset = match[1]
+  if (!fs.existsSync(path.join(root, 'public', asset.replace(/^\//, '')))) fail(`Missing data-referenced public image: ${asset}`)
+}
+
 const sitemap = read('src/app/sitemap.ts')
 for (const token of ['...services.map', '...industries.map', '...cases.map', '...blogPosts.map']) {
   if (!sitemap.includes(token)) fail(`Sitemap is missing dynamic collection: ${token}`)

@@ -13,6 +13,7 @@ const header = read('src/components/header.tsx')
 const workFilter = read('src/components/work-filter.tsx')
 const blogExplorer = read('src/components/blog-explorer.tsx')
 const jobsBoard = read('src/components/jobs-board.tsx')
+const caseMediaCss = read('src/components/case-media.module.css')
 
 const responsiveChecks = [
   ['small phone breakpoint', '@media (max-width:420px)'],
@@ -26,7 +27,12 @@ const responsiveChecks = [
   ['article code overflow protection', '.article-content pre'],
   ['modal mobile layout', '.modal-dialog'],
   ['filter horizontal scrolling', '.work-filter-scroll'],
-  ['long-content wrapping', 'overflow-wrap:break-word'],
+  ['full display audit layer', 'Full display audit corrections - v2.3'],
+  ['single-column mobile service cards', '.service-grid-five{grid-template-columns:minmax(0,1fr)}'],
+  ['mobile hero height correction', '.hero-visual{min-height:340px}'],
+  ['mobile card padding correction', '.case-card-copy{padding:26px 23px}'],
+  ['balanced heading wrapping', 'text-wrap:balance'],
+  ['card height protection', '.case-grid-home-scroll>.case-card{height:auto;min-height:100%}'],
 ]
 
 for (const [label, token] of responsiveChecks) {
@@ -35,6 +41,19 @@ for (const [label, token] of responsiveChecks) {
 
 if ((css.match(/{/g) || []).length !== (css.match(/}/g) || []).length) {
   fail('globals.css has unbalanced braces')
+}
+
+
+const mediaChecks = [
+  ['media display audit layer', 'Full media display audit corrections - v2.3'],
+  ['uncropped gallery media', 'object-fit:contain'],
+  ['wide media ratio', ".mediaItem[data-aspect='wide'] .mediaFrame{aspect-ratio:16/8.5}"],
+  ['portrait media ratio', ".mediaItem[data-aspect='portrait'] .mediaFrame{aspect-ratio:4/5}"],
+  ['media caption growth protection', 'flex:0 0 auto'],
+]
+
+for (const [label, token] of mediaChecks) {
+  if (!caseMediaCss.includes(token)) fail(`Media CSS is missing ${label}: ${token}`)
 }
 
 const componentChecks = [
@@ -53,5 +72,5 @@ for (const [source, label, token] of componentChecks) {
 }
 
 if (!process.exitCode) {
-  console.log('Responsive validation passed: breakpoints, overflow protection, safe areas, mobile navigation, filters and forms.')
+  console.log('Responsive validation passed: final cascade, card growth, media visibility, safe areas, mobile navigation, filters and forms.')
 }
