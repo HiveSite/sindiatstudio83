@@ -1,0 +1,141 @@
+.coverWithImage {
+  isolation: isolate;
+  background: #0b0b10;
+}
+
+.coverWithImage::before,
+.coverWithImage::after,
+.mediaItem::before,
+.mediaItem::after {
+  content: none !important;
+}
+
+.coverImage {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scale(1.002);
+}
+
+.coverShade {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background:
+    linear-gradient(90deg, rgba(5, 5, 8, 0.92) 0%, rgba(5, 5, 8, 0.67) 43%, rgba(5, 5, 8, 0.08) 78%),
+    linear-gradient(0deg, rgba(5, 5, 8, 0.78) 0%, transparent 58%);
+}
+
+.coverWithImage :global(.case-cover-copy) {
+  position: relative;
+  z-index: 3;
+}
+
+.coverWithImage :global(.case-cover-copy > strong) {
+  text-shadow: 0 12px 48px rgba(0, 0, 0, 0.78);
+}
+
+.mediaItem {
+  margin: 0;
+  padding: 0 !important;
+  display: flex;
+  flex-direction: column;
+  background: #0b0b10 !important;
+}
+
+.mediaFrame {
+  position: relative;
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow: hidden;
+  background: #111118;
+}
+
+.mediaFrame img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  transition: transform 0.45s ease;
+}
+
+.mediaItem:hover .mediaFrame img {
+  transform: scale(1.025);
+}
+
+.screenshot .mediaFrame {
+  display: grid;
+  place-items: center;
+  padding: 18px;
+  background:
+    radial-gradient(circle at 18% 15%, rgba(245, 0, 98, 0.11), transparent 22rem),
+    radial-gradient(circle at 82% 85%, rgba(0, 217, 232, 0.09), transparent 20rem),
+    #0c0c11;
+}
+
+.screenshot .mediaFrame img {
+  object-fit: contain;
+  filter: drop-shadow(0 20px 36px rgba(0, 0, 0, 0.34));
+}
+
+.mediaCaption {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-height: 94px;
+  padding: 18px 20px 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(10, 10, 14, 0.97);
+}
+
+.mediaCaption span {
+  width: max-content;
+  max-width: 100%;
+  color: var(--cyan);
+  font-size: 10px;
+  font-weight: 950;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.mediaCaption strong {
+  color: #f5f3f8;
+  font-size: clamp(17px, 1.8vw, 23px);
+  line-height: 1.18;
+  letter-spacing: -0.025em;
+}
+
+@media (max-width: 760px) {
+  .coverShade {
+    background:
+      linear-gradient(90deg, rgba(5, 5, 8, 0.88) 0%, rgba(5, 5, 8, 0.56) 62%, rgba(5, 5, 8, 0.1) 100%),
+      linear-gradient(0deg, rgba(5, 5, 8, 0.78) 0%, transparent 65%);
+  }
+
+  .screenshot .mediaFrame {
+    padding: 12px;
+  }
+
+  .mediaCaption {
+    min-height: 86px;
+    padding: 16px 17px 18px;
+  }
+}
+
+@media (hover: none) {
+  .mediaItem:hover .mediaFrame img {
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mediaFrame img {
+    transition: none;
+  }
+}

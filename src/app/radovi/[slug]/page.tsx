@@ -17,7 +17,13 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const { slug } = await params
   const item = caseBySlug[slug]
   if (!item) return {}
-  return createMetadata({ title: item.title, description: item.summary, path: `/radovi/${item.slug}/` })
+  return createMetadata({
+    title: item.title,
+    description: item.summary,
+    path: `/radovi/${item.slug}/`,
+    image: item.socialImage?.src,
+    imageAlt: item.socialImage?.alt,
+  })
 }
 
 export default async function CaseStudyPage({ params }: { params: Promise<{ slug: string }> }) {
@@ -38,6 +44,7 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
         creator: { '@id': `${site.domain}/#organization` },
         url: `${site.domain}/radovi/${item.slug}/`,
         inLanguage: site.locale,
+        image: item.socialImage ? `${site.domain}${item.socialImage.src}` : undefined,
       },
     ]} />
 
@@ -69,7 +76,7 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
 
     {item.subprojects?.length ? <section className="section"><div className="container"><div className="section-heading"><div><span className="eyebrow">Primjene i podprojekti</span><h2>Jedan operativni princip, više konkretnih realizacija.</h2></div><p>Tim, komunikacija, funkcionalnosti i tok prilagođavaju se svakoj situaciji, dok standard odgovornosti ostaje isti.</p></div><div className="case-subproject-grid">{item.subprojects.map((subproject) => <article key={subproject.title}><span className="case-subproject-mark" /><h3>{subproject.title}</h3><p>{subproject.summary}</p>{subproject.link ? <a href={subproject.link.href} target="_blank" rel="noreferrer" data-track="case_subproject_click">{subproject.link.label} ↗</a> : null}</article>)}</div></div></section> : null}
 
-    <section className="section section-dark"><div className="container"><div className="section-heading"><div><span className="eyebrow">Vizuelni pregled</span><h2>Ključni momenti, ekrani i detalji koji najbolje objašnjavaju projekat.</h2></div><p>Galerija je organizovana tako da pokaže širi kontekst, radni proces, detalje realizacije i finalni rezultat, bez gomilanja sličnih kadrova.</p></div><div className="case-media-grid">{item.gallery.map((media) => <CaseMediaPlaceholder key={`${media.kind}-${media.label}`} item={media} />)}</div></div></section>
+    <section className="section section-dark"><div className="container"><div className="section-heading"><div><span className="eyebrow">Vizuelni pregled</span><h2>Ključni momenti, ekrani i detalji koji najbolje objašnjavaju projekat.</h2></div><p>Galerija prikazuje sve dostavljene materijale za projekat, uz SEO nazive, optimizovane formate i jasan opis uloge svakog kadra ili ekrana.</p></div><div className="case-media-grid">{item.gallery.map((media) => <CaseMediaPlaceholder key={`${media.kind}-${media.label}`} item={media} />)}</div></div></section>
 
     <section className="section"><div className="container"><span className="eyebrow">Obuhvaćene discipline</span><h2>Više vrsta rada, ali jedna odgovorna cjelina.</h2><p className="lead">Oznake ispod ne predstavljaju katalog dodatnih usluga, već discipline koje su u ovom projektu morale biti međusobno usklađene.</p><div className="case-service-tags">{item.services.map((service) => <span key={service}>{service}</span>)}</div><div className="button-row" style={{ marginTop: 30 }}><Link className="button button-dark" href="/radovi/">Pogledaj sve projekte</Link></div></div></section>
 

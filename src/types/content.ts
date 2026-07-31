@@ -47,10 +47,19 @@ export interface CaseStudyLink {
   href: string
 }
 
+export interface CaseStudyImage {
+  src: string
+  alt: string
+  width: number
+  height: number
+  position?: string
+}
+
 export interface CaseStudyMedia {
   label: string
-  kind: 'Fotografija' | 'Screenshot'
+  kind: 'Fotografija' | 'Screenshot' | 'Vizual'
   aspect?: 'wide' | 'landscape' | 'portrait' | 'square'
+  image?: CaseStudyImage
 }
 
 export interface CaseStudySubproject {
@@ -75,6 +84,8 @@ export interface CaseStudy {
   scope: string[]
   coverMark: string
   coverLabel: string
+  coverImage?: CaseStudyImage
+  socialImage?: CaseStudyImage
   links?: CaseStudyLink[]
   gallery: CaseStudyMedia[]
   subprojects?: CaseStudySubproject[]
