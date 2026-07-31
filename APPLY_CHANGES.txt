@@ -1,11 +1,11 @@
-Raspakuj ZIP u root postojećeg repoa i dozvoli zamjenu fajlova.
+Raspakuj ZIP u root postojeceg repoa i dozvoli zamjenu fajlova.
 
 Mijenjaju se samo:
-- src/app/page.tsx
-- src/app/globals.css
+- src/components/case-media.tsx
+- src/components/case-media.module.css
 
 Rezultat:
-- blok „Radovi i sistemi“ na početnoj postaje horizontalna skrol traka
-- kartice koriste scroll snap
-- na telefonu se vidi dio sljedeće kartice
-- stranica Radovi i ostali gridovi ostaju nepromijenjeni
+- zadrzavaju se postojeci placeholder/animacioni elementi
+- stvarne slike ostaju iza tih elemenata
+- dodat je tamni overlay
+- slike se vide oko 60%

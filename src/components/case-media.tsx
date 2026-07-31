@@ -35,7 +35,7 @@ export function CaseCoverPlaceholder({ item, large = false }: { item: CaseStudy;
         <small>{item.coverLabel}</small>
       </div>
 
-      {image ? null : <div className="case-orbit" aria-hidden="true" />}
+      <div className="case-orbit" aria-hidden="true" />
     </div>
   )
 }
@@ -69,6 +69,7 @@ export function CaseMediaPlaceholder({ item }: { item: CaseStudyMedia }) {
           decoding="async"
           style={imageStyle(image)}
         />
+        <span className={styles.mediaVeil} aria-hidden="true" />
       </div>
       <figcaption className={styles.mediaCaption}>
         <span>{item.kind}</span>

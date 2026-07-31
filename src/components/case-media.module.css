@@ -1,13 +1,8 @@
 .coverWithImage {
   isolation: isolate;
-  background: #0b0b10;
-}
-
-.coverWithImage::before,
-.coverWithImage::after,
-.mediaItem::before,
-.mediaItem::after {
-  content: none !important;
+  background:
+    radial-gradient(circle at 18% 18%, rgba(0, 217, 232, 0.16), transparent 24rem),
+    linear-gradient(145deg, #13131a, #08080b);
 }
 
 .coverImage {
@@ -17,7 +12,9 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transform: scale(1.002);
+  opacity: 0.6;
+  filter: saturate(0.94) brightness(0.8);
+  transform: scale(1.01);
 }
 
 .coverShade {
@@ -26,8 +23,8 @@
   z-index: 1;
   pointer-events: none;
   background:
-    linear-gradient(90deg, rgba(5, 5, 8, 0.92) 0%, rgba(5, 5, 8, 0.67) 43%, rgba(5, 5, 8, 0.08) 78%),
-    linear-gradient(0deg, rgba(5, 5, 8, 0.78) 0%, transparent 58%);
+    linear-gradient(90deg, rgba(5, 5, 8, 0.86) 0%, rgba(5, 5, 8, 0.68) 42%, rgba(5, 5, 8, 0.42) 72%, rgba(5, 5, 8, 0.3) 100%),
+    linear-gradient(0deg, rgba(5, 5, 8, 0.72) 0%, rgba(5, 5, 8, 0.28) 58%, rgba(5, 5, 8, 0.12) 100%);
 }
 
 .coverWithImage :global(.case-cover-copy) {
@@ -39,12 +36,48 @@
   text-shadow: 0 12px 48px rgba(0, 0, 0, 0.78);
 }
 
+.coverWithImage :global(.case-orbit) {
+  z-index: 2;
+  opacity: 0.92;
+}
+
 .mediaItem {
+  position: relative;
   margin: 0;
   padding: 0 !important;
   display: flex;
   flex-direction: column;
+  overflow: hidden;
   background: #0b0b10 !important;
+  isolation: isolate;
+}
+
+.mediaItem::before,
+.mediaItem::after {
+  content: '';
+  position: absolute;
+  border-radius: 999px;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.7;
+}
+
+.mediaItem::before {
+  width: 12rem;
+  height: 12rem;
+  top: -4rem;
+  right: -3rem;
+  background: radial-gradient(circle, rgba(0, 217, 232, 0.18) 0%, rgba(0, 217, 232, 0.02) 62%, transparent 72%);
+  animation: caseFloatA 9s ease-in-out infinite;
+}
+
+.mediaItem::after {
+  width: 15rem;
+  height: 15rem;
+  left: -6rem;
+  bottom: -7rem;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  animation: caseFloatB 12s ease-in-out infinite;
 }
 
 .mediaFrame {
@@ -56,11 +89,25 @@
 }
 
 .mediaFrame img {
+  position: relative;
+  z-index: 0;
   width: 100%;
   height: 100%;
   display: block;
   object-fit: cover;
+  opacity: 0.6;
+  filter: saturate(0.94) brightness(0.82);
   transition: transform 0.45s ease;
+}
+
+.mediaVeil {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background:
+    linear-gradient(180deg, rgba(8, 8, 11, 0.32) 0%, rgba(8, 8, 11, 0.18) 28%, rgba(8, 8, 11, 0.56) 100%),
+    linear-gradient(135deg, rgba(8, 8, 11, 0.52) 0%, rgba(8, 8, 11, 0.2) 44%, rgba(8, 8, 11, 0.38) 100%);
 }
 
 .mediaItem:hover .mediaFrame img {
@@ -79,7 +126,7 @@
 
 .screenshot .mediaFrame img {
   object-fit: contain;
-  filter: drop-shadow(0 20px 36px rgba(0, 0, 0, 0.34));
+  filter: drop-shadow(0 20px 36px rgba(0, 0, 0, 0.34)) saturate(0.98);
 }
 
 .mediaCaption {
@@ -91,7 +138,8 @@
   min-height: 94px;
   padding: 18px 20px 20px;
   border-top: 1px solid rgba(255, 255, 255, 0.1);
-  background: rgba(10, 10, 14, 0.97);
+  background: rgba(10, 10, 14, 0.92);
+  backdrop-filter: blur(6px);
 }
 
 .mediaCaption span {
@@ -111,11 +159,23 @@
   letter-spacing: -0.025em;
 }
 
+@keyframes caseFloatA {
+  0%,
+  100% { transform: translate3d(0, 0, 0); }
+  50% { transform: translate3d(-10px, 12px, 0); }
+}
+
+@keyframes caseFloatB {
+  0%,
+  100% { transform: translate3d(0, 0, 0) scale(1); }
+  50% { transform: translate3d(12px, -8px, 0) scale(1.04); }
+}
+
 @media (max-width: 760px) {
   .coverShade {
     background:
-      linear-gradient(90deg, rgba(5, 5, 8, 0.88) 0%, rgba(5, 5, 8, 0.56) 62%, rgba(5, 5, 8, 0.1) 100%),
-      linear-gradient(0deg, rgba(5, 5, 8, 0.78) 0%, transparent 65%);
+      linear-gradient(90deg, rgba(5, 5, 8, 0.82) 0%, rgba(5, 5, 8, 0.58) 62%, rgba(5, 5, 8, 0.26) 100%),
+      linear-gradient(0deg, rgba(5, 5, 8, 0.7) 0%, rgba(5, 5, 8, 0.16) 65%, rgba(5, 5, 8, 0.06) 100%);
   }
 
   .screenshot .mediaFrame {
@@ -135,7 +195,10 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .mediaFrame img {
+  .mediaFrame img,
+  .mediaItem::before,
+  .mediaItem::after {
     transition: none;
+    animation: none;
   }
 }
