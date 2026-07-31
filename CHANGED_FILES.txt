@@ -1,9 +1,6 @@
 src/app/globals.css
-src/components/case-media.tsx
-src/components/case-media.module.css
 scripts/validate-responsive.mjs
-scripts/validate-site-integrity.mjs
-docs/RESPONSIVE_DISPLAY_AUDIT_2026-07-31.md
-VALIDATION_REPORT_DISPLAY.txt
+docs/FULL_WIDTH_LAYOUT_UPDATE_2026-07-31.md
+VALIDATION_REPORT_FULL_WIDTH.txt
 APPLY_CHANGES.txt
 CHANGED_FILES.txt

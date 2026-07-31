@@ -1,16 +1,11 @@
-SINDIKAT STUDIO 83 - FULL RESPONSIVE I DISPLAY AUDIT
-
-1. Raspakuj ZIP u root postojeceg Next.js repoa.
-2. Dozvoli zamjenu postojecih fajlova.
-3. Ne brisi postojece public/images fajlove.
-4. Pokreni Netlify deploy:
-   Deploys -> Trigger deploy -> Clear cache and deploy site
+Raspakuj ZIP u root postojeceg repoa i dozvoli zamjenu fajlova.
 
 Mijenjaju se:
 - src/app/globals.css
-- src/components/case-media.tsx
-- src/components/case-media.module.css
 - scripts/validate-responsive.mjs
-- scripts/validate-site-integrity.mjs
 
-GitHub nije mijenjan direktno.
+Dokumentacija:
+- docs/FULL_WIDTH_LAYOUT_UPDATE_2026-07-31.md
+- VALIDATION_REPORT_FULL_WIDTH.txt
+
+Ovaj patch pretpostavlja da su prethodni image, gallery cleanup i responsive audit patchevi vec primijenjeni.

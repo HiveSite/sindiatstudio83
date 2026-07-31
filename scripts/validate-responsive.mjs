@@ -14,6 +14,7 @@ const workFilter = read('src/components/work-filter.tsx')
 const blogExplorer = read('src/components/blog-explorer.tsx')
 const jobsBoard = read('src/components/jobs-board.tsx')
 const caseMediaCss = read('src/components/case-media.module.css')
+const caseMediaComponent = read('src/components/case-media.tsx')
 
 const responsiveChecks = [
   ['small phone breakpoint', '@media (max-width:420px)'],
@@ -33,6 +34,14 @@ const responsiveChecks = [
   ['mobile card padding correction', '.case-card-copy{padding:26px 23px}'],
   ['balanced heading wrapping', 'text-wrap:balance'],
   ['card height protection', '.case-grid-home-scroll>.case-card{height:auto;min-height:100%}'],
+  ['full-width editorial layer', 'Full-width editorial layout and mobile polish - v2.4'],
+  ['fluid full-width container', '--container:2200px'],
+  ['fluid page gutters', '--page-gutters:clamp(24px,6vw,128px)'],
+  ['wide featured work rail', 'grid-auto-columns:min(84vw,1320px)'],
+  ['readable text measure', '--reading-measure:760px'],
+  ['phone total gutters', ':root{--page-gutters:24px}'],
+  ['small phone total gutters', ':root{--page-gutters:20px}'],
+  ['mobile touch target', '.button,.menu-toggle,.modal-close,.filter-button{min-height:48px}'],
 ]
 
 for (const [label, token] of responsiveChecks) {
@@ -45,15 +54,27 @@ if ((css.match(/{/g) || []).length !== (css.match(/}/g) || []).length) {
 
 
 const mediaChecks = [
-  ['media display audit layer', 'Full media display audit corrections - v2.3'],
-  ['uncropped gallery media', 'object-fit:contain'],
-  ['wide media ratio', ".mediaItem[data-aspect='wide'] .mediaFrame{aspect-ratio:16/8.5}"],
-  ['portrait media ratio', ".mediaItem[data-aspect='portrait'] .mediaFrame{aspect-ratio:4/5}"],
-  ['media caption growth protection', 'flex:0 0 auto'],
+  ['uncropped gallery media', 'object-fit: contain'],
+  ['full gallery visibility', 'opacity: 1'],
+  ['wide media ratio', ".mediaItem[data-aspect='wide'] .mediaFrame"],
+  ['portrait media ratio', ".mediaItem[data-aspect='portrait'] .mediaFrame"],
+  ['clean gallery without decorative pseudo-elements', '.mediaItem::before'],
+  ['thumbnail overlay', '.coverShade'],
+  ['clean full-size case cover', '.fullCoverImage'],
 ]
 
 for (const [label, token] of mediaChecks) {
   if (!caseMediaCss.includes(token)) fail(`Media CSS is missing ${label}: ${token}`)
+}
+
+if (caseMediaComponent.includes('<figcaption') || caseMediaComponent.includes('mediaCaption')) {
+  fail('Gallery component still renders visible photo captions')
+}
+if (caseMediaComponent.includes('mediaVeil')) {
+  fail('Gallery component still renders a dark image veil')
+}
+if (!caseMediaComponent.includes('if (!image) return null')) {
+  fail('Missing images should not render instructional placeholder cards')
 }
 
 const componentChecks = [
@@ -72,5 +93,5 @@ for (const [source, label, token] of componentChecks) {
 }
 
 if (!process.exitCode) {
-  console.log('Responsive validation passed: final cascade, card growth, media visibility, safe areas, mobile navigation, filters and forms.')
+  console.log('Responsive validation passed: full-width layout, readable measures, final cascade, card growth, media visibility, safe areas, mobile navigation, filters and forms.')
 }
