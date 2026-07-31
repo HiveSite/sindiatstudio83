@@ -13,6 +13,8 @@ export function Header() {
   const pathname = usePathname()
   const normalizedPath = pathname.endsWith('/') ? pathname : `${pathname}/`
   const [open, setOpen] = useState(false)
+  const [languageOpen, setLanguageOpen] = useState(false)
+  const languageRef = useRef<HTMLDivElement | null>(null)
   const toggleRef = useRef<HTMLButtonElement | null>(null)
   const panelRef = useRef<HTMLDivElement | null>(null)
 
@@ -28,6 +30,7 @@ export function Header() {
 
   useEffect(() => {
     closeMenu(false)
+    setLanguageOpen(false)
   }, [pathname])
 
   useEffect(() => {
@@ -76,7 +79,28 @@ export function Header() {
     }
   }, [open])
 
-  const toggleMenu = () => setOpen((current) => !current)
+  useEffect(() => {
+    if (!languageOpen) return
+
+    const closeLanguageMenu = (event: MouseEvent) => {
+      if (!languageRef.current?.contains(event.target as Node)) setLanguageOpen(false)
+    }
+    const closeLanguageMenuOnEscape = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') setLanguageOpen(false)
+    }
+
+    document.addEventListener('mousedown', closeLanguageMenu)
+    window.addEventListener('keydown', closeLanguageMenuOnEscape)
+    return () => {
+      document.removeEventListener('mousedown', closeLanguageMenu)
+      window.removeEventListener('keydown', closeLanguageMenuOnEscape)
+    }
+  }, [languageOpen])
+
+  const toggleMenu = () => {
+    setLanguageOpen(false)
+    setOpen((current) => !current)
+  }
 
   return (
     <>
@@ -93,6 +117,35 @@ export function Header() {
             })}
           </nav>
           <div className="nav-actions">
+            <div ref={languageRef} className={`language-switcher${languageOpen ? ' is-open' : ''}`}>
+              <button
+                className="language-switcher-button"
+                type="button"
+                aria-label="Izaberi jezik"
+                aria-haspopup="menu"
+                aria-expanded={languageOpen}
+                aria-controls="language-menu"
+                onClick={() => setLanguageOpen((current) => !current)}
+              >
+                <svg className="language-switcher-icon" viewBox="0 0 24 24" aria-hidden="true">
+                  <circle cx="12" cy="12" r="9" />
+                  <path d="M3.5 12h17M12 3c2.4 2.4 3.6 5.4 3.6 9S14.4 18.6 12 21M12 3C9.6 5.4 8.4 8.4 8.4 12s1.2 6.6 3.6 9" />
+                </svg>
+                <span className="language-switcher-code">ME</span>
+                <span className="language-switcher-chevron" aria-hidden="true" />
+              </button>
+              <div id="language-menu" className="language-switcher-menu" role="menu" hidden={!languageOpen}>
+                <span className="language-option is-active" role="menuitem" aria-current="true">
+                  <span className="language-option-code">ME</span>
+                  <span><strong>Crnogorski</strong><small>Aktivni jezik</small></span>
+                  <span className="language-option-check" aria-hidden="true">✓</span>
+                </span>
+                <span className="language-option is-disabled" role="menuitem" aria-disabled="true">
+                  <span className="language-option-code">EN</span>
+                  <span><strong>English</strong><small>Uskoro</small></span>
+                </span>
+              </div>
+            </div>
             <Link className="button button-primary button-small" href="/kontakt/?izvor=header" data-track="header_lead">Pošalji brief</Link>
             <button ref={toggleRef} className="menu-toggle" type="button" aria-label={open ? 'Zatvori meni' : 'Otvori meni'} aria-expanded={open} aria-controls="mobile-navigation" onClick={toggleMenu}>
               <span /><span /><span />

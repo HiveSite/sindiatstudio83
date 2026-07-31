@@ -1,11 +1,13 @@
 Raspakuj ZIP u root postojeceg repoa i dozvoli zamjenu fajlova.
 
 Mijenjaju se:
+- src/components/header.tsx
+- src/app/page.tsx
 - src/app/globals.css
-- scripts/validate-responsive.mjs
 
-Dokumentacija:
-- docs/FULL_WIDTH_LAYOUT_UPDATE_2026-07-31.md
-- VALIDATION_REPORT_FULL_WIDTH.txt
-
-Ovaj patch pretpostavlja da su prethodni image, gallery cleanup i responsive audit patchevi vec primijenjeni.
+Rezultat:
+- premium glass language switcher
+- aktivni ME jezik i EN oznacen kao uskoro
+- hero kartice bez preklapanja sa centralnim krugom
+- na telefonu kartice prelaze ispod animacije
+- prilagodjeno za 320px, mobilni, tablet i desktop

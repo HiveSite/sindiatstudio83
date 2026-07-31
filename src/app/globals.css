@@ -1167,3 +1167,97 @@ a,strong,span{max-width:100%}
   .button-row{width:100%}
   .hero-actions .button,.final-cta-panel .button{width:100%}
 }
+
+/* Premium language control and collision-free hero system */
+.language-switcher{position:relative;z-index:96;flex:none}
+.language-switcher-button{height:44px;min-width:82px;padding:0 12px;display:inline-flex;align-items:center;justify-content:center;gap:9px;border:1px solid rgba(255,255,255,.16);border-radius:999px;background:linear-gradient(180deg,rgba(255,255,255,.075),rgba(255,255,255,.028));color:#fff;box-shadow:inset 0 1px 0 rgba(255,255,255,.08),0 12px 30px rgba(0,0,0,.2);backdrop-filter:blur(14px);transition:transform .2s ease,border-color .2s ease,background .2s ease,box-shadow .2s ease}
+.language-switcher-button:hover{transform:translateY(-1px);border-color:rgba(0,217,232,.48);background:linear-gradient(180deg,rgba(0,217,232,.11),rgba(255,255,255,.035));box-shadow:inset 0 1px 0 rgba(255,255,255,.1),0 14px 34px rgba(0,0,0,.28),0 0 0 4px rgba(0,217,232,.045)}
+.language-switcher-button:focus-visible{outline:3px solid var(--cyan);outline-offset:3px}
+.language-switcher-icon{width:17px;height:17px;fill:none;stroke:var(--cyan);stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.language-switcher-code{font-size:12px;font-weight:950;letter-spacing:.13em}
+.language-switcher-chevron{width:7px;height:7px;border-right:1.5px solid #c9c6d0;border-bottom:1.5px solid #c9c6d0;transform:translateY(-2px) rotate(45deg);transition:transform .2s ease}
+.language-switcher.is-open .language-switcher-button{border-color:rgba(245,0,98,.52);background:linear-gradient(180deg,rgba(245,0,98,.13),rgba(255,255,255,.035))}
+.language-switcher.is-open .language-switcher-chevron{transform:translateY(2px) rotate(225deg)}
+.language-switcher-menu{position:absolute;top:calc(100% + 12px);right:0;width:228px;padding:8px;border:1px solid rgba(255,255,255,.14);border-radius:18px;background:rgba(13,13,18,.96);box-shadow:0 26px 70px rgba(0,0,0,.48);backdrop-filter:blur(20px)}
+.language-switcher-menu[hidden]{display:none}
+.language-option{display:grid;grid-template-columns:38px minmax(0,1fr) 22px;gap:11px;align-items:center;padding:11px;border-radius:12px;color:#f4f2f7}
+.language-option+.language-option{margin-top:3px}
+.language-option.is-active{background:linear-gradient(90deg,rgba(245,0,98,.14),rgba(0,217,232,.06));border:1px solid rgba(255,255,255,.08)}
+.language-option.is-disabled{grid-template-columns:38px minmax(0,1fr);opacity:.48}
+.language-option-code{display:grid;place-items:center;width:36px;height:36px;border:1px solid rgba(255,255,255,.12);border-radius:11px;color:var(--cyan);font-size:11px;font-weight:950;letter-spacing:.1em;background:rgba(255,255,255,.035)}
+.language-option strong,.language-option small{display:block}
+.language-option strong{font-size:13px;line-height:1.2}
+.language-option small{margin-top:3px;color:#85828d;font-size:10px;font-weight:750}
+.language-option-check{color:var(--pink-light);font-size:15px;font-weight:950;text-align:center}
+
+.hero-system{position:relative;width:min(100%,660px);aspect-ratio:1;z-index:2}
+.hero-orbit-stage{position:absolute;inset:0;display:grid;place-items:center}
+.hero-node-grid{display:contents}
+.hero-core{inset:28%;z-index:2}
+.hero-node{z-index:4;width:clamp(150px,11vw,178px);min-height:118px;padding:18px;display:flex;flex-direction:column;justify-content:flex-start;border-radius:20px;background:linear-gradient(155deg,rgba(24,24,32,.94),rgba(14,14,20,.86));box-shadow:0 24px 62px rgba(0,0,0,.4),inset 0 1px 0 rgba(255,255,255,.07)}
+.hero-node strong{font-size:18px;line-height:1.15}
+.hero-node span{font-size:11px;line-height:1.55}
+.hero-node-1{top:2%;right:0}
+.hero-node-2{left:0;bottom:4%}
+.hero-node-3{right:0;bottom:4%}
+
+@media (max-width:1200px) and (min-width:1041px){
+  .hero-system{width:min(100%,560px)}
+  .hero-node{width:150px;min-height:112px;padding:16px}
+  .hero-node strong{font-size:17px}
+  .hero-node span{font-size:10.5px}
+}
+
+@media (max-width:1040px){
+  .language-switcher-button{height:42px;min-width:76px;padding-inline:11px}
+  .hero-system{width:min(100%,560px)}
+  .hero-core{inset:28%}
+  .hero-node{width:146px;min-height:110px;padding:15px}
+  .hero-node-1{top:2%;right:1%}
+  .hero-node-2{left:1%;bottom:3%}
+  .hero-node-3{right:1%;bottom:3%}
+}
+
+@media (max-width:760px){
+  .hero-visual{display:block;min-height:0;overflow:visible;margin-top:24px}
+  .hero-system{width:100%;max-width:none;aspect-ratio:auto;display:grid;gap:12px}
+  .hero-orbit-stage{position:relative;inset:auto;width:min(100%,370px);aspect-ratio:1;margin-inline:auto}
+  .hero-core{inset:27%}
+  .hero-ring{width:92%;height:92%}
+  .hero-ring:nth-child(2){width:78%;height:78%}
+  .hero-node-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+  .hero-node,.hero-node-1,.hero-node-2,.hero-node-3{position:relative;inset:auto;display:flex!important;width:auto;min-height:118px;padding:14px 13px;border-radius:16px}
+  .hero-node:before{margin-bottom:9px}
+  .hero-node strong{font-size:16px}
+  .hero-node span{font-size:10px;line-height:1.45}
+}
+
+@media (max-width:620px){
+  .language-switcher-menu{position:fixed;top:calc(var(--header) + 8px);right:12px;left:12px;width:auto}
+  .hero-orbit-stage{width:min(100%,340px)}
+  .hero-node-grid{gap:8px}
+  .hero-node,.hero-node-1,.hero-node-2,.hero-node-3{min-height:112px;padding:13px 11px}
+}
+
+@media (max-width:520px){
+  .language-switcher-button{min-width:68px;padding-inline:10px;gap:7px}
+  .language-switcher-icon{width:15px;height:15px}
+  .hero-orbit-stage{width:min(100%,315px)}
+  .hero-node-grid{grid-template-columns:minmax(0,1fr);gap:8px}
+  .hero-node,.hero-node-1,.hero-node-2,.hero-node-3{min-height:0;padding:14px 16px;display:grid!important;grid-template-columns:auto minmax(0,1fr);column-gap:11px;align-items:center}
+  .hero-node:before{grid-row:1/3;margin:0;width:8px;height:8px}
+  .hero-node strong{margin:0 0 2px;font-size:16px}
+  .hero-node span{font-size:11px}
+}
+
+@media (max-width:390px){
+  .language-switcher-code{font-size:11px}
+  .language-switcher-button{min-width:62px}
+  .hero-orbit-stage{width:min(100%,292px)}
+}
+
+@media (hover:none){
+  .language-switcher-button:hover{transform:none}
+}
+.hero-orbit-stage .hero-glow,.hero-orbit-stage .hero-ring{left:50%;top:50%;transform:translate(-50%,-50%)}
+.hero-orbit-stage .hero-ring:nth-child(2){transform:translate(-50%,-50%) rotate(12deg)}
