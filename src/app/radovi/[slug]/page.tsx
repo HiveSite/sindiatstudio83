@@ -5,6 +5,7 @@ import { Breadcrumbs } from '@/components/breadcrumbs'
 import { CaseCoverPlaceholder, CaseMediaPlaceholder } from '@/components/case-media'
 import { FinalCta } from '@/components/final-cta'
 import { JsonLd } from '@/components/json-ld'
+import { caseGalleryOverrides } from '@/data/case-gallery-overrides'
 import { cases, caseBySlug } from '@/data/cases'
 import { site } from '@/data/site'
 import { createMetadata } from '@/lib/metadata'
@@ -28,8 +29,11 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 
 export default async function CaseStudyPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
-  const item = caseBySlug[slug]
-  if (!item) notFound()
+  const baseItem = caseBySlug[slug]
+  if (!baseItem) notFound()
+  const item = caseGalleryOverrides[slug]
+    ? { ...baseItem, gallery: caseGalleryOverrides[slug] }
+    : baseItem
   const crumbs = [{ label: 'Radovi', href: '/radovi/' }, { label: item.title, href: `/radovi/${item.slug}/` }]
   const metrics = item.metrics || []
 
