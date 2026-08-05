@@ -7,10 +7,10 @@ export const caseGalleryOverrides: Record<string, CaseStudyMedia[]> = {
       kind: 'Screenshot',
       aspect: 'wide',
       image: {
-        src: '/images/cases/imaposla/imaposla-desktop-pocetna-brzi-angazmani.avif',
+        src: '/images/cases/imaposla/imaposla-desktop-pocetna-brzi-angazmani.webp',
         alt: 'Desktop prikaz početne stranice ImaPosla.me sa izdvojenim firmama i brzim angažmanima',
-        width: 640,
-        height: 462,
+        width: 2608,
+        height: 1886,
       },
     },
     {
@@ -18,10 +18,10 @@ export const caseGalleryOverrides: Record<string, CaseStudyMedia[]> = {
       kind: 'Screenshot',
       aspect: 'portrait',
       image: {
-        src: '/images/cases/imaposla/imaposla-mobilna-naslovna-pretraga-poslova-podgorica.avif',
+        src: '/images/cases/imaposla/imaposla-mobilna-naslovna-pretraga-poslova-podgorica.webp',
         alt: 'Mobilni prikaz početne stranice ImaPosla.me sa pretragom poslova u Podgorici',
-        width: 320,
-        height: 696,
+        width: 790,
+        height: 1716,
       },
     },
     {
@@ -29,10 +29,10 @@ export const caseGalleryOverrides: Record<string, CaseStudyMedia[]> = {
       kind: 'Screenshot',
       aspect: 'landscape',
       image: {
-        src: '/images/cases/imaposla/imaposla-brzi-poslovi-oglasi-desktop.avif',
+        src: '/images/cases/imaposla/imaposla-brzi-poslovi-oglasi-desktop.webp',
         alt: 'Desktop lista brzih poslova na ImaPosla.me sa filterima, terminima i karticama oglasa',
-        width: 640,
-        height: 464,
+        width: 2588,
+        height: 1880,
       },
     },
     {
@@ -40,10 +40,10 @@ export const caseGalleryOverrides: Record<string, CaseStudyMedia[]> = {
       kind: 'Screenshot',
       aspect: 'portrait',
       image: {
-        src: '/images/cases/imaposla/imaposla-brzi-poslovi-mobilni-prikaz.avif',
+        src: '/images/cases/imaposla/imaposla-brzi-poslovi-mobilni-prikaz.webp',
         alt: 'Mobilna lista brzih poslova na ImaPosla.me sa filterima i karticama oglasa',
-        width: 380,
-        height: 508,
+        width: 1020,
+        height: 1362,
       },
     },
     {
@@ -51,10 +51,10 @@ export const caseGalleryOverrides: Record<string, CaseStudyMedia[]> = {
       kind: 'Screenshot',
       aspect: 'landscape',
       image: {
-        src: '/images/cases/imaposla/imaposla-marketplace-usluga-desktop.avif',
+        src: '/images/cases/imaposla/imaposla-marketplace-usluga-desktop.webp',
         alt: 'Desktop prikaz ImaPosla.me marketplacea sa filterima za pronalazak osobe ili firme po kategoriji i gradu',
-        width: 640,
-        height: 462,
+        width: 2614,
+        height: 1890,
       },
     },
     {
@@ -62,10 +62,10 @@ export const caseGalleryOverrides: Record<string, CaseStudyMedia[]> = {
       kind: 'Screenshot',
       aspect: 'portrait',
       image: {
-        src: '/images/cases/imaposla/imaposla-mobilni-gradovi-i-usluge.avif',
+        src: '/images/cases/imaposla/imaposla-mobilni-gradovi-i-usluge.webp',
         alt: 'Mobilni prikaz ImaPosla.me sa izborom gradova i karticama lokalnih usluga',
-        width: 320,
-        height: 698,
+        width: 780,
+        height: 1700,
       },
     },
   ],
