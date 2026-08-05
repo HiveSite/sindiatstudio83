@@ -1,0 +1,56 @@
+name: Refresh ImaPosla screenshots
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'scripts/capture-imaposla-screenshots.mjs'
+      - '.github/workflows/refresh-imaposla-screenshots.yml'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: refresh-imaposla-screenshots
+  cancel-in-progress: true
+
+jobs:
+  capture:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: npm
+
+      - name: Install project dependencies
+        run: npm ci
+
+      - name: Install Playwright for capture
+        run: |
+          npm install --no-save --no-package-lock playwright
+          npx playwright install --with-deps chromium
+
+      - name: Capture full-resolution screenshots
+        run: node scripts/capture-imaposla-screenshots.mjs
+
+      - name: Commit refreshed screenshots
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add public/images/cases/imaposla/*.webp src/data/case-gallery-overrides.ts
+          if git diff --cached --quiet; then
+            echo "No screenshot changes to commit."
+            exit 0
+          fi
+          git commit -m "Refresh ImaPosla screenshots at full resolution"
+          git push
