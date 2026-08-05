@@ -127,6 +127,10 @@
 }
 
 .screenshot .mediaFrame img {
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 100%;
   object-fit: contain;
   filter: drop-shadow(0 18px 32px rgba(0, 0, 0, 0.28));
 }
