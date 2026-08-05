@@ -8,56 +8,50 @@ function imageStyle(image: CaseStudyImage): CSSProperties {
 
 export function CaseCoverPlaceholder({ item, large = false }: { item: CaseStudy; large?: boolean }) {
   const image = item.coverImage
+  const showOverlay = !image || !large
 
   return (
     <div
       className={`case-visual case-visual-${item.slug}${large ? ' case-visual-large' : ''}${image ? ` ${styles.coverWithImage}` : ''}`}
     >
       {image ? (
-        <>
-          <img
-            className={styles.coverImage}
-            src={image.src}
-            alt={image.alt}
-            width={image.width}
-            height={image.height}
-            loading={large ? 'eager' : 'lazy'}
-            decoding="async"
-            style={imageStyle(image)}
-          />
-          <span className={styles.coverShade} aria-hidden="true" />
-        </>
+        <img
+          className={`${styles.coverImage}${large ? ` ${styles.fullCoverImage}` : ''}`}
+          src={image.src}
+          alt={image.alt}
+          width={image.width}
+          height={image.height}
+          loading={large ? 'eager' : 'lazy'}
+          decoding="async"
+          style={imageStyle(image)}
+        />
       ) : null}
 
-      <div className="case-cover-copy">
-        <span>{item.type}</span>
-        <strong>{item.coverMark}</strong>
-        <small>{item.coverLabel}</small>
-      </div>
+      {image && !large ? <span className={styles.coverShade} aria-hidden="true" /> : null}
 
-      <div className="case-orbit" aria-hidden="true" />
+      {showOverlay ? (
+        <>
+          <div className="case-cover-copy">
+            <span>{item.type}</span>
+            <strong>{item.coverMark}</strong>
+            <small>{item.coverLabel}</small>
+          </div>
+          <div className="case-orbit" aria-hidden="true" />
+        </>
+      ) : null}
     </div>
   )
 }
 
 export function CaseMediaPlaceholder({ item }: { item: CaseStudyMedia }) {
   const image = item.image
-
-  if (!image) {
-    return (
-      <article className="case-media-placeholder" data-aspect={item.aspect || 'landscape'}>
-        <div className="case-media-placeholder-inner">
-          <span>{item.kind}</span>
-          <strong>{item.label}</strong>
-        </div>
-      </article>
-    )
-  }
+  if (!image) return null
 
   return (
     <figure
       className={`case-media-placeholder ${styles.mediaItem}${item.kind === 'Screenshot' ? ` ${styles.screenshot}` : ''}`}
       data-aspect={item.aspect || 'landscape'}
+      aria-label={item.label}
     >
       <div className={styles.mediaFrame}>
         <img
@@ -69,12 +63,7 @@ export function CaseMediaPlaceholder({ item }: { item: CaseStudyMedia }) {
           decoding="async"
           style={imageStyle(image)}
         />
-        <span className={styles.mediaVeil} aria-hidden="true" />
       </div>
-      <figcaption className={styles.mediaCaption}>
-        <span>{item.kind}</span>
-        <strong>{item.label}</strong>
-      </figcaption>
     </figure>
   )
 }
