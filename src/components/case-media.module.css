@@ -1,8 +1,6 @@
 .coverWithImage {
   isolation: isolate;
-  background:
-    radial-gradient(circle at 18% 18%, rgba(0, 217, 232, 0.16), transparent 24rem),
-    linear-gradient(145deg, #13131a, #08080b);
+  background: #0b0b10;
 }
 
 .coverImage {
@@ -11,10 +9,22 @@
   z-index: 0;
   width: 100%;
   height: 100%;
+  max-width: none;
   object-fit: cover;
-  opacity: 0.6;
+  opacity: 0.62;
   filter: saturate(0.94) brightness(0.8);
   transform: scale(1.01);
+}
+
+.fullCoverImage {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 1;
+  filter: none;
+  transform: none;
 }
 
 .coverShade {
@@ -23,13 +33,22 @@
   z-index: 1;
   pointer-events: none;
   background:
-    linear-gradient(90deg, rgba(5, 5, 8, 0.86) 0%, rgba(5, 5, 8, 0.68) 42%, rgba(5, 5, 8, 0.42) 72%, rgba(5, 5, 8, 0.3) 100%),
-    linear-gradient(0deg, rgba(5, 5, 8, 0.72) 0%, rgba(5, 5, 8, 0.28) 58%, rgba(5, 5, 8, 0.12) 100%);
+    linear-gradient(90deg, rgba(5, 5, 8, 0.86) 0%, rgba(5, 5, 8, 0.66) 44%, rgba(5, 5, 8, 0.34) 100%),
+    linear-gradient(0deg, rgba(5, 5, 8, 0.7) 0%, rgba(5, 5, 8, 0.16) 70%, transparent 100%);
 }
 
 .coverWithImage :global(.case-cover-copy) {
   position: relative;
   z-index: 3;
+  width: 100%;
+  min-width: 0;
+}
+
+.coverWithImage :global(.case-cover-copy > span),
+.coverWithImage :global(.case-cover-copy > small) {
+  max-width: 100%;
+  white-space: normal;
+  overflow-wrap: anywhere;
 }
 
 .coverWithImage :global(.case-cover-copy > strong) {
@@ -43,231 +62,103 @@
 
 .mediaItem {
   position: relative;
+  display: block;
+  width: 100%;
+  height: auto;
+  min-height: 0 !important;
   margin: 0;
   padding: 0 !important;
-  display: flex;
-  flex-direction: column;
   overflow: hidden;
-  background: #0b0b10 !important;
   isolation: isolate;
+  background: #0b0b10 !important;
 }
 
 .mediaItem::before,
 .mediaItem::after {
-  content: '';
-  position: absolute;
-  border-radius: 999px;
-  pointer-events: none;
-  z-index: 1;
-  opacity: 0.7;
-}
-
-.mediaItem::before {
-  width: 12rem;
-  height: 12rem;
-  top: -4rem;
-  right: -3rem;
-  background: radial-gradient(circle, rgba(0, 217, 232, 0.18) 0%, rgba(0, 217, 232, 0.02) 62%, transparent 72%);
-  animation: caseFloatA 9s ease-in-out infinite;
-}
-
-.mediaItem::after {
-  width: 15rem;
-  height: 15rem;
-  left: -6rem;
-  bottom: -7rem;
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  animation: caseFloatB 12s ease-in-out infinite;
+  content: none;
 }
 
 .mediaFrame {
   position: relative;
-  flex: 1 1 auto;
+  display: grid;
+  place-items: center;
+  width: 100%;
+  min-width: 0;
   min-height: 0;
   overflow: hidden;
   background: #111118;
 }
 
+.mediaItem[data-aspect='wide'] .mediaFrame {
+  aspect-ratio: 16 / 8.5;
+}
+
+.mediaItem[data-aspect='landscape'] .mediaFrame {
+  aspect-ratio: 16 / 10;
+}
+
+.mediaItem[data-aspect='portrait'] .mediaFrame {
+  aspect-ratio: 4 / 5;
+}
+
+.mediaItem[data-aspect='square'] .mediaFrame {
+  aspect-ratio: 1;
+}
+
 .mediaFrame img {
   position: relative;
   z-index: 0;
+  display: block;
   width: 100%;
   height: 100%;
-  display: block;
-  object-fit: cover;
-  opacity: 0.6;
-  filter: saturate(0.94) brightness(0.82);
-  transition: transform 0.45s ease;
-}
-
-.mediaVeil {
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  pointer-events: none;
-  background:
-    linear-gradient(180deg, rgba(8, 8, 11, 0.32) 0%, rgba(8, 8, 11, 0.18) 28%, rgba(8, 8, 11, 0.56) 100%),
-    linear-gradient(135deg, rgba(8, 8, 11, 0.52) 0%, rgba(8, 8, 11, 0.2) 44%, rgba(8, 8, 11, 0.38) 100%);
-}
-
-.mediaItem:hover .mediaFrame img {
-  transform: scale(1.025);
+  max-width: 100%;
+  object-fit: contain;
+  opacity: 1;
+  filter: none;
+  transform: none;
 }
 
 .screenshot .mediaFrame {
-  display: grid;
-  place-items: center;
-  padding: 18px;
+  padding: clamp(10px, 1.3vw, 18px);
   background:
-    radial-gradient(circle at 18% 15%, rgba(245, 0, 98, 0.11), transparent 22rem),
-    radial-gradient(circle at 82% 85%, rgba(0, 217, 232, 0.09), transparent 20rem),
+    radial-gradient(circle at 18% 15%, rgba(245, 0, 98, 0.08), transparent 22rem),
+    radial-gradient(circle at 82% 85%, rgba(0, 217, 232, 0.07), transparent 20rem),
     #0c0c11;
 }
 
 .screenshot .mediaFrame img {
   object-fit: contain;
-  filter: drop-shadow(0 20px 36px rgba(0, 0, 0, 0.34)) saturate(0.98);
-}
-
-.mediaCaption {
-  position: relative;
-  z-index: 2;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  min-height: 94px;
-  padding: 18px 20px 20px;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
-  background: rgba(10, 10, 14, 0.92);
-  backdrop-filter: blur(6px);
-}
-
-.mediaCaption span {
-  width: max-content;
-  max-width: 100%;
-  color: var(--cyan);
-  font-size: 10px;
-  font-weight: 950;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-}
-
-.mediaCaption strong {
-  color: #f5f3f8;
-  font-size: clamp(17px, 1.8vw, 23px);
-  line-height: 1.18;
-  letter-spacing: -0.025em;
-}
-
-@keyframes caseFloatA {
-  0%,
-  100% { transform: translate3d(0, 0, 0); }
-  50% { transform: translate3d(-10px, 12px, 0); }
-}
-
-@keyframes caseFloatB {
-  0%,
-  100% { transform: translate3d(0, 0, 0) scale(1); }
-  50% { transform: translate3d(12px, -8px, 0) scale(1.04); }
+  filter: drop-shadow(0 18px 32px rgba(0, 0, 0, 0.28));
 }
 
 @media (max-width: 760px) {
   .coverShade {
     background:
-      linear-gradient(90deg, rgba(5, 5, 8, 0.82) 0%, rgba(5, 5, 8, 0.58) 62%, rgba(5, 5, 8, 0.26) 100%),
-      linear-gradient(0deg, rgba(5, 5, 8, 0.7) 0%, rgba(5, 5, 8, 0.16) 65%, rgba(5, 5, 8, 0.06) 100%);
+      linear-gradient(90deg, rgba(5, 5, 8, 0.82) 0%, rgba(5, 5, 8, 0.56) 62%, rgba(5, 5, 8, 0.22) 100%),
+      linear-gradient(0deg, rgba(5, 5, 8, 0.68) 0%, rgba(5, 5, 8, 0.12) 72%, transparent 100%);
+  }
+
+  .mediaItem[data-aspect='wide'] .mediaFrame,
+  .mediaItem[data-aspect='landscape'] .mediaFrame {
+    aspect-ratio: 16 / 10;
+  }
+
+  .mediaItem[data-aspect='portrait'] .mediaFrame {
+    aspect-ratio: 4 / 5;
+  }
+}
+
+@media (max-width: 420px) {
+  .mediaItem[data-aspect='wide'] .mediaFrame,
+  .mediaItem[data-aspect='landscape'] .mediaFrame {
+    aspect-ratio: 4 / 3;
+  }
+
+  .mediaItem[data-aspect='portrait'] .mediaFrame {
+    aspect-ratio: 3 / 4;
   }
 
   .screenshot .mediaFrame {
-    padding: 12px;
+    padding: 10px;
   }
-
-  .mediaCaption {
-    min-height: 86px;
-    padding: 16px 17px 18px;
-  }
-}
-
-@media (hover: none) {
-  .mediaItem:hover .mediaFrame img {
-    transform: none;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .mediaFrame img,
-  .mediaItem::before,
-  .mediaItem::after {
-    transition: none;
-    animation: none;
-  }
-}
-
-/* Full media display audit corrections - v2.3 */
-.coverWithImage{
-  min-width:0;
-}
-.coverImage{
-  max-width:none;
-}
-.coverWithImage :global(.case-cover-copy){
-  width:100%;
-  min-width:0;
-}
-.coverWithImage :global(.case-cover-copy > span),
-.coverWithImage :global(.case-cover-copy > small){
-  max-width:100%;
-  white-space:normal;
-  overflow-wrap:anywhere;
-}
-
-.mediaItem{
-  height:auto;
-  min-height:0 !important;
-}
-.mediaFrame{
-  display:grid;
-  place-items:center;
-  flex:0 0 auto;
-  width:100%;
-  min-width:0;
-  min-height:0;
-}
-.mediaItem[data-aspect='wide'] .mediaFrame{aspect-ratio:16/8.5}
-.mediaItem[data-aspect='landscape'] .mediaFrame{aspect-ratio:16/10}
-.mediaItem[data-aspect='portrait'] .mediaFrame{aspect-ratio:4/5}
-.mediaItem[data-aspect='square'] .mediaFrame{aspect-ratio:1}
-.mediaFrame img{
-  width:100%;
-  height:100%;
-  max-width:100%;
-  object-fit:contain;
-}
-.screenshot .mediaFrame img{
-  object-fit:contain;
-}
-.mediaCaption{
-  flex:0 0 auto;
-  min-width:0;
-  height:auto;
-}
-.mediaCaption span,
-.mediaCaption strong{
-  max-width:100%;
-  white-space:normal;
-  overflow-wrap:anywhere;
-}
-
-@media (max-width:760px){
-  .mediaItem[data-aspect='wide'] .mediaFrame,
-  .mediaItem[data-aspect='landscape'] .mediaFrame{aspect-ratio:16/10}
-  .mediaItem[data-aspect='portrait'] .mediaFrame{aspect-ratio:4/5}
-  .mediaCaption{backdrop-filter:none}
-}
-
-@media (max-width:420px){
-  .mediaItem[data-aspect='wide'] .mediaFrame,
-  .mediaItem[data-aspect='landscape'] .mediaFrame{aspect-ratio:4/3}
-  .mediaItem[data-aspect='portrait'] .mediaFrame{aspect-ratio:3/4}
-  .screenshot .mediaFrame{padding:10px}
 }
