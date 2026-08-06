@@ -6,6 +6,11 @@ function imageStyle(image: CaseStudyImage): CSSProperties {
   return image.position ? { objectPosition: image.position } : {}
 }
 
+function mediaFrameStyle(item: CaseStudyMedia, image: CaseStudyImage): CSSProperties | undefined {
+  if (item.kind !== 'Screenshot') return undefined
+  return { aspectRatio: `${image.width} / ${image.height}` }
+}
+
 export function CaseCoverPlaceholder({ item, large = false }: { item: CaseStudy; large?: boolean }) {
   const image = item.coverImage
   const showOverlay = !image || !large
@@ -53,7 +58,7 @@ export function CaseMediaPlaceholder({ item }: { item: CaseStudyMedia }) {
       data-aspect={item.aspect || 'landscape'}
       aria-label={item.label}
     >
-      <div className={styles.mediaFrame}>
+      <div className={styles.mediaFrame} style={mediaFrameStyle(item, image)}>
         <img
           src={image.src}
           alt={image.alt}
