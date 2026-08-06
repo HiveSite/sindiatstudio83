@@ -1,0 +1,26 @@
+name: Package Netlify MCP
+
+on:
+  push:
+    branches: [agent/use-exact-uploaded-imaposla-images]
+    paths: ['.github/workflows/package-netlify-mcp.yml']
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  package:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Prepare package
+        run: |
+          mkdir bundle
+          cd bundle
+          npm init -y
+          npm install @netlify/mcp@1.15.1
+      - name: Upload bundle
+        uses: actions/upload-artifact@v4
+        with:
+          name: netlify-mcp-bundle
+          path: bundle
