@@ -1,9 +1,11 @@
-name: Refresh ImaPosla screenshots
+name: Refresh ImaPosla gallery
 
 on:
   workflow_dispatch:
   push:
-    branches: [main]
+    branches:
+      - main
+      - agent/finish-imaposla-gallery
     paths:
       - 'scripts/capture-imaposla-screenshots.mjs'
       - '.github/workflows/refresh-imaposla-screenshots.yml'
@@ -12,13 +14,13 @@ permissions:
   contents: write
 
 concurrency:
-  group: refresh-imaposla-screenshots
+  group: refresh-imaposla-gallery-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
   capture:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 25
 
     steps:
       - name: Checkout repository
@@ -32,24 +34,28 @@ jobs:
           node-version: '24'
 
       - name: Install project dependencies
-        run: npm install
+        run: npm install --no-package-lock
 
-      - name: Install Playwright for capture
+      - name: Install screenshot tooling
         run: |
-          npm install --no-save --no-package-lock playwright
+          npm install --no-save --no-package-lock playwright sharp
           npx playwright install --with-deps chromium
 
-      - name: Capture full-resolution screenshots
+      - name: Generate fitted gallery screenshots
         run: node scripts/capture-imaposla-screenshots.mjs
 
-      - name: Commit refreshed screenshots
+      - name: Validate production build
+        run: npm run build
+
+      - name: Commit gallery replacement
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add public/images/cases/imaposla/*.webp src/data/case-gallery-overrides.ts
+          git add -A public/images/cases/imaposla src/data/case-gallery-overrides.ts
           if git diff --cached --quiet; then
-            echo "No screenshot changes to commit."
+            echo "No gallery changes to commit."
             exit 0
           fi
-          git commit -m "Refresh ImaPosla screenshots at full resolution"
-          git push
+          git commit -m "Replace ImaPosla gallery with fitted screenshots"
+          git pull --rebase origin "${GITHUB_REF_NAME}"
+          git push origin "HEAD:${GITHUB_REF_NAME}"
