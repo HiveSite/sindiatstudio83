@@ -1,0 +1,36 @@
+name: Test Canva original download
+
+on:
+  push:
+    branches: [agent/use-exact-uploaded-imaposla-images]
+    paths: ['.github/workflows/test-canva-original-download.yml']
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Test signed Canva image variants
+        shell: bash
+        run: |
+          set -u
+          base='https://media.canva.com/v2/image-resize/format:PNG/height:200/quality:100/uri:ifs%3A%2F%2FM%2F2739c2e4-c932-4030-8e60-13ce9436dd20/watermark:F/width:141?csig=AAAAAAAAAAAAAAAAAAAAAI8PMzm67FPwCKOlg3ptMAKFHtEnZ-rLOz3F9dvCOKgQ&exp=1786021550&osig=AAAAAAAAAAAAAAAAAAAAAHa9yFjDfFlz99nXP6bwYvjaM9PxGctqQ3Cuw55ZlYx-&signer=media-rpc&x-canva-quality=thumbnail'
+          urls=(
+            "$base"
+            "${base/height:200/height:1491}"
+            "${base/width:141/width:1055}"
+            "${base/height:200/height:1491}" 
+          )
+          urls[3]="${urls[3]/width:141/width:1055}"
+          urls+=("${urls[3]/x-canva-quality=thumbnail/x-canva-quality=screen}")
+          urls+=("${urls[3]/x-canva-quality=thumbnail/x-canva-quality=original}")
+          for i in "${!urls[@]}"; do
+            echo "--- candidate $i ---"
+            code=$(curl -L -sS -o "candidate-$i" -w '%{http_code}' "${urls[$i]}" || true)
+            echo "http=$code bytes=$(wc -c < "candidate-$i" 2>/dev/null || echo 0)"
+            file "candidate-$i" || true
+            identify "candidate-$i" || true
+          done
