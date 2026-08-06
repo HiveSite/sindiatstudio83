@@ -57,5 +57,4 @@ jobs:
             exit 0
           fi
           git commit -m "Replace ImaPosla gallery with fitted screenshots"
-          git pull --rebase origin "${GITHUB_REF_NAME}"
           git push origin "HEAD:${GITHUB_REF_NAME}"
