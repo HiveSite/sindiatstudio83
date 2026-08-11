@@ -2,6 +2,16 @@ import type { CSSProperties } from 'react'
 import type { CaseStudy, CaseStudyImage, CaseStudyMedia } from '@/types/content'
 import styles from './case-media.module.css'
 
+const coverImageOverrides: Record<string, CaseStudyImage> = {
+  'imaposla-digitalni-proizvod': {
+    src: '/images/cases/imaposla/imaposla-me-platforma-poslovi-crna-gora-cover.svg',
+    alt: 'ImaPosla.me platforma za poslove u Crnoj Gori sa maskotom, laptopom i telefonom',
+    width: 800,
+    height: 800,
+    position: 'center',
+  },
+}
+
 function imageStyle(image: CaseStudyImage): CSSProperties {
   return image.position ? { objectPosition: image.position } : {}
 }
@@ -12,7 +22,7 @@ function mediaFrameStyle(item: CaseStudyMedia, image: CaseStudyImage): CSSProper
 }
 
 export function CaseCoverPlaceholder({ item, large = false }: { item: CaseStudy; large?: boolean }) {
-  const image = item.coverImage
+  const image = item.coverImage || coverImageOverrides[item.slug]
   const showOverlay = !image || !large
 
   return (
