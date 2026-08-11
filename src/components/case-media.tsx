@@ -4,10 +4,10 @@ import styles from './case-media.module.css'
 
 const coverImageOverrides: Record<string, CaseStudyImage> = {
   'imaposla-digitalni-proizvod': {
-    src: '/images/cases/imaposla/imaposla-me-platforma-poslovi-crna-gora-cover.svg',
+    src: '/images/cases/imaposla/imaposla-me-platforma-poslovi-crna-gora-cover.webp',
     alt: 'ImaPosla.me platforma za poslove u Crnoj Gori sa maskotom, laptopom i telefonom',
-    width: 800,
-    height: 800,
+    width: 1200,
+    height: 1200,
     position: 'center',
   },
 }
