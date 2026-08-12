@@ -9,8 +9,6 @@ on:
     paths:
       - 'scripts/capture-imaposla-screenshots.mjs'
       - '.github/workflows/refresh-imaposla-screenshots.yml'
-      - 'package.json'
-      - 'package-lock.json'
 
 permissions:
   contents: write
