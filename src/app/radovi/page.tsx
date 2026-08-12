@@ -5,18 +5,29 @@ import { JsonLd } from '@/components/json-ld'
 import { WorkFilter } from '@/components/work-filter'
 import { cases } from '@/data/cases'
 import { createMetadata } from '@/lib/metadata'
-import { breadcrumbSchema } from '@/lib/schema'
+import { breadcrumbSchema, itemListSchema, webPageSchema } from '@/lib/schema'
+
+const seoTitle = 'Portfolio - digitalni proizvodi, kampanje, eventi i promo timovi'
+const seoDescription = 'Case studies Sindikat Studio 83: digitalne platforme, kampanje, aktivacije, promo timovi, događaji, web projekti i operativni sistemi u Crnoj Gori.'
 
 export const metadata: Metadata = createMetadata({
-  title: 'Radovi - digitalni proizvodi, promo operacije i događaji',
-  description: 'Projekti Sindikat Studio 83: digitalne platforme, STEAM i community programi, promo timovi, aktivacije, mini-sajtovi i event produkcija.',
+  title: seoTitle,
+  description: seoDescription,
   path: '/radovi/',
 })
 
 export default function WorksPage() {
   const crumbs = [{ label: 'Radovi', href: '/radovi/' }]
   return <>
-    <JsonLd data={breadcrumbSchema(crumbs)} />
+    <JsonLd data={[
+      breadcrumbSchema(crumbs),
+      webPageSchema({ name: seoTitle, description: seoDescription, path: '/radovi/', type: 'CollectionPage' }),
+      itemListSchema({
+        name: 'Case studies Sindikat Studio 83',
+        path: '/radovi/',
+        items: cases.map((item) => ({ name: item.title, href: `/radovi/${item.slug}/` })),
+      }),
+    ]} />
     <section className="page-hero"><div className="container"><Breadcrumbs items={crumbs} /><div className="page-hero-grid"><div><span className="eyebrow">Radovi</span><h1>Projekti u kojima je ideja morala postati sistem koji stvarno radi.</h1><p className="lead">Portfolio je organizovan prema vrsti problema, a ne samo prema industriji. Svaki projekat objašnjava kontekst, našu ulogu, postavljeni proces, konkretne isporuke i ono što je realizacija omogućila.</p></div><aside className="page-hero-aside"><strong>Šta tražiti u case studyju</strong><ul><li>koji problem je projekat rješavao</li><li>šta je Sindikat konkretno preuzeo</li><li>koje discipline su morale raditi zajedno</li><li>šta je ostalo upotrebljivo nakon realizacije</li></ul></aside></div></div></section>
 
     <section className="section"><div className="container manifesto"><div><span className="eyebrow">Hijerarhija portfolija</span><h2>Prvo prikazujemo sisteme sa najvećim obimom odgovornosti.</h2></div><div className="manifesto-copy">Digitalni proizvodi, višemjesečni programi i operativni sistemi dolaze prvi jer najbolje pokazuju način rada. Pojedinačne aktivacije, događaji i mini-sajtovi zatim pokazuju kako se isti standard primjenjuje na kraće i specifičnije formate. <strong>Filter mijenja temu, ali ne mijenja osnovni redosljed projekata.</strong></div></div></section>
