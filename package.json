@@ -3,7 +3,7 @@
   "version": "2.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev --turbopack",
+    "dev": "next dev",
     "build": "node scripts/validate-project.mjs && node scripts/validate-responsive.mjs && node scripts/validate-site-integrity.mjs && node scripts/validate-seo.mjs && next build",
     "typecheck": "tsc --noEmit",
     "validate:source": "node scripts/validate-project.mjs",
