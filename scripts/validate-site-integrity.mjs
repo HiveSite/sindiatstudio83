@@ -74,8 +74,13 @@ for (const match of source.matchAll(/\bsrc:\s*["'](\/images\/[^"']+)["']/g)) {
 }
 
 const sitemap = read('src/app/sitemap.ts')
-for (const token of ['...services.map', '...industries.map', '...cases.map', '...blogPosts.map']) {
-  if (!sitemap.includes(token)) fail(`Sitemap is missing dynamic collection: ${token}`)
+for (const [collection, routeArray] of [
+  ['services.map', '...serviceRoutes'],
+  ['industries.map', '...industryRoutes'],
+  ['cases.map', '...caseRoutes'],
+  ['blogPosts.map', '...blogRoutes'],
+]) {
+  if (!sitemap.includes(collection) || !sitemap.includes(routeArray)) fail(`Sitemap is missing dynamic collection wiring: ${collection} -> ${routeArray}`)
 }
 const robots = read('src/app/robots.ts')
 if (!robots.includes('sitemap')) fail('robots.ts does not expose the sitemap')
