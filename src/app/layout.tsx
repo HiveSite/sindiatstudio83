@@ -8,6 +8,7 @@ import { JsonLd } from '@/components/json-ld'
 import { organizationSchema, websiteSchema } from '@/lib/schema'
 import { site } from '@/data/site'
 import './globals.css'
+import './sales-ux.css'
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.domain),
