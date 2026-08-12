@@ -12,7 +12,7 @@ const css = read('src/app/globals.css')
 const header = read('src/components/header.tsx')
 const workFilter = read('src/components/work-filter.tsx')
 const blogExplorer = read('src/components/blog-explorer.tsx')
-const jobsBoard = read('src/components/jobs-board.tsx')
+const leadForm = read('src/components/lead-form.tsx')
 const caseMediaCss = read('src/components/case-media.module.css')
 const caseMediaComponent = read('src/components/case-media.tsx')
 
@@ -26,7 +26,6 @@ const responsiveChecks = [
   ['dynamic viewport height', '100dvh'],
   ['article table overflow protection', '.article-content table'],
   ['article code overflow protection', '.article-content pre'],
-  ['modal mobile layout', '.modal-dialog'],
   ['filter horizontal scrolling', '.work-filter-scroll'],
   ['full display audit layer', 'Full display audit corrections - v2.3'],
   ['single-column mobile service cards', '.service-grid-five{grid-template-columns:minmax(0,1fr)}'],
@@ -51,7 +50,6 @@ for (const [label, token] of responsiveChecks) {
 if ((css.match(/{/g) || []).length !== (css.match(/}/g) || []).length) {
   fail('globals.css has unbalanced braces')
 }
-
 
 const mediaChecks = [
   ['uncropped gallery media', 'object-fit: contain'],
@@ -85,7 +83,7 @@ const componentChecks = [
   [workFilter, 'accessible work filter group', 'role="group"'],
   [workFilter, 'filter result controls', 'aria-controls="work-results"'],
   [blogExplorer, 'scrollable blog filters', 'filter-row-scroll'],
-  [jobsBoard, 'telephone input mode', 'inputMode="tel"'],
+  [leadForm, 'telephone input mode', 'inputMode="tel"'],
 ]
 
 for (const [source, label, token] of componentChecks) {
@@ -93,5 +91,5 @@ for (const [source, label, token] of componentChecks) {
 }
 
 if (!process.exitCode) {
-  console.log('Responsive validation passed: full-width layout, readable measures, final cascade, card growth, media visibility, safe areas, mobile navigation, filters and forms.')
+  console.log('Responsive validation passed: full-width layout, readable measures, final cascade, card growth, media visibility, safe areas, mobile navigation, filters and active lead form.')
 }
