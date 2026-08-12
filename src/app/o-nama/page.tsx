@@ -5,18 +5,24 @@ import { FinalCta } from '@/components/final-cta'
 import { JsonLd } from '@/components/json-ld'
 import { SectionHeading } from '@/components/section-heading'
 import { createMetadata } from '@/lib/metadata'
-import { breadcrumbSchema } from '@/lib/schema'
+import { breadcrumbSchema, webPageSchema } from '@/lib/schema'
+
+const seoTitle = 'Sindikat Studio 83 - digitalni i event studio iz Podgorice'
+const seoDescription = 'Upoznajte Sindikat Studio 83, operativni studio iz Podgorice za digitalne proizvode, kampanje, sadržaj, promo timove, aktivacije i događaje u Crnoj Gori.'
 
 export const metadata: Metadata = createMetadata({
-  title: 'O nama - studio za digital, ljude i teren',
-  description: 'Sindikat Studio 83 je operativni studio iz Podgorice koji povezuje digitalne proizvode, kampanje, sadržaj, promo timove, aktivacije i događaje.',
+  title: seoTitle,
+  description: seoDescription,
   path: '/o-nama/',
 })
 
 export default function AboutPage() {
   const crumbs = [{ label: 'O nama', href: '/o-nama/' }]
   return <>
-    <JsonLd data={breadcrumbSchema(crumbs)} />
+    <JsonLd data={[
+      breadcrumbSchema(crumbs),
+      webPageSchema({ name: seoTitle, description: seoDescription, path: '/o-nama/', type: 'AboutPage' }),
+    ]} />
     <section className="page-hero"><div className="container"><Breadcrumbs items={crumbs} /><div className="page-hero-grid"><div><span className="eyebrow">O Sindikatu</span><h1>Nastali smo na terenu, a digital razvili da rezultat ne zavisi od improvizacije.</h1><p className="lead">Sindikat Studio 83 je operativni studio iz Podgorice. Razvijamo digitalne proizvode i kampanje, organizujemo ljude i vodimo realizaciju na lokaciji kada projekat traži više od jedne discipline.</p></div><aside className="page-hero-aside"><strong>Naš fokus</strong><ul><li>jedan cilj i jedna operativna mapa</li><li>jasan obim, vlasnici i rokovi</li><li>realna lokalna izvedba u Crnoj Gori</li><li>mjerenje i izvještavanje bez uljepšavanja</li></ul></aside></div></div></section>
 
     <section className="section"><div className="container manifesto"><div><span className="eyebrow">Zašto postojimo</span><h2>Između dobre ideje i dobrog rezultata postoji veliki operativni prostor.</h2></div><div className="manifesto-copy">Dobar oglas ne može spasiti nejasnu ponudu. Dobar sajt ne pomaže ako niko ne obrađuje upit. Dobar event ne ostavlja dovoljno vrijednosti ako marketing, produkcija, ljudi i sadržaj nijesu povezani. <strong>Naš posao je da te djelove pretvorimo u sistem koji se može razumjeti, izvesti i unaprijediti.</strong></div></div></section>
