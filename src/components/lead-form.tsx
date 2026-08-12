@@ -16,6 +16,7 @@ type QueryContext = {
   source: string
   collaborationModel: string
   recommendation: string
+  product: string
 }
 
 const goalOptions = [
@@ -36,7 +37,7 @@ export function LeadForm({ compact = false, source = 'contact-page' }: { compact
   const [status, setStatus] = useState('')
   const [goal, setGoal] = useState('')
   const [budget, setBudget] = useState('')
-  const [queryContext, setQueryContext] = useState<QueryContext>({ service: '', industry: '', source, collaborationModel: '', recommendation: '' })
+  const [queryContext, setQueryContext] = useState<QueryContext>({ service: '', industry: '', source, collaborationModel: '', recommendation: '', product: '' })
   const [state, setState] = useState<FormState>('idle')
 
   const selectedService = queryContext.service
@@ -53,13 +54,16 @@ export function LeadForm({ compact = false, source = 'contact-page' }: { compact
       source: params.get('izvor') || source,
       collaborationModel: params.get('model') || '',
       recommendation: params.get('preporuka') || '',
+      product: params.get('proizvod') || '',
     }
     setQueryContext(nextContext)
     if (goalOptions.includes(goalParam)) setGoal(goalParam)
     if (budgetOptions.includes(budgetParam)) setBudget(budgetParam)
 
-    if (nextContext.recommendation) {
-      setStatus(`Prenijeli smo tvoj izbor. Preporučeni pravac: ${nextContext.recommendation}. Dodaj kontakt, rok i kratak kontekst.`)
+    if (nextContext.product) {
+      setStatus(`Izabrani proizvod: ${nextContext.product}. Dodaj kontakt, rok i kratak kontekst projekta.`)
+    } else if (nextContext.recommendation) {
+      setStatus(`Prenijeli smo tvoj izbor. Preporučeni proizvod: ${nextContext.recommendation}. Dodaj kontakt, rok i kratak kontekst.`)
     } else if (nextContext.service || nextContext.industry) {
       setStatus('Prepoznali smo stranicu sa koje dolaziš. Dodaj kontakt, rok i najvažniji kontekst.')
     }
@@ -69,11 +73,8 @@ export function LeadForm({ compact = false, source = 'contact-page' }: { compact
     if (startedRef.current) return
     startedRef.current = true
     trackEvent('form_start', {
-      form_name: 'lead_form',
-      form_source: sourceParam,
-      service: selectedService,
-      industry: selectedIndustry,
-      recommendation: queryContext.recommendation,
+      form_name: 'lead_form', form_source: sourceParam, service: selectedService, industry: selectedIndustry,
+      recommendation: queryContext.recommendation, product: queryContext.product,
     })
   }
 
@@ -85,85 +86,47 @@ export function LeadForm({ compact = false, source = 'contact-page' }: { compact
     if (fd.get('website')) return
 
     if (!form.checkValidity()) {
-      form.reportValidity()
-      setStatus('Provjeri označena obavezna polja.')
-      setState('error')
-      trackEvent('form_error', { form_name: 'lead_form', reason: 'validation', form_source: sourceParam })
-      return
+      form.reportValidity(); setStatus('Provjeri označena obavezna polja.'); setState('error')
+      trackEvent('form_error', { form_name: 'lead_form', reason: 'validation', form_source: sourceParam }); return
     }
 
     const email = String(fd.get('email') || '').trim()
     const phone = String(fd.get('phone') || '').trim()
     const payload = {
-      name: String(fd.get('name') || '').trim(),
-      email,
-      phone,
-      contact: [email, phone].filter(Boolean).join(' / '),
-      goal: String(fd.get('goal') || '').trim(),
-      budget: String(fd.get('budget') || '').trim(),
-      deadline: String(fd.get('deadline') || '').trim(),
-      projectState: String(fd.get('projectState') || '').trim(),
-      message: String(fd.get('message') || '').trim(),
-      collaborationModel: queryContext.collaborationModel,
-      recommendation: queryContext.recommendation,
-      service: selectedService,
-      industry: selectedIndustry,
-      url: window.location.href,
-      landingPage: sessionStorage.getItem('sindikat_landing_page') || '',
-      referrer: document.referrer,
-      source: sourceParam,
-      consentChoice: localStorage.getItem('sindikat_cookie_consent') || '',
-      submittedAt: new Date().toISOString(),
-      ...getStoredCampaignData(),
-      ...getFirstTouchData(),
+      name: String(fd.get('name') || '').trim(), email, phone, contact: [email, phone].filter(Boolean).join(' / '),
+      goal: String(fd.get('goal') || '').trim(), budget: String(fd.get('budget') || '').trim(), deadline: String(fd.get('deadline') || '').trim(),
+      projectState: String(fd.get('projectState') || '').trim(), message: String(fd.get('message') || '').trim(),
+      collaborationModel: queryContext.collaborationModel, recommendation: queryContext.recommendation, product: queryContext.product,
+      service: selectedService, industry: selectedIndustry, url: window.location.href,
+      landingPage: sessionStorage.getItem('sindikat_landing_page') || '', referrer: document.referrer, source: sourceParam,
+      consentChoice: localStorage.getItem('sindikat_cookie_consent') || '', submittedAt: new Date().toISOString(),
+      ...getStoredCampaignData(), ...getFirstTouchData(),
     }
 
-    setState('loading')
-    setStatus('Šaljemo brief...')
-    const controller = new AbortController()
-    const timeout = window.setTimeout(() => controller.abort(), requestTimeoutMs)
+    setState('loading'); setStatus('Šaljemo brief...')
+    const controller = new AbortController(); const timeout = window.setTimeout(() => controller.abort(), requestTimeoutMs)
 
     try {
-      const response = await fetch(site.integrations.contactEndpoint, {
-        method: 'POST',
-        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-        body: JSON.stringify(payload),
-        signal: controller.signal,
-      })
-      const responseText = await response.text()
-      let result: { ok?: boolean; error?: string } = {}
+      const response = await fetch(site.integrations.contactEndpoint, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(payload), signal: controller.signal })
+      const responseText = await response.text(); let result: { ok?: boolean; error?: string } = {}
       try { result = responseText ? JSON.parse(responseText) as typeof result : {} } catch { result = {} }
       if (!response.ok || result.ok === false) throw new Error(result.error || `HTTP ${response.status}`)
 
-      trackEvent('generate_lead', {
-        form_name: 'lead_form',
-        goal: payload.goal,
-        budget: payload.budget,
-        form_source: sourceParam,
-        service: selectedService,
-        industry: selectedIndustry,
-        recommendation: queryContext.recommendation,
-      })
-      form.reset()
-      setGoal('')
-      setBudget('')
-      setStatus(`Hvala. Upit je poslat. ${site.responseTime}`)
-      setState('success')
+      trackEvent('generate_lead', { form_name: 'lead_form', goal: payload.goal, budget: payload.budget, form_source: sourceParam, service: selectedService, industry: selectedIndustry, recommendation: queryContext.recommendation, product: queryContext.product })
+      form.reset(); setGoal(''); setBudget(''); setStatus(`Hvala. Upit je poslat. ${site.responseTime}`); setState('success')
       window.setTimeout(() => router.push(`/hvala/?source=${encodeURIComponent(sourceParam)}`), 800)
     } catch (error) {
       const reason = error instanceof DOMException && error.name === 'AbortError' ? 'timeout' : 'network'
-      console.error(error)
-      setStatus(`Slanje nije potvrđeno. Probaj ponovo ili piši direktno na ${site.email}.`)
-      setState('error')
+      console.error(error); setStatus(`Slanje nije potvrđeno. Probaj ponovo ili piši direktno na ${site.email}.`); setState('error')
       trackEvent('form_error', { form_name: 'lead_form', reason, form_source: sourceParam })
-    } finally {
-      window.clearTimeout(timeout)
-    }
+    } finally { window.clearTimeout(timeout) }
   }
+
+  const contextTitle = queryContext.product || queryContext.recommendation
 
   return (
     <form ref={formRef} className={`lead-form${compact ? ' lead-form-compact' : ''}`} onInput={startTracking} onSubmit={submit} noValidate aria-busy={state === 'loading'}>
-      {queryContext.recommendation ? <div className="brief-context"><span>Preporučeni pravac</span><strong>{queryContext.recommendation}</strong>{queryContext.collaborationModel ? <small>{queryContext.collaborationModel}</small> : null}</div> : null}
+      {contextTitle ? <div className="brief-context"><span>{queryContext.product ? 'Izabrani proizvod' : 'Preporučeni proizvod'}</span><strong>{contextTitle}</strong>{queryContext.collaborationModel ? <small>{queryContext.collaborationModel}</small> : null}</div> : null}
       <div className="form-grid">
         <label><span>Ime i firma *</span><input name="name" autoComplete="name" required maxLength={120} placeholder="Ime / Naziv firme ili projekta" /></label>
         <label><span>Email *</span><input name="email" type="email" autoComplete="email" required maxLength={180} placeholder="marko@email.com" /></label>
