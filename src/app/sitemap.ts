@@ -7,28 +7,50 @@ import { site } from '@/data/site'
 
 export const dynamic = 'force-static'
 
+const absoluteUrl = (path: string) => new URL(path, site.domain).toString()
+const contentDate = new Date(`${site.contentUpdatedAt}T00:00:00.000Z`)
+
 export default function sitemap(): MetadataRoute.Sitemap {
-  const staticRoutes = [
-    '/', '/usluge/', '/industrije/', '/radovi/', '/o-nama/', '/blog/', '/kontakt/',
-    '/privatnost/', '/kolacici/', '/uslovi-koriscenja/',
+  const staticRoutes: MetadataRoute.Sitemap = [
+    { url: absoluteUrl('/'), lastModified: contentDate, images: [absoluteUrl('/images/brand/og-cover.png')] },
+    { url: absoluteUrl('/usluge/'), lastModified: contentDate },
+    { url: absoluteUrl('/industrije/'), lastModified: contentDate },
+    { url: absoluteUrl('/radovi/'), lastModified: contentDate },
+    { url: absoluteUrl('/o-nama/'), lastModified: contentDate },
+    { url: absoluteUrl('/blog/'), lastModified: contentDate },
+    { url: absoluteUrl('/kontakt/'), lastModified: contentDate },
   ]
-  const contentDate = new Date(`${site.contentUpdatedAt}T00:00:00.000Z`)
+
+  const serviceRoutes: MetadataRoute.Sitemap = services.map((item) => ({
+    url: absoluteUrl(`/usluge/${item.slug}/`),
+    lastModified: contentDate,
+  }))
+
+  const industryRoutes: MetadataRoute.Sitemap = industries.map((item) => ({
+    url: absoluteUrl(`/industrije/${item.slug}/`),
+    lastModified: contentDate,
+  }))
+
+  const caseRoutes: MetadataRoute.Sitemap = cases.map((item) => {
+    const image = item.socialImage?.src || item.coverImage?.src
+    return {
+      url: absoluteUrl(`/radovi/${item.slug}/`),
+      lastModified: contentDate,
+      images: image ? [absoluteUrl(image)] : undefined,
+    }
+  })
+
+  const blogRoutes: MetadataRoute.Sitemap = blogPosts.map((item) => ({
+    url: absoluteUrl(`/blog/${item.slug}/`),
+    lastModified: item.date ? new Date(`${item.date}T00:00:00.000Z`) : undefined,
+    images: item.cover ? [absoluteUrl(item.cover)] : undefined,
+  }))
 
   return [
-    ...staticRoutes.map((route) => ({
-      url: new URL(route, site.domain).toString(),
-      lastModified: contentDate,
-      changeFrequency: route === '/' ? 'weekly' as const : 'monthly' as const,
-      priority: route === '/' ? 1 : route.split('/').filter(Boolean).length === 1 ? 0.8 : 0.6,
-    })),
-    ...services.map((item) => ({ url: `${site.domain}/usluge/${item.slug}/`, lastModified: contentDate, changeFrequency: 'monthly' as const, priority: 0.8 })),
-    ...industries.map((item) => ({ url: `${site.domain}/industrije/${item.slug}/`, lastModified: contentDate, changeFrequency: 'monthly' as const, priority: 0.7 })),
-    ...cases.map((item) => ({ url: `${site.domain}/radovi/${item.slug}/`, lastModified: contentDate, changeFrequency: 'monthly' as const, priority: 0.7 })),
-    ...blogPosts.map((item) => ({
-      url: `${site.domain}/blog/${item.slug}/`,
-      lastModified: new Date(`${item.date || site.contentUpdatedAt}T00:00:00.000Z`),
-      changeFrequency: 'monthly' as const,
-      priority: 0.6,
-    })),
+    ...staticRoutes,
+    ...serviceRoutes,
+    ...industryRoutes,
+    ...caseRoutes,
+    ...blogRoutes,
   ]
 }
