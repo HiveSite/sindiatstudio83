@@ -13,7 +13,7 @@ export async function generateMetadata({ params }: { params: Promise<{ legal: st
   const { legal } = await params
   const page = legalPages[legal as keyof typeof legalPages]
   if (!page) return {}
-  return createMetadata({ title: page.title, description: page.description, path: `/${legal}/` })
+  return createMetadata({ title: page.title, description: page.description, path: `/${legal}/`, noIndex: true })
 }
 
 export default async function LegalPage({ params }: { params: Promise<{ legal: string }> }) {
