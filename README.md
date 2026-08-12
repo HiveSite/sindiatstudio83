@@ -1,6 +1,6 @@
 # Sindikat Studio 83 - Next.js produkcijski sajt
 
-Kompletna Next.js 16 App Router verzija sajta. Dizajn, sadržaj, ponuda, GA4/GTM, Google Apps Script forme, blog, angažmani, SEO i stari redirecti preneseni su iz prethodne produkcijske verzije.
+Next.js 16 App Router sajt za Sindikat Studio 83. Produkcija je statički eksportovana i obuhvata ponudu, case studies, industrijske stranice, resurse, GA4/GTM mjerenje, Google Apps Script kontakt formu, SEO i legacy redirecte.
 
 ## Brzi početak
 
@@ -26,20 +26,25 @@ Build rezultat se generiše u folderu `out/`.
 - Publish directory: `out`
 - Node: `20`
 
-`netlify.toml` već sadrži ovu konfiguraciju. Kada je repo pravilno postavljen u rootu, Netlify ne treba ručno podešavati osim povezivanja repozitorijuma.
+`netlify.toml` je source of truth za build, cache i security header konfiguraciju.
 
 ## Najvažniji fajlovi
 
-- `src/data/site.ts` - domen, email, analitika, endpointi, navigacija i brojke
-- `src/data/services.ts` - kompletna ponuda i cijene
+- `src/data/site.ts` - domen, kontakt, analitika, navigacija i proof brojke
+- `src/data/services.ts` - sadržaj glavnih usluga
+- `src/data/service-products.ts` - centralni proizvodi i javne početne cijene
 - `src/data/industries.ts` - industrijske stranice
 - `src/data/cases.ts` - case studies
-- `src/data/blog-posts.json` - blog sadržaj
+- `src/data/blog-posts.json` - lokalni produkcijski blog sadržaj
 - `src/app/page.tsx` - homepage
-- `src/app/globals.css` - kompletan vizuelni sistem
-- `src/components/lead-form.tsx` - kontakt forma
-- `src/components/jobs-board.tsx` - poslovi, prijave i objava angažmana
+- `src/app/globals.css` - glavni vizuelni sistem
+- `src/app/sales-ux.css` - product/service sales UI
+- `src/app/contrast.css` - završni contrast/readability sloj
+- `src/components/lead-form.tsx` - kontakt i brief forma
 - `src/components/analytics.tsx` - GA4, GTM i consent default
-- `public/_redirects` - Netlify 301 redirecti
+- `src/lib/metadata.ts` i `src/lib/schema.ts` - metadata i structured-data SEO sloj
+- `public/_redirects` - canonical, legacy i ImaPosla 301 redirecti
 
-Detaljno: `docs/CHANGE_MAP.md`.
+Prijave za poslove više nijesu dio ovog sajta. Svi "Postani dio tima" tokovi vode na `imaposla.me`.
+
+Detaljno: `docs/ARCHITECTURE.md`, `docs/INTEGRATIONS.md` i `docs/CHANGE_MAP.md`.
