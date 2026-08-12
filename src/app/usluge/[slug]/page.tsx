@@ -9,9 +9,8 @@ import { SectionHeading } from '@/components/section-heading'
 import { cases } from '@/data/cases'
 import { serviceBySlug, services } from '@/data/services'
 import { serviceProducts } from '@/data/service-products'
-import { site } from '@/data/site'
 import { createMetadata } from '@/lib/metadata'
-import { breadcrumbSchema } from '@/lib/schema'
+import { breadcrumbSchema, itemListSchema, serviceSchema, webPageSchema } from '@/lib/schema'
 
 export const dynamicParams = false
 export function generateStaticParams() { return services.map((service) => ({ slug: service.slug })) }
@@ -20,7 +19,11 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const { slug } = await params
   const service = serviceBySlug[slug]
   if (!service) return {}
-  return createMetadata({ title: `${service.shortTitle} u Crnoj Gori`, description: service.summary, path: `/usluge/${service.slug}/` })
+  return createMetadata({
+    title: `${service.shortTitle} u Crnoj Gori - usluge i cijene`,
+    description: service.summary,
+    path: `/usluge/${service.slug}/`,
+  })
 }
 
 export default async function ServicePage({ params }: { params: Promise<{ slug: string }> }) {
@@ -29,13 +32,30 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
   if (!service) notFound()
 
   const products = serviceProducts[service.slug] || []
-  const crumbs = [{ label: 'Usluge', href: '/usluge/' }, { label: service.shortTitle, href: `/usluge/${service.slug}/` }]
+  const path = `/usluge/${service.slug}/`
+  const crumbs = [{ label: 'Usluge', href: '/usluge/' }, { label: service.shortTitle, href: path }]
   const relatedServices = services.filter((item) => item.slug !== service.slug).slice(0, 4)
   const relatedCases = cases.filter((item) => item.serviceSlugs.includes(service.slug)).slice(0, 2)
-  const schemas = [breadcrumbSchema(crumbs), {
-    '@context': 'https://schema.org', '@type': 'Service', name: service.shortTitle, description: service.summary,
-    provider: { '@id': `${site.domain}/#organization` }, areaServed: { '@type': 'Country', name: 'Montenegro' }, url: `${site.domain}/usluge/${service.slug}/`,
-  }]
+  const schemas = [
+    breadcrumbSchema(crumbs),
+    webPageSchema({
+      name: `${service.shortTitle} u Crnoj Gori`,
+      description: service.summary,
+      path,
+      about: [{ name: service.shortTitle, url: path }],
+    }),
+    serviceSchema({
+      name: service.shortTitle,
+      description: service.summary,
+      path,
+      serviceType: service.shortTitle,
+    }),
+    itemListSchema({
+      name: `Proizvodi - ${service.shortTitle}`,
+      path,
+      items: products.map((product) => ({ name: product.name, href: `${path}#proizvodi` })),
+    }),
+  ]
 
   return <div className="premium-service-page">
     <JsonLd data={schemas} />
