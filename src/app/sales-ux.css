@@ -50,6 +50,9 @@
 .sales-recommendation{margin-top:16px;padding:26px;border:1px solid var(--line-strong);border-radius:22px;background:#0c0c11;display:flex;align-items:center;justify-content:space-between;gap:26px}
 .sales-recommendation-copy{max-width:690px}.sales-recommendation-copy>span{display:block;color:var(--pink-light);font-size:11px;font-weight:900;text-transform:uppercase;letter-spacing:.14em;margin-bottom:8px}.sales-recommendation-copy strong{display:block;font-size:clamp(28px,4vw,42px);letter-spacing:-.04em;line-height:1.05}.sales-recommendation-copy p{margin:9px 0 0}.sales-recommendation-actions{display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end;flex-shrink:0}
 .sales-home .hero{min-height:720px}.sales-home .hero-copy .lead{max-width:720px}.sales-home .hero-copy h1{font-size:clamp(50px,6.5vw,88px)}
+.brief-context{margin-bottom:18px;padding:18px 20px;border:1px solid rgba(245,0,98,.35);border-radius:18px;background:linear-gradient(135deg,rgba(245,0,98,.11),rgba(255,255,255,.025));display:grid;gap:3px}
+.brief-context span{font-size:10px;text-transform:uppercase;letter-spacing:.14em;font-weight:900;color:var(--pink-light)}
+.brief-context strong{font-size:21px;letter-spacing:-.03em}.brief-context small{color:var(--muted);font-size:13px}
 
 @media (max-width:1040px){
   .sales-section-head,.sales-chooser-head{grid-template-columns:1fr;gap:14px;align-items:start}.sales-section-head>p,.sales-chooser-head>p{max-width:720px}
