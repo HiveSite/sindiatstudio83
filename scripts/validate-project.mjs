@@ -57,7 +57,7 @@ for (const file of sourceFiles) {
 }
 
 const redirects = fs.readFileSync(path.join(root, 'public/_redirects'), 'utf8')
-for (const requiredRedirect of ['/sr-me/ / 301!', '/sr-me/kontakt/ /kontakt/ 301!', '/sr-me/poslovi/ /postani-dio-tima/ 301!']) {
+for (const requiredRedirect of ['/sr-me/ / 301!', '/sr-me/kontakt/ /kontakt/ 301!', '/postani-dio-tima/ https://imaposla.me/ 301!', '/sr-me/poslovi/ https://imaposla.me/ 301!']) {
   if (!redirects.includes(requiredRedirect)) failures.push(`Missing redirect rule: ${requiredRedirect}`)
 }
 const redirectSources = redirects.split('\n').map((line) => line.trim()).filter((line) => line && !line.startsWith('#')).map((line) => line.split(/\s+/)[0])
