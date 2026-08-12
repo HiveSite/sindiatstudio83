@@ -47,7 +47,6 @@ export const site = {
 export const navigation = [
   { label: 'Usluge', href: '/usluge/' },
   { label: 'Radovi', href: '/radovi/' },
-  { label: 'Kako radimo', href: '/#saradnja' },
   { label: 'O nama', href: '/o-nama/' },
   { label: 'Kontakt', href: '/kontakt/' },
 ] as const
