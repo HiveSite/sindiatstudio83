@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { cases } from '@/data/cases'
+import { services } from '@/data/services'
 import { site } from '@/data/site'
 import { CaseCard } from '@/components/cards'
 import { SectionHeading } from '@/components/section-heading'
@@ -8,27 +9,34 @@ import { FinalCta } from '@/components/final-cta'
 import { JsonLd } from '@/components/json-ld'
 import { OfferAreas, OfferChooser } from '@/components/sales-offer'
 import { createMetadata } from '@/lib/metadata'
+import { itemListSchema, webPageSchema } from '@/lib/schema'
+
+const seoTitle = 'Digitalni marketing, web, eventi i promo timovi u Crnoj Gori'
+const seoDescription = 'Sindikat Studio 83 je studio iz Podgorice za digitalni marketing, web i digitalne proizvode, aktivacije, događaje, sadržaj i promo timove širom Crne Gore.'
 
 export const metadata: Metadata = createMetadata({
-  title: 'Sindikat Studio 83 - digital, kampanje, ljudi i realizacija',
-  description: 'Studio iz Podgorice koji povezuje digitalne proizvode, kampanje, promo timove, aktivacije i događaje kroz jednu odgovornu realizaciju.',
+  title: seoTitle,
+  description: seoDescription,
   path: '/',
 })
 
 export default function HomePage() {
   return (
     <div className="sales-home">
-      <JsonLd data={{
-        '@context': 'https://schema.org', '@type': 'ProfessionalService', '@id': `${site.domain}/#service`, name: site.name, url: site.domain,
-        image: `${site.domain}/images/brand/og-cover.png`, areaServed: { '@type': 'Country', name: 'Montenegro' },
-        address: { '@type': 'PostalAddress', addressLocality: 'Podgorica', addressCountry: 'ME' }, parentOrganization: { '@id': `${site.domain}/#organization` },
-      }} />
+      <JsonLd data={[
+        webPageSchema({ name: seoTitle, description: seoDescription, path: '/', image: '/images/brand/og-cover.png' }),
+        itemListSchema({
+          name: 'Usluge Sindikat Studio 83',
+          path: '/',
+          items: services.map((service) => ({ name: service.shortTitle, href: `/usluge/${service.slug}/` })),
+        }),
+      ]} />
 
       <section className="hero"><div className="container hero-grid">
         <div className="hero-copy">
           <span className="eyebrow">Studio za rast i realizaciju</span>
           <h1><span>Digital, kampanje,</span><span>ljudi i realizacija.</span><span className="outline">Jedan tim.</span></h1>
-          <p className="lead">Od prvog klika do posljednjeg detalja na terenu - preuzimamo djelove koji moraju da rade zajedno i vodimo ih kroz jednu odgovornu tačku.</p>
+          <p className="lead">Od digitalnog marketinga i web proizvoda do promo timova, aktivacija i događaja u Crnoj Gori - povezujemo djelove koji moraju da rade zajedno i vodimo ih kroz jednu odgovornu tačku.</p>
           <div className="button-row hero-actions"><Link className="button button-primary" href="#izaberi-rjesenje" data-track="hero_solution">Pogledaj ponudu</Link><Link className="button button-ghost" href="/radovi/" data-track="hero_cases">Pogledaj radove</Link></div>
           <div className="hero-note"><span><i /> Podgorica i cijela Crna Gora</span><span><i /> Jedan vlasnik projekta, manje koordinacije za klijenta</span></div>
         </div>
