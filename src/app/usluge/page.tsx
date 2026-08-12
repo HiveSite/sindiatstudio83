@@ -6,19 +6,30 @@ import { JsonLd } from '@/components/json-ld'
 import { OfferAreas, OfferChooser } from '@/components/sales-offer'
 import { services } from '@/data/services'
 import { serviceProducts } from '@/data/service-products'
-import { breadcrumbSchema } from '@/lib/schema'
+import { breadcrumbSchema, itemListSchema, webPageSchema } from '@/lib/schema'
 import { createMetadata } from '@/lib/metadata'
 
+const seoTitle = 'Usluge digitalnog marketinga, weba, događaja i promo timova u Crnoj Gori'
+const seoDescription = 'Performance marketing, web i digitalni proizvodi, aktivacije, događaji, sadržaj i recruitment kampanje iz Podgorice za klijente širom Crne Gore.'
+
 export const metadata: Metadata = createMetadata({
-  title: 'Usluge - kampanje, web, aktivacije i timovi',
-  description: 'Izaberite oblast i konkretan proizvod: kampanje i rast, web i digitalni proizvodi, aktivacije i eventi ili timovi i angažmani.',
+  title: seoTitle,
+  description: seoDescription,
   path: '/usluge/',
 })
 
 export default function ServicesPage() {
   const crumbs = [{ label: 'Usluge', href: '/usluge/' }]
   return <>
-    <JsonLd data={breadcrumbSchema(crumbs)} />
+    <JsonLd data={[
+      breadcrumbSchema(crumbs),
+      webPageSchema({ name: seoTitle, description: seoDescription, path: '/usluge/', type: 'CollectionPage' }),
+      itemListSchema({
+        name: 'Usluge Sindikat Studio 83',
+        path: '/usluge/',
+        items: services.map((service) => ({ name: service.shortTitle, href: `/usluge/${service.slug}/` })),
+      }),
+    ]} />
     <section className="page-hero"><div className="container"><Breadcrumbs items={crumbs} /><div className="page-hero-grid"><div><span className="eyebrow">Usluge</span><h1>Izaberite oblast. Zatim konkretan proizvod i cjenovni okvir.</h1><p className="lead">Ponuda je organizovana tako da brzo pronađete ono što vam treba - bez agencijskog žargona i bez univerzalnih paketa.</p></div><aside className="page-hero-aside"><strong>Kako da koristite ovu stranicu</strong><ul><li>izaberite kategoriju najbližu problemu</li><li>pogledajte konkretne proizvode i početne cijene</li><li>otvorite detalje proizvoda koji vam odgovara</li><li>pošaljite brief ako obim nije standardan</li></ul></aside></div></div></section>
 
     <OfferAreas />
