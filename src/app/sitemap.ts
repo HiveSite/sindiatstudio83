@@ -10,7 +10,7 @@ export const dynamic = 'force-static'
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticRoutes = [
     '/', '/usluge/', '/industrije/', '/radovi/', '/o-nama/', '/blog/', '/kontakt/',
-    '/postani-dio-tima/', '/privatnost/', '/kolacici/', '/uslovi-koriscenja/',
+    '/privatnost/', '/kolacici/', '/uslovi-koriscenja/',
   ]
   const contentDate = new Date(`${site.contentUpdatedAt}T00:00:00.000Z`)
 
