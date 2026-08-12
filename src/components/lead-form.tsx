@@ -28,7 +28,7 @@ const goalOptions = [
   'Nijesam siguran - treba mi preporuka',
 ]
 
-const budgetOptions = ['Do 500 €', '500 - 1.500 €', '1.500 - 5.000 €', '5.000 €+']
+const budgetOptions = ['Do 150 €', '150 - 500 €', '500 - 1.500 €', '1.500 €+']
 
 export function LeadForm({ compact = false, source = 'contact-page' }: { compact?: boolean; source?: string }) {
   const router = useRouter()
