@@ -9,6 +9,8 @@ on:
     paths:
       - 'scripts/capture-imaposla-screenshots.mjs'
       - '.github/workflows/refresh-imaposla-screenshots.yml'
+      - 'package.json'
+      - 'package-lock.json'
 
 permissions:
   contents: write
@@ -32,13 +34,14 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '20'
+          cache: 'npm'
 
       - name: Install project dependencies
-        run: npm install --no-package-lock
+        run: npm ci --no-audit --no-fund
 
       - name: Install screenshot tooling
         run: |
-          npm install --no-save --no-package-lock playwright sharp
+          npm install --no-save --package-lock=false playwright sharp
           npx playwright install --with-deps chromium
 
       - name: Generate fitted gallery screenshots
