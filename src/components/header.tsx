@@ -4,7 +4,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useEffect, useRef, useState } from 'react'
-import { navigation } from '@/data/site'
+import { navigation, site } from '@/data/site'
 
 const desktopMediaQuery = '(min-width: 1041px)'
 const focusableSelector = 'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])'
@@ -163,7 +163,7 @@ export function Header() {
         >
           <nav aria-label="Mobilna navigacija">
             {navigation.map((item) => <Link key={item.href} href={item.href} aria-current={activeHref === item.href ? 'page' : undefined}>{item.label}</Link>)}
-            <Link href="/postani-dio-tima/">Postani dio tima</Link>
+            <a href={site.imaposla} data-track="imaposla_team_click">Postani dio tima</a>
           </nav>
           <Link className="button button-primary" href="/kontakt/?izvor=mobile-menu" data-track="mobile_menu_lead">Pošalji brief</Link>
         </div>
