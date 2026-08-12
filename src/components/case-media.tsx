@@ -5,9 +5,9 @@ import styles from './case-media.module.css'
 const coverImageOverrides: Record<string, CaseStudyImage> = {
   'imaposla-digitalni-proizvod': {
     src: '/images/cases/imaposla/imaposla-firme-poslodavci.webp',
-    alt: 'ImaPosla.me prikaz pretrage osoba i firmi za posao u Crnoj Gori',
-    width: 1307,
-    height: 945,
+    alt: 'ImaPosla.me prikaz radnika, firmi i profila na platformi za poslove u Crnoj Gori',
+    width: 360,
+    height: 260,
     position: 'center',
   },
 }
@@ -15,27 +15,27 @@ const coverImageOverrides: Record<string, CaseStudyImage> = {
 const mediaImageOverrides: Record<string, CaseStudyImage> = {
   'Naslovna stranica, pretraga i glavni korisnički izbori': {
     src: '/images/cases/imaposla/imaposla-pocetna-platforma-poslovi.webp',
-    alt: 'ImaPosla.me početna stranica sa firmama i brzim angažmanima',
-    width: 1304,
-    height: 943,
+    alt: 'ImaPosla.me desktop prikaz platforme za poslove i angažmane',
+    width: 360,
+    height: 260,
   },
   'Lista oglasa i detalj pojedinačne pozicije': {
     src: '/images/cases/imaposla/imaposla-oglasi-za-posao.webp',
-    alt: 'ImaPosla.me prikaz oglasa i kratkih poslova sa jasnim terminom',
-    width: 510,
-    height: 681,
+    alt: 'ImaPosla.me prikaz oglasa i pronalaska posla',
+    width: 270,
+    height: 360,
   },
   'Brzi angažmani, profili radnika i usluge': {
     src: '/images/cases/imaposla/imaposla-brzi-angazmani.webp',
     alt: 'ImaPosla.me desktop prikaz brzih angažmana i kratkih poslova',
-    width: 1294,
-    height: 940,
+    width: 360,
+    height: 262,
   },
   'Mobilno iskustvo platforme i prijavni tok': {
     src: '/images/cases/imaposla/imaposla-kategorije-poslova.webp',
-    alt: 'ImaPosla.me mobilni prikaz pretrage i kategorija poslova',
-    width: 395,
-    height: 858,
+    alt: 'ImaPosla.me mobilni prikaz kategorija i pretrage poslova',
+    width: 166,
+    height: 360,
   },
 }
 
@@ -43,9 +43,9 @@ const extraMediaOverrides: Record<string, CaseStudyImage[]> = {
   'Mobilno iskustvo platforme i prijavni tok': [
     {
       src: '/images/cases/imaposla/imaposla-usluge-marketplace.webp',
-      alt: 'ImaPosla.me mobilni prikaz usluga, proizvoda i filtera',
-      width: 390,
-      height: 850,
+      alt: 'ImaPosla.me mobilni prikaz usluga i ponuda',
+      width: 165,
+      height: 360,
     },
   ],
 }
