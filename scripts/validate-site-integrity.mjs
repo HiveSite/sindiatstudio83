@@ -20,7 +20,7 @@ const source = sourceFiles.map((file) => fs.readFileSync(file, 'utf8')).join('\n
 
 const staticRoutes = new Set([
   '/', '/usluge/', '/industrije/', '/radovi/', '/o-nama/', '/blog/', '/kontakt/',
-  '/postani-dio-tima/', '/privatnost/', '/kolacici/', '/uslovi-koriscenja/', '/hvala/',
+  '/privatnost/', '/kolacici/', '/uslovi-koriscenja/', '/hvala/',
 ])
 
 const collectSlugs = (file) => [...read(file).matchAll(/\bslug:\s*['"]([^'"]+)['"]/g)].map((match) => match[1])
