@@ -14,7 +14,7 @@ export const site = {
   email: publicEnv(process.env.NEXT_PUBLIC_CONTACT_EMAIL, 'sindikatevents@gmail.com'),
   instagram: 'https://www.instagram.com/sindikat_studio83/',
   imaposla: 'https://imaposla.me/',
-  contentUpdatedAt: '2026-07-29',
+  contentUpdatedAt: '2026-08-12',
   responseTime: 'Odgovaramo u roku od jednog radnog dana.',
   consentVersion: '2026-07-27',
   analytics: {
@@ -46,9 +46,8 @@ export const site = {
 
 export const navigation = [
   { label: 'Usluge', href: '/usluge/' },
-  { label: 'Aktivacije', href: '/usluge/aktivacije-i-eventi/' },
   { label: 'Radovi', href: '/radovi/' },
-  { label: 'Industrije', href: '/industrije/' },
+  { label: 'Kako radimo', href: '/#saradnja' },
   { label: 'O nama', href: '/o-nama/' },
-  { label: 'Resursi', href: '/blog/' },
+  { label: 'Kontakt', href: '/kontakt/' },
 ] as const
