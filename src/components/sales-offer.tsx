@@ -2,41 +2,45 @@
 
 import Link from 'next/link'
 import { useMemo, useState } from 'react'
+import { serviceProducts } from '@/data/service-products'
+
+const priceFor = (slug: string, index: number) => serviceProducts[slug]?.[index]?.price || 'po ponudi'
 
 const categories = [
   {
     index: '01', title: 'Kampanje i rast', short: 'Kampanje',
     text: 'Za više prodaje, kvalitetnijih upita i vidljivosti koja vodi do konkretne radnje.',
     items: [
-      { title: 'Performance marketing', price: 'od 300 €', text: 'Meta, Google, mjerenje i optimizacija prema poslovnom rezultatu.', href: '/usluge/performance-marketing/' },
-      { title: 'Sadržaj za kampanje', price: 'od 250 €', text: 'Kreativni pravci, video, foto, UGC i varijante spremne za testiranje.', href: '/usluge/sadrzaj-za-kampanje/' },
-      { title: 'Landing i konverzije', price: 'od 550 €', text: 'Odredišne stranice i korisnički tok koji kampanji daju gdje da konvertuje.', href: '/usluge/web-i-konverzije/' },
+      { title: 'Performance marketing', price: priceFor('performance-marketing', 1), text: 'Meta, Google, mjerenje i optimizacija prema poslovnom rezultatu.', href: '/usluge/performance-marketing/' },
+      { title: 'Sadržaj za kampanje', price: priceFor('sadrzaj-za-kampanje', 0), text: 'Kreativni pravci, video, foto, UGC i varijante spremne za testiranje.', href: '/usluge/sadrzaj-za-kampanje/' },
+      { title: 'Landing i konverzije', price: priceFor('web-i-konverzije', 0), text: 'Odredišne stranice i korisnički tok koji kampanji daju gdje da konvertuje.', href: '/usluge/web-i-konverzije/' },
     ],
   },
   {
     index: '02', title: 'Web i digitalni proizvodi', short: 'Web',
     text: 'Od fokusirane landing stranice do kompleksnije platforme sa jasnim korisničkim tokom i integracijama.',
     items: [
-      { title: 'Landing stranica', price: 'od 550 €', text: 'Jedna jasna ponuda, jedan cilj i minimum trenja do kontakta ili prijave.', href: '/usluge/web-i-konverzije/' },
-      { title: 'Premium mini-sajt', price: 'od 900 €', text: 'Ozbiljnija digitalna prezentacija sa više sadržaja, stranica i integracija.', href: '/usluge/web-i-konverzije/' },
-      { title: 'Digitalni proizvod', price: 'po specifikaciji', text: 'Platforme, prijavni sistemi i proizvodi sa posebnom poslovnom logikom.', href: '/usluge/web-i-konverzije/' },
+      { title: 'Landing stranica', price: priceFor('web-i-konverzije', 0), text: 'Jedna jasna ponuda, jedan cilj i minimum trenja do kontakta ili prijave.', href: '/usluge/web-i-konverzije/' },
+      { title: 'Premium mini-sajt', price: priceFor('web-i-konverzije', 1), text: 'Ozbiljnija digitalna prezentacija sa više sadržaja, stranica i integracija.', href: '/usluge/web-i-konverzije/' },
+      { title: 'Digitalni proizvod', price: priceFor('web-i-konverzije', 2), text: 'Platforme, prijavni sistemi i proizvodi sa posebnom poslovnom logikom.', href: '/usluge/web-i-konverzije/' },
     ],
   },
   {
     index: '03', title: 'Aktivacije i eventi', short: 'Aktivacije',
     text: 'Koncept, produkcija, ljudi, lokacije, logistika i izvještaj kroz jednu odgovornu realizaciju.',
     items: [
-      { title: 'Plan aktivacije', price: 'od 500 €', text: 'Koncept, mehanika, operativna mapa i budžetska struktura.', href: '/usluge/aktivacije-i-eventi/' },
-      { title: 'Produkcija i koordinacija', price: 'od 1.500 €', text: 'Tim, lokacije, smjene, logistika, supervizija i izvještaj.', href: '/usluge/aktivacije-i-eventi/' },
-      { title: 'Kompletna kampanja', price: 'po ponudi', text: 'Digital, produkcija, ljudi, teren i sadržaj povezani kroz isti cilj.', href: '/usluge/aktivacije-i-eventi/' },
+      { title: 'Plan aktivacije', price: priceFor('aktivacije-i-eventi', 0), text: 'Koncept, mehanika, operativna mapa i budžetska struktura.', href: '/usluge/aktivacije-i-eventi/' },
+      { title: 'Produkcija i koordinacija', price: priceFor('aktivacije-i-eventi', 1), text: 'Tim, lokacije, smjene, logistika, supervizija i izvještaj.', href: '/usluge/aktivacije-i-eventi/' },
+      { title: 'Kompletna kampanja', price: priceFor('aktivacije-i-eventi', 2), text: 'Digital, produkcija, ljudi, teren i sadržaj povezani kroz isti cilj.', href: '/usluge/aktivacije-i-eventi/' },
     ],
   },
   {
     index: '04', title: 'Timovi i angažmani', short: 'Timovi',
     text: 'Pronalazak i organizacija ljudi za promocije, događaje, sezonske potrebe i kampanje zapošljavanja.',
     items: [
-      { title: 'Recruitment sprint', price: 'od 400 €', text: 'Oglas, employer ponuda, prijavni flow, kampanjska postavka i distribucija.', href: '/usluge/recruitment-kampanje/' },
-      { title: 'Sezonska kampanja', price: 'od 800 €', text: 'Više pozicija, kreativni paket, distribucija i kontinuirana optimizacija.', href: '/usluge/recruitment-kampanje/' },
+      { title: 'Recruitment sprint', price: priceFor('recruitment-kampanje', 0), text: 'Oglas, employer ponuda, prijavni flow, kampanjska postavka i distribucija.', href: '/usluge/recruitment-kampanje/' },
+      { title: 'Sezonska kampanja', price: priceFor('recruitment-kampanje', 1), text: 'Više pozicija, kreativni paket, distribucija i kontinuirana optimizacija.', href: '/usluge/recruitment-kampanje/' },
+      { title: 'Employer sistem', price: priceFor('recruitment-kampanje', 2), text: 'Kontinuirano zapošljavanje i employer branding kroz više kanala.', href: '/usluge/recruitment-kampanje/' },
       { title: 'Promo i event timovi', price: 'po obimu', text: 'Sourcing, briefing, rasporedi, zamjene i operativna kontrola na terenu.', href: '/usluge/aktivacije-i-eventi/' },
     ],
   },
@@ -85,26 +89,28 @@ type ChoiceState = { goal: string; mode: string; budget: string }
 
 const goalLabels: Record<string, string> = { growth: 'Više prodaje ili upita', web: 'Novi sajt ili platforma', event: 'Promocija ili događaj', people: 'Ljudi i angažmani', complex: 'Kompleksan projekat' }
 const modeLabels: Record<string, string> = { one: 'Jednokratan projekat', ongoing: 'Kontinuirana potreba', unsure: 'Još nije definisano' }
-const budgetLabels: Record<string, string> = { under500: 'Do 500 €', '500-1500': '500 - 1.500 €', '1500-5000': '1.500 - 5.000 €', '5000plus': '5.000 €+' }
+const budgetLabels: Record<string, string> = { under150: 'Do 150 €', '150-500': '150 - 500 €', '500-1500': '500 - 1.500 €', '1500plus': '1.500 €+' }
 
 function recommendationFor(state: ChoiceState) {
   if (!state.goal || !state.mode || !state.budget) return null
   if (state.goal === 'web') {
-    if (state.budget === 'under500') return { title: 'Web dijagnostika i struktura', text: 'Prvo zaključavamo sadržaj, korisnički tok i prioritetne funkcionalnosti prije produkcije.', href: '/usluge/web-i-konverzije/' }
-    if (state.budget === '500-1500') return { title: 'Landing ili premium mini-sajt', text: 'Najrealniji prvi proizvod je fokusirana landing stranica ili manji premium sajt.', href: '/usluge/web-i-konverzije/' }
-    return { title: 'Digitalni proizvod', text: 'Budžetski okvir dozvoljava ozbiljniji web sistem, integracije i širi korisnički flow.', href: '/usluge/web-i-konverzije/' }
+    if (state.budget === 'under150') return { title: 'Landing stranica', text: 'Za ovaj okvir najrealniji prvi proizvod je fokusirana landing stranica sa jasnim ciljem i kontakt flowom.', href: '/usluge/web-i-konverzije/' }
+    if (state.budget === '150-500') return { title: 'Premium mini-sajt', text: 'Ovaj okvir odgovara manjem premium sajtu sa više sadržaja i osnovnim integracijama.', href: '/usluge/web-i-konverzije/' }
+    return { title: 'Digitalni proizvod', text: 'Za širi web sistem, integracije i posebnu poslovnu logiku ulazimo u digitalni proizvod.', href: '/usluge/web-i-konverzije/' }
   }
   if (state.goal === 'event' || state.goal === 'complex') {
-    if (state.budget === 'under500') return { title: 'Plan aktivacije', text: 'Najpametnije je prvo zaključati koncept, logistiku i budžetsku strukturu.', href: '/usluge/aktivacije-i-eventi/' }
-    return { title: 'Produkcija i koordinacija', text: 'Za ovaj tip projekta treba jedna odgovorna tačka za ljude, lokacije, produkciju i teren.', href: '/usluge/aktivacije-i-eventi/' }
+    if (state.budget === 'under150') return { title: 'Plan aktivacije', text: 'Prvo zaključavamo koncept, logistiku i operativnu strukturu.', href: '/usluge/aktivacije-i-eventi/' }
+    if (state.budget === '150-500') return { title: 'Produkcija i koordinacija', text: 'Ovaj okvir može pokriti manju produkciju ili koordinaciju konkretnog obima.', href: '/usluge/aktivacije-i-eventi/' }
+    return { title: 'Kompletna kampanja', text: 'Za širi projekat povezujemo digital, produkciju, ljude i teren.', href: '/usluge/aktivacije-i-eventi/' }
   }
   if (state.goal === 'people') {
-    if (state.budget === 'under500') return { title: 'Recruitment sprint', text: 'Fokusirana kampanja za jednu poziciju ili jasno definisan hiring cilj.', href: '/usluge/recruitment-kampanje/' }
-    return { title: 'Sezonska recruitment kampanja', text: 'Više pozicija, veći broj kandidata i kontinuirana distribucija traže širi proizvod.', href: '/usluge/recruitment-kampanje/' }
+    if (state.budget === 'under150') return { title: 'Recruitment sprint', text: 'Fokusirana kampanja za jednu poziciju ili jasno definisan hiring cilj.', href: '/usluge/recruitment-kampanje/' }
+    if (state.budget === '150-500') return { title: 'Sezonska kampanja', text: 'Za više pozicija i veći broj kandidata biramo širi recruitment proizvod.', href: '/usluge/recruitment-kampanje/' }
+    return { title: 'Employer sistem', text: 'Za kontinuirano zapošljavanje i employer branding kroz više kanala.', href: '/usluge/recruitment-kampanje/' }
   }
-  if (state.mode === 'ongoing') return { title: 'Mjesečno vođenje kampanja', text: 'Kontinuirano testiranje, optimizacija i razvoj kreativa oko istog poslovnog cilja.', href: '/usluge/performance-marketing/' }
-  if (state.budget === 'under500') return { title: 'Dijagnostika i plan', text: 'Prvo preciziramo ponudu, mjerenje i prioritete prije većeg medijskog ulaganja.', href: '/usluge/performance-marketing/' }
-  return { title: 'Postavka kampanje', text: 'Kampanjska struktura, tracking, oglasi i kontrolisano pokretanje.', href: '/usluge/performance-marketing/' }
+  if (state.mode === 'ongoing' && state.budget !== 'under150') return { title: 'Mjesečno vođenje kampanja', text: 'Kontinuirano testiranje, optimizacija i razvoj kreativa oko istog poslovnog cilja.', href: '/usluge/performance-marketing/' }
+  if (state.budget === 'under150') return { title: 'Postavka kampanje', text: 'Za početni okvir postavljamo osnovnu kampanjsku strukturu, tracking i prvi test.', href: '/usluge/performance-marketing/' }
+  return { title: 'Performance marketing', text: 'Kampanjska struktura, tracking, oglasi i kontinuirana optimizacija prema cilju.', href: '/usluge/performance-marketing/' }
 }
 
 export function OfferChooser() {
@@ -124,7 +130,7 @@ export function OfferChooser() {
       <div className="sales-chooser-grid">
         <div className="sales-chooser-step"><small>01 - cilj</small><h3>Šta želite da postignete?</h3><div className="sales-choice-list">{choice('goal','growth','Više prodaje ili upita')}{choice('goal','web','Novi sajt ili platformu')}{choice('goal','event','Promociju ili događaj')}{choice('goal','people','Pronaći i organizovati ljude')}{choice('goal','complex','Kompleksan projekat')}</div></div>
         <div className="sales-chooser-step"><small>02 - potreba</small><h3>Da li je potreba jednokratna?</h3><div className="sales-choice-list">{choice('mode','one','Da, jedan projekat')}{choice('mode','ongoing','Treba nam kontinuirano')}{choice('mode','unsure','Još nijesmo sigurni')}</div></div>
-        <div className="sales-chooser-step"><small>03 - okvir</small><h3>Koji je okvirni budžet?</h3><div className="sales-choice-list">{choice('budget','under500','Do 500 €')}{choice('budget','500-1500','500 - 1.500 €')}{choice('budget','1500-5000','1.500 - 5.000 €')}{choice('budget','5000plus','5.000 €+')}</div></div>
+        <div className="sales-chooser-step"><small>03 - okvir</small><h3>Koji je okvirni budžet?</h3><div className="sales-choice-list">{choice('budget','under150','Do 150 €')}{choice('budget','150-500','150 - 500 €')}{choice('budget','500-1500','500 - 1.500 €')}{choice('budget','1500plus','1.500 €+')}</div></div>
       </div>
       <div className="sales-recommendation"><div className="sales-recommendation-copy"><span>{recommendation ? 'Preporučeni proizvod' : 'Preporuka'}</span><strong>{recommendation?.title || 'Izaberite tri odgovora iznad.'}</strong><p>{recommendation?.text || 'Ne morate pogoditi savršeno - finalni obim zaključavamo tek nakon briefa.'}</p></div><div className="sales-recommendation-actions">{recommendation ? <Link className="button button-ghost" href={recommendation.href}>Pogledaj proizvod</Link> : null}<Link className="button button-primary" href={briefHref}>Pošalji brief</Link></div></div>
     </div></div></section>
