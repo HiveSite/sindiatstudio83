@@ -7,12 +7,15 @@ const root = path.dirname(path.dirname(fileURLToPath(import.meta.url)))
 const required = [
   'next.config.ts', 'netlify.toml', 'src/app/layout.tsx', 'src/app/page.tsx',
   'src/app/sitemap.ts', 'src/app/robots.ts', 'src/app/manifest.ts', 'src/data/site.ts',
-  'src/components/lead-form.tsx', 'src/components/jobs-board.tsx', 'src/lib/tracking.ts',
-  'public/_redirects', 'public/_headers', 'public/.well-known/security.txt',
+  'src/components/lead-form.tsx', 'src/lib/tracking.ts',
+  'public/_redirects', 'public/.well-known/security.txt',
 ]
 const failures = []
 const warnings = []
 for (const file of required) if (!fs.existsSync(path.join(root, file))) failures.push(`Missing required file: ${file}`)
+
+const retiredFiles = ['src/components/jobs-board.tsx', 'src/app/postani-dio-tima/page.tsx']
+for (const file of retiredFiles) if (fs.existsSync(path.join(root, file))) failures.push(`Retired source should not exist: ${file}`)
 
 const blogPath = path.join(root, 'src/data/blog-posts.json')
 const posts = JSON.parse(fs.readFileSync(blogPath, 'utf8'))
@@ -63,9 +66,9 @@ for (const requiredRedirect of ['/sr-me/ / 301!', '/sr-me/kontakt/ /kontakt/ 301
 const redirectSources = redirects.split('\n').map((line) => line.trim()).filter((line) => line && !line.startsWith('#')).map((line) => line.split(/\s+/)[0])
 for (const source of new Set(redirectSources)) if (redirectSources.filter((item) => item === source).length > 1) warnings.push(`Duplicate redirect source: ${source}`)
 
-const headers = fs.readFileSync(path.join(root, 'public/_headers'), 'utf8')
+const netlifyConfig = fs.readFileSync(path.join(root, 'netlify.toml'), 'utf8')
 for (const header of ['Content-Security-Policy', 'Strict-Transport-Security', 'X-Content-Type-Options', 'Referrer-Policy']) {
-  if (!headers.includes(header)) failures.push(`Missing security header: ${header}`)
+  if (!netlifyConfig.includes(header)) failures.push(`Missing security header in netlify.toml: ${header}`)
 }
 
 if (warnings.length) console.warn(warnings.map((item) => `WARNING: ${item}`).join('\n'))
