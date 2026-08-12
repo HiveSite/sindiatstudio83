@@ -1,0 +1,133 @@
+/* Global readability and contrast layer - loaded last on purpose */
+:root{
+  --muted:#b9b6c1;
+  --line:rgba(255,255,255,.16);
+  --line-strong:rgba(255,255,255,.30);
+}
+
+/* Dark surfaces */
+body,.section-dark,.sales-solutions,.sales-chooser,.site-footer,.mobile-panel,.modal-dialog{
+  color:var(--text);
+}
+body p,.section-dark p,.sales-solutions p,.sales-chooser p,.site-footer p,.mobile-panel p,.modal-dialog p{
+  color:var(--muted);
+}
+.hero-note{color:#b5b2bd}
+.hero-node span{color:#c0bdc7}
+.proof-stat span{color:#bbb8c3}
+.article-meta span,.job-meta span{color:#c3c0c9}
+.footer-grid>div>a{color:#bebbc5}
+.footer-bottom{color:#9d9aa5}
+.article-aside a{color:#b8b5bf}
+.article-content p,.article-content ul,.article-content ol,.legal p,.legal li{color:#d8d5dd}
+.article-content figcaption,.article-content .ref,.result-count{color:#aaa7b1}
+
+/* Keep the outlined hero word decorative but fully legible */
+.hero-copy .outline{
+  color:rgba(248,247,251,.12);
+  -webkit-text-stroke:1.35px #f8f7fb;
+  text-shadow:0 0 22px rgba(255,255,255,.08);
+}
+
+/* Pink is a bright brand surface: dark ink has stronger contrast than white */
+.button-primary,.filter-button.is-active{
+  color:#08080b;
+}
+.button-primary:hover{color:#08080b}
+
+/* Ghost controls on dark backgrounds */
+.button-ghost{
+  color:#f8f7fb;
+  border-color:rgba(255,255,255,.32);
+  background:rgba(255,255,255,.055);
+}
+.button-ghost:hover{
+  border-color:rgba(255,255,255,.52);
+  background:rgba(255,255,255,.10);
+}
+
+/* Light surfaces: force a dark readable text system */
+.section-light,
+.sales-product-section,
+.product-price-card:not(.is-featured),
+.service-card:not(.service-card-featured){
+  color:var(--ink);
+}
+.section-light p,
+.sales-product-section p,
+.product-price-card:not(.is-featured) p,
+.service-card:not(.service-card-featured) p{
+  color:#5c5862;
+}
+.section-light h1,.section-light h2,.section-light h3,.section-light h4,
+.sales-product-section h1,.sales-product-section h2,.sales-product-section h3,
+.product-price-card:not(.is-featured) h2,.product-price-card:not(.is-featured) h3,
+.service-card:not(.service-card-featured) h3{
+  color:var(--ink);
+}
+.section-light .eyebrow,.sales-product-section .eyebrow{color:var(--ink)}
+.section-light .button-ghost,.sales-product-section .button-ghost{
+  color:var(--ink);
+  border-color:rgba(20,19,24,.28);
+  background:rgba(20,19,24,.04);
+}
+.section-light .button-ghost:hover,.sales-product-section .button-ghost:hover{
+  border-color:rgba(20,19,24,.48);
+  background:rgba(20,19,24,.08);
+}
+.section-light .text-link,.sales-product-section .text-link{color:var(--ink)}
+.section-light :focus-visible,.sales-product-section :focus-visible{outline-color:#007b83}
+
+/* Category scroller */
+.sales-category-tab{color:#aaa7b2}
+.sales-category-tab:hover{color:#e5e2ea}
+.sales-category-tab.is-active{color:#fff}
+.sales-item-link>span{color:#a9a6b0}
+.sales-item-link p{color:#bbb8c2}
+.sales-item-link em{color:#fff}
+.sales-category-copy p{color:#bbb8c2}
+.sales-unsure span{color:#bbb8c2}
+
+/* Dark cards inside otherwise light product sections */
+.product-price-card.is-featured,
+.service-card-featured{
+  color:#fff;
+}
+.product-price-card.is-featured p,.service-card-featured p{color:#c8c5ce}
+.product-price-card.is-featured li,.service-card-featured li{color:#f0eef3}
+
+/* Service rails and pricing anchors */
+.service-price-anchor p,.service-rail-card p{color:#c3c0ca}
+.service-rail-card b{color:#fff}
+.service-rail-card>span,.service-price-anchor>span{color:#ff6ba7}
+
+/* Chooser */
+.sales-choice{color:#f4f2f6;border-color:rgba(255,255,255,.20);background:rgba(255,255,255,.045)}
+.sales-choice:hover{background:rgba(255,255,255,.10);border-color:rgba(255,255,255,.38)}
+.sales-choice.is-selected{color:#fff;background:rgba(245,0,98,.20);border-color:#ff4d91}
+.sales-recommendation-copy p{color:#c5c2cc}
+
+/* Forms */
+.lead-form label>span{color:#f0eef4}
+.lead-form input,.lead-form select,.lead-form textarea{
+  color:#fff;
+  background:#0b0b10;
+  border-color:rgba(255,255,255,.22);
+}
+.lead-form input::placeholder,.lead-form textarea::placeholder{color:#9f9ca7;opacity:1}
+.lead-form input:focus,.lead-form select:focus,.lead-form textarea:focus{
+  border-color:#35e4ef;
+  box-shadow:0 0 0 1px rgba(53,228,239,.28);
+}
+.form-submit p{color:#b8b5bf}
+.brief-context small{color:#c0bdc7}
+
+/* Readable links and small interactive text */
+.text-link{color:#f8f7fb}
+.footer-link-button{color:#a9a6b0}
+.footer-link-button:hover{color:#fff}
+
+@media (max-width:620px){
+  .hero-copy .outline{-webkit-text-stroke:1.15px #f8f7fb;color:rgba(248,247,251,.14)}
+  .sales-category-tab{color:#b8b5bf}
+}
