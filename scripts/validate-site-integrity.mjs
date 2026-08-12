@@ -91,7 +91,7 @@ for (const file of visibleSalesFiles) {
 }
 
 const salesOffer = read('src/components/sales-offer.tsx')
-if (!salesOffer.includes("serviceProducts")) fail('Homepage service scroller must use the central serviceProducts pricing source')
+if (!salesOffer.includes('serviceProducts')) fail('Homepage service scroller must use the central serviceProducts pricing source')
 if (/\bprice:\s*['"](?:od\s*)?\d[\d.]*\s*€/i.test(salesOffer)) fail('Homepage service scroller contains a duplicated hardcoded product price')
 
 for (const forbidden of ['Grafičke MART', 'Placeholderi ostaju', 'biće zaključani nakon interne provjere']) {
@@ -102,10 +102,11 @@ for (const token of ['form_start', 'generate_lead', 'next_page_view', 'outbound_
   if (!source.includes(token)) fail(`Tracking event is missing from source: ${token}`)
 }
 
-const headers = `${read('public/_headers')}\n${read('netlify.toml')}`
+const netlifyConfig = read('netlify.toml')
 for (const host of ['https://script.google.com', 'https://www.google-analytics.com', 'https://www.googletagmanager.com']) {
-  if (!headers.includes(host)) fail(`Security policy is missing required integration host: ${host}`)
+  if (!netlifyConfig.includes(host)) fail(`Security policy is missing required integration host: ${host}`)
 }
+if (!netlifyConfig.includes('Netlify-CDN-Cache-Control')) fail('Netlify CDN cache policy is missing')
 
 if (warnings.length) console.warn(warnings.map((message) => `WARNING: ${message}`).join('\n'))
 if (failures.length) {
