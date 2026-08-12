@@ -90,6 +90,10 @@ for (const file of visibleSalesFiles) {
   if (/\b(?:od\s*)?\d[\d.]*\s*€(?:\s*\/\s*mj\.)?/i.test(text)) fail(`${file} contains an unconfirmed public price`)
 }
 
+const salesOffer = read('src/components/sales-offer.tsx')
+if (!salesOffer.includes("serviceProducts")) fail('Homepage service scroller must use the central serviceProducts pricing source')
+if (/\bprice:\s*['"](?:od\s*)?\d[\d.]*\s*€/i.test(salesOffer)) fail('Homepage service scroller contains a duplicated hardcoded product price')
+
 for (const forbidden of ['Grafičke MART', 'Placeholderi ostaju', 'biće zaključani nakon interne provjere']) {
   if (source.includes(forbidden)) fail(`Public source still contains internal or incorrect wording: ${forbidden}`)
 }
