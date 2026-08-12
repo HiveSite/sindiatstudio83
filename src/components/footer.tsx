@@ -31,7 +31,7 @@ export function Footer() {
             <Link href="/industrije/">Industrije</Link>
             <Link href="/o-nama/">O nama</Link>
             <Link href="/blog/">Resursi</Link>
-            <Link href="/postani-dio-tima/">Postani dio tima</Link>
+            <a href={site.imaposla} data-track="imaposla_team_click">Postani dio tima</a>
           </div>
           <div>
             <h2>Kontakt</h2>
