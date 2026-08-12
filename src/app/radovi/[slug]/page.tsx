@@ -7,9 +7,10 @@ import { FinalCta } from '@/components/final-cta'
 import { JsonLd } from '@/components/json-ld'
 import { caseGalleryOverrides } from '@/data/case-gallery-overrides'
 import { cases, caseBySlug } from '@/data/cases'
+import { serviceBySlug } from '@/data/services'
 import { site } from '@/data/site'
 import { createMetadata } from '@/lib/metadata'
-import { breadcrumbSchema } from '@/lib/schema'
+import { breadcrumbSchema, webPageSchema } from '@/lib/schema'
 
 export const dynamicParams = false
 export function generateStaticParams() { return cases.map((item) => ({ slug: item.slug })) }
@@ -19,7 +20,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const item = caseBySlug[slug]
   if (!item) return {}
   return createMetadata({
-    title: item.title,
+    title: `${item.title} - case study`,
     description: item.summary,
     path: `/radovi/${item.slug}/`,
     image: item.socialImage?.src,
@@ -34,21 +35,34 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
   const item = caseGalleryOverrides[slug]
     ? { ...baseItem, gallery: caseGalleryOverrides[slug] }
     : baseItem
-  const crumbs = [{ label: 'Radovi', href: '/radovi/' }, { label: item.title, href: `/radovi/${item.slug}/` }]
+  const path = `/radovi/${item.slug}/`
+  const crumbs = [{ label: 'Radovi', href: '/radovi/' }, { label: item.title, href: path }]
   const metrics = item.metrics || []
+  const linkedServices = item.serviceSlugs.map((serviceSlug) => serviceBySlug[serviceSlug]).filter(Boolean)
 
   return <>
     <JsonLd data={[
       breadcrumbSchema(crumbs),
+      webPageSchema({
+        name: `${item.title} - case study`,
+        description: item.summary,
+        path,
+        image: item.socialImage?.src || item.coverImage?.src,
+        about: linkedServices.map((service) => ({ name: service.shortTitle, url: `/usluge/${service.slug}/` })),
+      }),
       {
         '@context': 'https://schema.org',
         '@type': 'CreativeWork',
+        '@id': `${site.domain}${path}#case-study`,
         name: item.title,
         description: item.summary,
         creator: { '@id': `${site.domain}/#organization` },
-        url: `${site.domain}/radovi/${item.slug}/`,
+        publisher: { '@id': `${site.domain}/#organization` },
+        url: `${site.domain}${path}`,
         inLanguage: site.locale,
-        image: item.socialImage ? `${site.domain}${item.socialImage.src}` : undefined,
+        image: item.socialImage ? `${site.domain}${item.socialImage.src}` : item.coverImage ? `${site.domain}${item.coverImage.src}` : undefined,
+        about: linkedServices.map((service) => ({ '@type': 'Service', name: service.shortTitle, url: `${site.domain}/usluge/${service.slug}/` })),
+        isPartOf: { '@id': `${site.domain}/#website` },
       },
     ]} />
 
@@ -82,7 +96,7 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
 
     <section className="section section-dark"><div className="container"><div className="section-heading"><div><span className="eyebrow">Vizuelni pregled</span><h2>Ključni momenti, ekrani i detalji koji najbolje objašnjavaju projekat.</h2></div><p>Galerija prikazuje sve dostavljene materijale za projekat, uz SEO nazive, optimizovane formate i jasan opis uloge svakog kadra ili ekrana.</p></div><div className="case-media-grid">{item.gallery.map((media) => <CaseMediaPlaceholder key={`${media.kind}-${media.label}`} item={media} />)}</div></div></section>
 
-    <section className="section"><div className="container"><span className="eyebrow">Obuhvaćene discipline</span><h2>Više vrsta rada, ali jedna odgovorna cjelina.</h2><p className="lead">Oznake ispod ne predstavljaju katalog dodatnih usluga, već discipline koje su u ovom projektu morale biti međusobno usklađene.</p><div className="case-service-tags">{item.services.map((service) => <span key={service}>{service}</span>)}</div><div className="button-row" style={{ marginTop: 30 }}><Link className="button button-dark" href="/radovi/">Pogledaj sve projekte</Link></div></div></section>
+    <section className="section"><div className="container"><span className="eyebrow">Obuhvaćene discipline</span><h2>Više vrsta rada, ali jedna odgovorna cjelina.</h2><p className="lead">Oznake ispod pokazuju usluge koje su u projektu morale biti međusobno usklađene.</p><div className="case-service-tags">{linkedServices.map((service) => <Link href={`/usluge/${service.slug}/`} key={service.slug}>{service.shortTitle}</Link>)}</div><div className="button-row" style={{ marginTop: 30 }}><Link className="button button-dark" href="/radovi/">Pogledaj sve projekte</Link></div></div></section>
 
     <FinalCta title="Imaš projekat sa više pokretnih djelova?" text="Pošalji osnovni kontekst, rok, učesnike i ono što je već dogovoreno. Prvo ćemo razdvojiti cilj, odgovornosti, zavisnosti i realan obim prve faze." />
   </>
