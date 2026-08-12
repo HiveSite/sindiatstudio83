@@ -6,7 +6,7 @@ import { CaseCard } from '@/components/cards'
 import { SectionHeading } from '@/components/section-heading'
 import { FinalCta } from '@/components/final-cta'
 import { JsonLd } from '@/components/json-ld'
-import { EngagementModels, OfferAreas, OfferChooser } from '@/components/sales-offer'
+import { OfferAreas, OfferChooser } from '@/components/sales-offer'
 import { createMetadata } from '@/lib/metadata'
 
 export const metadata: Metadata = createMetadata({
@@ -29,7 +29,7 @@ export default function HomePage() {
           <span className="eyebrow">Studio za rast i realizaciju</span>
           <h1><span>Digital, kampanje,</span><span>ljudi i realizacija.</span><span className="outline">Jedan tim.</span></h1>
           <p className="lead">Od prvog klika do posljednjeg detalja na terenu - preuzimamo djelove koji moraju da rade zajedno i vodimo ih kroz jednu odgovornu tačku.</p>
-          <div className="button-row hero-actions"><Link className="button button-primary" href="#izaberi-rjesenje" data-track="hero_solution">Pronađi rješenje</Link><Link className="button button-ghost" href="/radovi/" data-track="hero_cases">Pogledaj radove</Link></div>
+          <div className="button-row hero-actions"><Link className="button button-primary" href="#izaberi-rjesenje" data-track="hero_solution">Pogledaj ponudu</Link><Link className="button button-ghost" href="/radovi/" data-track="hero_cases">Pogledaj radove</Link></div>
           <div className="hero-note"><span><i /> Podgorica i cijela Crna Gora</span><span><i /> Jedan vlasnik projekta, manje koordinacije za klijenta</span></div>
         </div>
         <div className="hero-visual" aria-label="Sistem koji povezuje digital, ljude i realizaciju"><div className="hero-system"><div className="hero-orbit-stage"><div className="hero-glow" /><div className="hero-ring" /><div className="hero-ring" /><div className="hero-core"><strong>jedna tačka<br />odgovornosti</strong></div></div><div className="hero-node-grid"><div className="hero-node hero-node-1"><strong>Digital</strong><span>Kampanje, web i mjerenje</span></div><div className="hero-node hero-node-2"><strong>Ljudi</strong><span>Timovi, raspored i logistika</span></div><div className="hero-node hero-node-3"><strong>Teren</strong><span>Aktivacije, eventi i sadržaj</span></div></div></div></div>
@@ -45,10 +45,9 @@ export default function HomePage() {
         <div className="button-row" style={{ marginTop: 28 }}><Link className="button button-ghost" href="/radovi/">Pogledaj sve projekte</Link></div>
       </div></section>
 
-      <EngagementModels />
       <OfferChooser />
 
-      <FinalCta title="Imate cilj. Mi ćemo složiti sistem koji ga može izvesti." text="Ne morate unaprijed znati koja vam usluga treba. Pošaljite cilj, rok i okvirni budžet - vratićemo se sa konkretnim sljedećim korakom." label="Pošalji brief" />
+      <FinalCta title="Imate cilj. Mi ćemo složiti konkretan proizvod i obim." text="Ne morate unaprijed znati sve detalje. Pošaljite cilj, rok i okvirni budžet - vratićemo se sa jasnim sljedećim korakom i cijenom prema izabranom proizvodu." label="Pošalji brief" />
     </div>
   )
 }
