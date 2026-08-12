@@ -1,18 +1,6 @@
 import Link from 'next/link'
-import type { CaseStudy, Industry, Service } from '@/types/content'
+import type { CaseStudy, Industry } from '@/types/content'
 import { CaseCoverPlaceholder } from '@/components/case-media'
-
-export function ServiceCard({ service, featured = false }: { service: Service; featured?: boolean }) {
-  return (
-    <article className={`service-card${featured ? ' service-card-featured' : ''}`}>
-      <span className="service-index">{service.eyebrow}</span>
-      <h3>{service.shortTitle}</h3>
-      <p>{service.summary}</p>
-      <ul>{service.outcomes.map((item) => <li key={item}>{item}</li>)}</ul>
-      <Link href={`/usluge/${service.slug}/`}>Pogledaj uslugu <span>↗</span></Link>
-    </article>
-  )
-}
 
 export function CaseCard({ item }: { item: CaseStudy }) {
   const metrics = item.metrics?.slice(0, 3) || []
