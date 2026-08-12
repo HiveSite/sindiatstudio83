@@ -9,6 +9,9 @@ interface MetadataInput {
   imageAlt?: string
   type?: 'website' | 'article'
   noIndex?: boolean
+  publishedTime?: string
+  modifiedTime?: string
+  tags?: string[]
 }
 
 export function createMetadata({
@@ -19,27 +22,69 @@ export function createMetadata({
   imageAlt = site.name,
   type = 'website',
   noIndex = false,
+  publishedTime,
+  modifiedTime,
+  tags = [],
 }: MetadataInput): Metadata {
   const fullTitle = title.includes(site.shortName) ? title : `${title} | ${site.name}`
   const canonical = new URL(path, site.domain).toString()
   const imageUrl = new URL(image, site.domain).toString()
+  const socialImage = { url: imageUrl, width: 1200, height: 630, alt: imageAlt }
+
+  const openGraph: Metadata['openGraph'] = type === 'article'
+    ? {
+        type: 'article',
+        locale: site.openGraphLocale,
+        siteName: site.name,
+        title: fullTitle,
+        description,
+        url: canonical,
+        images: [socialImage],
+        publishedTime,
+        modifiedTime: modifiedTime || publishedTime,
+        authors: [site.domain],
+        tags,
+      }
+    : {
+        type: 'website',
+        locale: site.openGraphLocale,
+        siteName: site.name,
+        title: fullTitle,
+        description,
+        url: canonical,
+        images: [socialImage],
+      }
 
   return {
     title: { absolute: fullTitle },
     description,
     alternates: { canonical },
+    authors: [{ name: site.name, url: site.domain }],
+    creator: site.name,
+    publisher: site.name,
     robots: noIndex
-      ? { index: false, follow: false, noarchive: true }
-      : { index: true, follow: true, googleBot: { index: true, follow: true, 'max-image-preview': 'large', 'max-snippet': -1, 'max-video-preview': -1 } },
-    openGraph: {
-      type,
-      locale: site.openGraphLocale,
-      siteName: site.name,
+      ? {
+          index: false,
+          follow: true,
+          googleBot: { index: false, follow: true },
+        }
+      : {
+          index: true,
+          follow: true,
+          googleBot: {
+            index: true,
+            follow: true,
+            'max-image-preview': 'large',
+            'max-snippet': -1,
+            'max-video-preview': -1,
+          },
+        },
+    openGraph,
+    twitter: {
+      card: 'summary_large_image',
       title: fullTitle,
       description,
-      url: canonical,
-      images: [{ url: imageUrl, width: 1200, height: 630, alt: imageAlt }],
+      images: [imageUrl],
     },
-    twitter: { card: 'summary_large_image', title: fullTitle, description, images: [imageUrl] },
   }
 }
