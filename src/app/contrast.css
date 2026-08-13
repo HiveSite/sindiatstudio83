@@ -127,7 +127,21 @@ body p,.section-dark p,.sales-solutions p,.sales-chooser p,.site-footer p,.mobil
 .footer-link-button{color:#a9a6b0}
 .footer-link-button:hover{color:#fff}
 
+/* Premium blog covers are designed as square editorial posters. Preserve the full composition. */
+.blog-card img{
+  aspect-ratio:1/1;
+  object-fit:cover;
+}
+.article-cover{
+  width:min(calc(100% - 40px),900px);
+}
+.article-cover img{
+  aspect-ratio:1/1;
+  object-fit:cover;
+}
+
 @media (max-width:620px){
   .hero-copy .outline{-webkit-text-stroke:1.15px #f8f7fb;color:rgba(248,247,251,.14)}
   .sales-category-tab{color:#b8b5bf}
+  .article-cover{width:min(calc(100% - 24px),900px);border-radius:20px}
 }
