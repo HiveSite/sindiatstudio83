@@ -1,35 +1,11 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" width="1200" height="675" role="img" aria-label="Zašto kampanja u Podgorici propadne prije nego krene">
-  <defs>
-    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#05010D"/>
-      <stop offset="1" stop-color="#12011F"/>
-    </linearGradient>
-    <radialGradient id="g1" cx="50%" cy="50%" r="50%">
-      <stop offset="0" stop-color="#18F5FF" stop-opacity="0.55"/>
-      <stop offset="1" stop-color="#18F5FF" stop-opacity="0"/>
-    </radialGradient>
-    <radialGradient id="g2" cx="50%" cy="50%" r="50%">
-      <stop offset="0" stop-color="#A24CFF" stop-opacity="0.5"/>
-      <stop offset="1" stop-color="#A24CFF" stop-opacity="0"/>
-    </radialGradient>
-    <linearGradient id="txt" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0" stop-color="#FFFFFF"/>
-      <stop offset="1" stop-color="#18F5FF"/>
-    </linearGradient>
-  </defs>
-  <rect width="1200" height="675" fill="url(#bg)"/>
-  <circle cx="204" cy="68" r="360" fill="url(#g1)"/>
-  <circle cx="792" cy="405" r="320" fill="url(#g2)"/>
-  <g opacity="0.10" stroke="#FFFFFF" stroke-width="1">
-    <line x1="0" y1="223" x2="1200" y2="223"/>
-    <line x1="0" y1="446" x2="1200" y2="446"/>
-    <line x1="600" y1="0" x2="600" y2="675"/>
-  </g>
-  <g font-family="'Segoe UI', system-ui, -apple-system, Roboto, Arial, sans-serif">
-    <rect x="70" y="196" rx="8" ry="8" width="190" height="40" fill="#18F5FF" opacity="0.16"/>
-    <text x="86" y="224" fill="#18F5FF" font-size="22" font-weight="700" letter-spacing="3">STRATEGIJA</text>
-    <text fill="url(#txt)" font-size="60" font-weight="800" letter-spacing="-1"><tspan x="70" y="292">Zašto kampanja u Podgorici</tspan><tspan x="70" y="364">propadne prije nego krene</tspan></text>
-    <text x="70" y="615" fill="rgba(255,255,255,.78)" font-size="26" font-weight="600">Sindikat Studio 83 · Podgorica</text>
-  </g>
-  <rect x="0" y="667" width="1200" height="8" fill="#18F5FF"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000" width="1000" height="1000" role="img" aria-label="Zašto kampanja u Podgorici propadne prije nego krene">
+<defs><linearGradient id="bg" x2="1" y2="1"><stop stop-color="#090a0d"/><stop offset="1" stop-color="#111217"/></linearGradient><radialGradient id="glow"><stop stop-color="#f50062" stop-opacity=".22"/><stop offset="1" stop-color="#f50062" stop-opacity="0"/></radialGradient><filter id="soft"><feGaussianBlur stdDeviation="18"/></filter></defs>
+<rect width="1000" height="1000" fill="url(#bg)"/><circle cx="855" cy="800" r="260" fill="url(#glow)"/><g opacity=".08" stroke="#fff"><path d="M0 230H1000M0 500H1000M0 770H1000M470 0V1000"/><circle cx="150" cy="860" r="170"/><circle cx="150" cy="860" r="110"/></g>
+<g font-family="Arial,sans-serif"><text x="56" y="72" fill="#f50062" font-size="54" font-weight="900">83</text><path d="M140 30V95" stroke="#8c8d92"/><text x="163" y="55" fill="#f5f0e8" font-size="18" letter-spacing="4">SINDIKAT</text><text x="163" y="82" fill="#f5f0e8" font-size="18" letter-spacing="4">STUDIO 83</text><text x="888" y="58" fill="#f50062" text-anchor="end" font-size="17" letter-spacing="4">BLOG</text><path d="M800 72H890" stroke="#f50062" stroke-width="2"/></g>
+<g font-family="Georgia,serif" font-weight="700"><text x="56" y="190" fill="#f7f1e8" font-size="68">Zašto kampanja</text><text x="56" y="272" fill="#f7f1e8" font-size="68">u <tspan fill="#f50062">Podgorici</tspan></text><text x="56" y="354" fill="#f7f1e8" font-size="68">propadne prije</text><text x="56" y="436" fill="#f7f1e8" font-size="68">nego krene</text></g>
+<path d="M58 472H110" stroke="#f50062" stroke-width="4"/><text x="58" y="515" fill="#a9a7aa" font-family="Arial,sans-serif" font-size="17" letter-spacing="2">STRATEGIJA PRIJE BUDŽETA.</text><text x="58" y="543" fill="#a9a7aa" font-family="Arial,sans-serif" font-size="17" letter-spacing="2">PLAN PRIJE LAUNCH-A.</text>
+<g transform="translate(520 145)" font-family="Arial,sans-serif"><g fill="#121319" stroke="#77787e"><rect width="390" height="96" rx="18"/><rect y="112" width="390" height="96" rx="18"/><rect y="224" width="390" height="96" rx="18"/><rect y="336" width="390" height="96" rx="18"/></g><g fill="none" stroke="#f50062" stroke-width="3"><circle cx="44" cy="48" r="18"/><path d="M44 20V31M44 65V76M16 48H27M61 48H72"/><path d="M27 155h34v32H27zM31 155c-11-17 15-22 13 0M57 155c11-17-15-22-13 0"/><path d="M25 283c28-32 42 30 70-2" stroke-dasharray="5 7"/><circle cx="26" cy="283" r="5" fill="#f50062"/><circle cx="95" cy="281" r="5" fill="#f50062"/><path d="M24 393h9v18h-9zM41 379h9v32h-9zM58 365h9v46h-9zM75 384h9v27h-9z"/></g><g fill="#f7f1e8" font-size="17" font-weight="700"><text x="90" y="42">JASAN CILJ</text><text x="90" y="154">PONUDA</text><text x="90" y="266">PUT KONVERZIJE</text><text x="90" y="378">MJERENJE</text></g><g fill="#a9a7aa" font-size="14"><text x="90" y="66">Šta tačno želimo postići?</text><text x="90" y="178">Jedna jasna vrijednost za publiku</text><text x="90" y="290">Od interesa do konkretne akcije</text><text x="90" y="402">Podaci koji pokazuju šta radi</text></g><g stroke="#f7f1e8" fill="none"><path d="M195 96v16M195 208v16M195 320v16"/><path d="M190 107l5 6 5-6M190 219l5 6 5-6M190 331l5 6 5-6"/></g></g>
+<g transform="translate(520 625)"><path d="M15 0H375L320 55H70Z" fill="none" stroke="#d5d0c8"/><path d="M70 55H320L270 110H120Z" fill="none" stroke="#d5d0c8"/><path d="M120 110H270L225 170H165Z" fill="none" stroke="#d5d0c8"/><path d="M195 170V224" stroke="#d5d0c8" stroke-dasharray="5 8"/><circle cx="195" cy="190" r="8" fill="#f50062"/></g>
+<g transform="translate(630 820)"><path d="M80 0c-42 0-72 31-72 70 0 54 72 130 72 130s72-76 72-130C152 31 122 0 80 0Z" fill="#f50062"/><circle cx="80" cy="70" r="24" fill="#111217"/><circle cx="80" cy="70" r="40" fill="none" stroke="#f7f1e8" opacity=".5"/><text x="175" y="112" fill="#f50062" font-family="Arial,sans-serif" font-size="22" letter-spacing="4">PODGORICA</text></g>
+<path d="M520 915C610 890 660 935 730 905S860 885 970 920" fill="none" stroke="#f50062" stroke-width="3" opacity=".5"/><text x="55" y="925" fill="none" stroke="#f50062" stroke-width="1.5" font-family="Arial,sans-serif" font-size="190" font-weight="800" opacity=".45">83</text>
 </svg>
