@@ -10,6 +10,7 @@ import { cases, caseBySlug } from '@/data/cases'
 import { serviceBySlug } from '@/data/services'
 import { site } from '@/data/site'
 import { createMetadata } from '@/lib/metadata'
+import { getPublicCaseStudy } from '@/lib/public-case'
 import { breadcrumbSchema, webPageSchema } from '@/lib/schema'
 
 export const dynamicParams = false
@@ -17,8 +18,9 @@ export function generateStaticParams() { return cases.map((item) => ({ slug: ite
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params
-  const item = caseBySlug[slug]
-  if (!item) return {}
+  const baseItem = caseBySlug[slug]
+  if (!baseItem) return {}
+  const item = getPublicCaseStudy(baseItem)
   return createMetadata({
     title: `${item.title} - case study`,
     description: item.summary,
@@ -32,9 +34,10 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
   const { slug } = await params
   const baseItem = caseBySlug[slug]
   if (!baseItem) notFound()
-  const item = caseGalleryOverrides[slug]
+  const galleryItem = caseGalleryOverrides[slug]
     ? { ...baseItem, gallery: caseGalleryOverrides[slug] }
     : baseItem
+  const item = getPublicCaseStudy(galleryItem)
   const path = `/radovi/${item.slug}/`
   const crumbs = [{ label: 'Radovi', href: '/radovi/' }, { label: item.title, href: path }]
   const metrics = item.metrics || []
