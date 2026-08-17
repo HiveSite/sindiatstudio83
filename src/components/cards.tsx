@@ -1,34 +1,37 @@
 import Link from 'next/link'
 import type { CaseStudy, Industry } from '@/types/content'
 import { CaseCoverPlaceholder } from '@/components/case-media'
+import { getPublicCaseStudy } from '@/lib/public-case'
 
 export function CaseCard({ item }: { item: CaseStudy }) {
-  const metrics = item.metrics?.slice(0, 3) || []
+  const publicItem = getPublicCaseStudy(item)
+  const metrics = publicItem.metrics?.slice(0, 3) || []
   return (
     <article className="case-card">
-      <CaseCoverPlaceholder item={item} />
+      <CaseCoverPlaceholder item={publicItem} />
       <div className="case-card-copy">
-        <span className="eyebrow">{item.type}</span>
-        <h3>{item.title}</h3>
-        <p>{item.summary}</p>
+        <span className="eyebrow">{publicItem.type}</span>
+        <h3>{publicItem.title}</h3>
+        <p>{publicItem.summary}</p>
         {metrics.length ? <div className="case-mini-metrics">
           {metrics.map(([value, label]) => <div key={`${value}-${label}`}><strong>{value}</strong><span>{label}</span></div>)}
         </div> : null}
-        <Link href={`/radovi/${item.slug}/`}>Pogledaj projekat <span>↗</span></Link>
+        <Link href={`/radovi/${publicItem.slug}/`}>Pogledaj projekat <span>↗</span></Link>
       </div>
     </article>
   )
 }
 
 export function CasePreviewCard({ item }: { item: CaseStudy }) {
+  const publicItem = getPublicCaseStudy(item)
   return (
     <article className="case-preview-card">
-      <CaseCoverPlaceholder item={item} />
+      <CaseCoverPlaceholder item={publicItem} />
       <div className="case-preview-copy">
-        <span>{item.type}</span>
-        <h3>{item.title}</h3>
-        <p>{item.summary}</p>
-        <Link href={`/radovi/${item.slug}/`}>Pogledaj projekat ↗</Link>
+        <span>{publicItem.type}</span>
+        <h3>{publicItem.title}</h3>
+        <p>{publicItem.summary}</p>
+        <Link href={`/radovi/${publicItem.slug}/`}>Pogledaj projekat ↗</Link>
       </div>
     </article>
   )
