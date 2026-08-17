@@ -1,5 +1,6 @@
 import type { CaseStudy } from '@/types/content'
 
+// Public portfolio copy intentionally uses the category-level description instead of individual beverage brand names.
 const publicCaseOverrides: Partial<Record<string, Partial<CaseStudy>>> = {
   'aktivacije-regulisanih-brendova': {
     type: 'Promocije brendova pića + teren',
