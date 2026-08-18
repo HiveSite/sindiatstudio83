@@ -1,56 +1,99 @@
-// Studio83 private media uploader
+// Studio83 private media manager
 const COOKIE_NAME = 'studio83_media_session'
-const MAX_FILE_BYTES = 900_000
-const MAX_FILES_PER_UPLOAD = 4
+const MAX_FILE_BYTES = 500_000
+const MAX_FILES_PER_UPLOAD = 8
 const MEDIA_PASSWORD = 'studio83media2026!'
 
-const PROJECTS = {
-  'promo-timovi': {
-    label: 'Promo timovi i terenski angažmani',
-    slots: {
-      tim: 'public/images/cases/promo-timovi/tim.webp',
-      briefing: 'public/images/cases/promo-timovi/briefing.webp',
-      realizacija: 'public/images/cases/promo-timovi/realizacija.webp',
-      logistika: 'public/images/cases/promo-timovi/logistika.webp',
-    },
+const PROJECTS = [
+  {
+    key: 'imaposla',
+    title: 'ImaPosla.me',
+    route: '/radovi/imaposla-digitalni-proizvod/',
+    folder: 'public/images/cases/imaposla',
+    planned: [],
   },
-  'regulisane-aktivacije': {
-    label: 'Promocije brendova pića',
-    slots: {
-      postavka: 'public/images/cases/regulisane-aktivacije/postavka.webp',
-      tim: 'public/images/cases/regulisane-aktivacije/tim.webp',
-      realizacija: 'public/images/cases/regulisane-aktivacije/realizacija.webp',
-      detalj: 'public/images/cases/regulisane-aktivacije/detalj.webp',
-    },
+  {
+    key: 'battlebots-arena',
+    title: 'BattleBots Arena',
+    route: '/radovi/battlebots-arena/',
+    folder: 'public/images/cases/battlebots-arena',
+    planned: [],
   },
-  dogadjaji: {
-    label: 'Privatni i korporativni događaji',
-    slots: {
-      postavka: 'public/images/cases/dogadjaji/postavka.webp',
-      'program-tehnika': 'public/images/cases/dogadjaji/program-tehnika.webp',
-      atmosfera: 'public/images/cases/dogadjaji/atmosfera.webp',
-      backstage: 'public/images/cases/dogadjaji/backstage.webp',
-    },
+  {
+    key: 'promo-timovi',
+    title: 'Promo timovi i terenski angažmani',
+    route: '/radovi/sistem-za-terenske-angazmane/',
+    folder: 'public/images/cases/promo-timovi',
+    planned: [
+      ['tim.webp', 'Kompletan promo ili event tim na lokaciji'],
+      ['briefing.webp', 'Briefing, priprema i podjela odgovornosti'],
+      ['realizacija.webp', 'Realizacija kroz više pozicija ili lokacija'],
+      ['logistika.webp', 'Logistika, supervizija i operativno izvještavanje'],
+    ],
   },
-  'student-connect': {
-    label: 'Student Connect',
-    slots: {
-      prostor: 'public/images/cases/student-connect/prostor.webp',
-      radionica: 'public/images/cases/student-connect/radionica.webp',
-      atmosfera: 'public/images/cases/student-connect/atmosfera.webp',
-      tim: 'public/images/cases/student-connect/tim.webp',
-    },
+  {
+    key: 'regulisane-aktivacije',
+    title: 'Promocije brendova pića',
+    route: '/radovi/aktivacije-regulisanih-brendova/',
+    folder: 'public/images/cases/regulisane-aktivacije',
+    planned: [
+      ['postavka.webp', 'Kompletna brendirana postavka na lokaciji'],
+      ['tim.webp', 'Promo tim, uniforme i priprema'],
+      ['realizacija.webp', 'Realizacija i komunikacija u prostoru'],
+      ['detalj.webp', 'Detalji postavke i završni dokaz standarda'],
+    ],
   },
-  'podgoricki-pazar': {
-    label: 'Kućica na Podgoričkom pazaru',
-    slots: {
-      kucica: 'public/images/cases/podgoricki-pazar/kucica.webp',
-      detalji: 'public/images/cases/podgoricki-pazar/detalji.webp',
-      atmosfera: 'public/images/cases/podgoricki-pazar/atmosfera.webp',
-      tim: 'public/images/cases/podgoricki-pazar/tim.webp',
-    },
+  {
+    key: 'dogadjaji',
+    title: 'Privatni i korporativni događaji',
+    route: '/radovi/privatni-i-korporativni-dogadjaji/',
+    folder: 'public/images/cases/dogadjaji',
+    planned: [
+      ['postavka.webp', 'Završena postavka prostora prije dolaska gostiju'],
+      ['program-tehnika.webp', 'Program, DJ i tehnička realizacija'],
+      ['atmosfera.webp', 'Atmosfera, tok gostiju i ključni momenti'],
+      ['backstage.webp', 'Tim, backstage i koordinacija iza scene'],
+    ],
   },
-}
+  {
+    key: 'student-connect',
+    title: 'Student Connect',
+    route: '/radovi/student-connect-mini-festival/',
+    folder: 'public/images/cases/student-connect',
+    planned: [
+      ['prostor.webp', 'Glavni prostor i vizuelni identitet festivala'],
+      ['radionica.webp', 'Radionica, predavanje ili interaktivni sadržaj'],
+      ['atmosfera.webp', 'Studenti, povezivanje i atmosfera'],
+      ['tim.webp', 'Organizacioni tim i realizacija iza scene'],
+    ],
+  },
+  {
+    key: 'podgoricki-pazar',
+    title: 'Kućica na Podgoričkom pazaru',
+    route: '/radovi/kucica-na-podgorickom-pazaru/',
+    folder: 'public/images/cases/podgoricki-pazar',
+    planned: [
+      ['kucica.webp', 'Kompletna kućica i vizuelna postavka'],
+      ['detalji.webp', 'Brending, detalji prostora i digitalni meni'],
+      ['atmosfera.webp', 'Atmosfera, posjetioci i tok kroz termine'],
+      ['tim.webp', 'Tim, program i svakodnevna operativa'],
+    ],
+  },
+  {
+    key: 'mini-sajtovi',
+    title: 'Mini-sajtovi i digitalni alati',
+    route: '/radovi/mini-sajtovi-i-digitalni-alati/',
+    folder: 'public/images/cases/mini-sajtovi-i-digitalni-alati',
+    planned: [],
+  },
+  {
+    key: 'hive-agency',
+    title: 'Hive Agency platforma',
+    route: '/radovi/hive-agency-platforma/',
+    folder: 'public/images/cases/hive-agency',
+    planned: [],
+  },
+]
 
 function json(body, status = 200, headers = {}) {
   return new Response(JSON.stringify(body), {
@@ -94,10 +137,7 @@ async function verifySession(token, secret) {
   try {
     const key = await importHmacKey(secret)
     const valid = await crypto.subtle.verify(
-      'HMAC',
-      key,
-      base64UrlDecode(signature),
-      new TextEncoder().encode(payload),
+      'HMAC', key, base64UrlDecode(signature), new TextEncoder().encode(payload),
     )
     if (!valid) return false
     const data = JSON.parse(new TextDecoder().decode(base64UrlDecode(payload)))
@@ -117,25 +157,87 @@ function sessionCookie(value, maxAge) {
   return `${COOKIE_NAME}=${encodeURIComponent(value)}; Path=/; HttpOnly; Secure; SameSite=Strict; Max-Age=${maxAge}`
 }
 
-async function githubRequest(path, options = {}) {
+function repoConfig() {
+  const repo = getEnv('STUDIO83_GITHUB_REPO') || 'HiveSite/sindiatstudio83'
+  const branch = getEnv('STUDIO83_GITHUB_BRANCH') || 'main'
+  const [owner, name] = repo.split('/')
+  if (!owner || !name) throw new Error('STUDIO83_GITHUB_REPO nije validan.')
+  return { repo, branch, owner, name }
+}
+
+async function githubApi(path, options = {}, requireToken = false) {
   const token = getEnv('STUDIO83_GITHUB_TOKEN')
-  if (!token) throw new Error('STUDIO83_GITHUB_TOKEN nije konfigurisan u Netlify environment variables.')
-  const response = await fetch(`https://api.github.com${path}`, {
-    ...options,
-    headers: {
-      accept: 'application/vnd.github+json',
-      authorization: `Bearer ${token}`,
-      'x-github-api-version': '2022-11-28',
-      'content-type': 'application/json',
-      ...(options.headers || {}),
-    },
-  })
+  if (requireToken && !token) throw new Error('STUDIO83_GITHUB_TOKEN nije konfigurisan.')
+  const headers = {
+    accept: 'application/vnd.github+json',
+    'x-github-api-version': '2022-11-28',
+    'content-type': 'application/json',
+    ...(options.headers || {}),
+  }
+  if (token) headers.authorization = `Bearer ${token}`
+  const response = await fetch(`https://api.github.com${path}`, { ...options, headers })
   const text = await response.text()
   const payload = text ? JSON.parse(text) : null
-  if (!response.ok) {
-    throw new Error(payload?.message || `GitHub API greška (${response.status})`)
-  }
+  if (!response.ok) throw new Error(payload?.message || `GitHub API greška (${response.status})`)
   return payload
+}
+
+function humanize(fileName) {
+  const text = String(fileName).replace(/\.[^.]+$/, '').replace(/[-_]+/g, ' ').trim()
+  return text ? text.charAt(0).toUpperCase() + text.slice(1) : fileName
+}
+
+function safeFileName(fileName) {
+  return /^[a-z0-9][a-z0-9._-]*\.webp$/i.test(fileName || '')
+}
+
+async function repositoryCatalog() {
+  const { repo, branch, owner, name } = repoConfig()
+  const ref = await githubApi(`/repos/${owner}/${name}/git/ref/heads/${encodeURIComponent(branch)}`)
+  const headSha = ref.object.sha
+  const headCommit = await githubApi(`/repos/${owner}/${name}/git/commits/${headSha}`)
+  const tree = await githubApi(`/repos/${owner}/${name}/git/trees/${headCommit.tree.sha}?recursive=1`)
+  const files = (tree.tree || []).filter((item) => item.type === 'blob' && /^public\/images\/cases\/.+\.(?:webp|png|jpe?g)$/i.test(item.path))
+
+  const projects = PROJECTS.map((project) => {
+    const prefix = `${project.folder}/`
+    const existing = files.filter((item) => item.path.startsWith(prefix))
+    const existingNames = new Map(existing.map((item) => [item.path.slice(prefix.length), item]))
+    const plannedNames = new Set(project.planned.map(([fileName]) => fileName))
+    const slots = project.planned.map(([fileName, label]) => {
+      const item = existingNames.get(fileName)
+      const path = `${project.folder}/${fileName}`
+      return {
+        key: fileName,
+        label,
+        fileName,
+        exists: Boolean(item),
+        planned: true,
+        path,
+        src: `/${path.replace(/^public\//, '')}`,
+        previewUrl: item ? `https://raw.githubusercontent.com/${repo}/${branch}/${path}?v=${headSha.slice(0, 10)}` : null,
+      }
+    })
+
+    for (const item of existing.sort((a, b) => a.path.localeCompare(b.path))) {
+      const fileName = item.path.slice(prefix.length)
+      if (plannedNames.has(fileName)) continue
+      slots.push({
+        key: fileName,
+        label: humanize(fileName),
+        fileName,
+        exists: true,
+        planned: false,
+        path: item.path,
+        src: `/${item.path.replace(/^public\//, '')}`,
+        previewUrl: `https://raw.githubusercontent.com/${repo}/${branch}/${item.path}?v=${headSha.slice(0, 10)}`,
+      })
+    }
+
+    return { ...project, slots, existingCount: slots.filter((slot) => slot.exists).length }
+  })
+
+  return { projects, headSha }
 }
 
 function parseWebpData(data) {
@@ -149,57 +251,46 @@ function parseWebpData(data) {
 }
 
 async function commitFiles(projectKey, files) {
-  const project = PROJECTS[projectKey]
+  const project = PROJECTS.find((item) => item.key === projectKey)
   if (!project) throw new Error('Nepoznat projekat.')
   if (!Array.isArray(files) || files.length < 1 || files.length > MAX_FILES_PER_UPLOAD) {
-    throw new Error('Po uploadu je dozvoljeno 1 do 4 fajla.')
+    throw new Error(`Po jednom čuvanju je dozvoljeno 1 do ${MAX_FILES_PER_UPLOAD} fajlova.`)
   }
 
-  const repo = getEnv('STUDIO83_GITHUB_REPO') || 'HiveSite/sindiatstudio83'
-  const branch = getEnv('STUDIO83_GITHUB_BRANCH') || 'main'
-  const [owner, name] = repo.split('/')
-  if (!owner || !name) throw new Error('STUDIO83_GITHUB_REPO nije validan.')
-
-  const uniqueSlots = new Set()
+  const { branch, owner, name } = repoConfig()
+  const uniqueNames = new Set()
   const prepared = files.map((file) => {
-    const path = project.slots[file.slotKey]
-    if (!path) throw new Error(`Nepoznat slot: ${file.slotKey}`)
-    if (uniqueSlots.has(file.slotKey)) throw new Error('Isti slot je poslat više puta.')
-    uniqueSlots.add(file.slotKey)
-    return { path, buffer: parseWebpData(file.data) }
+    if (!safeFileName(file.fileName)) throw new Error('Neispravan naziv fajla.')
+    if (uniqueNames.has(file.fileName)) throw new Error('Isti fajl je poslat više puta.')
+    uniqueNames.add(file.fileName)
+    return { path: `${project.folder}/${file.fileName}`, buffer: parseWebpData(file.data) }
   })
 
-  const ref = await githubRequest(`/repos/${owner}/${name}/git/ref/heads/${encodeURIComponent(branch)}`)
+  const ref = await githubApi(`/repos/${owner}/${name}/git/ref/heads/${encodeURIComponent(branch)}`, {}, true)
   const headSha = ref.object.sha
-  const headCommit = await githubRequest(`/repos/${owner}/${name}/git/commits/${headSha}`)
-
+  const headCommit = await githubApi(`/repos/${owner}/${name}/git/commits/${headSha}`, {}, true)
   const tree = []
+
   for (const file of prepared) {
-    const blob = await githubRequest(`/repos/${owner}/${name}/git/blobs`, {
+    const blob = await githubApi(`/repos/${owner}/${name}/git/blobs`, {
       method: 'POST',
       body: JSON.stringify({ content: file.buffer.toString('base64'), encoding: 'base64' }),
-    })
+    }, true)
     tree.push({ path: file.path, mode: '100644', type: 'blob', sha: blob.sha })
   }
 
-  const newTree = await githubRequest(`/repos/${owner}/${name}/git/trees`, {
+  const newTree = await githubApi(`/repos/${owner}/${name}/git/trees`, {
     method: 'POST',
     body: JSON.stringify({ base_tree: headCommit.tree.sha, tree }),
-  })
-
-  const commit = await githubRequest(`/repos/${owner}/${name}/git/commits`, {
+  }, true)
+  const commit = await githubApi(`/repos/${owner}/${name}/git/commits`, {
     method: 'POST',
-    body: JSON.stringify({
-      message: `Upload Studio83 media: ${project.label}`,
-      tree: newTree.sha,
-      parents: [headSha],
-    }),
-  })
-
-  await githubRequest(`/repos/${owner}/${name}/git/refs/heads/${encodeURIComponent(branch)}`, {
+    body: JSON.stringify({ message: `Update Studio83 media: ${project.title}`, tree: newTree.sha, parents: [headSha] }),
+  }, true)
+  await githubApi(`/repos/${owner}/${name}/git/refs/heads/${encodeURIComponent(branch)}`, {
     method: 'PATCH',
     body: JSON.stringify({ sha: commit.sha, force: false }),
-  })
+  }, true)
 
   return { commit: commit.sha, paths: prepared.map((item) => item.path) }
 }
@@ -209,7 +300,13 @@ export default async (req) => {
   const authenticated = await verifySession(readCookie(req, COOKIE_NAME), password)
 
   if (req.method === 'GET') {
-    return json({ authenticated, githubConfigured: Boolean(getEnv('STUDIO83_GITHUB_TOKEN')) })
+    if (!authenticated) return json({ authenticated: false, githubConfigured: Boolean(getEnv('STUDIO83_GITHUB_TOKEN')) })
+    try {
+      const catalog = await repositoryCatalog()
+      return json({ authenticated: true, githubConfigured: Boolean(getEnv('STUDIO83_GITHUB_TOKEN')), ...catalog })
+    } catch (error) {
+      return json({ authenticated: true, githubConfigured: Boolean(getEnv('STUDIO83_GITHUB_TOKEN')), projects: PROJECTS.map((p) => ({ ...p, slots: p.planned.map(([fileName, label]) => ({ key: fileName, label, fileName, exists: false, planned: true, path: `${p.folder}/${fileName}`, src: `/${p.folder.replace(/^public\//, '')}/${fileName}`, previewUrl: null })) })), catalogError: error instanceof Error ? error.message : 'Katalog nije dostupan.' })
+    }
   }
 
   if (req.method !== 'POST') return json({ error: 'Method not allowed' }, 405)
@@ -227,17 +324,10 @@ export default async (req) => {
       return json({ error: 'Pogrešna lozinka.' }, 401)
     }
     const token = await makeSession(password)
-    return json(
-      { ok: true, githubConfigured: Boolean(getEnv('STUDIO83_GITHUB_TOKEN')) },
-      200,
-      { 'set-cookie': sessionCookie(token, 12 * 60 * 60) },
-    )
+    return json({ ok: true, githubConfigured: Boolean(getEnv('STUDIO83_GITHUB_TOKEN')) }, 200, { 'set-cookie': sessionCookie(token, 12 * 60 * 60) })
   }
 
-  if (body.action === 'logout') {
-    return json({ ok: true }, 200, { 'set-cookie': sessionCookie('', 0) })
-  }
-
+  if (body.action === 'logout') return json({ ok: true }, 200, { 'set-cookie': sessionCookie('', 0) })
   if (!authenticated) return json({ error: 'Sesija je istekla. Prijavi se ponovo.' }, 401)
 
   if (body.action === 'upload') {
