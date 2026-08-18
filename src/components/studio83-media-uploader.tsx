@@ -1,20 +1,27 @@
 'use client'
 
 import { useEffect, useMemo, useState } from 'react'
+import type { CSSProperties } from 'react'
 import styles from './studio83-media-uploader.module.css'
 
-type Slot = {
+type ApiSlot = {
   key: string
   label: string
   fileName: string
+  exists: boolean
+  planned: boolean
+  path: string
+  src: string
+  previewUrl: string | null
 }
 
-type Project = {
+type ApiProject = {
   key: string
   title: string
   route: string
   folder: string
-  slots: Slot[]
+  slots: ApiSlot[]
+  existingCount?: number
 }
 
 type PendingFile = {
@@ -22,70 +29,34 @@ type PendingFile = {
   preview: string
 }
 
-type ProjectFiles = Record<string, PendingFile>
+type FitMode = 'cover' | 'contain'
+type FrameMode = 'card' | 'wide' | 'portrait' | 'original'
+type PositionMode = 'center' | 'top' | 'bottom' | 'left' | 'right'
 
-const projects: Project[] = [
-  {
-    key: 'promo-timovi',
-    title: 'Promo timovi i terenski angažmani',
-    route: '/radovi/sistem-za-terenske-angazmane/',
-    folder: 'public/images/cases/promo-timovi/',
-    slots: [
-      { key: 'tim', label: 'Kompletan promo ili event tim na lokaciji', fileName: 'tim.webp' },
-      { key: 'briefing', label: 'Briefing, priprema i podjela odgovornosti', fileName: 'briefing.webp' },
-      { key: 'realizacija', label: 'Realizacija kroz više pozicija ili lokacija', fileName: 'realizacija.webp' },
-      { key: 'logistika', label: 'Logistika, supervizija i operativno izvještavanje', fileName: 'logistika.webp' },
-    ],
-  },
-  {
-    key: 'regulisane-aktivacije',
-    title: 'Promocije brendova pića',
-    route: '/radovi/aktivacije-regulisanih-brendova/',
-    folder: 'public/images/cases/regulisane-aktivacije/',
-    slots: [
-      { key: 'postavka', label: 'Kompletna brendirana postavka na lokaciji', fileName: 'postavka.webp' },
-      { key: 'tim', label: 'Promo tim, uniforme i priprema', fileName: 'tim.webp' },
-      { key: 'realizacija', label: 'Realizacija i komunikacija u prostoru', fileName: 'realizacija.webp' },
-      { key: 'detalj', label: 'Detalji postavke i završni dokaz standarda', fileName: 'detalj.webp' },
-    ],
-  },
-  {
-    key: 'dogadjaji',
-    title: 'Privatni i korporativni događaji',
-    route: '/radovi/privatni-i-korporativni-dogadjaji/',
-    folder: 'public/images/cases/dogadjaji/',
-    slots: [
-      { key: 'postavka', label: 'Završena postavka prostora prije dolaska gostiju', fileName: 'postavka.webp' },
-      { key: 'program-tehnika', label: 'DJ, program, bar ili tehnička realizacija', fileName: 'program-tehnika.webp' },
-      { key: 'atmosfera', label: 'Atmosfera, tok gostiju i ključni momenti', fileName: 'atmosfera.webp' },
-      { key: 'backstage', label: 'Tim, backstage i koordinacija iza scene', fileName: 'backstage.webp' },
-    ],
-  },
-  {
-    key: 'student-connect',
-    title: 'Student Connect',
-    route: '/radovi/student-connect-mini-festival/',
-    folder: 'public/images/cases/student-connect/',
-    slots: [
-      { key: 'prostor', label: 'Glavni prostor i vizuelni identitet festivala', fileName: 'prostor.webp' },
-      { key: 'radionica', label: 'Radionica, predavanje ili interaktivni sadržaj', fileName: 'radionica.webp' },
-      { key: 'atmosfera', label: 'Studenti, povezivanje i atmosfera između programa', fileName: 'atmosfera.webp' },
-      { key: 'tim', label: 'Organizacioni tim i realizacija iza scene', fileName: 'tim.webp' },
-    ],
-  },
-  {
-    key: 'podgoricki-pazar',
-    title: 'Kućica na Podgoričkom pazaru',
-    route: '/radovi/kucica-na-podgorickom-pazaru/',
-    folder: 'public/images/cases/podgoricki-pazar/',
-    slots: [
-      { key: 'kucica', label: 'Kompletna kućica i vizuelna postavka', fileName: 'kucica.webp' },
-      { key: 'detalji', label: 'Brending, detalji prostora i digitalni meni', fileName: 'detalji.webp' },
-      { key: 'atmosfera', label: 'Atmosfera, posjetioci i tok kroz termine', fileName: 'atmosfera.webp' },
-      { key: 'tim', label: 'Tim, program i svakodnevna operativa', fileName: 'tim.webp' },
-    ],
-  },
-]
+type PreviewPrefs = {
+  fit: FitMode
+  frame: FrameMode
+  position: PositionMode
+}
+
+type Dimensions = { width: number; height: number }
+
+const defaultPrefs: PreviewPrefs = {
+  fit: 'cover',
+  frame: 'card',
+  position: 'center',
+}
+
+function slotId(projectKey: string, slotKey: string) {
+  return `${projectKey}::${slotKey}`
+}
+
+function defaultFrame(fileName: string): FrameMode {
+  const value = fileName.toLowerCase()
+  if (value.includes('og.')) return 'wide'
+  if (value.includes('mobil') || value.includes('portrait')) return 'portrait'
+  return 'card'
+}
 
 async function imageToWebp(file: File) {
   const url = URL.createObjectURL(file)
@@ -109,12 +80,12 @@ async function imageToWebp(file: File) {
     context.drawImage(image, 0, 0, width, height)
 
     let blob: Blob | null = null
-    for (const quality of [0.84, 0.78, 0.72, 0.66, 0.6]) {
+    for (const quality of [0.84, 0.78, 0.72, 0.66, 0.6, 0.54]) {
       blob = await new Promise<Blob | null>((resolve) => canvas.toBlob(resolve, 'image/webp', quality))
-      if (blob && blob.size <= 850_000) break
+      if (blob && blob.size <= 450_000) break
     }
     if (!blob) throw new Error('WebP konverzija nije uspjela.')
-    if (blob.size > 900_000) throw new Error('Fotografija je i nakon optimizacije prevelika. Probaj manju originalnu fotografiju.')
+    if (blob.size > 500_000) throw new Error('Fotografija je i nakon optimizacije prevelika. Probaj manju originalnu fotografiju.')
 
     const data = await new Promise<string>((resolve, reject) => {
       const reader = new FileReader()
@@ -134,24 +105,43 @@ export function Studio83MediaUploader() {
   const [password, setPassword] = useState('')
   const [loginError, setLoginError] = useState('')
   const [githubConfigured, setGithubConfigured] = useState(false)
-  const [files, setFiles] = useState<Record<string, ProjectFiles>>({})
+  const [projects, setProjects] = useState<ApiProject[]>([])
+  const [catalogError, setCatalogError] = useState('')
+  const [files, setFiles] = useState<Record<string, PendingFile>>({})
+  const [prefs, setPrefs] = useState<Record<string, PreviewPrefs>>({})
+  const [dimensions, setDimensions] = useState<Record<string, Dimensions>>({})
   const [busyProject, setBusyProject] = useState<string | null>(null)
   const [messages, setMessages] = useState<Record<string, string>>({})
+  const [showOnlyMissing, setShowOnlyMissing] = useState(false)
+
+  const loadCatalog = async () => {
+    const response = await fetch('/api/studio83-media', { credentials: 'include', cache: 'no-store' })
+    const data = await response.json().catch(() => ({}))
+    setGithubConfigured(Boolean(data.githubConfigured))
+    if (!data.authenticated) {
+      setAuthState('locked')
+      return
+    }
+    setProjects(Array.isArray(data.projects) ? data.projects : [])
+    setCatalogError(data.catalogError || '')
+    setAuthState('ready')
+  }
 
   useEffect(() => {
-    fetch('/api/studio83-media', { credentials: 'include' })
-      .then(async (response) => {
-        const data = await response.json().catch(() => ({}))
-        setGithubConfigured(Boolean(data.githubConfigured))
-        setAuthState(data.authenticated ? 'ready' : 'locked')
-      })
-      .catch(() => setAuthState('locked'))
+    loadCatalog().catch(() => setAuthState('locked'))
   }, [])
 
-  const totalSelected = useMemo(
-    () => Object.values(files).reduce((sum, projectFiles) => sum + Object.keys(projectFiles).length, 0),
-    [files],
-  )
+  const totalSelected = Object.keys(files).length
+  const totalSlots = projects.reduce((sum, project) => sum + project.slots.length, 0)
+  const totalExisting = projects.reduce((sum, project) => sum + project.slots.filter((slot) => slot.exists).length, 0)
+  const totalMissing = Math.max(0, totalSlots - totalExisting)
+
+  const visibleProjects = useMemo(() => {
+    if (!showOnlyMissing) return projects
+    return projects
+      .map((project) => ({ ...project, slots: project.slots.filter((slot) => !slot.exists) }))
+      .filter((project) => project.slots.length)
+  }, [projects, showOnlyMissing])
 
   const login = async () => {
     setLoginError('')
@@ -166,9 +156,8 @@ export function Studio83MediaUploader() {
       setLoginError(data.error || 'Prijava nije uspjela.')
       return
     }
-    setGithubConfigured(Boolean(data.githubConfigured))
     setPassword('')
-    setAuthState('ready')
+    await loadCatalog()
   }
 
   const logout = async () => {
@@ -179,58 +168,88 @@ export function Studio83MediaUploader() {
       body: JSON.stringify({ action: 'logout' }),
     }).catch(() => undefined)
     setAuthState('locked')
+    setProjects([])
   }
 
-  const selectMany = (project: Project, list: FileList | null) => {
-    if (!list?.length) return
-    const accepted = Array.from(list)
-      .filter((file) => ['image/jpeg', 'image/png'].includes(file.type))
-      .slice(0, project.slots.length)
-
-    setFiles((current) => {
-      const nextProject: ProjectFiles = { ...(current[project.key] || {}) }
-      accepted.forEach((file, index) => {
-        const slot = project.slots[index]
-        if (!slot) return
-        if (nextProject[slot.key]?.preview) URL.revokeObjectURL(nextProject[slot.key].preview)
-        nextProject[slot.key] = { file, preview: URL.createObjectURL(file) }
-      })
-      return { ...current, [project.key]: nextProject }
-    })
-    setMessages((current) => ({ ...current, [project.key]: '' }))
-  }
-
-  const selectOne = (projectKey: string, slotKey: string, file: File | undefined) => {
+  const selectOne = (projectKey: string, slot: ApiSlot, file: File | undefined) => {
     if (!file || !['image/jpeg', 'image/png'].includes(file.type)) return
+    const id = slotId(projectKey, slot.key)
     setFiles((current) => {
-      const projectFiles = { ...(current[projectKey] || {}) }
-      if (projectFiles[slotKey]?.preview) URL.revokeObjectURL(projectFiles[slotKey].preview)
-      projectFiles[slotKey] = { file, preview: URL.createObjectURL(file) }
-      return { ...current, [projectKey]: projectFiles }
+      if (current[id]?.preview) URL.revokeObjectURL(current[id].preview)
+      return { ...current, [id]: { file, preview: URL.createObjectURL(file) } }
     })
     setMessages((current) => ({ ...current, [projectKey]: '' }))
   }
 
-  const uploadProject = async (project: Project) => {
-    const selected = files[project.key] || {}
-    const slotEntries = project.slots.filter((slot) => selected[slot.key])
-    if (!slotEntries.length) {
-      setMessages((current) => ({ ...current, [project.key]: 'Prvo izaberi makar jednu fotografiju.' }))
+  const clearPending = (projectKey: string, slotKey: string) => {
+    const id = slotId(projectKey, slotKey)
+    setFiles((current) => {
+      if (current[id]?.preview) URL.revokeObjectURL(current[id].preview)
+      const next = { ...current }
+      delete next[id]
+      return next
+    })
+  }
+
+  const getPrefs = (projectKey: string, slot: ApiSlot): PreviewPrefs => {
+    const id = slotId(projectKey, slot.key)
+    return prefs[id] || { ...defaultPrefs, frame: defaultFrame(slot.fileName) }
+  }
+
+  const updatePrefs = (projectKey: string, slot: ApiSlot, patch: Partial<PreviewPrefs>) => {
+    const id = slotId(projectKey, slot.key)
+    setPrefs((current) => ({ ...current, [id]: { ...getPrefs(projectKey, slot), ...patch } }))
+  }
+
+  const previewStyle = (projectKey: string, slot: ApiSlot): CSSProperties => {
+    const id = slotId(projectKey, slot.key)
+    const current = getPrefs(projectKey, slot)
+    const size = dimensions[id]
+    const aspect = current.frame === 'wide'
+      ? '16 / 9'
+      : current.frame === 'portrait'
+        ? '4 / 5'
+        : current.frame === 'original' && size
+          ? `${size.width} / ${size.height}`
+          : '4 / 3'
+    return { aspectRatio: aspect }
+  }
+
+  const imageStyle = (projectKey: string, slot: ApiSlot): CSSProperties => {
+    const current = getPrefs(projectKey, slot)
+    const positions: Record<PositionMode, string> = {
+      center: 'center',
+      top: 'center top',
+      bottom: 'center bottom',
+      left: 'left center',
+      right: 'right center',
+    }
+    return { objectFit: current.fit, objectPosition: positions[current.position] }
+  }
+
+  const uploadProject = async (project: ApiProject) => {
+    const selected = project.slots.filter((slot) => files[slotId(project.key, slot.key)])
+    if (!selected.length) {
+      setMessages((current) => ({ ...current, [project.key]: 'Izaberi makar jednu fotografiju u ovom projektu.' }))
+      return
+    }
+    if (selected.length > 8) {
+      setMessages((current) => ({ ...current, [project.key]: 'Sačuvaj najviše 8 izmjena odjednom, pa zatim ostatak.' }))
       return
     }
 
     setBusyProject(project.key)
-    setMessages((current) => ({ ...current, [project.key]: 'Konvertujem u WebP i optimizujem…' }))
+    setMessages((current) => ({ ...current, [project.key]: 'Konvertujem odabrane fotografije u WebP…' }))
 
     try {
       const payloadFiles = []
-      for (const slot of slotEntries) {
-        const pending = selected[slot.key]
+      for (const slot of selected) {
+        const pending = files[slotId(project.key, slot.key)]
         const converted = await imageToWebp(pending.file)
-        payloadFiles.push({ slotKey: slot.key, data: converted.data })
+        payloadFiles.push({ fileName: slot.fileName, data: converted.data })
       }
 
-      setMessages((current) => ({ ...current, [project.key]: 'Upisujem fajlove u GitHub repo…' }))
+      setMessages((current) => ({ ...current, [project.key]: 'Upisujem samo ovaj projekat u GitHub repo…' }))
       const response = await fetch('/api/studio83-media', {
         method: 'POST',
         credentials: 'include',
@@ -240,11 +259,20 @@ export function Studio83MediaUploader() {
       const data = await response.json().catch(() => ({}))
       if (!response.ok) throw new Error(data.error || 'Upload nije uspio.')
 
+      setFiles((current) => {
+        const next = { ...current }
+        for (const slot of selected) {
+          const id = slotId(project.key, slot.key)
+          if (next[id]?.preview) URL.revokeObjectURL(next[id].preview)
+          delete next[id]
+        }
+        return next
+      })
       setMessages((current) => ({
         ...current,
-        [project.key]: `Gotovo. ${payloadFiles.length} fajla su upisana u repo. Commit ${String(data.commit || '').slice(0, 7)}.`,
+        [project.key]: `Sačuvano ${payloadFiles.length} izmjena. Commit ${String(data.commit || '').slice(0, 7)}.`,
       }))
-      setFiles((current) => ({ ...current, [project.key]: {} }))
+      await loadCatalog()
     } catch (error) {
       setMessages((current) => ({
         ...current,
@@ -256,7 +284,7 @@ export function Studio83MediaUploader() {
   }
 
   if (authState === 'checking') {
-    return <main className={styles.shell}><div className={styles.centerCard}>Provjeravam privatnu sesiju…</div></main>
+    return <main className={styles.shell}><div className={styles.centerCard}>Učitavam media biblioteku…</div></main>
   }
 
   if (authState === 'locked') {
@@ -264,14 +292,14 @@ export function Studio83MediaUploader() {
       <main className={styles.shell}>
         <section className={styles.loginCard}>
           <span className={styles.kicker}>Studio83 / private</span>
-          <h1>Media uploader</h1>
-          <p>Privatni alat za case-study fotografije. Slike se automatski pretvaraju u WebP i šalju na unaprijed definisanu putanju u repou.</p>
+          <h1>Media manager</h1>
+          <p>Kompletna biblioteka fotografija i screenshotova po projektu, sa pregledom fita i direktnom zamjenom fajlova.</p>
           <label>
             <span>Lozinka</span>
             <input type="password" value={password} onChange={(event) => setPassword(event.target.value)} onKeyDown={(event) => event.key === 'Enter' && login()} autoComplete="current-password" />
           </label>
           {loginError ? <div className={styles.error}>{loginError}</div> : null}
-          <button type="button" onClick={login} disabled={!password}>Uđi u uploader</button>
+          <button type="button" onClick={login} disabled={!password}>Uđi u media manager</button>
         </section>
       </main>
     )
@@ -282,69 +310,140 @@ export function Studio83MediaUploader() {
       <div className={styles.topbar}>
         <div>
           <span className={styles.kicker}>Studio83 / media admin</span>
-          <h1>Case-study fotografije</h1>
-          <p>Odaberi do četiri fotografije odjednom. Redosljed izbora prati redosljed slotova ispod, a svaku možeš naknadno zamijeniti pojedinačno.</p>
+          <h1>Media biblioteka</h1>
+          <p>Vidiš sve slike svih portfolio projekata. Postojeće možeš zamijeniti, prazne slotove dopuniti, a fit provjeriti prije uploadovanja.</p>
         </div>
         <div className={styles.topActions}>
-          <span>{totalSelected} odabrano</span>
+          <button type="button" className={styles.ghostButton} onClick={() => setShowOnlyMissing((value) => !value)}>
+            {showOnlyMissing ? 'Prikaži sve' : `Samo nedostaju (${totalMissing})`}
+          </button>
           <button type="button" className={styles.ghostButton} onClick={logout}>Odjava</button>
         </div>
       </div>
 
+      <div className={styles.summaryBar}>
+        <span><strong>{projects.length}</strong> projekata</span>
+        <span><strong>{totalExisting}</strong> postojeće</span>
+        <span><strong>{totalMissing}</strong> nedostaje</span>
+        <span><strong>{totalSelected}</strong> spremno za izmjenu</span>
+      </div>
+
       {!githubConfigured ? (
         <div className={styles.warning}>
-          <strong>Još fali GitHub dozvola.</strong>
-          <span>U Netlify environment variables treba dodati <code>STUDIO83_GITHUB_TOKEN</code>. Uploader je spreman, ali neće pisati u repo dok taj server-side token ne postoji.</span>
+          <strong>Pregled radi, ali čuvanje je zaključano.</strong>
+          <span>Dodaj <code>STUDIO83_GITHUB_TOKEN</code> u Netlify da bi dugmad “Sačuvaj ovaj projekat” mogla pisati u repo. Sve postojeće slike i fit možeš pregledati i bez tokena.</span>
         </div>
       ) : null}
 
+      {catalogError ? <div className={styles.warning}><strong>Katalog nije potpuno učitan.</strong><span>{catalogError}</span></div> : null}
+
       <div className={styles.projectList}>
-        {projects.map((project) => {
-          const projectFiles = files[project.key] || {}
-          const selectedCount = Object.keys(projectFiles).length
+        {visibleProjects.map((project, projectIndex) => {
+          const selectedCount = project.slots.filter((slot) => files[slotId(project.key, slot.key)]).length
+          const existingCount = project.slots.filter((slot) => slot.exists).length
+          const missingCount = project.slots.length - existingCount
           const busy = busyProject === project.key
+
           return (
             <section className={styles.projectCard} key={project.key}>
               <div className={styles.projectHeader}>
                 <div>
-                  <span className={styles.projectIndex}>{String(projects.indexOf(project) + 1).padStart(2, '0')}</span>
+                  <span className={styles.projectIndex}>{String(projectIndex + 1).padStart(2, '0')}</span>
                   <h2>{project.title}</h2>
                   <a href={project.route} target="_blank" rel="noreferrer">{project.route}</a>
                 </div>
-                <label className={styles.batchPicker}>
-                  <input type="file" accept="image/jpeg,image/png,.jpg,.jpeg,.png" multiple onChange={(event) => selectMany(project, event.target.files)} />
-                  Odaberi do 4 slike
-                </label>
+                <div className={styles.projectCounts}>
+                  <span>{existingCount} ima</span>
+                  {missingCount ? <span className={styles.missingCount}>{missingCount} fali</span> : <span>kompletno</span>}
+                </div>
               </div>
 
-              <div className={styles.folder}>{project.folder}</div>
+              <div className={styles.folder}>{project.folder}/</div>
 
               <div className={styles.slotGrid}>
-                {project.slots.map((slot, index) => {
-                  const pending = projectFiles[slot.key]
+                {project.slots.map((slot) => {
+                  const id = slotId(project.key, slot.key)
+                  const pending = files[id]
+                  const currentPrefs = getPrefs(project.key, slot)
+                  const currentSrc = pending?.preview || (slot.exists ? (slot.previewUrl || slot.src) : '')
+                  const size = dimensions[id]
+
                   return (
-                    <article className={styles.slot} key={slot.key}>
-                      <div className={styles.slotPreview}>
-                        {pending ? <img src={pending.preview} alt="" /> : <span>{String(index + 1).padStart(2, '0')}</span>}
+                    <article className={`${styles.slot}${!slot.exists ? ` ${styles.slotMissing}` : ''}`} key={slot.key}>
+                      <div className={styles.slotTopline}>
+                        <span className={`${styles.stateBadge}${slot.exists ? ` ${styles.stateExisting}` : ` ${styles.stateMissing}`}`}>
+                          {pending ? 'IZMJENA' : slot.exists ? 'IMA' : 'NEDOSTAJE'}
+                        </span>
+                        {size ? <small>{size.width}×{size.height}</small> : null}
                       </div>
+
+                      <div className={styles.slotPreview} style={previewStyle(project.key, slot)}>
+                        {currentSrc ? (
+                          <img
+                            src={currentSrc}
+                            alt=""
+                            style={imageStyle(project.key, slot)}
+                            onLoad={(event) => {
+                              const image = event.currentTarget
+                              setDimensions((current) => ({ ...current, [id]: { width: image.naturalWidth, height: image.naturalHeight } }))
+                            }}
+                          />
+                        ) : (
+                          <div className={styles.emptyPreview}><strong>+</strong><span>Fotografija nije dodata</span></div>
+                        )}
+                      </div>
+
+                      <div className={styles.fitControls}>
+                        <label>
+                          <span>Frame</span>
+                          <select value={currentPrefs.frame} onChange={(event) => updatePrefs(project.key, slot, { frame: event.target.value as FrameMode })}>
+                            <option value="card">Kartica 4:3</option>
+                            <option value="wide">Wide 16:9</option>
+                            <option value="portrait">Portret 4:5</option>
+                            <option value="original">Original</option>
+                          </select>
+                        </label>
+                        <label>
+                          <span>Fit</span>
+                          <select value={currentPrefs.fit} onChange={(event) => updatePrefs(project.key, slot, { fit: event.target.value as FitMode })}>
+                            <option value="cover">Cover</option>
+                            <option value="contain">Cijela slika</option>
+                          </select>
+                        </label>
+                        <label>
+                          <span>Pozicija</span>
+                          <select value={currentPrefs.position} onChange={(event) => updatePrefs(project.key, slot, { position: event.target.value as PositionMode })}>
+                            <option value="center">Centar</option>
+                            <option value="top">Gore</option>
+                            <option value="bottom">Dolje</option>
+                            <option value="left">Lijevo</option>
+                            <option value="right">Desno</option>
+                          </select>
+                        </label>
+                      </div>
+
                       <div className={styles.slotCopy}>
                         <strong>{slot.label}</strong>
                         <code>{slot.fileName}</code>
-                        <small>{pending ? pending.file.name : 'JPG, JPEG ili PNG'}</small>
+                        <small>{pending ? `Nova: ${pending.file.name}` : slot.exists ? 'Trenutni fajl iz repoa' : 'JPG, JPEG ili PNG → WebP'}</small>
                       </div>
-                      <label className={styles.replaceButton}>
-                        <input type="file" accept="image/jpeg,image/png,.jpg,.jpeg,.png" onChange={(event) => selectOne(project.key, slot.key, event.target.files?.[0])} />
-                        {pending ? 'Promijeni' : 'Izaberi'}
-                      </label>
+
+                      <div className={styles.slotActions}>
+                        <label className={styles.replaceButton}>
+                          <input type="file" accept="image/jpeg,image/png,.jpg,.jpeg,.png" onChange={(event) => selectOne(project.key, slot, event.target.files?.[0])} />
+                          {slot.exists ? 'Promijeni sliku' : 'Dodaj sliku'}
+                        </label>
+                        {pending ? <button type="button" className={styles.clearButton} onClick={() => clearPending(project.key, slot.key)}>Poništi</button> : null}
+                      </div>
                     </article>
                   )
                 })}
               </div>
 
               <div className={styles.projectFooter}>
-                <span className={styles.status}>{messages[project.key] || `${selectedCount}/4 spremno za upload`}</span>
+                <span className={styles.status}>{messages[project.key] || (selectedCount ? `${selectedCount} izmjena spremno samo za ovaj projekat.` : 'Nema nesačuvanih izmjena u ovom projektu.')}</span>
                 <button type="button" onClick={() => uploadProject(project)} disabled={!selectedCount || busy || !githubConfigured}>
-                  {busy ? 'Obrađujem…' : `Uploaduj ${selectedCount || ''}${selectedCount ? ' odabrano' : ''}`}
+                  {busy ? 'Čuvam projekat…' : `Sačuvaj ovaj projekat${selectedCount ? ` (${selectedCount})` : ''}`}
                 </button>
               </div>
             </section>
