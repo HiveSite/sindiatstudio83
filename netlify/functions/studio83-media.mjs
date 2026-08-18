@@ -1,3 +1,4 @@
+// Studio83 private media uploader
 const COOKIE_NAME = 'studio83_media_session'
 const MAX_FILE_BYTES = 900_000
 const MAX_FILES_PER_UPLOAD = 4
