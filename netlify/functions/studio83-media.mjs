@@ -1,6 +1,7 @@
 const COOKIE_NAME = 'studio83_media_session'
 const MAX_FILE_BYTES = 900_000
 const MAX_FILES_PER_UPLOAD = 4
+const MEDIA_PASSWORD = 'studio83media2026!'
 
 const PROJECTS = {
   'promo-timovi': {
@@ -203,9 +204,7 @@ async function commitFiles(projectKey, files) {
 }
 
 export default async (req) => {
-  const password = getEnv('STUDIO83_MEDIA_PASSWORD')
-  if (!password) return json({ error: 'Media uploader nije konfigurisan.' }, 503)
-
+  const password = MEDIA_PASSWORD
   const authenticated = await verifySession(readCookie(req, COOKIE_NAME), password)
 
   if (req.method === 'GET') {
