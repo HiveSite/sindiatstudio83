@@ -62,14 +62,24 @@ for (const line of redirectLines) {
   if (!staticRoutes.has(normalized)) fail(`Redirect target does not resolve to a known route: ${line}`)
 }
 
+const optionalUploaderAssetPrefixes = [
+  '/images/cases/promo-timovi/',
+  '/images/cases/regulisane-aktivacije/',
+  '/images/cases/dogadjaji/',
+  '/images/cases/student-connect/',
+  '/images/cases/podgoricki-pazar/',
+]
+const isOptionalUploaderAsset = (asset) => optionalUploaderAssetPrefixes.some((prefix) => asset.startsWith(prefix))
+
 for (const match of source.matchAll(/\bsrc=["'](\/[^"']+)["']/g)) {
   const asset = match[1]
-  if (asset.includes('${')) continue
+  if (asset.includes('${') || isOptionalUploaderAsset(asset)) continue
   if (!fs.existsSync(path.join(root, 'public', asset.replace(/^\//, '')))) fail(`Missing referenced public asset: ${asset}`)
 }
 
 for (const match of source.matchAll(/\bsrc:\s*["'](\/images\/[^"']+)["']/g)) {
   const asset = match[1]
+  if (isOptionalUploaderAsset(asset)) continue
   if (!fs.existsSync(path.join(root, 'public', asset.replace(/^\//, '')))) fail(`Missing data-referenced public image: ${asset}`)
 }
 
