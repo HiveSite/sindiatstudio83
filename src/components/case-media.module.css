@@ -75,6 +75,7 @@
   padding: 0 !important;
   overflow: hidden;
   isolation: isolate;
+  align-self: start;
   background: #0b0b10 !important;
 }
 
