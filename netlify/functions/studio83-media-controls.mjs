@@ -127,6 +127,10 @@ function safeName(name) {
   return /^[a-z0-9][a-z0-9._-]*\.(?:webp|png|jpe?g)$/i.test(name || '') && !String(name).includes('/')
 }
 
+function protectedTechnicalFile(name) {
+  return /(?:^|[-_])og\.(?:webp|png|jpe?g)$/i.test(String(name || ''))
+}
+
 function cleanTheme(value) {
   return String(value || '').trim().replace(/\s+/g, ' ').slice(0, 90)
 }
@@ -171,7 +175,7 @@ async function listProject(project, manifest) {
   const thumbPath = `${project.folder}/${project.thumbnail}`
   const imageEntries = entries.filter((entry) => entry.type === 'file' && /\.(?:webp|png|jpe?g)$/i.test(entry.name))
   const thumbnailEntry = imageEntries.find((entry) => entry.path === thumbPath)
-  const gallery = imageEntries.filter((entry) => entry.path !== thumbPath && !customPaths.has(entry.path)).map((entry) => ({
+  const gallery = imageEntries.filter((entry) => entry.path !== thumbPath && !customPaths.has(entry.path) && !protectedTechnicalFile(entry.name)).map((entry) => ({
     fileName: entry.name,
     path: entry.path,
     src: `https://raw.githubusercontent.com/${repo}/${branch}/${entry.path}`,
@@ -245,6 +249,7 @@ export default async (req) => {
       await saveManifest(manifest, `Unlink Studio83 thumbnail: ${project.title}`)
     } else if (body.action === 'delete-gallery-image') {
       if (!safeName(body.fileName)) throw new Error('Neispravan naziv slike.')
+      if (protectedTechnicalFile(body.fileName)) throw new Error('SEO/social asset je zaštićen i ne može se brisati iz galerijskog panela.')
       await removeImagePath(`${project.folder}/${body.fileName}`, `Remove Studio83 image: ${project.title}`)
     } else if (body.action === 'create-slot') {
       const theme = cleanTheme(body.theme)
