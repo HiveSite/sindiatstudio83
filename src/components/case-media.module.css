@@ -9,19 +9,22 @@
   z-index: 0;
   width: 100%;
   height: 100%;
-  max-width: none;
-  object-fit: cover;
-  opacity: 0.62;
-  filter: saturate(0.94) brightness(0.8);
-  transform: scale(1.01);
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  object-position: center;
+  opacity: 0.78;
+  filter: saturate(0.96) brightness(0.88);
+  transform: none;
 }
 
 .fullCoverImage {
-  position: absolute;
-  inset: 0;
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  max-width: 100%;
+  max-height: 720px;
+  object-fit: contain;
+  object-position: center;
   opacity: 1;
   filter: none;
   transform: none;
@@ -33,8 +36,8 @@
   z-index: 1;
   pointer-events: none;
   background:
-    linear-gradient(90deg, rgba(5, 5, 8, 0.86) 0%, rgba(5, 5, 8, 0.66) 44%, rgba(5, 5, 8, 0.34) 100%),
-    linear-gradient(0deg, rgba(5, 5, 8, 0.7) 0%, rgba(5, 5, 8, 0.16) 70%, transparent 100%);
+    linear-gradient(90deg, rgba(5, 5, 8, 0.78) 0%, rgba(5, 5, 8, 0.54) 44%, rgba(5, 5, 8, 0.26) 100%),
+    linear-gradient(0deg, rgba(5, 5, 8, 0.62) 0%, rgba(5, 5, 8, 0.12) 70%, transparent 100%);
 }
 
 .coverWithImage :global(.case-cover-copy) {
@@ -61,12 +64,14 @@
 }
 
 .mediaItem {
+  --case-media-max-width: 1180px;
+  --case-media-max-height: 920px;
   position: relative;
   display: block;
-  width: 100%;
+  width: min(100%, var(--case-media-max-width));
   height: auto;
   min-height: 0 !important;
-  margin: 0;
+  margin: 0 auto;
   padding: 0 !important;
   overflow: hidden;
   isolation: isolate;
@@ -80,39 +85,36 @@
 
 .mediaFrame {
   position: relative;
-  display: grid;
-  place-items: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 100%;
+  max-width: var(--case-media-max-width);
   min-width: 0;
   min-height: 0;
+  height: auto;
   overflow: hidden;
   background: #111118;
 }
 
-.mediaItem[data-aspect='wide'] .mediaFrame {
-  aspect-ratio: 16 / 8.5;
-}
-
-.mediaItem[data-aspect='landscape'] .mediaFrame {
-  aspect-ratio: 16 / 10;
-}
-
-.mediaItem[data-aspect='portrait'] .mediaFrame {
-  aspect-ratio: 4 / 5;
-}
-
+.mediaItem[data-aspect='wide'] .mediaFrame,
+.mediaItem[data-aspect='landscape'] .mediaFrame,
+.mediaItem[data-aspect='portrait'] .mediaFrame,
 .mediaItem[data-aspect='square'] .mediaFrame {
-  aspect-ratio: 1;
+  aspect-ratio: auto;
 }
 
 .mediaFrame img {
   position: relative;
   z-index: 0;
   display: block;
-  width: 100%;
-  height: 100%;
+  width: auto;
+  height: auto;
   max-width: 100%;
+  max-height: var(--case-media-max-height);
+  margin: 0 auto;
   object-fit: contain;
+  object-position: center;
   opacity: 1;
   filter: none;
   transform: none;
@@ -130,7 +132,7 @@
   width: auto;
   height: auto;
   max-width: 100%;
-  max-height: 100%;
+  max-height: var(--case-media-max-height);
   object-fit: contain;
   filter: drop-shadow(0 18px 32px rgba(0, 0, 0, 0.28));
 }
@@ -138,28 +140,18 @@
 @media (max-width: 760px) {
   .coverShade {
     background:
-      linear-gradient(90deg, rgba(5, 5, 8, 0.82) 0%, rgba(5, 5, 8, 0.56) 62%, rgba(5, 5, 8, 0.22) 100%),
-      linear-gradient(0deg, rgba(5, 5, 8, 0.68) 0%, rgba(5, 5, 8, 0.12) 72%, transparent 100%);
+      linear-gradient(90deg, rgba(5, 5, 8, 0.74) 0%, rgba(5, 5, 8, 0.48) 62%, rgba(5, 5, 8, 0.18) 100%),
+      linear-gradient(0deg, rgba(5, 5, 8, 0.58) 0%, rgba(5, 5, 8, 0.1) 72%, transparent 100%);
   }
 
-  .mediaItem[data-aspect='wide'] .mediaFrame,
-  .mediaItem[data-aspect='landscape'] .mediaFrame {
-    aspect-ratio: 16 / 10;
-  }
-
-  .mediaItem[data-aspect='portrait'] .mediaFrame {
-    aspect-ratio: 4 / 5;
+  .mediaItem {
+    --case-media-max-height: 760px;
   }
 }
 
 @media (max-width: 420px) {
-  .mediaItem[data-aspect='wide'] .mediaFrame,
-  .mediaItem[data-aspect='landscape'] .mediaFrame {
-    aspect-ratio: 4 / 3;
-  }
-
-  .mediaItem[data-aspect='portrait'] .mediaFrame {
-    aspect-ratio: 3 / 4;
+  .mediaItem {
+    --case-media-max-height: 640px;
   }
 
   .screenshot .mediaFrame {
