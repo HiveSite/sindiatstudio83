@@ -2,9 +2,15 @@ import Link from 'next/link'
 import type { CaseStudy, Industry } from '@/types/content'
 import { CaseCoverPlaceholder } from '@/components/case-media'
 import { getPublicCaseStudy } from '@/lib/public-case'
+import { managedThumbnail } from '@/lib/studio83-media'
+
+function withManagedThumbnail(item: CaseStudy): CaseStudy {
+  const coverImage = managedThumbnail(item.slug, item.coverImage)
+  return coverImage === item.coverImage ? item : { ...item, coverImage }
+}
 
 export function CaseCard({ item }: { item: CaseStudy }) {
-  const publicItem = getPublicCaseStudy(item)
+  const publicItem = withManagedThumbnail(getPublicCaseStudy(item))
   const metrics = publicItem.metrics?.slice(0, 3) || []
   return (
     <article className="case-card">
@@ -23,7 +29,7 @@ export function CaseCard({ item }: { item: CaseStudy }) {
 }
 
 export function CasePreviewCard({ item }: { item: CaseStudy }) {
-  const publicItem = getPublicCaseStudy(item)
+  const publicItem = withManagedThumbnail(getPublicCaseStudy(item))
   return (
     <article className="case-preview-card">
       <CaseCoverPlaceholder item={publicItem} />
