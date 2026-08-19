@@ -212,11 +212,6 @@ function imageStyle(image: CaseStudyImage): CSSProperties {
   return image.position ? { objectPosition: image.position } : {}
 }
 
-function mediaFrameStyle(item: CaseStudyMedia, image: CaseStudyImage): CSSProperties | undefined {
-  if (item.kind !== 'Screenshot') return undefined
-  return { aspectRatio: `${image.width} / ${image.height}` }
-}
-
 function MediaFigure({
   item,
   image,
@@ -236,12 +231,10 @@ function MediaFigure({
       data-aspect={resolvedAspect}
       aria-label={item.label}
     >
-      <div className={styles.mediaFrame} style={mediaFrameStyle(item, image)}>
+      <div className={styles.mediaFrame}>
         <img
           src={image.src}
           alt={image.alt}
-          width={image.width}
-          height={image.height}
           loading="lazy"
           decoding="async"
           style={imageStyle(image)}
@@ -267,8 +260,6 @@ export function CaseCoverPlaceholder({ item, large = false }: { item: CaseStudy;
           className={`${styles.coverImage}${large ? ` ${styles.fullCoverImage}` : ''}`}
           src={image.src}
           alt={image.alt}
-          width={image.width}
-          height={image.height}
           loading={large ? 'eager' : 'lazy'}
           decoding="async"
           style={imageStyle(image)}
