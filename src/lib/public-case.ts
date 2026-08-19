@@ -1,5 +1,4 @@
 import type { CaseStudy } from '@/types/content'
-import { managedThumbnail } from '@/lib/studio83-media'
 
 // Public portfolio copy intentionally uses the category-level description instead of individual beverage brand names.
 const publicCaseOverrides: Partial<Record<string, Partial<CaseStudy>>> = {
@@ -37,7 +36,5 @@ const publicCaseOverrides: Partial<Record<string, Partial<CaseStudy>>> = {
 
 export function getPublicCaseStudy(item: CaseStudy): CaseStudy {
   const override = publicCaseOverrides[item.slug]
-  const publicItem = override ? { ...item, ...override } : item
-  const coverImage = managedThumbnail(publicItem.slug, publicItem.coverImage)
-  return coverImage === publicItem.coverImage ? publicItem : { ...publicItem, coverImage }
+  return override ? { ...item, ...override } : item
 }
