@@ -4,6 +4,14 @@ const MAX_FILE_BYTES = 500_000
 const MAX_FILES_PER_UPLOAD = 8
 const MEDIA_PASSWORD = 'studio83media2026!'
 
+const MANAGED_THUMBNAIL_NAMES = new Set([
+  'thumbnail.webp',
+  'imaposla-thumbnail.webp',
+  'battlebots-thumbnail.webp',
+  'mini-sajtovi-thumbnail.webp',
+  'hive-thumbnail.webp',
+])
+
 const PROJECTS = [
   {
     key: 'imaposla',
@@ -102,8 +110,8 @@ function json(body, status = 200, headers = {}) {
   })
 }
 
-function getEnv(name) {
-  return typeof Netlify !== 'undefined' ? Netlify.env.get(name) : process.env[name]
+function env(name) {
+  return Netlify.env.get(name)
 }
 
 function base64UrlEncode(bytes) {
@@ -136,9 +144,7 @@ async function verifySession(token, secret) {
   const [payload, signature] = token.split('.')
   try {
     const key = await importHmacKey(secret)
-    const valid = await crypto.subtle.verify(
-      'HMAC', key, base64UrlDecode(signature), new TextEncoder().encode(payload),
-    )
+    const valid = await crypto.subtle.verify('HMAC', key, base64UrlDecode(signature), new TextEncoder().encode(payload))
     if (!valid) return false
     const data = JSON.parse(new TextDecoder().decode(base64UrlDecode(payload)))
     return typeof data.exp === 'number' && data.exp > Date.now()
@@ -158,15 +164,15 @@ function sessionCookie(value, maxAge) {
 }
 
 function repoConfig() {
-  const repo = getEnv('STUDIO83_GITHUB_REPO') || 'HiveSite/sindiatstudio83'
-  const branch = getEnv('STUDIO83_GITHUB_BRANCH') || 'main'
+  const repo = env('STUDIO83_GITHUB_REPO') || 'HiveSite/sindiatstudio83'
+  const branch = env('STUDIO83_GITHUB_BRANCH') || 'main'
   const [owner, name] = repo.split('/')
   if (!owner || !name) throw new Error('STUDIO83_GITHUB_REPO nije validan.')
   return { repo, branch, owner, name }
 }
 
 async function githubApi(path, options = {}, requireToken = false) {
-  const token = getEnv('STUDIO83_GITHUB_TOKEN')
+  const token = env('STUDIO83_GITHUB_TOKEN')
   if (requireToken && !token) throw new Error('STUDIO83_GITHUB_TOKEN nije konfigurisan.')
   const headers = {
     accept: 'application/vnd.github+json',
@@ -188,21 +194,37 @@ function humanize(fileName) {
 }
 
 function safeFileName(fileName) {
-  return /^[a-z0-9][a-z0-9._-]*\.webp$/i.test(fileName || '')
+  return /^[a-z0-9][a-z0-9._-]*\.webp$/i.test(String(fileName || ''))
 }
 
-async function repositoryCatalog() {
+function protectedTechnicalFile(fileName) {
+  const value = String(fileName || '')
+  return value.includes('/') || MANAGED_THUMBNAIL_NAMES.has(value) || /(?:^|[-_])og\.webp$/i.test(value)
+}
+
+async function repositoryState() {
   const { repo, branch, owner, name } = repoConfig()
   const ref = await githubApi(`/repos/${owner}/${name}/git/ref/heads/${encodeURIComponent(branch)}`)
   const headSha = ref.object.sha
   const headCommit = await githubApi(`/repos/${owner}/${name}/git/commits/${headSha}`)
   const tree = await githubApi(`/repos/${owner}/${name}/git/trees/${headCommit.tree.sha}?recursive=1`)
-  const files = (tree.tree || []).filter((item) => item.type === 'blob' && /^public\/images\/cases\/.+\.(?:webp|png|jpe?g)$/i.test(item.path))
+  const files = (tree.tree || []).filter((item) => item.type === 'blob' && /^public\/images\/cases\/.+\.webp$/i.test(item.path))
+  return { repo, branch, owner, name, headSha, headCommit, files }
+}
 
+function visibleExistingForProject(project, files) {
+  const prefix = `${project.folder}/`
+  return files
+    .filter((item) => item.path.startsWith(prefix))
+    .map((item) => ({ ...item, fileName: item.path.slice(prefix.length) }))
+    .filter((item) => safeFileName(item.fileName) && !protectedTechnicalFile(item.fileName))
+}
+
+async function repositoryCatalog() {
+  const state = await repositoryState()
   const projects = PROJECTS.map((project) => {
-    const prefix = `${project.folder}/`
-    const existing = files.filter((item) => item.path.startsWith(prefix))
-    const existingNames = new Map(existing.map((item) => [item.path.slice(prefix.length), item]))
+    const existing = visibleExistingForProject(project, state.files)
+    const existingNames = new Map(existing.map((item) => [item.fileName, item]))
     const plannedNames = new Set(project.planned.map(([fileName]) => fileName))
     const slots = project.planned.map(([fileName, label]) => {
       const item = existingNames.get(fileName)
@@ -215,33 +237,32 @@ async function repositoryCatalog() {
         planned: true,
         path,
         src: `/${path.replace(/^public\//, '')}`,
-        previewUrl: item ? `https://raw.githubusercontent.com/${repo}/${branch}/${path}?v=${headSha.slice(0, 10)}` : null,
+        previewUrl: item ? `https://raw.githubusercontent.com/${state.repo}/${state.branch}/${path}?v=${state.headSha.slice(0, 10)}` : null,
       }
     })
 
     for (const item of existing.sort((a, b) => a.path.localeCompare(b.path))) {
-      const fileName = item.path.slice(prefix.length)
-      if (plannedNames.has(fileName)) continue
+      if (plannedNames.has(item.fileName)) continue
       slots.push({
-        key: fileName,
-        label: humanize(fileName),
-        fileName,
+        key: item.fileName,
+        label: humanize(item.fileName),
+        fileName: item.fileName,
         exists: true,
         planned: false,
         path: item.path,
         src: `/${item.path.replace(/^public\//, '')}`,
-        previewUrl: `https://raw.githubusercontent.com/${repo}/${branch}/${item.path}?v=${headSha.slice(0, 10)}`,
+        previewUrl: `https://raw.githubusercontent.com/${state.repo}/${state.branch}/${item.path}?v=${state.headSha.slice(0, 10)}`,
       })
     }
 
     return { ...project, slots, existingCount: slots.filter((slot) => slot.exists).length }
   })
 
-  return { projects, headSha }
+  return { projects, headSha: state.headSha }
 }
 
 function parseWebpData(data) {
-  const match = /^data:image\/webp;base64,([A-Za-z0-9+/=]+)$/.exec(data || '')
+  const match = /^data:image\/webp;base64,([A-Za-z0-9+/=]+)$/.exec(String(data || ''))
   if (!match) throw new Error('Fajl nije validan WebP payload.')
   const buffer = Buffer.from(match[1], 'base64')
   if (!buffer.length || buffer.length > MAX_FILE_BYTES) {
@@ -257,37 +278,38 @@ async function commitFiles(projectKey, files) {
     throw new Error(`Po jednom čuvanju je dozvoljeno 1 do ${MAX_FILES_PER_UPLOAD} fajlova.`)
   }
 
-  const { branch, owner, name } = repoConfig()
+  const state = await repositoryState()
+  const existingNames = new Set(visibleExistingForProject(project, state.files).map((item) => item.fileName))
+  const plannedNames = new Set(project.planned.map(([fileName]) => fileName))
   const uniqueNames = new Set()
+
   const prepared = files.map((file) => {
-    if (!safeFileName(file.fileName)) throw new Error('Neispravan naziv fajla.')
-    if (uniqueNames.has(file.fileName)) throw new Error('Isti fajl je poslat više puta.')
-    uniqueNames.add(file.fileName)
-    return { path: `${project.folder}/${file.fileName}`, buffer: parseWebpData(file.data) }
+    const fileName = String(file.fileName || '')
+    if (!safeFileName(fileName) || protectedTechnicalFile(fileName)) throw new Error('Ovaj fajl nije dozvoljen u standardnom media editoru.')
+    if (!plannedNames.has(fileName) && !existingNames.has(fileName)) throw new Error('Nova proizvoljna pozicija mora se dodati kroz Napredno upravljanje.')
+    if (uniqueNames.has(fileName)) throw new Error('Isti fajl je poslat više puta.')
+    uniqueNames.add(fileName)
+    return { path: `${project.folder}/${fileName}`, buffer: parseWebpData(file.data) }
   })
 
-  const ref = await githubApi(`/repos/${owner}/${name}/git/ref/heads/${encodeURIComponent(branch)}`, {}, true)
-  const headSha = ref.object.sha
-  const headCommit = await githubApi(`/repos/${owner}/${name}/git/commits/${headSha}`, {}, true)
   const tree = []
-
   for (const file of prepared) {
-    const blob = await githubApi(`/repos/${owner}/${name}/git/blobs`, {
+    const blob = await githubApi(`/repos/${state.owner}/${state.name}/git/blobs`, {
       method: 'POST',
       body: JSON.stringify({ content: file.buffer.toString('base64'), encoding: 'base64' }),
     }, true)
     tree.push({ path: file.path, mode: '100644', type: 'blob', sha: blob.sha })
   }
 
-  const newTree = await githubApi(`/repos/${owner}/${name}/git/trees`, {
+  const newTree = await githubApi(`/repos/${state.owner}/${state.name}/git/trees`, {
     method: 'POST',
-    body: JSON.stringify({ base_tree: headCommit.tree.sha, tree }),
+    body: JSON.stringify({ base_tree: state.headCommit.tree.sha, tree }),
   }, true)
-  const commit = await githubApi(`/repos/${owner}/${name}/git/commits`, {
+  const commit = await githubApi(`/repos/${state.owner}/${state.name}/git/commits`, {
     method: 'POST',
-    body: JSON.stringify({ message: `Update Studio83 media: ${project.title}`, tree: newTree.sha, parents: [headSha] }),
+    body: JSON.stringify({ message: `Update Studio83 media: ${project.title}`, tree: newTree.sha, parents: [state.headSha] }),
   }, true)
-  await githubApi(`/repos/${owner}/${name}/git/refs/heads/${encodeURIComponent(branch)}`, {
+  await githubApi(`/repos/${state.owner}/${state.name}/git/refs/heads/${encodeURIComponent(state.branch)}`, {
     method: 'PATCH',
     body: JSON.stringify({ sha: commit.sha, force: false }),
   }, true)
@@ -296,16 +318,33 @@ async function commitFiles(projectKey, files) {
 }
 
 export default async (req) => {
-  const password = MEDIA_PASSWORD
-  const authenticated = await verifySession(readCookie(req, COOKIE_NAME), password)
+  const authenticated = await verifySession(readCookie(req, COOKIE_NAME), MEDIA_PASSWORD)
+  const githubConfigured = Boolean(env('STUDIO83_GITHUB_TOKEN'))
 
   if (req.method === 'GET') {
-    if (!authenticated) return json({ authenticated: false, githubConfigured: Boolean(getEnv('STUDIO83_GITHUB_TOKEN')) })
+    if (!authenticated) return json({ authenticated: false, githubConfigured })
     try {
       const catalog = await repositoryCatalog()
-      return json({ authenticated: true, githubConfigured: Boolean(getEnv('STUDIO83_GITHUB_TOKEN')), ...catalog })
+      return json({ authenticated: true, githubConfigured, ...catalog })
     } catch (error) {
-      return json({ authenticated: true, githubConfigured: Boolean(getEnv('STUDIO83_GITHUB_TOKEN')), projects: PROJECTS.map((p) => ({ ...p, slots: p.planned.map(([fileName, label]) => ({ key: fileName, label, fileName, exists: false, planned: true, path: `${p.folder}/${fileName}`, src: `/${p.folder.replace(/^public\//, '')}/${fileName}`, previewUrl: null })) })), catalogError: error instanceof Error ? error.message : 'Katalog nije dostupan.' })
+      return json({
+        authenticated: true,
+        githubConfigured,
+        projects: PROJECTS.map((project) => ({
+          ...project,
+          slots: project.planned.map(([fileName, label]) => ({
+            key: fileName,
+            label,
+            fileName,
+            exists: false,
+            planned: true,
+            path: `${project.folder}/${fileName}`,
+            src: `/${project.folder.replace(/^public\//, '')}/${fileName}`,
+            previewUrl: null,
+          })),
+        })),
+        catalogError: error instanceof Error ? error.message : 'Katalog nije dostupan.',
+      })
     }
   }
 
@@ -319,15 +358,18 @@ export default async (req) => {
   }
 
   if (body.action === 'login') {
-    if (body.password !== password) {
+    if (body.password !== MEDIA_PASSWORD) {
       await new Promise((resolve) => setTimeout(resolve, 350))
       return json({ error: 'Pogrešna lozinka.' }, 401)
     }
-    const token = await makeSession(password)
-    return json({ ok: true, githubConfigured: Boolean(getEnv('STUDIO83_GITHUB_TOKEN')) }, 200, { 'set-cookie': sessionCookie(token, 12 * 60 * 60) })
+    const token = await makeSession(MEDIA_PASSWORD)
+    return json({ ok: true, githubConfigured }, 200, { 'set-cookie': sessionCookie(token, 12 * 60 * 60) })
   }
 
-  if (body.action === 'logout') return json({ ok: true }, 200, { 'set-cookie': sessionCookie('', 0) })
+  if (body.action === 'logout') {
+    return json({ ok: true }, 200, { 'set-cookie': sessionCookie('', 0) })
+  }
+
   if (!authenticated) return json({ error: 'Sesija je istekla. Prijavi se ponovo.' }, 401)
 
   if (body.action === 'upload') {
