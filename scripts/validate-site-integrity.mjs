@@ -63,11 +63,15 @@ for (const line of redirectLines) {
 }
 
 const optionalUploaderAssetPrefixes = [
+  '/images/cases/imaposla/',
+  '/images/cases/battlebots-arena/',
   '/images/cases/promo-timovi/',
   '/images/cases/regulisane-aktivacije/',
   '/images/cases/dogadjaji/',
   '/images/cases/student-connect/',
   '/images/cases/podgoricki-pazar/',
+  '/images/cases/mini-sajtovi-i-digitalni-alati/',
+  '/images/cases/hive-agency/',
 ]
 const isOptionalUploaderAsset = (asset) => optionalUploaderAssetPrefixes.some((prefix) => asset.startsWith(prefix))
 
