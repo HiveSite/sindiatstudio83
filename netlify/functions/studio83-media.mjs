@@ -1,7 +1,7 @@
 // Studio83 private media manager
 const COOKIE_NAME = 'studio83_media_session'
-const MAX_FILE_BYTES = 500_000
-const MAX_FILES_PER_UPLOAD = 8
+const MAX_FILE_BYTES = 900_000
+const MAX_FILES_PER_UPLOAD = 12
 const MEDIA_PASSWORD = 'studio83media2026!'
 
 const MANAGED_THUMBNAIL_NAMES = new Set([
@@ -18,14 +18,31 @@ const PROJECTS = [
     title: 'ImaPosla.me',
     route: '/radovi/imaposla-digitalni-proizvod/',
     folder: 'public/images/cases/imaposla',
-    planned: [],
+    planned: [
+      ['imaposla-me-platforma-poslovi-crna-gora-cover.webp', 'Glavni cover / Radovi kartica'],
+      ['imaposla-pocetna-platforma-poslovi.webp', 'Naslovna platforme'],
+      ['imaposla-oglasi-za-posao.webp', 'Oglasi i detalj pozicije'],
+      ['imaposla-brzi-angazmani.webp', 'Brzi angažmani'],
+      ['imaposla-usluge-marketplace.webp', 'Usluge i marketplace'],
+      ['imaposla-firme-poslodavci.webp', 'Firme i poslodavci'],
+      ['imaposla-kategorije-poslova.webp', 'Kategorije poslova i mobilni prikaz'],
+    ],
   },
   {
     key: 'battlebots-arena',
     title: 'BattleBots Arena',
     route: '/radovi/battlebots-arena/',
     folder: 'public/images/cases/battlebots-arena',
-    planned: [],
+    planned: [
+      ['battlebots-finalna-arena-i-publika.webp', 'Glavni cover / finalna arena i publika'],
+      ['battlebots-edukativna-radionica.webp', 'Edukativna radionica i predavanje'],
+      ['battlebots-programiranje-robota.webp', 'Programiranje i testiranje robota'],
+      ['battlebots-ucesnici-na-programu.webp', 'Učesnici tokom programa i pripreme'],
+      ['battlebots-pobjednicki-tim.webp', 'Pobjednički tim i završna dodjela'],
+      ['battlebots-robot-u-borbenoj-areni.webp', 'Robot u borbenoj areni'],
+      ['battlebots-roboti-pred-borbu.webp', 'Roboti i takmičari pred borbu'],
+      ['battlebots-arena-produkcija-i-rasvjeta.webp', 'Arena, rasvjeta i produkcija događaja'],
+    ],
   },
   {
     key: 'promo-timovi',
@@ -33,7 +50,7 @@ const PROJECTS = [
     route: '/radovi/sistem-za-terenske-angazmane/',
     folder: 'public/images/cases/promo-timovi',
     planned: [
-      ['tim.webp', 'Kompletan promo ili event tim na lokaciji'],
+      ['tim.webp', 'Glavni cover / kompletan promo ili event tim'],
       ['briefing.webp', 'Briefing, priprema i podjela odgovornosti'],
       ['realizacija.webp', 'Realizacija kroz više pozicija ili lokacija'],
       ['logistika.webp', 'Logistika, supervizija i operativno izvještavanje'],
@@ -41,11 +58,11 @@ const PROJECTS = [
   },
   {
     key: 'regulisane-aktivacije',
-    title: 'Promocije brendova pića',
+    title: 'Regulisane aktivacije',
     route: '/radovi/aktivacije-regulisanih-brendova/',
     folder: 'public/images/cases/regulisane-aktivacije',
     planned: [
-      ['postavka.webp', 'Kompletna brendirana postavka na lokaciji'],
+      ['postavka.webp', 'Glavni cover / postavka na lokaciji'],
       ['tim.webp', 'Promo tim, uniforme i priprema'],
       ['realizacija.webp', 'Realizacija i komunikacija u prostoru'],
       ['detalj.webp', 'Detalji postavke i završni dokaz standarda'],
@@ -57,8 +74,8 @@ const PROJECTS = [
     route: '/radovi/privatni-i-korporativni-dogadjaji/',
     folder: 'public/images/cases/dogadjaji',
     planned: [
-      ['postavka.webp', 'Završena postavka prostora prije dolaska gostiju'],
-      ['program-tehnika.webp', 'Program, DJ i tehnička realizacija'],
+      ['postavka.webp', 'Glavni cover / završena postavka prostora'],
+      ['program-tehnika.webp', 'Program i tehnička realizacija'],
       ['atmosfera.webp', 'Atmosfera, tok gostiju i ključni momenti'],
       ['backstage.webp', 'Tim, backstage i koordinacija iza scene'],
     ],
@@ -69,7 +86,7 @@ const PROJECTS = [
     route: '/radovi/student-connect-mini-festival/',
     folder: 'public/images/cases/student-connect',
     planned: [
-      ['prostor.webp', 'Glavni prostor i vizuelni identitet festivala'],
+      ['prostor.webp', 'Glavni cover / prostor i vizuelni identitet'],
       ['radionica.webp', 'Radionica, predavanje ili interaktivni sadržaj'],
       ['atmosfera.webp', 'Studenti, povezivanje i atmosfera'],
       ['tim.webp', 'Organizacioni tim i realizacija iza scene'],
@@ -81,7 +98,7 @@ const PROJECTS = [
     route: '/radovi/kucica-na-podgorickom-pazaru/',
     folder: 'public/images/cases/podgoricki-pazar',
     planned: [
-      ['kucica.webp', 'Kompletna kućica i vizuelna postavka'],
+      ['kucica.webp', 'Glavni cover / kompletna kućica i postavka'],
       ['detalji.webp', 'Brending, detalji prostora i digitalni meni'],
       ['atmosfera.webp', 'Atmosfera, posjetioci i tok kroz termine'],
       ['tim.webp', 'Tim, program i svakodnevna operativa'],
@@ -92,14 +109,34 @@ const PROJECTS = [
     title: 'Mini-sajtovi i digitalni alati',
     route: '/radovi/mini-sajtovi-i-digitalni-alati/',
     folder: 'public/images/cases/mini-sajtovi-i-digitalni-alati',
-    planned: [],
+    planned: [
+      ['mini-sajtovi-cover.webp', 'Glavni cover / kolaž digitalnih rješenja'],
+      ['dj-miqelly-mobilna-naslovna.webp', 'DJ Miqelly - mobilna naslovna'],
+      ['dj-miqelly-mobilni-program-i-zurke.webp', 'DJ Miqelly - mobilni program i kontakt'],
+      ['dj-miqelly-desktop-portfolio.webp', 'DJ Miqelly - desktop portfolio'],
+      ['stan-na-dan-mobilna-naslovna.webp', 'Stan na dan - mobilna naslovna'],
+      ['stan-na-dan-mobilna-galerija.webp', 'Stan na dan - mobilna galerija'],
+      ['stan-na-dan-lokacija-i-navigacija.webp', 'Stan na dan - lokacija i navigacija'],
+      ['stan-na-dan-desktop-galerija.webp', 'Stan na dan - desktop galerija'],
+      ['graficke-mape-desktop-alat.webp', 'Grafičke mape - desktop alat'],
+      ['graficke-mape-podgorica-tamni-poster.webp', 'Grafičke mape - tamni poster'],
+      ['graficke-mape-podgorica-lokacija.webp', 'Grafičke mape - označena lokacija'],
+    ],
   },
   {
     key: 'hive-agency',
     title: 'Hive Agency platforma',
     route: '/radovi/hive-agency-platforma/',
     folder: 'public/images/cases/hive-agency',
-    planned: [],
+    planned: [
+      ['hive-team-building-avanturisticki-park.webp', 'Glavni cover / avanturistički park'],
+      ['hive-team-building-paintball-turnir.webp', 'Paintball turnir'],
+      ['hive-team-building-splavarska-misija.webp', 'Splavarska misija'],
+      ['hive-team-building-planinarenje.webp', 'Planinarenje'],
+      ['hive-team-building-timska-mreza-vizual.webp', 'Timska mreža - vizual'],
+      ['hive-team-building-plazni-poligon-vizual.webp', 'Plažni poligon - vizual'],
+      ['hive-team-building-zamkovi-od-pijeska-vizual.webp', 'Zamkovi od pijeska - vizual'],
+    ],
   },
 ]
 
@@ -236,6 +273,7 @@ async function repositoryCatalog() {
         exists: Boolean(item),
         planned: true,
         path,
+        size: item?.size || 0,
         src: `/${path.replace(/^public\//, '')}`,
         previewUrl: item ? `https://raw.githubusercontent.com/${state.repo}/${state.branch}/${path}?v=${state.headSha.slice(0, 10)}` : null,
       }
@@ -250,6 +288,7 @@ async function repositoryCatalog() {
         exists: true,
         planned: false,
         path: item.path,
+        size: item.size || 0,
         src: `/${item.path.replace(/^public\//, '')}`,
         previewUrl: `https://raw.githubusercontent.com/${state.repo}/${state.branch}/${item.path}?v=${state.headSha.slice(0, 10)}`,
       })
@@ -339,6 +378,7 @@ export default async (req) => {
             exists: false,
             planned: true,
             path: `${project.folder}/${fileName}`,
+            size: 0,
             src: `/${project.folder.replace(/^public\//, '')}/${fileName}`,
             previewUrl: null,
           })),
@@ -351,11 +391,7 @@ export default async (req) => {
   if (req.method !== 'POST') return json({ error: 'Method not allowed' }, 405)
 
   let body
-  try {
-    body = await req.json()
-  } catch {
-    return json({ error: 'Neispravan zahtjev.' }, 400)
-  }
+  try { body = await req.json() } catch { return json({ error: 'Neispravan zahtjev.' }, 400) }
 
   if (body.action === 'login') {
     if (body.password !== MEDIA_PASSWORD) {
@@ -366,10 +402,7 @@ export default async (req) => {
     return json({ ok: true, githubConfigured }, 200, { 'set-cookie': sessionCookie(token, 12 * 60 * 60) })
   }
 
-  if (body.action === 'logout') {
-    return json({ ok: true }, 200, { 'set-cookie': sessionCookie('', 0) })
-  }
-
+  if (body.action === 'logout') return json({ ok: true }, 200, { 'set-cookie': sessionCookie('', 0) })
   if (!authenticated) return json({ error: 'Sesija je istekla. Prijavi se ponovo.' }, 401)
 
   if (body.action === 'upload') {
@@ -384,6 +417,4 @@ export default async (req) => {
   return json({ error: 'Nepoznata akcija.' }, 400)
 }
 
-export const config = {
-  path: '/api/studio83-media',
-}
+export const config = { path: '/api/studio83-media' }
