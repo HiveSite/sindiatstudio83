@@ -24,13 +24,54 @@ type Project = {
 }
 
 type PendingFile = { file: File; preview: string; width: number; height: number }
+type ImageSize = { width: number; height: number }
 type AuthState = 'checking' | 'locked' | 'ready'
+type QualityTone = 'good' | 'warn' | 'bad' | 'unknown'
 
 const slotId = (projectKey: string, slotKey: string) => `${projectKey}:${slotKey}`
 const isCoverSlot = (slot: Slot) => /glavni cover/i.test(slot.label)
 
+function slotUsage(cover: boolean) {
+  if (cover) return 'Radovi kartica + početna gdje je projekat izdvojen + glavni vizual projekta.'
+  return 'Detalj projekta → sekcija “Vizuelni pregled”. Slika se prikazuje cijela.'
+}
+
+function slotPreparation(cover: boolean) {
+  if (cover) return {
+    format: 'Landscape 3:2',
+    target: '1800 × 1200 px',
+    minimum: '1400 × 900 px',
+    fit: 'COVER',
+    crop: 'DA',
+    focus: 'CENTAR',
+    note: 'Najvažniji motiv drži u srednjih ~70% kadra. Desktop i mobile mogu odsjeći ivice.',
+  }
+  return {
+    format: 'Originalni odnos',
+    target: 'duža ivica 1600–1800 px',
+    minimum: 'duža ivica 1000 px',
+    fit: 'CONTAIN',
+    crop: 'NE',
+    focus: 'NEBITNO',
+    note: 'Ne cropuj zbog sajta. Screenshot ostavi u originalnom odnosu; fotografija se prikazuje cijela.',
+  }
+}
+
+function qualityFor(size: ImageSize | undefined, cover: boolean): { tone: QualityTone; label: string; detail: string } {
+  if (!size) return { tone: 'unknown', label: 'PROVJERA ČEKA', detail: 'Dimenzije će se pojaviti kada se slika učita.' }
+  if (cover) {
+    if (size.width >= 1400 && size.height >= 900) return { tone: 'good', label: 'KVALITET OK', detail: `${size.width} × ${size.height}px — dovoljno za cover.` }
+    if (size.width >= 1200 && size.height >= 700) return { tone: 'warn', label: 'MOŽE, ALI BOLJE VEĆA', detail: `${size.width} × ${size.height}px — koristi samo ako nemaš bolju.` }
+    return { tone: 'bad', label: 'PREMALA ZA COVER', detail: `${size.width} × ${size.height}px — nemoj ovu koristiti kao glavni cover.` }
+  }
+  const longEdge = Math.max(size.width, size.height)
+  if (longEdge >= 1200) return { tone: 'good', label: 'KVALITET OK', detail: `${size.width} × ${size.height}px — dobra rezolucija.` }
+  if (longEdge >= 800) return { tone: 'warn', label: 'MANJA SLIKA', detail: `${size.width} × ${size.height}px — za screenshot može proći, za fotografiju traži veću.` }
+  return { tone: 'bad', label: 'PREMALA', detail: `${size.width} × ${size.height}px — vjerovatno će izgledati mekano.` }
+}
+
 async function readDimensions(url: string) {
-  return await new Promise<{ width: number; height: number }>((resolve, reject) => {
+  return await new Promise<ImageSize>((resolve, reject) => {
     const image = new Image()
     image.onload = () => resolve({ width: image.naturalWidth, height: image.naturalHeight })
     image.onerror = () => reject(new Error('Fotografija ne može da se pročita.'))
@@ -88,7 +129,7 @@ export function Studio83MediaUploader() {
   const [githubConfigured, setGithubConfigured] = useState(false)
   const [catalogError, setCatalogError] = useState('')
   const [files, setFiles] = useState<Record<string, PendingFile>>({})
-  const [dimensions, setDimensions] = useState<Record<string, { width: number; height: number }>>({})
+  const [dimensions, setDimensions] = useState<Record<string, ImageSize>>({})
   const [messages, setMessages] = useState<Record<string, string>>({})
   const [busyProject, setBusyProject] = useState<string | null>(null)
   const [showOnlyMissing, setShowOnlyMissing] = useState(false)
@@ -151,10 +192,8 @@ export function Studio83MediaUploader() {
         if (current[id]?.preview) URL.revokeObjectURL(current[id].preview)
         return { ...current, [id]: { file, preview, ...size } }
       })
-      const warning = isCoverSlot(slot) && (size.width < 1200 || size.height < 700)
-        ? ` Cover je ${size.width}×${size.height}px — preporuka je najmanje 1400×900.`
-        : ''
-      setMessages((current) => ({ ...current, [projectKey]: `Slika je samo u previewu.${warning} Klikni “Sačuvaj ovaj projekat” tek kada provjeriš kadar.` }))
+      const quality = qualityFor(size, isCoverSlot(slot))
+      setMessages((current) => ({ ...current, [projectKey]: `${slot.label}: ${quality.detail} Slika je samo u previewu dok ne klikneš “Sačuvaj ovaj projekat”.` }))
     } catch (error) {
       URL.revokeObjectURL(preview)
       setMessages((current) => ({ ...current, [projectKey]: error instanceof Error ? error.message : 'Slika se ne može pripremiti.' }))
@@ -175,7 +214,7 @@ export function Studio83MediaUploader() {
     const selected = project.slots.filter((slot) => files[slotId(project.key, slot.key)])
     if (!selected.length) return
     setBusyProject(project.key)
-    setMessages((current) => ({ ...current, [project.key]: 'Optimizujem fotografije i upisujem ih u repo…' }))
+    setMessages((current) => ({ ...current, [project.key]: 'Optimizujem izabrane slike u WebP i upisujem ih na tačne pozicije…' }))
     try {
       const payloadFiles = []
       for (const slot of selected) {
@@ -201,7 +240,7 @@ export function Studio83MediaUploader() {
         }
         return next
       })
-      setMessages((current) => ({ ...current, [project.key]: `Sačuvano ${payloadFiles.length} izmjena. Commit ${String(data.commit || '').slice(0, 7)}.` }))
+      setMessages((current) => ({ ...current, [project.key]: `Sačuvano ${payloadFiles.length} slika na tačne pozicije. Commit ${String(data.commit || '').slice(0, 7)}.` }))
       await loadCatalog()
     } catch (error) {
       setMessages((current) => ({ ...current, [project.key]: error instanceof Error ? error.message : 'Upload nije uspio.' }))
@@ -222,11 +261,11 @@ export function Studio83MediaUploader() {
       <main className={styles.shell}>
         <section className={styles.loginCard}>
           <span className={styles.kicker}>Studio83 / private</span>
-          <h1>Media manager</h1>
-          <p>Kompletna biblioteka fotografija i screenshotova po projektu, sa stvarnim statusom svakog očekivanog fajla.</p>
+          <h1>Media uploader</h1>
+          <p>Jedan alat za zamjenu portfolio covera i galerijskih slika na tačno definisanim pozicijama.</p>
           <label><span>Lozinka</span><input type="password" value={password} onChange={(event) => setPassword(event.target.value)} onKeyDown={(event) => event.key === 'Enter' && login()} autoComplete="current-password" /></label>
           {loginError ? <div className={styles.error}>{loginError}</div> : null}
-          <button type="button" onClick={login} disabled={!password}>Uđi u media manager</button>
+          <button type="button" onClick={login} disabled={!password}>Uđi u media uploader</button>
         </section>
       </main>
     )
@@ -237,8 +276,8 @@ export function Studio83MediaUploader() {
       <div className={styles.topbar}>
         <div>
           <span className={styles.kicker}>Studio83 / media admin</span>
-          <h1>Media biblioteka</h1>
-          <p>Sada vidiš unaprijed definisane pozicije za svih 9 portfolio projekata. Cover koristi <b>cover/crop</b>; galerijske fotografije i screenshotovi koriste <b>contain</b>. Nema više kontrola koje mijenjaju samo preview, a ne live sajt.</p>
+          <h1>Slike bez nagađanja.</h1>
+          <p>Izaberi projekat i poziciju. Svaka pozicija ispod kaže <b>gdje se vidi</b>, <b>koje dimenzije da pripremiš</b>, <b>da li se cropuje</b> i <b>da li je izabrana slika dovoljno velika</b>. Ti biraš kadar; uploader samo optimizuje u WebP i snimi na pravo mjesto.</p>
         </div>
         <div className={styles.topActions}>
           <button type="button" className={styles.ghostButton} onClick={() => setShowOnlyMissing((value) => !value)}>{showOnlyMissing ? 'Prikaži sve' : `Samo nedostaju (${totalMissing})`}</button>
@@ -246,11 +285,17 @@ export function Studio83MediaUploader() {
         </div>
       </div>
 
+      <section className={styles.howTo}>
+        <article><span>1</span><div><strong>Nađi poziciju</strong><p>Ne mijenjaj ime fajla. Gledaj naziv pozicije: Glavni cover, Naslovna platforme, Atmosfera, Tim…</p></div></article>
+        <article><span>2</span><div><strong>Pripremi sliku po pravilima</strong><p>Cover: 1800×1200, 3:2, važan motiv u centru. Galerija: zadrži originalni odnos, bez cropa.</p></div></article>
+        <article><span>3</span><div><strong>Preview pa sačuvaj</strong><p>Prvo vidiš kako će kadar sjesti. Tek dugme “Sačuvaj ovaj projekat” pravi GitHub commit i pokreće deploy.</p></div></article>
+      </section>
+
       <div className={styles.summaryBar}>
         <span><strong>{projects.length}</strong> projekata</span>
-        <span><strong>{totalExisting}</strong> postoji</span>
+        <span><strong>{totalExisting}</strong> slika postoji</span>
         <span><strong>{totalMissing}</strong> nedostaje</span>
-        <span><strong>{totalSelected}</strong> spremno za izmjenu</span>
+        <span><strong>{totalSelected}</strong> izabrano za čuvanje</span>
       </div>
 
       {!githubConfigured ? <div className={styles.warning}><strong>Pregled radi, ali čuvanje je zaključano.</strong><span>Nedostaje GitHub write token na Netlify projektu.</span></div> : null}
@@ -265,35 +310,56 @@ export function Studio83MediaUploader() {
           return (
             <section className={styles.projectCard} key={project.key}>
               <div className={styles.projectHeader}>
-                <div><span className={styles.projectIndex}>{String(projectIndex + 1).padStart(2, '0')}</span><h2>{project.title}</h2><a href={project.route} target="_blank" rel="noreferrer">{project.route}</a></div>
+                <div>
+                  <span className={styles.projectIndex}>PROJEKAT {String(projectIndex + 1).padStart(2, '0')}</span>
+                  <h2>{project.title}</h2>
+                  <a href={project.route} target="_blank" rel="noreferrer">Otvori live projekat ↗</a>
+                </div>
                 <div className={styles.projectCounts}><span>{existingCount} ima</span>{missingCount ? <span className={styles.missingCount}>{missingCount} fali</span> : <span>kompletno</span>}</div>
               </div>
-              <div className={styles.folder}>{project.folder}/</div>
 
               <div className={styles.slotGrid}>
-                {project.slots.map((slot) => {
+                {project.slots.map((slot, slotIndex) => {
                   const id = slotId(project.key, slot.key)
                   const pending = files[id]
                   const currentSrc = pending?.preview || (slot.exists ? (slot.previewUrl || slot.src) : '')
                   const size = pending ? { width: pending.width, height: pending.height } : dimensions[id]
                   const cover = isCoverSlot(slot)
-                  const tinyExisting = Boolean(slot.exists && slot.size && slot.size < 20_000)
+                  const prep = slotPreparation(cover)
+                  const quality = qualityFor(size, cover)
                   return (
-                    <article className={`${styles.slot}${!slot.exists ? ` ${styles.slotMissing}` : ''}`} key={slot.key}>
-                      <div className={styles.slotTopline}>
-                        <span className={`${styles.stateBadge}${slot.exists ? ` ${styles.stateExisting}` : ` ${styles.stateMissing}`}`}>{pending ? 'IZMJENA' : slot.exists ? 'IMA' : 'NEDOSTAJE'}</span>
-                        <small>{cover ? 'LIVE: COVER / CROP' : 'LIVE: CONTAIN / BEZ CROPA'}</small>
+                    <article className={`${styles.slot}${!slot.exists ? ` ${styles.slotMissing}` : ''}${cover ? ` ${styles.coverSlot}` : ''}`} key={slot.key}>
+                      <div className={styles.slotHeader}>
+                        <div>
+                          <span className={cover ? styles.coverBadge : styles.galleryBadge}>{cover ? 'GLAVNI COVER' : `GALERIJA ${String(slotIndex).padStart(2, '0')}`}</span>
+                          <strong>{slot.label}</strong>
+                        </div>
+                        <span className={`${styles.quality} ${styles[`quality_${quality.tone}`]}`}>{pending ? 'NOVA · ' : ''}{quality.label}</span>
                       </div>
+
+                      <div className={styles.usageBox}><span>GDJE SE VIDI</span><p>{slotUsage(cover)}</p></div>
+
+                      <div className={styles.rules}>
+                        <div><span>PRIPREMI</span><strong>{prep.target}</strong><small>{prep.format}</small></div>
+                        <div><span>MINIMUM</span><strong>{prep.minimum}</strong><small>ispod ovoga ne preporučujem</small></div>
+                        <div><span>PRIKAZ</span><strong>{prep.fit}</strong><small>crop: {prep.crop.toLowerCase()} · fokus: {prep.focus.toLowerCase()}</small></div>
+                      </div>
+
                       <div className={styles.slotPreview} style={{ aspectRatio: cover ? '3 / 2' : '4 / 3' }}>
-                        {currentSrc ? <img src={currentSrc} alt="" style={{ objectFit: cover ? 'cover' : 'contain', objectPosition: 'center' }} onLoad={(event) => { const image = event.currentTarget; setDimensions((current) => ({ ...current, [id]: { width: image.naturalWidth, height: image.naturalHeight } })) }} /> : <div className={styles.emptyPreview}><strong>+</strong><span>Fotografija nije dodata</span></div>}
+                        {currentSrc ? <img src={currentSrc} alt="" style={{ objectFit: cover ? 'cover' : 'contain', objectPosition: 'center' }} onLoad={(event) => { const image = event.currentTarget; setDimensions((current) => ({ ...current, [id]: { width: image.naturalWidth, height: image.naturalHeight } })) }} /> : <div className={styles.emptyPreview}><strong>+</strong><span>Ova pozicija nema sliku</span></div>}
+                        {cover && currentSrc ? <div className={styles.safeZone}><span>VAŽAN MOTIV DRŽI OVDJE</span></div> : null}
                       </div>
-                      <div className={styles.slotCopy}>
-                        <strong>{slot.label}</strong>
+
+                      <div className={styles.qualityDetail}><strong>{quality.detail}</strong><p>{prep.note}</p></div>
+
+                      <div className={styles.fileInfo}>
+                        <span>{pending ? `Izabrano: ${pending.file.name}` : slot.exists ? 'Trenutna live slika' : 'Nedostaje slika'}</span>
                         <code>{slot.fileName}</code>
-                        <small>{pending ? `Nova: ${pending.file.name} · ${pending.width}×${pending.height}px` : slot.exists ? `${size ? `${size.width}×${size.height}px · ` : ''}${slot.size ? `${Math.round(slot.size / 1000)} KB` : 'fajl iz repoa'}${tinyExisting ? ' · PREMALA TEŽINA / provjeri kvalitet' : ''}` : 'JPG, PNG ili WebP → kvalitetni WebP'}</small>
+                        {slot.size && !pending ? <small>{Math.round(slot.size / 1000)} KB u repou</small> : null}
                       </div>
+
                       <div className={styles.slotActions}>
-                        <label className={styles.replaceButton}><input type="file" accept="image/jpeg,image/png,image/webp,.jpg,.jpeg,.png,.webp" onChange={(event) => selectOne(project.key, slot, event.target.files?.[0])} />{slot.exists ? 'Promijeni sliku' : 'Dodaj sliku'}</label>
+                        <label className={styles.replaceButton}><input type="file" accept="image/jpeg,image/png,image/webp,.jpg,.jpeg,.png,.webp" onChange={(event) => selectOne(project.key, slot, event.target.files?.[0])} />{pending ? 'Izaberi drugu' : slot.exists ? 'Promijeni ovu sliku' : 'Dodaj sliku'}</label>
                         {pending ? <button type="button" className={styles.clearButton} onClick={() => clearPending(project.key, slot.key)}>Poništi</button> : null}
                       </div>
                     </article>
@@ -302,7 +368,7 @@ export function Studio83MediaUploader() {
               </div>
 
               <div className={styles.projectFooter}>
-                <span className={styles.status}>{messages[project.key] || (selectedCount ? `${selectedCount} izmjena spremno samo za ovaj projekat.` : 'Nema nesačuvanih izmjena u ovom projektu.')}</span>
+                <span className={styles.status}>{messages[project.key] || (selectedCount ? `${selectedCount} izmjena je samo u previewu. Ništa još nije poslato.` : 'Nema nesačuvanih izmjena u ovom projektu.')}</span>
                 <button type="button" onClick={() => uploadProject(project)} disabled={!selectedCount || busy || !githubConfigured}>{busy ? 'Čuvam projekat…' : `Sačuvaj ovaj projekat${selectedCount ? ` (${selectedCount})` : ''}`}</button>
               </div>
             </section>
