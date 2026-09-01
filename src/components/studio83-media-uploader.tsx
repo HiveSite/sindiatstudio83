@@ -1,71 +1,52 @@
 'use client'
 
 import { useEffect, useMemo, useState } from 'react'
-import type { CSSProperties } from 'react'
 import styles from './studio83-media-uploader.module.css'
 
-type ApiSlot = {
+type Slot = {
   key: string
   label: string
   fileName: string
   exists: boolean
   planned: boolean
   path: string
+  size?: number
   src: string
   previewUrl: string | null
 }
 
-type ApiProject = {
+type Project = {
   key: string
   title: string
   route: string
   folder: string
-  slots: ApiSlot[]
-  existingCount?: number
+  slots: Slot[]
 }
 
-type PendingFile = {
-  file: File
-  preview: string
-}
+type PendingFile = { file: File; preview: string; width: number; height: number }
+type AuthState = 'checking' | 'locked' | 'ready'
 
-type FitMode = 'cover' | 'contain'
-type FrameMode = 'card' | 'wide' | 'portrait' | 'original'
-type PositionMode = 'center' | 'top' | 'bottom' | 'left' | 'right'
+const slotId = (projectKey: string, slotKey: string) => `${projectKey}:${slotKey}`
+const isCoverSlot = (slot: Slot) => /glavni cover/i.test(slot.label)
 
-type PreviewPrefs = {
-  fit: FitMode
-  frame: FrameMode
-  position: PositionMode
-}
-
-type Dimensions = { width: number; height: number }
-
-const defaultPrefs: PreviewPrefs = {
-  fit: 'cover',
-  frame: 'card',
-  position: 'center',
-}
-
-function slotId(projectKey: string, slotKey: string) {
-  return `${projectKey}::${slotKey}`
-}
-
-function defaultFrame(fileName: string): FrameMode {
-  const value = fileName.toLowerCase()
-  if (value.includes('og.')) return 'wide'
-  if (value.includes('mobil') || value.includes('portrait')) return 'portrait'
-  return 'card'
+async function readDimensions(url: string) {
+  return await new Promise<{ width: number; height: number }>((resolve, reject) => {
+    const image = new Image()
+    image.onload = () => resolve({ width: image.naturalWidth, height: image.naturalHeight })
+    image.onerror = () => reject(new Error('Fotografija ne može da se pročita.'))
+    image.src = url
+  })
 }
 
 async function imageToWebp(file: File) {
-  const url = URL.createObjectURL(file)
+  if (!file.type.startsWith('image/')) throw new Error('Izaberi fotografiju.')
+  const objectUrl = URL.createObjectURL(file)
   try {
     const image = await new Promise<HTMLImageElement>((resolve, reject) => {
       const img = new Image()
       img.onload = () => resolve(img)
       img.onerror = () => reject(new Error('Fotografija ne može da se pročita.'))
-      img.src = url
+      img.src = objectUrl
     })
 
     const maxEdge = 1800
@@ -75,73 +56,58 @@ async function imageToWebp(file: File) {
     const canvas = document.createElement('canvas')
     canvas.width = width
     canvas.height = height
-    const context = canvas.getContext('2d', { alpha: false })
-    if (!context) throw new Error('Browser ne podržava obradu slike.')
-    context.drawImage(image, 0, 0, width, height)
+    const ctx = canvas.getContext('2d', { alpha: false })
+    if (!ctx) throw new Error('Browser ne podržava obradu slike.')
+    ctx.drawImage(image, 0, 0, width, height)
 
     let blob: Blob | null = null
-    for (const quality of [0.84, 0.78, 0.72, 0.66, 0.6, 0.54]) {
+    for (const quality of [0.9, 0.86, 0.82, 0.78, 0.74, 0.7, 0.66]) {
       blob = await new Promise<Blob | null>((resolve) => canvas.toBlob(resolve, 'image/webp', quality))
-      if (blob && blob.size <= 450_000) break
+      if (blob && blob.size <= 850_000) break
     }
-    if (!blob) throw new Error('WebP konverzija nije uspjela.')
-    if (blob.size > 500_000) throw new Error('Fotografija je i nakon optimizacije prevelika. Probaj manju originalnu fotografiju.')
+    if (!blob || blob.size > 900_000) throw new Error('Slika je prevelika nakon optimizacije.')
 
     const data = await new Promise<string>((resolve, reject) => {
       const reader = new FileReader()
       reader.onload = () => resolve(String(reader.result))
-      reader.onerror = () => reject(new Error('Fotografija ne može da se pripremi za upload.'))
-      reader.readAsDataURL(blob)
+      reader.onerror = () => reject(new Error('Slika se ne može pripremiti.'))
+      reader.readAsDataURL(blob!)
     })
 
-    return { data, width, height, size: blob.size }
+    return { data, width, height, bytes: blob.size }
   } finally {
-    URL.revokeObjectURL(url)
+    URL.revokeObjectURL(objectUrl)
   }
 }
 
 export function Studio83MediaUploader() {
-  const [authState, setAuthState] = useState<'checking' | 'locked' | 'ready'>('checking')
+  const [authState, setAuthState] = useState<AuthState>('checking')
   const [password, setPassword] = useState('')
   const [loginError, setLoginError] = useState('')
+  const [projects, setProjects] = useState<Project[]>([])
   const [githubConfigured, setGithubConfigured] = useState(false)
-  const [projects, setProjects] = useState<ApiProject[]>([])
   const [catalogError, setCatalogError] = useState('')
   const [files, setFiles] = useState<Record<string, PendingFile>>({})
-  const [prefs, setPrefs] = useState<Record<string, PreviewPrefs>>({})
-  const [dimensions, setDimensions] = useState<Record<string, Dimensions>>({})
-  const [busyProject, setBusyProject] = useState<string | null>(null)
+  const [dimensions, setDimensions] = useState<Record<string, { width: number; height: number }>>({})
   const [messages, setMessages] = useState<Record<string, string>>({})
+  const [busyProject, setBusyProject] = useState<string | null>(null)
   const [showOnlyMissing, setShowOnlyMissing] = useState(false)
 
   const loadCatalog = async () => {
     const response = await fetch('/api/studio83-media', { credentials: 'include', cache: 'no-store' })
     const data = await response.json().catch(() => ({}))
     setGithubConfigured(Boolean(data.githubConfigured))
-    if (!data.authenticated) {
+    if (!response.ok || !data.authenticated) {
       setAuthState('locked')
-      return
+      return false
     }
     setProjects(Array.isArray(data.projects) ? data.projects : [])
-    setCatalogError(data.catalogError || '')
+    setCatalogError(String(data.catalogError || ''))
     setAuthState('ready')
+    return true
   }
 
-  useEffect(() => {
-    loadCatalog().catch(() => setAuthState('locked'))
-  }, [])
-
-  const totalSelected = Object.keys(files).length
-  const totalSlots = projects.reduce((sum, project) => sum + project.slots.length, 0)
-  const totalExisting = projects.reduce((sum, project) => sum + project.slots.filter((slot) => slot.exists).length, 0)
-  const totalMissing = Math.max(0, totalSlots - totalExisting)
-
-  const visibleProjects = useMemo(() => {
-    if (!showOnlyMissing) return projects
-    return projects
-      .map((project) => ({ ...project, slots: project.slots.filter((slot) => !slot.exists) }))
-      .filter((project) => project.slots.length)
-  }, [projects, showOnlyMissing])
+  useEffect(() => { loadCatalog().catch(() => setAuthState('locked')) }, [])
 
   const login = async () => {
     setLoginError('')
@@ -171,19 +137,33 @@ export function Studio83MediaUploader() {
     setProjects([])
   }
 
-  const selectOne = (projectKey: string, slot: ApiSlot, file: File | undefined) => {
-    if (!file || !['image/jpeg', 'image/png'].includes(file.type)) return
-    const id = slotId(projectKey, slot.key)
-    setFiles((current) => {
-      if (current[id]?.preview) URL.revokeObjectURL(current[id].preview)
-      return { ...current, [id]: { file, preview: URL.createObjectURL(file) } }
-    })
-    setMessages((current) => ({ ...current, [projectKey]: '' }))
+  const selectOne = async (projectKey: string, slot: Slot, file?: File) => {
+    if (!file) return
+    if (!file.type.startsWith('image/')) {
+      setMessages((current) => ({ ...current, [projectKey]: 'Izaberi JPG, PNG ili WebP fotografiju.' }))
+      return
+    }
+    const preview = URL.createObjectURL(file)
+    try {
+      const size = await readDimensions(preview)
+      setFiles((current) => {
+        const id = slotId(projectKey, slot.key)
+        if (current[id]?.preview) URL.revokeObjectURL(current[id].preview)
+        return { ...current, [id]: { file, preview, ...size } }
+      })
+      const warning = isCoverSlot(slot) && (size.width < 1200 || size.height < 700)
+        ? ` Cover je ${size.width}×${size.height}px — preporuka je najmanje 1400×900.`
+        : ''
+      setMessages((current) => ({ ...current, [projectKey]: `Slika je samo u previewu.${warning} Klikni “Sačuvaj ovaj projekat” tek kada provjeriš kadar.` }))
+    } catch (error) {
+      URL.revokeObjectURL(preview)
+      setMessages((current) => ({ ...current, [projectKey]: error instanceof Error ? error.message : 'Slika se ne može pripremiti.' }))
+    }
   }
 
   const clearPending = (projectKey: string, slotKey: string) => {
-    const id = slotId(projectKey, slotKey)
     setFiles((current) => {
+      const id = slotId(projectKey, slotKey)
       if (current[id]?.preview) URL.revokeObjectURL(current[id].preview)
       const next = { ...current }
       delete next[id]
@@ -191,65 +171,18 @@ export function Studio83MediaUploader() {
     })
   }
 
-  const getPrefs = (projectKey: string, slot: ApiSlot): PreviewPrefs => {
-    const id = slotId(projectKey, slot.key)
-    return prefs[id] || { ...defaultPrefs, frame: defaultFrame(slot.fileName) }
-  }
-
-  const updatePrefs = (projectKey: string, slot: ApiSlot, patch: Partial<PreviewPrefs>) => {
-    const id = slotId(projectKey, slot.key)
-    setPrefs((current) => ({ ...current, [id]: { ...getPrefs(projectKey, slot), ...patch } }))
-  }
-
-  const previewStyle = (projectKey: string, slot: ApiSlot): CSSProperties => {
-    const id = slotId(projectKey, slot.key)
-    const current = getPrefs(projectKey, slot)
-    const size = dimensions[id]
-    const aspect = current.frame === 'wide'
-      ? '16 / 9'
-      : current.frame === 'portrait'
-        ? '4 / 5'
-        : current.frame === 'original' && size
-          ? `${size.width} / ${size.height}`
-          : '4 / 3'
-    return { aspectRatio: aspect }
-  }
-
-  const imageStyle = (projectKey: string, slot: ApiSlot): CSSProperties => {
-    const current = getPrefs(projectKey, slot)
-    const positions: Record<PositionMode, string> = {
-      center: 'center',
-      top: 'center top',
-      bottom: 'center bottom',
-      left: 'left center',
-      right: 'right center',
-    }
-    return { objectFit: current.fit, objectPosition: positions[current.position] }
-  }
-
-  const uploadProject = async (project: ApiProject) => {
+  const uploadProject = async (project: Project) => {
     const selected = project.slots.filter((slot) => files[slotId(project.key, slot.key)])
-    if (!selected.length) {
-      setMessages((current) => ({ ...current, [project.key]: 'Izaberi makar jednu fotografiju u ovom projektu.' }))
-      return
-    }
-    if (selected.length > 8) {
-      setMessages((current) => ({ ...current, [project.key]: 'Sačuvaj najviše 8 izmjena odjednom, pa zatim ostatak.' }))
-      return
-    }
-
+    if (!selected.length) return
     setBusyProject(project.key)
-    setMessages((current) => ({ ...current, [project.key]: 'Konvertujem odabrane fotografije u WebP…' }))
-
+    setMessages((current) => ({ ...current, [project.key]: 'Optimizujem fotografije i upisujem ih u repo…' }))
     try {
       const payloadFiles = []
       for (const slot of selected) {
         const pending = files[slotId(project.key, slot.key)]
-        const converted = await imageToWebp(pending.file)
-        payloadFiles.push({ fileName: slot.fileName, data: converted.data })
+        const prepared = await imageToWebp(pending.file)
+        payloadFiles.push({ fileName: slot.fileName, data: prepared.data })
       }
-
-      setMessages((current) => ({ ...current, [project.key]: 'Upisujem samo ovaj projekat u GitHub repo…' }))
       const response = await fetch('/api/studio83-media', {
         method: 'POST',
         credentials: 'include',
@@ -268,24 +201,21 @@ export function Studio83MediaUploader() {
         }
         return next
       })
-      setMessages((current) => ({
-        ...current,
-        [project.key]: `Sačuvano ${payloadFiles.length} izmjena. Commit ${String(data.commit || '').slice(0, 7)}.`,
-      }))
+      setMessages((current) => ({ ...current, [project.key]: `Sačuvano ${payloadFiles.length} izmjena. Commit ${String(data.commit || '').slice(0, 7)}.` }))
       await loadCatalog()
     } catch (error) {
-      setMessages((current) => ({
-        ...current,
-        [project.key]: error instanceof Error ? error.message : 'Upload nije uspio.',
-      }))
+      setMessages((current) => ({ ...current, [project.key]: error instanceof Error ? error.message : 'Upload nije uspio.' }))
     } finally {
       setBusyProject(null)
     }
   }
 
-  if (authState === 'checking') {
-    return <main className={styles.shell}><div className={styles.centerCard}>Učitavam media biblioteku…</div></main>
-  }
+  const totalExisting = useMemo(() => projects.reduce((sum, project) => sum + project.slots.filter((slot) => slot.exists).length, 0), [projects])
+  const totalMissing = useMemo(() => projects.reduce((sum, project) => sum + project.slots.filter((slot) => !slot.exists).length, 0), [projects])
+  const totalSelected = Object.keys(files).length
+  const visibleProjects = showOnlyMissing ? projects.filter((project) => project.slots.some((slot) => !slot.exists)) : projects
+
+  if (authState === 'checking') return <main className={styles.shell}><div className={styles.centerCard}>Učitavam media biblioteku…</div></main>
 
   if (authState === 'locked') {
     return (
@@ -293,11 +223,8 @@ export function Studio83MediaUploader() {
         <section className={styles.loginCard}>
           <span className={styles.kicker}>Studio83 / private</span>
           <h1>Media manager</h1>
-          <p>Kompletna biblioteka fotografija i screenshotova po projektu, sa pregledom fita i direktnom zamjenom fajlova.</p>
-          <label>
-            <span>Lozinka</span>
-            <input type="password" value={password} onChange={(event) => setPassword(event.target.value)} onKeyDown={(event) => event.key === 'Enter' && login()} autoComplete="current-password" />
-          </label>
+          <p>Kompletna biblioteka fotografija i screenshotova po projektu, sa stvarnim statusom svakog očekivanog fajla.</p>
+          <label><span>Lozinka</span><input type="password" value={password} onChange={(event) => setPassword(event.target.value)} onKeyDown={(event) => event.key === 'Enter' && login()} autoComplete="current-password" /></label>
           {loginError ? <div className={styles.error}>{loginError}</div> : null}
           <button type="button" onClick={login} disabled={!password}>Uđi u media manager</button>
         </section>
@@ -311,30 +238,22 @@ export function Studio83MediaUploader() {
         <div>
           <span className={styles.kicker}>Studio83 / media admin</span>
           <h1>Media biblioteka</h1>
-          <p>Vidiš sve slike svih portfolio projekata. Postojeće možeš zamijeniti, prazne slotove dopuniti, a fit provjeriti prije uploadovanja.</p>
+          <p>Sada vidiš unaprijed definisane pozicije za svih 9 portfolio projekata. Cover koristi <b>cover/crop</b>; galerijske fotografije i screenshotovi koriste <b>contain</b>. Nema više kontrola koje mijenjaju samo preview, a ne live sajt.</p>
         </div>
         <div className={styles.topActions}>
-          <button type="button" className={styles.ghostButton} onClick={() => setShowOnlyMissing((value) => !value)}>
-            {showOnlyMissing ? 'Prikaži sve' : `Samo nedostaju (${totalMissing})`}
-          </button>
+          <button type="button" className={styles.ghostButton} onClick={() => setShowOnlyMissing((value) => !value)}>{showOnlyMissing ? 'Prikaži sve' : `Samo nedostaju (${totalMissing})`}</button>
           <button type="button" className={styles.ghostButton} onClick={logout}>Odjava</button>
         </div>
       </div>
 
       <div className={styles.summaryBar}>
         <span><strong>{projects.length}</strong> projekata</span>
-        <span><strong>{totalExisting}</strong> postojeće</span>
+        <span><strong>{totalExisting}</strong> postoji</span>
         <span><strong>{totalMissing}</strong> nedostaje</span>
         <span><strong>{totalSelected}</strong> spremno za izmjenu</span>
       </div>
 
-      {!githubConfigured ? (
-        <div className={styles.warning}>
-          <strong>Pregled radi, ali čuvanje je zaključano.</strong>
-          <span>Dodaj <code>STUDIO83_GITHUB_TOKEN</code> u Netlify da bi dugmad “Sačuvaj ovaj projekat” mogla pisati u repo. Sve postojeće slike i fit možeš pregledati i bez tokena.</span>
-        </div>
-      ) : null}
-
+      {!githubConfigured ? <div className={styles.warning}><strong>Pregled radi, ali čuvanje je zaključano.</strong><span>Nedostaje GitHub write token na Netlify projektu.</span></div> : null}
       {catalogError ? <div className={styles.warning}><strong>Katalog nije potpuno učitan.</strong><span>{catalogError}</span></div> : null}
 
       <div className={styles.projectList}>
@@ -343,96 +262,38 @@ export function Studio83MediaUploader() {
           const existingCount = project.slots.filter((slot) => slot.exists).length
           const missingCount = project.slots.length - existingCount
           const busy = busyProject === project.key
-
           return (
             <section className={styles.projectCard} key={project.key}>
               <div className={styles.projectHeader}>
-                <div>
-                  <span className={styles.projectIndex}>{String(projectIndex + 1).padStart(2, '0')}</span>
-                  <h2>{project.title}</h2>
-                  <a href={project.route} target="_blank" rel="noreferrer">{project.route}</a>
-                </div>
-                <div className={styles.projectCounts}>
-                  <span>{existingCount} ima</span>
-                  {missingCount ? <span className={styles.missingCount}>{missingCount} fali</span> : <span>kompletno</span>}
-                </div>
+                <div><span className={styles.projectIndex}>{String(projectIndex + 1).padStart(2, '0')}</span><h2>{project.title}</h2><a href={project.route} target="_blank" rel="noreferrer">{project.route}</a></div>
+                <div className={styles.projectCounts}><span>{existingCount} ima</span>{missingCount ? <span className={styles.missingCount}>{missingCount} fali</span> : <span>kompletno</span>}</div>
               </div>
-
               <div className={styles.folder}>{project.folder}/</div>
 
               <div className={styles.slotGrid}>
                 {project.slots.map((slot) => {
                   const id = slotId(project.key, slot.key)
                   const pending = files[id]
-                  const currentPrefs = getPrefs(project.key, slot)
                   const currentSrc = pending?.preview || (slot.exists ? (slot.previewUrl || slot.src) : '')
-                  const size = dimensions[id]
-
+                  const size = pending ? { width: pending.width, height: pending.height } : dimensions[id]
+                  const cover = isCoverSlot(slot)
+                  const tinyExisting = Boolean(slot.exists && slot.size && slot.size < 20_000)
                   return (
                     <article className={`${styles.slot}${!slot.exists ? ` ${styles.slotMissing}` : ''}`} key={slot.key}>
                       <div className={styles.slotTopline}>
-                        <span className={`${styles.stateBadge}${slot.exists ? ` ${styles.stateExisting}` : ` ${styles.stateMissing}`}`}>
-                          {pending ? 'IZMJENA' : slot.exists ? 'IMA' : 'NEDOSTAJE'}
-                        </span>
-                        {size ? <small>{size.width}×{size.height}</small> : null}
+                        <span className={`${styles.stateBadge}${slot.exists ? ` ${styles.stateExisting}` : ` ${styles.stateMissing}`}`}>{pending ? 'IZMJENA' : slot.exists ? 'IMA' : 'NEDOSTAJE'}</span>
+                        <small>{cover ? 'LIVE: COVER / CROP' : 'LIVE: CONTAIN / BEZ CROPA'}</small>
                       </div>
-
-                      <div className={styles.slotPreview} style={previewStyle(project.key, slot)}>
-                        {currentSrc ? (
-                          <img
-                            src={currentSrc}
-                            alt=""
-                            style={imageStyle(project.key, slot)}
-                            onLoad={(event) => {
-                              const image = event.currentTarget
-                              setDimensions((current) => ({ ...current, [id]: { width: image.naturalWidth, height: image.naturalHeight } }))
-                            }}
-                          />
-                        ) : (
-                          <div className={styles.emptyPreview}><strong>+</strong><span>Fotografija nije dodata</span></div>
-                        )}
+                      <div className={styles.slotPreview} style={{ aspectRatio: cover ? '3 / 2' : '4 / 3' }}>
+                        {currentSrc ? <img src={currentSrc} alt="" style={{ objectFit: cover ? 'cover' : 'contain', objectPosition: 'center' }} onLoad={(event) => { const image = event.currentTarget; setDimensions((current) => ({ ...current, [id]: { width: image.naturalWidth, height: image.naturalHeight } })) }} /> : <div className={styles.emptyPreview}><strong>+</strong><span>Fotografija nije dodata</span></div>}
                       </div>
-
-                      <div className={styles.fitControls}>
-                        <label>
-                          <span>Frame</span>
-                          <select value={currentPrefs.frame} onChange={(event) => updatePrefs(project.key, slot, { frame: event.target.value as FrameMode })}>
-                            <option value="card">Kartica 4:3</option>
-                            <option value="wide">Wide 16:9</option>
-                            <option value="portrait">Portret 4:5</option>
-                            <option value="original">Original</option>
-                          </select>
-                        </label>
-                        <label>
-                          <span>Fit</span>
-                          <select value={currentPrefs.fit} onChange={(event) => updatePrefs(project.key, slot, { fit: event.target.value as FitMode })}>
-                            <option value="cover">Cover</option>
-                            <option value="contain">Cijela slika</option>
-                          </select>
-                        </label>
-                        <label>
-                          <span>Pozicija</span>
-                          <select value={currentPrefs.position} onChange={(event) => updatePrefs(project.key, slot, { position: event.target.value as PositionMode })}>
-                            <option value="center">Centar</option>
-                            <option value="top">Gore</option>
-                            <option value="bottom">Dolje</option>
-                            <option value="left">Lijevo</option>
-                            <option value="right">Desno</option>
-                          </select>
-                        </label>
-                      </div>
-
                       <div className={styles.slotCopy}>
                         <strong>{slot.label}</strong>
                         <code>{slot.fileName}</code>
-                        <small>{pending ? `Nova: ${pending.file.name}` : slot.exists ? 'Trenutni fajl iz repoa' : 'JPG, JPEG ili PNG → WebP'}</small>
+                        <small>{pending ? `Nova: ${pending.file.name} · ${pending.width}×${pending.height}px` : slot.exists ? `${size ? `${size.width}×${size.height}px · ` : ''}${slot.size ? `${Math.round(slot.size / 1000)} KB` : 'fajl iz repoa'}${tinyExisting ? ' · PREMALA TEŽINA / provjeri kvalitet' : ''}` : 'JPG, PNG ili WebP → kvalitetni WebP'}</small>
                       </div>
-
                       <div className={styles.slotActions}>
-                        <label className={styles.replaceButton}>
-                          <input type="file" accept="image/jpeg,image/png,.jpg,.jpeg,.png" onChange={(event) => selectOne(project.key, slot, event.target.files?.[0])} />
-                          {slot.exists ? 'Promijeni sliku' : 'Dodaj sliku'}
-                        </label>
+                        <label className={styles.replaceButton}><input type="file" accept="image/jpeg,image/png,image/webp,.jpg,.jpeg,.png,.webp" onChange={(event) => selectOne(project.key, slot, event.target.files?.[0])} />{slot.exists ? 'Promijeni sliku' : 'Dodaj sliku'}</label>
                         {pending ? <button type="button" className={styles.clearButton} onClick={() => clearPending(project.key, slot.key)}>Poništi</button> : null}
                       </div>
                     </article>
@@ -442,9 +303,7 @@ export function Studio83MediaUploader() {
 
               <div className={styles.projectFooter}>
                 <span className={styles.status}>{messages[project.key] || (selectedCount ? `${selectedCount} izmjena spremno samo za ovaj projekat.` : 'Nema nesačuvanih izmjena u ovom projektu.')}</span>
-                <button type="button" onClick={() => uploadProject(project)} disabled={!selectedCount || busy || !githubConfigured}>
-                  {busy ? 'Čuvam projekat…' : `Sačuvaj ovaj projekat${selectedCount ? ` (${selectedCount})` : ''}`}
-                </button>
+                <button type="button" onClick={() => uploadProject(project)} disabled={!selectedCount || busy || !githubConfigured}>{busy ? 'Čuvam projekat…' : `Sačuvaj ovaj projekat${selectedCount ? ` (${selectedCount})` : ''}`}</button>
               </div>
             </section>
           )
