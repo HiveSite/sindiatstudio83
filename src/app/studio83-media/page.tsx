@@ -1,5 +1,4 @@
 import type { Metadata } from 'next'
-import { Studio83MediaControls } from '@/components/studio83-media-controls'
 import { Studio83MediaUploader } from '@/components/studio83-media-uploader'
 
 export const metadata: Metadata = {
@@ -18,10 +17,5 @@ export const metadata: Metadata = {
 }
 
 export default function Studio83MediaPage() {
-  return (
-    <>
-      <Studio83MediaControls />
-      <Studio83MediaUploader />
-    </>
-  )
+  return <Studio83MediaUploader />
 }
