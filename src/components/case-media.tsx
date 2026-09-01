@@ -5,10 +5,13 @@ import type { CSSProperties } from 'react'
 import type { CaseStudy, CaseStudyImage, CaseStudyMedia } from '@/types/content'
 import styles from './case-media.module.css'
 
+const MIN_LARGE_COVER_WIDTH = 1200
+const MIN_LARGE_COVER_HEIGHT = 675
+
 const coverImageOverrides: Record<string, CaseStudyImage> = {
   'imaposla-digitalni-proizvod': {
-    src: '/images/cases/imaposla/imaposla-firme-poslodavci.webp',
-    alt: 'ImaPosla.me prikaz radnika, firmi i profila na platformi za poslove u Crnoj Gori',
+    src: '/images/cases/imaposla/imaposla-me-platforma-poslovi-crna-gora-cover.webp',
+    alt: 'ImaPosla.me prikaz platforme za poslove, angažmane, firme i usluge u Crnoj Gori',
     width: 360,
     height: 260,
     position: 'center',
@@ -248,7 +251,10 @@ function MediaFigure({
 export function CaseCoverPlaceholder({ item, large = false }: { item: CaseStudy; large?: boolean }) {
   const candidate = item.coverImage || coverImageOverrides[item.slug]
   const [failedSrc, setFailedSrc] = useState<string | null>(null)
-  const image = candidate && candidate.src !== failedSrc ? candidate : undefined
+  const availableImage = candidate && candidate.src !== failedSrc ? candidate : undefined
+  const image = large && availableImage && (
+    availableImage.width < MIN_LARGE_COVER_WIDTH || availableImage.height < MIN_LARGE_COVER_HEIGHT
+  ) ? undefined : availableImage
   const showOverlay = !image || !large
 
   return (
