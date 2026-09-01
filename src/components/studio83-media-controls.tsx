@@ -10,7 +10,7 @@ type Project = {
   title: string
   route: string
   folder: string
-  thumbnail: { fileName: string; path: string; exists: boolean; src: string | null }
+  thumbnail: { fileName: string; path: string; exists: boolean; src: string | null; canonical?: boolean }
   gallery: GalleryImage[]
   customSlots: CustomSlot[]
 }
@@ -44,9 +44,9 @@ async function imageToWebp(file: File) {
     if (!context) throw new Error('Browser ne podržava obradu slike.')
     context.drawImage(image, 0, 0, width, height)
     let blob: Blob | null = null
-    for (const quality of [0.84, 0.78, 0.72, 0.66, 0.6]) {
+    for (const quality of [0.9, 0.86, 0.82, 0.78, 0.74, 0.7]) {
       blob = await new Promise<Blob | null>((resolve) => canvas.toBlob(resolve, 'image/webp', quality))
-      if (blob && blob.size <= 820_000) break
+      if (blob && blob.size <= 850_000) break
     }
     if (!blob || blob.size > 900_000) throw new Error('Slika je prevelika nakon optimizacije.')
     return await new Promise<string>((resolve, reject) => {
@@ -78,11 +78,12 @@ async function prepareDraft(file: File): Promise<DraftImage> {
 }
 
 function thumbnailAdvice(draft?: DraftImage) {
-  if (!draft) return 'Izaberi sliku i ovdje ćeš prije čuvanja vidjeti tačan odnos slike i ograničene kartice.'
+  if (!draft) return 'Cover sada čita isti fajl koji koristi live /radovi/ kartica. Za oštar prikaz ciljaj najmanje 1400 × 900 px.'
   const ratio = draft.width / draft.height
-  if (ratio < 0.9) return 'Portretna slika će se prikazati cijela, ali će u desktop kartici ostati više praznog prostora sa strane.'
-  if (ratio > 2) return 'Vrlo široka slika će se prikazati cijela, ali će u kartici ostati više praznog prostora iznad i ispod.'
-  return 'Odnos stranica je dobar za thumbnail karticu. Slika ostaje cijela - bez cropa.'
+  if (draft.width < 1200 || draft.height < 700) return 'PREMALA REZOLUCIJA: cover će vjerovatno biti mekan. Preporuka je najmanje 1400 × 900 px.'
+  if (ratio < 1.25) return 'Portretna ili skoro kvadratna slika će biti dosta cropovana u desktop coveru. Bolji je landscape kadar.'
+  if (ratio > 2) return 'Vrlo široka slika će biti cropovana po bokovima ili visini, zavisno od kartice. Idealno je oko 3:2.'
+  return 'Dobar format za cover. Kartica koristi cover/crop da uvijek bude popunjena i oštra.'
 }
 
 function aspectRatio(aspect: string) {
@@ -165,7 +166,7 @@ export function Studio83MediaControls() {
         if (current[project.key]?.preview) URL.revokeObjectURL(current[project.key].preview)
         return { ...current, [project.key]: draft }
       })
-      setMessage((current) => ({ ...current, [project.key]: 'Nova thumbnail slika je samo u previewu. Provjeri desktop/mobile prikaz pa klikni Sačuvaj thumbnail.' }))
+      setMessage((current) => ({ ...current, [project.key]: 'Novi cover je samo u previewu. Provjeri desktop/mobile crop pa klikni Sačuvaj cover.' }))
     } catch (error) {
       setMessage((current) => ({ ...current, [project.key]: error instanceof Error ? error.message : 'Slika se ne može pripremiti.' }))
     }
@@ -184,10 +185,10 @@ export function Studio83MediaControls() {
     const draft = thumbnailDrafts[project.key]
     if (!draft) return
     setBusy(project.key)
-    setMessage((current) => ({ ...current, [project.key]: 'Optimizujem thumbnail u WebP…' }))
+    setMessage((current) => ({ ...current, [project.key]: 'Optimizujem cover u kvalitetni WebP…' }))
     try {
       const data = await imageToWebp(draft.file)
-      const ok = await act(project, { action: 'upload-thumbnail', data }, 'Thumbnail je sačuvan. Netlify će povući novi commit.')
+      const ok = await act(project, { action: 'upload-thumbnail', data }, 'Cover je sačuvan u stvarni fajl koji koristi live portfolio.')
       if (ok) clearThumbnailDraft(project.key)
     } catch (error) {
       setMessage((current) => ({ ...current, [project.key]: error instanceof Error ? error.message : 'Upload nije uspio.' }))
@@ -253,8 +254,8 @@ export function Studio83MediaControls() {
       <div className={styles.header}>
         <div>
           <span>Studio83 / pozicije i preview</span>
-          <h2>Thumbnail i ograničene media pozicije</h2>
-          <p>Svaka pozicija sada kaže gdje se slika koristi, kako je sajt stvarno prikazuje i da li je okvir ograničen. Izbor fajla više ništa ne uploaduje odmah - prvo vidiš preview, pa tek onda čuvaš.</p>
+          <h2>Coveri i ograničene media pozicije</h2>
+          <p>Cover za svaki projekat sada je isti stvarni fajl koji koristi live portfolio. Nema više odvojenog „thumbnail” fajla koji admin vidi kao prazan dok sajt koristi nešto drugo.</p>
         </div>
         <strong className={githubConfigured ? styles.ok : styles.warn}>{githubConfigured ? 'GitHub write: OK' : 'GitHub write nije aktivan'}</strong>
       </div>
@@ -276,23 +277,23 @@ export function Studio83MediaControls() {
               <div className={styles.thumbnailBlock}>
                 <div className={styles.positionHeader}>
                   <div>
-                    <span className={styles.restrictedBadge}>OGRANIČENA POZICIJA</span>
-                    <strong>Thumbnail / cover kartice projekta</strong>
-                    <p>Lokacija: kartice na <b>/radovi/</b> i povezane case-study kartice. Ovo nije galerijska fotografija.</p>
+                    <span className={styles.restrictedBadge}>GLAVNI COVER</span>
+                    <strong>Cover kartice projekta</strong>
+                    <p>Lokacija: <b>/radovi/</b>, homepage portfolio i povezane case-study kartice. Ovo je obavezna pozicija i može se zamijeniti, ne brisati.</p>
                   </div>
                   <div className={styles.rulePills}>
-                    <span>FIT: contain</span>
-                    <span>CROP: nema</span>
+                    <span>FIT: cover</span>
+                    <span>CROP: da</span>
                     <span>FOKUS: centar</span>
-                    <span>DESKTOP: min 440px</span>
-                    <span>MOBILE: min 280px</span>
+                    <span>MIN: 1400 × 900</span>
+                    <span>WEBP: do 900 KB</span>
                   </div>
                 </div>
 
                 <div className={styles.previewToolbar}>
                   <div>
                     <strong>Preview stvarne kartice</strong>
-                    <small>Slika se prikazuje cijela kao na sajtu. Prazan prostor koji vidiš ovdje vidjeće se i na kartici.</small>
+                    <small>Cover popunjava cijeli media okvir. Desktop i mobile mogu odsjeći različit dio fotografije.</small>
                   </div>
                   <div className={styles.previewSwitch}>
                     <button type="button" className={mode === 'desktop' ? styles.activePreview : ''} onClick={() => setPreviewMode((current) => ({ ...current, [project.key]: 'desktop' }))}>Desktop</button>
@@ -302,7 +303,7 @@ export function Studio83MediaControls() {
 
                 <div className={`${styles.siteCardPreview}${mode === 'mobile' ? ` ${styles.siteCardPreviewMobile}` : ''}`}>
                   <div className={styles.siteCardVisual}>
-                    {thumbSrc ? <img src={thumbSrc} alt="" /> : <span className={styles.noImage}>Nema thumbnaila</span>}
+                    {thumbSrc ? <img src={thumbSrc} alt="" /> : <span className={styles.noImage}>COVER NEDOSTAJE</span>}
                     <span className={styles.siteCardShade} aria-hidden="true" />
                     <div className={styles.siteCardOverlay}>
                       <span>CASE STUDY</span>
@@ -313,14 +314,14 @@ export function Studio83MediaControls() {
                   <div className={styles.siteCardCopyMock}>
                     <span>RADOVI</span>
                     <h4>{project.title}</h4>
-                    <p>Ovako thumbnail sjeda uz tekst kartice i ograničeni media okvir.</p>
+                    <p>Ovako cover sjeda uz tekst kartice i ograničeni media okvir.</p>
                     <b>Pogledaj projekat ↗</b>
                   </div>
                 </div>
 
                 <div className={styles.thumbnailInfo}>
                   <div>
-                    <strong>{thumbDraft ? 'Nova slika - još nije sačuvana' : project.thumbnail.exists ? 'Trenutni thumbnail' : 'Thumbnail nedostaje'}</strong>
+                    <strong>{thumbDraft ? 'Novi cover - još nije sačuvan' : project.thumbnail.exists ? 'Trenutni live cover' : 'COVER NEDOSTAJE'}</strong>
                     <code>{project.thumbnail.fileName}</code>
                     {thumbDraft ? <small>{thumbDraft.width} × {thumbDraft.height}px · {thumbDraft.file.name}</small> : null}
                   </div>
@@ -328,11 +329,9 @@ export function Studio83MediaControls() {
                 </div>
 
                 <div className={styles.actions}>
-                  <label><input type="file" accept="image/jpeg,image/png,image/webp,.jpg,.jpeg,.png,.webp" onChange={(event) => stageThumbnail(project, event.target.files?.[0])} />{thumbDraft ? 'Izaberi drugu sliku' : project.thumbnail.exists ? 'Promijeni thumbnail' : 'Dodaj thumbnail'}</label>
-                  {thumbDraft ? <button type="button" className={styles.save} disabled={thumbBusy || !githubConfigured} onClick={() => saveThumbnail(project)}>Sačuvaj thumbnail</button> : null}
+                  <label><input type="file" accept="image/jpeg,image/png,image/webp,.jpg,.jpeg,.png,.webp" onChange={(event) => stageThumbnail(project, event.target.files?.[0])} />{thumbDraft ? 'Izaberi drugi cover' : project.thumbnail.exists ? 'Promijeni cover' : 'Dodaj cover'}</label>
+                  {thumbDraft ? <button type="button" className={styles.save} disabled={thumbBusy || !githubConfigured} onClick={() => saveThumbnail(project)}>Sačuvaj cover</button> : null}
                   {thumbDraft ? <button type="button" onClick={() => clearThumbnailDraft(project.key)}>Poništi preview</button> : null}
-                  {!thumbDraft && project.thumbnail.exists ? <button type="button" className={confirm === `${project.key}:thumb` ? styles.confirm : styles.danger} onClick={() => confirmAction(`${project.key}:thumb`, () => act(project, { action: 'delete-thumbnail' }, 'Thumbnail je uklonjen.'))}>{confirm === `${project.key}:thumb` ? 'Potvrdi brisanje' : 'Ukloni thumbnail'}</button> : null}
-                  {confirm === `${project.key}:thumb` ? <button type="button" onClick={() => setConfirm(null)}>Odustani</button> : null}
                 </div>
               </div>
 
@@ -354,7 +353,7 @@ export function Studio83MediaControls() {
               </div> : null}
 
               <div className={styles.newSlot}>
-                <div><strong>+ Nova galerijska pozicija</strong><p>Pozicija ide u detalj projekta. Aspect je organizaciona oznaka, a sama fotografija se na sajtu prikazuje cijela - bez cropa.</p></div>
+                <div><strong>+ Nova galerijska pozicija</strong><p>Pozicija ide u detalj projekta. Fotografija se na sajtu prikazuje cijela, bez cropa.</p></div>
                 <input value={theme[project.key] || ''} onChange={(event) => setTheme((current) => ({ ...current, [project.key]: event.target.value }))} placeholder="Tema / naziv pozicije" maxLength={90} />
                 <select value={aspect[project.key] || 'landscape'} onChange={(event) => setAspect((current) => ({ ...current, [project.key]: event.target.value }))}><option value="landscape">Landscape</option><option value="wide">Wide</option><option value="portrait">Portrait</option><option value="square">Square</option></select>
                 <button type="button" disabled={busy === project.key || !githubConfigured} onClick={async () => {
