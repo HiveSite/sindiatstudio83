@@ -20,8 +20,8 @@ export const metadata: Metadata = {
 export default function Studio83MediaPage() {
   return (
     <>
-      <Studio83MediaUploader />
       <Studio83MediaControls />
+      <Studio83MediaUploader />
     </>
   )
 }
