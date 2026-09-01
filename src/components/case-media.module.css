@@ -11,14 +11,15 @@
   height: 100%;
   max-width: 100%;
   max-height: 100%;
-  object-fit: contain;
+  object-fit: cover;
   object-position: center;
-  opacity: 0.78;
-  filter: saturate(0.96) brightness(0.88);
+  opacity: 1;
+  filter: none;
   transform: none;
 }
 
 .fullCoverImage {
+  position: relative;
   width: 100%;
   height: 100%;
   max-width: 100%;
@@ -28,6 +29,7 @@
   opacity: 1;
   filter: none;
   transform: none;
+  background: #0b0b10;
 }
 
 .coverShade {
@@ -36,31 +38,49 @@
   z-index: 1;
   pointer-events: none;
   background:
-    linear-gradient(90deg, rgba(5, 5, 8, 0.78) 0%, rgba(5, 5, 8, 0.54) 44%, rgba(5, 5, 8, 0.26) 100%),
-    linear-gradient(0deg, rgba(5, 5, 8, 0.62) 0%, rgba(5, 5, 8, 0.12) 70%, transparent 100%);
+    linear-gradient(90deg, rgba(5, 5, 8, 0.36) 0%, rgba(5, 5, 8, 0.14) 52%, rgba(5, 5, 8, 0.04) 100%),
+    linear-gradient(0deg, rgba(5, 5, 8, 0.34) 0%, rgba(5, 5, 8, 0.04) 68%, transparent 100%);
 }
 
 .coverWithImage :global(.case-cover-copy) {
   position: relative;
   z-index: 3;
-  width: 100%;
+  width: min(92%, 460px);
   min-width: 0;
+  padding: 16px 18px 17px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 17px;
+  background: rgba(7, 7, 10, 0.78);
+  box-shadow: 0 16px 46px rgba(0, 0, 0, 0.38);
+  backdrop-filter: blur(12px) saturate(1.08);
+  -webkit-backdrop-filter: blur(12px) saturate(1.08);
+  color: #fff;
 }
 
 .coverWithImage :global(.case-cover-copy > span),
-.coverWithImage :global(.case-cover-copy > small) {
+.coverWithImage :global(.case-cover-copy > small),
+.coverWithImage :global(.case-cover-copy > strong) {
+  color: #fff;
   max-width: 100%;
   white-space: normal;
   overflow-wrap: anywhere;
 }
 
+.coverWithImage :global(.case-cover-copy > span) {
+  opacity: 0.82;
+}
+
+.coverWithImage :global(.case-cover-copy > small) {
+  opacity: 0.9;
+}
+
 .coverWithImage :global(.case-cover-copy > strong) {
-  text-shadow: 0 12px 48px rgba(0, 0, 0, 0.78);
+  text-shadow: none;
 }
 
 .coverWithImage :global(.case-orbit) {
   z-index: 2;
-  opacity: 0.92;
+  opacity: 0.72;
 }
 
 .mediaItem {
@@ -141,8 +161,14 @@
 @media (max-width: 760px) {
   .coverShade {
     background:
-      linear-gradient(90deg, rgba(5, 5, 8, 0.74) 0%, rgba(5, 5, 8, 0.48) 62%, rgba(5, 5, 8, 0.18) 100%),
-      linear-gradient(0deg, rgba(5, 5, 8, 0.58) 0%, rgba(5, 5, 8, 0.1) 72%, transparent 100%);
+      linear-gradient(90deg, rgba(5, 5, 8, 0.28) 0%, rgba(5, 5, 8, 0.1) 62%, rgba(5, 5, 8, 0.02) 100%),
+      linear-gradient(0deg, rgba(5, 5, 8, 0.28) 0%, rgba(5, 5, 8, 0.04) 72%, transparent 100%);
+  }
+
+  .coverWithImage :global(.case-cover-copy) {
+    width: min(96%, 420px);
+    padding: 14px 15px 15px;
+    border-radius: 15px;
   }
 
   .mediaItem {
