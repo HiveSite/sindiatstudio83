@@ -3,17 +3,19 @@ const MEDIA_PASSWORD = 'studio83media2026!'
 const MANIFEST_PATH = 'src/data/studio83-media-manifest.json'
 const MAX_FILE_BYTES = 900_000
 
+// IMPORTANT: coverFile is the file the live portfolio actually uses.
+// The media admin and the public site must point at the same source.
 const PROJECTS = [
-  ['imaposla','imaposla-digitalni-proizvod','ImaPosla.me','/radovi/imaposla-digitalni-proizvod/','public/images/cases/imaposla','imaposla-thumbnail.webp'],
-  ['battlebots-arena','battlebots-arena','BattleBots Arena','/radovi/battlebots-arena/','public/images/cases/battlebots-arena','battlebots-thumbnail.webp'],
-  ['promo-timovi','sistem-za-terenske-angazmane','Promo timovi i terenski angažmani','/radovi/sistem-za-terenske-angazmane/','public/images/cases/promo-timovi','thumbnail.webp'],
-  ['regulisane-aktivacije','aktivacije-regulisanih-brendova','Promocije brendova pića','/radovi/aktivacije-regulisanih-brendova/','public/images/cases/regulisane-aktivacije','thumbnail.webp'],
-  ['dogadjaji','privatni-i-korporativni-dogadjaji','Privatni i korporativni događaji','/radovi/privatni-i-korporativni-dogadjaji/','public/images/cases/dogadjaji','thumbnail.webp'],
-  ['student-connect','student-connect-mini-festival','Student Connect','/radovi/student-connect-mini-festival/','public/images/cases/student-connect','thumbnail.webp'],
-  ['podgoricki-pazar','kucica-na-podgorickom-pazaru','Kućica na Podgoričkom pazaru','/radovi/kucica-na-podgorickom-pazaru/','public/images/cases/podgoricki-pazar','thumbnail.webp'],
-  ['mini-sajtovi','mini-sajtovi-i-digitalni-alati','Mini-sajtovi i digitalni alati','/radovi/mini-sajtovi-i-digitalni-alati/','public/images/cases/mini-sajtovi-i-digitalni-alati','mini-sajtovi-thumbnail.webp'],
-  ['hive-agency','hive-agency-platforma','Hive Agency platforma','/radovi/hive-agency-platforma/','public/images/cases/hive-agency','hive-thumbnail.webp'],
-].map(([key,caseSlug,title,route,folder,thumbnail]) => ({ key,caseSlug,title,route,folder,thumbnail }))
+  ['imaposla','imaposla-digitalni-proizvod','ImaPosla.me','/radovi/imaposla-digitalni-proizvod/','public/images/cases/imaposla','imaposla-me-platforma-poslovi-crna-gora-cover.webp'],
+  ['battlebots-arena','battlebots-arena','BattleBots Arena','/radovi/battlebots-arena/','public/images/cases/battlebots-arena','battlebots-finalna-arena-i-publika.webp'],
+  ['promo-timovi','sistem-za-terenske-angazmane','Promo timovi i terenski angažmani','/radovi/sistem-za-terenske-angazmane/','public/images/cases/promo-timovi','tim.webp'],
+  ['regulisane-aktivacije','aktivacije-regulisanih-brendova','Regulisane aktivacije','/radovi/aktivacije-regulisanih-brendova/','public/images/cases/regulisane-aktivacije','postavka.webp'],
+  ['dogadjaji','privatni-i-korporativni-dogadjaji','Privatni i korporativni događaji','/radovi/privatni-i-korporativni-dogadjaji/','public/images/cases/dogadjaji','postavka.webp'],
+  ['student-connect','student-connect-mini-festival','Student Connect','/radovi/student-connect-mini-festival/','public/images/cases/student-connect','prostor.webp'],
+  ['podgoricki-pazar','kucica-na-podgorickom-pazaru','Kućica na Podgoričkom pazaru','/radovi/kucica-na-podgorickom-pazaru/','public/images/cases/podgoricki-pazar','kucica.webp'],
+  ['mini-sajtovi','mini-sajtovi-i-digitalni-alati','Mini-sajtovi i digitalni alati','/radovi/mini-sajtovi-i-digitalni-alati/','public/images/cases/mini-sajtovi-i-digitalni-alati','mini-sajtovi-cover.webp'],
+  ['hive-agency','hive-agency-platforma','Hive Agency platforma','/radovi/hive-agency-platforma/','public/images/cases/hive-agency','hive-team-building-avanturisticki-park.webp'],
+].map(([key,caseSlug,title,route,folder,coverFile]) => ({ key,caseSlug,title,route,folder,coverFile }))
 
 function json(body, status = 200) {
   return new Response(JSON.stringify(body), { status, headers: { 'content-type': 'application/json; charset=utf-8' } })
@@ -170,21 +172,27 @@ async function listProject(project, manifest) {
   } catch {
     entries = []
   }
+
   const mp = manifestProject(manifest, project)
   const customPaths = new Set(mp.customSlots.map((slot) => slot.path))
-  const thumbPath = `${project.folder}/${project.thumbnail}`
+  const coverPath = `${project.folder}/${project.coverFile}`
   const imageEntries = entries.filter((entry) => entry.type === 'file' && /\.(?:webp|png|jpe?g)$/i.test(entry.name))
-  const thumbnailEntry = imageEntries.find((entry) => entry.path === thumbPath)
-  const gallery = imageEntries.filter((entry) => entry.path !== thumbPath && !customPaths.has(entry.path) && !protectedTechnicalFile(entry.name)).map((entry) => ({
-    fileName: entry.name,
-    path: entry.path,
-    src: `https://raw.githubusercontent.com/${repo}/${branch}/${entry.path}`,
-  }))
+  const coverEntry = imageEntries.find((entry) => entry.path === coverPath)
+
+  const gallery = imageEntries
+    .filter((entry) => entry.path !== coverPath && !customPaths.has(entry.path) && !protectedTechnicalFile(entry.name))
+    .map((entry) => ({
+      fileName: entry.name,
+      path: entry.path,
+      src: `https://raw.githubusercontent.com/${repo}/${branch}/${entry.path}`,
+    }))
+
   const customSlots = mp.customSlots.map((slot) => ({
     ...slot,
     exists: Boolean(slot.imagePath && imageEntries.some((entry) => entry.path === slot.imagePath)),
     src: slot.imagePath ? `https://raw.githubusercontent.com/${repo}/${branch}/${slot.imagePath}` : null,
   }))
+
   return {
     key: project.key,
     caseSlug: project.caseSlug,
@@ -192,10 +200,11 @@ async function listProject(project, manifest) {
     route: project.route,
     folder: project.folder,
     thumbnail: {
-      fileName: project.thumbnail,
-      path: thumbPath,
-      exists: Boolean(thumbnailEntry),
-      src: thumbnailEntry ? `https://raw.githubusercontent.com/${repo}/${branch}/${thumbPath}` : null,
+      fileName: project.coverFile,
+      path: coverPath,
+      exists: Boolean(coverEntry),
+      src: coverEntry ? `https://raw.githubusercontent.com/${repo}/${branch}/${coverPath}` : null,
+      canonical: true,
     },
     gallery,
     customSlots,
@@ -238,17 +247,15 @@ export default async (req) => {
     const mp = manifestProject(manifest, project)
 
     if (body.action === 'upload-thumbnail') {
-      const path = `${project.folder}/${project.thumbnail}`
-      await putImage(path, body.data, `Update Studio83 thumbnail: ${project.title}`)
+      const path = `${project.folder}/${project.coverFile}`
+      await putImage(path, body.data, `Update Studio83 cover: ${project.title}`)
       mp.thumbnailPath = `/${path.replace(/^public\//, '')}`
-      await saveManifest(manifest, `Link Studio83 thumbnail: ${project.title}`)
+      await saveManifest(manifest, `Link Studio83 cover: ${project.title}`)
     } else if (body.action === 'delete-thumbnail') {
-      const path = `${project.folder}/${project.thumbnail}`
-      await removeImagePath(path, `Remove Studio83 thumbnail: ${project.title}`)
-      mp.thumbnailPath = null
-      await saveManifest(manifest, `Unlink Studio83 thumbnail: ${project.title}`)
+      throw new Error('Glavni cover je obavezna pozicija. Možeš ga zamijeniti, ali ne i obrisati.')
     } else if (body.action === 'delete-gallery-image') {
       if (!safeName(body.fileName)) throw new Error('Neispravan naziv slike.')
+      if (body.fileName === project.coverFile) throw new Error('Glavni cover se ne briše iz galerijskog panela.')
       if (protectedTechnicalFile(body.fileName)) throw new Error('SEO/social asset je zaštićen i ne može se brisati iz galerijskog panela.')
       await removeImagePath(`${project.folder}/${body.fileName}`, `Remove Studio83 image: ${project.title}`)
     } else if (body.action === 'create-slot') {
