@@ -15,6 +15,15 @@ type Project = {
   customSlots: CustomSlot[]
 }
 
+type DraftImage = {
+  file: File
+  preview: string
+  width: number
+  height: number
+}
+
+type PreviewMode = 'desktop' | 'mobile'
+
 async function imageToWebp(file: File) {
   const objectUrl = URL.createObjectURL(file)
   try {
@@ -51,6 +60,38 @@ async function imageToWebp(file: File) {
   }
 }
 
+async function prepareDraft(file: File): Promise<DraftImage> {
+  if (!file.type.startsWith('image/')) throw new Error('Izaberi fotografiju.')
+  const preview = URL.createObjectURL(file)
+  try {
+    const dimensions = await new Promise<{ width: number; height: number }>((resolve, reject) => {
+      const image = new Image()
+      image.onload = () => resolve({ width: image.naturalWidth, height: image.naturalHeight })
+      image.onerror = () => reject(new Error('Fotografija ne može da se pročita.'))
+      image.src = preview
+    })
+    return { file, preview, ...dimensions }
+  } catch (error) {
+    URL.revokeObjectURL(preview)
+    throw error
+  }
+}
+
+function thumbnailAdvice(draft?: DraftImage) {
+  if (!draft) return 'Izaberi sliku i ovdje ćeš prije čuvanja vidjeti tačan odnos slike i ograničene kartice.'
+  const ratio = draft.width / draft.height
+  if (ratio < 0.9) return 'Portretna slika će se prikazati cijela, ali će u desktop kartici ostati više praznog prostora sa strane.'
+  if (ratio > 2) return 'Vrlo široka slika će se prikazati cijela, ali će u kartici ostati više praznog prostora iznad i ispod.'
+  return 'Odnos stranica je dobar za thumbnail karticu. Slika ostaje cijela - bez cropa.'
+}
+
+function aspectRatio(aspect: string) {
+  if (aspect === 'wide') return '16 / 9'
+  if (aspect === 'portrait') return '4 / 5'
+  if (aspect === 'square') return '1 / 1'
+  return '3 / 2'
+}
+
 export function Studio83MediaControls() {
   const [projects, setProjects] = useState<Project[]>([])
   const [ready, setReady] = useState(false)
@@ -60,6 +101,9 @@ export function Studio83MediaControls() {
   const [confirm, setConfirm] = useState<string | null>(null)
   const [theme, setTheme] = useState<Record<string, string>>({})
   const [aspect, setAspect] = useState<Record<string, string>>({})
+  const [thumbnailDrafts, setThumbnailDrafts] = useState<Record<string, DraftImage>>({})
+  const [customDrafts, setCustomDrafts] = useState<Record<string, DraftImage>>({})
+  const [previewMode, setPreviewMode] = useState<Record<string, PreviewMode>>({})
 
   const load = async () => {
     const response = await fetch('/api/studio83-media-controls', { credentials: 'include', cache: 'no-store' })
@@ -113,13 +157,81 @@ export function Studio83MediaControls() {
     }
   }
 
-  const upload = async (project: Project, action: 'upload-thumbnail' | 'upload-custom', file: File | undefined, slotKey?: string) => {
+  const stageThumbnail = async (project: Project, file: File | undefined) => {
     if (!file) return
-    setBusy(project.key)
-    setMessage((current) => ({ ...current, [project.key]: 'Optimizujem fotografiju…' }))
     try {
-      const data = await imageToWebp(file)
-      await act(project, { action, data, ...(slotKey ? { slotKey } : {}) }, 'Slika je sačuvana. Netlify će povući novi commit.')
+      const draft = await prepareDraft(file)
+      setThumbnailDrafts((current) => {
+        if (current[project.key]?.preview) URL.revokeObjectURL(current[project.key].preview)
+        return { ...current, [project.key]: draft }
+      })
+      setMessage((current) => ({ ...current, [project.key]: 'Nova thumbnail slika je samo u previewu. Provjeri desktop/mobile prikaz pa klikni Sačuvaj thumbnail.' }))
+    } catch (error) {
+      setMessage((current) => ({ ...current, [project.key]: error instanceof Error ? error.message : 'Slika se ne može pripremiti.' }))
+    }
+  }
+
+  const clearThumbnailDraft = (projectKey: string) => {
+    setThumbnailDrafts((current) => {
+      if (current[projectKey]?.preview) URL.revokeObjectURL(current[projectKey].preview)
+      const next = { ...current }
+      delete next[projectKey]
+      return next
+    })
+  }
+
+  const saveThumbnail = async (project: Project) => {
+    const draft = thumbnailDrafts[project.key]
+    if (!draft) return
+    setBusy(project.key)
+    setMessage((current) => ({ ...current, [project.key]: 'Optimizujem thumbnail u WebP…' }))
+    try {
+      const data = await imageToWebp(draft.file)
+      const ok = await act(project, { action: 'upload-thumbnail', data }, 'Thumbnail je sačuvan. Netlify će povući novi commit.')
+      if (ok) clearThumbnailDraft(project.key)
+    } catch (error) {
+      setMessage((current) => ({ ...current, [project.key]: error instanceof Error ? error.message : 'Upload nije uspio.' }))
+      setBusy(null)
+    }
+  }
+
+  const customDraftId = (projectKey: string, slotKey: string) => `${projectKey}:${slotKey}`
+
+  const stageCustom = async (project: Project, slot: CustomSlot, file: File | undefined) => {
+    if (!file) return
+    const id = customDraftId(project.key, slot.key)
+    try {
+      const draft = await prepareDraft(file)
+      setCustomDrafts((current) => {
+        if (current[id]?.preview) URL.revokeObjectURL(current[id].preview)
+        return { ...current, [id]: draft }
+      })
+      setMessage((current) => ({ ...current, [project.key]: `Slika za „${slot.theme}” je u previewu. Sačuvaj tek kada provjeriš prikaz.` }))
+    } catch (error) {
+      setMessage((current) => ({ ...current, [project.key]: error instanceof Error ? error.message : 'Slika se ne može pripremiti.' }))
+    }
+  }
+
+  const clearCustomDraft = (projectKey: string, slotKey: string) => {
+    const id = customDraftId(projectKey, slotKey)
+    setCustomDrafts((current) => {
+      if (current[id]?.preview) URL.revokeObjectURL(current[id].preview)
+      const next = { ...current }
+      delete next[id]
+      return next
+    })
+  }
+
+  const saveCustom = async (project: Project, slot: CustomSlot) => {
+    const id = customDraftId(project.key, slot.key)
+    const draft = customDrafts[id]
+    if (!draft) return
+    setBusy(project.key)
+    setMessage((current) => ({ ...current, [project.key]: 'Optimizujem fotografiju u WebP…' }))
+    try {
+      const data = await imageToWebp(draft.file)
+      const ok = await act(project, { action: 'upload-custom', data, slotKey: slot.key }, 'Slika je sačuvana. Netlify će povući novi commit.')
+      if (ok) clearCustomDraft(project.key, slot.key)
     } catch (error) {
       setMessage((current) => ({ ...current, [project.key]: error instanceof Error ? error.message : 'Upload nije uspio.' }))
       setBusy(null)
@@ -140,81 +252,150 @@ export function Studio83MediaControls() {
     <section className={styles.shell} id="napredno-upravljanje">
       <div className={styles.header}>
         <div>
-          <span>Studio83 / napredno</span>
-          <h2>Thumbnail, brisanje i nove pozicije</h2>
-          <p>Ovdje uklanjaš slike iz repoa i dodaješ potpuno nove galerijske pozicije sa sopstvenom temom.</p>
+          <span>Studio83 / pozicije i preview</span>
+          <h2>Thumbnail i ograničene media pozicije</h2>
+          <p>Svaka pozicija sada kaže gdje se slika koristi, kako je sajt stvarno prikazuje i da li je okvir ograničen. Izbor fajla više ništa ne uploaduje odmah - prvo vidiš preview, pa tek onda čuvaš.</p>
         </div>
         <strong className={githubConfigured ? styles.ok : styles.warn}>{githubConfigured ? 'GitHub write: OK' : 'GitHub write nije aktivan'}</strong>
       </div>
 
       <div className={styles.projects}>
-        {projects.map((project) => (
-          <article className={styles.project} key={project.key}>
-            <div className={styles.projectHead}>
-              <div><h3>{project.title}</h3><a href={project.route} target="_blank" rel="noreferrer">Pogledaj projekat ↗</a></div>
-              <span>{project.gallery.length} galerijskih slika · {project.customSlots.length} dodatnih pozicija</span>
-            </div>
+        {projects.map((project) => {
+          const thumbDraft = thumbnailDrafts[project.key]
+          const thumbSrc = thumbDraft?.preview || project.thumbnail.src
+          const mode = previewMode[project.key] || 'desktop'
+          const thumbBusy = busy === project.key
 
-            <div className={styles.thumbnailBlock}>
-              <div className={styles.preview}>{project.thumbnail.src ? <img src={project.thumbnail.src} alt="" /> : <span>Nema thumbnaila</span>}</div>
-              <div className={styles.copy}>
-                <strong>Thumbnail / cover kartice</strong>
-                <code>{project.thumbnail.fileName}</code>
+          return (
+            <article className={styles.project} key={project.key}>
+              <div className={styles.projectHead}>
+                <div><h3>{project.title}</h3><a href={project.route} target="_blank" rel="noreferrer">Pogledaj projekat ↗</a></div>
+                <span>{project.gallery.length} galerijskih slika · {project.customSlots.length} dodatnih pozicija</span>
+              </div>
+
+              <div className={styles.thumbnailBlock}>
+                <div className={styles.positionHeader}>
+                  <div>
+                    <span className={styles.restrictedBadge}>OGRANIČENA POZICIJA</span>
+                    <strong>Thumbnail / cover kartice projekta</strong>
+                    <p>Lokacija: kartice na <b>/radovi/</b> i povezane case-study kartice. Ovo nije galerijska fotografija.</p>
+                  </div>
+                  <div className={styles.rulePills}>
+                    <span>FIT: contain</span>
+                    <span>CROP: nema</span>
+                    <span>FOKUS: centar</span>
+                    <span>DESKTOP: min 440px</span>
+                    <span>MOBILE: min 280px</span>
+                  </div>
+                </div>
+
+                <div className={styles.previewToolbar}>
+                  <div>
+                    <strong>Preview stvarne kartice</strong>
+                    <small>Slika se prikazuje cijela kao na sajtu. Prazan prostor koji vidiš ovdje vidjeće se i na kartici.</small>
+                  </div>
+                  <div className={styles.previewSwitch}>
+                    <button type="button" className={mode === 'desktop' ? styles.activePreview : ''} onClick={() => setPreviewMode((current) => ({ ...current, [project.key]: 'desktop' }))}>Desktop</button>
+                    <button type="button" className={mode === 'mobile' ? styles.activePreview : ''} onClick={() => setPreviewMode((current) => ({ ...current, [project.key]: 'mobile' }))}>Mobile</button>
+                  </div>
+                </div>
+
+                <div className={`${styles.siteCardPreview}${mode === 'mobile' ? ` ${styles.siteCardPreviewMobile}` : ''}`}>
+                  <div className={styles.siteCardVisual}>
+                    {thumbSrc ? <img src={thumbSrc} alt="" /> : <span className={styles.noImage}>Nema thumbnaila</span>}
+                    <span className={styles.siteCardShade} aria-hidden="true" />
+                    <div className={styles.siteCardOverlay}>
+                      <span>CASE STUDY</span>
+                      <strong>STUDIO83</strong>
+                      <small>{project.title}</small>
+                    </div>
+                  </div>
+                  <div className={styles.siteCardCopyMock}>
+                    <span>RADOVI</span>
+                    <h4>{project.title}</h4>
+                    <p>Ovako thumbnail sjeda uz tekst kartice i ograničeni media okvir.</p>
+                    <b>Pogledaj projekat ↗</b>
+                  </div>
+                </div>
+
+                <div className={styles.thumbnailInfo}>
+                  <div>
+                    <strong>{thumbDraft ? 'Nova slika - još nije sačuvana' : project.thumbnail.exists ? 'Trenutni thumbnail' : 'Thumbnail nedostaje'}</strong>
+                    <code>{project.thumbnail.fileName}</code>
+                    {thumbDraft ? <small>{thumbDraft.width} × {thumbDraft.height}px · {thumbDraft.file.name}</small> : null}
+                  </div>
+                  <p className={styles.advice}>{thumbnailAdvice(thumbDraft)}</p>
+                </div>
+
                 <div className={styles.actions}>
-                  <label><input type="file" accept="image/jpeg,image/png,image/webp,.jpg,.jpeg,.png,.webp" onChange={(event) => upload(project, 'upload-thumbnail', event.target.files?.[0])} />{project.thumbnail.exists ? 'Promijeni thumbnail' : 'Dodaj thumbnail'}</label>
-                  {project.thumbnail.exists ? <button type="button" className={confirm === `${project.key}:thumb` ? styles.confirm : styles.danger} onClick={() => confirmAction(`${project.key}:thumb`, () => act(project, { action: 'delete-thumbnail' }, 'Thumbnail je uklonjen.'))}>{confirm === `${project.key}:thumb` ? 'Potvrdi brisanje' : 'Ukloni thumbnail'}</button> : null}
+                  <label><input type="file" accept="image/jpeg,image/png,image/webp,.jpg,.jpeg,.png,.webp" onChange={(event) => stageThumbnail(project, event.target.files?.[0])} />{thumbDraft ? 'Izaberi drugu sliku' : project.thumbnail.exists ? 'Promijeni thumbnail' : 'Dodaj thumbnail'}</label>
+                  {thumbDraft ? <button type="button" className={styles.save} disabled={thumbBusy || !githubConfigured} onClick={() => saveThumbnail(project)}>Sačuvaj thumbnail</button> : null}
+                  {thumbDraft ? <button type="button" onClick={() => clearThumbnailDraft(project.key)}>Poništi preview</button> : null}
+                  {!thumbDraft && project.thumbnail.exists ? <button type="button" className={confirm === `${project.key}:thumb` ? styles.confirm : styles.danger} onClick={() => confirmAction(`${project.key}:thumb`, () => act(project, { action: 'delete-thumbnail' }, 'Thumbnail je uklonjen.'))}>{confirm === `${project.key}:thumb` ? 'Potvrdi brisanje' : 'Ukloni thumbnail'}</button> : null}
                   {confirm === `${project.key}:thumb` ? <button type="button" onClick={() => setConfirm(null)}>Odustani</button> : null}
                 </div>
               </div>
-            </div>
 
-            {project.gallery.length ? <div className={styles.fileList}>
-              <strong>Postojeće galerijske slike</strong>
-              {project.gallery.map((image) => {
-                const id = `${project.key}:gallery:${image.fileName}`
-                return <div className={styles.fileRow} key={image.path}>
-                  <span>{image.fileName}</span>
-                  <div>
-                    <button type="button" className={confirm === id ? styles.confirm : styles.danger} disabled={busy === project.key} onClick={() => confirmAction(id, () => act(project, { action: 'delete-gallery-image', fileName: image.fileName }, `Uklonjena slika ${image.fileName}.`))}>{confirm === id ? 'Potvrdi brisanje' : 'Ukloni sliku'}</button>
-                    {confirm === id ? <button type="button" onClick={() => setConfirm(null)}>Odustani</button> : null}
-                  </div>
+              {project.gallery.length ? <div className={styles.fileList}>
+                <div className={styles.listHeading}>
+                  <div><strong>Postojeće galerijske slike</strong><p>Lokacija: detalj projekta. Prikaz: cijela fotografija bez cropa, maksimalno do okvira sadržaja.</p></div>
+                  <div className={styles.rulePills}><span>FIT: contain</span><span>CROP: nema</span><span>MAX: 1180 × 920</span></div>
                 </div>
-              })}
-            </div> : null}
-
-            <div className={styles.newSlot}>
-              <div><strong>+ Nova pozicija sa temom</strong><p>Primjer: „Atmosfera večernje smjene“, „Detalj brendinga“, „Backstage tim“.</p></div>
-              <input value={theme[project.key] || ''} onChange={(event) => setTheme((current) => ({ ...current, [project.key]: event.target.value }))} placeholder="Tema / naziv pozicije" maxLength={90} />
-              <select value={aspect[project.key] || 'landscape'} onChange={(event) => setAspect((current) => ({ ...current, [project.key]: event.target.value }))}><option value="landscape">Landscape</option><option value="wide">Wide</option><option value="portrait">Portrait</option><option value="square">Square</option></select>
-              <button type="button" disabled={busy === project.key || !githubConfigured} onClick={async () => {
-                const value = (theme[project.key] || '').trim()
-                if (!value) { setMessage((current) => ({ ...current, [project.key]: 'Unesi temu nove pozicije.' })); return }
-                const ok = await act(project, { action: 'create-slot', theme: value, aspect: aspect[project.key] || 'landscape' }, `Dodata pozicija „${value}”.`)
-                if (ok) setTheme((current) => ({ ...current, [project.key]: '' }))
-              }}>Dodaj poziciju</button>
-            </div>
-
-            {project.customSlots.length ? <div className={styles.customGrid}>
-              {project.customSlots.map((slot) => {
-                const imageId = `${project.key}:${slot.key}:image`
-                const slotId = `${project.key}:${slot.key}:slot`
-                return <div className={styles.customCard} key={slot.key}>
-                  <div className={styles.preview}>{slot.src ? <img src={slot.src} alt="" /> : <span>Nema slike</span>}</div>
-                  <strong>{slot.theme}</strong>
-                  <small>{slot.aspect}</small>
-                  <div className={styles.actions}>
-                    <label><input type="file" accept="image/jpeg,image/png,image/webp,.jpg,.jpeg,.png,.webp" onChange={(event) => upload(project, 'upload-custom', event.target.files?.[0], slot.key)} />{slot.exists ? 'Promijeni sliku' : 'Dodaj sliku'}</label>
-                    {slot.exists ? <button type="button" className={confirm === imageId ? styles.confirm : styles.danger} onClick={() => confirmAction(imageId, () => act(project, { action: 'delete-custom-image', slotKey: slot.key }, 'Slika je uklonjena, tema ostaje.'))}>{confirm === imageId ? 'Potvrdi' : 'Ukloni sliku'}</button> : null}
-                    <button type="button" className={confirm === slotId ? styles.confirm : styles.remove} onClick={() => confirmAction(slotId, () => act(project, { action: 'remove-slot', slotKey: slot.key }, 'Pozicija je potpuno uklonjena.'))}>{confirm === slotId ? 'Potvrdi poziciju' : 'Ukloni poziciju'}</button>
-                    {confirm?.startsWith(`${project.key}:${slot.key}:`) ? <button type="button" onClick={() => setConfirm(null)}>Odustani</button> : null}
+                {project.gallery.map((image) => {
+                  const id = `${project.key}:gallery:${image.fileName}`
+                  return <div className={styles.fileRow} key={image.path}>
+                    <span>{image.fileName}</span>
+                    <div>
+                      <button type="button" className={confirm === id ? styles.confirm : styles.danger} disabled={busy === project.key} onClick={() => confirmAction(id, () => act(project, { action: 'delete-gallery-image', fileName: image.fileName }, `Uklonjena slika ${image.fileName}.`))}>{confirm === id ? 'Potvrdi brisanje' : 'Ukloni sliku'}</button>
+                      {confirm === id ? <button type="button" onClick={() => setConfirm(null)}>Odustani</button> : null}
+                    </div>
                   </div>
-                </div>
-              })}
-            </div> : null}
+                })}
+              </div> : null}
 
-            {message[project.key] ? <div className={styles.message}>{message[project.key]}</div> : null}
-          </article>
-        ))}
+              <div className={styles.newSlot}>
+                <div><strong>+ Nova galerijska pozicija</strong><p>Pozicija ide u detalj projekta. Aspect je organizaciona oznaka, a sama fotografija se na sajtu prikazuje cijela - bez cropa.</p></div>
+                <input value={theme[project.key] || ''} onChange={(event) => setTheme((current) => ({ ...current, [project.key]: event.target.value }))} placeholder="Tema / naziv pozicije" maxLength={90} />
+                <select value={aspect[project.key] || 'landscape'} onChange={(event) => setAspect((current) => ({ ...current, [project.key]: event.target.value }))}><option value="landscape">Landscape</option><option value="wide">Wide</option><option value="portrait">Portrait</option><option value="square">Square</option></select>
+                <button type="button" disabled={busy === project.key || !githubConfigured} onClick={async () => {
+                  const value = (theme[project.key] || '').trim()
+                  if (!value) { setMessage((current) => ({ ...current, [project.key]: 'Unesi temu nove pozicije.' })); return }
+                  const ok = await act(project, { action: 'create-slot', theme: value, aspect: aspect[project.key] || 'landscape' }, `Dodata pozicija „${value}”.`)
+                  if (ok) setTheme((current) => ({ ...current, [project.key]: '' }))
+                }}>Dodaj poziciju</button>
+              </div>
+
+              {project.customSlots.length ? <div className={styles.customGrid}>
+                {project.customSlots.map((slot) => {
+                  const imageId = `${project.key}:${slot.key}:image`
+                  const removeSlotId = `${project.key}:${slot.key}:slot`
+                  const draftId = customDraftId(project.key, slot.key)
+                  const draft = customDrafts[draftId]
+                  const src = draft?.preview || slot.src
+                  return <div className={styles.customCard} key={slot.key}>
+                    <div className={styles.customMeta}>
+                      <span>DETALJ PROJEKTA</span>
+                      <small>{slot.aspect} · contain · bez cropa</small>
+                    </div>
+                    <div className={styles.preview} style={{ aspectRatio: aspectRatio(slot.aspect) }}>{src ? <img src={src} alt="" /> : <span>Nema slike</span>}</div>
+                    <strong>{slot.theme}</strong>
+                    {draft ? <small>{draft.width} × {draft.height}px · preview prije čuvanja</small> : <small>{slot.aspect} · puna fotografija</small>}
+                    <div className={styles.actions}>
+                      <label><input type="file" accept="image/jpeg,image/png,image/webp,.jpg,.jpeg,.png,.webp" onChange={(event) => stageCustom(project, slot, event.target.files?.[0])} />{draft ? 'Izaberi drugu' : slot.exists ? 'Promijeni sliku' : 'Dodaj sliku'}</label>
+                      {draft ? <button type="button" className={styles.save} disabled={busy === project.key || !githubConfigured} onClick={() => saveCustom(project, slot)}>Sačuvaj sliku</button> : null}
+                      {draft ? <button type="button" onClick={() => clearCustomDraft(project.key, slot.key)}>Poništi</button> : null}
+                      {!draft && slot.exists ? <button type="button" className={confirm === imageId ? styles.confirm : styles.danger} onClick={() => confirmAction(imageId, () => act(project, { action: 'delete-custom-image', slotKey: slot.key }, 'Slika je uklonjena, tema ostaje.'))}>{confirm === imageId ? 'Potvrdi' : 'Ukloni sliku'}</button> : null}
+                      {!draft ? <button type="button" className={confirm === removeSlotId ? styles.confirm : styles.remove} onClick={() => confirmAction(removeSlotId, () => act(project, { action: 'remove-slot', slotKey: slot.key }, 'Pozicija je potpuno uklonjena.'))}>{confirm === removeSlotId ? 'Potvrdi poziciju' : 'Ukloni poziciju'}</button> : null}
+                      {confirm?.startsWith(`${project.key}:${slot.key}:`) ? <button type="button" onClick={() => setConfirm(null)}>Odustani</button> : null}
+                    </div>
+                  </div>
+                })}
+              </div> : null}
+
+              {message[project.key] ? <div className={styles.message}>{message[project.key]}</div> : null}
+            </article>
+          )
+        })}
       </div>
     </section>
   )
