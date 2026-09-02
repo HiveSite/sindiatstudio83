@@ -34,18 +34,6 @@ type MediaManifest = {
 
 const mediaManifest = manifest as MediaManifest
 
-const canonicalCoverPaths: Record<string, string> = {
-  'imaposla-digitalni-proizvod': '/images/cases/imaposla/imaposla-me-platforma-poslovi-crna-gora-cover.webp',
-  'battlebots-arena': '/images/cases/battlebots-arena/battlebots-finalna-arena-i-publika.webp',
-  'sistem-za-terenske-angazmane': '/images/cases/promo-timovi/tim.webp',
-  'aktivacije-regulisanih-brendova': '/images/cases/regulisane-aktivacije/postavka.webp',
-  'privatni-i-korporativni-dogadjaji': '/images/cases/dogadjaji/postavka.webp',
-  'student-connect-mini-festival': '/images/cases/student-connect/prostor.webp',
-  'kucica-na-podgorickom-pazaru': '/images/cases/podgoricki-pazar/kucica.webp',
-  'mini-sajtovi-i-digitalni-alati': '/images/cases/mini-sajtovi-i-digitalni-alati/mini-sajtovi-cover.webp',
-  'hive-agency-platforma': '/images/cases/hive-agency/hive-team-building-avanturisticki-park.webp',
-}
-
 function clampPercent(value: number | undefined, fallback = 50) {
   if (typeof value !== 'number' || !Number.isFinite(value)) return fallback
   return Math.max(0, Math.min(100, Math.round(value)))
@@ -87,14 +75,14 @@ function publicSrcToRepoPath(src: string) {
 
 export function managedThumbnail(slug: string, fallback?: CaseStudyImage): CaseStudyImage | undefined {
   const project = mediaManifest.projects[slug]
-  const path = project?.thumbnailPath || canonicalCoverPaths[slug]
+  const path = project?.thumbnailPath
   if (!path) return fallback
 
   const base: CaseStudyImage = {
     src: path,
     alt: fallback?.alt || `Cover projekta ${slug}`,
-    width: fallback?.width || 1600,
-    height: fallback?.height || 1200,
+    width: fallback?.width || project?.coverSettings?.width || 1600,
+    height: fallback?.height || project?.coverSettings?.height || 1200,
   }
 
   return imageWithSettings(base, project?.coverSettings, 'cover')
