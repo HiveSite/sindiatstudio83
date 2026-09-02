@@ -24,6 +24,7 @@
   height: 100%;
   max-width: 100%;
   max-height: 720px;
+  object-fit: contain;
   object-fit: var(--media-fit, contain);
   object-position: var(--media-position-desktop, center);
   opacity: 1;
@@ -134,6 +135,7 @@
   max-width: 100%;
   max-height: var(--case-media-max-height);
   margin: 0 auto;
+  object-fit: contain;
   object-fit: var(--media-fit, contain);
   object-position: var(--media-position-desktop, center);
   opacity: 1;
@@ -154,6 +156,7 @@
   height: auto;
   max-width: 100%;
   max-height: var(--case-media-max-height);
+  object-fit: contain;
   object-fit: var(--media-fit, contain);
   object-position: var(--media-position-desktop, center);
   filter: drop-shadow(0 18px 32px rgba(0, 0, 0, 0.28));
