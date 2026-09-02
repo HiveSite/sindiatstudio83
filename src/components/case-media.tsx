@@ -211,8 +211,19 @@ const extraMediaOverrides: Record<string, CaseStudyImage[]> = {
   ],
 }
 
-function imageStyle(image: CaseStudyImage): CSSProperties {
-  return image.position ? { objectPosition: image.position } : {}
+type MediaCssProperties = CSSProperties & {
+  '--media-position-desktop'?: string
+  '--media-position-mobile'?: string
+  '--media-fit'?: string
+}
+
+function imageStyle(image: CaseStudyImage): MediaCssProperties {
+  const desktopPosition = image.desktopPosition || image.position || 'center'
+  return {
+    '--media-position-desktop': desktopPosition,
+    '--media-position-mobile': image.mobilePosition || desktopPosition,
+    '--media-fit': image.fit || undefined,
+  }
 }
 
 function MediaFigure({
