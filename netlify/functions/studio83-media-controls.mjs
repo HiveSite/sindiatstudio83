@@ -76,7 +76,7 @@ async function verifySession(token) {
   }
 }
 
-function emptyManifest() { return { version: 1, projects: {} } }
+function emptyManifest() { return { version: 2, projects: {} } }
 
 async function getContent(path, required = true) {
   const { owner, name, branch } = repoConfig()
@@ -93,16 +93,48 @@ async function readManifest() {
   if (!file?.content) return emptyManifest()
   try {
     const parsed = JSON.parse(Buffer.from(file.content, 'base64').toString('utf8'))
-    return parsed?.projects ? parsed : emptyManifest()
+    if (!parsed?.projects) return emptyManifest()
+    if (!parsed.version || parsed.version < 2) parsed.version = 2
+    return parsed
   } catch {
     return emptyManifest()
   }
 }
 
+function clampPercent(value, fallback = 50) {
+  const parsed = Number(value)
+  if (!Number.isFinite(parsed)) return fallback
+  return Math.max(0, Math.min(100, Math.round(parsed)))
+}
+
+function cleanDimension(value) {
+  const parsed = Number(value)
+  if (!Number.isFinite(parsed) || parsed <= 0) return undefined
+  return Math.round(parsed)
+}
+
+function cleanSettings(value, defaultFit = 'cover') {
+  const source = value && typeof value === 'object' ? value : {}
+  const fit = source.fit === 'contain' ? 'contain' : source.fit === 'cover' ? 'cover' : defaultFit
+  return {
+    fit,
+    desktopX: clampPercent(source.desktopX),
+    desktopY: clampPercent(source.desktopY),
+    mobileX: clampPercent(source.mobileX),
+    mobileY: clampPercent(source.mobileY),
+    ...(cleanDimension(source.width) ? { width: cleanDimension(source.width) } : {}),
+    ...(cleanDimension(source.height) ? { height: cleanDimension(source.height) } : {}),
+  }
+}
+
 function manifestProject(manifest, project) {
-  if (!manifest.projects[project.caseSlug]) manifest.projects[project.caseSlug] = { thumbnailPath: null, customSlots: [] }
-  if (!Array.isArray(manifest.projects[project.caseSlug].customSlots)) manifest.projects[project.caseSlug].customSlots = []
-  return manifest.projects[project.caseSlug]
+  if (!manifest.projects[project.caseSlug]) manifest.projects[project.caseSlug] = {}
+  const item = manifest.projects[project.caseSlug]
+  if (!Array.isArray(item.customSlots)) item.customSlots = []
+  if (!item.gallerySettings || typeof item.gallerySettings !== 'object') item.gallerySettings = {}
+  item.coverSettings = cleanSettings(item.coverSettings, 'cover')
+  for (const slot of item.customSlots) slot.settings = cleanSettings(slot.settings, 'contain')
+  return item
 }
 
 async function saveManifest(manifest, message) {
@@ -185,10 +217,12 @@ async function listProject(project, manifest) {
       fileName: entry.name,
       path: entry.path,
       src: `https://raw.githubusercontent.com/${repo}/${branch}/${entry.path}`,
+      settings: cleanSettings(mp.gallerySettings[entry.path], 'contain'),
     }))
 
   const customSlots = mp.customSlots.map((slot) => ({
     ...slot,
+    settings: cleanSettings(slot.settings, 'contain'),
     exists: Boolean(slot.imagePath && imageEntries.some((entry) => entry.path === slot.imagePath)),
     src: slot.imagePath ? `https://raw.githubusercontent.com/${repo}/${branch}/${slot.imagePath}` : null,
   }))
@@ -205,6 +239,7 @@ async function listProject(project, manifest) {
       exists: Boolean(coverEntry),
       src: coverEntry ? `https://raw.githubusercontent.com/${repo}/${branch}/${coverPath}` : null,
       canonical: true,
+      settings: cleanSettings(mp.coverSettings, 'cover'),
     },
     gallery,
     customSlots,
@@ -250,14 +285,35 @@ export default async (req) => {
       const path = `${project.folder}/${project.coverFile}`
       await putImage(path, body.data, `Update Studio83 cover: ${project.title}`)
       mp.thumbnailPath = `/${path.replace(/^public\//, '')}`
-      await saveManifest(manifest, `Link Studio83 cover: ${project.title}`)
+      mp.coverSettings = cleanSettings({ ...body.settings, width: body.width, height: body.height }, 'cover')
+      await saveManifest(manifest, `Link Studio83 cover and settings: ${project.title}`)
+    } else if (body.action === 'save-thumbnail-settings') {
+      mp.coverSettings = cleanSettings(body.settings, 'cover')
+      await saveManifest(manifest, `Update Studio83 cover focus: ${project.title}`)
     } else if (body.action === 'delete-thumbnail') {
       throw new Error('Glavni cover je obavezna pozicija. Možeš ga zamijeniti, ali ne i obrisati.')
+    } else if (body.action === 'upload-gallery-image') {
+      if (!safeName(body.fileName)) throw new Error('Neispravan naziv slike.')
+      if (!String(body.fileName).toLowerCase().endsWith('.webp')) throw new Error('Postojeća galerijska slika mora biti WebP da bi se zamijenila iz editora.')
+      if (body.fileName === project.coverFile) throw new Error('Cover se mijenja u cover panelu.')
+      if (protectedTechnicalFile(body.fileName)) throw new Error('SEO/social asset je zaštićen.')
+      const path = `${project.folder}/${body.fileName}`
+      await putImage(path, body.data, `Update Studio83 gallery image: ${project.title}`)
+      mp.gallerySettings[path] = cleanSettings({ ...body.settings, width: body.width, height: body.height }, 'contain')
+      await saveManifest(manifest, `Update Studio83 gallery settings: ${project.title}`)
+    } else if (body.action === 'save-gallery-settings') {
+      const path = String(body.path || '')
+      if (!path.startsWith(`${project.folder}/`) || path.includes('..')) throw new Error('Neispravna putanja slike.')
+      mp.gallerySettings[path] = cleanSettings(body.settings, 'contain')
+      await saveManifest(manifest, `Update Studio83 gallery focus: ${project.title}`)
     } else if (body.action === 'delete-gallery-image') {
       if (!safeName(body.fileName)) throw new Error('Neispravan naziv slike.')
       if (body.fileName === project.coverFile) throw new Error('Glavni cover se ne briše iz galerijskog panela.')
       if (protectedTechnicalFile(body.fileName)) throw new Error('SEO/social asset je zaštićen i ne može se brisati iz galerijskog panela.')
-      await removeImagePath(`${project.folder}/${body.fileName}`, `Remove Studio83 image: ${project.title}`)
+      const path = `${project.folder}/${body.fileName}`
+      await removeImagePath(path, `Remove Studio83 image: ${project.title}`)
+      delete mp.gallerySettings[path]
+      await saveManifest(manifest, `Remove Studio83 gallery settings: ${project.title}`)
     } else if (body.action === 'create-slot') {
       const theme = cleanTheme(body.theme)
       if (theme.length < 2) throw new Error('Unesi temu/naziv nove pozicije.')
@@ -269,6 +325,7 @@ export default async (req) => {
         path: `${project.folder}/custom/${filename}`,
         imagePath: null,
         aspect: ['wide','landscape','portrait','square'].includes(body.aspect) ? body.aspect : 'landscape',
+        settings: cleanSettings(body.settings, 'contain'),
       })
       await saveManifest(manifest, `Add Studio83 media slot: ${project.title}`)
     } else if (body.action === 'upload-custom') {
@@ -276,7 +333,13 @@ export default async (req) => {
       if (!slot) throw new Error('Nepoznata pozicija.')
       await putImage(slot.path, body.data, `Update Studio83 custom image: ${project.title}`)
       slot.imagePath = slot.path
-      await saveManifest(manifest, `Link Studio83 custom image: ${project.title}`)
+      slot.settings = cleanSettings({ ...body.settings, width: body.width, height: body.height }, 'contain')
+      await saveManifest(manifest, `Link Studio83 custom image and settings: ${project.title}`)
+    } else if (body.action === 'save-custom-settings') {
+      const slot = mp.customSlots.find((item) => item.key === body.slotKey)
+      if (!slot) throw new Error('Nepoznata pozicija.')
+      slot.settings = cleanSettings(body.settings, 'contain')
+      await saveManifest(manifest, `Update Studio83 custom focus: ${project.title}`)
     } else if (body.action === 'delete-custom-image') {
       const slot = mp.customSlots.find((item) => item.key === body.slotKey)
       if (!slot) throw new Error('Nepoznata pozicija.')
