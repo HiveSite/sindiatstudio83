@@ -47,12 +47,17 @@ export interface CaseStudyLink {
   href: string
 }
 
+export type MediaFit = 'cover' | 'contain'
+
 export interface CaseStudyImage {
   src: string
   alt: string
   width: number
   height: number
   position?: string
+  desktopPosition?: string
+  mobilePosition?: string
+  fit?: MediaFit
 }
 
 export interface CaseStudyMedia {
