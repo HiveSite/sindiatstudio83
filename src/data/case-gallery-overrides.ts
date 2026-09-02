@@ -1,6 +1,6 @@
 import type { CaseStudyMedia } from '@/types/content'
 import { cases } from '@/data/cases'
-import { managedExtraGallery } from '@/lib/studio83-media'
+import { managedExtraGallery, managedGalleryImage } from '@/lib/studio83-media'
 
 const fixedOverrides: Record<string, CaseStudyMedia[]> = {
   'imaposla-digitalni-proizvod': [
@@ -74,8 +74,14 @@ const fixedOverrides: Record<string, CaseStudyMedia[]> = {
 }
 
 export const caseGalleryOverrides: Record<string, CaseStudyMedia[]> = Object.fromEntries(
-  cases.map((item) => [
-    item.slug,
-    [...(fixedOverrides[item.slug] || item.gallery), ...managedExtraGallery(item.slug)],
-  ]),
+  cases.map((item) => {
+    const base = fixedOverrides[item.slug] || item.gallery
+    return [
+      item.slug,
+      [
+        ...base.map((media) => managedGalleryImage(item.slug, media)),
+        ...managedExtraGallery(item.slug),
+      ],
+    ]
+  }),
 )
