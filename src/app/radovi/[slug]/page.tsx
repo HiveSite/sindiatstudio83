@@ -12,6 +12,7 @@ import { site } from '@/data/site'
 import { createMetadata } from '@/lib/metadata'
 import { getPublicCaseStudy } from '@/lib/public-case'
 import { breadcrumbSchema, webPageSchema } from '@/lib/schema'
+import { managedThumbnail } from '@/lib/studio83-media'
 
 export const dynamicParams = false
 export function generateStaticParams() { return cases.map((item) => ({ slug: item.slug })) }
@@ -37,7 +38,9 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
   const galleryItem = caseGalleryOverrides[slug]
     ? { ...baseItem, gallery: caseGalleryOverrides[slug] }
     : baseItem
-  const item = getPublicCaseStudy(galleryItem)
+  const publicItem = getPublicCaseStudy(galleryItem)
+  const managedCover = managedThumbnail(publicItem.slug, publicItem.coverImage)
+  const item = managedCover === publicItem.coverImage ? publicItem : { ...publicItem, coverImage: managedCover }
   const path = `/radovi/${item.slug}/`
   const crumbs = [{ label: 'Radovi', href: '/radovi/' }, { label: item.title, href: path }]
   const metrics = item.metrics || []
