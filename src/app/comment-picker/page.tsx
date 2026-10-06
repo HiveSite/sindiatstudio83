@@ -6,6 +6,30 @@ type Comment = { id:string; username:string; text:string; timestamp?:string };
 
 function randomIndex(max:number){if(max<=1)return 0;const a=new Uint32Array(1);crypto.getRandomValues(a);return a[0]%max}
 
+function parseCsv(text:string):Comment[]{
+  const rows:string[][]=[];let row:string[]=[];let cell='';let quoted=false;
+  for(let i=0;i<text.length;i++){
+    const ch=text[i];
+    if(ch==='"'){
+      if(quoted&&text[i+1]==='"'){cell+='"';i++;}else quoted=!quoted;
+    }else if(ch===','&&!quoted){row.push(cell);cell='';}
+    else if((ch==='\n'||ch==='\r')&&!quoted){
+      if(ch==='\r'&&text[i+1]==='\n')i++;
+      row.push(cell);cell='';if(row.some(v=>v.trim()))rows.push(row);row=[];
+    }else cell+=ch;
+  }
+  row.push(cell);if(row.some(v=>v.trim()))rows.push(row);
+  if(!rows.length)return [];
+  const header=rows[0].map(v=>v.trim().toLowerCase());
+  const uIndex=Math.max(0,header.findIndex(v=>['username','user','handle','account'].includes(v)));
+  const tFound=header.findIndex(v=>['comment','text','comment_text','content'].includes(v));
+  const tIndex=tFound>=0?tFound:Math.min(1,rows[0].length-1);
+  const start=header.some(v=>['username','user','handle','account','comment','text','comment_text','content'].includes(v))?1:0;
+  return rows.slice(start).map((r,i)=>({id:`csv-${i}-${(r[uIndex]||'').trim()}` ,username:(r[uIndex]||'').trim().replace(/^@/,''),text:(r[tIndex]||'').trim()})).filter(c=>c.username);
+}
+
+const exporterCode=`javascript:(async()=>{const sleep=m=>new Promise(r=>setTimeout(r,m));const found=new Map();const norm=s=>(s||'').replace(/\\s+/g,' ').trim();const collect=()=>{document.querySelectorAll('ul li').forEach(li=>{const links=[...li.querySelectorAll('a[href]')];const a=links.find(x=>/^\\/[A-Za-z0-9._]+\\/?$/.test(x.getAttribute('href')||''));if(!a)return;const user=(a.getAttribute('href')||'').replaceAll('/','');if(!user||['explore','accounts','direct','reels'].includes(user))return;let txt=norm(li.innerText);if(!txt)return;txt=txt.replace(new RegExp('^'+user.replace(/[.*+?^\\${}()|[\\]\\\\]/g,'\\\\$&')+'\\\\s*'),'').trim();txt=txt.replace(/\\b(Reply|Like|See translation|Odgovori|Sviđa mi se)\\b.*$/i,'').trim();if(txt&&txt!==user)found.set(user+'\\n'+txt,{username:user,comment:txt});});};let stable=0,last=0;for(let round=0;round<300;round++){collect();const buttons=[...document.querySelectorAll('button,div[role=button]')];let clicked=false;for(const b of buttons){const t=norm(b.textContent).toLowerCase();if(t.includes('more comments')||t.includes('view all')||t.includes('load more')||t.includes('prikaži još')||t.includes('jos komentara')||t.includes('još komentara')){try{b.click();clicked=true;}catch{}}}const dialog=document.querySelector('div[role=dialog]');if(dialog){dialog.scrollTop=dialog.scrollHeight;}window.scrollTo(0,document.body.scrollHeight);await sleep(clicked?850:650);collect();if(found.size===last)stable++;else stable=0;last=found.size;if(stable>=10)break;}const esc=v=>'"'+String(v??'').replaceAll('"','""')+'"';const csv='username,comment\\n'+[...found.values()].map(x=>esc(x.username)+','+esc(x.comment)).join('\\n');const blob=new Blob([csv],{type:'text/csv;charset=utf-8'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='instagram-comments.csv';document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(a.href),1000);alert('Exportovano '+found.size+' komentara.');})();`;
+
 export default function CommentPickerPage(){
   const [postUrl,setPostUrl]=useState('');
   const [comments,setComments]=useState<Comment[]>([]);
@@ -16,6 +40,7 @@ export default function CommentPickerPage(){
   const [error,setError]=useState('');
   const [uniqueOnly,setUniqueOnly]=useState(true);
   const [previous,setPrevious]=useState<string[]>([]);
+  const [copied,setCopied]=useState(false);
 
   const eligible=useMemo(()=>{
     let list=[...comments];
@@ -32,6 +57,13 @@ export default function CommentPickerPage(){
     }catch(e){setError(e instanceof Error?e.message:'Greška pri učitavanju.')}finally{setLoading(false)}
   }
 
+  async function importCsv(file:File){
+    setError('');setWinner(null);setRolling(null);setPrevious([]);
+    try{const list=parseCsv(await file.text());if(!list.length)throw new Error('CSV nema prepoznatljive username/comment podatke.');setComments(list);}catch(e){setError(e instanceof Error?e.message:'CSV nije moguće učitati.');}
+  }
+
+  async function copyExporter(){await navigator.clipboard.writeText(exporterCode);setCopied(true);setTimeout(()=>setCopied(false),1800)}
+
   async function draw(){
     if(!eligible.length||drawing)return;setDrawing(true);setWinner(null);
     const finalWinner=eligible[randomIndex(eligible.length)];const started=performance.now();
@@ -44,13 +76,34 @@ export default function CommentPickerPage(){
       <section style={card}>
         <div style={eyebrow}>SINDIKAT STUDIO 83 · INSTAGRAM TOOL</div>
         <h1 style={{fontSize:'clamp(42px,8vw,82px)',lineHeight:.95,margin:'10px 0 18px',letterSpacing:'-0.05em'}}>Random Comment Picker</h1>
-        <p style={{color:'#a5a5b0',fontSize:17}}>Zalijepi link Instagram posta, učitaj komentare i izvuci pobjednika.</p>
-        <div style={{display:'grid',gridTemplateColumns:'1fr auto',gap:10,marginTop:18}}>
+        <p style={{color:'#a5a5b0',fontSize:17}}>Bez API-ja: eksportuj komentare iz Instagram browsera u CSV, pa ubaci CSV ovdje.</p>
+      </section>
+
+      <section style={card}>
+        <div style={eyebrow}>1 · EXPORT SA INSTAGRAMA</div>
+        <h2 style={{margin:'10px 0'}}>Browser exporter</h2>
+        <p style={{color:'#bdbdc8',lineHeight:1.6}}>Klikni <b>Copy exporter</b>, napravi novi bookmark u Chrome-u i u polje URL zalijepi kopirani kod. Zatim otvori giveaway post na instagram.com dok si ulogovan i klikni taj bookmark. Alat će učitavati dostupne komentare i skinuti <b>instagram-comments.csv</b>.</p>
+        <button onClick={copyExporter} style={{...button,background:'#02C9BF',color:'#061313'}}>{copied?'Kopirano ✓':'Copy exporter'}</button>
+        <div style={{marginTop:12,fontSize:13,color:'#8f8f9a'}}>Instagram može usporiti ili zaustaviti učitavanje kod veoma velikih postova; exporter ne koristi tvoju lozinku niti API token.</div>
+      </section>
+
+      <section style={card}>
+        <div style={eyebrow}>2 · UBACI CSV</div>
+        <label style={{display:'block',marginTop:12,padding:22,border:'1px dashed #454552',borderRadius:16,cursor:'pointer',textAlign:'center',background:'#0f0f13'}}>
+          <b>Izaberi instagram-comments.csv</b><br/><span style={{fontSize:13,color:'#92929d'}}>podržava i CSV iz drugih exportera ako ima username + comment kolone</span>
+          <input type="file" accept=".csv,text/csv" onChange={e=>{const f=e.target.files?.[0];if(f)importCsv(f)}} style={{display:'none'}}/>
+        </label>
+        {!!comments.length&&<div style={{marginTop:12,color:'#bdbdc8'}}><b>{comments.length}</b> komentara učitano · <b>{eligible.length}</b> eligible entries</div>}
+        {error&&<div style={{marginTop:12,padding:12,border:'1px solid #6d2d2d',borderRadius:12,color:'#ffb6b6'}}>{error}</div>}
+      </section>
+
+      <section style={card}>
+        <div style={eyebrow}>OPCIONALNO · API</div>
+        <p style={{color:'#a5a5b0'}}>Ako kasnije dodaš Meta token, možeš učitati komentare direktno linkom:</p>
+        <div style={{display:'grid',gridTemplateColumns:'1fr auto',gap:10,marginTop:12}}>
           <input value={postUrl} onChange={e=>setPostUrl(e.target.value)} placeholder="https://www.instagram.com/p/..." style={input}/>
           <button onClick={load} disabled={loading||!postUrl.trim()} style={button}>{loading?'Učitavanje...':'Load comments'}</button>
         </div>
-        {error&&<div style={{marginTop:12,padding:12,border:'1px solid #6d2d2d',borderRadius:12,color:'#ffb6b6'}}>{error}</div>}
-        {!!comments.length&&<div style={{marginTop:12,color:'#bdbdc8'}}>{comments.length} komentara · {eligible.length} eligible entries</div>}
       </section>
 
       <section style={card}>
@@ -68,7 +121,7 @@ export default function CommentPickerPage(){
 
       {!!comments.length&&<section style={card}>
         <div style={eyebrow}>COMMENTS</div>
-        <div style={{display:'grid',gap:8,marginTop:14,maxHeight:380,overflow:'auto'}}>{comments.slice(0,250).map(c=><div key={c.id} style={{display:'grid',gridTemplateColumns:'180px 1fr',gap:12,padding:12,border:'1px solid #292932',borderRadius:12,background:'#101014'}}><strong>@{c.username}</strong><span style={{color:'#a5a5b0'}}>{c.text}</span></div>)}</div>
+        <div style={{display:'grid',gap:8,marginTop:14,maxHeight:380,overflow:'auto'}}>{comments.slice(0,500).map(c=><div key={c.id} style={{display:'grid',gridTemplateColumns:'180px 1fr',gap:12,padding:12,border:'1px solid #292932',borderRadius:12,background:'#101014'}}><strong>@{c.username}</strong><span style={{color:'#a5a5b0'}}>{c.text}</span></div>)}</div>
       </section>}
     </div>
   </main>
