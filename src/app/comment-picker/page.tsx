@@ -26,7 +26,7 @@ export default function CommentPickerPage(){
   async function load(){
     setLoading(true);setError('');setComments([]);setWinner(null);setRolling(null);setPrevious([]);
     try{
-      const r=await fetch('/api/comment-picker',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({postUrl})});
+      const r=await fetch('/comment-picker/api',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({postUrl})});
       const d=await r.json();if(!r.ok)throw new Error(d.error||'Nije moguće učitati komentare.');
       setComments(Array.isArray(d.comments)?d.comments:[]);
     }catch(e){setError(e instanceof Error?e.message:'Greška pri učitavanju.')}finally{setLoading(false)}
