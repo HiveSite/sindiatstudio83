@@ -1,0 +1,114 @@
+'use client'
+
+import { FormEvent, useEffect, useMemo, useState } from 'react'
+import styles from './game.module.css'
+import { challenges, checkpointLabels, getDigitalSequence, getNextCheckpoint, locationHints, normalizeAnswer, normalizeTeamCode, teamRoutes, type CheckpointId } from './game-data'
+
+type SavedResult = { score: number; hints: number; completedAt: string }
+type Progress = Partial<Record<CheckpointId, SavedResult>>
+
+function BrandMark() {
+  return (
+    <svg className={styles.brandMark} viewBox="0 0 48 48" aria-hidden="true">
+      <defs><linearGradient id="abg" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stopColor="#293189"/><stop offset="1" stopColor="#009ADE"/></linearGradient></defs>
+      <rect width="48" height="48" fill="#0F209E" />
+      <path d="M24 24 48 0v48L24 24Z" fill="url(#abg)" />
+      <path d="M24 24 10 48h28L24 24Z" fill="#fff" />
+    </svg>
+  )
+}
+
+function BrandBar({ checkpoint }: { checkpoint?: CheckpointId }) {
+  return <div className={styles.brandBar}><div className={styles.brand}><BrandMark/><span>ADRIATIC BANK</span></div><div className={styles.gameLabel}>Treasure Hunt{checkpoint ? ` · ${checkpoint}` : ''}</div></div>
+}
+
+export function GameClient({ checkpoint }: { checkpoint: CheckpointId }) {
+  const challenge = challenges[checkpoint]
+  const [teamInput, setTeamInput] = useState('')
+  const [teamCode, setTeamCode] = useState('')
+  const [answer, setAnswer] = useState('')
+  const [hints, setHints] = useState(0)
+  const [message, setMessage] = useState('')
+  const [error, setError] = useState('')
+  const [completed, setCompleted] = useState<SavedResult | null>(null)
+  const [startedAt, setStartedAt] = useState('')
+
+  const progressKey = teamCode ? `ab-treasure-progress:${teamCode}` : ''
+  const progress = useMemo<Progress>(() => {
+    if (!progressKey || typeof window === 'undefined') return {}
+    try { return JSON.parse(localStorage.getItem(progressKey) || '{}') } catch { return {} }
+  }, [progressKey, completed])
+
+  useEffect(() => {
+    if (teamCode && !startedAt) setStartedAt(new Date().toISOString())
+  }, [teamCode, startedAt])
+
+  const score = hints === 0 ? challenge.points.base : hints === 1 ? challenge.points.hint1 : hints === 2 ? challenge.points.hint2 : challenge.points.reveal
+
+  function unlock(e: FormEvent) {
+    e.preventDefault(); setError(''); setMessage('')
+    const code = normalizeTeamCode(teamInput)
+    if (!teamRoutes[code]) { setError('Team code not found. Check your team card and try again.'); return }
+    let saved: Progress = {}
+    try { saved = JSON.parse(localStorage.getItem(`ab-treasure-progress:${code}`) || '{}') } catch {}
+    if (saved[checkpoint]) { setTeamCode(code); setCompleted(saved[checkpoint]!); return }
+    const digitalOrder = getDigitalSequence(code)
+    const firstIncomplete = digitalOrder.find(id => !saved[id])
+    if (firstIncomplete && firstIncomplete !== checkpoint) {
+      setError(`This checkpoint is not currently available for your team. Your next digital checkpoint is ${firstIncomplete}.`)
+      return
+    }
+    setTeamCode(code)
+    setStartedAt(new Date().toISOString())
+  }
+
+  function useHint(level: number) {
+    const next = Math.max(hints, level)
+    setHints(next)
+    setMessage(level === 1 ? challenge.hint1 : level === 2 ? challenge.hint2 : challenge.reveal)
+  }
+
+  async function submit(e: FormEvent) {
+    e.preventDefault(); setError('')
+    if (normalizeAnswer(answer) !== normalizeAnswer(challenge.answer)) { setMessage('Not quite. Try again.'); return }
+    const result: SavedResult = { score, hints, completedAt: new Date().toISOString() }
+    const previous: Progress = (() => { try { return JSON.parse(localStorage.getItem(progressKey) || '{}') } catch { return {} } })()
+    localStorage.setItem(progressKey, JSON.stringify({ ...previous, [checkpoint]: result }))
+    setCompleted(result)
+    const endpoint = process.env.NEXT_PUBLIC_TREASURE_HUNT_ENDPOINT
+    if (endpoint) {
+      fetch(endpoint, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ teamCode, checkpoint, score, hints, startedAt, completedAt: result.completedAt }) }).catch(() => undefined)
+    }
+  }
+
+  const next = teamCode ? getNextCheckpoint(teamCode, checkpoint) : null
+  const digitalOrder = teamCode ? getDigitalSequence(teamCode) : []
+  const completedDigital = teamCode ? digitalOrder.filter(id => progress[id] || id === checkpoint && completed).length : 0
+  const progressPercent = Math.max(8, (completedDigital / 5) * 100)
+
+  return <div className={styles.shell}><div className={styles.viewport}>
+    <BrandBar checkpoint={checkpoint}/>
+    <div className={styles.progressWrap}><div className={styles.progressMeta}><span>Digital progress</span><span>{completedDigital}/5</span></div><div className={styles.progressTrack}><div className={styles.progressFill} style={{ width: `${progressPercent}%` }}/></div></div>
+    <section className={styles.card}>
+      {!teamCode ? <>
+        <p className={styles.kicker}>{challenge.kicker}</p><h1 className={styles.title}>Unlock {checkpoint}</h1><p className={styles.intro}>Enter the Team Code from your team card to unlock this challenge.</p>
+        <form className={styles.form} onSubmit={unlock} style={{ marginTop: 28 }}><label className={styles.label} htmlFor="team">Team code</label><input id="team" className={styles.input} value={teamInput} onChange={e => setTeamInput(e.target.value)} placeholder="e.g. AZUL01" autoCapitalize="characters"/><button className={styles.button}>UNLOCK CHALLENGE</button></form>
+        {error && <div className={styles.errorBox}>{error}</div>}
+      </> : completed ? <>
+        <div className={styles.successIcon}>✓</div><span className={styles.teamBadge}>{teamCode}</span><p className={styles.kicker} style={{ marginTop: 18 }}>Challenge complete</p><h1 className={styles.title}>Nice work.</h1><div className={styles.scoreBig}>{completed.score}</div><p className={styles.intro}>POINTS EARNED</p>
+        {next ? <div className={styles.nextBox}><small>Your next location</small><h2>{next} · {checkpointLabels[next]}</h2><p>{locationHints[next]}</p></div> : <div className={styles.nextBox}><small>Route complete</small><h2>Return to Final Base</h2><p>Your team has reached the end of its route.</p></div>}
+      </> : <>
+        <span className={styles.teamBadge}>{teamCode}</span><p className={styles.kicker} style={{ marginTop: 18 }}>{challenge.kicker}</p><h1 className={styles.title}>{challenge.title}</h1><p className={styles.intro}>{challenge.intro}</p>
+        <div className={styles.challengeBox}><p className={styles.challengePrompt}>{challenge.prompt}</p>{challenge.code && <div className={styles.challengeCode}>{challenge.code}</div>}{challenge.chips && <div className={styles.chips}>{challenge.chips.map(x => <span className={styles.chip} key={x}>{x}</span>)}</div>}{challenge.symbolOrder && <div className={styles.symbolOrder}>{challenge.symbolOrder.map(x => <div className={styles.symbol} key={x}>{x}</div>)}</div>}</div>
+        <form className={styles.form} onSubmit={submit}><label className={styles.label} htmlFor="answer">Your answer</label><input id="answer" className={styles.input} value={answer} onChange={e => setAnswer(e.target.value)} placeholder={challenge.placeholder} autoComplete="off"/><button className={styles.button}>SUBMIT ANSWER</button></form>
+        <div className={styles.hintGrid}><button className={styles.hintButton} onClick={() => useHint(1)}>HINT 1 · 90 PTS</button><button className={styles.hintButton} onClick={() => useHint(2)}>HINT 2 · 75 PTS</button><button className={styles.hintButton} onClick={() => useHint(3)}>REVEAL · 50 PTS</button></div>
+        {message && <div className={styles.hintBox}>{message}</div>}
+        <div className={styles.scoreStrip}><span>Current maximum</span><strong>{score} pts</strong></div>
+      </>}
+    </section>
+  </div></div>
+}
+
+export function GameHub() {
+  return <div className={styles.shell}><div className={styles.viewport}><BrandBar/><section className={styles.card}><p className={styles.kicker}>Organizer preview</p><h1 className={styles.title}>Digital Checkpoints</h1><p className={styles.intro}>Five isolated mobile-first game pages for the Adriatic Bank Treasure Hunt at Azul. Team codes currently available: AZUL01–AZUL10.</p><div className={styles.hubGrid}>{(Object.keys(challenges) as CheckpointId[]).map(id => <a className={styles.hubLink} href={`/team-building/azul/${id.toLowerCase()}`} key={id}>{id} · {challenges[id].title}<span>{challenges[id].kicker}</span></a>)}</div><p className={styles.note}>D2 currently uses a temporary on-site answer (8) until the exact QR location is locked. D4 is ready for four physical symbol cards: SUN=6, PALM=3, WAVE=8, STAR=1.</p></section></div></div>
+}
