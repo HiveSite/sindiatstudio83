@@ -62,9 +62,9 @@ export function GameClient({ checkpoint }: { checkpoint: CheckpointId }) {
   }
 
   function useHint(level: number) {
-    const next = Math.max(hints, level)
-    setHints(next)
-    setMessage(level === 1 ? challenge.hint1 : level === 2 ? challenge.hint2 : challenge.reveal)
+    if (level !== hints + 1 || level > 3) return
+    setHints(level)
+    setMessage('')
   }
 
   async function submit(e: FormEvent) {
@@ -100,8 +100,18 @@ export function GameClient({ checkpoint }: { checkpoint: CheckpointId }) {
         <span className={styles.teamBadge}>{teamCode}</span><p className={styles.kicker} style={{ marginTop: 18 }}>{challenge.kicker}</p><h1 className={styles.title}>{challenge.title}</h1><p className={styles.intro}>{challenge.intro}</p>
         <div className={styles.challengeBox}><p className={styles.challengePrompt}>{challenge.prompt}</p>{challenge.code && <div className={styles.challengeCode}>{challenge.code}</div>}{challenge.chips && <div className={styles.chips}>{challenge.chips.map(x => <span className={styles.chip} key={x}>{x}</span>)}</div>}{challenge.symbolOrder && <div className={styles.symbolOrder}>{challenge.symbolOrder.map(x => <div className={styles.symbol} key={x}>{x}</div>)}</div>}</div>
         <form className={styles.form} onSubmit={submit}><label className={styles.label} htmlFor="answer">Your answer</label><input id="answer" className={styles.input} value={answer} onChange={e => setAnswer(e.target.value)} placeholder={challenge.placeholder} autoComplete="off"/><button className={styles.button}>SUBMIT ANSWER</button></form>
-        <div className={styles.hintGrid}><button className={styles.hintButton} onClick={() => useHint(1)}>HINT 1 · 90 PTS</button><button className={styles.hintButton} onClick={() => useHint(2)}>HINT 2 · 75 PTS</button><button className={styles.hintButton} onClick={() => useHint(3)}>REVEAL · 50 PTS</button></div>
-        {message && <div className={styles.hintBox}>{message}</div>}
+
+        {hints >= 1 && <div className={styles.hintBox}><strong>Hint 1</strong><br/>{challenge.hint1}</div>}
+        {hints >= 2 && <div className={styles.hintBox}><strong>Hint 2</strong><br/>{challenge.hint2}</div>}
+        {hints >= 3 && <div className={styles.hintBox}><strong>Reveal</strong><br/>{challenge.reveal}</div>}
+
+        <div className={styles.hintGrid} style={{ gridTemplateColumns: '1fr' }}>
+          {hints === 0 && <button className={styles.hintButton} onClick={() => useHint(1)}>OPEN HINT 1 · MAX 90 PTS</button>}
+          {hints === 1 && <button className={styles.hintButton} onClick={() => useHint(2)}>OPEN HINT 2 · MAX 75 PTS</button>}
+          {hints === 2 && <button className={styles.hintButton} onClick={() => useHint(3)}>REVEAL ANSWER · 50 PTS</button>}
+        </div>
+
+        {message && <div className={styles.errorBox}>{message}</div>}
         <div className={styles.scoreStrip}><span>Current maximum</span><strong>{score} pts</strong></div>
       </>}
     </section>
@@ -109,5 +119,5 @@ export function GameClient({ checkpoint }: { checkpoint: CheckpointId }) {
 }
 
 export function GameHub() {
-  return <div className={styles.shell}><div className={styles.viewport}><BrandBar/><section className={styles.card}><p className={styles.kicker}>Organizer preview</p><h1 className={styles.title}>Digital Checkpoints</h1><p className={styles.intro}>Five isolated mobile-first game pages for the Adriatic Bank Treasure Hunt at Azul. Team codes currently available: AZUL01–AZUL10.</p><div className={styles.hubGrid}>{(Object.keys(challenges) as CheckpointId[]).map(id => <a className={styles.hubLink} href={`/team-building/azul/${id.toLowerCase()}`} key={id}>{id} · {challenges[id].title}<span>{challenges[id].kicker}</span></a>)}</div><p className={styles.note}>D2 currently uses a temporary on-site answer (8) until the exact QR location is locked. D4 is ready for four physical symbol cards: SUN=6, PALM=3, WAVE=8, STAR=1.</p></section></div></div>
+  return <div className={styles.shell}><div className={styles.viewport}><BrandBar/><section className={styles.card}><p className={styles.kicker}>Organizer preview</p><h1 className={styles.title}>Digital Checkpoints</h1><p className={styles.intro}>Five isolated mobile-first game pages for the Adriatic Bank Treasure Hunt at Azul. Team codes currently available: AZUL01–AZUL10.</p><div className={styles.hubGrid}>{(Object.keys(challenges) as CheckpointId[]).map(id => <a className={styles.hubLink} href={`/team-building/azul/${id.toLowerCase()}`} key={id}>{id} · {challenges[id].title}<span>{challenges[id].kicker}</span></a>)}</div><p className={styles.note}>D2 currently uses a temporary on-site setup based on 8 supports until the exact QR location is locked. D4 is ready for four physical symbol cards: SUN=6, PALM=3, WAVE=8, STAR=1.</p></section></div></div>
 }
