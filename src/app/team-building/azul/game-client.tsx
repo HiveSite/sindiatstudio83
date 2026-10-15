@@ -7,19 +7,24 @@ import { challenges, checkpointLabels, getDigitalSequence, getNextCheckpoint, lo
 type SavedResult = { score: number; hints: number; completedAt: string }
 type Progress = Partial<Record<CheckpointId, SavedResult>>
 
-function BrandMark() {
+const ADRIATIC_LOGO_SQUARE = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcScBst1CPeNSpfj8FUvaFALuW_bSR13CrmehvYUIVoxPYXQkiIbrAnYnRs&s=10'
+const ADRIATIC_LOGO_HORIZONTAL = 'https://bankar.me/wp-content/uploads/2023/10/adriatic-bank-660x330-px-2.jpg'
+
+function BrandLogo() {
   return (
-    <svg className={styles.brandMark} viewBox="0 0 48 48" aria-hidden="true">
-      <defs><linearGradient id="abg" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stopColor="#293189"/><stop offset="1" stopColor="#009ADE"/></linearGradient></defs>
-      <rect width="48" height="48" fill="#0F209E" />
-      <path d="M24 24 48 0v48L24 24Z" fill="url(#abg)" />
-      <path d="M24 24 10 48h28L24 24Z" fill="#fff" />
-    </svg>
+    <picture aria-label="Adriatic Bank">
+      <source media="(max-width: 480px)" srcSet={ADRIATIC_LOGO_SQUARE} />
+      <img
+        src={ADRIATIC_LOGO_HORIZONTAL}
+        alt="Adriatic Bank"
+        style={{ display: 'block', width: 'clamp(124px, 31vw, 182px)', height: '48px', objectFit: 'contain', objectPosition: 'left center' }}
+      />
+    </picture>
   )
 }
 
 function BrandBar({ checkpoint }: { checkpoint?: CheckpointId }) {
-  return <div className={styles.brandBar}><div className={styles.brand}><BrandMark/><span>ADRIATIC BANK</span></div><div className={styles.gameLabel}>Treasure Hunt{checkpoint ? ` · ${checkpoint}` : ''}</div></div>
+  return <div className={styles.brandBar}><div className={styles.brand}><BrandLogo/></div><div className={styles.gameLabel}>Treasure Hunt{checkpoint ? ` · ${checkpoint}` : ''}</div></div>
 }
 
 export function GameClient({ checkpoint }: { checkpoint: CheckpointId }) {
