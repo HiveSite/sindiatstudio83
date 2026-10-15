@@ -57,12 +57,6 @@ export function GameClient({ checkpoint }: { checkpoint: CheckpointId }) {
     let saved: Progress = {}
     try { saved = JSON.parse(localStorage.getItem(`ab-treasure-progress:${code}`) || '{}') } catch {}
     if (saved[checkpoint]) { setTeamCode(code); setCompleted(saved[checkpoint]!); return }
-    const digitalOrder = getDigitalSequence(code)
-    const firstIncomplete = digitalOrder.find(id => !saved[id])
-    if (firstIncomplete && firstIncomplete !== checkpoint) {
-      setError(`This checkpoint is not currently available for your team. Your next digital checkpoint is ${firstIncomplete}.`)
-      return
-    }
     setTeamCode(code)
     setStartedAt(new Date().toISOString())
   }
