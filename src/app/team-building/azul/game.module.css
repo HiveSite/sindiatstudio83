@@ -152,12 +152,17 @@
 }
 
 .challengeCode {
-  margin: 6px 0 0;
-  font-size: clamp(32px, 9vw, 56px);
-  line-height: 1.05;
-  letter-spacing: 0.12em;
+  margin: 18px 0 2px;
+  padding: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.08);
+  font-size: clamp(18px, 4.6vw, 28px);
+  line-height: 1.35;
+  letter-spacing: 0;
   font-weight: 700;
   text-align: center;
+  overflow-wrap: anywhere;
 }
 
 .challengePrompt {
@@ -260,12 +265,6 @@
 .button:disabled {
   cursor: not-allowed;
   opacity: 0.5;
-}
-
-.secondaryButton {
-  composes: button;
-  background: #f0f3fa;
-  color: #0f209e;
 }
 
 .hintGrid {
@@ -380,6 +379,7 @@
 .nextBox h2 {
   margin: 0 0 8px;
   font-size: 24px;
+  overflow-wrap: anywhere;
 }
 
 .nextBox p {
@@ -426,6 +426,8 @@
 }
 
 .note {
+  position: relative;
+  z-index: 1;
   margin-top: 20px;
   color: #70706f;
   font-size: 12px;
