@@ -18,6 +18,12 @@ export type DigitalChallenge = {
   symbolOrder?: string[]
 }
 
+export type CheckpointLocation = {
+  display: string
+  instruction: string
+  mapsUrl?: string
+}
+
 export const challenges: Record<CheckpointId, DigitalChallenge> = {
   D1: {
     id: 'D1',
@@ -101,29 +107,68 @@ export const teamRoutes: Record<string, RouteCheckpoint[]> = {
 }
 
 export const checkpointLabels: Record<RouteCheckpoint, string> = {
-  P1: 'Ball Harvest',
-  P2: 'Water Relay',
-  P3: 'Balloon Transport',
-  P4: 'Team Crane',
-  P5: 'Uroš Mobile Challenge',
-  D1: 'The Locked Code',
-  D2: 'Three Lives',
-  D3: 'Five Symbols',
-  D4: 'The Balance',
-  D5: 'Two Sequences',
+  P1: 'Physical Checkpoint 1',
+  P2: 'Physical Checkpoint 2',
+  P3: 'Physical Checkpoint 3',
+  P4: 'Physical Checkpoint 4',
+  P5: 'Uroš Mobile Checkpoint',
+  D1: 'Digital Checkpoint 1',
+  D2: 'Digital Checkpoint 2',
+  D3: 'Digital Checkpoint 3',
+  D4: 'Digital Checkpoint 4',
+  D5: 'Digital Checkpoint 5',
 }
 
-export const locationHints: Record<RouteCheckpoint, string> = {
-  P1: 'Find the Game Master at Physical Checkpoint P1 - Ball Harvest.',
-  P2: 'Find the Game Master at Physical Checkpoint P2 - Water Relay.',
-  P3: 'Find the Game Master at Physical Checkpoint P3 - Balloon Transport.',
-  P4: 'Find the Game Master at Physical Checkpoint P4 - Team Crane.',
-  P5: 'Find Uroš and the mobile physical challenge.',
-  D1: 'Find the QR marker for Digital Checkpoint D1.',
-  D2: 'Find the QR marker for Digital Checkpoint D2.',
-  D3: 'Find the QR marker for Digital Checkpoint D3.',
-  D4: 'Find the QR marker for Digital Checkpoint D4.',
-  D5: 'Find the QR marker for Digital Checkpoint D5.',
+export const checkpointLocations: Record<RouteCheckpoint, CheckpointLocation> = {
+  P1: {
+    display: '41.9086887, 19.2442599',
+    instruction: 'Go to these coordinates and find the physical checkpoint.',
+    mapsUrl: 'https://www.google.com/maps?q=41.9086887,19.2442599',
+  },
+  P2: {
+    display: '41.9083408, 19.2463678',
+    instruction: 'Go to these coordinates and find the physical checkpoint.',
+    mapsUrl: 'https://www.google.com/maps?q=41.9083408,19.2463678',
+  },
+  P3: {
+    display: '41.9094981, 19.2465703',
+    instruction: 'Go to these coordinates and find the physical checkpoint.',
+    mapsUrl: 'https://www.google.com/maps?q=41.9094981,19.2465703',
+  },
+  P4: {
+    display: '41.9127689, 19.2461371',
+    instruction: 'Go to these coordinates and find the physical checkpoint.',
+    mapsUrl: 'https://www.google.com/maps?q=41.9127689,19.2461371',
+  },
+  P5: {
+    display: 'FIND UROŠ — MOBILE CHECKPOINT',
+    instruction: 'Find Uroš and complete the mobile physical challenge.',
+  },
+  D1: {
+    display: '41.9114295, 19.2454535',
+    instruction: 'Go to these coordinates and find the QR marker.',
+    mapsUrl: 'https://www.google.com/maps?q=41.9114295,19.2454535',
+  },
+  D2: {
+    display: '41.9121414, 19.2456818',
+    instruction: 'Go to these coordinates and find the QR marker.',
+    mapsUrl: 'https://www.google.com/maps?q=41.9121414,19.2456818',
+  },
+  D3: {
+    display: '41.9114687, 19.2469180',
+    instruction: 'Go to these coordinates and find the QR marker.',
+    mapsUrl: 'https://www.google.com/maps?q=41.9114687,19.2469180',
+  },
+  D4: {
+    display: '41.9113507, 19.2473455',
+    instruction: 'Go to these coordinates and find the QR marker.',
+    mapsUrl: 'https://www.google.com/maps?q=41.9113507,19.2473455',
+  },
+  D5: {
+    display: '41.9100044, 19.2473746',
+    instruction: 'Go to these coordinates and find the QR marker.',
+    mapsUrl: 'https://www.google.com/maps?q=41.9100044,19.2473746',
+  },
 }
 
 export function normalizeTeamCode(value: string) {
