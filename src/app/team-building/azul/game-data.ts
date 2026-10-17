@@ -88,16 +88,16 @@ export const challenges: Record<CheckpointId, DigitalChallenge> = {
 }
 
 export const teamRoutes: Record<string, RouteCheckpoint[]> = {
-  AZUL01: ['P1', 'D1', 'P2', 'D3', 'P3', 'D5', 'P4', 'D2', 'P5', 'D4'],
-  AZUL02: ['D1', 'P2', 'D3', 'P3', 'D5', 'P4', 'D2', 'P5', 'D4', 'P1'],
-  AZUL03: ['P2', 'D3', 'P3', 'D5', 'P4', 'D2', 'P5', 'D4', 'P1', 'D1'],
-  AZUL04: ['D3', 'P3', 'D5', 'P4', 'D2', 'P5', 'D4', 'P1', 'D1', 'P2'],
-  AZUL05: ['P3', 'D5', 'P4', 'D2', 'P5', 'D4', 'P1', 'D1', 'P2', 'D3'],
-  AZUL06: ['D5', 'P4', 'D2', 'P5', 'D4', 'P1', 'D1', 'P2', 'D3', 'P3'],
-  AZUL07: ['P4', 'D2', 'P5', 'D4', 'P1', 'D1', 'P2', 'D3', 'P3', 'D5'],
-  AZUL08: ['D2', 'P5', 'D4', 'P1', 'D1', 'P2', 'D3', 'P3', 'D5', 'P4'],
-  AZUL09: ['P5', 'D4', 'P1', 'D1', 'P2', 'D3', 'P3', 'D5', 'P4', 'D2'],
-  AZUL10: ['D4', 'P1', 'D1', 'P2', 'D3', 'P3', 'D5', 'P4', 'D2', 'P5'],
+  AZUL01: ['P2', 'D2', 'D5', 'P4', 'P5', 'D3', 'D1', 'P3', 'P1', 'D4'],
+  AZUL02: ['D4', 'P1', 'P3', 'D1', 'D3', 'P5', 'P4', 'D5', 'D2', 'P2'],
+  AZUL03: ['P4', 'D3', 'D2', 'P3', 'P2', 'D4', 'D5', 'P1', 'P5', 'D1'],
+  AZUL04: ['D1', 'P5', 'P1', 'D5', 'D4', 'P2', 'P3', 'D2', 'D3', 'P4'],
+  AZUL05: ['P3', 'D4', 'D3', 'P1', 'P4', 'D1', 'D2', 'P5', 'P2', 'D5'],
+  AZUL06: ['D3', 'P3', 'P4', 'D4', 'D2', 'P1', 'P2', 'D1', 'D5', 'P5'],
+  AZUL07: ['P5', 'D5', 'D1', 'P2', 'P1', 'D2', 'D4', 'P4', 'P3', 'D3'],
+  AZUL08: ['D2', 'P4', 'P2', 'D3', 'D5', 'P3', 'P5', 'D4', 'D1', 'P1'],
+  AZUL09: ['P1', 'D1', 'D4', 'P5', 'P3', 'D5', 'D3', 'P2', 'P4', 'D2'],
+  AZUL10: ['D5', 'P2', 'P5', 'D2', 'D1', 'P4', 'P1', 'D3', 'D4', 'P3'],
 }
 
 export const checkpointLabels: Record<RouteCheckpoint, string> = {
