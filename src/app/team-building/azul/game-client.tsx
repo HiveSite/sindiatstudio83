@@ -2,7 +2,7 @@
 
 import { FormEvent, useEffect, useMemo, useState } from 'react'
 import styles from './game.module.css'
-import { challenges, checkpointLabels, getDigitalSequence, getNextCheckpoint, locationHints, normalizeAnswer, normalizeTeamCode, teamRoutes, type CheckpointId } from './game-data'
+import { challenges, checkpointLocations, getDigitalSequence, getNextCheckpoint, normalizeAnswer, normalizeTeamCode, teamRoutes, type CheckpointId } from './game-data'
 
 type SavedResult = { score: number; hints: number; completedAt: string }
 type Progress = Partial<Record<CheckpointId, SavedResult>>
@@ -81,6 +81,7 @@ export function GameClient({ checkpoint }: { checkpoint: CheckpointId }) {
   }
 
   const next = teamCode ? getNextCheckpoint(teamCode, checkpoint) : null
+  const nextLocation = next ? checkpointLocations[next] : null
   const digitalOrder = teamCode ? getDigitalSequence(teamCode) : []
   const completedDigital = teamCode ? digitalOrder.filter(id => progress[id] || id === checkpoint && completed).length : 0
   const progressPercent = Math.max(8, (completedDigital / 5) * 100)
@@ -95,7 +96,7 @@ export function GameClient({ checkpoint }: { checkpoint: CheckpointId }) {
         {error && <div className={styles.errorBox}>{error}</div>}
       </> : completed ? <>
         <div className={styles.successIcon}>✓</div><span className={styles.teamBadge}>{teamCode}</span><p className={styles.kicker} style={{ marginTop: 18 }}>Challenge complete</p><h1 className={styles.title}>Nice work.</h1><div className={styles.scoreBig}>{completed.score}</div><p className={styles.intro}>POINTS EARNED</p>
-        {next ? <div className={styles.nextBox}><small>Your next location</small><h2>{next} · {checkpointLabels[next]}</h2><p>{locationHints[next]}</p></div> : <div className={styles.nextBox}><small>Route complete</small><h2>Return to Final Base</h2><p>Your team has reached the end of its route.</p></div>}
+        {next && nextLocation ? <div className={styles.nextBox}><small>Your next location</small><h2>{nextLocation.display}</h2><p>{nextLocation.instruction}</p>{nextLocation.mapsUrl && <a href={nextLocation.mapsUrl} target="_blank" rel="noreferrer" className={styles.button} style={{ display: 'grid', placeItems: 'center', marginTop: 16, textDecoration: 'none', background: 'white', color: '#0f209e' }}>OPEN LOCATION IN MAPS</a>}</div> : <div className={styles.nextBox}><small>Route complete</small><h2>RETURN TO FINAL BASE</h2><p>Your team has completed all 10 checkpoints. Return to the event host / final base.</p></div>}
       </> : <>
         <span className={styles.teamBadge}>{teamCode}</span><p className={styles.kicker} style={{ marginTop: 18 }}>{challenge.kicker}</p><h1 className={styles.title}>{challenge.title}</h1><p className={styles.intro}>{challenge.intro}</p>
         <div className={styles.challengeBox}><p className={styles.challengePrompt}>{challenge.prompt}</p>{challenge.code && <div className={styles.challengeCode}>{challenge.code}</div>}{challenge.chips && <div className={styles.chips}>{challenge.chips.map(x => <span className={styles.chip} key={x}>{x}</span>)}</div>}{challenge.symbolOrder && <div className={styles.symbolOrder}>{challenge.symbolOrder.map(x => <div className={styles.symbol} key={x}>{x}</div>)}</div>}</div>
@@ -119,5 +120,5 @@ export function GameClient({ checkpoint }: { checkpoint: CheckpointId }) {
 }
 
 export function GameHub() {
-  return <div className={styles.shell}><div className={styles.viewport}><BrandBar/><section className={styles.card}><p className={styles.kicker}>Organizer preview</p><h1 className={styles.title}>Digital Checkpoints</h1><p className={styles.intro}>Five isolated mobile-first game pages for the Adriatic Bank Treasure Hunt at Azul. Team codes currently available: AZUL01–AZUL10.</p><div className={styles.hubGrid}>{(Object.keys(challenges) as CheckpointId[]).map(id => <a className={styles.hubLink} href={`/team-building/azul/${id.toLowerCase()}`} key={id}>{id} · {challenges[id].title}<span>{challenges[id].kicker}</span></a>)}</div><p className={styles.note}>D2 currently uses a temporary on-site setup based on 8 supports until the exact QR location is locked. D4 is ready for four physical symbol cards: SUN=6, PALM=3, WAVE=8, STAR=1.</p></section></div></div>
+  return <div className={styles.shell}><div className={styles.viewport}><BrandBar/><section className={styles.card}><p className={styles.kicker}>Organizer preview</p><h1 className={styles.title}>Digital Checkpoints</h1><p className={styles.intro}>Five mobile game pages for the Adriatic Bank Treasure Hunt at Azul. Team codes AZUL01–AZUL10 use separate randomized routes. After each solved digital challenge, the page shows that team’s exact next location.</p><div className={styles.hubGrid}>{(Object.keys(challenges) as CheckpointId[]).map(id => <a className={styles.hubLink} href={`/team-building/azul/${id.toLowerCase()}`} key={id}>{id} · {challenges[id].title}<span>{checkpointLocations[id].display}</span></a>)}</div><p className={styles.note}>D1: 41.9114295, 19.2454535 · D2: 41.9121414, 19.2456818 · D3: 41.9114687, 19.2469180 · D4: 41.9113507, 19.2473455 · D5: 41.9100044, 19.2473746.</p></section></div></div>
 }
