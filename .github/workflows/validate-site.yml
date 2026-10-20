@@ -40,3 +40,32 @@ jobs:
       - name: Run full production checks
         if: ${{ always() && steps.install.outcome == 'success' }}
         run: npm run check
+
+  repair-dependencies:
+    if: github.ref == 'refs/heads/audit-2026-10-20-security-stability' && github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+      - name: Resolve and verify updated dependencies
+        run: |
+          npm install next@16.4.2 --save-exact --no-audit --no-fund
+          npm audit fix --no-fund
+          npm audit --audit-level=high
+          npm run check
+      - name: Commit validated manifests on isolated branch
+        run: |
+          git diff --check
+          git add package.json package-lock.json
+          if ! git diff --cached --quiet; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git commit -m "Update vulnerable dependencies after audit"
+            git push origin HEAD:audit-2026-10-20-security-stability
+          fi
