@@ -2,7 +2,8 @@
 const COOKIE_NAME = 'studio83_media_session'
 const MAX_FILE_BYTES = 900_000
 const MAX_FILES_PER_UPLOAD = 12
-const MEDIA_PASSWORD = 'studio83media2026!'
+// Configure STUDIO83_MEDIA_PASSWORD in Netlify environment; no code fallback.
+const mediaPassword = () => (env('STUDIO83_MEDIA_PASSWORD') || '').trim()
 
 const MANAGED_THUMBNAIL_NAMES = new Set([
   'thumbnail.webp',
@@ -357,7 +358,8 @@ async function commitFiles(projectKey, files) {
 }
 
 export default async (req) => {
-  const authenticated = await verifySession(readCookie(req, COOKIE_NAME), MEDIA_PASSWORD)
+  const password = mediaPassword()
+  const authenticated = password.length >= 24 && await verifySession(readCookie(req, COOKIE_NAME), password)
   const githubConfigured = Boolean(env('STUDIO83_GITHUB_TOKEN'))
 
   if (req.method === 'GET') {
@@ -394,11 +396,12 @@ export default async (req) => {
   try { body = await req.json() } catch { return json({ error: 'Neispravan zahtjev.' }, 400) }
 
   if (body.action === 'login') {
-    if (body.password !== MEDIA_PASSWORD) {
+    if (password.length < 24) return json({ error: 'Media admin nije konfigurisan.' }, 503)
+    if (body.password !== password) {
       await new Promise((resolve) => setTimeout(resolve, 350))
       return json({ error: 'Pogrešna lozinka.' }, 401)
     }
-    const token = await makeSession(MEDIA_PASSWORD)
+    const token = await makeSession(password)
     return json({ ok: true, githubConfigured }, 200, { 'set-cookie': sessionCookie(token, 12 * 60 * 60) })
   }
 
