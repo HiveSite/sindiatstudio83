@@ -53,3 +53,17 @@ NEXT_PUBLIC_BLOG_ENDPOINT
 ```
 
 Pošto su sve `NEXT_PUBLIC_`, vidljive su browseru. Ovdje nema tajnih ključeva.
+
+## Sigurnosne postavke media admina
+
+Media administrator i Instagram comment-picker koriste zajedničku potpisanu sesiju.
+Prije produkcijskog deploya obavezno:
+
+1. Dodaj `STUDIO83_MEDIA_PASSWORD` u Netlify Environment Variables (min. 24 karaktera, jedinstvena snažna vrijednost).
+2. Rotiraj prethodnu javno izloženu lozinku. Nemoj je ponovo koristiti.
+3. Provjeri da je `STUDIO83_GITHUB_TOKEN` podešen sa minimalnim pristupom samo ovom repozitorijumu i potrebnim operacijama.
+4. Testiraj prijavu, odjavu, istek sesije, media upload i comment-picker sa autentifikovanom sesijom.
+5. Provjeri da anonimni POST na `/comment-picker/api`, `/api/studio83-media` i `/api/studio83-media-controls` ne može izvršiti zaštićene akcije.
+6. Potvrdi da GitHub Actions audit zavisnosti i `npm run check` prolaze prije merge-a.
+
+Ako `STUDIO83_MEDIA_PASSWORD` nije postavljen, media admin prijava i zaštićeni alati ostaju zaključani (fail-closed). Nikada ne unositi vrijednosti tajni u git, issues ili PR komentare.
