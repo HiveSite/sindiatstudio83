@@ -127,6 +127,25 @@ for (const host of ['https://script.google.com', 'https://www.google-analytics.c
 }
 if (!netlifyConfig.includes('Netlify-CDN-Cache-Control')) fail('Netlify CDN cache policy is missing')
 
+// Security regression checks for admin-only endpoints and lead confirmation.
+for (const filename of [
+  'netlify/functions/studio83-media.mjs',
+  'netlify/functions/studio83-media-controls.mjs',
+]) {
+  const handler = read(filename)
+  if (!handler.includes('STUDIO83_MEDIA_PASSWORD')) fail(`${filename} must read admin secret from environment`)
+  if (!handler.includes('isSameOriginRequest(req)')) fail(`${filename} must validate mutation origin`)
+}
+const picker = read('netlify/functions/instagram-comment-picker.mts')
+if (!picker.includes('hasAdminSession(req)') || !picker.includes('sameOrigin(req)')) {
+  fail('Instagram comment picker must require admin authentication and same-origin requests')
+}
+const lead = read('src/components/lead-form.tsx')
+if (!lead.includes('result.ok !== true')) fail('Lead form must require explicit success acknowledgement')
+if (fs.existsSync(path.join(root, 'src/app/api/comment-picker/route.ts'))) {
+  fail('Static-export project must not include a server-only Next.js comment-picker route')
+}
+
 if (warnings.length) console.warn(warnings.map((message) => `WARNING: ${message}`).join('\n'))
 if (failures.length) {
   console.error(failures.map((message) => `ERROR: ${message}`).join('\n'))
