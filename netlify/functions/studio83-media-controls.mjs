@@ -1,3 +1,11 @@
+function isSameOriginRequest(req) {
+  const origin = req.headers.get('origin')
+  if (!origin) return false
+  try {
+    return new URL(origin).origin === new URL(req.url).origin
+  } catch { return false }
+}
+
 const COOKIE_NAME = 'studio83_media_session'
 const mediaSecret = () => (getEnv('STUDIO83_MEDIA_PASSWORD') || '').trim()
 const MANIFEST_PATH = 'src/data/studio83-media-manifest.json'
@@ -274,6 +282,7 @@ export default async (req) => {
   }
 
   if (req.method !== 'POST') return json({ error: 'Method not allowed' }, 405)
+  if (!isSameOriginRequest(req)) return json({ error: 'Cross-origin request rejected.' }, 403)
   let body
   try { body = await req.json() } catch { return json({ error: 'Neispravan zahtjev.' }, 400) }
 
