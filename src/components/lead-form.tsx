@@ -110,7 +110,7 @@ export function LeadForm({ compact = false, source = 'contact-page' }: { compact
       const response = await fetch(site.integrations.contactEndpoint, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(payload), signal: controller.signal })
       const responseText = await response.text(); let result: { ok?: boolean; error?: string } = {}
       try { result = responseText ? JSON.parse(responseText) as typeof result : {} } catch { result = {} }
-      if (!response.ok || result.ok === false) throw new Error(result.error || `HTTP ${response.status}`)
+      if (!response.ok || result.ok !== true) throw new Error(result.error || `HTTP ${response.status}`)
 
       trackEvent('generate_lead', { form_name: 'lead_form', goal: payload.goal, budget: payload.budget, form_source: sourceParam, service: selectedService, industry: selectedIndustry, recommendation: queryContext.recommendation, product: queryContext.product })
       form.reset(); setGoal(''); setBudget(''); setStatus(`Hvala. Upit je poslat. ${site.responseTime}`); setState('success')
