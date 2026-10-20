@@ -42,13 +42,15 @@ jobs:
         run: npm run check
 
   repair-dependencies:
-    if: github.ref == 'refs/heads/audit-2026-10-20-security-stability' && github.actor != 'github-actions[bot]'
+    if: (github.ref == 'refs/heads/audit-2026-10-20-security-stability' || github.head_ref == 'audit-2026-10-20-security-stability') && github.actor != 'github-actions[bot]'
     runs-on: ubuntu-latest
     timeout-minutes: 15
     permissions:
       contents: write
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: audit-2026-10-20-security-stability
       - uses: actions/setup-node@v4
         with:
           node-version: '20'
