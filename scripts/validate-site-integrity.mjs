@@ -143,6 +143,9 @@ const picker = read('netlify/functions/instagram-comment-picker.mts')
 if (!picker.includes('hasAdminSession(req)') || !picker.includes('sameOrigin(req)')) {
   fail('Instagram comment picker must require admin authentication and same-origin requests')
 }
+if (!picker.includes("endpoint.hostname !== 'graph.instagram.com'") || !picker.includes('AbortSignal.timeout(12000)')) {
+  fail('Instagram API requests must be restricted to the approved host and use a timeout')
+}
 const lead = read('src/components/lead-form.tsx')
 if (!lead.includes('result.ok !== true')) fail('Lead form must require explicit success acknowledgement')
 if (fs.existsSync(path.join(root, 'src/app/api/comment-picker/route.ts'))) {

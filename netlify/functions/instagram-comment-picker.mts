@@ -49,6 +49,7 @@ function json(data: unknown, status = 200) {
 function canonical(input: string) {
   try {
     const url = new URL(input);
+    if (url.protocol !== 'https:' || !['instagram.com', 'www.instagram.com'].includes(url.hostname) || url.port) return '';
     const parts = url.pathname.split('/').filter(Boolean);
     return parts.length >= 2 && ['p', 'reel', 'tv'].includes(parts[0]) ? `/${parts[0]}/${parts[1]}` : '';
   } catch { return ''; }
@@ -59,7 +60,11 @@ function graph(path: string, token: string) {
 }
 
 async function graphFetch<T>(url: string) {
-  const response = await fetch(url, { headers: { accept: 'application/json' } });
+  const endpoint = new URL(url);
+  if (endpoint.protocol !== 'https:' || endpoint.hostname !== 'graph.instagram.com' || endpoint.port) {
+    throw new Error('Instagram API returned an invalid pagination URL.');
+  }
+  const response = await fetch(endpoint, { headers: { accept: 'application/json' }, signal: AbortSignal.timeout(12000) });
   const data = await response.json().catch(() => ({})) as GraphPage<unknown>;
   if (!response.ok || data.error) throw new Error(data.error?.message || `Instagram API request failed (${response.status}).`);
   return data as T;
