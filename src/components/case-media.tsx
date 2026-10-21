@@ -249,6 +249,8 @@ function MediaFigure({
         <img
           src={image.src}
           alt={image.alt}
+          width={image.width}
+          height={image.height}
           loading="lazy"
           decoding="async"
           style={imageStyle(image)}
@@ -277,6 +279,8 @@ export function CaseCoverPlaceholder({ item, large = false }: { item: CaseStudy;
           className={`${styles.coverImage}${large ? ` ${styles.fullCoverImage}` : ''}`}
           src={image.src}
           alt={image.alt}
+          width={image.width}
+          height={image.height}
           loading={large ? 'eager' : 'lazy'}
           decoding="async"
           style={imageStyle(image)}
