@@ -20,20 +20,28 @@ export function trackEvent(event: string, payload: TrackingPayload = {}) {
   if (site.analytics.forwardCustomEventsToDirectGa4) sendDirectGa4Event(event, payload)
 }
 
+function safeGetStorage(storage: 'local' | 'session', key: string): string {
+  try {
+    return (storage === 'local' ? window.localStorage : window.sessionStorage).getItem(key) || ''
+  } catch {
+    return ''
+  }
+}
+
 export function getStoredCampaignData() {
   if (typeof window === 'undefined') return {}
   const keys = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term', 'gclid', 'fbclid']
   return Object.fromEntries(keys.map((key) => [
     key,
     new URLSearchParams(window.location.search).get(key)
-      || sessionStorage.getItem(`sindikat_${key}`)
+      || safeGetStorage('session', `sindikat_${key}`)
       || '',
   ]))
 }
 
 export function getFirstTouchData() {
   if (typeof window === 'undefined') return {}
-  const raw = localStorage.getItem('sindikat_first_touch')
+  const raw = safeGetStorage('local', 'sindikat_first_touch')
   if (!raw) return {}
   try {
     const parsed = JSON.parse(raw) as Record<string, unknown>
