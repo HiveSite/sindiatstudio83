@@ -6,6 +6,14 @@ import { useRouter } from 'next/navigation'
 import { site } from '@/data/site'
 import { getFirstTouchData, getStoredCampaignData, trackEvent } from '@/lib/tracking'
 
+function safeStorageValue(storage: 'local' | 'session', key: string): string {
+  try {
+    return (storage === 'local' ? window.localStorage : window.sessionStorage).getItem(key) || ''
+  } catch {
+    return ''
+  }
+}
+
 const requestTimeoutMs = 15000
 
 type FormState = 'idle' | 'loading' | 'error' | 'success'
@@ -98,8 +106,8 @@ export function LeadForm({ compact = false, source = 'contact-page' }: { compact
       projectState: String(fd.get('projectState') || '').trim(), message: String(fd.get('message') || '').trim(),
       collaborationModel: queryContext.collaborationModel, recommendation: queryContext.recommendation, product: queryContext.product,
       service: selectedService, industry: selectedIndustry, url: window.location.href,
-      landingPage: sessionStorage.getItem('sindikat_landing_page') || '', referrer: document.referrer, source: sourceParam,
-      consentChoice: localStorage.getItem('sindikat_cookie_consent') || '', submittedAt: new Date().toISOString(),
+      landingPage: safeStorageValue('session', 'sindikat_landing_page'), referrer: document.referrer, source: sourceParam,
+      consentChoice: safeStorageValue('local', 'sindikat_cookie_consent'), submittedAt: new Date().toISOString(),
       ...getStoredCampaignData(), ...getFirstTouchData(),
     }
 
