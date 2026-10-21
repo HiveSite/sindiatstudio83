@@ -138,6 +138,7 @@ for (const filename of [
   const handler = read(filename)
   if (!handler.includes('STUDIO83_MEDIA_PASSWORD')) fail(`${filename} must read admin secret from environment`)
   if (!handler.includes('isSameOriginRequest(req)')) fail(`${filename} must validate mutation origin`)
+  if (!handler.includes("'cache-control': 'no-store'")) fail(`${filename} must prevent caching admin API responses`)
 }
 const picker = read('netlify/functions/instagram-comment-picker.mts')
 if (!picker.includes('hasAdminSession(req)') || !picker.includes('sameOrigin(req)')) {
