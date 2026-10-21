@@ -85,3 +85,22 @@
   .sales-chooser-shell{padding:16px}.sales-chooser-step{padding:18px}.sales-choice{font-size:14px}.sales-category-copy h3{font-size:34px}
   .product-price-top h2{font-size:30px}.product-price-top>strong{font-size:34px}.service-rail-card{flex-basis:86vw;padding:24px}
 }
+
+/* P1 mobile usability: keep columns shrinkable and horizontal choices navigable */
+.sales-category-panel > *, .sales-chooser-grid > *, .sales-recommendation > *, .sales-section-head > *, .sales-chooser-head > * {min-width:0}
+.sales-category-rail, .service-rail {overscroll-behavior-inline:contain;scroll-padding-inline:12px;-webkit-overflow-scrolling:touch}
+.sales-category-tab:focus-visible, .sales-choice:focus-visible, .sales-item-link:focus-visible {outline:2px solid #02c9bf;outline-offset:3px}
+@media (max-width:760px){
+ .sales-category-rail, .service-rail {scroll-padding-inline:20px}
+ .sales-category-panel {grid-template-columns:minmax(0,1fr)}
+ .sales-category-copy h3 {font-size:clamp(30px,9vw,40px);overflow-wrap:anywhere}
+ .sales-recommendation-copy strong, .service-rail-card h3 {overflow-wrap:break-word}
+ .sales-item-link {grid-template-columns:24px minmax(0,1fr) 20px}
+}
+@media (max-width:390px){
+ .sales-chooser-shell {padding:12px;border-radius:18px}
+ .sales-chooser-step {padding:14px}
+ .sales-item-link strong {font-size:19px}
+ .sales-chooser-step h3 {font-size:20px}
+}
+@media (hover:none){.sales-choice:hover{transform:none}.sales-item-link:hover{padding-left:0;background:transparent}}

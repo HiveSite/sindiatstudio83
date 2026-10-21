@@ -9,6 +9,7 @@ const fail = (message) => {
 }
 
 const css = read('src/app/globals.css')
+const salesCss = read('src/app/sales-ux.css')
 const header = read('src/components/header.tsx')
 const workFilter = read('src/components/work-filter.tsx')
 const blogExplorer = read('src/components/blog-explorer.tsx')
@@ -74,6 +75,16 @@ if (caseMediaComponent.includes('mediaVeil')) {
 if (!caseMediaComponent.includes('if (!image) return null')) {
   fail('Missing images should not render instructional placeholder cards')
 }
+
+for (const [label, token] of [
+  ['shrinkable mobile sales layout', '.sales-category-panel {grid-template-columns:minmax(0,1fr)}'],
+  ['small phone sales breakpoint', '@media (max-width:390px)'],
+  ['touch friendly category scrolling', 'overscroll-behavior-inline:contain'],
+  ['touch hover reset', '@media (hover:none)'],
+]) {
+  if (!salesCss.includes(token)) fail(`Sales responsive CSS missing ${label}: ${token}`)
+}
+if ((salesCss.match(/{/g) || []).length !== (salesCss.match(/}/g) || []).length) fail('sales-ux.css has unbalanced braces')
 
 const componentChecks = [
   [header, 'mobile navigation focus trap', "event.key !== 'Tab'"],
