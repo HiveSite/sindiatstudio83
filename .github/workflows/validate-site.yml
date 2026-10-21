@@ -40,3 +40,15 @@ jobs:
       - name: Run full production checks
         if: ${{ always() && steps.install.outcome == 'success' }}
         run: npm run check
+
+      - name: Verify exported production pages
+        if: ${{ always() && steps.install.outcome == 'success' }}
+        run: |
+          set -eu
+          for page in index.html usluge/index.html industrije/index.html radovi/index.html o-nama/index.html blog/index.html kontakt/index.html sitemap.xml robots.txt; do
+            if [ ! -s "out/$page" ]; then
+              echo "Missing or empty exported file: out/$page" >&2
+              exit 1
+            fi
+          done
+          echo 'Verified public pages, sitemap and robots output.'
