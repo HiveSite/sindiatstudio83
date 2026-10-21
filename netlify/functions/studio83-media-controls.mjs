@@ -26,7 +26,7 @@ const PROJECTS = [
 ].map(([key,caseSlug,title,route,folder,coverFile]) => ({ key,caseSlug,title,route,folder,coverFile }))
 
 function json(body, status = 200) {
-  return new Response(JSON.stringify(body), { status, headers: { 'content-type': 'application/json; charset=utf-8' } })
+  return new Response(JSON.stringify(body), { status, headers: { 'content-type': 'application/json; charset=utf-8', 'cache-control': 'no-store' } })
 }
 
 function getEnv(name) {
