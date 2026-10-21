@@ -36,8 +36,8 @@ export default function HomePage() {
         <div className="hero-copy">
           <span className="eyebrow">Studio za rast i realizaciju</span>
           <h1><span>Digital, kampanje,</span><span>ljudi i realizacija.</span><span className="outline">Jedan tim.</span></h1>
-          <p className="lead">Od digitalnog marketinga i web proizvoda do promo timova, aktivacija i događaja u Crnoj Gori - povezujemo djelove koji moraju da rade zajedno i vodimo ih kroz jednu odgovornu tačku.</p>
-          <div className="button-row hero-actions"><Link className="button button-primary" href="#izaberi-rjesenje" data-track="hero_solution">Pogledaj ponudu</Link><Link className="button button-ghost" href="/radovi/" data-track="hero_cases">Pogledaj radove</Link></div>
+          <p className="lead">Vodimo digitalni marketing, web projekte, promocije i događaje - od ideje do realizacije. Jedan tim, jasni koraci i jedna odgovorna tačka za vaš projekat.</p>
+          <div className="button-row hero-actions"><Link className="button button-primary" href="/kontakt/?izvor=hero" data-track="hero_contact">Zatraži ponudu</Link><Link className="button button-ghost" href="#izaberi-rjesenje" data-track="hero_solution">Istraži usluge</Link></div>
           <div className="hero-note"><span><i /> Podgorica i cijela Crna Gora</span><span><i /> Jedan vlasnik projekta, manje koordinacije za klijenta</span></div>
         </div>
         <div className="hero-visual" aria-label="Sistem koji povezuje digital, ljude i realizaciju"><div className="hero-system"><div className="hero-orbit-stage"><div className="hero-glow" /><div className="hero-ring" /><div className="hero-ring" /><div className="hero-core"><strong>jedna tačka<br />odgovornosti</strong></div></div><div className="hero-node-grid"><div className="hero-node hero-node-1"><strong>Digital</strong><span>Kampanje, web i mjerenje</span></div><div className="hero-node hero-node-2"><strong>Ljudi</strong><span>Timovi, raspored i logistika</span></div><div className="hero-node hero-node-3"><strong>Teren</strong><span>Aktivacije, eventi i sadržaj</span></div></div></div></div>
