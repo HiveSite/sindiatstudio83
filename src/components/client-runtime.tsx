@@ -6,27 +6,35 @@ import { sendDirectGa4Event, trackEvent } from '@/lib/tracking'
 
 const campaignKeys = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term', 'gclid', 'fbclid'] as const
 
+function safeStorageRead(storage: 'local' | 'session', key: string): string {
+  try { return (storage === 'local' ? window.localStorage : window.sessionStorage).getItem(key) || '' } catch { return '' }
+}
+
+function safeStorageWrite(storage: 'local' | 'session', key: string, value: string): void {
+  try { (storage === 'local' ? window.localStorage : window.sessionStorage).setItem(key, value) } catch { /* Browser may block storage; tracking must never break navigation. */ }
+}
+
 function RuntimeEffects() {
   const pathname = usePathname()
   const searchParams = useSearchParams()
   const lastPageRef = useRef('')
 
   useEffect(() => {
-    if (!sessionStorage.getItem('sindikat_landing_page')) sessionStorage.setItem('sindikat_landing_page', window.location.pathname + window.location.search)
+    if (!safeStorageRead('session', 'sindikat_landing_page')) safeStorageWrite('session', 'sindikat_landing_page', window.location.pathname + window.location.search)
 
     campaignKeys.forEach((key) => {
       const value = searchParams.get(key)
-      if (value) sessionStorage.setItem(`sindikat_${key}`, value)
+      if (value) safeStorageWrite('session', `sindikat_${key}`, value)
     })
 
-    if (!localStorage.getItem('sindikat_first_touch')) {
+    if (!safeStorageRead('local', 'sindikat_first_touch')) {
       const firstTouch = {
         landing_page: window.location.pathname + window.location.search,
         referrer: document.referrer,
         timestamp: new Date().toISOString(),
         ...Object.fromEntries(campaignKeys.map((key) => [key, searchParams.get(key) || ''])),
       }
-      localStorage.setItem('sindikat_first_touch', JSON.stringify(firstTouch))
+      safeStorageWrite('local', 'sindikat_first_touch', JSON.stringify(firstTouch))
     }
   }, [searchParams])
 
