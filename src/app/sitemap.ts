@@ -8,35 +8,32 @@ import { site } from '@/data/site'
 export const dynamic = 'force-static'
 
 const absoluteUrl = (path: string) => new URL(path, site.domain).toString()
-const contentDate = new Date(`${site.contentUpdatedAt}T00:00:00.000Z`)
+// Avoid claiming that every route changed on the same unverified date.
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticRoutes: MetadataRoute.Sitemap = [
-    { url: absoluteUrl('/'), lastModified: contentDate, images: [absoluteUrl('/images/brand/og-cover.png')] },
-    { url: absoluteUrl('/usluge/'), lastModified: contentDate },
-    { url: absoluteUrl('/industrije/'), lastModified: contentDate },
-    { url: absoluteUrl('/radovi/'), lastModified: contentDate },
-    { url: absoluteUrl('/o-nama/'), lastModified: contentDate },
-    { url: absoluteUrl('/blog/'), lastModified: contentDate },
-    { url: absoluteUrl('/kontakt/'), lastModified: contentDate },
+    { url: absoluteUrl('/'), images: [absoluteUrl('/images/brand/og-cover.png')] },
+    { url: absoluteUrl('/usluge/') },
+    { url: absoluteUrl('/industrije/') },
+    { url: absoluteUrl('/radovi/') },
+    { url: absoluteUrl('/o-nama/') },
+    { url: absoluteUrl('/blog/') },
+    { url: absoluteUrl('/kontakt/') },
   ]
 
   const serviceRoutes: MetadataRoute.Sitemap = services.map((item) => ({
     url: absoluteUrl(`/usluge/${item.slug}/`),
-    lastModified: contentDate,
   }))
 
   const industryRoutes: MetadataRoute.Sitemap = industries.map((item) => ({
     url: absoluteUrl(`/industrije/${item.slug}/`),
-    lastModified: contentDate,
   }))
 
   const caseRoutes: MetadataRoute.Sitemap = cases.map((item) => {
     const image = item.socialImage?.src || item.coverImage?.src
     return {
       url: absoluteUrl(`/radovi/${item.slug}/`),
-      lastModified: contentDate,
-      images: image ? [absoluteUrl(image)] : undefined,
+        images: image ? [absoluteUrl(image)] : undefined,
     }
   })
 

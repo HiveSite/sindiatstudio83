@@ -1261,3 +1261,10 @@ a,strong,span{max-width:100%}
 }
 .hero-orbit-stage .hero-glow,.hero-orbit-stage .hero-ring{left:50%;top:50%;transform:translate(-50%,-50%)}
 .hero-orbit-stage .hero-ring:nth-child(2){transform:translate(-50%,-50%) rotate(12deg)}
+
+/* Studio83 targeted accessibility and responsive enhancements - 2026-10-21 */
+:where(a,button,input,select,textarea,[tabindex]):focus-visible{outline:2px solid #02c9bf;outline-offset:3px}
+:where(.button,.menu-toggle,.filter-button){touch-action:manipulation}
+:where(.hero-copy,.hero-actions,.hero-note,.section-heading){min-width:0}
+@media (max-width:620px){.hero-actions{display:flex;flex-wrap:wrap;gap:12px}.hero-actions .button{max-width:100%;white-space:normal;text-align:center}.hero-copy h1{overflow-wrap:break-word}}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
