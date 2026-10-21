@@ -149,6 +149,11 @@ if (!picker.includes("endpoint.hostname !== 'graph.instagram.com'") || !picker.i
 }
 const lead = read('src/components/lead-form.tsx')
 if (!lead.includes('result.ok !== true')) fail('Lead form must require explicit success acknowledgement')
+const tracking = read('src/lib/tracking.ts')
+const runtime = read('src/components/client-runtime.tsx')
+if (!tracking.includes('function safeGetStorage') || /(?<!safeGetStorage\('session', `)sessionStorage\.getItem\(/.test(tracking)) fail('Tracking must tolerate disabled storage')
+if (!runtime.includes('function safeStorageRead') || !runtime.includes('function safeStorageWrite')) fail('Client runtime must tolerate disabled storage')
+if (!lead.includes('function safeStorageValue')) fail('Lead form must tolerate disabled storage')
 if (fs.existsSync(path.join(root, 'src/app/api/comment-picker/route.ts'))) {
   fail('Static-export project must not include a server-only Next.js comment-picker route')
 }
