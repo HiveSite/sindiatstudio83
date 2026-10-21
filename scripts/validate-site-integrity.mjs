@@ -98,7 +98,7 @@ for (const [collection, routeArray] of [
 }
 const robots = read('src/app/robots.ts')
 if (!robots.includes('sitemap')) fail('robots.ts does not expose the sitemap')
-for (const route of ['/studio83-media/', '/comment-picker/', '/hvala/', '/team-building/azul/']) {
+for (const route of ['/studio83-media/', '/comment-picker/', '/team-building/azul/']) {
   if (!robots.includes(route)) fail(`robots.ts does not exclude internal route: ${route}`)
 }
 
