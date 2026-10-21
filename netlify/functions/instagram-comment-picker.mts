@@ -1,3 +1,38 @@
+const SESSION_COOKIE = 'studio83_media_session';
+
+function sessionToken(request: Request) {
+  const cookie = request.headers.get('cookie') || '';
+  const entry = cookie.split(';').map(part => part.trim()).find(part => part.startsWith(SESSION_COOKIE + '='));
+  try { return entry ? decodeURIComponent(entry.slice(SESSION_COOKIE.length + 1)) : ''; }
+  catch { return ''; }
+}
+
+async function hasAdminSession(request: Request) {
+  const secret = (Netlify.env.get('STUDIO83_MEDIA_PASSWORD') || '').trim();
+  if (secret.length < 24) return false;
+  const token = sessionToken(request);
+  if (!token || !token.includes('.')) return false;
+  const [payload, signature] = token.split('.');
+  try {
+    const key = await crypto.subtle.importKey(
+      'raw', new TextEncoder().encode(secret), { name: 'HMAC', hash: 'SHA-256' }, false, ['verify']
+    );
+    const valid = await crypto.subtle.verify(
+      'HMAC', key, Uint8Array.from(Buffer.from(signature, 'base64url')), new TextEncoder().encode(payload)
+    );
+    if (!valid) return false;
+    const parsed = JSON.parse(Buffer.from(payload, 'base64url').toString('utf8')) as { exp?: number };
+    return typeof parsed.exp === 'number' && parsed.exp > Date.now();
+  } catch { return false; }
+}
+
+function sameOrigin(request: Request) {
+  const origin = request.headers.get('origin');
+  if (!origin) return false;
+  try { return new URL(origin).origin === new URL(request.url).origin; }
+  catch { return false; }
+}
+
 declare const Netlify: { env: { get: (key: string) => string | undefined } };
 
 type MediaItem = { id: string; permalink?: string };
@@ -32,6 +67,8 @@ async function graphFetch<T>(url: string) {
 
 export default async (req: Request) => {
   if (req.method !== 'POST') return json({ error: 'Method not allowed.' }, 405);
+  if (!sameOrigin(req)) return json({ error: 'Forbidden origin.' }, 403);
+  if (!(await hasAdminSession(req))) return json({ error: 'Administrator session required.' }, 401);
   const token = (Netlify.env.get('INSTAGRAM_ACCESS_TOKEN') || '').trim();
   if (!token) return json({ error: 'Instagram API token nije konfigurisan na serveru.' }, 503);
 

@@ -52,7 +52,7 @@ export default function CommentPickerPage(){
     setLoading(true);setError('');setComments([]);setWinner(null);setRolling(null);setPrevious([]);
     try{
       const r=await fetch('/comment-picker/api',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({postUrl})});
-      const d=await r.json();if(!r.ok)throw new Error(d.error||'Nije moguće učitati komentare.');
+      const d=await r.json();if(r.status===401)throw new Error('Za Instagram API prijavi se u Studio83 Media Admin, pa se vrati na ovu stranicu.');if(!r.ok)throw new Error(d.error||'Nije moguće učitati komentare.');
       setComments(Array.isArray(d.comments)?d.comments:[]);
     }catch(e){setError(e instanceof Error?e.message:'Greška pri učitavanju.')}finally{setLoading(false)}
   }
@@ -77,13 +77,14 @@ export default function CommentPickerPage(){
         <div style={eyebrow}>SINDIKAT STUDIO 83 · INSTAGRAM TOOL</div>
         <h1 style={{fontSize:'clamp(42px,8vw,82px)',lineHeight:.95,margin:'10px 0 18px',letterSpacing:'-0.05em'}}>Random Comment Picker</h1>
         <p style={{color:'#a5a5b0',fontSize:17}}>Bez API-ja: eksportuj komentare iz Instagram browsera u CSV, pa ubaci CSV ovdje.</p>
+        <p style={{color:'#a5a5b0',fontSize:14}}>Za direktno API učitavanje komentara potrebna je administratorska prijava. <a href="/studio83-media/" style={{color:'#02C9BF',textDecoration:'underline'}}>Prijavi se u Media Admin</a>. CSV import je dostupan bez API poziva.</p>
       </section>
 
       <section style={card}>
         <div style={eyebrow}>1 · EXPORT SA INSTAGRAMA</div>
         <h2 style={{margin:'10px 0'}}>Browser exporter</h2>
         <p style={{color:'#bdbdc8',lineHeight:1.6}}>Klikni <b>Copy exporter</b>, napravi novi bookmark u Chrome-u i u polje URL zalijepi kopirani kod. Zatim otvori giveaway post na instagram.com dok si ulogovan i klikni taj bookmark. Alat će učitavati dostupne komentare i skinuti <b>instagram-comments.csv</b>.</p>
-        <button onClick={copyExporter} style={{...button,background:'#02C9BF',color:'#061313'}}>{copied?'Kopirano ✓':'Copy exporter'}</button>
+        <button type="button" onClick={copyExporter} style={{...button,background:'#02C9BF',color:'#061313'}}>{copied?'Kopirano ✓':'Copy exporter'}</button>
         <div style={{marginTop:12,fontSize:13,color:'#8f8f9a'}}>Instagram može usporiti ili zaustaviti učitavanje kod veoma velikih postova; exporter ne koristi tvoju lozinku niti API token.</div>
       </section>
 
@@ -102,7 +103,7 @@ export default function CommentPickerPage(){
         <p style={{color:'#a5a5b0'}}>Ako kasnije dodaš Meta token, možeš učitati komentare direktno linkom:</p>
         <div style={{display:'grid',gridTemplateColumns:'1fr auto',gap:10,marginTop:12}}>
           <input value={postUrl} onChange={e=>setPostUrl(e.target.value)} placeholder="https://www.instagram.com/p/..." style={input}/>
-          <button onClick={load} disabled={loading||!postUrl.trim()} style={button}>{loading?'Učitavanje...':'Load comments'}</button>
+          <button type="button" onClick={load} disabled={loading||!postUrl.trim()} style={button}>{loading?'Učitavanje...':'Load comments'}</button>
         </div>
       </section>
 
@@ -116,7 +117,7 @@ export default function CommentPickerPage(){
           <div style={{fontSize:'clamp(48px,9vw,96px)',fontWeight:900,letterSpacing:'-0.06em',margin:'12px 0',wordBreak:'break-word'}}>{rolling?'@'+rolling.username:'@username'}</div>
           <div style={{color:'#a5a5b0',maxWidth:720,lineHeight:1.5}}>{rolling?.text||'Komentar pobjednika će se pojaviti ovdje.'}</div>
         </div>
-        <button onClick={draw} disabled={!eligible.length||drawing} style={{...button,width:'100%',marginTop:12,background:'#BF02C9'}}>{drawing?'Drawing...':winner?'Draw again':'Start draw'}</button>
+        <button type="button" onClick={draw} disabled={!eligible.length||drawing} style={{...button,width:'100%',marginTop:12,background:'#BF02C9'}}>{drawing?'Drawing...':winner?'Draw again':'Start draw'}</button>
       </section>
 
       {!!comments.length&&<section style={card}>

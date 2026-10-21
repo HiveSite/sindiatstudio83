@@ -1,5 +1,13 @@
+function isSameOriginRequest(req) {
+  const origin = req.headers.get('origin')
+  if (!origin) return false
+  try {
+    return new URL(origin).origin === new URL(req.url).origin
+  } catch { return false }
+}
+
 const COOKIE_NAME = 'studio83_media_session'
-const MEDIA_PASSWORD = 'studio83media2026!'
+const mediaSecret = () => (getEnv('STUDIO83_MEDIA_PASSWORD') || '').trim()
 const MANIFEST_PATH = 'src/data/studio83-media-manifest.json'
 const MAX_FILE_BYTES = 900_000
 
@@ -63,10 +71,11 @@ async function importHmacKey(secret) {
 }
 
 async function verifySession(token) {
-  if (!token || !token.includes('.')) return false
+  const secret = mediaSecret()
+  if (secret.length < 24 || !token || !token.includes('.')) return false
   const [payload, signature] = token.split('.')
   try {
-    const key = await importHmacKey(MEDIA_PASSWORD)
+    const key = await importHmacKey(secret)
     const valid = await crypto.subtle.verify('HMAC', key, Buffer.from(signature, 'base64url'), new TextEncoder().encode(payload))
     if (!valid) return false
     const data = JSON.parse(Buffer.from(payload, 'base64url').toString('utf8'))
@@ -273,6 +282,7 @@ export default async (req) => {
   }
 
   if (req.method !== 'POST') return json({ error: 'Method not allowed' }, 405)
+  if (!isSameOriginRequest(req)) return json({ error: 'Cross-origin request rejected.' }, 403)
   let body
   try { body = await req.json() } catch { return json({ error: 'Neispravan zahtjev.' }, 400) }
 

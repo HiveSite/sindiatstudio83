@@ -174,7 +174,7 @@ export function GameClient({ checkpoint }: { checkpoint: CheckpointId }) {
         <form className={styles.form} onSubmit={unlock} style={{ marginTop: 28 }}>
           <label className={styles.label} htmlFor="team">Team Code</label>
           <input id="team" className={styles.input} value={teamInput} onChange={e => setTeamInput(e.target.value)} placeholder="npr. AZUL01" autoCapitalize="characters"/>
-          <button className={styles.button}>OTKLJUCAJ ZADATAK</button>
+          <button type="button" className={styles.button}>OTKLJUCAJ ZADATAK</button>
         </form>
         {error && <div className={styles.errorBox}>{error}</div>}
       </> : completed ? <>
@@ -209,7 +209,7 @@ export function GameClient({ checkpoint }: { checkpoint: CheckpointId }) {
         <form className={styles.form} onSubmit={submit}>
           <label className={styles.label} htmlFor="answer">Vas odgovor</label>
           <input id="answer" className={styles.input} value={answer} onChange={e => setAnswer(e.target.value)} placeholder={challenge.placeholder} autoComplete="off"/>
-          <button className={styles.button}>POTVRDI ODGOVOR</button>
+          <button type="button" className={styles.button}>POTVRDI ODGOVOR</button>
         </form>
 
         {message && <div className={styles.errorBox}>{message}</div>}
