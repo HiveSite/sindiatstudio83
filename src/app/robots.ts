@@ -8,7 +8,7 @@ export default function robots(): MetadataRoute.Robots {
     rules: {
       userAgent: '*',
       allow: '/',
-      disallow: ['/studio83-media/', '/comment-picker/', '/hvala/', '/team-building/azul/'],
+      disallow: ['/studio83-media/', '/comment-picker/', '/team-building/azul/'],
     },
     sitemap: `${site.domain}/sitemap.xml`,
     host: site.domain,
