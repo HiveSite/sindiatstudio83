@@ -33,7 +33,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     const image = item.socialImage?.src || item.coverImage?.src
     return {
       url: absoluteUrl(`/radovi/${item.slug}/`),
-        images: image ? [absoluteUrl(image)] : undefined,
+      images: image ? [absoluteUrl(image)] : undefined,
     }
   })
 
