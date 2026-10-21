@@ -202,7 +202,9 @@ async function verifySession(token, secret) {
 function readCookie(req, name) {
   const raw = req.headers.get('cookie') || ''
   const item = raw.split(';').map((part) => part.trim()).find((part) => part.startsWith(`${name}=`))
-  return item ? decodeURIComponent(item.slice(name.length + 1)) : ''
+  if (!item) return ''
+  try { return decodeURIComponent(item.slice(name.length + 1)) }
+  catch { return '' }
 }
 
 function sessionCookie(value, maxAge) {
