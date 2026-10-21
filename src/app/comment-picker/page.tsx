@@ -52,7 +52,7 @@ export default function CommentPickerPage(){
     setLoading(true);setError('');setComments([]);setWinner(null);setRolling(null);setPrevious([]);
     try{
       const r=await fetch('/comment-picker/api',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({postUrl})});
-      const d=await r.json();if(!r.ok)throw new Error(d.error||'Nije moguće učitati komentare.');
+      const d=await r.json();if(r.status===401)throw new Error('Za Instagram API prijavi se u Studio83 Media Admin, pa se vrati na ovu stranicu.');if(!r.ok)throw new Error(d.error||'Nije moguće učitati komentare.');
       setComments(Array.isArray(d.comments)?d.comments:[]);
     }catch(e){setError(e instanceof Error?e.message:'Greška pri učitavanju.')}finally{setLoading(false)}
   }
@@ -77,6 +77,7 @@ export default function CommentPickerPage(){
         <div style={eyebrow}>SINDIKAT STUDIO 83 · INSTAGRAM TOOL</div>
         <h1 style={{fontSize:'clamp(42px,8vw,82px)',lineHeight:.95,margin:'10px 0 18px',letterSpacing:'-0.05em'}}>Random Comment Picker</h1>
         <p style={{color:'#a5a5b0',fontSize:17}}>Bez API-ja: eksportuj komentare iz Instagram browsera u CSV, pa ubaci CSV ovdje.</p>
+        <p style={{color:'#a5a5b0',fontSize:14}}>Za direktno API učitavanje komentara potrebna je administratorska prijava. <a href="/studio83-media/" style={{color:'#02C9BF',textDecoration:'underline'}}>Prijavi se u Media Admin</a>. CSV import je dostupan bez API poziva.</p>
       </section>
 
       <section style={card}>
