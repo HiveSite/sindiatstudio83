@@ -117,7 +117,7 @@ export function LeadForm({ compact = false, source = 'contact-page' }: { compact
       window.setTimeout(() => router.push(`/hvala/?source=${encodeURIComponent(sourceParam)}`), 800)
     } catch (error) {
       const reason = error instanceof DOMException && error.name === 'AbortError' ? 'timeout' : 'network'
-      console.error(error); setStatus(`Slanje nije potvrđeno. Probaj ponovo ili piši direktno na ${site.email}.`); setState('error')
+      if (process.env.NODE_ENV === 'development') console.error(error); setStatus(`Slanje nije potvrđeno. Probaj ponovo ili piši direktno na ${site.email}.`); setState('error')
       trackEvent('form_error', { form_name: 'lead_form', reason, form_source: sourceParam })
     } finally { window.clearTimeout(timeout) }
   }
@@ -139,7 +139,7 @@ export function LeadForm({ compact = false, source = 'contact-page' }: { compact
         <label className="honeypot" aria-hidden="true">Website<input name="website" tabIndex={-1} autoComplete="off" /></label>
       </div>
       <div className="form-submit"><button className="button button-primary" type="submit" disabled={state === 'loading'}>{state === 'loading' ? 'Šaljem...' : 'Pošalji brief'}</button><p>Slanjem briefa prihvataš <Link href="/privatnost/">pravila privatnosti</Link>. {site.responseTime}</p></div>
-      <div className={`form-status${state === 'error' ? ' is-error' : state === 'success' ? ' is-success' : ''}`} role="status" aria-live="polite">{status}</div>
+      <div className={`form-status${state === 'error' ? ' is-error' : state === 'success' ? ' is-success' : ''}`} role="status" aria-live="polite" aria-atomic="true">{status}</div>
     </form>
   )
 }
