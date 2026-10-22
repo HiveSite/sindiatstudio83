@@ -282,6 +282,7 @@ export function CaseCoverPlaceholder({ item, large = false }: { item: CaseStudy;
           width={image.width}
           height={image.height}
           loading={large ? 'eager' : 'lazy'}
+          fetchPriority={large ? 'high' : 'auto'}
           decoding="async"
           style={imageStyle(image)}
           onError={() => setFailedSrc(image.src)}
