@@ -15,13 +15,37 @@ import { breadcrumbSchema, itemListSchema, serviceSchema, webPageSchema } from '
 export const dynamicParams = false
 export function generateStaticParams() { return services.map((service) => ({ slug: service.slug })) }
 
+const serviceSeo: Record<string, { title: string; description: string }> = {
+  'performance-marketing': {
+    title: 'Meta Ads i Google Ads kampanje u Crnoj Gori',
+    description: 'Meta i Google Ads kampanje, postavka mjerenja, optimizacija i analiza upita. Sindikat Studio 83 - digitalni marketing iz Podgorice.',
+  },
+  'web-i-konverzije': {
+    title: 'Izrada web sajtova i landing stranica u Podgorici',
+    description: 'Izrada brzih sajtova, landing stranica i digitalnih proizvoda u Crnoj Gori. UX, mobilni dizajn, SEO osnova, analitika i integracije.',
+  },
+  'aktivacije-i-eventi': {
+    title: 'Organizacija događaja i promo aktivacija u Crnoj Gori',
+    description: 'Organizacija događaja, promocija, promo timova i aktivacija na terenu. Koncept, logistika, koordinacija i izvještavanje širom Crne Gore.',
+  },
+  'sadrzaj-za-kampanje': {
+    title: 'Kreiranje sadržaja i video produkcija u Crnoj Gori',
+    description: 'Foto i video produkcija, Reels, kreativni koncepti i sadržaj za Instagram, Facebook i digitalne kampanje. Sindikat Studio 83 Podgorica.',
+  },
+  'recruitment-kampanje': {
+    title: 'Kampanje za zapošljavanje i employer branding',
+    description: 'Kampanje za zapošljavanje u Crnoj Gori. Oglasi, prijavni tokovi, sadržaj za poslodavce, distribucija i optimizacija prijava.',
+  },
+}
+
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params
   const service = serviceBySlug[slug]
   if (!service) return {}
+  const seo = serviceSeo[slug]
   return createMetadata({
-    title: `${service.shortTitle} u Crnoj Gori - usluge i cijene`,
-    description: service.summary,
+    title: seo?.title || `${service.shortTitle} u Crnoj Gori - usluge i cijene`,
+    description: seo?.description || service.summary,
     path: `/usluge/${service.slug}/`,
   })
 }
