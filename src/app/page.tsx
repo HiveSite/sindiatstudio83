@@ -3,10 +3,9 @@ import Link from 'next/link'
 import { cases } from '@/data/cases'
 import { services } from '@/data/services'
 import { site } from '@/data/site'
-import { CaseCard } from '@/components/cards'
-import { SectionHeading } from '@/components/section-heading'
 import { FinalCta } from '@/components/final-cta'
 import { HeroShowcase } from '@/components/hero-showcase'
+import { HomeServiceDirectory, HomeProjectHighlights, HomeProcessAndFaq } from '@/components/home-sales-sections'
 import { JsonLd } from '@/components/json-ld'
 import { OfferAreas, OfferChooser } from '@/components/sales-offer'
 import { createMetadata } from '@/lib/metadata'
@@ -48,13 +47,13 @@ export default function HomePage() {
 
       <OfferAreas />
 
-      <section className="section section-dark"><div className="container">
-        <SectionHeading eyebrow="Radovi" title="Pogledajte kako izgleda kada više djelova rade kao jedan sistem." text="Ne prikazujemo samo finalni vizual. Case studies pokazuju problem, našu ulogu, obim i rezultat koji je projekat omogućio." />
-        <div className="case-grid case-grid-home-scroll" role="region" aria-label="Istaknuti projekti" tabIndex={0}>{cases.slice(0, 3).map((item) => <CaseCard key={item.slug} item={item} />)}</div>
-        <div className="button-row" style={{ marginTop: 28 }}><Link className="button button-ghost" href="/radovi/">Pogledaj sve projekte</Link></div>
-      </div></section>
+      <HomeServiceDirectory />
+
+      <HomeProjectHighlights />
 
       <OfferChooser />
+
+      <HomeProcessAndFaq />
 
       <FinalCta title="Imate cilj. Mi ćemo složiti konkretan proizvod i obim." text="Ne morate unaprijed znati sve detalje. Pošaljite cilj, rok i okvirni budžet - vratićemo se sa jasnim sljedećim korakom i cijenom prema izabranom proizvodu." label="Pošalji brief" />
     </div>
