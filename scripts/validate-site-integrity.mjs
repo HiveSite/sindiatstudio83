@@ -19,7 +19,7 @@ walk(path.join(root, 'src'))
 const source = sourceFiles.map((file) => fs.readFileSync(file, 'utf8')).join('\n')
 
 const staticRoutes = new Set([
-  '/', '/usluge/', '/industrije/', '/radovi/', '/o-nama/', '/blog/', '/kontakt/',
+  '/', '/usluge/', '/usluge/meta-ads/', '/usluge/google-ads/', '/industrije/', '/radovi/', '/o-nama/', '/blog/', '/kontakt/',
   '/privatnost/', '/kolacici/', '/uslovi-koriscenja/', '/hvala/', '/studio83-media/', '/comment-picker/',
 ])
 
