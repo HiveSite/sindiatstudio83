@@ -6,6 +6,7 @@ import { site } from '@/data/site'
 import { CaseCard } from '@/components/cards'
 import { SectionHeading } from '@/components/section-heading'
 import { FinalCta } from '@/components/final-cta'
+import { HeroShowcase } from '@/components/hero-showcase'
 import { JsonLd } from '@/components/json-ld'
 import { OfferAreas, OfferChooser } from '@/components/sales-offer'
 import { createMetadata } from '@/lib/metadata'
@@ -40,7 +41,7 @@ export default function HomePage() {
           <div className="button-row hero-actions"><Link className="button button-primary" href="/kontakt/?izvor=hero" data-track="hero_contact">Zatraži ponudu</Link><Link className="button button-ghost" href="#izaberi-rjesenje" data-track="hero_solution">Istraži usluge</Link></div>
           <div className="hero-note"><span><i /> Podgorica i cijela Crna Gora</span><span><i /> Jedan vlasnik projekta, manje koordinacije za klijenta</span></div>
         </div>
-        <div className="hero-visual" aria-label="Sistem koji povezuje digital, ljude i realizaciju"><div className="hero-system"><div className="hero-orbit-stage"><div className="hero-glow" /><div className="hero-ring" /><div className="hero-ring" /><div className="hero-core"><strong>jedna tačka<br />odgovornosti</strong></div></div><div className="hero-node-grid"><div className="hero-node hero-node-1"><strong>Digital</strong><span>Kampanje, web i mjerenje</span></div><div className="hero-node hero-node-2"><strong>Ljudi</strong><span>Timovi, raspored i logistika</span></div><div className="hero-node hero-node-3"><strong>Teren</strong><span>Aktivacije, eventi i sadržaj</span></div></div></div></div>
+        <div className="hero-visual"><HeroShowcase /></div>
       </div></section>
 
       <section className="proof-strip"><div className="container proof-grid"><div className="proof-intro">Operativa koja postoji i van prezentacije.</div>{site.proof.map((item) => <div className="proof-stat" key={item.value}><strong>{item.value}</strong><span>{item.label}</span></div>)}</div></section>
