@@ -31,12 +31,12 @@ export function HeroShowcase() {
 
   const slide = slides[active]
   return (
-    <div className="hero-photo-showcase" aria-label="Fotografije iz projekata Sindikat Studio 83">
+    <div className="hero-photo-showcase" aria-label="Kreativni hero vizuali Sindikat Studio 83">
       <div className="hero-photo-viewport">
         <Image key={slide.src} className="hero-photo-image" src={slide.src} alt={slide.alt}
           fill sizes="100vw"
           priority={active === 0} loading={active === 0 ? 'eager' : 'lazy'} />
-        <div className="hero-photo-label" aria-live="off"><span>Stvarni projekti</span><strong>{slide.title}</strong></div>
+        <div className="hero-photo-label" aria-live="off"><span>Sindikat kreativni vizuali</span><strong>{slide.title}</strong></div>
       </div>
       <div className="hero-photo-controls">
         <span className="hero-photo-counter">{String(active + 1).padStart(2, '0')} / {String(slides.length).padStart(2, '0')}</span>
