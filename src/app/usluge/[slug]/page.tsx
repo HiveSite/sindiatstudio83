@@ -78,6 +78,15 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
       <div className="outcome-band">{service.outcomes.map((item) => <div key={item}>{item}</div>)}</div>
     </div></section>
 
+    <section className="section service-audience-section" aria-label="Za koga je usluga i šta donosi"><div className="container service-audience-layout">
+      <div className="service-audience-column"><span className="eyebrow">Za koga je</span><h2>Kada ova usluga ima smisla?</h2>
+        <ul>{service.bestFor.map((item) => <li key={item}>{item}</li>)}</ul>
+      </div>
+      <div className="service-audience-column"><span className="eyebrow">Šta pratimo</span><h2>Kako prepoznajemo napredak?</h2>
+        <ul>{service.successSignals.map((item) => <li key={item}>{item}</li>)}</ul>
+      </div>
+    </div></section>
+
     <section className="section section-light" id="proizvodi"><div className="container">
       <SectionHeading eyebrow="Proizvodi i cijene" title="Izaberite konkretan obim, ne apstraktan paket." text="Svaki proizvod ima jasan početni okvir i definisanu namjenu. Ako projekat prelazi standardni obim, cijenu formiramo nakon kratkog briefa." />
       <div className="product-pricing-grid">
@@ -92,6 +101,13 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
     <section className="section"><div className="container">
       <SectionHeading eyebrow="Šta može biti dio isporuke" title="Sve što je potrebno da proizvod stvarno radi." text="Ne ubacujemo stavke samo da ponuda izgleda veća. Konačni scope uključuje samo ono što direktno podržava cilj i dogovorenu isporuku." />
       <div className="deliverable-grid premium-deliverables">{service.includes.map((item, index) => <article className="deliverable" key={item}><span>{String(index + 1).padStart(2, '0')}</span><h3>{item}</h3></article>)}</div>
+    </div></section>
+
+    <section className="section service-input-section"><div className="container">
+      <div className="service-input-panel">
+        <div><span className="eyebrow">Brži početak</span><h2>Šta nam treba od vas?</h2><p>Nije potrebno da imate gotov brief. Ovo su informacije koje pomažu da brzo i realno procijenimo obim.</p></div>
+        <ul>{service.clientInputs.map((item) => <li key={item}>{item}</li>)}</ul>
+      </div>
     </div></section>
 
     <section className="section section-dark"><div className="container split-sticky">
