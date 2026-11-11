@@ -2,7 +2,18 @@ import { chromium } from 'playwright'
 import fs from 'node:fs'
 
 const base = process.env.QA_BASE_URL || 'http://127.0.0.1:4173'
-const routes = ['/', '/usluge/', '/cijene/', '/radovi/', '/industrije/', '/kontakt/', '/usluge/meta-ads/', '/usluge/google-ads/']
+const routes = [
+  '/', '/usluge/', '/cijene/', '/radovi/', '/industrije/', '/kontakt/',
+  '/usluge/meta-ads/', '/usluge/google-ads/',
+  '/usluge/performance-marketing/', '/usluge/aktivacije-i-eventi/',
+  '/usluge/web-i-konverzije/', '/usluge/sadrzaj-za-kampanje/', '/usluge/recruitment-kampanje/',
+  '/industrije/ugostiteljstvo-i-turizam/', '/industrije/retail-i-fmcg/',
+  '/industrije/eventi-i-venue/', '/industrije/nekretnine-i-premium-usluge/',
+  '/industrije/poslodavci-i-zaposljavanje/',
+  '/radovi/imaposla-digitalni-proizvod/', '/radovi/battlebots-arena/',
+  '/radovi/sistem-za-terenske-angazmane/', '/radovi/student-connect-mini-festival/',
+  '/o-nama/', '/blog/', '/privatnost/', '/kolacici/', '/uslovi-koriscenja/',
+]
 const widths = [320,360,390,430,768,1024,1440]
 const errors = []
 fs.mkdirSync('qa-screenshots',{recursive:true})
