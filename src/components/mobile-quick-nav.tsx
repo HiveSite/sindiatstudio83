@@ -7,7 +7,7 @@ const quickLinks = [
   { href: '/', label: 'Početna', icon: 'home' },
   { href: '/usluge/', label: 'Usluge', icon: 'grid' },
   { href: '/radovi/', label: 'Projekti', icon: 'image' },
-  { href: '/usluge/#pronadji-model', label: 'Ponuda', icon: 'tag' },
+  { href: '/cijene/', label: 'Cijene', icon: 'tag' },
   { href: '/kontakt/?izvor=mobile-nav', label: 'Upit', icon: 'send' },
 ] as const
 
@@ -28,7 +28,7 @@ export function MobileQuickNav() {
     <nav className="mobile-quick-nav" aria-label="Brza mobilna navigacija">
       {quickLinks.map((item) => {
         const base = item.href.split(/[?#]/)[0]
-        const active = item.href === '/' ? pathname === '/' : item.icon === 'tag' ? false : pathname === base || pathname.startsWith(base)
+        const active = item.href === '/' ? pathname === '/' : pathname === base || pathname.startsWith(base)
         return (
           <Link
             key={item.label}
