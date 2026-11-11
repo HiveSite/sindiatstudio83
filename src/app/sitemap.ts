@@ -14,6 +14,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const staticRoutes: MetadataRoute.Sitemap = [
     { url: absoluteUrl('/'), images: [absoluteUrl('/images/brand/og-cover.png')] },
     { url: absoluteUrl('/usluge/') },
+    { url: absoluteUrl('/cijene/') },
     { url: absoluteUrl('/usluge/meta-ads/') },
     { url: absoluteUrl('/usluge/google-ads/') },
     { url: absoluteUrl('/industrije/') },
