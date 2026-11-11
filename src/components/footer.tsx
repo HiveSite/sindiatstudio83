@@ -28,6 +28,7 @@ export function Footer() {
           <div>
             <h2>Studio</h2>
             <Link href="/radovi/">Radovi</Link>
+            <Link href="/cijene/">Cijene i saradnja</Link>
             <Link href="/industrije/">Industrije</Link>
             <Link href="/o-nama/">O nama</Link>
             <Link href="/blog/">Resursi</Link>
