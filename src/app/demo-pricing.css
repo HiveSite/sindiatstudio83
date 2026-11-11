@@ -1,0 +1,36 @@
+/* V7 pricing page - existing brand palette */
+.demo-pricing-hero{min-height:0;padding:98px 0 82px;background:radial-gradient(circle at 78% 24%,rgba(245,0,98,.19),transparent 26rem),#0d0d12}
+.demo-pricing-hero h1{max-width:900px;margin:20px 0 24px}
+.demo-pricing-hero .button-row{margin-top:30px}
+.demo-pricing-section{background:#f3f1f0;color:#141318}
+.demo-pricing-index{display:flex;flex-wrap:wrap;gap:9px;margin:0 0 70px}
+.demo-pricing-index a{display:inline-flex;align-items:center;gap:12px;padding:11px 15px;border:1px solid rgba(20,19,24,.17);border-radius:30px;font-size:13px;font-weight:800;line-height:1.3;background:#fff}
+.demo-pricing-index a:hover{border-color:#141318}
+.demo-pricing-category{padding:30px 0 75px;scroll-margin-top:110px;border-top:1px solid rgba(20,19,24,.16)}
+.demo-pricing-heading{display:flex;justify-content:space-between;align-items:end;gap:25px;margin-bottom:28px}
+.demo-pricing-heading>div{max-width:740px}
+.demo-pricing-heading h2{margin:12px 0 18px;color:#141318;font-size:clamp(35px,4.3vw,57px)}
+.demo-pricing-heading p{color:#5c5862;margin:0;font-size:15px}
+.demo-pricing-heading>a{font-weight:850;font-size:14px;flex-shrink:0}
+.demo-pricing-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:15px}
+.demo-pricing-card{display:flex;flex-direction:column;min-width:0;padding:26px;background:#fff;border:1px solid rgba(20,19,24,.13);border-radius:22px}
+.demo-pricing-card.is-featured{background:#141318;color:#fff}
+.demo-pricing-card>div>span{font-size:10px;letter-spacing:.15em;text-transform:uppercase;font-weight:950;color:#b30054}
+.demo-pricing-card.is-featured>div>span{color:#ff6b9c}
+.demo-pricing-card h3{font-size:clamp(23px,2.5vw,31px);margin:26px 0 12px;color:inherit}
+.demo-pricing-card strong{font-size:clamp(28px,3vw,41px);font-weight:900;letter-spacing:-.04em}
+.demo-pricing-card p{font-size:14px;color:#5b5660;margin:17px 0 20px}
+.demo-pricing-card.is-featured p{color:#cbc6ce}
+.demo-pricing-card ul{list-style:none;margin:0 0 24px;padding:18px 0 0;border-top:1px solid rgba(128,128,128,.24);display:grid;gap:12px;flex:1}
+.demo-pricing-card li{font-size:13px;font-weight:700;line-height:1.5;padding-left:18px;position:relative}
+.demo-pricing-card li:before{content:'+';position:absolute;left:0;color:#d40059}
+.demo-pricing-card .button{min-height:46px;font-size:13px;line-height:1.2;text-align:center}
+.demo-pricing-fineprint{color:#625d67;font-size:13px;max-width:880px}
+.demo-pricing-models{display:grid;grid-template-columns:.55fr 1.45fr;gap:28px}
+.demo-pricing-model-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.demo-pricing-model-grid>div{padding:23px;border:1px solid var(--line);border-radius:18px;background:rgba(255,255,255,.035)}
+.demo-pricing-model-grid span{font-size:12px;font-weight:900;color:var(--cyan)}
+.demo-pricing-model-grid h3{font-size:21px;margin:24px 0 10px}
+.demo-pricing-model-grid p{font-size:14px;margin:0}
+@media(max-width:980px){.demo-pricing-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.demo-pricing-models{grid-template-columns:1fr}.demo-pricing-model-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:700px){.demo-pricing-hero{padding:57px 0}.demo-pricing-hero h1{font-size:clamp(35px,9vw,50px)}.demo-pricing-index{gap:8px;margin-bottom:35px}.demo-pricing-index a{padding:10px 12px;font-size:12px}.demo-pricing-category{padding:24px 0 48px}.demo-pricing-heading{display:block}.demo-pricing-heading>a{display:inline-block;margin-top:12px}.demo-pricing-grid{grid-template-columns:1fr}.demo-pricing-card{padding:21px}.demo-pricing-model-grid{grid-template-columns:1fr}}
