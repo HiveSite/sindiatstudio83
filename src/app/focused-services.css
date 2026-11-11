@@ -1,0 +1,19 @@
+.focused-columns{display:grid;grid-template-columns:minmax(0,.75fr) minmax(0,1.25fr);gap:46px;align-items:start}
+.focused-columns h2{margin-top:16px}
+.focused-columns>ul{margin:0;padding:0;list-style:none}
+.focused-columns>ul li{padding:16px 8px 16px 30px;border-bottom:1px solid var(--line);position:relative;font-weight:650}
+.focused-columns>ul li:before{content:"+";position:absolute;left:0;color:var(--cyan)}
+.focused-deliverables{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:13px;margin-top:26px}
+.focused-deliverables article{border:1px solid rgba(0,0,0,.13);border-radius:18px;padding:23px;background:#fff}
+.focused-deliverables span,.focused-steps span{font-size:12px;font-weight:900;color:var(--pink)}
+.focused-deliverables h3{font-size:21px;margin:22px 0 0;line-height:1.25}
+.focused-disclaimer{margin:25px 0 0;font-size:14px}
+.focused-steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:32px}
+.focused-steps article{border:1px solid var(--line);border-radius:20px;padding:26px;background:#14141a}
+.focused-steps h3{font-size:24px;margin:25px 0 12px}
+.focused-steps p{font-size:15px;margin:0}
+.focused-faq details{border-bottom:1px solid var(--line)}
+.focused-faq summary{padding:18px 0;cursor:pointer;font-weight:750}
+.focused-faq p{margin:0 0 18px}
+@media(max-width:850px){.focused-columns{grid-template-columns:1fr;gap:18px}.focused-deliverables{grid-template-columns:repeat(2,minmax(0,1fr))}.focused-steps{grid-template-columns:1fr}}
+@media(max-width:600px){.focused-deliverables{grid-template-columns:1fr}.focused-deliverables article{padding:20px}.focused-steps article{padding:20px}.focused-columns h2{font-size:clamp(29px,8vw,40px)}}
