@@ -40,6 +40,7 @@ export const navigation = [
   { label: 'Usluge', href: '/usluge/' },
   { label: 'Industrije', href: '/industrije/' },
   { label: 'Projekti', href: '/radovi/' },
+  { label: 'Cijene', href: '/cijene/' },
   { label: 'Blog', href: '/blog/' },
   { label: 'O nama', href: '/o-nama/' },
   { label: 'Kontakt', href: '/kontakt/' },
