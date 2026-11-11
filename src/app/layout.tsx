@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from 'next'
 import type { ReactNode } from 'react'
 import { Header } from '@/components/header'
+import { MobileQuickNav } from '@/components/mobile-quick-nav'
 import { Footer } from '@/components/footer'
 import { AnalyticsScripts, GoogleTagManagerNoScript } from '@/components/analytics'
 import { ClientRuntime } from '@/components/client-runtime'
@@ -10,6 +11,7 @@ import { site } from '@/data/site'
 import './globals.css'
 import './sales-ux.css'
 import './contrast.css'
+import './mobile-navigation.css'
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.domain),
@@ -43,6 +45,7 @@ export default function RootLayout({ children }: Readonly<{ children: ReactNode 
         <Header />
         <main id="main">{children}</main>
         <Footer />
+        <MobileQuickNav />
         <ClientRuntime />
       </body>
     </html>
