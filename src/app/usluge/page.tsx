@@ -50,6 +50,14 @@ export default function ServicesPage() {
       </div>
     </div></section>
 
+    <section className="section section-light"><div className="container">
+      <div className="service-rail-head"><div><span className="eyebrow">Oglašavanje po kanalu</span><h2>Treba ti baš Instagram ili Google oglašavanje?</h2></div></div>
+      <div className="channel-links-grid">
+        <Link href="/usluge/meta-ads/" className="channel-link-card"><span>META ADS</span><h3>Instagram i Facebook oglasi</h3><p>Strategija, kreative, mjerenje i optimizacija kampanja za relevantne upite.</p><strong>Detalji Meta Ads usluge ↗</strong></Link>
+        <Link href="/usluge/google-ads/" className="channel-link-card"><span>GOOGLE ADS</span><h3>Oglasi na Google pretrazi</h3><p>Pretrage sa kupovnom namjerom, relevantne odredišne stranice i praćenje konverzija.</p><strong>Detalji Google Ads usluge ↗</strong></Link>
+      </div>
+    </div></section>
+
     <OfferChooser />
 
     <FinalCta title="Ne znate koji proizvod odgovara projektu?" text="Pošaljite cilj, rok i budžetski okvir. Vratićemo se sa konkretnim proizvodom ili custom obimom ako standardna opcija nije dovoljna." label="Pošalji brief" />
