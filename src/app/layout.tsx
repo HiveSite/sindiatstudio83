@@ -17,6 +17,8 @@ import './home-sales-sections.css'
 import './service-buyer.css'
 import './focused-services.css'
 import './demo-pricing.css'
+import './demo-home-choices.css'
+import './demo-hero.css'
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.domain),
