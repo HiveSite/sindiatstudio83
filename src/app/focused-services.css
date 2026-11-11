@@ -17,3 +17,13 @@
 .focused-faq p{margin:0 0 18px}
 @media(max-width:850px){.focused-columns{grid-template-columns:1fr;gap:18px}.focused-deliverables{grid-template-columns:repeat(2,minmax(0,1fr))}.focused-steps{grid-template-columns:1fr}}
 @media(max-width:600px){.focused-deliverables{grid-template-columns:1fr}.focused-deliverables article{padding:20px}.focused-steps article{padding:20px}.focused-columns h2{font-size:clamp(29px,8vw,40px)}}
+
+.channel-links-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.channel-link-card{display:flex;flex-direction:column;gap:10px;min-width:0;padding:30px;border:1px solid rgba(20,19,24,.16);border-radius:22px;background:#fff;transition:transform .2s,border-color .2s}
+.channel-link-card:hover{transform:translateY(-2px);border-color:rgba(20,19,24,.45)}
+.channel-link-card>span{font-size:11px;letter-spacing:.14em;font-weight:900;color:#ad0050}
+.channel-link-card h3{color:#17151a;font-size:clamp(23px,2.8vw,34px);margin:8px 0}
+.channel-link-card p{color:#55515b;flex:1;max-width:460px}
+.channel-link-card strong{color:#17151a;font-size:14px}
+@media(max-width:760px){.channel-links-grid{grid-template-columns:1fr}.channel-link-card{padding:22px}}
+@media(prefers-reduced-motion:reduce){.channel-link-card{transition:none}.channel-link-card:hover{transform:none}}
