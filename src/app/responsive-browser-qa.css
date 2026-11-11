@@ -68,3 +68,10 @@
  .premium-service-page .service-rail-head h2,.premium-service-page .service-rail-head .text-link{min-width:0;max-width:100%;overflow-wrap:anywhere}
  .premium-service-page .service-rail{box-sizing:border-box;display:flex;width:100%;max-width:100%;min-width:0;overflow-x:auto;overflow-y:hidden}
 }
+
+/* The related-service carousel scrolls internally; its section must not enlarge the page. */
+@media(max-width:760px){
+  .section:has(> .container .service-rail){overflow-x:clip}
+  .section:has(> .container .service-rail)>.container{min-width:0;max-width:100%}
+  .section:has(> .container .service-rail) .service-rail-head{overflow-wrap:anywhere}
+}
