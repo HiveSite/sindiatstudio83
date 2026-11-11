@@ -16,7 +16,13 @@ try {
         if (!res || res.status() >= 400) errors.push(width+'px '+route+' HTTP '+(res?.status()||'missing'))
         if (await page.locator('h1').count() !== 1) errors.push(width+'px '+route+' H1 count')
         const dimension = await page.evaluate(()=>({width:innerWidth,scroll:document.documentElement.scrollWidth,body:document.body.scrollWidth}))
-        if (dimension.scroll > dimension.width+2 || dimension.body>dimension.width+2) errors.push(width+'px '+route+' overflow '+JSON.stringify(dimension))
+        if (dimension.scroll > dimension.width+2 || dimension.body>dimension.width+2) {
+          const offenders=await page.evaluate(()=>Array.from(document.body.querySelectorAll('*')).map(el=>{
+            const r=el.getBoundingClientRect()
+            return {tag:el.tagName.toLowerCase(),className:typeof el.className==='string'?el.className.slice(0,100):'',left:Math.round(r.left),right:Math.round(r.right),width:Math.round(r.width)}
+          }).filter(r=>r.right>innerWidth+2 && r.width>0).slice(0,16))
+          errors.push(width+'px '+route+' overflow '+JSON.stringify(dimension)+' elements '+JSON.stringify(offenders))
+        }
         if(route==='/'&&(width===390||width===1440)) {
           const picture=page.locator('.demo-hero-photo img').first()
           const loaded=await picture.evaluate(async img=>{try{await img.decode();return img.naturalWidth>0}catch{return false}})
