@@ -38,7 +38,9 @@ export const site = {
 
 export const navigation = [
   { label: 'Usluge', href: '/usluge/' },
-  { label: 'Radovi', href: '/radovi/' },
+  { label: 'Industrije', href: '/industrije/' },
+  { label: 'Projekti', href: '/radovi/' },
+  { label: 'Blog', href: '/blog/' },
   { label: 'O nama', href: '/o-nama/' },
   { label: 'Kontakt', href: '/kontakt/' },
 ] as const
