@@ -91,26 +91,56 @@ const goalLabels: Record<string, string> = { growth: 'Više prodaje ili upita', 
 const modeLabels: Record<string, string> = { one: 'Jednokratan projekat', ongoing: 'Kontinuirana potreba', unsure: 'Još nije definisano' }
 const budgetLabels: Record<string, string> = { under150: 'Do 150 €', '150-500': '150 - 500 €', '500-1500': '500 - 1.500 €', '1500plus': '1.500 €+' }
 
-function recommendationFor(state: ChoiceState) {
+type Recommendation = { title: string; text: string; href: string; product: string }
+const budgetMaximum: Record<string, number> = {
+  under150: 150,
+  '150-500': 500,
+  '500-1500': 1500,
+  '1500plus': Number.POSITIVE_INFINITY,
+}
+
+// The chooser must not promise a deliverable below its published starting price.
+function productStartingPrice(price: string): number | null {
+  const match = price.match(/\d[\d.,]*/)
+  if (!match) return null
+  const value = Number(match[0].replace(/\./g, '').replace(',', '.'))
+  return Number.isFinite(value) ? value : null
+}
+
+function recommendationFor(state: ChoiceState): Recommendation | null {
   if (!state.goal || !state.mode || !state.budget) return null
-  if (state.goal === 'web') {
-    if (state.budget === 'under150') return { title: 'Landing stranica', text: 'Za ovaj okvir najrealniji prvi proizvod je fokusirana landing stranica sa jasnim ciljem i kontakt flowom.', href: '/usluge/web-i-konverzije/' }
-    if (state.budget === '150-500') return { title: 'Premium mini-sajt', text: 'Ovaj okvir odgovara manjem premium sajtu sa više sadržaja i osnovnim integracijama.', href: '/usluge/web-i-konverzije/' }
-    return { title: 'Digitalni proizvod', text: 'Za širi web sistem, integracije i posebnu poslovnu logiku ulazimo u digitalni proizvod.', href: '/usluge/web-i-konverzije/' }
+
+  const preferredSlug =
+    state.goal === 'web' ? 'web-i-konverzije' :
+    state.goal === 'event' || state.goal === 'complex' ? 'aktivacije-i-eventi' :
+    state.goal === 'people' ? 'recruitment-kampanje' :
+    'performance-marketing'
+
+  const products = serviceProducts[preferredSlug] || []
+  const maxBudget = budgetMaximum[state.budget]
+  const fit = products.filter((product) => {
+    const minimum = productStartingPrice(product.price)
+    return minimum !== null && minimum <= maxBudget
+  })
+  const selected = state.mode === 'ongoing' && state.goal === 'growth'
+    ? fit.find((product) => /mjesečn/i.test(product.name)) || fit[fit.length - 1]
+    : fit[fit.length - 1]
+
+  if (!selected) {
+    return {
+      title: 'Kratka procjena izvodljivosti',
+      text: 'Za izabrani budžet nema potvrđenog standardnog paketa u ovoj oblasti. Pošaljite cilj i okvir, pa ćemo realno procijeniti mogućnosti bez obećavanja isporuke po preniskoj cijeni.',
+      href: `/usluge/${preferredSlug}/`,
+      product: '',
+    }
   }
-  if (state.goal === 'event' || state.goal === 'complex') {
-    if (state.budget === 'under150') return { title: 'Plan aktivacije', text: 'Prvo zaključavamo koncept, logistiku i operativnu strukturu.', href: '/usluge/aktivacije-i-eventi/' }
-    if (state.budget === '150-500') return { title: 'Produkcija i koordinacija', text: 'Ovaj okvir može pokriti manju produkciju ili koordinaciju konkretnog obima.', href: '/usluge/aktivacije-i-eventi/' }
-    return { title: 'Kompletna kampanja', text: 'Za širi projekat povezujemo digital, produkciju, ljude i teren.', href: '/usluge/aktivacije-i-eventi/' }
+
+  return {
+    title: selected.name,
+    text: `${selected.description} Početna cijena: ${selected.price}. Konačna ponuda zavisi od dogovorenog obima i uslova.`,
+    href: `/usluge/${preferredSlug}/#proizvodi`,
+    product: selected.name,
   }
-  if (state.goal === 'people') {
-    if (state.budget === 'under150') return { title: 'Recruitment sprint', text: 'Fokusirana kampanja za jednu poziciju ili jasno definisan hiring cilj.', href: '/usluge/recruitment-kampanje/' }
-    if (state.budget === '150-500') return { title: 'Sezonska kampanja', text: 'Za više pozicija i veći broj kandidata biramo širi recruitment proizvod.', href: '/usluge/recruitment-kampanje/' }
-    return { title: 'Employer sistem', text: 'Za kontinuirano zapošljavanje i employer branding kroz više kanala.', href: '/usluge/recruitment-kampanje/' }
-  }
-  if (state.mode === 'ongoing' && state.budget !== 'under150') return { title: 'Mjesečno vođenje kampanja', text: 'Kontinuirano testiranje, optimizacija i razvoj kreativa oko istog poslovnog cilja.', href: '/usluge/performance-marketing/' }
-  if (state.budget === 'under150') return { title: 'Postavka kampanje', text: 'Za početni okvir postavljamo osnovnu kampanjsku strukturu, tracking i prvi test.', href: '/usluge/performance-marketing/' }
-  return { title: 'Performance marketing', text: 'Kampanjska struktura, tracking, oglasi i kontinuirana optimizacija prema cilju.', href: '/usluge/performance-marketing/' }
 }
 
 export function OfferChooser() {
@@ -119,6 +149,7 @@ export function OfferChooser() {
   const briefHref = useMemo(() => {
     if (!recommendation) return '/kontakt/?izvor=chooser'
     const params = new URLSearchParams({ izvor: 'chooser', cilj: goalLabels[state.goal], model: modeLabels[state.mode], budzet: budgetLabels[state.budget], preporuka: recommendation.title })
+    if (recommendation.product) params.set('proizvod', recommendation.product)
     return `/kontakt/?${params.toString()}`
   }, [recommendation, state])
 
