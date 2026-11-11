@@ -23,6 +23,15 @@ try {
           }).filter(r=>r.right>innerWidth+2 && r.width>0).slice(0,16))
           errors.push(width+'px '+route+' overflow '+JSON.stringify(dimension)+' elements '+JSON.stringify(offenders))
         }
+        if(route==='/' && width===390) {
+          const demoImages = Array.from({length:10},(_,i) => '/images/demo-hero/slide-'+String(i+1).padStart(2,'0')+'.webp')
+          for(const asset of demoImages) {
+            const imageResponse = await page.request.get(base+asset)
+            if(!imageResponse.ok() || !(imageResponse.headers()['content-type']||'').includes('image/')) {
+              errors.push('Demo hero image unavailable: '+asset+' status='+imageResponse.status())
+            }
+          }
+        }
         if(route==='/'&&(width===390||width===1440)) {
           const picture=page.locator('.demo-hero-photo img').first()
           const loaded=await picture.evaluate(async img=>{try{await img.decode();return img.naturalWidth>0}catch{return false}})
