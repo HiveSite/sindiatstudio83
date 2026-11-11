@@ -4,16 +4,16 @@ import Image from 'next/image'
 import { useEffect, useState } from 'react'
 
 const slides = [
-  {src:'/images/cases/dogadjaji/backstage.webp',alt:'Produkcijska atmosfera iza scene',title:'Produkcija sadržaja'},
-  {src:'/images/cases/promo-timovi/tim.webp',alt:'Sindikat promo tim na događaju',title:'Ljudi i realizacija'},
-  {src:'/images/cases/battlebots-arena/battlebots-finalna-arena-i-publika.webp',alt:'BattleBots Arena sa učesnicima i publikom',title:'Event produkcija'},
-  {src:'/images/cases/student-connect/prostor.webp',alt:'Prostor za Student Connect događaj',title:'Kreativni događaji'},
-  {src:'/images/cases/podgoricki-pazar/atmosfera.webp',alt:'Atmosfera na Podgoričkom pazaru',title:'Brend iskustva'},
-  {src:'/images/cases/dogadjaji/program-tehnika.webp',alt:'Program i tehnika događaja',title:'Tehnička realizacija'},
-  {src:'/images/cases/promo-timovi/briefing.webp',alt:'Priprema i briefing promo tima',title:'Organizacija timova'},
-  {src:'/images/cases/student-connect/radionica.webp',alt:'Radionica u okviru Student Connect projekta',title:'Radionice i zajednica'},
-  {src:'/images/cases/battlebots-arena/battlebots-arena-produkcija-i-rasvjeta.webp',alt:'Arena i produkcijska rasvjeta',title:'Event iskustva'},
-  {src:'/images/cases/mini-sajtovi-i-digitalni-alati/mini-sajtovi-cover.webp',alt:'Web i digitalni projekti Sindikata',title:'Web i digital'},
+  { src: '/images/demo-hero/slide-01.webp', alt: 'Event i brend iskustva - kreativni vizual Sindikat Studio 83', title: 'Event & experience' },
+  { src: '/images/demo-hero/slide-02.webp', alt: 'Produkcija događaja u kinematografskom Sindikat stilu', title: 'Produkcija događaja' },
+  { src: '/images/demo-hero/slide-03.webp', alt: 'Kreativna ekipa na produkciji - Sindikat Studio 83', title: 'Creative crew' },
+  { src: '/images/demo-hero/slide-04.webp', alt: 'Brend iskustva i kampanjska aktivacija - Sindikat', title: 'Brand experiences' },
+  { src: '/images/demo-hero/slide-05.webp', alt: 'Foto i video produkcija kreativnog studija', title: 'Foto i video produkcija' },
+  { src: '/images/demo-hero/slide-06.webp', alt: 'Operativna koordinacija događaja i produkcije', title: 'Event operations' },
+  { src: '/images/demo-hero/slide-07.webp', alt: 'Strategija i rad kreativnog tima', title: 'Strategija i tim' },
+  { src: '/images/demo-hero/slide-08.webp', alt: 'Digitalna produkcija i kreativna kampanja', title: 'Digital & creative' },
+  { src: '/images/demo-hero/slide-09.webp', alt: 'Digitalni proizvod i produkcija sadržaja', title: 'Product & content' },
+  { src: '/images/demo-hero/slide-10.webp', alt: 'Aktivacija i produkcija projekta', title: 'Aktivacije i produkcija' },
 ] as const
 
 export function HeroShowcase() {
