@@ -7,7 +7,8 @@ import { FinalCta } from '@/components/final-cta'
 import { HeroShowcase } from '@/components/hero-showcase'
 import { HomeServiceDirectory, HomeProjectHighlights, HomeProcessAndFaq } from '@/components/home-sales-sections'
 import { JsonLd } from '@/components/json-ld'
-import { OfferAreas, OfferChooser } from '@/components/sales-offer'
+import { OfferChooser } from '@/components/sales-offer'
+import { HomeQuickChoices, HomeIndustriesPreview } from '@/components/demo-home-choices'
 import { createMetadata } from '@/lib/metadata'
 import { itemListSchema, webPageSchema } from '@/lib/schema'
 
@@ -32,20 +33,25 @@ export default function HomePage() {
         }),
       ]} />
 
-      <section className="hero"><div className="container hero-grid">
-        <div className="hero-copy">
-          <span className="eyebrow">Studio za rast i realizaciju</span>
-          <h1><span>Digital, kampanje,</span><span>ljudi i realizacija.</span><span className="outline">Jedan tim.</span></h1>
-          <p className="lead">Vodimo digitalni marketing, web projekte, promocije i događaje - od ideje do realizacije. Jedan tim, jasni koraci i jedna odgovorna tačka za vaš projekat.</p>
-          <div className="button-row hero-actions"><Link className="button button-primary" href="/kontakt/?izvor=hero" data-track="hero_contact">Zatraži ponudu</Link><Link className="button button-ghost" href="#izaberi-rjesenje" data-track="hero_solution">Istraži usluge</Link></div>
-          <div className="hero-note"><span><i /> Podgorica i cijela Crna Gora</span><span><i /> Jedan vlasnik projekta, manje koordinacije za klijenta</span></div>
+      <section className="demo-hero" aria-label="Sindikat Studio 83 - kreativni i produkcijski studio">
+        <div className="demo-hero-photo"><HeroShowcase /></div>
+        <div className="container demo-hero-content">
+          <div className="demo-hero-copy">
+            <span className="eyebrow">Nezavisni kreativni i produkcijski studio / Podgorica</span>
+            <h1><span>IDEJE.</span><span>LJUDI.</span><span className="demo-hero-accent">REALIZACIJA.</span></h1>
+            <p className="lead">Od sadržaja i kampanja do web proizvoda, događaja i aktivacija. Sindikat spaja kreativni rad i operativu u jedan konkretan rezultat.</p>
+            <div className="button-row demo-hero-actions">
+              <Link className="button button-primary" href="/kontakt/?izvor=hero" data-track="hero_contact">Hajde da radimo ↗</Link>
+              <Link className="button button-ghost" href="/radovi/" data-track="hero_work">Pogledaj naše radove ↗</Link>
+            </div>
+            <div className="demo-hero-subline">Podgorica · cijela Crna Gora / Jedan tim, više disciplina.</div>
+          </div>
         </div>
-        <div className="hero-visual"><HeroShowcase /></div>
-      </div></section>
+      </section>
 
       <section className="proof-strip"><div className="container proof-grid"><div className="proof-intro">Operativa koja postoji i van prezentacije.</div>{site.proof.map((item) => <div className="proof-stat" key={item.value}><strong>{item.value}</strong><span>{item.label}</span></div>)}</div></section>
 
-      <OfferAreas />
+      <HomeQuickChoices />
 
       <HomeServiceDirectory />
 
@@ -54,6 +60,8 @@ export default function HomePage() {
       <OfferChooser />
 
       <HomeProcessAndFaq />
+
+      <HomeIndustriesPreview />
 
       <FinalCta title="Imate cilj. Mi ćemo složiti konkretan proizvod i obim." text="Ne morate unaprijed znati sve detalje. Pošaljite cilj, rok i okvirni budžet - vratićemo se sa jasnim sljedećim korakom i cijenom prema izabranom proizvodu." label="Pošalji brief" />
     </div>
