@@ -30,3 +30,11 @@
   .proof-grid{grid-template-columns:minmax(0,1fr)}
   .proof-intro{grid-column:1}
 }
+
+/* Extended 27-page Chromium audit: prevent tiny overflow at 320-430px. */
+@media(max-width:760px){
+  .service-rail-head{min-width:0;max-width:100%;flex-wrap:wrap}
+  .service-rail-head>*{min-width:0;max-width:100%}
+  .service-rail-head .text-link{display:inline-flex;max-width:100%;white-space:normal;overflow-wrap:anywhere}
+  .filter-row-scroll{width:100%;max-width:100%;min-width:0;margin-inline:0!important;padding:2px 8px 12px!important;overflow-x:auto;overscroll-behavior-x:contain}
+}
