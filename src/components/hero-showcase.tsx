@@ -4,11 +4,16 @@ import Image from 'next/image'
 import { useEffect, useState } from 'react'
 
 const slides = [
-  { src: '/images/cases/promo-timovi/tim.webp', alt: 'Sindikat promo tim tokom realizacije događaja', title: 'Ljudi i realizacija' },
-  { src: '/images/cases/battlebots-arena/battlebots-finalna-arena-i-publika.webp', alt: 'BattleBots Arena, finalna arena i publika', title: 'Event produkcija' },
-  { src: '/images/cases/student-connect/prostor.webp', alt: 'Student Connect, prostor događaja', title: 'Kreativni događaji' },
-  { src: '/images/cases/podgoricki-pazar/kucica.webp', alt: 'Sindikat kućica na Podgoričkom pazaru', title: 'Brend iskustva' },
-  { src: '/images/cases/mini-sajtovi-i-digitalni-alati/mini-sajtovi-cover.webp', alt: 'Web i digitalni projekti Sindikata', title: 'Web i digital' },
+  {src:'/images/cases/dogadjaji/backstage.webp',alt:'Produkcijska atmosfera iza scene',title:'Produkcija sadržaja'},
+  {src:'/images/cases/promo-timovi/tim.webp',alt:'Sindikat promo tim na događaju',title:'Ljudi i realizacija'},
+  {src:'/images/cases/battlebots-arena/battlebots-finalna-arena-i-publika.webp',alt:'BattleBots Arena sa učesnicima i publikom',title:'Event produkcija'},
+  {src:'/images/cases/student-connect/prostor.webp',alt:'Prostor za Student Connect događaj',title:'Kreativni događaji'},
+  {src:'/images/cases/podgoricki-pazar/atmosfera.webp',alt:'Atmosfera na Podgoričkom pazaru',title:'Brend iskustva'},
+  {src:'/images/cases/dogadjaji/program-tehnika.webp',alt:'Program i tehnika događaja',title:'Tehnička realizacija'},
+  {src:'/images/cases/promo-timovi/briefing.webp',alt:'Priprema i briefing promo tima',title:'Organizacija timova'},
+  {src:'/images/cases/student-connect/radionica.webp',alt:'Radionica u okviru Student Connect projekta',title:'Radionice i zajednica'},
+  {src:'/images/cases/battlebots-arena/battlebots-arena-produkcija-i-rasvjeta.webp',alt:'Arena i produkcijska rasvjeta',title:'Event iskustva'},
+  {src:'/images/cases/mini-sajtovi-i-digitalni-alati/mini-sajtovi-cover.webp',alt:'Web i digitalni projekti Sindikata',title:'Web i digital'},
 ] as const
 
 export function HeroShowcase() {
@@ -29,7 +34,7 @@ export function HeroShowcase() {
     <div className="hero-photo-showcase" aria-label="Fotografije iz projekata Sindikat Studio 83">
       <div className="hero-photo-viewport">
         <Image key={slide.src} className="hero-photo-image" src={slide.src} alt={slide.alt}
-          fill sizes="(max-width: 760px) 100vw, (max-width: 1040px) 90vw, 48vw"
+          fill sizes="100vw"
           priority={active === 0} loading={active === 0 ? 'eager' : 'lazy'} />
         <div className="hero-photo-label" aria-live="off"><span>Stvarni projekti</span><strong>{slide.title}</strong></div>
       </div>
