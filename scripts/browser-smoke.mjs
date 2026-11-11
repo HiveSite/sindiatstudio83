@@ -42,6 +42,12 @@ try {
         if(!await nav.isVisible())errors.push('Mobile quick navigation hidden')
         await nav.getByRole('link',{name:'Cijene'}).click({timeout:7000})
         await page.waitForURL('**/cijene/',{timeout:10000})
+        await page.locator('.demo-pricing-card a.button').first().click({timeout:7000})
+        await page.waitForURL('**/kontakt/?*',{timeout:10000})
+        await page.locator('.brief-context').waitFor({state:'visible',timeout:10000})
+        const context=await page.locator('.brief-context').innerText()
+        if(!context.includes('Izabrani proizvod'))errors.push('Pricing selection did not carry the selected product into the contact form')
+        if(await page.locator('form.lead-form').count()!==1)errors.push('Lead form missing on chosen product contact page')
       }catch(e){errors.push('Mobile pricing navigation '+String(e))}
     }
     await page.close()
