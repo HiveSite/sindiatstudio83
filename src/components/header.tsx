@@ -5,7 +5,7 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useEffect, useRef, useState } from 'react'
 import { navigation, site } from '@/data/site'
-import { enNavigation } from '@/data/en'
+import { enNavigation, enCaseSummaries } from '@/data/en'
 
 const desktopMediaQuery = '(min-width: 1041px)'
 const focusableSelector = 'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])'
@@ -16,7 +16,9 @@ export function Header() {
   const visibleNavigation = english ? enNavigation : navigation
   const toMe = english ? pathname.replace(/^\/en(?=\/|$)/, '') || '/' : pathname
   const supportedEnglish = /^\/(?:$|usluge|industrije|radovi|cijene|blog|o-nama|kontakt|privatnost|kolacici|uslovi-koriscenja|hvala)(?:\/|$)/.test(pathname)
-  const toEn = english ? pathname : supportedEnglish ? '/en' + (pathname === '/' ? '/' : pathname) : '/en/'
+  const unavailableEnglishCase = /^\/radovi\/([^/]+)\/?$/.exec(pathname)
+  const hasEnglishCase = !unavailableEnglishCase || enCaseSummaries.some((item) => item.slug === unavailableEnglishCase[1])
+  const toEn = english ? pathname : !hasEnglishCase ? '/en/radovi/' : supportedEnglish ? '/en' + (pathname === '/' ? '/' : pathname) : '/en/'
   const normalizedPath = pathname.endsWith('/') ? pathname : `${pathname}/`
   const [open, setOpen] = useState(false)
   const [languageOpen, setLanguageOpen] = useState(false)
