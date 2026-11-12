@@ -22,11 +22,11 @@ export default function ContactPage() {
 
     <section className="section"><div className="container contact-layout"><aside className="contact-sidebar"><span className="eyebrow">Direktan kontakt</span><h2>Podgorica i cijela Crna Gora.</h2><p>Digitalne projekte možemo voditi potpuno online. Za aktivacije, promo angažmane i događaje planiramo ljude, lokacije, transport i dobavljače prema stvarnom obimu.</p><div className="contact-card"><strong>Email</strong><a href={`mailto:${site.email}`} data-track="email_click">{site.email}</a><p>U naslov poruke stavi naziv firme ili projekta da bismo ga lakše povezali sa materijalima.</p></div><div className="contact-card"><strong>Instagram</strong><a href={site.instagram} target="_blank" rel="noopener noreferrer" data-track="instagram_click">@sindikat_studio83</a><p>Za briefove, ponude i dokumente forma ili email su pouzdaniji od direktnih poruka.</p></div><div className="contact-card"><strong>Odgovor</strong><p>{site.responseTime} Ako nema dovoljno informacija za procjenu, prvo šaljemo kratka konkretna pitanja umjesto generičke ponude.</p></div></aside><LeadForm /></div></section>
 
-    <section className="section section-dark"><div className="container split-sticky"><div className="sticky-copy"><span className="eyebrow">Nakon slanja</span><h2>Prvi odgovor treba da smanji nejasnoću, ne da je pretvori u prodajni poziv.</h2><p className="lead">Ne šaljemo automatski veliki paket usluga. Prvo provjeravamo fit, ključne zavisnosti i da li projekat ima dovoljno informacija za realnu procjenu.</p></div><div className="step-list">{[
+    <section className="section section-dark"><div className="container split-sticky"><div className="sticky-copy"><span className="eyebrow">Nakon slanja</span><h2>Prvo ćemo razumjeti šta ti treba.</h2><p className="lead">Nećemo ti odmah ponuditi sve što radimo. Prvo ćemo pogledati cilj, rok i ono što već imaš, pa predložiti rješenje koje zaista ima smisla.</p></div><div className="step-list">{[
       ['01','Pregled briefa','Provjeravamo cilj, rok, lokacije, postojeće materijale i odgovornosti koje su već definisane.'],
-      ['02','Pitanja koja nedostaju','Vraćamo se samo sa informacijama koje stvarno mijenjaju obim, cijenu, rok ili izbor rješenja.'],
-      ['03','Preporučeni prvi korak','Predlažemo poziv, audit, sprint, tehničku provjeru ili okvir projekta, zavisno od nivoa spremnosti.'],
-      ['04','Ponuda i početak','Kada su obim, rokovi i vlasnici jasni, ponuda razdvaja isporuke, troškove, zavisnosti i način odobravanja.'],
+      ['02','Pitanja koja nedostaju','Pitaćemo samo ono što nam je potrebno da tačno odredimo posao, rok i cijenu.'],
+      ['03','Preporučeni prvi korak','Predložićemo kratak razgovor, pregled postojećeg stanja ili konkretan plan, u zavisnosti od toga šta ti treba.'],
+      ['04','Ponuda i početak','Dogovaramo šta isporučujemo, koliko košta, ko je za šta odgovoran i kada počinjemo.'],
     ].map(([number,title,text]) => <div className="step" key={number}><span>{number}</span><div><h3>{title}</h3><p>{text}</p></div></div>)}</div></div></section>
   </>
 }
