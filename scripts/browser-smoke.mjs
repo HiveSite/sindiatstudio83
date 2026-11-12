@@ -70,6 +70,17 @@ try {
         if(marker!=='5')errors.push('Manual slider counter data-slide-index mismatch: '+marker)
         await manualDots.first().click()
         if((await counter.innerText()).trim()!=='01 / 10')errors.push('Returning manually to first image did not update counter')
+        // Swipe the actual photograph rather than clicking a dot.
+        await motionPage.locator('.hero-photo-viewport').evaluate(el => {
+          el.dispatchEvent(new TouchEvent('touchstart',{bubbles:true,touches:[new Touch({identifier:1,target:el,clientX:290,clientY:130})]}))
+          el.dispatchEvent(new TouchEvent('touchend',{bubbles:true,changedTouches:[new Touch({identifier:1,target:el,clientX:110,clientY:132})]}))
+        })
+        if((await counter.innerText()).trim()!=='02 / 10')errors.push('Left swipe did not advance slider counter')
+        await motionPage.locator('.hero-photo-viewport').evaluate(el => {
+          el.dispatchEvent(new TouchEvent('touchstart',{bubbles:true,touches:[new Touch({identifier:2,target:el,clientX:110,clientY:130})]}))
+          el.dispatchEvent(new TouchEvent('touchend',{bubbles:true,changedTouches:[new Touch({identifier:2,target:el,clientX:290,clientY:132})]}))
+        })
+        if((await counter.innerText()).trim()!=='01 / 10')errors.push('Right swipe did not decrease slider counter')
         await motionPage.getByRole('button',{name:'Pokreni rotaciju'}).click()
         const first=(await counter.innerText()).trim()
         await motionPage.waitForTimeout(5400)
