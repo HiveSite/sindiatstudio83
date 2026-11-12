@@ -38,9 +38,14 @@ const goalOptions = [
 ]
 
 const budgetOptions = ['Do 150 €', '150 - 500 €', '500 - 1.500 €', '1.500 €+']
+const enGoalOptions = ['More sales or enquiries', 'A new website or platform', 'A promotion or event', 'Recruitment or field teams', 'A complex project', 'I need a recommendation']
+const enBudgetOptions = ['Up to €150', '€150 - €500', '€500 - €1,500', '€1,500+']
 
-export function LeadForm({ compact = false, source = 'contact-page' }: { compact?: boolean; source?: string }) {
+export function LeadForm({ compact = false, source = 'contact-page', locale = 'me' }: { compact?: boolean; source?: string; locale?: 'me' | 'en' }) {
   const router = useRouter()
+  const english = locale === 'en'
+  const formGoals = english ? enGoalOptions : goalOptions
+  const formBudgets = english ? enBudgetOptions : budgetOptions
   const formRef = useRef<HTMLFormElement | null>(null)
   const startedRef = useRef(false)
   const [status, setStatus] = useState('')
@@ -64,22 +69,22 @@ export function LeadForm({ compact = false, source = 'contact-page' }: { compact
       collaborationModel: params.get('model') || '',
       recommendation: params.get('preporuka') || '',
       product: params.get('proizvod') || '',
-      focus: goalParam && !goalOptions.includes(goalParam) ? goalParam : '',
+      focus: goalParam && !formGoals.includes(goalParam) ? goalParam : '',
     }
     setQueryContext(nextContext)
-    if (goalOptions.includes(goalParam)) setGoal(goalParam)
-    if (budgetOptions.includes(budgetParam)) setBudget(budgetParam)
+    if (formGoals.includes(goalParam)) setGoal(goalParam)
+    if (formBudgets.includes(budgetParam)) setBudget(budgetParam)
 
     if (nextContext.product) {
-      setStatus(`Izabrani proizvod: ${nextContext.product}. Dodaj kontakt, rok i kratak kontekst projekta.`)
+      setStatus(english ? `Selected service: ${nextContext.product}. Add your contact details and a short description.` : `Izabrani proizvod: ${nextContext.product}. Dodaj kontakt, rok i kratak kontekst projekta.`)
     } else if (nextContext.recommendation) {
-      setStatus(`Prenijeli smo tvoj izbor. Preporučeni proizvod: ${nextContext.recommendation}. Dodaj kontakt, rok i kratak kontekst.`)
+      setStatus(english ? `Recommended option: ${nextContext.recommendation}. Tell us about your project.` : `Prenijeli smo tvoj izbor. Preporučeni proizvod: ${nextContext.recommendation}. Dodaj kontakt, rok i kratak kontekst.`)
     } else if (nextContext.focus) {
-      setStatus(`Tema upita: ${nextContext.focus}. Izaberi cilj i dodaj kontakt kako bismo znali šta ti treba.`)
+      setStatus(english ? `Enquiry topic: ${nextContext.focus}. Please add your details.` : `Tema upita: ${nextContext.focus}. Izaberi cilj i dodaj kontakt kako bismo znali šta ti treba.`)
     } else if (nextContext.service || nextContext.industry) {
-      setStatus('Prepoznali smo stranicu sa koje dolaziš. Dodaj kontakt, rok i najvažniji kontekst.')
+      setStatus(english ? 'Your chosen service has been saved. Please tell us about the project.' : 'Prepoznali smo stranicu sa koje dolaziš. Dodaj kontakt, rok i najvažniji kontekst.')
     }
-  }, [source])
+  }, [source, locale])
 
   const startTracking = () => {
     if (startedRef.current) return
@@ -98,7 +103,7 @@ export function LeadForm({ compact = false, source = 'contact-page' }: { compact
     if (fd.get('website')) return
 
     if (!form.checkValidity()) {
-      form.reportValidity(); setStatus('Provjeri označena obavezna polja.'); setState('error')
+      form.reportValidity(); setStatus(english ? 'Please complete the required fields.' : 'Provjeri označena obavezna polja.'); setState('error')
       trackEvent('form_error', { form_name: 'lead_form', reason: 'validation', form_source: sourceParam }); return
     }
 
@@ -115,7 +120,7 @@ export function LeadForm({ compact = false, source = 'contact-page' }: { compact
       ...getStoredCampaignData(), ...getFirstTouchData(),
     }
 
-    setState('loading'); setStatus('Šaljemo upit...')
+    setState('loading'); setStatus(english ? 'Sending your enquiry...' : 'Šaljemo upit...')
     const controller = new AbortController(); const timeout = window.setTimeout(() => controller.abort(), requestTimeoutMs)
 
     try {
@@ -125,11 +130,11 @@ export function LeadForm({ compact = false, source = 'contact-page' }: { compact
       if (!response.ok || result.ok !== true) throw new Error(result.error || `HTTP ${response.status}`)
 
       trackEvent('generate_lead', { form_name: 'lead_form', goal: payload.goal, budget: payload.budget, form_source: sourceParam, service: selectedService, industry: selectedIndustry, recommendation: queryContext.recommendation, product: queryContext.product })
-      form.reset(); setGoal(''); setBudget(''); setStatus(`Hvala. Upit je poslat. ${site.responseTime}`); setState('success')
-      window.setTimeout(() => router.push(`/hvala/?source=${encodeURIComponent(sourceParam)}`), 800)
+      form.reset(); setGoal(''); setBudget(''); setStatus(english ? 'Thank you. Your enquiry has been sent. We aim to reply within one business day.' : `Hvala. Upit je poslat. ${site.responseTime}`); setState('success')
+      window.setTimeout(() => router.push(`${english ? '/en/hvala/' : '/hvala/'}?source=${encodeURIComponent(sourceParam)}`), 800)
     } catch (error) {
       const reason = error instanceof DOMException && error.name === 'AbortError' ? 'timeout' : 'network'
-      if (process.env.NODE_ENV === 'development') console.error(error); setStatus(`Slanje nije potvrđeno. Probaj ponovo ili piši direktno na ${site.email}.`); setState('error')
+      if (process.env.NODE_ENV === 'development') console.error(error); setStatus(english ? `We could not confirm delivery. Please try again or email ${site.email}.` : `Slanje nije potvrđeno. Probaj ponovo ili piši direktno na ${site.email}.`); setState('error')
       trackEvent('form_error', { form_name: 'lead_form', reason, form_source: sourceParam })
     } finally { window.clearTimeout(timeout) }
   }
@@ -138,19 +143,19 @@ export function LeadForm({ compact = false, source = 'contact-page' }: { compact
 
   return (
     <form ref={formRef} className={`lead-form${compact ? ' lead-form-compact' : ''}`} onInput={startTracking} onSubmit={submit} noValidate aria-busy={state === 'loading'}>
-      {contextTitle ? <div className="brief-context"><span>{queryContext.product ? 'Izabrani proizvod' : queryContext.recommendation ? 'Preporučeni proizvod' : 'Tema upita'}</span><strong>{contextTitle}</strong>{queryContext.collaborationModel ? <small>{queryContext.collaborationModel}</small> : null}</div> : null}
+      {contextTitle ? <div className="brief-context"><span>{queryContext.product ? (english ? 'Selected option' : 'Izabrani proizvod') : queryContext.recommendation ? (english ? 'Recommended option' : 'Preporučeni proizvod') : (english ? 'Enquiry topic' : 'Tema upita')}</span><strong>{contextTitle}</strong>{queryContext.collaborationModel ? <small>{queryContext.collaborationModel}</small> : null}</div> : null}
       <div className="form-grid">
-        <label><span>Ime i firma *</span><input name="name" autoComplete="name" required maxLength={120} placeholder="Ime / Naziv firme ili projekta" /></label>
+        <label><span>{english ? 'Name and company *' : 'Ime i firma *'}</span><input name="name" autoComplete="name" required maxLength={120} placeholder={english ? 'Your name / Company or project' : 'Ime / Naziv firme ili projekta'} /></label>
         <label><span>Email *</span><input name="email" type="email" autoComplete="email" required maxLength={180} placeholder="marko@email.com" /></label>
-        <label><span>Telefon</span><input name="phone" type="tel" autoComplete="tel" inputMode="tel" maxLength={40} placeholder="+382..." /></label>
-        <label><span>Šta želiš da postigneš? *</span><select name="goal" required value={goal} onChange={(event) => setGoal(event.target.value)}><option value="">Izaberi cilj</option>{goalOptions.map((option) => <option key={option}>{option}</option>)}</select></label>
-        <label><span>Okvirni budžet</span><select name="budget" value={budget} onChange={(event) => setBudget(event.target.value)}><option value="">Još nije definisan</option>{budgetOptions.map((option) => <option key={option}>{option}</option>)}</select></label>
-        <label><span>Kada projekat treba da krene?</span><select name="deadline" defaultValue=""><option value="">Rok još nije zaključan</option><option>Što prije</option><option>U narednih 30 dana</option><option>Za 1-3 mjeseca</option><option>Kasnije / priprema unaprijed</option></select></label>
-        <label className="form-span"><span>Šta već postoji?</span><select name="projectState" defaultValue=""><option value="">Izaberi najbliže</option><option>Imamo samo ideju i cilj</option><option>Imamo postojeći sajt ili digitalni proizvod</option><option>Imamo aktivne kampanje i materijale</option><option>Imamo interni tim ili druge partnere</option><option>Imamo sistem koji treba unaprijediti</option><option>Drugo / kombinacija</option></select></label>
-        <label className="form-span"><span>Kratak opis projekta</span><textarea name="message" rows={6} maxLength={3000} placeholder="Napiši najvažniji problem, lokaciju, šta već postoji i gdje trenutno zapinje." /></label>
+        <label><span>{english ? 'Phone' : 'Telefon'}</span><input name="phone" type="tel" autoComplete="tel" inputMode="tel" maxLength={40} placeholder="+382..." /></label>
+        <label><span>{english ? 'What do you want to achieve? *' : 'Šta želiš da postigneš? *'}</span><select name="goal" required value={goal} onChange={(event) => setGoal(event.target.value)}><option value="">{english ? 'Choose a goal' : 'Izaberi cilj'}</option>{formGoals.map((option) => <option key={option}>{option}</option>)}</select></label>
+        <label><span>{english ? 'Indicative budget' : 'Okvirni budžet'}</span><select name="budget" value={budget} onChange={(event) => setBudget(event.target.value)}><option value="">{english ? 'Not decided yet' : 'Još nije definisan'}</option>{formBudgets.map((option) => <option key={option}>{option}</option>)}</select></label>
+        <label><span>{english ? 'When would you like to start?' : 'Kada projekat treba da krene?'}</span><select name="deadline" defaultValue=""><option value="">{english ? 'Timing not fixed yet' : 'Rok još nije zaključan'}</option>{(english ? ['As soon as possible', 'Within 30 days', 'In 1-3 months', 'Later / planning ahead'] : ['Što prije', 'U narednih 30 dana', 'Za 1-3 mjeseca', 'Kasnije / priprema unaprijed']).map(x=><option key={x}>{x}</option>)</select></label>
+        <label className="form-span"><span>{english ? 'What do you already have?' : 'Šta već postoji?'}</span><select name="projectState" defaultValue=""><option value="">{english ? 'Select an option' : 'Izaberi najbliže'}</option>{(english ? ['An idea and a goal', 'An existing website or product', 'Active campaigns and materials', 'An in-house team or other partners', 'An existing system that needs improving', 'Other / a combination'] : ['Imamo samo ideju i cilj', 'Imamo postojeći sajt ili digitalni proizvod', 'Imamo aktivne kampanje i materijale', 'Imamo interni tim ili druge partnere', 'Imamo sistem koji treba unaprijediti', 'Drugo / kombinacija']).map(x=><option key={x}>{x}</option>)</select></label>
+        <label className="form-span"><span>{english ? 'Brief project description' : 'Kratak opis projekta'}</span><textarea name="message" rows={6} maxLength={3000} placeholder={english ? 'What do you need, where is the project and what is the main challenge?' : 'Napiši najvažniji problem, lokaciju, šta već postoji i gdje trenutno zapinje.'} /></label>
         <label className="honeypot" aria-hidden="true">Website<input name="website" tabIndex={-1} autoComplete="off" /></label>
       </div>
-      <div className="form-submit"><button className="button button-primary" type="submit" disabled={state === 'loading'}>{state === 'loading' ? 'Šaljem...' : 'Pošalji upit'}</button><p>Slanjem upita prihvataš <Link href="/privatnost/">pravila privatnosti</Link>. {site.responseTime}</p></div>
+      <div className="form-submit"><button className="button button-primary" type="submit" disabled={state === 'loading'}>{state === 'loading' ? (english ? 'Sending...' : 'Šaljem...') : (english ? 'Send enquiry' : 'Pošalji upit')}</button><p>{english ? <>By sending this enquiry, you agree to our <Link href="/en/privatnost/">privacy policy</Link>. We aim to reply within one business day.</> : <>Slanjem upita prihvataš <Link href="/privatnost/">pravila privatnosti</Link>. {site.responseTime}</>}</p></div>
       <div className={`form-status${state === 'error' ? ' is-error' : state === 'success' ? ' is-success' : ''}`} role="status" aria-live="polite" aria-atomic="true">{status}</div>
     </form>
   )
