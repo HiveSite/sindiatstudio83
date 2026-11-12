@@ -9,6 +9,7 @@ import { enServiceDetails } from '@/data/en-service-details'
 import { enIndustryDetails } from '@/data/en-industry-details'
 import { cases } from '@/data/cases'
 import { blogPosts } from '@/data/blog'
+import { englishBlogBySlug, englishBlogPosts, plainEnglishExcerpt } from '@/data/en-blog'
 import { site } from '@/data/site'
 import { enLegalPages } from '@/data/en-legal'
 
@@ -92,12 +93,12 @@ export async function generateMetadata({params}:{params:Promise<{segments:string
   if(kind==='usluge'&&slug){const x=serviceBySlug[slug]||enAdServices[slug];if(!x)return {};title=x.title;description=x.summary}
   else if(kind==='radovi'&&slug){const x=caseCopyBySlug[slug];if(!x)return {};title=x.title;description=x.summary}
   else if(kind==='industrije'&&slug){const x=industryBySlug[slug];if(!x)return {};title=x.title;description=x.summary}
-  else if(kind==='blog'&&slug){title=enArticles[slug]||'Practical guide';description='A practical guide from Sindikat Studio 83.'}
+  else if(kind==='blog'&&slug){const article=englishBlogBySlug[slug];title=article?.title||'Practical guide';description=article?plainEnglishExcerpt(article):'A practical guide from Sindikat Studio 83.'}
   else {const x=top.find(row=>row[0]===kind);if(x){title=x[1];description=x[2]}}
   return {
     title:`${title} | Sindikat Studio 83`,description,
-    alternates:{canonical:path(segments),languages:kind==='blog'&&slug?undefined:{'en':path(segments),'sr-Latn-ME':`/${segments.join('/')}/`}},
-    robots:(kind==='blog'&&slug)||['privatnost','kolacici','uslovi-koriscenja','hvala'].includes(kind)?{index:false,follow:true}:undefined,
+    alternates:{canonical:path(segments),languages:{'en':path(segments),'sr-Latn-ME':`/${segments.join('/')}/`}},
+    robots:['privatnost','kolacici','uslovi-koriscenja','hvala'].includes(kind)?{index:false,follow:true}:undefined,
     openGraph:{locale:'en_GB',title,description},
   }
 }
@@ -151,8 +152,15 @@ export default async function EnglishPages({params}:{params:Promise<{segments:st
   if(kind==='o-nama')return <div lang="en"><Head eyebrow="ABOUT SINDIKAT" title="An independent studio built for real-world execution." description="We combine digital work, creative production, teams and coordination so businesses can move from a plan to a finished project."/><section className="section section-dark"><div className="container"><h2>One team, multiple disciplines</h2><p>Our work spans campaigns, digital products, content, events and field activation. We believe a good idea matters only when people can turn it into clear deliverables.</p><p>Based in Podgorica, we work on projects across Montenegro and collaborate with trusted partners when a project needs additional expertise.</p><Link href="/en/kontakt/" className="button button-primary">Talk to our studio ↗</Link></div></section></div>
   if(kind==='kontakt')return <div lang="en"><Head eyebrow="CONTACT" title="Tell us about your project." description="Share your goal, timeline and a few details. We will get back to you with a realistic next step."/><section className="section section-dark"><div className="container"><LeadForm source="en-contact-page" locale="en"/><p style={{marginTop:24}}>You can also email us directly at <a href={`mailto:${site.email}`}>{site.email}</a>.</p></div></section></div>
   if(kind==='hvala')return <div lang="en"><Head eyebrow="THANK YOU" title="Your enquiry has been received." description="We will review your message and get back to you as soon as we can."/><section className="section"><div className="container"><Link className="button button-primary" href="/en/">Back to homepage ↗</Link></div></section></div>
-  if(kind==='blog'&&!slug)return <div lang="en"><Head eyebrow="RESOURCES" title="Practical guides from the studio." description="Explore campaign planning, websites, local search and event production."/><section className="section section-dark"><div className="container home-project-grid">{blogPosts.map(post=><article key={post.slug} className="home-project-card"><div className="home-project-text"><h3>{enArticles[post.slug]}</h3><p>Insights and practical guidance from Sindikat Studio 83.</p><Link href={path(['blog',post.slug])}>English article overview ↗</Link></div></article>)}</div></section></div>
-  if(kind==='blog'&&slug&&enArticles[slug])return <div lang="en"><Head eyebrow="ARTICLE OVERVIEW" title={enArticles[slug]} description="An English overview of this topic is being edited. The full article is currently available in Serbian (ijekavian)."/><section className="section section-dark"><div className="container"><h2>Read the full guide</h2><p>The complete English translation has not yet been published. We would rather show this clearly than display an incomplete or unreliable automated translation.</p><Link href={`/blog/${slug}/`} className="button button-ghost">Read the original Serbian guide ↗</Link></div></section></div>
+  if(kind==='blog'&&!slug)return <div lang="en"><Head eyebrow="RESOURCES" title="Practical guides from the studio." description="Explore campaign planning, websites, local search and event production."/><section className="section section-dark"><div className="container home-project-grid">{englishBlogPosts.map(post=><article key={post.slug} className="home-project-card"><div className="home-project-text"><h3>{post.title}</h3><p>{plainEnglishExcerpt(post)}</p><Link href={path(['blog',post.slug])}>Read article ↗</Link></div></article>)}</div></section></div>
+  if(kind==='blog'&&slug&&englishBlogBySlug[slug]){
+    const article=englishBlogBySlug[slug]
+    return <div lang="en"><Head eyebrow="FROM THE STUDIO / RESOURCES" title={article.title} description={plainEnglishExcerpt(article)}/>
+      <section className="section section-dark"><div className="container"><div className="blog-article-body" dangerouslySetInnerHTML={{__html:article.body}} />
+        <div className="button-row" style={{marginTop:40}}><Link href="/en/usluge/" className="button button-primary">Explore our services ↗</Link><Link href="/en/blog/" className="button button-ghost">More articles ↗</Link></div>
+      </div></section>
+    </div>
+  }
   if(kind==='privatnost'||kind==='kolacici'||kind==='uslovi-koriscenja'){
     const legal=enLegalPages[kind]
     return <div lang="en"><Head eyebrow="LEGAL INFORMATION" title={legal.title} description={legal.description}/>
