@@ -6,10 +6,10 @@ export const blogPostBySlug = Object.fromEntries(blogPosts.map((post) => [post.s
 
 export const categoryLabels: Record<string, string> = {
   strategija: 'Strategija',
-  performance: 'Performance',
+  performance: 'Oglašavanje',
   kreative: 'Kreative',
   dogadjaji: 'Događaji',
   aktivacije: 'Aktivacije',
   seo: 'SEO',
-  web: 'Web',
+  web: 'Sajtovi',
 }
