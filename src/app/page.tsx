@@ -12,8 +12,8 @@ import { HomeQuickChoices, HomeIndustriesPreview } from '@/components/demo-home-
 import { createMetadata } from '@/lib/metadata'
 import { itemListSchema, webPageSchema } from '@/lib/schema'
 
-const seoTitle = 'Digitalni marketing, web, eventi i promo timovi u Crnoj Gori'
-const seoDescription = 'Sindikat Studio 83 je studio iz Podgorice za digitalni marketing, web i digitalne proizvode, aktivacije, događaje, sadržaj i promo timove širom Crne Gore.'
+const seoTitle = 'Marketing agencija Podgorica - kampanje, web i događaji'
+const seoDescription = 'Sindikat Studio 83 iz Podgorice kreira sadržaj, vodi digitalne kampanje, pravi sajtove i organizuje događaje i promocije širom Crne Gore.'
 
 export const metadata: Metadata = createMetadata({
   title: seoTitle,
@@ -39,7 +39,7 @@ export default function HomePage() {
           <div className="demo-hero-copy">
             <span className="eyebrow">Nezavisni kreativni i produkcijski studio / Podgorica</span>
             <h1><span>IDEJE.</span><span>LJUDI.</span><span className="demo-hero-accent">REALIZACIJA.</span></h1>
-            <p className="lead">Od sadržaja i kampanja do web proizvoda, događaja i aktivacija. Sindikat spaja kreativni rad i operativu u jedan konkretan rezultat.</p>
+            <p className="lead">Vodimo kampanje, snimamo sadržaj, pravimo sajtove i organizujemo događaje. Od prve ideje do posljednjeg detalja - sve drži jedan tim.</p>
             <div className="button-row demo-hero-actions">
               <Link className="button button-primary" href="/kontakt/?izvor=hero" data-track="hero_contact">Hajde da radimo ↗</Link>
               <Link className="button button-ghost" href="/radovi/" data-track="hero_work">Pogledaj naše radove ↗</Link>
@@ -49,7 +49,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="proof-strip"><div className="container proof-grid"><div className="proof-intro">Operativa koja postoji i van prezentacije.</div>{site.proof.map((item) => <div className="proof-stat" key={item.value}><strong>{item.value}</strong><span>{item.label}</span></div>)}</div></section>
+      <section className="proof-strip"><div className="container proof-grid"><div className="proof-intro">Ne ostajemo na lijepoj prezentaciji.</div>{site.proof.map((item) => <div className="proof-stat" key={item.value}><strong>{item.value}</strong><span>{item.label}</span></div>)}</div></section>
 
       <HomeQuickChoices />
 
@@ -63,7 +63,7 @@ export default function HomePage() {
 
       <HomeIndustriesPreview />
 
-      <FinalCta title="Imate cilj. Mi ćemo složiti konkretan proizvod i obim." text="Ne morate unaprijed znati sve detalje. Pošaljite cilj, rok i okvirni budžet - vratićemo se sa jasnim sljedećim korakom i cijenom prema izabranom proizvodu." label="Pošalji brief" />
+      <FinalCta title="Imaš ideju ili problem koji treba riješiti?" text="Napiši nam šta želiš da postigneš i kada ti treba. Predložićemo konkretnu uslugu, obim posla i sljedeći korak." label="Pošalji brief" />
     </div>
   )
 }
