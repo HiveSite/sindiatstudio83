@@ -22,9 +22,9 @@ export default function PricingPage() {
     ]}/>
     <section className="page-hero demo-pricing-hero"><div className="container">
       <Breadcrumbs items={crumbs}/>
-      <span className="eyebrow">Saradnja bez nagađanja</span>
-      <h1>Jasan početak. Ponuda po stvarnom obimu.</h1>
-      <p className="lead">Izaberi oblast i pogledaj šta ulazi u početni okvir. Svaki projekat zaključujemo kroz konkretne isporuke, rok i cijenu prije početka.</p>
+      <span className="eyebrow">Jasno od početka</span>
+      <h1>Pogledaj cijene. Izaberi kako da sarađujemo.</h1>
+      <p className="lead">Pogledaj početne cijene za kampanje, sadržaj, sajtove i događaje. Prije početka dogovaramo tačno šta radiš sa nama, koliko traje i šta dobijaš.</p>
       <div className="button-row"><Link className="button button-primary" href="/kontakt/?izvor=cijene-hero">Zatraži ponudu</Link><a className="button button-ghost" href="#pregled-cijena">Pregledaj opcije</a></div>
     </div></section>
 
@@ -48,6 +48,6 @@ export default function PricingPage() {
       <div><span>02</span><h3>Mjesečna saradnja</h3><p>Kontinuirani rad uz dogovoreni obim i ritam izvještavanja.</p></div>
       <div><span>03</span><h3>Kompletan projekat</h3><p>Strategija, kreativa, web, ljudi i teren povezani kroz zajednički plan.</p></div>
     </div></div></section>
-    <FinalCta title="Nijesi siguran šta ti treba?" text="Pošalji cilj, rok i okvirni budžet. Predložićemo najbližu realnu opciju ili pripremiti ponudu prema obimu." label="Pošalji brief"/>
+    <FinalCta title="Nijesi siguran koju uslugu da izabereš?" text="Napiši šta želiš da postigneš i koliko vremena imaš. Predložićemo odgovarajuću uslugu i jasnu ponudu." label="Pošalji brief"/>
   </div>
 }
