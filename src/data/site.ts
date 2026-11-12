@@ -16,7 +16,7 @@ export const site = {
   imaposla: 'https://imaposla.me/',
   contentUpdatedAt: '2026-08-12',
   responseTime: 'Odgovaramo u roku od jednog radnog dana.',
-  consentVersion: '2026-07-27',
+  consentVersion: '2026-11-12-v2',
   analytics: {
     ga4Id: publicEnv(process.env.NEXT_PUBLIC_GA4_ID, 'G-NH2FL5SP1Y'),
     gtmId: publicEnv(process.env.NEXT_PUBLIC_GTM_ID, 'GTM-PBXVW3GK'),
