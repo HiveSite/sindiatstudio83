@@ -133,6 +133,36 @@ try {
     }
     await page.close()
   }
+
+  // More interaction-level tests on a mobile viewport, without calling external services.
+  const uxPage=await browser.newPage({viewport:{width:390,height:844},reducedMotion:'reduce'})
+  try {
+    await uxPage.goto(base+'/',{waitUntil:'domcontentloaded'})
+    await uxPage.getByRole('button',{name:'Otvori meni'}).click()
+    const mobileDialog=uxPage.getByRole('dialog',{name:'Mobilna navigacija'})
+    if(!await mobileDialog.isVisible())errors.push('Mobile menu did not open')
+    await uxPage.keyboard.press('Escape')
+    if(await mobileDialog.isVisible())errors.push('Escape key did not close mobile menu')
+
+    const chooser=uxPage.locator('#pronadji-model')
+    await chooser.getByRole('button',{name:'Više prodaje ili upita'}).click()
+    await chooser.getByRole('button',{name:'Da, jedan projekat'}).click()
+    await chooser.getByRole('button',{name:'Do 150 €'}).click()
+    const recommended=await chooser.locator('.sales-recommendation-copy strong').innerText()
+    if(!recommended || recommended.includes('Izaberite tri'))errors.push('Three-choice recommendation is not generated')
+    const chosenLink=await chooser.locator('.sales-recommendation-actions a.button-primary').getAttribute('href')
+    if(!chosenLink || !chosenLink.includes('izvor=chooser'))errors.push('Chooser did not carry recommendation context')
+
+    await uxPage.goto(base+'/blog/',{waitUntil:'domcontentloaded'})
+    const search=uxPage.getByRole('searchbox',{name:'Pretraži tekstove'})
+    await search.fill('never-existing-topic-QA-38112')
+    await uxPage.getByText('Nema rezultata',{exact:true}).waitFor({state:'visible'})
+    await search.fill('')
+    const count=await uxPage.locator('.blog-card').count()
+    if(count<1)errors.push('Blog search reset did not restore article cards')
+    console.log('CHECK mobile menu, recommendation chooser, and blog search filtering')
+  } catch(e) {errors.push('Additional interactive checks '+String(e))}
+  finally {await uxPage.close()}
 } finally {await browser.close()}
 if(errors.length){console.error('QA FAIL\n'+errors.join('\n'));process.exitCode=1}
 else console.log('BROWSER QA PASS: '+(routes.length*widths.length)+' viewport/page combinations plus mobile pricing navigation')
