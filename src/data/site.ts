@@ -30,9 +30,9 @@ export const site = {
     ),
   },
   proof: [
-    { value: '150+', label: 'ljudi u operativnom rosteru' },
-    { value: '15+', label: 'klijenata i partnerskih timova' },
-    { value: '20.000 €+', label: 'isplaćeno angažovanim ljudima u prva četiri mjeseca' },
+    { value: '9', label: 'projekata predstavljenih u portfoliju' },
+    { value: '20+', label: 'partnera i saradnika' },
+    { value: '150+', label: 'ljudi u mreži za angažmane i događaje' },
   ],
 } as const
 
