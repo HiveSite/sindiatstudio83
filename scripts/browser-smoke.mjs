@@ -166,6 +166,39 @@ try {
     console.log('CHECK mobile menu, recommendation chooser, and blog search filtering')
   } catch(e) {errors.push('Additional interactive checks '+String(e))}
   finally {await uxPage.close()}
+
+  // Cookie preferences must be independent, reversible and work without sending a business lead.
+  const consentPage=await browser.newPage({viewport:{width:390,height:844}})
+  try{
+    await consentPage.goto(base+'/',{waitUntil:'domcontentloaded'})
+    const cookieDialog=consentPage.getByRole('dialog',{name:'Kolačići i analitika'})
+    await cookieDialog.waitFor({state:'visible',timeout:10000})
+    await cookieDialog.getByRole('button',{name:'Samo analitika'}).click()
+    const analyticsOnly=await consentPage.evaluate(()=>{
+      const raw=localStorage.getItem('sindikat_cookie_consent')
+      const updates=(window.dataLayer||[]).filter(x=>Array.isArray(x)&&x[0]==='consent'&&x[1]==='update')
+      return {choice:raw?JSON.parse(raw).choice:null,update:updates.at(-1)?.[2]}
+    })
+    if(analyticsOnly.choice!=='analytics'||analyticsOnly.update?.analytics_storage!=='granted'||analyticsOnly.update?.ad_storage!=='denied')errors.push('Analytics-only consent did not deny advertising: '+JSON.stringify(analyticsOnly))
+    await consentPage.reload({waitUntil:'domcontentloaded'})
+    if(await cookieDialog.isVisible())errors.push('Cookie banner incorrectly reopens for a current saved choice')
+    await consentPage.getByRole('button',{name:'Podešavanja kolačića'}).click()
+    await cookieDialog.getByRole('button',{name:'Samo neophodno'}).click()
+    const rejected=await consentPage.evaluate(()=>{
+      const updates=(window.dataLayer||[]).filter(x=>Array.isArray(x)&&x[0]==='consent'&&x[1]==='update')
+      return {choice:JSON.parse(localStorage.getItem('sindikat_cookie_consent')||'{}').choice,update:updates.at(-1)?.[2]}
+    })
+    if(rejected.choice!=='rejected'||rejected.update?.analytics_storage!=='denied'||rejected.update?.ad_storage!=='denied')errors.push('Reject consent did not deny analytics/ads: '+JSON.stringify(rejected))
+    await consentPage.getByRole('button',{name:'Podešavanja kolačića'}).click()
+    await cookieDialog.getByRole('button',{name:'Prihvati sve'}).click()
+    const all=await consentPage.evaluate(()=>{
+      const updates=(window.dataLayer||[]).filter(x=>Array.isArray(x)&&x[0]==='consent'&&x[1]==='update')
+      return {choice:JSON.parse(localStorage.getItem('sindikat_cookie_consent')||'{}').choice,update:updates.at(-1)?.[2]}
+    })
+    if(all.choice!=='accepted'||all.update?.analytics_storage!=='granted'||all.update?.ad_storage!=='granted')errors.push('Accept all consent did not grant both: '+JSON.stringify(all))
+    console.log('CHECK cookie preferences: analytics-only, reject, accept all, persistence and reopening')
+  }catch(e){errors.push('Cookie consent interaction '+String(e))}
+  finally{await consentPage.close()}
 } finally {await browser.close()}
 if(errors.length){console.error('QA FAIL\n'+errors.join('\n'));process.exitCode=1}
 else console.log('BROWSER QA PASS: '+(routes.length*widths.length)+' viewport/page combinations plus mobile pricing navigation')
