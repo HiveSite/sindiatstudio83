@@ -4,10 +4,10 @@ export const services: Service[] = [
   {
     slug: 'performance-marketing',
     eyebrow: 'Performance sistem',
-    title: 'Kampanje koje imaju jasan put od oglasa do poslovnog rezultata',
+    title: 'Oglasi koji dovode do upita, rezervacija i prodaje',
     shortTitle: 'Performance marketing',
     summary: 'Meta i Google kampanje povezujemo sa ponudom, landing stranicom, mjerenjem i kreativama. Ne optimizujemo samo klikove, već radnju koja ima vrijednost za biznis: upit, rezervaciju, registraciju, posjetu ili prodaju.',
-    outcomes: ['više kvalitetnih konverzija', 'jasniji odnos budžeta i rezultata', 'sistem testiranja koji se može ponavljati'],
+    outcomes: ['više kvalitetnih konverzija', 'jasniji odnos budžeta i rezultata', 'jasan način da otkrijemo koji oglasi rade'],
     bestFor: [
       'biznise koji već imaju proizvod ili uslugu, ali nemaju stabilan tok kvalitetnih upita',
       'timove koji troše budžet bez pouzdanog mjerenja i jasnog objašnjenja rezultata',
@@ -22,13 +22,13 @@ export const services: Service[] = [
     ],
     successSignals: [
       'svaki važan korak korisnika se ispravno mjeri',
-      'poznat je trošak i kvalitet konverzije po kanalu, publici i poruci',
+      'znamo koji oglasi donose upite i koliko nas ti upiti koštaju',
       'pobjedničke poruke i formati mogu da se ponove ili skaliraju',
-      'tim zna šta treba mijenjati kada rezultat oslabi, umjesto da nasumično povećava budžet',
+      'znamo šta treba popraviti kada broj ili kvalitet upita padne',
     ],
     includes: [
       'analiza cilja, ponude, publike i trenutnog prodajnog puta',
-      'plan kanala, kampanjske strukture i faza testiranja',
+      'plan kanala, strukture kampanje i faza testiranja',
       'postavljanje ili reorganizacija Meta Ads i Google Ads kampanja',
       'GA4, GTM i mjerenje događaja koji predstavljaju stvarnu konverziju',
       'kreativni pravci, tekstovi oglasa i varijante za kontrolisano testiranje',
@@ -36,9 +36,9 @@ export const services: Service[] = [
     ],
     process: [
       ['Dijagnostika', 'Provjeravamo ponudu, tržište, podatke, postojeće kampanje i mjesto na kojem korisnik najčešće odustaje.'],
-      ['Mjerenje i struktura', 'Postavljamo događaje, odredišne stranice, publike i kampanje tako da se svaki test može jasno pročitati.'],
-      ['Kontrolisani test', 'Testiramo poruku, format, publiku i ponudu u obimu koji može dati koristan signal, bez prerane potrošnje budžeta.'],
-      ['Optimizacija i skaliranje', 'Budžet pomjeramo prema kombinacijama koje daju kvalitetniji rezultat i dokumentujemo šta treba razvijati dalje.'],
+      ['Priprema kampanje i mjerenja', 'Postavljamo događaje, odredišne stranice, publike i kampanje tako da se svaki test može jasno pročitati.'],
+      ['Probna kampanja', 'Testiramo poruku, format, publiku i ponudu u obimu koji može dati koristan signal, bez prerane potrošnje budžeta.'],
+      ['Unapređenje kampanje', 'Budžet pomjeramo prema kombinacijama koje daju kvalitetniji rezultat i dokumentujemo šta treba razvijati dalje.'],
     ],
     engagements: [
       { name: 'Dijagnostički sprint', text: 'Audit ponude, kampanja, mjerenja i prodajnog toka sa prioritetima i konkretnim planom narednih poteza.' },
@@ -64,7 +64,7 @@ export const services: Service[] = [
       'brendove koji pokreću promociju na jednoj ili više lokacija',
       'sezonske projekte kojima treba roster, transport, vođe smjena i plan zamjena',
       'događaje kod kojih marketing, produkcija i osoblje moraju raditi po istom rasporedu',
-      'kampanje koje žele povezati fizičku interakciju sa prijavom, QR radnjom, sadržajem ili ponovnim kontaktom',
+      'kampanje koje žele povezati fizičku interakciju sa prijavom preko QR koda, sadržajem ili ponovnim kontaktom',
     ],
     clientInputs: [
       'cilj aktivacije, datumi, lokacije i očekivani obim posjećenosti',
@@ -162,9 +162,9 @@ export const services: Service[] = [
   {
     slug: 'sadrzaj-za-kampanje',
     eyebrow: 'Sistem sadržaja',
-    title: 'Sadržaj koji je napravljen da obavi konkretan posao u kampanji',
+    title: 'Sadržaj koji ljudi žele da pogledaju i koji podržava prodaju',
     shortTitle: 'Sadržaj za kampanje',
-    summary: 'Planiramo poruke, formate i produkciju prema publici, kanalu i fazi korisničkog puta. Materijal se pravi za distribuciju, testiranje i ponovnu upotrebu, a ne samo za uredan izgled profila.',
+    summary: 'Planiramo poruke, formate i produkciju prema publici, kanalu i fazi korisničkog puta. Pravimo fotografije, video i dizajn koji se lako prilagođavaju Instagramu, oglasima i sajtu. Cilj nije samo lijep profil, već sadržaj koji prenosi pravu poruku.',
     outcomes: ['više korisnih kreativnih testova', 'jasnija i dosljednija poruka ponude', 'materijal spreman za oglase, mreže i teren'],
     bestFor: [
       'kampanje koje imaju budžet, ali nemaju dovoljno različitih kreativnih pravaca za testiranje',
@@ -182,12 +182,12 @@ export const services: Service[] = [
       'svaki materijal ima definisanu publiku, kanal i zadatak',
       'kampanja dobija dovoljno različitih poruka i formata za smislen test',
       'najbolji pravci se razvijaju dalje, a slabiji se mijenjaju bez vezivanja za estetiku',
-      'materijal je organizovan i može se ponovo koristiti kroz oglase, mreže i izvještavanje',
+      'fotografije, video i dizajn ostaju spremni i za naredne objave ili oglase',
     ],
     includes: [
       'komunikaciona ideja i plan sadržaja prema cilju kampanje',
-      'matrica uvodnih poruka, uglova, naslova i poziva na akciju',
-      'scenariji, shot lista, produkcioni plan i koordinacija snimanja',
+      'predlozi uvodnih poruka, naslova i poziva na akciju',
+      'scenariji, plan kadrova, raspored i organizacija snimanja',
       'foto, video, dizajn, sadržaj sa terena i prilagođavanje postojećeg materijala',
       'izvozi za oglase, društvene mreže, web i druge dogovorene kanale',
       'arhiva materijala, označavanje varijanti i plan ponovne upotrebe',
@@ -197,7 +197,7 @@ export const services: Service[] = [
       ['Produkcioni plan', 'Definišemo scene, kadrove, formate, ljude, lokacije, rekvizite, odobrenja i rokove.'],
       ['Produkcija', 'Snimamo, dizajniramo ili prilagođavamo materijal u paketima spremnim za distribuciju.'],
       ['Test i analiza', 'Povezujemo kreativne varijante sa kampanjskim rezultatima i razlikujemo estetski dopadljiv materijal od materijala koji radi.'],
-      ['Razvoj pobjednika', 'Najbolje poruke i formate širimo u nove varijante i koristimo ih kao osnovu narednog produkcionog ciklusa.'],
+      ['Razvoj najboljih ideja', 'Poruke i formate koji daju dobar rezultat koristimo kao osnovu za sljedeća snimanja i objave.'],
     ],
     engagements: [
       { name: 'Kreativni sprint', text: 'Poruke, uglovi, formati, scenariji i produkcioni plan za konkretan cilj ili kampanju.' },
@@ -215,9 +215,9 @@ export const services: Service[] = [
   {
     slug: 'recruitment-kampanje',
     eyebrow: 'Kampanje za zapošljavanje',
-    title: 'Kampanje za zapošljavanje koje smanjuju put od oglasa do relevantne prijave',
+    title: 'Oglasi za posao koji lakše dolaze do pravih kandidata',
     shortTitle: 'Recruitment kampanje',
-    summary: 'Povezujemo ponudu poslodavca, oglas, landing ili prijavni tok, distribuciju i početna pitanja. Cilj nije samo veći broj CV-eva, već više relevantnih kandidata i uredniji proces obrade.',
+    summary: 'Povezujemo ponudu poslodavca, oglas, landing ili prijavni tok, distribuciju i početna pitanja. Nije poenta dobiti što više CV-eva, već doći do ljudi koji ispunjavaju uslove i olakšati pregled prijava.',
     outcomes: ['više relevantnih prijava', 'brži i pregledniji početni proces', 'jasniji izvor i kvalitet kandidata'],
     bestFor: [
       'poslodavce koji traže sezonske, operativne ili teško dostupne profile',
