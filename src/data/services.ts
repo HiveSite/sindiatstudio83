@@ -57,7 +57,7 @@ export const services: Service[] = [
     slug: 'aktivacije-i-eventi',
     eyebrow: 'Teren + digital',
     title: 'Aktivacije i događaji sa jasnim planom ljudi, lokacija i odgovornosti',
-    shortTitle: 'Aktivacije i eventi',
+    shortTitle: 'Aktivacije i događaji',
     summary: 'Planiramo koncept, tim, raspored, logistiku, komunikaciju i sadržaj sa terena. Aktivacija nije samo prisustvo brenda na lokaciji, već operativni sistem sa ciljem, kontrolom i završnim izvještajem.',
     outcomes: ['pouzdan tim i uredna logistika', 'kontrolisana realizacija na svakoj lokaciji', 'dokaz i podaci za naredni potez'],
     bestFor: [
@@ -147,7 +147,7 @@ export const services: Service[] = [
       ['QA i objava', 'Testiramo uređaje, linkove, forme, događaje, redirecte, performanse i ponašanje nakon objave.'],
     ],
     engagements: [
-      { name: 'Landing stranica', text: 'Jedna fokusirana prodajna stranica sa jasnim pozivom na akciju, formom, analitikom i SEO osnovom.' },
+      { name: 'Odredišna stranica', text: 'Jedna fokusirana prodajna stranica sa jasnim pozivom na akciju, formom, analitikom i SEO osnovom.' },
       { name: 'Napredni mini-sajt', text: 'Kompaktna prezentacija usluge, prostora, izvođača ili partnera sa više sekcija i mobilnim prioritetom.' },
       { name: 'Digitalni proizvod', text: 'Kompleksniji korisnički tok, uloge, integracije, administracija i posebna poslovna logika.' },
     ],
