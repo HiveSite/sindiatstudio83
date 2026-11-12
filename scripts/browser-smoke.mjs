@@ -56,6 +56,24 @@ try {
       } catch(e){errors.push(width+'px '+route+': '+String(e))}
     }
     if(width===390){
+      // Test the real motion behavior separately from reduced-motion layout checks.
+      const motionPage=await browser.newPage({viewport:{width:390,height:844},reducedMotion:'no-preference'})
+      try {
+        await motionPage.goto(base+'/',{waitUntil:'domcontentloaded'})
+        const counter=motionPage.locator('.hero-photo-counter')
+        await counter.waitFor({state:'visible'})
+        const first=(await counter.innerText()).trim()
+        await motionPage.waitForTimeout(5400)
+        const second=(await counter.innerText()).trim()
+        if(first===second)errors.push('Hero rotation did not advance after 5 seconds')
+        await motionPage.getByRole('button',{name:'Pauziraj rotaciju'}).click()
+        const paused=(await counter.innerText()).trim()
+        await motionPage.waitForTimeout(5400)
+        if((await counter.innerText()).trim()!==paused)errors.push('Hero slider continued rotating after pause')
+      } catch(e) {errors.push('Hero rotation/pause behavior: '+String(e))}
+      finally {await motionPage.close()}
+    }
+    if(width===390){
       try{
         await page.goto(base+'/',{waitUntil:'domcontentloaded'})
         const nav=page.getByRole('navigation',{name:'Brza mobilna navigacija'})
@@ -70,6 +88,11 @@ try {
         const context=await page.locator('.brief-context').innerText()
         if(!expectedProduct || !context.includes(expectedProduct))errors.push('Pricing selection mismatch. Expected '+JSON.stringify(expectedProduct)+'; got '+JSON.stringify(context)+'; URL '+page.url())
         if(await page.locator('form.lead-form').count()!==1)errors.push('Lead form missing on chosen product contact page')
+        await page.locator('form.lead-form button[type="submit"]').click()
+        const invalid=await page.locator('form.lead-form input[name="name"]').evaluate(el=>!el.checkValidity())
+        if(!invalid)errors.push('Empty lead form did not preserve required field validation')
+        const status=await page.locator('form.lead-form [role="status"]').innerText()
+        if(!status.includes('obavezna polja'))errors.push('Lead form validation does not communicate required fields')
       }catch(e){errors.push('Mobile pricing navigation '+String(e))}
     }
     await page.close()
