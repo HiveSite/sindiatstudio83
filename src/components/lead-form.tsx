@@ -111,7 +111,7 @@ export function LeadForm({ compact = false, source = 'contact-page' }: { compact
       ...getStoredCampaignData(), ...getFirstTouchData(),
     }
 
-    setState('loading'); setStatus('Šaljemo brief...')
+    setState('loading'); setStatus('Šaljemo upit...')
     const controller = new AbortController(); const timeout = window.setTimeout(() => controller.abort(), requestTimeoutMs)
 
     try {
@@ -146,7 +146,7 @@ export function LeadForm({ compact = false, source = 'contact-page' }: { compact
         <label className="form-span"><span>Kratak opis projekta</span><textarea name="message" rows={6} maxLength={3000} placeholder="Napiši najvažniji problem, lokaciju, šta već postoji i gdje trenutno zapinje." /></label>
         <label className="honeypot" aria-hidden="true">Website<input name="website" tabIndex={-1} autoComplete="off" /></label>
       </div>
-      <div className="form-submit"><button className="button button-primary" type="submit" disabled={state === 'loading'}>{state === 'loading' ? 'Šaljem...' : 'Pošalji brief'}</button><p>Slanjem briefa prihvataš <Link href="/privatnost/">pravila privatnosti</Link>. {site.responseTime}</p></div>
+      <div className="form-submit"><button className="button button-primary" type="submit" disabled={state === 'loading'}>{state === 'loading' ? 'Šaljem...' : 'Pošalji upit'}</button><p>Slanjem upita prihvataš <Link href="/privatnost/">pravila privatnosti</Link>. {site.responseTime}</p></div>
       <div className={`form-status${state === 'error' ? ' is-error' : state === 'success' ? ' is-success' : ''}`} role="status" aria-live="polite" aria-atomic="true">{status}</div>
     </form>
   )
