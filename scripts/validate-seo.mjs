@@ -9,7 +9,7 @@ const fail = (message) => failures.push(message)
 const warn = (message) => warnings.push(message)
 
 const metadata = read('src/lib/metadata.ts')
-for (const token of ['alternates: { canonical }', 'openGraph', 'twitter', 'max-image-preview']) {
+for (const token of ['alternates: { canonical', 'openGraph', 'twitter', 'max-image-preview']) {
   if (!metadata.includes(token)) fail(`Metadata helper is missing SEO token: ${token}`)
 }
 if (!metadata.includes('index: false') || !metadata.includes('follow: true')) fail('Noindex metadata must remain crawlable with follow=true')
