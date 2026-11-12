@@ -1,6 +1,7 @@
 'use client'
 
 import Image from 'next/image'
+import { usePathname } from 'next/navigation'
 import { useEffect, useState } from 'react'
 
 const slides = [
@@ -16,7 +17,10 @@ const slides = [
   { src: '/images/demo-hero/slide-10.webp', alt: 'Aktivacija i produkcija projekta', title: 'Aktivacije i produkcija' },
 ] as const
 
+const englishTitles = ['Events & experiences','Event production','Creative crew','Brand experiences','Photo & video production','Event operations','Strategy & team','Digital & creative','Digital products & content','Activations & production']
+
 export function HeroShowcase() {
+  const english = usePathname().startsWith('/en')
   const [active, setActive] = useState(0)
   const [paused, setPaused] = useState(false)
   const [manualSelection, setManualSelection] = useState(false)
@@ -32,22 +36,22 @@ export function HeroShowcase() {
 
   const slide = slides[active]
   return (
-    <div className="hero-photo-showcase" aria-label="Kreativni hero vizuali Sindikat Studio 83">
+    <div className="hero-photo-showcase" aria-label={english ? "Sindikat Studio 83 creative visuals" : "Kreativni hero vizuali Sindikat Studio 83"}>
       <div className="hero-photo-viewport">
-        <Image key={slide.src} className="hero-photo-image" src={slide.src} alt={slide.alt}
+        <Image key={slide.src} className="hero-photo-image" src={slide.src} alt={english ? `Sindikat Studio 83 - ${englishTitles[active]}` : slide.alt}
           fill sizes="100vw"
           priority={active === 0} loading={active === 0 ? 'eager' : 'lazy'} />
-        <div className="hero-photo-label" aria-live="off"><span>Sindikat kreativni vizuali</span><strong>{slide.title}</strong></div>
+        <div className="hero-photo-label" aria-live="off"><span>{english ? 'Sindikat creative visuals' : 'Sindikat kreativni vizuali'}</span><strong>{english ? englishTitles[active] : slide.title}</strong></div>
       </div>
       <div className="hero-photo-controls">
         <output className="hero-photo-counter" aria-live="polite" aria-atomic="true" data-slide-index={active + 1} key={`count-${active}`}>{String(active + 1).padStart(2, '0')} / {String(slides.length).padStart(2, '0')}</output>
-        <div className="hero-photo-dots" aria-label="Izaberi fotografiju">
+        <div className="hero-photo-dots" aria-label={english ? "Choose an image" : "Izaberi fotografiju"}>
           {slides.map((item, index) => <button key={item.src} type="button"
-            className={index === active ? 'is-active' : ''} aria-label={`Prikaži fotografiju ${index + 1}: ${item.title}`}
+            className={index === active ? 'is-active' : ''} aria-label={english ? `Show image ${index + 1}: ${englishTitles[index]}` : `Prikaži fotografiju ${index + 1}: ${item.title}`}
             aria-current={index === active ? 'true' : undefined} onClick={() => { setActive(index); setManualSelection(true) }} />)}
         </div>
-        <button className="hero-photo-pause" type="button" aria-label={paused ? 'Pokreni rotaciju' : 'Pauziraj rotaciju'} onClick={() => { setManualSelection(false); setPaused((current) => !current) }}>
-          {paused ? 'Pokreni' : 'Pauza'}
+        <button className="hero-photo-pause" type="button" aria-label={paused ? (english ? 'Resume slideshow' : 'Pokreni rotaciju') : (english ? 'Pause slideshow' : 'Pauziraj rotaciju')} onClick={() => { setManualSelection(false); setPaused((current) => !current) }}>
+          {paused ? (english ? 'Play' : 'Pokreni') : (english ? 'Pause' : 'Pauza')}
         </button>
       </div>
     </div>
