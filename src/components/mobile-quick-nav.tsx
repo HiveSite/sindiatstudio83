@@ -24,21 +24,24 @@ function NavIcon({ name }: { name: (typeof quickLinks)[number]['icon'] }) {
 
 export function MobileQuickNav() {
   const pathname = usePathname()
+  const english = pathname === '/en' || pathname.startsWith('/en/')
   return (
-    <nav className="mobile-quick-nav" aria-label="Brza mobilna navigacija">
+    <nav className="mobile-quick-nav" aria-label={english ? "Quick mobile navigation" : "Brza mobilna navigacija"}>
       {quickLinks.map((item) => {
-        const base = item.href.split(/[?#]/)[0]
-        const active = item.href === '/' ? pathname === '/' : pathname === base || pathname.startsWith(base)
+        const localizedHref = english ? '/en' + item.href : item.href
+        const localizedLabel = english ? ({ 'Početna':'Home', 'Usluge':'Services', 'Projekti':'Projects', 'Cijene':'Pricing', 'Upit':'Enquiry' } as Record<string,string>)[item.label] : item.label
+        const base = localizedHref.split(/[?#]/)[0]
+        const active = item.href === '/' ? (english ? pathname === '/en/' || pathname === '/en' : pathname === '/') : pathname === base || pathname.startsWith(base)
         return (
           <Link
             key={item.label}
             className={'mobile-quick-link' + (active ? ' is-current' : '') + (item.icon === 'send' ? ' is-lead' : '')}
-            href={item.href}
+            href={localizedHref}
             aria-current={active ? 'page' : undefined}
             data-track={item.icon === 'send' ? 'mobile_nav_lead' : undefined}
           >
             <NavIcon name={item.icon} />
-            <span>{item.label}</span>
+            <span>{localizedLabel}</span>
           </Link>
         )
       })}
