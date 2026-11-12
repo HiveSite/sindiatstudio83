@@ -48,7 +48,7 @@ export const services: Service[] = [
     faq: [
       ['Koliki budžet ima smisla?', 'Zavisi od cilja, tržišta, marže, trajanja kampanje i količine podataka potrebne za stabilan test. Prvo definišemo minimalan obim koji može dati koristan signal.'],
       ['Da li radite samo Meta oglase?', 'Ne. Koristimo Meta, Google i druge kanale kada imaju jasnu ulogu u putu korisnika. Kanal ne uvodimo samo zato što je popularan.'],
-      ['Možete li raditi sa postojećim sajtom?', 'Da. Prvo provjeravamo brzinu, poruku, mobilni prikaz, poziv na akciju i mjerenje. Nekad je dovoljna optimizacija, a nekad je bolje napraviti posebnu landing stranicu.'],
+      ['Možete li raditi sa postojećim sajtom?', 'Da. Prvo provjeravamo brzinu, poruku, mobilni prikaz, poziv na akciju i mjerenje. Nekad je dovoljna optimizacija, a nekad je bolje napraviti posebnu odredišnu stranicu.'],
       ['Ko odgovara na upite iz kampanje?', 'Klijent može zadržati obradu upita, a mi postavljamo način evidencije i povratne informacije. Kod šireg projekta možemo pomoći da se proces prijema i početne kvalifikacije organizuje.'],
     ],
     accent: 'pink',
@@ -213,7 +213,7 @@ export const services: Service[] = [
     accent: 'pink',
   },
   {
-    slug: 'recruitment-kampanje',
+    slug: 'zapošljavanje-kampanje',
     eyebrow: 'Kampanje za zapošljavanje',
     title: 'Oglasi za posao koji lakše dolaze do pravih kandidata',
     shortTitle: 'Kampanje za zapošljavanje',
