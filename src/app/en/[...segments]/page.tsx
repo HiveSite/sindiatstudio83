@@ -94,8 +94,8 @@ export async function generateMetadata({params}:{params:Promise<{segments:string
   else {const x=top.find(row=>row[0]===kind);if(x){title=x[1];description=x[2]}}
   return {
     title:`${title} | Sindikat Studio 83`,description,
-    alternates:{canonical:path(segments),languages:{'en':path(segments),'sr-Latn-ME':`/${segments.join('/')}/`}},
-    robots:kind==='blog'&&slug?{index:false,follow:true}:undefined,
+    alternates:{canonical:path(segments),languages:kind==='blog'&&slug?undefined:{'en':path(segments),'sr-Latn-ME':`/${segments.join('/')}/`}},
+    robots:(kind==='blog'&&slug)||['privatnost','kolacici','uslovi-koriscenja','hvala'].includes(kind)?{index:false,follow:true}:undefined,
     openGraph:{locale:'en_GB',title,description},
   }
 }
