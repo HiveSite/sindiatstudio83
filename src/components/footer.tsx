@@ -27,7 +27,7 @@ export function Footer() {
           <div>
             <h2>{tr('Usluge','Services')}</h2>
             <Link href={localized('/usluge/performance-marketing/')}>{tr('Digitalno oglašavanje','Digital advertising')}</Link>
-            <Link href={localized('/usluge/aktivacije-i-eventi/')}>{tr('Aktivacije i eventi','Events & activations')}</Link>
+            <Link href={localized('/usluge/aktivacije-i-eventi/')}>{tr('Aktivacije i događaji','Events & activations')}</Link>
             <Link href={localized('/usluge/web-i-konverzije/')}>{tr('Sajtovi i digitalni proizvodi','Websites & digital products')}</Link>
             <Link href={localized('/usluge/sadrzaj-za-kampanje/')}>{tr('Sadržaj za kampanje','Content production')}</Link>
             <Link href={localized('/usluge/recruitment-kampanje/')}>{tr('Kampanje za zapošljavanje','Recruitment campaigns')}</Link>
