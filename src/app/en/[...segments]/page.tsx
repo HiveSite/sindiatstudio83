@@ -8,6 +8,7 @@ import { serviceProducts } from '@/data/service-products'
 import { cases } from '@/data/cases'
 import { blogPosts } from '@/data/blog'
 import { site } from '@/data/site'
+import { enLegalPages } from '@/data/en-legal'
 
 const enArticles: Record<string,string> = {
 p01:'Why a campaign in Podgorica can fail before it starts',
@@ -134,8 +135,15 @@ export default async function EnglishPages({params}:{params:Promise<{segments:st
   if(kind==='blog'&&!slug)return <div lang="en"><Head eyebrow="RESOURCES" title="Practical guides from the studio." description="Explore campaign planning, websites, local search and event production."/><section className="section section-dark"><div className="container home-project-grid">{blogPosts.map(post=><article key={post.slug} className="home-project-card"><div className="home-project-text"><h3>{enArticles[post.slug]}</h3><p>Insights and practical guidance from Sindikat Studio 83.</p><Link href={path(['blog',post.slug])}>English article overview ↗</Link></div></article>)}</div></section></div>
   if(kind==='blog'&&slug&&enArticles[slug])return <div lang="en"><Head eyebrow="ARTICLE OVERVIEW" title={enArticles[slug]} description="An English overview of this topic is being edited. The full article is currently available in Serbian (ijekavian)."/><section className="section section-dark"><div className="container"><h2>Read the full guide</h2><p>The complete English translation has not yet been published. We would rather show this clearly than display an incomplete or unreliable automated translation.</p><Link href={`/blog/${slug}/`} className="button button-ghost">Read the original Serbian guide ↗</Link></div></section></div>
   if(kind==='privatnost'||kind==='kolacici'||kind==='uslovi-koriscenja'){
-    const text=kind==='privatnost'?'We use contact details you submit to answer enquiries and coordinate projects. You can request access, correction or deletion by emailing us.':'Your preferences control optional analytics and advertising storage. Essential site functionality remains available without optional cookies.'
-    return <div lang="en"><Head eyebrow="LEGAL INFORMATION" title={kind==='privatnost'?'Privacy policy':kind==='kolacici'?'Cookie policy':'Terms of use'} description={text}/><section className="section section-dark"><div className="container"><h2>Questions about your information?</h2><p>Contact us at <a href={`mailto:${site.email}`}>{site.email}</a>. A fully reviewed English legal version is being prepared; the Serbian legal text remains authoritative.</p><Link href={`/${kind}/`} className="button button-ghost">Read full legal document ↗</Link></div></section></div>
+    const legal=enLegalPages[kind]
+    return <div lang="en"><Head eyebrow="LEGAL INFORMATION" title={legal.title} description={legal.description}/>
+      <section className="section section-dark"><div className="container legal">
+        {legal.sections.map(section=><div key={section.title} style={{marginBottom:30}}><h2>{section.title}</h2><p>{section.text}</p></div>)}
+        <p>Last updated: November 12, 2026.</p>
+        <p>Questions? Email <a href={`mailto:${site.email}`}>{site.email}</a>.</p>
+      </div></section>
+    </div>
   }
+
   notFound()
 }
