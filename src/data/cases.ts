@@ -3,10 +3,10 @@ import type { CaseCategory, CaseStudy } from '@/types/content'
 export const caseCategories: { slug: 'sve' | CaseCategory; label: string }[] = [
   { slug: 'sve', label: 'Sve' },
   { slug: 'digitalni-proizvodi', label: 'Digitalni proizvodi' },
-  { slug: 'web-i-mini-sajtovi', label: 'Web i mini-sajtovi' },
-  { slug: 'aktivacije-i-promo-timovi', label: 'Aktivacije i promo timovi' },
+  { slug: 'web-i-mini-sajtovi', label: 'Sajtovi i mini-sajtovi' },
+  { slug: 'aktivacije-i-promo-timovi', label: 'Aktivacije i promotivni timovi' },
   { slug: 'dogadjaji-i-produkcija', label: 'Događaji i produkcija' },
-  { slug: 'edukacija-i-community', label: 'Edukacija i community' },
+  { slug: 'edukacija-i-community', label: 'Edukacija i zajednica' },
 ]
 
 export const cases: CaseStudy[] = [
@@ -47,7 +47,7 @@ export const cases: CaseStudy[] = [
   },
   {
     slug: 'battlebots-arena',
-    type: 'STEAM program + event produkcija',
+    type: 'STEAM program + produkcija događaja',
     title: 'BattleBots Arena - višemjesečni program od prijave do finalne arene',
     summary: 'Nacionalni STEAM format koji je povezao komunikaciju, prijave, edukativne radionice, mentorski rad, izradu robota i finalno takmičenje pred publikom.',
     role: 'Sindikat je učestvovao u projektnoj koordinaciji, digitalnoj prezentaciji, prijavnim i komunikacionim tokovima, organizaciji radionica i produkciji završnog događaja.',
@@ -59,7 +59,7 @@ export const cases: CaseStudy[] = [
     challenge: 'Program je trajao više mjeseci i uključivao učesnike, mentore, predavače, partnere, radionice, tehničke zahtjeve, komunikaciju i finalnu produkciju. Svaka faza je morala biti razumljiva početnicima, vremenski povezana i dovoljno bezbjedna za rad sa robotikom i završnu borbu u areni.',
     solution: 'Projekat je podijeljen na jasne faze: informisanje i prijave, edukativni program, razvoj timova, izrada i testiranje robota, priprema finalista i produkcija završnog događaja. Web stranica i komunikacioni materijali služili su kao centralno mjesto za informacije, rokove i objašnjenje formata, dok je operativni plan povezivao učesnike, mentore, partnere i produkcijski tim.',
     result: 'BattleBots Arena je dobila prepoznatljiv identitet i jasan put od prve prijave do takmičenja. Obrazovni proces nije ostao zatvoren u radionicama, već je pretvoren u događaj koji je istovremeno razumljiv učesnicima, partnerima, publici i medijima.',
-    services: ['Projektna koordinacija', 'Event produkcija', 'Web i prijavni tokovi', 'Brending i komunikacija', 'Sadržaj i dokumentovanje'],
+    services: ['Projektna koordinacija', 'Produkcija događaja', 'Sajt i tokovi prijave', 'Brending i komunikacija', 'Sadržaj i dokumentovanje'],
     serviceSlugs: ['aktivacije-i-eventi', 'web-i-konverzije', 'sadrzaj-za-kampanje'],
     categories: ['dogadjaji-i-produkcija', 'edukacija-i-community', 'web-i-mini-sajtovi'],
     scope: [
@@ -183,7 +183,7 @@ export const cases: CaseStudy[] = [
     slug: 'sistem-za-terenske-angazmane',
     type: 'Promo timovi + logistika',
     title: 'Operativni sistem za promo timove, smjene i više lokacija',
-    summary: 'Sourcing, roster, briefing, rasporedi, transport, vođe smjena, zamjene, kontrola dolazaka i izvještavanje za promotivne, hospitality i event angažmane.',
+    summary: 'Odabir ljudi, evidencija tima, priprema, rasporedi, transport, vođe smjena, zamjene, kontrola dolazaka i izvještavanje za promocije i događaje.',
     role: 'Sindikat preuzima organizaciju ljudi od prvog briefa do završene smjene: izbor profila, potvrdu dostupnosti, pripremu, raspored, komunikaciju, rezervna rješenja, superviziju i operativni izvještaj.',
     metrics: [
       ['150+', 'ljudi u operativnoj mreži'],
@@ -268,7 +268,7 @@ export const cases: CaseStudy[] = [
   },
   {
     slug: 'privatni-i-korporativni-dogadjaji',
-    type: 'Event produkcija + koordinacija',
+    type: 'Produkcija događaja + koordinacija',
     title: 'Privatni i korporativni događaji - jedna koordinacija za cijelu realizaciju',
     summary: 'Planiranje i povezivanje prostora, programa, DJ-a ili izvođača, bara, hostesa, tehničke opreme, foto i video tima, dobavljača i operativnog toka događaja.',
     role: 'Sindikat može preuzeti kompletnu koordinaciju ili tačno definisane produkcijske blokove, sa jednom operativnom mapom, rasporedom, odgovornim osobama i planom za promjene tokom događaja.',
@@ -298,14 +298,14 @@ export const cases: CaseStudy[] = [
   },
   {
     slug: 'mini-sajtovi-i-digitalni-alati',
-    type: 'Web produkcija + digitalni alati',
+    type: 'Izrada sajtova + digitalni alati',
     title: 'Mini-sajtovi i digitalni alati za partnerske ponude',
     summary: 'Mobilno prilagođene prezentacije i praktični web alati unutar Sindikat Events ekosistema - od DJ portfolija i smještaja do grafičkih mapa.',
     role: 'Sindikat razvija strukturu, sadržajni tok, dizajn i frontend kompaktnih digitalnih rješenja koja brzo objašnjavaju ponudu i vode korisnika prema kontaktu, rezervaciji, lokaciji ili drugoj konkretnoj radnji.',
     challenge: 'Manjim biznisima, izvođačima i partnerskim ponudama često nije potreban veliki sajt, ali im je potrebno više od Instagram profila ili PDF dokumenta. Informacije moraju biti pregledne na telefonu, vizuelno prilagođene konkretnoj ponudi i dostupne preko jednostavnog linka.',
     solution: 'Razvijen je modularni pristup mini-sajtovima unutar postojećeg domena. Svaki projekat dobija sopstvenu strukturu i vizuelni identitet, dok zajednička tehnička osnova ubrzava razvoj, održavanje i kasnije izmjene. Kontakt, lokacija, poziv ili drugi važan korak postavljaju se kao primarna mobilna radnja.',
     result: 'Partneri dobijaju samostalnu i profesionalnu digitalnu prezentaciju bez nepotrebno velike infrastrukture. Sindikat dobija ponovljiv model koji se može prilagoditi novom izvođaču, prostoru, usluzi ili praktičnom alatu.',
-    services: ['Informaciona arhitektura', 'UX/UI dizajn', 'Frontend razvoj', 'Mobilna optimizacija', 'Kontakt i navigacioni tokovi'],
+    services: ['Informaciona arhitektura', 'Dizajn korisničkog iskustva', 'Frontend razvoj', 'Mobilna optimizacija', 'Kontakt i navigacioni tokovi'],
     serviceSlugs: ['web-i-konverzije', 'sadrzaj-za-kampanje'],
     categories: ['web-i-mini-sajtovi', 'digitalni-proizvodi'],
     scope: [
@@ -468,14 +468,14 @@ export const cases: CaseStudy[] = [
   },
   {
     slug: 'hive-agency-platforma',
-    type: 'Digitalni proizvod + web platforma',
+    type: 'Digitalni proizvod + internet platforma',
     title: 'Hive Agency - digitalni katalog team building programa i aktivnosti',
     summary: 'Web platforma koja organizuje sportske, zabavne, kreativne, kulturne, edukativne i avanturističke aktivnosti i vodi kompaniju od istraživanja ponude do upita za prilagođen program.',
     role: 'Sindikat je radio na strukturi digitalne ponude, korisničkom toku, dizajnu i web realizaciji platforme koja veliki broj različitih aktivnosti pretvara u pregledan prodajni sistem.',
     challenge: 'Širok katalog programa lako može postati nepregledan: korisnik vidi mnogo aktivnosti, ali ne razumije razliku, kome su namijenjene i kako da napravi sljedeći korak. Sajt je morao zadržati energiju iskustva, a istovremeno omogućiti kompanijama da brzo istraže kategorije i dođu do kontakta.',
     solution: 'Ponuda je organizovana kroz kategorije aktivnosti, izdvojene programe, detaljne stranice i jednostavan proces od izbora do rezervacije termina. Vizuelni sistem i mobilni prikaz prilagođeni su istraživanju većeg broja opcija, dok pozivi na akciju vode prema razgovoru i prilagođavanju programa potrebama tima.',
     result: 'Hive Agency je dobio centralno prodajno mjesto za predstavljanje team building ponude. Umjesto objašnjavanja kompletnog kataloga u prvoj poruci, kompanije mogu unaprijed razumjeti vrste aktivnosti i doći na razgovor sa jasnijom predstavom o formatu koji im odgovara.',
-    services: ['Struktura digitalne ponude', 'UX/UI dizajn', 'Web razvoj', 'Mobilna optimizacija', 'Kontaktni i prodajni tok'],
+    services: ['Struktura digitalne ponude', 'Dizajn korisničkog iskustva', 'Razvoj sajta', 'Mobilna optimizacija', 'Kontaktni i prodajni tok'],
     serviceSlugs: ['web-i-konverzije', 'sadrzaj-za-kampanje', 'performance-marketing'],
     categories: ['digitalni-proizvodi', 'web-i-mini-sajtovi'],
     scope: [
@@ -596,7 +596,7 @@ export const cases: CaseStudy[] = [
     challenge: 'Studentski događaj mora ponuditi dovoljno koristan sadržaj da opravda dolazak, ali i dovoljno otvoren i dinamičan format da podstakne upoznavanje, razmjenu i zadržavanje publike. Različiti programski blokovi, učesnici i atmosfera morali su djelovati kao jedna cjelina.',
     solution: 'Program je strukturiran kao dvodnevni mini festival sa jasno odvojenim edukativnim, interaktivnim i društvenim segmentima. Komunikacija je prilagođena studentskoj publici, dok su prostor, učesnici i produkcijski tok organizovani tako da prelazi između sadržaja ostanu jednostavni i razumljivi.',
     result: 'Student Connect je dobio format koji ne djeluje ni kao klasična konferencija ni kao događaj bez sadržajne osnove. Edukacija, community i festivalsko iskustvo objedinjeni su u program koji poziva na aktivno učešće i nova povezivanja.',
-    services: ['Koncept i program', 'Event produkcija', 'Koordinacija učesnika', 'Komunikacija i sadržaj', 'Community iskustvo'],
+    services: ['Koncept i program', 'Produkcija događaja', 'Koordinacija učesnika', 'Komunikacija i sadržaj', 'Community iskustvo'],
     serviceSlugs: ['aktivacije-i-eventi', 'sadrzaj-za-kampanje'],
     categories: ['edukacija-i-community', 'dogadjaji-i-produkcija'],
     scope: [
