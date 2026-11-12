@@ -13,7 +13,7 @@ export const industries: Industry[] = [
     ],
     solutions: [
       'sezonski plan ponude, sadržaja, kampanja i kapaciteta',
-      'landing ili mini-sajt sa direktnim upitom, lokacijom i jasnim informacijama',
+      'odredišnu stranicu ili mini-sajt sa direktnim upitom, lokacijom i jasnim informacijama',
       'Google i Meta kampanje povezane sa mjerenjem rezervacije ili kontakta',
       'foto i video produkcija na lokaciji sa materijalom za više kanala',
       'promo, event ili hospitality timovi kada digitalna kampanja ima nastavak na terenu',
@@ -81,7 +81,7 @@ export const industries: Industry[] = [
       'programska i produkcijska struktura sa jasnim odgovornostima',
       'landing, prijava, ulaznice ili drugi odgovarajući put do učešća',
       'kampanja i sadržaj usklađeni sa stvarnim kapacitetom događaja',
-      'event osoblje, dobavljači, tehnika i protokol u jednoj operativnoj mapi',
+      'osoblje na događaju, dobavljači, tehnika i protokol u jednoj operativnoj mapi',
       'foto, video, izvještaj i plan nastavka nakon događaja',
     ],
     bestFor: [
@@ -111,17 +111,17 @@ export const industries: Industry[] = [
       'prodajni tim prekasno dobija informaciju o izvoru i interesovanju kontakta',
     ],
     solutions: [
-      'landing ili mini-sajt prema konkretnoj ponudi, lokaciji ili segmentu kupaca',
+      'odredišnu stranicu ili mini-sajt prema konkretnoj ponudi, lokaciji ili segmentu kupaca',
       'kampanje sa porukama koje filtriraju interesovanje prije kontakta',
       'kvalifikaciona pitanja i jasan izbor načina komunikacije',
-      'tracking izvora, statusa i kvaliteta kontakata',
+      'praćenje izvora, statusa i kvaliteta kontakata',
       'sadržaj koji objašnjava proces, standard, povjerenje i razliku u ponudi',
     ],
     bestFor: [
       'nekretnine, smještaj i usluge gdje odluka zahtijeva više informacija i povjerenja',
       'ponude sa ograničenim kapacitetom ili većom vrijednošću pojedinačnog klijenta',
       'timove koji žele manje, ali relevantnije upite',
-      'biznise kojima je potreban premium mini-sajt umjesto velike i komplikovane web prezentacije',
+      'biznise kojima je potreban napredni mini-sajt umjesto velike i komplikovane web prezentacije',
     ],
     successSignals: [
       'korisnik prije kontakta razumije ponudu, okvir procesa i očekivani naredni korak',
