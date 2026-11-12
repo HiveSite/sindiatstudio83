@@ -23,16 +23,15 @@ export function HeroShowcase() {
   const english = usePathname().startsWith('/en')
   const [active, setActive] = useState(0)
   const [paused, setPaused] = useState(false)
-  const [manualSelection, setManualSelection] = useState(false)
 
   useEffect(() => {
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)')
-    if (paused || manualSelection || reduced.matches || document.visibilityState === 'hidden') return
+    if (paused || reduced.matches || document.visibilityState === 'hidden') return
     const timer = window.setInterval(() => {
       if (document.visibilityState === 'visible') setActive((current) => (current + 1) % slides.length)
     }, 5000)
     return () => window.clearInterval(timer)
-  }, [paused, manualSelection])
+  }, [paused])
 
   const slide = slides[active]
   return (
@@ -48,9 +47,9 @@ export function HeroShowcase() {
         <div className="hero-photo-dots" aria-label={english ? "Choose an image" : "Izaberi fotografiju"}>
           {slides.map((item, index) => <button key={item.src} type="button"
             className={index === active ? 'is-active' : ''} aria-label={english ? `Show image ${index + 1}: ${englishTitles[index]}` : `Prikaži fotografiju ${index + 1}: ${item.title}`}
-            aria-current={index === active ? 'true' : undefined} onClick={() => { setActive(index); setManualSelection(true) }} />)}
+            aria-current={index === active ? 'true' : undefined} onClick={() => { setActive(index); setPaused(true) }} />)}
         </div>
-        <button className="hero-photo-pause" type="button" aria-label={paused ? (english ? 'Resume slideshow' : 'Pokreni rotaciju') : (english ? 'Pause slideshow' : 'Pauziraj rotaciju')} onClick={() => { setManualSelection(false); setPaused((current) => !current) }}>
+        <button className="hero-photo-pause" type="button" aria-label={paused ? (english ? 'Resume slideshow' : 'Pokreni rotaciju') : (english ? 'Pause slideshow' : 'Pauziraj rotaciju')} onClick={() => setPaused((current) => !current)}>
           {paused ? (english ? 'Play' : 'Pokreni') : (english ? 'Pause' : 'Pauza')}
         </button>
       </div>
