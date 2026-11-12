@@ -4,9 +4,9 @@ import { industries } from '@/data/industries'
 const goals = [
   {title:'Više kupaca i upita',desc:'Oglasi, prodaja i konverzije',href:'/usluge/performance-marketing/'},
   {title:'Jači nastup na mrežama',desc:'Snimanje, sadržaj i društvene mreže',href:'/usluge/sadrzaj-za-kampanje/'},
-  {title:'Sajt koji prodaje',desc:'Web, landing i digitalni proizvodi',href:'/usluge/web-i-konverzije/'},
+  {title:'Sajt koji prodaje',desc:'Sajtovi, odredišne stranice i digitalni proizvodi',href:'/usluge/web-i-konverzije/'},
   {title:'Događaj ili aktivacija',desc:'Produkcija, ljudi i realizacija',href:'/usluge/aktivacije-i-eventi/'},
-  {title:'Potrebni su mi ljudi',desc:'Recruitment i promo timovi',href:'/usluge/recruitment-kampanje/'},
+  {title:'Potrebni su mi ljudi',desc:'Zapošljavanje i promotivni timovi',href:'/usluge/recruitment-kampanje/'},
 ] as const
 
 export function HomeQuickChoices() {
