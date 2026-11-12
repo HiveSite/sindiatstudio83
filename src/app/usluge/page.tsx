@@ -60,6 +60,6 @@ export default function ServicesPage() {
 
     <OfferChooser />
 
-    <FinalCta title="Ne znaš odakle da kreneš?" text="Napiši šta ti treba, kada bi krenuo i koji budžet imaš na umu. Predložićemo najpraktičnije rješenje ili napraviti ponudu po mjeri." label="Pošalji brief" />
+    <FinalCta title="Ne znaš odakle da kreneš?" text="Napiši šta ti treba, kada bi krenuo i koji budžet imaš na umu. Predložićemo najpraktičnije rješenje ili napraviti ponudu po mjeri." label="Pošalji upit" />
   </>
 }
