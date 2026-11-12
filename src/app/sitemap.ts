@@ -4,6 +4,8 @@ import { industries } from '@/data/industries'
 import { cases } from '@/data/cases'
 import { blogPosts } from '@/data/blog'
 import { site } from '@/data/site'
+import { enServices, enIndustries, enCaseSummaries } from '@/data/en'
+import { englishBlogPosts } from '@/data/en-blog'
 
 export const dynamic = 'force-static'
 
@@ -33,6 +35,20 @@ export default function sitemap(): MetadataRoute.Sitemap {
     }},
   }))
 
+  const englishDetailRoutes: MetadataRoute.Sitemap = [
+    '/usluge/meta-ads/', '/usluge/google-ads/',
+    ...enServices.map((item) => `/usluge/${item.slug}/`),
+    ...enIndustries.map((item) => `/industrije/${item.slug}/`),
+    ...enCaseSummaries.map((item) => `/radovi/${item.slug}/`),
+    ...englishBlogPosts.map((item) => `/blog/${item.slug}/`),
+  ].map((pagePath) => ({
+    url: absoluteUrl('/en' + pagePath),
+    alternates: { languages: {
+      'en': absoluteUrl('/en' + pagePath),
+      'sr-Latn-ME': absoluteUrl(pagePath),
+    } },
+  }))
+
   const serviceRoutes: MetadataRoute.Sitemap = services.map((item) => ({
     url: absoluteUrl(`/usluge/${item.slug}/`),
   }))
@@ -58,6 +74,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   return [
     ...staticRoutes,
     ...englishRoutes,
+    ...englishDetailRoutes,
     ...serviceRoutes,
     ...industryRoutes,
     ...caseRoutes,
