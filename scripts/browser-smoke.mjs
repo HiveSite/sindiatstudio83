@@ -221,7 +221,7 @@ try {
   finally{await consentPage.close()}
 
   // Dual-language smoke checks: actual localized routes and UX, not a decorative switch.
-  const englishRoutes=['/en/','/en/usluge/','/en/cijene/','/en/radovi/','/en/industrije/','/en/o-nama/','/en/kontakt/','/en/privatnost/','/en/kolacici/','/en/usluge/performance-marketing/']
+  const englishRoutes=['/en/','/en/usluge/','/en/cijene/','/en/radovi/','/en/industrije/','/en/o-nama/','/en/kontakt/','/en/privatnost/','/en/kolacici/','/en/usluge/performance-marketing/','/en/blog/',...Array.from({length:30},(_,i)=>'/en/blog/p'+String(i+1).padStart(2,'0')+'/')]
   const englishPage=await browser.newPage({viewport:{width:390,height:844},reducedMotion:'reduce'})
   try{
     for(const route of englishRoutes){
@@ -230,6 +230,13 @@ try {
       const language=await englishPage.locator('html').getAttribute('lang')
       if(language!=='en')errors.push('Incorrect English document lang on '+route+': '+language)
       if(await englishPage.locator('h1').count()!==1)errors.push('English route must have exactly one H1: '+route)
+      if(route.startsWith('/en/blog/p')){
+        const paragraphs=await englishPage.locator('.blog-article-body p').count()
+        if(paragraphs<5)errors.push('English article is too short or missing: '+route+' paragraphs='+paragraphs)
+        const heading=await englishPage.locator('.blog-article-body h2').count()
+        if(heading<2)errors.push('English article needs useful section headings: '+route)
+        if((await englishPage.locator('body').innerText()).includes('complete English translation has not yet been published'))errors.push('Old English placeholder still present: '+route)
+      }
       const width=await englishPage.evaluate(()=>({screen:innerWidth,scroll:document.documentElement.scrollWidth}))
       if(width.scroll>width.screen+2)errors.push('English route mobile overflow: '+route+' '+JSON.stringify(width))
     }
@@ -245,7 +252,7 @@ try {
     await englishPage.getByRole('button',{name:'Send enquiry'}).click()
     const validation=await englishPage.getByRole('status').innerText()
     if(!validation.includes('required fields'))errors.push('English lead validation is not localized')
-    console.log('CHECK ten English routes, document lang, bilingual language switching and English lead form')
+    console.log('CHECK all 30 English articles, translated commercial routes, language switching and English lead form')
   } catch(e) {errors.push('English localized UX: '+String(e))}
   finally{await englishPage.close()}
 } finally {await browser.close()}
