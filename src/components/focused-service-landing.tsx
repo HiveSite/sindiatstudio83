@@ -19,6 +19,7 @@ export type FocusedServiceData = {
 
 export function FocusedServiceLanding({ data }: { data: FocusedServiceData }) {
   const products = serviceProducts['performance-marketing'] || []
+  const planningProduct = products.find((item) => item.name === 'Dijagnostika i plan') || products[0]
   const crumbs = [
     { label: 'Usluge', href: '/usluge/' },
     { label: 'Performance marketing', href: '/usluge/performance-marketing/' },
@@ -36,10 +37,10 @@ export function FocusedServiceLanding({ data }: { data: FocusedServiceData }) {
         <div><span className="eyebrow">{data.eyebrow} / Podgorica + Crna Gora</span><h1>{data.title}</h1>
         <p className="lead">{data.intro}</p>
         <div className="button-row" style={{marginTop:26}}>
-          <Link className="button button-primary" href={`/kontakt/?usluga=performance-marketing&proizvod=${encodeURIComponent(data.eyebrow)}&izvor=seo-usluga`}>Zatraži ponudu</Link>
+          <Link className="button button-primary" href={`/kontakt/?usluga=performance-marketing&cilj=${encodeURIComponent(data.eyebrow)}&izvor=seo-usluga`}>Zatraži ponudu</Link>
           <a className="button button-ghost" href="#sta-dobijate">Šta dobijate</a>
         </div></div>
-        <aside className="service-price-anchor"><span>Početni okvir za kampanje</span><strong>{products[0]?.price || 'Po ponudi'}</strong><p>Okvir je za početnu dijagnostiku. Postavka i vođenje kampanja imaju zasebnu cijenu. Budžet za oglase ugovara se odvojeno.</p></aside>
+        <aside className="service-price-anchor"><span>Prvi korak - {planningProduct?.name || 'Procjena'}</span><strong>{planningProduct?.price || 'Po ponudi'}</strong><p>Ovo je cijena početne analize, a ne vođenja oglasa. Postavku kampanje, mjesečni rad i budžet za reklame dogovaramo odvojeno.</p><Link href="/cijene/#performance-marketing" className="text-link">Vidi sve opcije i cijene ↗</Link></aside>
       </div>
     </div></section>
     <section className="section section-dark"><div className="container focused-columns">
@@ -49,16 +50,16 @@ export function FocusedServiceLanding({ data }: { data: FocusedServiceData }) {
     <section className="section section-light" id="sta-dobijate"><div className="container">
       <span className="eyebrow">Obim saradnje</span><h2>Šta konkretno radimo?</h2>
       <div className="focused-deliverables">{data.deliverables.map((t,i)=><article key={t}><span>{String(i+1).padStart(2,'0')}</span><h3>{t}</h3></article>)}</div>
-      <p className="focused-disclaimer">Konačan obim, kanali, trajanje i cijene potvrđuju se prije početka saradnje.</p>
+      <p className="focused-disclaimer">Dogovaramo šta je uključeno i koliko košta prije nego što počnemo.</p>
     </div></section>
     <section className="section section-dark"><div className="container">
-      <span className="eyebrow">Kako radimo</span><h2>Od prvog briefa do izvještaja.</h2>
+      <span className="eyebrow">Kako radimo</span><h2>Od prvog razgovora do rezultata.</h2>
       <div className="focused-steps">{data.stages.map((step,i)=><article key={step.name}><span>0{i+1}</span><h3>{step.name}</h3><p>{step.text}</p></article>)}</div>
     </div></section>
     <section className="section"><div className="container focused-columns">
       <div><span className="eyebrow">Najčešća pitanja</span><h2>Prije saradnje.</h2><Link className="text-link" href="/usluge/performance-marketing/">Sve performance usluge ↗</Link></div>
       <div className="focused-faq">{data.faq.map(item=><details key={item.question}><summary>{item.question}</summary><p>{item.answer}</p></details>)}</div>
     </div></section>
-    <FinalCta title="Da li ova usluga odgovara tvom cilju?" text="Pošalji nam kratak cilj, rok i postojeće kanale. Predložićemo realan prvi korak bez univerzalnih paketa." label="Pošalji brief"/>
+    <FinalCta title="Treba ti oglašavanje koje ima jasan cilj?" text="Napiši šta želiš da promovišeš, kome se obraćaš i kada želiš da počneš. Predložićemo ti prvi korak i realan obim." label="Pošalji brief"/>
   </div>
 }
