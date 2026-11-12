@@ -3,16 +3,16 @@ import type { Service } from '@/types/content'
 export const services: Service[] = [
   {
     slug: 'performance-marketing',
-    eyebrow: 'Performance sistem',
+    eyebrow: 'Sistem oglašavanja',
     title: 'Oglasi koji dovode do upita, rezervacija i prodaje',
-    shortTitle: 'Performance marketing',
-    summary: 'Meta i Google kampanje povezujemo sa ponudom, landing stranicom, mjerenjem i kreativama. Ne optimizujemo samo klikove, već radnju koja ima vrijednost za biznis: upit, rezervaciju, registraciju, posjetu ili prodaju.',
+    shortTitle: 'Digitalno oglašavanje',
+    summary: 'Meta i Google kampanje povezujemo sa ponudom, odredišnom stranicom, mjerenjem i kreativama. Ne optimizujemo samo klikove, već radnju koja ima vrijednost za biznis: upit, rezervaciju, registraciju, posjetu ili prodaju.',
     outcomes: ['više kvalitetnih konverzija', 'jasniji odnos budžeta i rezultata', 'jasan način da otkrijemo koji oglasi rade'],
     bestFor: [
       'biznise koji već imaju proizvod ili uslugu, ali nemaju stabilan tok kvalitetnih upita',
       'timove koji troše budžet bez pouzdanog mjerenja i jasnog objašnjenja rezultata',
       'lansiranja, sezonske kampanje i ponude koje treba brzo testirati na lokalnom tržištu',
-      'projekte kojima uz kampanju treba landing stranica, sadržaj ili terenska realizacija',
+      'projekte kojima uz kampanju treba odredišna stranica, sadržaj ili terenska realizacija',
     ],
     clientInputs: [
       'jasna ponuda, cijene ili poslovna logika i informacija šta je stvarno dostupno kupcu',
@@ -80,7 +80,7 @@ export const services: Service[] = [
     ],
     includes: [
       'koncept, mehanika i operativna mapa aktivacije ili događaja',
-      'izbor i koordinacija promotera, hostesa, vođa smjena i event osoblja',
+      'izbor i koordinacija promotera, hostesa, vođa smjena i osoblja na događaju',
       'raspored lokacija, smjena, transporta, opreme i rezervnih rješenja',
       'briefing tima, kontrolne liste i jasna pravila komunikacije',
       'foto i video dokumentovanje, evidencija i dogovoreno mjerenje interakcije',
@@ -108,14 +108,14 @@ export const services: Service[] = [
   },
   {
     slug: 'web-i-konverzije',
-    eyebrow: 'Web + konverzije',
+    eyebrow: 'Sajtovi i prijave',
     title: 'Sajtovi i digitalni proizvodi koji korisnika vode do jasne radnje',
-    shortTitle: 'Web i konverzije',
-    summary: 'Pravimo mobilno prioritetne landing stranice, mini-sajtove i kompleksnije digitalne proizvode sa jasnom ponudom, logičnim korisničkim tokom, analitikom i funkcionalnim integracijama.',
+    shortTitle: 'Sajtovi i konverzije',
+    summary: 'Pravimo mobilno prioritetne odredišne stranice, mini-sajtove i kompleksnije digitalne proizvode sa jasnom ponudom, logičnim korisničkim tokom, analitikom i funkcionalnim integracijama.',
     outcomes: ['ponuda koju korisnik brzo razumije', 'manje prepreka do kontakta ili prijave', 'tehnička osnova spremna za kampanje i rast'],
     bestFor: [
       'biznise čiji postojeći sajt izgleda uredno, ali ne objašnjava ponudu niti donosi dovoljno upita',
-      'nove usluge, događaje ili projekte kojima treba fokusirana landing stranica',
+      'nove usluge, događaje ili projekte kojima treba fokusirana odredišna stranica',
       'partnere kojima je potreban brz mini-sajt sa direktnim kontaktom, rezervacijom ili navigacijom',
       'digitalne proizvode sa više uloga, sadržaja, prijava, profila ili posebne poslovne logike',
     ],
@@ -148,7 +148,7 @@ export const services: Service[] = [
     ],
     engagements: [
       { name: 'Landing stranica', text: 'Jedna fokusirana prodajna stranica sa jasnim pozivom na akciju, formom, analitikom i SEO osnovom.' },
-      { name: 'Premium mini-sajt', text: 'Kompaktna prezentacija usluge, prostora, izvođača ili partnera sa više sekcija i mobilnim prioritetom.' },
+      { name: 'Napredni mini-sajt', text: 'Kompaktna prezentacija usluge, prostora, izvođača ili partnera sa više sekcija i mobilnim prioritetom.' },
       { name: 'Digitalni proizvod', text: 'Kompleksniji korisnički tok, uloge, integracije, administracija i posebna poslovna logika.' },
     ],
     faq: [
@@ -216,8 +216,8 @@ export const services: Service[] = [
     slug: 'recruitment-kampanje',
     eyebrow: 'Kampanje za zapošljavanje',
     title: 'Oglasi za posao koji lakše dolaze do pravih kandidata',
-    shortTitle: 'Recruitment kampanje',
-    summary: 'Povezujemo ponudu poslodavca, oglas, landing ili prijavni tok, distribuciju i početna pitanja. Nije poenta dobiti što više CV-eva, već doći do ljudi koji ispunjavaju uslove i olakšati pregled prijava.',
+    shortTitle: 'Kampanje za zapošljavanje',
+    summary: 'Povezujemo ponudu poslodavca, oglas, odredišnu stranicu ili prijavni obrazac, distribuciju i početna pitanja. Nije poenta dobiti što više CV-eva, već doći do ljudi koji ispunjavaju uslove i olakšati pregled prijava.',
     outcomes: ['više relevantnih prijava', 'brži i pregledniji početni proces', 'jasniji izvor i kvalitet kandidata'],
     bestFor: [
       'poslodavce koji traže sezonske, operativne ili teško dostupne profile',
@@ -240,7 +240,7 @@ export const services: Service[] = [
     includes: [
       'profil kandidata i definisanje realne ponude poslodavca',
       'tekst oglasa, kreativni pravci i prilagođavanje poruke po poziciji',
-      'landing stranica, forma ili drugi jednostavan prijavni tok',
+      'odredišna stranica, forma ili drugi jednostavan prijavni tok',
       'Meta kampanja i distribucija kroz ImaPosla i relevantne zajednice',
       'početna pitanja, organizacija prijava i osnovna evidencija statusa',
       'izvještaj o izvoru, količini i kvalitetu kandidata',
