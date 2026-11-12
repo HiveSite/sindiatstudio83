@@ -32,6 +32,7 @@ export const enNavigation = [
   {label:'Industries',href:'/en/industrije/'},
   {label:'Projects',href:'/en/radovi/'},
   {label:'Pricing',href:'/en/cijene/'},
+  {label:'Blog',href:'/en/blog/'},
   {label:'About',href:'/en/o-nama/'},
   {label:'Contact',href:'/en/kontakt/'},
 ] as const
