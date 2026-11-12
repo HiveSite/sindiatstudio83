@@ -9,7 +9,7 @@ const highlighted = [
     image: '/images/cases/imaposla/imaposla-me-platforma-poslovi-crna-gora-cover.webp',
     category: 'DIGITALNI PROIZVOD',
     title: 'ImaPosla.me',
-    description: 'Web platforma, korisnički tokovi, SEO arhitektura i distribucija na lokalnom tržištu.',
+    description: 'Internet platforma, korisnički tokovi, SEO arhitektura i distribucija na lokalnom tržištu.',
     service: 'web-i-konverzije',
   },
   {
@@ -31,7 +31,7 @@ const highlighted = [
 ] as const
 
 const featuredServices = [
-  {slug: 'performance-marketing', title: 'Meta i Google kampanje', text: 'Oglasi, mjerenje konverzija, testiranje i optimizacija budžeta.', outcome: 'Kvalitetniji upiti i jasnije mjerenje'},
+  {slug: 'performance-marketing', title: 'Instagram i Google oglasi', text: 'Oglasi, mjerenje konverzija, testiranje i optimizacija budžeta.', outcome: 'Kvalitetniji upiti i jasnije mjerenje'},
   {slug: 'sadrzaj-za-kampanje', title: 'Sadržaj i produkcija', text: 'Kreativni pravci, fotografija, video i materijali spremni za kampanje.', outcome: 'Sadržaj sa konkretnom namjenom'},
   {slug: 'web-i-konverzije', title: 'Sajtovi i digitalni proizvodi', text: 'Odredišne stranice, mini-sajtovi i složeniji sistemi sa jasnim korisničkim tokom.', outcome: 'Lakši put do prijave ili kontakta'},
   {slug: 'aktivacije-i-eventi', title: 'Aktivacije i događaji', text: 'Koncept, ljudi, logistika i produkcija na jednoj ili više lokacija.', outcome: 'Pouzdanija realizacija projekta'},
