@@ -146,7 +146,7 @@ export function Header() {
                 </span>
               </div>
             </div>
-            <Link className="button button-primary button-small" href="/kontakt/?izvor=header" data-track="header_lead">Pošalji brief</Link>
+            <Link className="button button-primary button-small" href="/kontakt/?izvor=header" data-track="header_lead">Pošalji upit</Link>
             <button ref={toggleRef} className="menu-toggle" type="button" aria-label={open ? 'Zatvori meni' : 'Otvori meni'} aria-expanded={open} aria-controls="mobile-navigation" onClick={toggleMenu}>
               <span /><span /><span />
             </button>
@@ -165,7 +165,7 @@ export function Header() {
             {navigation.map((item) => <Link key={item.href} href={item.href} aria-current={activeHref === item.href ? 'page' : undefined}>{item.label}</Link>)}
             <a href={site.imaposla} data-track="imaposla_team_click">Postani dio tima</a>
           </nav>
-          <Link className="button button-primary" href="/kontakt/?izvor=mobile-menu" data-track="mobile_menu_lead">Pošalji brief</Link>
+          <Link className="button button-primary" href="/kontakt/?izvor=mobile-menu" data-track="mobile_menu_lead">Pošalji upit</Link>
         </div>
       </header>
       <button className="mobile-menu-scrim" type="button" aria-label="Zatvori meni" tabIndex={-1} hidden={!open} onClick={() => closeMenu(true)} />
