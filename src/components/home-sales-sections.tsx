@@ -25,15 +25,15 @@ const highlighted = [
     image: '/images/cases/promo-timovi/tim.webp',
     category: 'PROMO TIMOVI',
     title: 'Ljudi koji realizuju plan',
-    description: 'Izbor tima, briefing, rasporedi, logistika i kontrola realizacije na terenu.',
+    description: 'Izbor tima, opis projektaing, rasporedi, logistika i kontrola realizacije na terenu.',
     service: 'aktivacije-i-eventi',
   },
 ] as const
 
 const featuredServices = [
   {slug: 'performance-marketing', title: 'Meta i Google kampanje', text: 'Oglasi, mjerenje konverzija, testiranje i optimizacija budžeta.', outcome: 'Kvalitetniji upiti i jasnije mjerenje'},
-  {slug: 'sadrzaj-za-kampanje', title: 'Content i produkcija', text: 'Kreativni pravci, fotografija, video i materijali spremni za kampanje.', outcome: 'Sadržaj sa konkretnom namjenom'},
-  {slug: 'web-i-konverzije', title: 'Web i digitalni proizvodi', text: 'Landing stranice, mini-sajtovi i složeniji sistemi sa jasnim korisničkim tokom.', outcome: 'Lakši put do prijave ili kontakta'},
+  {slug: 'sadrzaj-za-kampanje', title: 'Sadržaj i produkcija', text: 'Kreativni pravci, fotografija, video i materijali spremni za kampanje.', outcome: 'Sadržaj sa konkretnom namjenom'},
+  {slug: 'web-i-konverzije', title: 'Sajtovi i digitalni proizvodi', text: 'Odredišne stranice, mini-sajtovi i složeniji sistemi sa jasnim korisničkim tokom.', outcome: 'Lakši put do prijave ili kontakta'},
   {slug: 'aktivacije-i-eventi', title: 'Aktivacije i događaji', text: 'Koncept, ljudi, logistika i produkcija na jednoj ili više lokacija.', outcome: 'Pouzdanija realizacija projekta'},
   {slug: 'recruitment-kampanje', title: 'Kampanje za zapošljavanje', text: 'Oglas, prijavni tok, distribucija i organizacija kandidata.', outcome: 'Relevantnije prijave kandidata'},
 ] as const
@@ -64,7 +64,7 @@ export function HomeServiceDirectory() {
             <div className="home-service-action">
               <span className="home-service-price">Početna opcija <strong>{product?.price || 'Po ponudi'}</strong></span>
               <Link href={`/usluge/${item.slug}/`} aria-label={`Pogledaj uslugu: ${item.title}`}>Detalji i cijene <span aria-hidden="true">↗</span></Link>
-              <Link className="home-service-brief" href={`/kontakt/?usluga=${encodeURIComponent(item.slug)}&izvor=home-service`}>Zatraži ponudu</Link>
+              <Link className="home-service-opis projekta" href={`/kontakt/?usluga=${encodeURIComponent(item.slug)}&izvor=home-service`}>Zatraži ponudu</Link>
             </div>
           </article>
         })}
@@ -101,7 +101,7 @@ export function HomeProcessAndFaq() {
   return <section className="section home-process" aria-labelledby="home-process-title">
     <div className="container">
       <div className="home-sales-heading"><div><span className="eyebrow">Saradnja bez komplikacija</span><h2 id="home-process-title">Od prvog upita do realizacije.</h2></div>
-        <p>Ne moraš imati gotov brief. Dovoljno je da nam kažeš šta želiš da postigneš.</p></div>
+        <p>Ne moraš imati gotov opis projekta. Dovoljno je da nam kažeš šta želiš da postigneš.</p></div>
       <div className="home-process-grid">{steps.map(step=><div className="home-process-step" key={step.number}><span>{step.number}</span><h3>{step.title}</h3><p>{step.text}</p></div>)}</div>
       <div className="home-faq-panel">
         <div><span className="eyebrow">Prije prvog upita</span><h3>Brzi odgovori.</h3><p>Najvažnije stvari koje treba da znaš prije saradnje.</p></div>
