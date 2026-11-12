@@ -13,38 +13,6 @@ import { englishBlogBySlug, englishBlogPosts, plainEnglishExcerpt } from '@/data
 import { site } from '@/data/site'
 import { enLegalPages } from '@/data/en-legal'
 
-const enArticles: Record<string,string> = {
-p01:'Why a campaign in Podgorica can fail before it starts',
-p02:'Five Meta Ads mistakes businesses in Montenegro can avoid',
-p03:'Why attractive creative is not always effective advertising',
-p04:'How much does event planning cost in Podgorica?',
-p05:'Brand activations in Montenegro - turning field work into results',
-p06:'Organising an event in Podgorica - a practical guide',
-p07:'Event production costs in Montenegro explained',
-p08:'Corporate event checklist - venue, team and production',
-p09:'Brand activations versus simple promotions',
-p10:'Nine elements of a landing page that encourages enquiries',
-p11:'Common event sound and lighting mistakes',
-p12:'How to measure a field promotion',
-p13:'Practical promotional ideas for hospitality venues',
-p14:'Combining events with digital campaigns',
-p15:'What to review after a one-day promotion',
-p16:'Meta advertising in Podgorica - what to check first',
-p17:'Choosing Google Ads keywords for service businesses',
-p18:'Seven reasons ads spend money without producing enquiries',
-p19:'A practical structure for enquiry-driven landing pages',
-p20:'How much advertising budget do you need to begin?',
-p21:'When remarketing makes sense',
-p22:'Ten creative variations without burning out your team',
-p23:'Cost per click versus cost per enquiry',
-p24:'GA4 and GTM - what is worth measuring?',
-p25:'SEO versus paid ads - when to combine them',
-p26:'Local SEO in Podgorica - improving Google visibility',
-p27:'Google Business Profile basics and customer reviews',
-p28:'Common SEO mistakes on agency websites',
-p29:'Why service pages and blog posts have different jobs',
-p30:'How to write a service page people understand',
-}
 const enAdServices: Record<string,{title:string;summary:string;benefits:string[]}> = {
  'meta-ads':{title:'Instagram & Facebook advertising',summary:'Reach relevant people with Meta Ads. We connect the offer, creative assets, audience targeting and measurement instead of focusing only on views.',benefits:['Campaign planning and audience research','Photo, video and ad copy variations','Tracking, testing and reporting']},
  'google-ads':{title:'Google Search advertising',summary:'Make your offer visible when people actively search for a relevant product or service. We connect keywords, ads, landing pages and conversion measurement.',benefits:['Search intent and keyword planning','Campaign setup and negative keywords','Clear reporting and optimization']},
