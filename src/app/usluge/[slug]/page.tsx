@@ -91,7 +91,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
           <span className="eyebrow">{service.eyebrow}</span>
           <h1>{service.title}</h1>
           <p className="lead">{service.summary}</p>
-          <div className="button-row" style={{ marginTop: 30 }}><a className="button button-primary" href="#proizvodi">Pogledaj proizvode i cijene</a><Link className="button button-ghost" href={`/kontakt/?usluga=${service.slug}`} data-track="service_lead">Pošalji brief</Link></div>
+          <div className="button-row" style={{ marginTop: 30 }}><a className="button button-primary" href="#proizvodi">Pogledaj proizvode i cijene</a><Link className="button button-ghost" href={`/kontakt/?usluga=${service.slug}`} data-track="service_lead">Pošalji upit</Link></div>
         </div>
         <aside className="service-price-anchor">
           <span>Početni okvir</span>
@@ -140,17 +140,17 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
     </div></section>
 
     {relatedCases.length ? <section className="section section-light"><div className="container">
-      <SectionHeading eyebrow="Dokaz u praksi" title="Pogledajte gdje je ova usluga već bila dio stvarnog projekta." text="Case study je važniji od dodatnog obećanja. Prikazujemo kontekst, našu ulogu i konkretan obim." />
+      <SectionHeading eyebrow="Dokaz u praksi" title="Pogledaj kako smo ovu uslugu koristili na stvarnim projektima." text="Case study je važniji od dodatnog obećanja. Prikazujemo kontekst, našu ulogu i konkretan obim." />
       <div className="case-preview-grid">{relatedCases.map((item) => <CasePreviewCard key={item.slug} item={item} />)}</div>
     </div></section> : null}
 
-    <section className="section"><div className="container faq-layout"><div><span className="eyebrow">Pitanja</span><h2>Najčešće prije kupovine.</h2><p>Ako je cilj jasan, ne treba nam duga dokumentacija. Dovoljni su rok, okvir, ono što već postoji i nekoliko ključnih informacija.</p></div><FaqList items={service.faq} /></div></section>
+    <section className="section"><div className="container faq-layout"><div><span className="eyebrow">Pitanja</span><h2>Najčešće prije kupovine.</h2><p>Ne treba nam duga dokumentacija da bismo razumjeli tvoj cilj. Dovoljni su rok, okvir, ono što već postoji i nekoliko ključnih informacija.</p></div><FaqList items={service.faq} /></div></section>
 
     <section className="section section-dark"><div className="container">
-      <div className="service-rail-head"><div><span className="eyebrow">Ostale usluge</span><h2>Nastavite kroz ponudu.</h2></div><Link className="text-link" href="/usluge/">Sve usluge <span>↗</span></Link></div>
+      <div className="service-rail-head"><div><span className="eyebrow">Ostale usluge</span><h2>Pogledaj i druge usluge.</h2></div><Link className="text-link" href="/usluge/">Sve usluge <span>↗</span></Link></div>
       <div className="service-rail" role="region" aria-label="Povezane usluge" tabIndex={0}>{relatedServices.map((item) => <Link className="service-rail-card" key={item.slug} href={`/usluge/${item.slug}/`}><span>{item.eyebrow}</span><h3>{item.shortTitle}</h3><p>{item.summary}</p><b>Pogledaj uslugu ↗</b></Link>)}</div>
     </div></section>
 
-    <FinalCta title={`Treba vam ${service.shortTitle.toLowerCase()}?`} text="Izaberite proizvod iznad ili pošaljite brief ako obim nije standardan. Vratićemo se sa konkretnom preporukom i jasnim cjenovnim okvirom." label="Pošalji brief" />
+    <FinalCta title={`Treba vam ${service.shortTitle.toLowerCase()}?`} text="Izaberite proizvod iznad ili pošaljite brief ako obim nije standardan. Vratićemo se sa konkretnom preporukom i jasnim cjenovnim okvirom." label="Pošalji upit" />
   </div>
 }
