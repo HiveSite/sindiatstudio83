@@ -8,7 +8,7 @@ const priceFor = (slug: string, index: number) => serviceProducts[slug]?.[index]
 
 const categories = [
   {
-    index: '01', title: 'Kampanje i rast', short: 'Kampanje',
+    index: '01', title: 'Kampanje i razvoj', short: 'Kampanje',
     text: 'Za više prodaje, kvalitetnijih upita i vidljivosti koja vodi do konkretne radnje.',
     items: [
       { title: 'Digitalno oglašavanje', price: priceFor('performance-marketing', 1), text: 'Meta, Google, mjerenje i optimizacija prema broju i kvalitetu upita.', href: '/usluge/performance-marketing/' },
