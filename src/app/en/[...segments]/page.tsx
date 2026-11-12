@@ -6,6 +6,7 @@ import { LeadForm } from '@/components/lead-form'
 import { enServices, enIndustries, enCaseSummaries, enCaseDetails } from '@/data/en'
 import { enProducts } from '@/data/en-products'
 import { enServiceDetails } from '@/data/en-service-details'
+import { enIndustryDetails } from '@/data/en-industry-details'
 import { cases } from '@/data/cases'
 import { blogPosts } from '@/data/blog'
 import { site } from '@/data/site'
@@ -132,7 +133,17 @@ export default async function EnglishPages({params}:{params:Promise<{segments:st
     </div>
   }
   if(kind==='usluge'&&!slug) return <div lang="en"><Head eyebrow="OUR SERVICES" title="One team for strategy and execution" description="Advertising, content, websites, events and recruitment campaigns in one coordinated offering."/><section className="section section-dark"><div className="container home-service-list">{enServices.map(s=><article className="home-service-row" key={s.slug}><span className="home-service-number">+</span><div className="home-service-main"><h3><Link href={path(['usluge',s.slug])}>{s.title}</Link></h3><p>{s.summary}</p></div><div className="home-service-action"><Link href={path(['usluge',s.slug])}>Explore ↗</Link></div></article>)}</div></section></div>
-  if(kind==='industrije'&&slug&&industry)return <div lang="en"><Head eyebrow="INDUSTRIES" title={industry.title} description={industry.summary}/><section className="section"><div className="container"><h2>How we help</h2><p>Campaign planning, content production, websites and operational coordination adapted to the way your industry works.</p><Buttons slug={slug}/></div></section></div>
+  if(kind==='industrije'&&slug&&industry) {
+    const detail=enIndustryDetails[slug]
+    return <div lang="en"><Head eyebrow="INDUSTRIES" title={industry.title} description={industry.summary}/>
+      <section className="section section-dark"><div className="container"><h2>Common challenges</h2><ul>{detail.problems.map(x=><li key={x}>{x}</li>)}</ul>
+      <h2>What we deliver</h2><ul>{detail.solutions.map(x=><li key={x}>{x}</li>)}</ul>
+      <h2>Who this is for</h2><ul>{detail.bestFor.map(x=><li key={x}>{x}</li>)}</ul>
+      <h2>What success looks like</h2><ul>{detail.signals.map(x=><li key={x}>{x}</li>)}</ul>
+      <h2>When to start</h2><p>{detail.timing}</p>
+      <Buttons slug={slug}/></div></section>
+    </div>
+  }
   if(kind==='industrije'&&!slug)return <div lang="en"><Head eyebrow="INDUSTRIES" title="Different industries. Practical solutions." description="We adapt the project scope, messaging, people and timeline to each industry."/><section className="section v7-industries-home"><div className="container v7-industries-grid">{enIndustries.map(s=><Link key={s.slug} href={path(['industrije',s.slug])} className="v7-industry"><h3>{s.title}</h3><p>{s.summary}</p><strong>Read more ↗</strong></Link>)}</div></section></div>
   if(kind==='radovi'&&slug&&project)return <div lang="en"><Head eyebrow="SELECTED PROJECT" title={project.title} description={project.summary}/><section className="section section-dark"><div className="container">{original?.coverImage?.src?<Image src={original.coverImage.src} alt={project.title} width={1000} height={600} style={{width:'100%',height:'auto',objectFit:'contain',borderRadius:20}}/>:null}<div style={{marginTop:30}}><h2>The challenge</h2><p>{enCaseDetails[slug]?.challenge || project.summary}</p><h2>What we did</h2><p>{enCaseDetails[slug]?.solution || project.summary}</p><h2>The outcome</h2><p>{enCaseDetails[slug]?.result || project.summary}</p><Link href="/en/kontakt/" className="button button-primary">Discuss a similar project ↗</Link></div></div></section></div>
   if(kind==='radovi'&&!slug)return <div lang="en"><Head eyebrow="OUR WORK" title="Real projects. Real execution." description="A selection of digital products, events, content and field projects from our studio."/><section className="section section-dark"><div className="container home-project-grid">{enCaseSummaries.map(s=><article className="home-project-card" key={s.slug}><div className="home-project-text"><h3>{s.title}</h3><p>{s.summary}</p><Link href={path(['radovi',s.slug])}>Explore project ↗</Link></div></article>)}</div></section></div>
