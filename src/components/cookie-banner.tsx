@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
+import { usePathname } from 'next/navigation'
 import { site } from '@/data/site'
 import { trackEvent } from '@/lib/tracking'
 
@@ -8,6 +9,7 @@ type Choice = 'accepted' | 'analytics' | 'rejected'
 const storageKey = 'sindikat_cookie_consent'
 
 export function CookieBanner() {
+  const english = usePathname().startsWith('/en')
   const [visible, setVisible] = useState(false)
   const firstButtonRef = useRef<HTMLButtonElement | null>(null)
 
@@ -53,11 +55,11 @@ export function CookieBanner() {
 
   return (
     <div className="cookie-banner" role="dialog" aria-modal="false" aria-labelledby="cookie-title" aria-describedby="cookie-description">
-      <div><strong id="cookie-title">Kolačići i analitika</strong><p id="cookie-description">Izaberi da li dozvoljavaš mjerenje posjeta i posebne oglasne kolačiće. Sajt radi i bez njih. Izbor možeš promijeniti u footeru.</p></div>
+      <div><strong id="cookie-title">{english ? "Cookies and analytics" : "Kolačići i analitika"}</strong><p id="cookie-description">{english ? "Choose whether to allow analytics and advertising storage. The website works without either. You can change your choice in the footer." : "Izaberi da li dozvoljavaš mjerenje posjeta i posebne oglasne kolačiće. Sajt radi i bez njih. Izbor možeš promijeniti u footeru."}</p></div>
       <div className="cookie-actions">
-        <button ref={firstButtonRef} className="button button-ghost button-small" type="button" onClick={() => setConsent('rejected')}>Samo neophodno</button>
-        <button className="button button-ghost button-small" type="button" onClick={() => setConsent('analytics')}>Samo analitika</button>
-        <button className="button button-primary button-small" type="button" onClick={() => setConsent('accepted')}>Prihvati sve</button>
+        <button ref={firstButtonRef} className="button button-ghost button-small" type="button" onClick={() => setConsent('rejected')}>{english ? "Essential only" : "Samo neophodno"}</button>
+        <button className="button button-ghost button-small" type="button" onClick={() => setConsent('analytics')}>{english ? "Analytics only" : "Samo analitika"}</button>
+        <button className="button button-primary button-small" type="button" onClick={() => setConsent('accepted')}>{english ? "Accept all" : "Prihvati sve"}</button>
       </div>
     </div>
   )
