@@ -25,6 +25,7 @@ type QueryContext = {
   collaborationModel: string
   recommendation: string
   product: string
+  focus: string
 }
 
 const goalOptions = [
@@ -45,7 +46,7 @@ export function LeadForm({ compact = false, source = 'contact-page' }: { compact
   const [status, setStatus] = useState('')
   const [goal, setGoal] = useState('')
   const [budget, setBudget] = useState('')
-  const [queryContext, setQueryContext] = useState<QueryContext>({ service: '', industry: '', source, collaborationModel: '', recommendation: '', product: '' })
+  const [queryContext, setQueryContext] = useState<QueryContext>({ service: '', industry: '', source, collaborationModel: '', recommendation: '', product: '', focus: '' })
   const [state, setState] = useState<FormState>('idle')
 
   const selectedService = queryContext.service
@@ -63,6 +64,7 @@ export function LeadForm({ compact = false, source = 'contact-page' }: { compact
       collaborationModel: params.get('model') || '',
       recommendation: params.get('preporuka') || '',
       product: params.get('proizvod') || '',
+      focus: goalParam && !goalOptions.includes(goalParam) ? goalParam : '',
     }
     setQueryContext(nextContext)
     if (goalOptions.includes(goalParam)) setGoal(goalParam)
@@ -72,6 +74,8 @@ export function LeadForm({ compact = false, source = 'contact-page' }: { compact
       setStatus(`Izabrani proizvod: ${nextContext.product}. Dodaj kontakt, rok i kratak kontekst projekta.`)
     } else if (nextContext.recommendation) {
       setStatus(`Prenijeli smo tvoj izbor. Preporučeni proizvod: ${nextContext.recommendation}. Dodaj kontakt, rok i kratak kontekst.`)
+    } else if (nextContext.focus) {
+      setStatus(`Tema upita: ${nextContext.focus}. Izaberi cilj i dodaj kontakt kako bismo znali šta ti treba.`)
     } else if (nextContext.service || nextContext.industry) {
       setStatus('Prepoznali smo stranicu sa koje dolaziš. Dodaj kontakt, rok i najvažniji kontekst.')
     }
@@ -104,7 +108,7 @@ export function LeadForm({ compact = false, source = 'contact-page' }: { compact
       name: String(fd.get('name') || '').trim(), email, phone, contact: [email, phone].filter(Boolean).join(' / '),
       goal: String(fd.get('goal') || '').trim(), budget: String(fd.get('budget') || '').trim(), deadline: String(fd.get('deadline') || '').trim(),
       projectState: String(fd.get('projectState') || '').trim(), message: String(fd.get('message') || '').trim(),
-      collaborationModel: queryContext.collaborationModel, recommendation: queryContext.recommendation, product: queryContext.product,
+      collaborationModel: queryContext.collaborationModel, recommendation: queryContext.recommendation, product: queryContext.product, focus: queryContext.focus,
       service: selectedService, industry: selectedIndustry, url: window.location.href,
       landingPage: safeStorageValue('session', 'sindikat_landing_page'), referrer: document.referrer, source: sourceParam,
       consentChoice: safeStorageValue('local', 'sindikat_cookie_consent'), submittedAt: new Date().toISOString(),
@@ -130,11 +134,11 @@ export function LeadForm({ compact = false, source = 'contact-page' }: { compact
     } finally { window.clearTimeout(timeout) }
   }
 
-  const contextTitle = queryContext.product || queryContext.recommendation
+  const contextTitle = queryContext.product || queryContext.recommendation || queryContext.focus
 
   return (
     <form ref={formRef} className={`lead-form${compact ? ' lead-form-compact' : ''}`} onInput={startTracking} onSubmit={submit} noValidate aria-busy={state === 'loading'}>
-      {contextTitle ? <div className="brief-context"><span>{queryContext.product ? 'Izabrani proizvod' : 'Preporučeni proizvod'}</span><strong>{contextTitle}</strong>{queryContext.collaborationModel ? <small>{queryContext.collaborationModel}</small> : null}</div> : null}
+      {contextTitle ? <div className="brief-context"><span>{queryContext.product ? 'Izabrani proizvod' : queryContext.recommendation ? 'Preporučeni proizvod' : 'Tema upita'}</span><strong>{contextTitle}</strong>{queryContext.collaborationModel ? <small>{queryContext.collaborationModel}</small> : null}</div> : null}
       <div className="form-grid">
         <label><span>Ime i firma *</span><input name="name" autoComplete="name" required maxLength={120} placeholder="Ime / Naziv firme ili projekta" /></label>
         <label><span>Email *</span><input name="email" type="email" autoComplete="email" required maxLength={180} placeholder="marko@email.com" /></label>
