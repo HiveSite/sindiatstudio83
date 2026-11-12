@@ -48,3 +48,9 @@
   .product-price-card h2,.case-card h3,.case-preview-card h3{overflow-wrap:break-word}
   .page-hero h1{overflow-wrap:break-word}
 }
+
+/* Some third-party language widgets insert a floating EN chip over the menu.
+   On mobile the built-in language control remains available in the header. */
+@media(max-width:1040px){
+  #lang-widget, #lang-mini{display:none!important;pointer-events:none!important}
+}
