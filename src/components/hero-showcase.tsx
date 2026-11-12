@@ -2,7 +2,7 @@
 
 import Image from 'next/image'
 import { usePathname } from 'next/navigation'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 const slides = [
   { src: '/images/demo-hero/slide-01.webp', alt: 'Događaji i brend aktivacije - vizual Sindikat Studio 83', title: 'Događaji i doživljaji' },
@@ -23,6 +23,19 @@ export function HeroShowcase() {
   const english = usePathname().startsWith('/en')
   const [active, setActive] = useState(0)
   const [paused, setPaused] = useState(false)
+  const swipeStartX = useRef<number | null>(null)
+  const goToSlide = (index: number) => {
+    setActive((index + slides.length) % slides.length)
+    setPaused(true)
+  }
+  const onSwipeEnd = (endX: number) => {
+    const startX = swipeStartX.current
+    swipeStartX.current = null
+    if (startX === null) return
+    const distance = endX - startX
+    if (Math.abs(distance) < 40) return
+    goToSlide(active + (distance < 0 ? 1 : -1))
+  }
 
   useEffect(() => {
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)')
@@ -36,7 +49,7 @@ export function HeroShowcase() {
   const slide = slides[active]
   return (
     <div className="hero-photo-showcase" aria-label={english ? "Sindikat Studio 83 creative visuals" : "Kreativni hero vizuali Sindikat Studio 83"}>
-      <div className="hero-photo-viewport">
+      <div className="hero-photo-viewport" onTouchStart={(event) => { swipeStartX.current = event.touches[0]?.clientX ?? null }} onTouchEnd={(event) => { if (event.changedTouches[0]) onSwipeEnd(event.changedTouches[0].clientX) }} onTouchCancel={() => { swipeStartX.current = null }}>
         <Image key={slide.src} className="hero-photo-image" src={slide.src} alt={english ? `Sindikat Studio 83 - ${englishTitles[active]}` : slide.alt}
           fill sizes="100vw"
           priority={active === 0} loading={active === 0 ? 'eager' : 'lazy'} />
@@ -47,7 +60,7 @@ export function HeroShowcase() {
         <div className="hero-photo-dots" aria-label={english ? "Choose an image" : "Izaberi fotografiju"}>
           {slides.map((item, index) => <button key={item.src} type="button"
             className={index === active ? 'is-active' : ''} aria-label={english ? `Show image ${index + 1}: ${englishTitles[index]}` : `Prikaži fotografiju ${index + 1}: ${item.title}`}
-            aria-current={index === active ? 'true' : undefined} onClick={() => { setActive(index); setPaused(true) }} />)}
+            aria-current={index === active ? 'true' : undefined} onClick={() => goToSlide(index)} />)}
         </div>
         <button className="hero-photo-pause" type="button" aria-label={paused ? (english ? 'Resume slideshow' : 'Pokreni rotaciju') : (english ? 'Pause slideshow' : 'Pauziraj rotaciju')} onClick={() => setPaused((current) => !current)}>
           {paused ? (english ? 'Play' : 'Pokreni') : (english ? 'Pause' : 'Pauza')}
