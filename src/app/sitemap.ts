@@ -24,6 +24,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: absoluteUrl('/kontakt/') },
   ]
 
+  const localizedPublicPaths = ['/', '/usluge/', '/cijene/', '/industrije/', '/radovi/', '/o-nama/', '/blog/', '/kontakt/']
+  const englishRoutes: MetadataRoute.Sitemap = localizedPublicPaths.map((pagePath) => ({
+    url: absoluteUrl('/en' + pagePath),
+    alternates: {languages: {
+      'en': absoluteUrl('/en' + pagePath),
+      'sr-Latn-ME': absoluteUrl(pagePath),
+    }},
+  }))
+
   const serviceRoutes: MetadataRoute.Sitemap = services.map((item) => ({
     url: absoluteUrl(`/usluge/${item.slug}/`),
   }))
@@ -48,6 +57,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   return [
     ...staticRoutes,
+    ...englishRoutes,
     ...serviceRoutes,
     ...industryRoutes,
     ...caseRoutes,
