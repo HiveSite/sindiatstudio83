@@ -19,7 +19,8 @@ export const legalPages = {
     sections: [
       ['Uvod', 'Sajt koristi lokalnu memoriju i analitičke tehnologije radi funkcionisanja, pamćenja izbora i mjerenja korišćenja.'],
       ['Neophodna memorija', 'Koristimo je da zapamtimo izbor u vezi sa kolačićima, zaštitimo forme i sačuvamo kampanjske parametre tokom sesije.'],
-      ['Analitika', 'Google Analytics 4 i Google Tag Manager koriste se u skladu sa izabranim pristankom i podešavanjima povezanih naloga.'],
+      ['Izbor pristanka', 'Možeš izabrati samo neophodne tehnologije, dozvoliti mjerenje posjeta bez oglasnih kolačića ili prihvatiti i analitičke i oglasne tehnologije. Izbor se primjenjuje kroz Google Consent Mode; pojedini tagovi mogu poslati ograničene signale i kada je skladištenje odbijeno, u zavisnosti od podešavanja alata.'],
+      ['Analitika i oglašavanje', 'Google Analytics 4 i Google Tag Manager koriste se za mjerenje posjeta i događaja. Oglasne dozvole su odvojene od analitičkih. Neophodni kolačići i osnovne funkcije sajta ostaju dostupni bez pristanka.'],
       ['Promjena izbora', 'Izbor možeš ponovo otvoriti preko dugmeta Podešavanja kolačića u footeru sajta.'],
       ['Trajanje izbora', 'Izbor se čuva u lokalnoj memoriji pregledača do promjene, brisanja podataka sajta ili objave nove verzije podešavanja pristanka.'],
     ],
