@@ -186,9 +186,9 @@ export const cases: CaseStudy[] = [
     summary: 'Sourcing, roster, briefing, rasporedi, transport, vođe smjena, zamjene, kontrola dolazaka i izvještavanje za promotivne, hospitality i event angažmane.',
     role: 'Sindikat preuzima organizaciju ljudi od prvog briefa do završene smjene: izbor profila, potvrdu dostupnosti, pripremu, raspored, komunikaciju, rezervna rješenja, superviziju i operativni izvještaj.',
     metrics: [
-      ['150+', 'ljudi u operativnom rosteru'],
-      ['15+', 'klijenata i partnerskih timova'],
-      ['20.000 €+', 'isplaćeno angažovanim ljudima u prva četiri mjeseca'],
+      ['150+', 'ljudi u operativnoj mreži'],
+      ['20+', 'partnera i saradnika'],
+      ['CG', 'angažmani širom Crne Gore'],
     ],
     challenge: 'Klijentu nije potreban samo spisak ljudi, već sigurnost da će odgovarajući tim doći na pravu lokaciju, u pravom terminu i sa jasnim zadatkom. Kod više smjena i gradova rizik brzo raste: otkazivanja, kašnjenja, nejasan briefing, transport, materijal i komunikacija mogu ugroziti cijelu realizaciju.',
     solution: 'Postavljen je centralni roster sa profilima i dostupnošću, standardizovan proces potvrde, briefing prije angažmana, raspored po smjenama i lokacijama, vođe smjena, check-in i check-out evidencija, plan zamjena i završni izvještaj. Za angažmane van Podgorice logistika i transport planiraju se kao dio operativne mape, a ne kao naknadna obaveza.',
