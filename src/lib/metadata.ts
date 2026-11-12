@@ -28,6 +28,8 @@ export function createMetadata({
 }: MetadataInput): Metadata {
   const fullTitle = title.includes(site.shortName) ? title : `${title} | ${site.name}`
   const canonical = new URL(path, site.domain).toString()
+  const englishPaths = new Set(['/', '/usluge/', '/cijene/', '/industrije/', '/radovi/', '/o-nama/', '/blog/', '/kontakt/', '/privatnost/', '/kolacici/', '/uslovi-koriscenja/'])
+  const languageAlternates = englishPaths.has(path) ? { 'sr-Latn-ME': canonical, 'en': new URL('/en' + path, site.domain).toString() } : undefined
   const imageUrl = new URL(image, site.domain).toString()
   const socialImage = { url: imageUrl, width: 1200, height: 630, alt: imageAlt }
 
@@ -58,7 +60,7 @@ export function createMetadata({
   return {
     title: { absolute: fullTitle },
     description,
-    alternates: { canonical },
+    alternates: { canonical, languages: languageAlternates },
     authors: [{ name: site.name, url: site.domain }],
     creator: site.name,
     publisher: site.name,
