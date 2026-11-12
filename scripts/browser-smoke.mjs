@@ -128,7 +128,7 @@ try {
           await focusPage.goto(base+'/kontakt/?usluga=performance-marketing&cilj=Meta%20Ads&izvor=seo-usluga',{waitUntil:'domcontentloaded'})
           await focusPage.locator('.brief-context').waitFor({state:'visible',timeout:10000})
           const focusText=await focusPage.locator('.brief-context').innerText()
-          if(!focusText.includes('Meta Ads') || !focusText.includes('Tema upita'))errors.push('Meta Ads enquiry context was lost: '+JSON.stringify(focusText)+' url='+focusPage.url())
+          if(!focusText.includes('Meta Ads') || !focusText.toLocaleLowerCase('sr-Latn-ME').includes('tema upita'))errors.push('Meta Ads enquiry context was lost: '+JSON.stringify(focusText)+' url='+focusPage.url())
         } finally {await focusPage.close()}
         console.log('CHECK mocked lead fail, retry and successful conversion')
       } catch(e) {errors.push('Mocked contact submit scenarios '+String(e))}
