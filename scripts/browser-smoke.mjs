@@ -208,6 +208,35 @@ try {
     console.log('CHECK cookie preferences: analytics-only, reject, accept all, persistence and reopening')
   }catch(e){errors.push('Cookie consent interaction '+String(e))}
   finally{await consentPage.close()}
+
+  // Dual-language smoke checks: actual localized routes and UX, not a decorative switch.
+  const englishRoutes=['/en/','/en/usluge/','/en/cijene/','/en/radovi/','/en/industrije/','/en/o-nama/','/en/kontakt/','/en/privatnost/','/en/kolacici/','/en/usluge/performance-marketing/']
+  const englishPage=await browser.newPage({viewport:{width:390,height:844},reducedMotion:'reduce'})
+  try{
+    for(const route of englishRoutes){
+      const response=await englishPage.goto(base+route,{waitUntil:'domcontentloaded'})
+      if(!response||response.status()>=400)errors.push('English route missing '+route+' HTTP '+response?.status())
+      const language=await englishPage.locator('html').getAttribute('lang')
+      if(language!=='en')errors.push('Incorrect English document lang on '+route+': '+language)
+      if(await englishPage.locator('h1').count()!==1)errors.push('English route must have exactly one H1: '+route)
+      const width=await englishPage.evaluate(()=>({screen:innerWidth,scroll:document.documentElement.scrollWidth}))
+      if(width.scroll>width.screen+2)errors.push('English route mobile overflow: '+route+' '+JSON.stringify(width))
+    }
+    await englishPage.goto(base+'/en/',{waitUntil:'domcontentloaded'})
+    await englishPage.getByRole('button',{name:'Choose language'}).click()
+    await englishPage.getByRole('menuitem',{name:/Srpski/}).click()
+    await englishPage.waitForURL(url=>url.pathname==='/',{timeout:12000})
+    await englishPage.getByRole('button',{name:'Izaberi jezik'}).click()
+    await englishPage.getByRole('menuitem',{name:/English/}).click()
+    await englishPage.waitForURL(url=>url.pathname==='/en/'||url.pathname==='/en',{timeout:12000})
+    await englishPage.goto(base+'/en/kontakt/',{waitUntil:'domcontentloaded'})
+    if(!await englishPage.getByText('What do you want to achieve? *').isVisible())errors.push('English lead form was not localized')
+    await englishPage.getByRole('button',{name:'Send enquiry'}).click()
+    const validation=await englishPage.getByRole('status').innerText()
+    if(!validation.includes('required fields'))errors.push('English lead validation is not localized')
+    console.log('CHECK ten English routes, document lang, bilingual language switching and English lead form')
+  } catch(e) {errors.push('English localized UX: '+String(e))}
+  finally{await englishPage.close()}
 } finally {await browser.close()}
 if(errors.length){console.error('QA FAIL\n'+errors.join('\n'));process.exitCode=1}
 else console.log('BROWSER QA PASS: '+(routes.length*widths.length)+' viewport/page combinations plus mobile pricing navigation')
