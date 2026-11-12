@@ -102,7 +102,7 @@ export const industries: Industry[] = [
   },
   {
     slug: 'nekretnine-i-premium-usluge',
-    title: 'Nekretnine i premium usluge',
+    title: 'Nekretnine i usluge višeg standarda',
     summary: 'Jasna digitalna prezentacija, kampanje za kvalitetne upite, kvalifikaciona pitanja i praćenje kontakata za ponude sa dužim procesom odluke.',
     problems: [
       'kampanja generiše mnogo kontakata koji nijesu ozbiljni ili ne razumiju ponudu',
