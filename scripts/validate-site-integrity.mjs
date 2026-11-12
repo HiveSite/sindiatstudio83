@@ -29,6 +29,21 @@ for (const slug of collectSlugs('src/data/industries.ts')) staticRoutes.add(`/in
 for (const slug of collectSlugs('src/data/cases.ts')) staticRoutes.add(`/radovi/${slug}/`)
 for (const post of JSON.parse(read('src/data/blog-posts.json'))) staticRoutes.add(`/blog/${post.slug}/`)
 
+const englishTopRoutes = [
+  '/en/', '/en/usluge/', '/en/radovi/', '/en/industrije/', '/en/cijene/',
+  '/en/o-nama/', '/en/kontakt/', '/en/blog/', '/en/hvala/',
+  '/en/privatnost/', '/en/kolacici/', '/en/uslovi-koriscenja/',
+  '/en/usluge/meta-ads/', '/en/usluge/google-ads/',
+]
+for (const route of englishTopRoutes) staticRoutes.add(route)
+for (const slug of collectSlugs('src/data/en.ts')) {
+  staticRoutes.add(`/en/usluge/${slug}/`)
+  staticRoutes.add(`/en/industrije/${slug}/`)
+  staticRoutes.add(`/en/radovi/${slug}/`)
+}
+for (const post of JSON.parse(read('src/data/blog-posts.json'))) staticRoutes.add(`/en/blog/${post.slug}/`)
+
+
 const literalLinks = []
 for (const file of sourceFiles.filter((file) => file.endsWith('.tsx'))) {
   const text = fs.readFileSync(file, 'utf8')
