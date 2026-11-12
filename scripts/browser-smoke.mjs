@@ -122,6 +122,11 @@ try {
         const successLeads=await formPage.evaluate(()=>Array.isArray(window.dataLayer)?window.dataLayer.filter(x=>x.event==='generate_lead').length:0)
         if(successLeads!==1)errors.push('Mocked successful endpoint should emit one generate_lead, found '+successLeads)
         await formPage.waitForURL('**/hvala/?*',{timeout:10000})
+        // The two dedicated ad pages must preserve which advertising channel was selected.
+        await formPage.goto(base+'/kontakt/?usluga=performance-marketing&cilj=Meta%20Ads&izvor=seo-usluga',{waitUntil:'domcontentloaded'})
+        await formPage.locator('.brief-context').waitFor({state:'visible',timeout:10000})
+        const focusText=await formPage.locator('.brief-context').innerText()
+        if(!focusText.includes('Meta Ads') || !focusText.includes('Tema upita'))errors.push('Meta Ads enquiry context was lost')
         console.log('CHECK mocked lead fail, retry and successful conversion')
       } catch(e) {errors.push('Mocked contact submit scenarios '+String(e))}
       finally {await formPage.close()}
