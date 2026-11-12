@@ -35,7 +35,7 @@ export default function ServicesPage() {
     <OfferAreas />
 
     <section className="section section-dark"><div className="container">
-      <div className="service-rail-head"><div><span className="eyebrow">Sve glavne usluge</span><h2>Brz pregled bez ulaska u svaku stranicu.</h2></div></div>
+      <div className="service-rail-head"><div><span className="eyebrow">Sve glavne usluge</span><h2>Pogledaj šta radimo i koliko košta početak.</h2></div></div>
       <div className="service-rail services-index-rail" role="region" aria-label="Sve usluge" tabIndex={0}>
         {services.map((service) => {
           const products = serviceProducts[service.slug] || []
@@ -60,6 +60,6 @@ export default function ServicesPage() {
 
     <OfferChooser />
 
-    <FinalCta title="Ne znate koji proizvod odgovara projektu?" text="Pošaljite cilj, rok i budžetski okvir. Vratićemo se sa konkretnim proizvodom ili custom obimom ako standardna opcija nije dovoljna." label="Pošalji brief" />
+    <FinalCta title="Ne znaš odakle da kreneš?" text="Napiši šta ti treba, kada bi krenuo i koji budžet imaš na umu. Predložićemo najpraktičnije rješenje ili napraviti ponudu po mjeri." label="Pošalji brief" />
   </>
 }
