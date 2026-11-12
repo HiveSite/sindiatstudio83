@@ -7,7 +7,7 @@ export function AnalyticsScripts() {
   return (
     <>
       <Script id="consent-default" strategy="beforeInteractive">
-        {`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}window.gtag=gtag;gtag('consent','default',{analytics_storage:'denied',ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied',functionality_storage:'granted',security_storage:'granted',wait_for_update:500});try{var raw=localStorage.getItem('sindikat_cookie_consent');if(raw){var c=JSON.parse(raw);var valid=c&&c.version==='2026-11-12-v2';var analytics=valid&&(c.choice==='analytics'||c.choice==='accepted');var ads=valid&&c.choice==='accepted';gtag('consent','update',{analytics_storage:analytics?'granted':'denied',ad_storage:ads?'granted':'denied',ad_user_data:ads?'granted':'denied',ad_personalization:ads?'granted':'denied'})}}catch(e){}`}
+        {`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}window.gtag=gtag;gtag('consent','default',{analytics_storage:'denied',ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied',functionality_storage:'granted',security_storage:'granted',wait_for_update:500});try{var raw=localStorage.getItem('sindikat_cookie_consent');if(raw){var c=JSON.parse(raw);var valid=c&&c.version==='${site.consentVersion}';var analytics=valid&&(c.choice==='analytics'||c.choice==='accepted');var ads=valid&&c.choice==='accepted';gtag('consent','update',{analytics_storage:analytics?'granted':'denied',ad_storage:ads?'granted':'denied',ad_user_data:ads?'granted':'denied',ad_personalization:ads?'granted':'denied'})}}catch(e){}`}
       </Script>
       {gtmId ? (
         <Script id="gtm-loader" strategy="afterInteractive">
