@@ -30,13 +30,13 @@ export const serviceProducts: Record<string, ServiceProduct[]> = {
   ],
   'web-i-konverzije': [
     {
-      name: 'Landing stranica',
+      name: 'Odredišna stranica',
       price: 'od 100 €',
       description: 'Jedna fokusirana prodajna stranica napravljena oko jasne ponude i konverzije.',
       includes: ['UX i prodajna struktura', 'dizajn prilagođen telefonu i računaru', 'kontakt forma, mjerenje i SEO osnova'],
     },
     {
-      name: 'Premium mini-sajt',
+      name: 'Napredni mini-sajt',
       price: 'od 250 €',
       description: 'Za biznis ili projekat kojem treba ozbiljnija digitalna prezentacija sa više sadržaja.',
       includes: ['više stranica ili sekcija', 'tekstovi i pregledna struktura sadržaja', 'integracije, analitika i QA'],
@@ -45,7 +45,7 @@ export const serviceProducts: Record<string, ServiceProduct[]> = {
     {
       name: 'Digitalni proizvod',
       price: 'od 500 €',
-      description: 'Za platforme, prijavne sisteme i web proizvode sa posebnom poslovnom logikom.',
+      description: 'Za platforme, sisteme za prijave i digitalne proizvode sa posebnom poslovnom logikom.',
       includes: ['plan funkcionalnosti i korisničkog iskustva', 'funkcionalnosti prilagođene projektu', 'integracije i produkcijska predaja'],
     },
   ],
