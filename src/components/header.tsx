@@ -137,7 +137,7 @@ export function Header() {
               <div id="language-menu" className="language-switcher-menu" role="menu" hidden={!languageOpen}>
                 <span className="language-option is-active" role="menuitem" aria-current="true">
                   <span className="language-option-code">ME</span>
-                  <span><strong>Crnogorski</strong><small>Aktivni jezik</small></span>
+                  <span><strong>Srpski - ijekavica</strong><small>ME - aktivni jezik</small></span>
                   <span className="language-option-check" aria-hidden="true">✓</span>
                 </span>
                 <span className="language-option is-disabled" role="menuitem" aria-disabled="true">
