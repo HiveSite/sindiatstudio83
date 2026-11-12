@@ -19,11 +19,11 @@ export function Footer() {
           </div>
           <div>
             <h2>Usluge</h2>
-            <Link href="/usluge/performance-marketing/">Performance marketing</Link>
+            <Link href="/usluge/performance-marketing/">Digitalno oglašavanje</Link>
             <Link href="/usluge/aktivacije-i-eventi/">Aktivacije i eventi</Link>
-            <Link href="/usluge/web-i-konverzije/">Web i digitalni proizvodi</Link>
+            <Link href="/usluge/web-i-konverzije/">Sajtovi i digitalni proizvodi</Link>
             <Link href="/usluge/sadrzaj-za-kampanje/">Sadržaj za kampanje</Link>
-            <Link href="/usluge/recruitment-kampanje/">Recruitment kampanje</Link>
+            <Link href="/usluge/recruitment-kampanje/">Kampanje za zapošljavanje</Link>
           </div>
           <div>
             <h2>Studio</h2>
@@ -39,7 +39,7 @@ export function Footer() {
             <p>{site.location}</p>
             <a href={`mailto:${site.email}`} data-track="email_click">{site.email}</a>
             <p>{site.responseTime}</p>
-            <Link href="/kontakt/?izvor=footer" data-track="footer_lead">Pošalji brief</Link>
+            <Link href="/kontakt/?izvor=footer" data-track="footer_lead">Pošalji upit</Link>
           </div>
         </div>
         <div className="container footer-bottom">
@@ -47,7 +47,7 @@ export function Footer() {
           <div><Link href="/privatnost/">Privatnost</Link><Link href="/kolacici/">Kolačići</Link><CookieSettingsButton /><Link href="/uslovi-koriscenja/">Uslovi</Link></div>
         </div>
       </footer>
-      <div className="mobile-cta"><Link className="button button-primary" href="/kontakt/?izvor=mobile-sticky" data-track="mobile_sticky_lead">Pošalji brief</Link></div>
+      <div className="mobile-cta"><Link className="button button-primary" href="/kontakt/?izvor=mobile-sticky" data-track="mobile_sticky_lead">Pošalji upit</Link></div>
       <CookieBanner />
     </>
   )
