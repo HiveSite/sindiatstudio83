@@ -33,7 +33,11 @@ export function CookieBanner() {
     try { localStorage.setItem(storageKey, JSON.stringify({ choice, version: site.consentVersion, updatedAt: new Date().toISOString() })) } catch { /* Storage can be blocked; consent still applies for this visit. */ }
     const analyticsGranted = choice === 'accepted' || choice === 'analytics'
     const adsGranted = choice === 'accepted'
-    window.gtag?.('consent', 'update', {
+    window.dataLayer = window.dataLayer || []
+    if (!window.gtag) {
+      window.gtag = function (..._args: unknown[]) { window.dataLayer.push(arguments) }
+    }
+    window.gtag('consent', 'update', {
       analytics_storage: analyticsGranted ? 'granted' : 'denied',
       ad_storage: adsGranted ? 'granted' : 'denied',
       ad_user_data: adsGranted ? 'granted' : 'denied',
