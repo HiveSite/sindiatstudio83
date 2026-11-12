@@ -213,7 +213,7 @@ export const services: Service[] = [
     accent: 'pink',
   },
   {
-    slug: 'zapošljavanje-kampanje',
+    slug: 'recruitment-kampanje',
     eyebrow: 'Kampanje za zapošljavanje',
     title: 'Oglasi za posao koji lakše dolaze do pravih kandidata',
     shortTitle: 'Kampanje za zapošljavanje',
