@@ -95,6 +95,37 @@ try {
         if(!status.includes('obavezna polja'))errors.push('Lead form validation does not communicate required fields')
       }catch(e){errors.push('Mobile pricing navigation '+String(e))}
     }
+
+    if(width===390){
+      // All network responses are mocked. No real lead is sent to the business endpoint.
+      const formPage=await browser.newPage({viewport:{width:390,height:844}})
+      try {
+        await formPage.route('https://script.google.com/**', async route => {
+          await route.fulfill({status:200,contentType:'application/json',headers:{'access-control-allow-origin':'*'},body:'{"ok":false,"error":"test response"}'})
+        })
+        await formPage.goto(base+'/kontakt/?izvor=browser-qa',{waitUntil:'domcontentloaded'})
+        await formPage.locator('input[name="name"]').fill('QA Test')
+        await formPage.locator('input[name="email"]').fill('qa@example.test')
+        await formPage.locator('select[name="goal"]').selectOption({label:'Više prodaje ili upita'})
+        await formPage.locator('form.lead-form button[type="submit"]').click()
+        await formPage.getByRole('status').getByText(/Slanje nije potvrđeno/).waitFor({timeout:10000})
+        const failedPageLeads=await formPage.evaluate(()=>Array.isArray(window.dataLayer)?window.dataLayer.filter(x=>x.event==='generate_lead').length:0)
+        if(failedPageLeads!==0)errors.push('Failed endpoint generated a false GA4 lead')
+        if(formPage.url().includes('/hvala/'))errors.push('Failed endpoint redirected to success page')
+
+        await formPage.unroute('https://script.google.com/**')
+        await formPage.route('https://script.google.com/**', async route => {
+          await route.fulfill({status:200,contentType:'application/json',headers:{'access-control-allow-origin':'*'},body:'{"ok":true}'})
+        })
+        await formPage.locator('form.lead-form button[type="submit"]').click()
+        await formPage.getByRole('status').getByText(/Upit je poslat/).waitFor({timeout:10000})
+        const successLeads=await formPage.evaluate(()=>Array.isArray(window.dataLayer)?window.dataLayer.filter(x=>x.event==='generate_lead').length:0)
+        if(successLeads!==1)errors.push('Mocked successful endpoint should emit one generate_lead, found '+successLeads)
+        await formPage.waitForURL('**/hvala/?*',{timeout:10000})
+        console.log('CHECK mocked lead fail, retry and successful conversion')
+      } catch(e) {errors.push('Mocked contact submit scenarios '+String(e))}
+      finally {await formPage.close()}
+    }
     await page.close()
   }
 } finally {await browser.close()}
