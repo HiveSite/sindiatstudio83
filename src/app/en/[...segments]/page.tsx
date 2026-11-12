@@ -5,6 +5,7 @@ import { notFound } from 'next/navigation'
 import { LeadForm } from '@/components/lead-form'
 import { enServices, enIndustries, enCaseSummaries, enCaseDetails } from '@/data/en'
 import { enProducts } from '@/data/en-products'
+import { enServiceDetails } from '@/data/en-service-details'
 import { cases } from '@/data/cases'
 import { blogPosts } from '@/data/blog'
 import { site } from '@/data/site'
@@ -115,12 +116,19 @@ export default async function EnglishPages({params}:{params:Promise<{segments:st
   const original=caseBySlug[slug]
   if(kind==='usluge'&&slug&&service){
     const products=enProducts[slug]||enProducts['performance-marketing']
+    const detail=enServiceDetails[slug] || enServiceDetails['performance-marketing']
     return <div lang="en"><Head eyebrow="OUR SERVICES / MONTENEGRO" title={service.title} description={service.summary}/>
       <section className="section section-dark"><div className="container"><h2>What we can deliver</h2>
       <div className="home-process-grid">{service.benefits.map((x,i)=><article className="home-process-step" key={x}><span>{String(i+1).padStart(2,'0')}</span><h3>{x}</h3></article>)}</div>
+      <h2>Best suited for</h2><ul>{detail.bestFor.map(x=><li key={x}>{x}</li>)}</ul>
+      <h2>What we need from you</h2><ul>{detail.needFromYou.map(x=><li key={x}>{x}</li>)}</ul>
+      <h2>What's included</h2><ul>{detail.includes.map(x=><li key={x}>{x}</li>)}</ul>
+      <h2>How we work</h2><div className="home-process-grid">{detail.process.map((step,i)=><article className="home-process-step" key={step.name}><span>{String(i+1).padStart(2,'0')}</span><h3>{step.name}</h3><p>{step.text}</p></article>)}</div>
+      <h2>What progress looks like</h2><ul>{detail.successSignals.map(x=><li key={x}>{x}</li>)}</ul>
       <p style={{marginTop:28}}>Every project starts with a clear scope, timeline and responsibilities. We work with local and international teams.</p><Buttons slug={slug}/></div></section>
       <section className="section section-light"><div className="container"><h2>Starting options</h2><p>Prices below are indicative starting points, not fixed quotes. Media spend and external supplier costs are agreed separately.</p>
       <div className="home-process-grid">{products.map(x=><article key={x.name} className="home-process-step" style={{background:'#fff',color:'#15151b'}}><h3>{x.name} - {x.price}</h3><p style={{color:'#444'}}>{x.description}</p><ul>{x.includes.map(part=><li key={part}>{part}</li>)}</ul><Link href={`/en/kontakt/?usluga=${slug}`}>Discuss this option ↗</Link></article>)}</div></div></section>
+      <section className="section section-dark"><div className="container"><h2>Frequently asked questions</h2>{detail.faq.map(item=><div key={item.question} style={{marginBottom:28}}><h3>{item.question}</h3><p>{item.answer}</p></div>)}<Buttons slug={slug}/></div></section>
     </div>
   }
   if(kind==='usluge'&&!slug) return <div lang="en"><Head eyebrow="OUR SERVICES" title="One team for strategy and execution" description="Advertising, content, websites, events and recruitment campaigns in one coordinated offering."/><section className="section section-dark"><div className="container home-service-list">{enServices.map(s=><article className="home-service-row" key={s.slug}><span className="home-service-number">+</span><div className="home-service-main"><h3><Link href={path(['usluge',s.slug])}>{s.title}</Link></h3><p>{s.summary}</p></div><div className="home-service-action"><Link href={path(['usluge',s.slug])}>Explore ↗</Link></div></article>)}</div></section></div>
