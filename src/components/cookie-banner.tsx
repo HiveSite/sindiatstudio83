@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from 'react'
 import { site } from '@/data/site'
 import { trackEvent } from '@/lib/tracking'
 
-type Choice = 'accepted' | 'rejected'
+type Choice = 'accepted' | 'analytics' | 'rejected'
 const storageKey = 'sindikat_cookie_consent'
 
 export function CookieBanner() {
@@ -30,13 +30,14 @@ export function CookieBanner() {
   }, [visible])
 
   const setConsent = (choice: Choice) => {
-    localStorage.setItem(storageKey, JSON.stringify({ choice, version: site.consentVersion, updatedAt: new Date().toISOString() }))
-    const granted = choice === 'accepted'
+    try { localStorage.setItem(storageKey, JSON.stringify({ choice, version: site.consentVersion, updatedAt: new Date().toISOString() })) } catch { /* Storage can be blocked; consent still applies for this visit. */ }
+    const analyticsGranted = choice === 'accepted' || choice === 'analytics'
+    const adsGranted = choice === 'accepted'
     window.gtag?.('consent', 'update', {
-      analytics_storage: granted ? 'granted' : 'denied',
-      ad_storage: granted ? 'granted' : 'denied',
-      ad_user_data: granted ? 'granted' : 'denied',
-      ad_personalization: granted ? 'granted' : 'denied',
+      analytics_storage: analyticsGranted ? 'granted' : 'denied',
+      ad_storage: adsGranted ? 'granted' : 'denied',
+      ad_user_data: adsGranted ? 'granted' : 'denied',
+      ad_personalization: adsGranted ? 'granted' : 'denied',
       functionality_storage: 'granted',
       security_storage: 'granted',
     })
@@ -48,10 +49,11 @@ export function CookieBanner() {
 
   return (
     <div className="cookie-banner" role="dialog" aria-modal="false" aria-labelledby="cookie-title" aria-describedby="cookie-description">
-      <div><strong id="cookie-title">Kolačići i analitika</strong><p id="cookie-description">Neophodna memorija radi uvijek. Analitiku i oglasne oznake aktiviramo prema tvom izboru, koji kasnije možeš promijeniti u footeru.</p></div>
+      <div><strong id="cookie-title">Kolačići i analitika</strong><p id="cookie-description">Izaberi da li dozvoljavaš mjerenje posjeta i posebne oglasne kolačiće. Sajt radi i bez njih. Izbor možeš promijeniti u footeru.</p></div>
       <div className="cookie-actions">
         <button ref={firstButtonRef} className="button button-ghost button-small" type="button" onClick={() => setConsent('rejected')}>Samo neophodno</button>
-        <button className="button button-primary button-small" type="button" onClick={() => setConsent('accepted')}>Prihvati analitiku</button>
+        <button className="button button-ghost button-small" type="button" onClick={() => setConsent('analytics')}>Samo analitika</button>
+        <button className="button button-primary button-small" type="button" onClick={() => setConsent('accepted')}>Prihvati sve</button>
       </div>
     </div>
   )
