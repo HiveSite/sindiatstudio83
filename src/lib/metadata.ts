@@ -1,5 +1,7 @@
 import type { Metadata } from 'next'
 import { site } from '@/data/site'
+import { enServices, enIndustries, enCaseSummaries } from '@/data/en'
+import { englishBlogPosts } from '@/data/en-blog'
 
 interface MetadataInput {
   title: string
@@ -28,7 +30,14 @@ export function createMetadata({
 }: MetadataInput): Metadata {
   const fullTitle = title.includes(site.shortName) ? title : `${title} | ${site.name}`
   const canonical = new URL(path, site.domain).toString()
-  const englishPaths = new Set(['/', '/usluge/', '/cijene/', '/industrije/', '/radovi/', '/o-nama/', '/blog/', '/kontakt/', '/privatnost/', '/kolacici/', '/uslovi-koriscenja/'])
+  const englishPaths = new Set([
+    '/', '/usluge/', '/cijene/', '/industrije/', '/radovi/', '/o-nama/', '/blog/', '/kontakt/',
+    '/usluge/meta-ads/', '/usluge/google-ads/',
+    ...enServices.map((entry) => `/usluge/${entry.slug}/`),
+    ...enIndustries.map((entry) => `/industrije/${entry.slug}/`),
+    ...enCaseSummaries.map((entry) => `/radovi/${entry.slug}/`),
+    ...englishBlogPosts.map((entry) => `/blog/${entry.slug}/`),
+  ])
   const languageAlternates = englishPaths.has(path) ? { 'sr-Latn-ME': canonical, 'en': new URL('/en' + path, site.domain).toString() } : undefined
   const imageUrl = new URL(image, site.domain).toString()
   const socialImage = { url: imageUrl, width: 1200, height: 630, alt: imageAlt }
