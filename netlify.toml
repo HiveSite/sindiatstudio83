@@ -1,5 +1,5 @@
 [build]
-  command = "npm run build"
+  command = "node scripts/diagnose-build.mjs"
   publish = "out"
 
 [build.environment]
