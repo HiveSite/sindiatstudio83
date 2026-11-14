@@ -20,6 +20,8 @@ import { IndustryPageContent } from '@/components/localized-industry-detail'
 import { IndustriesPageContent } from '@/components/localized-industries-page'
 import { AboutPageContent } from '@/components/localized-about-page'
 import { ContactPageContent } from '@/components/localized-contact-page'
+import { BlogPageContent } from '@/components/localized-blog-page'
+import { ArticlePageContent } from '@/components/localized-blog-article'
 
 const enAdServices: Record<string,{title:string;summary:string;benefits:string[]}> = {
  'meta-ads':{title:'Instagram & Facebook advertising',summary:'Reach relevant people with Meta Ads. We connect the offer, creative assets, audience targeting and measurement instead of focusing only on views.',benefits:['Campaign planning and audience research','Photo, video and ad copy variations','Tracking, testing and reporting']},
@@ -119,15 +121,8 @@ export default async function EnglishPages({params}:{params:Promise<{segments:st
   if(kind==='o-nama')return <div lang="en"><AboutPageContent locale="en" /></div>
   if(kind==='kontakt')return <div lang="en"><ContactPageContent locale="en" /></div>
   if(kind==='hvala')return <div lang="en"><Head eyebrow="THANK YOU" title="Your enquiry has been received." description="We will review your message and get back to you as soon as we can."/><section className="section"><div className="container"><Link className="button button-primary" href="/en/">Back to homepage ↗</Link></div></section></div>
-  if(kind==='blog'&&!slug)return <div lang="en"><Head eyebrow="RESOURCES" title="Practical guides from the studio." description="Explore campaign planning, websites, local search and event production."/><section className="section section-dark"><div className="container home-project-grid">{englishBlogPosts.map(post=><article key={post.slug} className="home-project-card"><div className="home-project-text"><h3>{post.title}</h3><p>{plainEnglishExcerpt(post)}</p><Link href={path(['blog',post.slug])}>Read article ↗</Link></div></article>)}</div></section></div>
-  if(kind==='blog'&&slug&&englishBlogBySlug[slug]){
-    const article=englishBlogBySlug[slug]
-    return <div lang="en"><Head eyebrow="FROM THE STUDIO / RESOURCES" title={article.title} description={plainEnglishExcerpt(article)}/>
-      <section className="section section-dark"><div className="container"><div className="blog-article-body" dangerouslySetInnerHTML={{__html:article.body}} />
-        <div className="button-row" style={{marginTop:40}}><Link href="/en/usluge/" className="button button-primary">Explore our services ↗</Link><Link href="/en/blog/" className="button button-ghost">More articles ↗</Link></div>
-      </div></section>
-    </div>
-  }
+  if(kind==='blog'&&!slug)return <div lang="en"><BlogPageContent locale="en" /></div>
+  if(kind==='blog'&&slug&&englishBlogBySlug[slug])return <div lang="en"><ArticlePageContent slug={slug} locale="en" /></div>
   if(kind==='privatnost'||kind==='kolacici'||kind==='uslovi-koriscenja'){
     const legal=enLegalPages[kind]
     return <div lang="en"><Head eyebrow="LEGAL INFORMATION" title={legal.title} description={legal.description}/>
