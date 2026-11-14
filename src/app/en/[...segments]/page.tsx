@@ -16,6 +16,8 @@ import { enLegalPages } from '@/data/en-legal'
 import { ServicesPageContent } from '@/components/localized-services-page'
 import { PricingPageContent } from '@/components/localized-pricing-page'
 import { ServicePageContent } from '@/components/localized-service-detail'
+import { IndustryPageContent } from '@/components/localized-industry-detail'
+import { IndustriesPageContent } from '@/components/localized-industries-page'
 
 const enAdServices: Record<string,{title:string;summary:string;benefits:string[]}> = {
  'meta-ads':{title:'Instagram & Facebook advertising',summary:'Reach relevant people with Meta Ads. We connect the offer, creative assets, audience targeting and measurement instead of focusing only on views.',benefits:['Campaign planning and audience research','Photo, video and ad copy variations','Tracking, testing and reporting']},
@@ -107,18 +109,8 @@ export default async function EnglishPages({params}:{params:Promise<{segments:st
     </div>
   }
   if(kind==='usluge'&&!slug) return <div lang="en"><ServicesPageContent locale="en" /></div>
-  if(kind==='industrije'&&slug&&industry) {
-    const detail=enIndustryDetails[slug]
-    return <div lang="en"><Head eyebrow="INDUSTRIES" title={industry.title} description={industry.summary}/>
-      <section className="section section-dark"><div className="container"><h2>Common challenges</h2><ul>{detail.problems.map(x=><li key={x}>{x}</li>)}</ul>
-      <h2>What we deliver</h2><ul>{detail.solutions.map(x=><li key={x}>{x}</li>)}</ul>
-      <h2>Who this is for</h2><ul>{detail.bestFor.map(x=><li key={x}>{x}</li>)}</ul>
-      <h2>What success looks like</h2><ul>{detail.signals.map(x=><li key={x}>{x}</li>)}</ul>
-      <h2>When to start</h2><p>{detail.timing}</p>
-      <Buttons slug={slug}/></div></section>
-    </div>
-  }
-  if(kind==='industrije'&&!slug)return <div lang="en"><Head eyebrow="INDUSTRIES" title="Different industries. Practical solutions." description="We adapt the project scope, messaging, people and timeline to each industry."/><section className="section v7-industries-home"><div className="container v7-industries-grid">{enIndustries.map(s=><Link key={s.slug} href={path(['industrije',s.slug])} className="v7-industry"><h3>{s.title}</h3><p>{s.summary}</p><strong>Read more ↗</strong></Link>)}</div></section></div>
+  if(kind==='industrije'&&slug&&industry) return <div lang="en"><IndustryPageContent slug={slug} locale="en" /></div>
+  if(kind==='industrije'&&!slug) return <div lang="en"><IndustriesPageContent locale="en" /></div>
   if(kind==='radovi'&&slug&&project)return <div lang="en"><Head eyebrow="SELECTED PROJECT" title={project.title} description={project.summary}/><section className="section section-dark"><div className="container">{original?.coverImage?.src?<Image src={original.coverImage.src} alt={project.title} width={1000} height={600} style={{width:'100%',height:'auto',objectFit:'contain',borderRadius:20}}/>:null}<div style={{marginTop:30}}><h2>The challenge</h2><p>{enCaseDetails[slug]?.challenge || project.summary}</p><h2>What we did</h2><p>{enCaseDetails[slug]?.solution || project.summary}</p><h2>The outcome</h2><p>{enCaseDetails[slug]?.result || project.summary}</p><Link href="/en/kontakt/" className="button button-primary">Discuss a similar project ↗</Link></div></div></section></div>
   if(kind==='radovi'&&!slug)return <div lang="en"><Head eyebrow="OUR WORK" title="Real projects. Real execution." description="A selection of digital products, events, content and field projects from our studio."/><section className="section section-dark"><div className="container home-project-grid">{enCaseSummaries.map(s=><article className="home-project-card" key={s.slug}><div className="home-project-text"><h3>{s.title}</h3><p>{s.summary}</p><Link href={path(['radovi',s.slug])}>Explore project ↗</Link></div></article>)}</div></section></div>
   if(kind==='cijene') return <div lang="en"><PricingPageContent locale="en" /></div>
