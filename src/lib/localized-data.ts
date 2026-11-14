@@ -31,7 +31,7 @@ export function localizedService(slug:string,locale:SiteLocale):Service|undefine
  }
  return {
   ...original,eyebrow:'OUR SERVICES',title:basic.title,shortTitle:basic.title,summary:basic.summary,
-  outcomes:[...detail.successSignals.slice(0,original.outcomes.length)],
+  outcomes:[...basic.benefits],
   bestFor:[...detail.bestFor],clientInputs:[...detail.needFromYou],
   successSignals:[...detail.successSignals],includes:[...detail.includes],
   process:detail.process.map(step=>[step.name,step.text]),
