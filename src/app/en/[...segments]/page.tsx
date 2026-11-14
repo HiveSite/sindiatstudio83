@@ -8,7 +8,7 @@ import { enProducts } from '@/data/en-products'
 import { enServiceDetails } from '@/data/en-service-details'
 import { enIndustryDetails } from '@/data/en-industry-details'
 import { cases } from '@/data/cases'
-import { serviceBySlug } from '@/data/services'
+import { serviceBySlug as canonicalServiceBySlug } from '@/data/services'
 import { blogPosts } from '@/data/blog'
 import { englishBlogBySlug, englishBlogPosts, plainEnglishExcerpt } from '@/data/en-blog'
 import { site } from '@/data/site'
@@ -90,7 +90,7 @@ export default async function EnglishPages({params}:{params:Promise<{segments:st
   const industry=industryBySlug[slug]
   const project=caseCopyBySlug[slug]
   const original=caseBySlug[slug]
-  if(kind==='usluge'&&slug&&serviceBySlug[slug]) return <div lang="en"><ServicePageContent slug={slug} locale="en" /></div>
+  if(kind==='usluge'&&slug&&canonicalServiceBySlug[slug]) return <div lang="en"><ServicePageContent slug={slug} locale="en" /></div>
   if(kind==='usluge'&&slug&&service&&enAdServices[slug]){
     const products=enProducts[slug]||enProducts['performance-marketing']
     const detail=enServiceDetails[slug] || enServiceDetails['performance-marketing']
