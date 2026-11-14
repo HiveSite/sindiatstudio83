@@ -46,8 +46,18 @@ const hubPages = [
   'src/app/industrije/page.tsx',
   'src/app/blog/page.tsx',
 ]
+const sharedPageSources = {
+  'src/app/page.tsx': 'src/components/localized-home-page.tsx',
+  'src/app/usluge/page.tsx': 'src/components/localized-services-page.tsx',
+  'src/app/cijene/page.tsx': 'src/components/localized-pricing-page.tsx',
+  'src/app/industrije/page.tsx': 'src/components/localized-industries-page.tsx',
+  'src/app/usluge/[slug]/page.tsx': 'src/components/localized-service-detail.tsx',
+  'src/app/industrije/[slug]/page.tsx': 'src/components/localized-industry-detail.tsx'
+}
+const fullPageSource = file => read(file)+(sharedPageSources[file] ? '\n'+read(sharedPageSources[file]) : '')
+
 for (const file of hubPages) {
-  const text = read(file)
+  const text = fullPageSource(file)
   if (!text.includes('createMetadata')) fail(`${file} must use shared metadata helper`)
   if (!text.includes('webPageSchema')) fail(`${file} must expose WebPage/CollectionPage structured data`)
   if (!text.includes('itemListSchema')) fail(`${file} must expose crawlable collection hierarchy with ItemList structured data`)
@@ -69,11 +79,11 @@ const detailPages = [
   'src/app/blog/[slug]/page.tsx',
 ]
 for (const file of detailPages) {
-  const text = read(file)
+  const text = fullPageSource(file)
   if (!text.includes('breadcrumbSchema')) fail(`${file} is missing breadcrumb structured data`)
   if (!text.includes('webPageSchema')) fail(`${file} is missing WebPage structured data`)
 }
-if (!read('src/app/usluge/[slug]/page.tsx').includes('serviceSchema')) fail('Service detail pages are missing Service structured data')
+if (!fullPageSource('src/app/usluge/[slug]/page.tsx').includes('serviceSchema')) fail('Service detail pages are missing Service structured data')
 if (!read('src/app/blog/[slug]/page.tsx').includes("'@type': 'BlogPosting'")) fail('Blog articles must use BlogPosting structured data')
 if (!read('src/app/radovi/[slug]/page.tsx').includes('href={`/usluge/${service.slug}/`}')) fail('Case studies must link disciplines to service pages')
 
