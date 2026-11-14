@@ -5,6 +5,7 @@ import { JsonLd } from '@/components/json-ld'
 import { legalPages } from '@/data/legal'
 import { createMetadata } from '@/lib/metadata'
 import { breadcrumbSchema } from '@/lib/schema'
+import { LegalPageContent } from '@/components/localized-legal-page'
 
 export const dynamicParams = false
 export function generateStaticParams() { return Object.keys(legalPages).map((legal) => ({ legal })) }
@@ -16,14 +17,7 @@ export async function generateMetadata({ params }: { params: Promise<{ legal: st
   return createMetadata({ title: page.title, description: page.description, path: `/${legal}/`, noIndex: true })
 }
 
-export default async function LegalPage({ params }: { params: Promise<{ legal: string }> }) {
-  const { legal } = await params
-  const page = legalPages[legal as keyof typeof legalPages]
-  if (!page) notFound()
-  const route = `/${legal}/`
-  const crumbs = [{ label: page.title, href: route }]
-  return <>
-    <JsonLd data={breadcrumbSchema(crumbs)} />
-    <section className="section"><div className="container legal"><Breadcrumbs items={crumbs} /><span className="eyebrow" style={{ marginTop: 42 }}>Pravni dokument</span><h1>{page.title}</h1><p className="lead">{page.description}</p>{page.sections.map(([title, text], index) => <div key={title}>{index > 0 ? <h2>{title}</h2> : null}<p>{text}</p></div>)}<p className="legal-updated">Posljednje ažuriranje: 12. novembar 2026.</p></div></section>
-  </>
+export default async function LegalPage({params}:{params:Promise<{legal:string}>}){
+ const {legal}=await params
+ return <LegalPageContent slug={legal} locale="sr" />
 }
