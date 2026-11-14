@@ -245,7 +245,7 @@ export function OfferChooser({locale='sr'}:{locale?:SiteLocale}) {
     return localeHref(locale,`/kontakt/?${params.toString()}`)
   }, [recommendation, state, locale])
 
-  const choice = (group: keyof ChoiceState, value: string, label: string) => <button type="button" className={`sales-choice${state[group] === value ? ' is-selected' : ''}`} aria-pressed={state[group] === value} onClick={() => setState((current) => ({ ...current, [group]: value }) )}>{t(label)}</button>
+  const choice = (group: keyof ChoiceState, value: string, label: string) => <button type="button" className={`sales-choice${state[group] === value ? ' is-selected' : ''}`} aria-pressed={state[group] === value} onClick={() => setState((current) => ({ ...current, [group]: value }))}>{t(label)}</button>
 
   return (
     <section className="sales-chooser section" id="pronadji-model"><div className="container"><div className="sales-chooser-shell">
