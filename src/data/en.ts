@@ -39,12 +39,13 @@ export const enNavigation = [
 ] as const
 
 export const enCaseDetails: Record<string,{
+challenge:string;solution:string;result:string}> = {
   'aktivacije-regulisanih-brendova': {
     challenge:'Brand activations in regulated categories require clear staff instructions, reliable coordination with venues and consistent operational standards. Every team member needs to understand their responsibilities and the agreed requirements before a shift starts.',
     solution:'Sindikat organizes adult promotional staff, briefings, schedules, venue communication, supervision and documentation. We define the process in advance and monitor execution against the agreed standards.',
     result:'The project has a clear operational point of responsibility, properly prepared teams and consistent documentation of what was delivered at each location.'
   },
-challenge:string;solution:string;result:string}> = {
+
   'imaposla-digitalni-proizvod':{
     challenge:'Jobs and recruitment information were scattered across social networks, messages, groups and disconnected listings. Candidates needed a reliable way to browse and apply, while employers needed simpler management of vacancies, candidates and promotions. The product had to support several user groups without making the first step complicated.',
     solution:'We structured a modular platform with separate journeys for job vacancies, short-term assignments and local services. The work includes city and category pages, employer and candidate profiles, applications, administrative controls, search-friendly content and community distribution. Mobile use is a central design priority.',
