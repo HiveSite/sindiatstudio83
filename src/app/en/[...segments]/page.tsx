@@ -13,9 +13,9 @@ import { blogPosts } from '@/data/blog'
 import { englishBlogBySlug, englishBlogPosts, plainEnglishExcerpt } from '@/data/en-blog'
 import { site } from '@/data/site'
 import { enLegalPages } from '@/data/en-legal'
-import { ServicesPageContent } from '@/app/usluge/page'
-import { PricingPageContent } from '@/app/cijene/page'
-import { ServicePageContent } from '@/app/usluge/[slug]/page'
+import { ServicesPageContent } from '@/components/localized-services-page'
+import { PricingPageContent } from '@/components/localized-pricing-page'
+import { ServicePageContent } from '@/components/localized-service-detail'
 
 const enAdServices: Record<string,{title:string;summary:string;benefits:string[]}> = {
  'meta-ads':{title:'Instagram & Facebook advertising',summary:'Reach relevant people with Meta Ads. We connect the offer, creative assets, audience targeting and measurement instead of focusing only on views.',benefits:['Campaign planning and audience research','Photo, video and ad copy variations','Tracking, testing and reporting']},
