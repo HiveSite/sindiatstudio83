@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { HomePageContent } from '../page'
+import { HomePageContent } from '@/components/localized-home-page'
 
 export const metadata: Metadata = {
   title: 'Creative production, campaigns and websites | Sindikat Studio 83',
