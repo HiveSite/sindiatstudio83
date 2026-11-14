@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import type { CaseStudy, Industry } from '@/types/content'
+import { localeHref,translate,type SiteLocale } from '@/lib/locale'
 import { CaseCoverPlaceholder } from '@/components/case-media'
 import { getPublicCaseStudy } from '@/lib/public-case'
 import { managedThumbnail } from '@/lib/studio83-media'
@@ -9,7 +10,7 @@ function withManagedThumbnail(item: CaseStudy): CaseStudy {
   return coverImage === item.coverImage ? item : { ...item, coverImage }
 }
 
-export function CaseCard({ item }: { item: CaseStudy }) {
+export function CaseCard({ item,locale='sr' }: { item: CaseStudy; locale?:SiteLocale }) {
   const publicItem = withManagedThumbnail(getPublicCaseStudy(item))
   const metrics = publicItem.metrics?.slice(0, 3) || []
   return (
@@ -22,13 +23,13 @@ export function CaseCard({ item }: { item: CaseStudy }) {
         {metrics.length ? <div className="case-mini-metrics">
           {metrics.map(([value, label]) => <div key={`${value}-${label}`}><strong>{value}</strong><span>{label}</span></div>)}
         </div> : null}
-        <Link href={`/radovi/${publicItem.slug}/`}>Pogledaj projekat <span>↗</span></Link>
+        <Link href={localeHref(locale,`/radovi/${publicItem.slug}/`)}>{translate(locale,'Pogledaj projekat','View project')} <span>↗</span></Link>
       </div>
     </article>
   )
 }
 
-export function CasePreviewCard({ item }: { item: CaseStudy }) {
+export function CasePreviewCard({ item,locale='sr' }: { item: CaseStudy; locale?:SiteLocale }) {
   const publicItem = withManagedThumbnail(getPublicCaseStudy(item))
   return (
     <article className="case-preview-card">
@@ -37,16 +38,16 @@ export function CasePreviewCard({ item }: { item: CaseStudy }) {
         <span>{publicItem.type}</span>
         <h3>{publicItem.title}</h3>
         <p>{publicItem.summary}</p>
-        <Link href={`/radovi/${publicItem.slug}/`}>Pogledaj projekat ↗</Link>
+        <Link href={`/radovi/${publicItem.slug}/`}>{translate(locale,'Pogledaj projekat ↗','View project ↗')}</Link>
       </div>
     </article>
   )
 }
 
-export function IndustryCard({ item }: { item: Industry }) {
+export function IndustryCard({ item,locale='sr' }: { item: Industry; locale?:SiteLocale }) {
   return (
-    <Link className="industry-card" href={`/industrije/${item.slug}/`}>
-      <span className="industry-mark" /><h3>{item.title}</h3><p>{item.summary}</p><span className="industry-link">Detalji ↗</span>
+    <Link className="industry-card" href={localeHref(locale,`/industrije/${item.slug}/`)}>
+      <span className="industry-mark" /><h3>{item.title}</h3><p>{item.summary}</p><span className="industry-link">{translate(locale,'Detalji ↗','Details ↗')}</span>
     </Link>
   )
 }
