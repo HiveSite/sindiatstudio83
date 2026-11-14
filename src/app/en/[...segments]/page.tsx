@@ -26,6 +26,7 @@ import { WorksPageContent } from '@/components/localized-works-page'
 import { CaseStudyPageContent } from '@/components/localized-case-detail'
 import { FocusedServiceLanding } from '@/components/focused-service-landing'
 import { focusedServicesEn } from '@/data/en-focused'
+import { LegalPageContent } from '@/components/localized-legal-page'
 
 const enAdServices: Record<string,{title:string;summary:string;benefits:string[]}> = {
  'meta-ads':{title:'Instagram & Facebook advertising',summary:'Reach relevant people with Meta Ads. We connect the offer, creative assets, audience targeting and measurement instead of focusing only on views.',benefits:['Campaign planning and audience research','Photo, video and ad copy variations','Tracking, testing and reporting']},
@@ -111,16 +112,7 @@ export default async function EnglishPages({params}:{params:Promise<{segments:st
   if(kind==='hvala')return <div lang="en"><Head eyebrow="THANK YOU" title="Your enquiry has been received." description="We will review your message and get back to you as soon as we can."/><section className="section"><div className="container"><Link className="button button-primary" href="/en/">Back to homepage ↗</Link></div></section></div>
   if(kind==='blog'&&!slug)return <div lang="en"><BlogPageContent locale="en" /></div>
   if(kind==='blog'&&slug&&englishBlogBySlug[slug])return <div lang="en"><ArticlePageContent slug={slug} locale="en" /></div>
-  if(kind==='privatnost'||kind==='kolacici'||kind==='uslovi-koriscenja'){
-    const legal=enLegalPages[kind]
-    return <div lang="en"><Head eyebrow="LEGAL INFORMATION" title={legal.title} description={legal.description}/>
-      <section className="section section-dark"><div className="container legal">
-        {legal.sections.map(section=><div key={section.title} style={{marginBottom:30}}><h2>{section.title}</h2><p>{section.text}</p></div>)}
-        <p>Last updated: November 12, 2026.</p>
-        <p>Questions? Email <a href={`mailto:${site.email}`}>{site.email}</a>.</p>
-      </div></section>
-    </div>
-  }
+  if(kind==='privatnost'||kind==='kolacici'||kind==='uslovi-koriscenja')return <div lang="en"><LegalPageContent slug={kind} locale="en" /></div>
 
   notFound()
 }
