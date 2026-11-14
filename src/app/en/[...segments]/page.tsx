@@ -28,6 +28,8 @@ import { FocusedServiceLanding } from '@/components/focused-service-landing'
 import { focusedServicesEn } from '@/data/en-focused'
 import { LegalPageContent } from '@/components/localized-legal-page'
 import { ThankYouPageContent } from '@/components/localized-thank-you'
+import { createEnglishMetadata } from '@/lib/metadata'
+import { enBlogFullBySlug } from '@/data/localized-blog'
 
 const enAdServices: Record<string,{title:string;summary:string;benefits:string[]}> = {
  'meta-ads':{title:'Instagram & Facebook advertising',summary:'Reach relevant people with Meta Ads. We connect the offer, creative assets, audience targeting and measurement instead of focusing only on views.',benefits:['Campaign planning and audience research','Photo, video and ad copy variations','Tracking, testing and reporting']},
@@ -79,12 +81,19 @@ export async function generateMetadata({params}:{params:Promise<{segments:string
   else if(kind==='industrije'&&slug){const x=industryBySlug[slug];if(!x)return {};title=x.title;description=x.summary}
   else if(kind==='blog'&&slug){const article=englishBlogBySlug[slug];title=article?.title||'Practical guide';description=article?plainEnglishExcerpt(article):'A practical guide from Sindikat Studio 83.'}
   else {const x=top.find(row=>row[0]===kind);if(x){title=x[1];description=x[2]}}
-  return {
-    title:`${title} | Sindikat Studio 83`,description,
-    alternates:{canonical:path(segments),languages:{'en':path(segments),'sr-Latn-ME':`/${segments.join('/')}/`}},
-    robots:['privatnost','kolacici','uslovi-koriscenja','hvala'].includes(kind)?{index:false,follow:true}:undefined,
-    openGraph:{locale:'en_GB',title,description},
-  }
+  const article=kind==='blog'&&slug?enBlogFullBySlug[slug]:undefined
+  const caseImage=kind==='radovi'&&slug?caseBySlug[slug]?.socialImage?.src||caseBySlug[slug]?.coverImage?.src:undefined
+  return createEnglishMetadata({
+    title,description,
+    path:'/'+segments.join('/')+'/',
+    image:article?.cover||caseImage,
+    imageAlt:article?.coverAlt||title,
+    type:article?'article':'website',
+    noIndex:['privatnost','kolacici','uslovi-koriscenja','hvala'].includes(kind),
+    publishedTime:article?.date||undefined,
+    modifiedTime:article?.date||undefined,
+    tags:article?.tags||[]
+  })
 }
 function Head({eyebrow,title,description}:{eyebrow:string;title:string;description:string}){
  return <section className="page-hero"><div className="container"><span className="eyebrow">{eyebrow}</span><h1>{title}</h1><p className="lead">{description}</p></div></section>
