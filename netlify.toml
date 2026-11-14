@@ -1,5 +1,5 @@
 [build]
-  command = "node scripts/diagnose-build.mjs"
+  command = "mkdir -p out/diagnostics && echo '<html><body>Netlify config active</body></html>' > out/index.html && cp out/index.html out/diagnostics/index.html"
   publish = "out"
 
 [build.environment]
