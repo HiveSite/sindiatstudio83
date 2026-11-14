@@ -27,6 +27,7 @@ import { CaseStudyPageContent } from '@/components/localized-case-detail'
 import { FocusedServiceLanding } from '@/components/focused-service-landing'
 import { focusedServicesEn } from '@/data/en-focused'
 import { LegalPageContent } from '@/components/localized-legal-page'
+import { ThankYouPageContent } from '@/components/localized-thank-you'
 
 const enAdServices: Record<string,{title:string;summary:string;benefits:string[]}> = {
  'meta-ads':{title:'Instagram & Facebook advertising',summary:'Reach relevant people with Meta Ads. We connect the offer, creative assets, audience targeting and measurement instead of focusing only on views.',benefits:['Campaign planning and audience research','Photo, video and ad copy variations','Tracking, testing and reporting']},
@@ -109,7 +110,7 @@ export default async function EnglishPages({params}:{params:Promise<{segments:st
   if(kind==='cijene') return <div lang="en"><PricingPageContent locale="en" /></div>
   if(kind==='o-nama')return <div lang="en"><AboutPageContent locale="en" /></div>
   if(kind==='kontakt')return <div lang="en"><ContactPageContent locale="en" /></div>
-  if(kind==='hvala')return <div lang="en"><Head eyebrow="THANK YOU" title="Your enquiry has been received." description="We will review your message and get back to you as soon as we can."/><section className="section"><div className="container"><Link className="button button-primary" href="/en/">Back to homepage ↗</Link></div></section></div>
+  if(kind==='hvala')return <div lang="en"><ThankYouPageContent locale="en" /></div>
   if(kind==='blog'&&!slug)return <div lang="en"><BlogPageContent locale="en" /></div>
   if(kind==='blog'&&slug&&englishBlogBySlug[slug])return <div lang="en"><ArticlePageContent slug={slug} locale="en" /></div>
   if(kind==='privatnost'||kind==='kolacici'||kind==='uslovi-koriscenja')return <div lang="en"><LegalPageContent slug={kind} locale="en" /></div>
