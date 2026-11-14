@@ -1,0 +1,28 @@
+name: SR-EN structural parity
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [fix/full-en-sr-parity-2026-11-14]
+
+permissions:
+  contents: read
+
+jobs:
+  bilingual:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - name: Install locked dependencies
+        run: npm ci
+      - name: Typecheck
+        run: npm run typecheck
+      - name: Build and source validation
+        run: npm run build
+      - name: Verify rendered SR/EN section parity
+        run: node scripts/audit-en-parity.mjs
