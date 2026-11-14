@@ -14,6 +14,7 @@ import { site } from '@/data/site'
 import { enLegalPages } from '@/data/en-legal'
 import { ServicesPageContent } from '@/app/usluge/page'
 import { PricingPageContent } from '@/app/cijene/page'
+import { ServicePageContent } from '@/app/usluge/[slug]/page'
 
 const enAdServices: Record<string,{title:string;summary:string;benefits:string[]}> = {
  'meta-ads':{title:'Instagram & Facebook advertising',summary:'Reach relevant people with Meta Ads. We connect the offer, creative assets, audience targeting and measurement instead of focusing only on views.',benefits:['Campaign planning and audience research','Photo, video and ad copy variations','Tracking, testing and reporting']},
@@ -86,7 +87,8 @@ export default async function EnglishPages({params}:{params:Promise<{segments:st
   const industry=industryBySlug[slug]
   const project=caseCopyBySlug[slug]
   const original=caseBySlug[slug]
-  if(kind==='usluge'&&slug&&service){
+  if(kind==='usluge'&&slug&&serviceBySlug[slug]) return <div lang="en"><ServicePageContent slug={slug} locale="en" /></div>
+  if(kind==='usluge'&&slug&&service&&enAdServices[slug]){
     const products=enProducts[slug]||enProducts['performance-marketing']
     const detail=enServiceDetails[slug] || enServiceDetails['performance-marketing']
     return <div lang="en"><Head eyebrow="OUR SERVICES / MONTENEGRO" title={service.title} description={service.summary}/>
