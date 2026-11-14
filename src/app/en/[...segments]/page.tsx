@@ -22,6 +22,8 @@ import { AboutPageContent } from '@/components/localized-about-page'
 import { ContactPageContent } from '@/components/localized-contact-page'
 import { BlogPageContent } from '@/components/localized-blog-page'
 import { ArticlePageContent } from '@/components/localized-blog-article'
+import { WorksPageContent } from '@/components/localized-works-page'
+import { CaseStudyPageContent } from '@/components/localized-case-detail'
 
 const enAdServices: Record<string,{title:string;summary:string;benefits:string[]}> = {
  'meta-ads':{title:'Instagram & Facebook advertising',summary:'Reach relevant people with Meta Ads. We connect the offer, creative assets, audience targeting and measurement instead of focusing only on views.',benefits:['Campaign planning and audience research','Photo, video and ad copy variations','Tracking, testing and reporting']},
@@ -115,8 +117,8 @@ export default async function EnglishPages({params}:{params:Promise<{segments:st
   if(kind==='usluge'&&!slug) return <div lang="en"><ServicesPageContent locale="en" /></div>
   if(kind==='industrije'&&slug&&industry) return <div lang="en"><IndustryPageContent slug={slug} locale="en" /></div>
   if(kind==='industrije'&&!slug) return <div lang="en"><IndustriesPageContent locale="en" /></div>
-  if(kind==='radovi'&&slug&&project)return <div lang="en"><Head eyebrow="SELECTED PROJECT" title={project.title} description={project.summary}/><section className="section section-dark"><div className="container">{original?.coverImage?.src?<Image src={original.coverImage.src} alt={project.title} width={1000} height={600} style={{width:'100%',height:'auto',objectFit:'contain',borderRadius:20}}/>:null}<div style={{marginTop:30}}><h2>The challenge</h2><p>{enCaseDetails[slug]?.challenge || project.summary}</p><h2>What we did</h2><p>{enCaseDetails[slug]?.solution || project.summary}</p><h2>The outcome</h2><p>{enCaseDetails[slug]?.result || project.summary}</p><Link href="/en/kontakt/" className="button button-primary">Discuss a similar project ↗</Link></div></div></section></div>
-  if(kind==='radovi'&&!slug)return <div lang="en"><Head eyebrow="OUR WORK" title="Real projects. Real execution." description="A selection of digital products, events, content and field projects from our studio."/><section className="section section-dark"><div className="container home-project-grid">{enCaseSummaries.map(s=><article className="home-project-card" key={s.slug}><div className="home-project-text"><h3>{s.title}</h3><p>{s.summary}</p><Link href={path(['radovi',s.slug])}>Explore project ↗</Link></div></article>)}</div></section></div>
+  if(kind==='radovi'&&slug&&project)return <div lang="en"><CaseStudyPageContent slug={slug} locale="en" /></div>
+  if(kind==='radovi'&&!slug)return <div lang="en"><WorksPageContent locale="en" /></div>
   if(kind==='cijene') return <div lang="en"><PricingPageContent locale="en" /></div>
   if(kind==='o-nama')return <div lang="en"><AboutPageContent locale="en" /></div>
   if(kind==='kontakt')return <div lang="en"><ContactPageContent locale="en" /></div>
