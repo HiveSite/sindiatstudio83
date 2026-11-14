@@ -1,0 +1,24 @@
+name: Verify bilingual Next.js build
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+permissions:
+  contents: read
+jobs:
+  validation:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci
+      - run: npm run typecheck
+      - run: npm run build
+      - name: Compare exported SR and EN structures
+        run: |
+          if [ -f scripts/audit-en-parity.mjs ]; then node scripts/audit-en-parity.mjs; fi
