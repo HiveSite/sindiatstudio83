@@ -15,7 +15,7 @@ export function CaseCard({ item,locale='sr' }: { item: CaseStudy; locale?:SiteLo
   const metrics = publicItem.metrics?.slice(0, 3) || []
   return (
     <article className="case-card">
-      <CaseCoverPlaceholder item={publicItem} />
+      <CaseCoverPlaceholder item={publicItem} altText={locale==='en' ? publicItem.title+' - project cover' : undefined} />
       <div className="case-card-copy">
         <span className="eyebrow">{publicItem.type}</span>
         <h3>{publicItem.title}</h3>
@@ -33,7 +33,7 @@ export function CasePreviewCard({ item,locale='sr' }: { item: CaseStudy; locale?
   const publicItem = withManagedThumbnail(locale==='en'?{...getPublicCaseStudy(item),...item}:getPublicCaseStudy(item))
   return (
     <article className="case-preview-card">
-      <CaseCoverPlaceholder item={publicItem} />
+      <CaseCoverPlaceholder item={publicItem} altText={locale==='en' ? publicItem.title+' - project cover' : undefined} />
       <div className="case-preview-copy">
         <span>{publicItem.type}</span>
         <h3>{publicItem.title}</h3>
