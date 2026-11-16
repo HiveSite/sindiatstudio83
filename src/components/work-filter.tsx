@@ -26,7 +26,7 @@ export function WorkFilter({ items,locale='sr' }: { items: CaseStudy[];locale?:S
   const countLabel = visibleItems.length === 1 ? 'projekat' : visibleItems.length >= 2 && visibleItems.length <= 4 ? 'projekta' : 'projekata'
 
   return (
-    <div className="work-explorer" id="projekti">
+    <div className="work-explorer">
       <div className="work-filter" role="group" aria-label={en?"Filter projects by topic":"Filtriraj projekte po temi"}>
         <div className="work-filter-scroll">
           {caseCategories.map((category) => (
