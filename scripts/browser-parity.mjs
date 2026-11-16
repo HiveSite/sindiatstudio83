@@ -148,6 +148,49 @@ try {
   }
   await context.close()
  }
+  // Interactive smoke tests complement the static-page comparison above.
+  // They do not send a live enquiry or contact an external service.
+  for(const width of [390,1440]){
+    for(const locale of ['sr','en']){
+      const context=await browser.newContext({viewport:{width,height:850},serviceWorkers:'block'})
+      await context.route('**/*',route=>route.request().url().startsWith(origin)?route.continue():route.abort())
+      const page=await context.newPage()
+      const base=locale==='en'?'/en':''
+      const mark=(name,error)=>errors.push({route:base+'/functional-smoke/',width,error:name+': '+error})
+      try{
+        await page.goto(origin+base+'/',{waitUntil:'load'})
+        const banner=page.locator('.cookie-banner')
+        await banner.waitFor({state:'visible',timeout:7000})
+        await banner.locator('button').first().click()
+        const choice=await page.evaluate(()=>JSON.parse(localStorage.getItem('sindikat_cookie_consent')||'{}').choice)
+        if(choice!=='rejected')mark('Cookie choice','Essential-only option was not stored')
+        await page.locator('button.footer-link-button').click()
+        await banner.waitFor({state:'visible',timeout:4000})
+        await banner.locator('button').nth(1).click()
+        const updated=await page.evaluate(()=>JSON.parse(localStorage.getItem('sindikat_cookie_consent')||'{}').choice)
+        if(updated!=='analytics')mark('Cookie settings','Updated analytics-only choice was not stored')
+        if(width===390){
+          const menu=page.locator('#mobile-navigation')
+          await page.locator('button.menu-toggle').click()
+          if(!(await menu.isVisible()))mark('Mobile menu','Menu did not open')
+          await page.keyboard.press('Escape')
+          if(await menu.isVisible())mark('Mobile menu','Menu did not close on Escape')
+        }
+        await page.goto(origin+base+'/cijene/',{waitUntil:'load'})
+        await page.locator('button.language-switcher-button').click()
+        const target=locale==='en'?'/cijene/':'/en/cijene/'
+        await page.locator('#language-menu a[href="'+target+'"]').click()
+        await page.waitForURL(url=>url.pathname===target,{timeout:10000})
+        const pathNow=new URL(page.url()).pathname
+        if(pathNow!==target)mark('Language switch','Expected '+target+' got '+pathNow)
+        await page.goto(origin+base+'/kontakt/',{waitUntil:'load'})
+        await page.locator('input[name="email"]').fill('invalid-email')
+        await page.locator('button[type="submit"]').click()
+        await page.locator('.form-status').filter({hasText:locale==='en'?'required fields':'obavezna polja'}).waitFor({state:'visible',timeout:6000})
+      }catch(error){mark('Interactive smoke',String(error).slice(0,650))}
+      finally{await context.close()}
+    }
+  }
 }finally{
  await browser.close()
  await new Promise(resolve=>server.close(resolve))
