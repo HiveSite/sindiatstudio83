@@ -26,7 +26,7 @@ export function IndustryPageContent({slug,locale='sr'}:{slug:string;locale?:Site
     : item.slug === 'retail-i-fmcg' || item.slug === 'eventi-i-venue'
       ? ['aktivacije-i-eventi', 'sadrzaj-za-kampanje', 'performance-marketing']
       : ['performance-marketing', 'web-i-konverzije', 'sadrzaj-za-kampanje']
-  const relatedServices = relatedSlugs.map((value) => localizedService(value,locale)).filter(Boolean)
+  const relatedServices = relatedSlugs.map((value) => localizedService(value,locale)).filter((service): service is NonNullable<typeof service> => service !== undefined)
   const relatedCases = item.caseSlugs.map((value) => caseBySlug[value]).filter(Boolean)
 
   return <>
