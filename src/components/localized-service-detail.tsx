@@ -11,6 +11,7 @@ import { serviceProducts } from '@/data/service-products'
 import { localizedCase } from '@/data/localized-cases'
 import { enProducts } from '@/data/en-products'
 import { localizedService } from '@/lib/localized-data'
+import { buyerSeo } from '@/data/buyer-seo'
 import { localeHref,translate,type SiteLocale } from '@/lib/locale'
 import { breadcrumbSchema, itemListSchema, serviceSchema, webPageSchema } from '@/lib/schema'
 
@@ -21,6 +22,7 @@ export function ServicePageContent({ slug, locale='sr' }: { slug: string; locale
   const href=(value:string)=>localeHref(locale,value)
   const service = localizedService(slug,locale)
   if (!service) notFound()
+  const buyer = buyerSeo[slug]?.[english ? 'en' : 'sr']
 
   const products = (english ? enProducts : serviceProducts)[service.slug] || []
   const path = href(`/usluge/${service.slug}/`)
@@ -56,8 +58,8 @@ export function ServicePageContent({ slug, locale='sr' }: { slug: string; locale
       <div className="page-hero-grid">
         <div>
           <span className="eyebrow">{service.eyebrow}</span>
-          <h1>{service.title}</h1>
-          <p className="lead">{service.summary}</p>
+          <h1>{buyer?.heading || service.title}</h1>
+          <p className="lead">{buyer?.intro || service.summary}</p>
           <div className="button-row" style={{ marginTop: 30 }}><a className="button button-primary" href="#proizvodi">{t("Pogledaj proizvode i cijene","View products and prices")}</a><Link className="button button-ghost" href={href(`/kontakt/?usluga=${service.slug}`)} data-track="service_lead">{t("Pošalji upit","Send enquiry")}</Link></div>
         </div>
         <aside className="service-price-anchor">
@@ -68,6 +70,8 @@ export function ServicePageContent({ slug, locale='sr' }: { slug: string; locale
       </div>
       <div className="outcome-band">{service.outcomes.map((item) => <div key={item}>{item}</div>)}</div>
     </div></section>
+
+    {buyer ? <section className="section buyer-intent-section" aria-labelledby="buyer-questions-title"><div className="container buyer-intent-layout"><div><span className="eyebrow">{t('Prije nego angažuješ studio','Before you hire a studio')}</span><h2 id="buyer-questions-title">{t('Šta treba da znaš prije ponude?','What should you know before requesting a proposal?')}</h2><p>{t('Konkretni odgovori o cijeni, obimu i početku saradnje, bez obećanja koja zavise od trećih strana.','Practical answers about price, scope and starting work, without guarantees that depend on outside factors.')}</p><Link className="button button-primary" href={href(`/kontakt/?usluga=${service.slug}&izvor=seo-kupci`)} data-track="buyer_seo_contact">{t('Zatraži ponudu za svoj projekat','Request a quote for your project')}</Link></div><div className="buyer-intent-questions">{buyer.buyerQuestions.map(([question,answer]) => <details key={question}><summary>{question}</summary><p>{answer}</p></details>)}<Link href={href('/radovi/')} className="text-link">{t('Pogledaj stvarne projekte','Explore real projects')} ↗</Link></div></div></section> : null}
 
     <section className="section service-audience-section" aria-label={t('Za koga je usluga i šta donosi','Who this service helps and what it delivers')}><div className="container service-audience-layout">
       <div className="service-audience-column"><span className="eyebrow">{t("Za koga je","Who it is for")}</span><h2>{t("Kada ova usluga ima smisla?","When is this service the right fit?")}</h2>

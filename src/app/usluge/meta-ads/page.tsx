@@ -5,7 +5,7 @@ import { createMetadata } from '@/lib/metadata'
 const data: FocusedServiceData = {
   path: '/usluge/meta-ads/',
   eyebrow: 'Meta Ads',
-  title: 'Instagram i Facebook oglašavanje za firme u Crnoj Gori',
+  title: 'Vođenje Instagram i Facebook oglasa u Crnoj Gori',
   description: 'Instagram i Facebook reklame za firme u Crnoj Gori. Priprema oglasa, ciljanje publike, mjerenje upita i vođenje Meta Ads kampanja iz Podgorice.',
   intro: 'Imaš dobru ponudu, ali reklame ne donose dovoljno upita? Pomažemo da je vidi prava publika na Instagramu i Facebooku. Pripremamo oglase, pratimo šta ljudi rade poslije klika i mijenjamo ono što ne daje rezultat.',
   problems: [

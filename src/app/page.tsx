@@ -15,8 +15,8 @@ import { localeHref, translate, type SiteLocale } from '@/lib/locale'
 import { enServices } from '@/data/en'
 import { itemListSchema, webPageSchema } from '@/lib/schema'
 
-const seoTitle = 'Marketing agencija Podgorica - kampanje, web i događaji'
-const seoDescription = 'Sindikat Studio 83 iz Podgorice kreira sadržaj, vodi digitalne kampanje, pravi sajtove i organizuje događaje i promocije širom Crne Gore.'
+const seoTitle = 'Marketing agencija u Podgorici - web, oglasi i sadržaj'
+const seoDescription = 'Tražiš marketing agenciju u Podgorici? Sindikat Studio 83 radi Instagram sadržaj, Meta i Google Ads, izradu sajtova i događaje. Pogledaj radove i zatraži ponudu.'
 
 export const metadata: Metadata = createMetadata({
   title: seoTitle,

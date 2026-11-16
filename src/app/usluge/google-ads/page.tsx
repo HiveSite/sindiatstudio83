@@ -5,7 +5,7 @@ import { createMetadata } from '@/lib/metadata'
 const data: FocusedServiceData = {
   path: '/usluge/google-ads/',
   eyebrow: 'Google Ads',
-  title: 'Google Ads oglašavanje za firme u Crnoj Gori',
+  title: 'Vođenje Google Ads kampanja u Podgorici i Crnoj Gori',
   description: 'Google Ads reklame u Podgorici i Crnoj Gori. Pomažemo firmama da dođu do kupaca koji već traže njihove proizvode i usluge na Googleu.',
   intro: 'Kada neko na Googleu traži ono što prodaješ, važno je da lako dođe do tvoje ponude. Biramo relevantne pretrage, pripremamo oglase i vodimo ljude na stranicu na kojoj mogu brzo da pozovu, pošalju upit ili kupe.',
   problems: [

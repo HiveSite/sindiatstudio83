@@ -48,3 +48,21 @@
 .local-service-grid p{font-size:14px;line-height:1.6}
 .local-service-grid span{font-weight:800;color:#fff;font-size:13px;margin-top:auto}
 @media(max-width:760px){.local-service-grid{grid-template-columns:1fr}.local-service-grid>a{padding:21px}}
+
+/* Buyer-focused service discovery: visible, readable, no keyword-only doorway pages. */
+.buyer-entry-section{background:#101017}
+.buyer-entry-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:26px}
+.buyer-entry-grid>a{display:flex;flex-direction:column;justify-content:space-between;min-height:145px;padding:25px;border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.04);border-radius:20px;transition:border-color .2s ease,transform .2s ease}
+.buyer-entry-grid>a:hover{border-color:var(--cyan);transform:translateY(-2px)}
+.buyer-entry-grid strong{display:block;color:#fff;font-size:clamp(19px,2.2vw,28px);line-height:1.2;letter-spacing:-.035em}
+.buyer-entry-grid span{margin-top:18px;color:#d0cad5;font-size:13px}
+.buyer-intent-section{background:#101017;border-block:1px solid rgba(255,255,255,.08)}
+.buyer-intent-layout{display:grid;grid-template-columns:minmax(0,.82fr) minmax(0,1.18fr);gap:clamp(25px,6vw,90px);align-items:start}
+.buyer-intent-layout h2{font-size:clamp(30px,3.6vw,48px);margin:18px 0}
+.buyer-intent-layout p{line-height:1.65}
+.buyer-intent-layout .button{margin-top:14px;max-width:100%;white-space:normal;text-align:center}
+.buyer-intent-questions details{border-bottom:1px solid rgba(255,255,255,.19);padding:18px 0}
+.buyer-intent-questions summary{font-size:clamp(16px,1.6vw,20px);font-weight:800;color:#fff;cursor:pointer}
+.buyer-intent-questions details p{padding:12px 0 0;margin:0;font-size:15px}
+.buyer-intent-questions .text-link{display:inline-flex;margin-top:26px}
+@media(max-width:760px){.buyer-entry-grid,.buyer-intent-layout{grid-template-columns:1fr}.buyer-entry-grid>a{min-height:125px;padding:20px}.buyer-intent-layout .button{width:100%}}
