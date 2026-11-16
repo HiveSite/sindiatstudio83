@@ -6,6 +6,7 @@ import { FinalCta } from '@/components/final-cta'
 import { JsonLd } from '@/components/json-ld'
 import { SectionHeading } from '@/components/section-heading'
 import { caseBySlug } from '@/data/cases'
+import { localizedCase } from '@/data/localized-cases'
 import { industries, industryBySlug } from '@/data/industries'
 import { serviceBySlug } from '@/data/services'
 import { localizedIndustry, localizedService } from '@/lib/localized-data'
@@ -27,7 +28,7 @@ export function IndustryPageContent({slug,locale='sr'}:{slug:string;locale?:Site
       ? ['aktivacije-i-eventi', 'sadrzaj-za-kampanje', 'performance-marketing']
       : ['performance-marketing', 'web-i-konverzije', 'sadrzaj-za-kampanje']
   const relatedServices = relatedSlugs.map((value) => localizedService(value,locale)).filter((service): service is NonNullable<typeof service> => service !== undefined)
-  const relatedCases = item.caseSlugs.map((value) => caseBySlug[value]).filter(Boolean)
+  const relatedCases = item.caseSlugs.map((value) => localizedCase(value,locale)).filter(Boolean)
 
   return <>
     <JsonLd data={[
@@ -50,7 +51,7 @@ export function IndustryPageContent({slug,locale='sr'}:{slug:string;locale?:Site
 
     <section className="section"><div className="container"><SectionHeading eyebrow={t("Preporučeni blokovi","Recommended services")} title={t("Usluge koje najčešće imaju smisla za ovu industriju.","Services usually most relevant to this industry.")} text={t("Ovo nije obavezni paket. Konačni obim zavisi od cilja, sezone, kapaciteta, postojećeg sistema i odgovornosti koje klijent želi da zadrži.","These are not mandatory packages. Scope depends on goals, seasonality, resources, existing systems and responsibilities.")} /><div className="related-grid">{relatedServices.map((service) => <article className="related-card" key={service.slug}><h3>{service.shortTitle}</h3><p>{service.summary}</p><Link href={href(`/usluge/${service.slug}/`)}>{t("Pogledaj uslugu ↗","Explore service ↗")}</Link></article>)}</div></div></section>
 
-    {relatedCases.length ? <section className="section section-light"><div className="container"><SectionHeading eyebrow={t("Povezani projekti","Related projects")} title={t("Kako se sličan kontekst pojavljuje u stvarnoj realizaciji.","How similar challenges appear in real projects.")} text={t("Projekti nijesu identične šeme, ali pokazuju kako povezujemo digitalni tok, sadržaj, ljude, lokacije i operativnu odgovornost.","Projects differ, but demonstrate how we connect digital journeys, content, people, locations and accountability.")} /><div className="case-preview-grid">{relatedCases.map((project) => <CasePreviewCard key={project.slug} item={project} />)}</div></div></section> : null}
+    {relatedCases.length ? <section className="section section-light"><div className="container"><SectionHeading eyebrow={t("Povezani projekti","Related projects")} title={t("Kako se sličan kontekst pojavljuje u stvarnoj realizaciji.","How similar challenges appear in real projects.")} text={t("Projekti nijesu identične šeme, ali pokazuju kako povezujemo digitalni tok, sadržaj, ljude, lokacije i operativnu odgovornost.","Projects differ, but demonstrate how we connect digital journeys, content, people, locations and accountability.")} /><div className="case-preview-grid">{relatedCases.map((project) => <CasePreviewCard key={project.slug} item={project} locale={locale} />)}</div></div></section> : null}
 
     <FinalCta locale={locale} title={en ? item.cta+' without unnecessary full-service packages.' : item.cta+' bez nepotrebnog full-service paketa.'} text={t('Pošalji cilj, sezonu ili rok, lokacije i ono što već postoji. Predložićemo prvi obim koji može dati stvarnu vrijednost i označiti šta mora biti spremno prije početka.','Send your objective, season or timeline, locations and existing resources. We will recommend an achievable initial scope and identify prerequisites.')} />
   </>
