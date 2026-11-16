@@ -22,6 +22,7 @@ function decode(node){
  if(ts.isAsExpression(node)||ts.isSatisfiesExpression(node))return decode(node.expression)
  if(ts.isParenthesizedExpression(node))return decode(node.expression)
  if(ts.isStringLiteral(node)||ts.isNoSubstitutionTemplateLiteral(node))return node.text
+ if(ts.isTemplateExpression(node))return node.head.text+node.templateSpans.map(span=>'${'+span.expression.getText()+'}'+span.literal.text).join('')
  if(ts.isNumericLiteral(node))return Number(node.text)
  if(node.kind===ts.SyntaxKind.TrueKeyword)return true
  if(node.kind===ts.SyntaxKind.FalseKeyword)return false
