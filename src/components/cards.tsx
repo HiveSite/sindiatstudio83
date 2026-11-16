@@ -11,7 +11,7 @@ function withManagedThumbnail(item: CaseStudy): CaseStudy {
 }
 
 export function CaseCard({ item,locale='sr' }: { item: CaseStudy; locale?:SiteLocale }) {
-  const publicItem = withManagedThumbnail(getPublicCaseStudy(item))
+  const publicItem = withManagedThumbnail(locale==='en'?{...getPublicCaseStudy(item),...item}:getPublicCaseStudy(item))
   const metrics = publicItem.metrics?.slice(0, 3) || []
   return (
     <article className="case-card">
@@ -38,7 +38,7 @@ export function CasePreviewCard({ item,locale='sr' }: { item: CaseStudy; locale?
         <span>{publicItem.type}</span>
         <h3>{publicItem.title}</h3>
         <p>{publicItem.summary}</p>
-        <Link href={`/radovi/${publicItem.slug}/`}>{translate(locale,'Pogledaj projekat ↗','View project ↗')}</Link>
+        <Link href={localeHref(locale,`/radovi/${publicItem.slug}/`)}>{translate(locale,'Pogledaj projekat ↗','View project ↗')}</Link>
       </div>
     </article>
   )
