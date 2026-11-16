@@ -188,6 +188,17 @@ try {
         await page.waitForURL(url=>url.pathname===target,{timeout:10000})
         const pathNow=new URL(page.url()).pathname
         if(pathNow!==target)mark('Language switch','Expected '+target+' got '+pathNow)
+        await page.goto(origin+base+'/usluge/',{waitUntil:'load'})
+        await page.locator('button.sales-category-tab').nth(1).click()
+        const optionNames=await page.locator('a.sales-item-link strong').allTextContents()
+        const expectedService=locale==='en'?'Landing page':'Odredišna stranica'
+        if(!optionNames.some(name=>name.trim()===expectedService))
+          mark('Interactive service categories','Expected localized '+expectedService+' among '+optionNames.join(' / '))
+        await page.locator('.sales-chooser-step').nth(0).locator('button').first().click()
+        await page.locator('.sales-chooser-step').nth(1).locator('button').first().click()
+        await page.locator('.sales-chooser-step').nth(2).locator('button').first().click()
+        const recommendation=await page.locator('.sales-recommendation-copy strong').textContent()
+        if(!recommendation||!recommendation.trim())mark('Service recommendation','Missing computed recommendation')
         await page.goto(origin+base+'/kontakt/',{waitUntil:'load'})
         await page.locator('input[name="email"]').fill('invalid-email')
         await page.locator('button[type="submit"]').click()
