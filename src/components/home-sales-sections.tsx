@@ -85,7 +85,7 @@ export function HomeServiceDirectory({locale='sr'}:{locale?:SiteLocale}) {
               <span className="home-service-outcome">{item.outcome}</span>
             </div>
             <div className="home-service-action">
-              <span className="home-service-price">Početna opcija <strong>{product?.price || t('Po ponudi','On request')}</strong></span>
+              <span className="home-service-price">{t("Početna opcija","Starting option")} <strong>{product?.price || t('Po ponudi','On request')}</strong></span>
               <Link href={localeHref(locale,`/usluge/${item.slug}/`)} aria-label={`${t('Pogledaj uslugu','View service')}: ${item.title}`}>{t("Detalji i cijene","Details and pricing")} <span aria-hidden="true">↗</span></Link>
               <Link className="home-service-opis projekta" href={localeHref(locale,`/kontakt/?usluga=${encodeURIComponent(item.slug)}&izvor=home-service`)}>{t("Zatraži ponudu","Request a proposal")}</Link>
             </div>
