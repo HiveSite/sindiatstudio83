@@ -48,6 +48,7 @@ const enIndustryDetails=parseVar(srcDir+'en-industry-details.ts','enIndustryDeta
 const srCases=parseVar(srcDir+'cases.ts','cases')
 const enCaseParity=parseVar(srcDir+'en-case-parity.ts','enCaseParity')
 const enCaseExtra=parseVar(srcDir+'localized-cases.ts','caseTranslations')
+const enCaseGalleryCaptions=parseVar(srcDir+'en-case-media.ts','enCaseGalleryCaptions')
 const srLegal=parseVar(srcDir+'legal.ts','legalPages')
 const enLegal=parseVar(srcDir+'en-legal.ts','enLegalPages')
 const reports={services:0,products:0,industries:0,cases:0,blog:0,legal:0}
@@ -101,6 +102,7 @@ for(const item of srCases){
  checkLength(item.scope,details.scope,item.slug+' scope')
  checkLength(item.metrics||[],details.metrics||[],item.slug+' metrics')
  checkLength(item.subprojects||[],details.subprojects||[],item.slug+' subprojects')
+ checkLength(item.slug==='imaposla-digitalni-proizvod' ? new Array(6) : item.gallery,enCaseGalleryCaptions[item.slug],item.slug+' image captions')
  if(/Jägermeister/.test(item.title))check(/Jägermeister/.test(e.title)&&/Jack Daniel/.test(e.title),'Names of both original regulated brands must be preserved in the English title')
 }
 for(const [slug,doc] of Object.entries(srLegal)){
