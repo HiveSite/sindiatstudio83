@@ -71,7 +71,7 @@ const snapshotScript=()=>{
  const duplicateIds=[...new Set(idList.filter((v,i)=>idList.indexOf(v)!==i))]
  const canonical=document.querySelector('link[rel="canonical"]')?.getAttribute('href')||''
  const alternateLang=[...document.querySelectorAll('link[rel="alternate"][hreflang]')].map(x=>({language:x.getAttribute('hreflang'),href:x.getAttribute('href')}))
- return {counts,seq,links,forms,documentOverflow,h1,language:document.documentElement.lang,text:visibleText.slice(0,4500),textSegmentCount:textSegments.length,serbianFragments:textSegments.filter(value=>/\b(?:Početna opcija|Sve usluge|Pogledaj|Pošalji|Zatraži|Prijava kandidata|Saznaj više|Nijesi siguran|Najčešći izbor)\b/i.test(value)).slice(0,8),schema,schemaErrors,canonical,alternateLang,brokenImages,duplicateIds}
+ return {counts,seq,links,forms,documentOverflow,h1,language:document.documentElement.lang,text:visibleText.slice(0,4500),textSegmentCount:textSegments.length,serbianFragments:textSegments.filter(value=>/\b(?:Početna opcija|Sve usluge|Pogledaj|Pošalji|Zatraži|Prijava kandidata|Saznaj više|Nijesi siguran|Najčešći izbor|Više kupaca i upita|Jači nastup na mrežama|Sajt koji prodaje|Događaj ili aktivacija|Potrebni su mi ljudi|Digitalno oglašavanje|Odredišna stranica|Napredni mini-sajt|Kampanja za jednu poziciju|Kreativni plan|Sadržaj za kampanje)\b/i.test(value)).slice(0,8),schema,schemaErrors,canonical,alternateLang,brokenImages,duplicateIds}
 }
 const browser=await chromium.launch({headless:true,args:['--no-sandbox']})
 let checked=0
