@@ -16,7 +16,7 @@ export function PricingPageContent({locale='sr'}:{locale?:SiteLocale}) {
   const en=locale==='en'
   const t=(sr:string,english:string)=>translate(locale,sr,english)
   const href=(value:string)=>localeHref(locale,value)
-  const crumbs = [{label:t('Cijene i saradnja','Pricing and collaboration'),href:'/cijene/'}]
+  const crumbs = [{label:t('Cijene i saradnja','Pricing and collaboration'),href:href('/cijene/')}]
   return <div className="demo-pricing">
     <JsonLd data={[
       breadcrumbSchema(crumbs),
@@ -36,7 +36,7 @@ export function PricingPageContent({locale='sr'}:{locale?:SiteLocale}) {
       {services.map((s,index)=>{
         const products = (en ? enProducts : serviceProducts)[s.slug] || []
         return <section className="demo-pricing-category" id={s.slug} key={s.slug} aria-labelledby={`pricing-${s.slug}`}>
-          <div className="demo-pricing-heading"><div><span className="eyebrow">0{index+1} / {t('Ponuda','Offer')}</span><h2 id={`pricing-${s.slug}`}>{s.shortTitle}</h2><p>{en ? enServices.find(item=>item.slug===s.slug)?.summary || s.summary : s.summary}</p></div><Link href={href(`/usluge/${s.slug}/`)}>{t("Detalji usluge ↗","Service details ↗")}</Link></div>
+          <div className="demo-pricing-heading"><div><span className="eyebrow">0{index+1} / {t('Ponuda','Offer')}</span><h2 id={`pricing-${s.slug}`}>{en ? enServices.find(item=>item.slug===s.slug)?.title || s.shortTitle : s.shortTitle}</h2><p>{en ? enServices.find(item=>item.slug===s.slug)?.summary || s.summary : s.summary}</p></div><Link href={href(`/usluge/${s.slug}/`)}>{t("Detalji usluge ↗","Service details ↗")}</Link></div>
           <div className="demo-pricing-grid">{products.map((product,index)=><article className={`demo-pricing-card${product.featured?' is-featured':''}`} key={product.name}>
             <div><span>{t(product.featured?'Izdvojena opcija':'Mogućnost saradnje',product.featured?'Featured option':'Available option')}</span><h3>{product.name}</h3><strong>{product.price}</strong><p>{product.description}</p></div>
             <ul>{product.includes.map(part=><li key={part}>{part}</li>)}</ul>

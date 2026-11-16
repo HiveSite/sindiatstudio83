@@ -163,7 +163,7 @@ export function OfferAreas({locale='sr'}:{locale?:SiteLocale}) {
             {active.items.map((item, index) => (
               <Link className="sales-item-link" href={localeHref(locale,item.href)} key={`${active.title}-${t(item.title)}-${index}`}>
                 <span>{String(index + 1).padStart(2, '0')}</span>
-                <div><strong>{item.title}</strong><p>{t(item.text)}</p><em>{t(item.price)}</em></div>
+                <div><strong>{t(item.title)}</strong><p>{t(item.text)}</p><em>{t(item.price)}</em></div>
                 <b aria-hidden="true">↗</b>
               </Link>
             ))}
@@ -214,7 +214,7 @@ function recommendationFor(state: ChoiceState,locale:SiteLocale='sr'): Recommend
     return minimum !== null && minimum <= maxBudget
   })
   const selected = state.mode === 'ongoing' && state.goal === 'growth'
-    ? fit.find((product) => /mjesečn/i.test(product.name)) || fit[fit.length - 1]
+    ? fit.find((product) => /mjesečn|monthly/i.test(product.name)) || fit[fit.length - 1]
     : fit[fit.length - 1]
 
   if (!selected) {
@@ -230,7 +230,7 @@ function recommendationFor(state: ChoiceState,locale:SiteLocale='sr'): Recommend
     title: selected.name,
     text: `${selected.description} ${localize(locale,'Početna cijena:')} ${selected.price}. ${localize(locale,'Konačna ponuda zavisi od dogovorenog obima i uslova.')}`,
     href: `/usluge/${preferredSlug}/#proizvodi`,
-    product: selected.name,
+    product: serviceProducts[preferredSlug]?.[products.indexOf(selected)]?.name || selected.name,
   }
 }
 

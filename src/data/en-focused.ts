@@ -45,7 +45,7 @@ export const focusedServicesEn:Record<string,FocusedServiceData>={
       },
       {
         "question": "Do you work only in Podgorica?",
-        "answer": "No. Campaigns can target suitable locations and markets throughout Montenegro and beyond."
+        "answer": "No. We can set up campaigns for appropriate locations and markets, including all of Montenegro."
       }
     ]
   },

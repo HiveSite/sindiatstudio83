@@ -3,6 +3,7 @@ import { site } from '@/data/site'
 export type JsonLdValue = Record<string, unknown>
 
 const absoluteUrl = (path: string) => new URL(path, site.domain).toString()
+const pageLanguage = (path: string) => /^\/en(?:\/|$)/.test(new URL(path, site.domain).pathname) ? 'en' : site.locale
 
 export function organizationSchema(): JsonLdValue {
   return {
@@ -55,7 +56,7 @@ export function websiteSchema(): JsonLdValue {
     alternateName: site.shortName,
     url: site.domain,
     description: 'Digitalni marketing, web, aktivacije, događaji, sadržaj i operativni timovi u Crnoj Gori.',
-    inLanguage: site.locale,
+    inLanguage: [site.locale, 'en'],
     publisher: { '@id': `${site.domain}/#organization` },
   }
 }
@@ -83,7 +84,7 @@ export function webPageSchema({
     url,
     name,
     description,
-    inLanguage: site.locale,
+    inLanguage: pageLanguage(path),
     isPartOf: { '@id': `${site.domain}/#website` },
     publisher: { '@id': `${site.domain}/#organization` },
     primaryImageOfPage: image ? { '@type': 'ImageObject', url: absoluteUrl(image) } : undefined,
@@ -140,13 +141,14 @@ export function serviceSchema({
     url: absoluteUrl(path),
     provider: { '@id': `${site.domain}/#organization` },
     areaServed: { '@type': 'Country', name: 'Montenegro' },
-    inLanguage: site.locale,
+    inLanguage: pageLanguage(path),
     isRelatedTo: { '@id': `${site.domain}/#organization` },
   }
 }
 
 export function breadcrumbSchema(items: Array<{ label: string; href: string }>): JsonLdValue {
-  const allItems = [{ label: 'Početna', href: '/' }, ...items]
+  const english = items.some(item => /^\/en(?:\/|$)/.test(new URL(item.href, site.domain).pathname))
+  const allItems = [{ label: english ? 'Home' : 'Početna', href: english ? '/en/' : '/' }, ...items]
   return {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',

@@ -58,7 +58,20 @@ const snapshotScript=()=>{
   if(value)textSegments.push(value)
  }
  const visibleText=main.innerText
- return {counts,seq,links,forms,documentOverflow,h1,language:document.documentElement.lang,text:visibleText.slice(0,4500),textSegmentCount:textSegments.length,serbianFragments:textSegments.filter(value=>/\b(?:Početna opcija|Sve usluge|Pogledaj|Pošalji|Zatraži|Prijava kandidata|Saznaj više|Nijesi siguran|Najčešći izbor)\b/i.test(value)).slice(0,8)}
+ const schema=[]
+ const schemaErrors=[]
+ for(const script of document.querySelectorAll('script[type="application/ld+json"]')){
+  try {
+   const json=JSON.parse(script.textContent||'{}')
+   schema.push(...(Array.isArray(json)?json:[json]))
+  } catch(e) {schemaErrors.push(String(e))}
+ }
+ const brokenImages=[...document.querySelectorAll('img')].filter(img=>img.complete&&img.naturalWidth===0&&img.getBoundingClientRect().top<window.innerHeight+600).map(img=>img.getAttribute('src')).filter(Boolean).slice(0,5)
+ const idList=[...main.querySelectorAll('[id]')].map(el=>el.id).filter(Boolean)
+ const duplicateIds=[...new Set(idList.filter((v,i)=>idList.indexOf(v)!==i))]
+ const canonical=document.querySelector('link[rel="canonical"]')?.getAttribute('href')||''
+ const alternateLang=[...document.querySelectorAll('link[rel="alternate"][hreflang]')].map(x=>({language:x.getAttribute('hreflang'),href:x.getAttribute('href')}))
+ return {counts,seq,links,forms,documentOverflow,h1,language:document.documentElement.lang,text:visibleText.slice(0,4500),textSegmentCount:textSegments.length,serbianFragments:textSegments.filter(value=>/\b(?:Početna opcija|Sve usluge|Pogledaj|Pošalji|Zatraži|Prijava kandidata|Saznaj više|Nijesi siguran|Najčešći izbor|Više kupaca i upita|Jači nastup na mrežama|Sajt koji prodaje|Događaj ili aktivacija|Potrebni su mi ljudi|Digitalno oglašavanje|Odredišna stranica|Napredni mini-sajt|Kampanja za jednu poziciju|Kreativni plan|Sadržaj za kampanje)\b/i.test(value)).slice(0,8),schema,schemaErrors,canonical,alternateLang,brokenImages,duplicateIds}
 }
 const browser=await chromium.launch({headless:true,args:['--no-sandbox']})
 let checked=0
@@ -85,6 +98,34 @@ try {
     if(snap.counts.h1!==1)errors.push({route:routePath,width,error:'Expected one H1, found '+snap.counts.h1})
     if(jsErrors.length)errors.push({route:routePath,width,error:'JS exception '+jsErrors.slice(0,2).join(' | ')})
     if(locale==='en'&&snap.language!=='en')errors.push({route:routePath,width,error:'HTML language '+snap.language})
+    if(snap.schemaErrors.length)errors.push({route:routePath,width,error:'Invalid JSON-LD '+snap.schemaErrors.join(' | ')})
+    if(snap.brokenImages.length)errors.push({route:routePath,width,error:'Broken visible images '+snap.brokenImages.join(' | ')})
+    if(snap.duplicateIds.length)errors.push({route:routePath,width,error:'Duplicate HTML IDs '+snap.duplicateIds.join(' | ')})
+    const expectedPrefix=locale==='en'?'/en':''
+    const expectedLang=locale==='en'?'en':'sr-Latn-ME'
+    const domain='https://www.sindikatstudio83.me'
+    const expectedCanonical=domain+expectedPrefix+route
+    if(snap.canonical && snap.canonical.replace(/\/$/,'')!==expectedCanonical.replace(/\/$/,''))
+      errors.push({route:routePath,width,error:'Wrong canonical '+snap.canonical+' expected '+expectedCanonical})
+    for(const entry of snap.schema){
+      const type=entry['@type']
+      if(['WebPage','CollectionPage','AboutPage','ContactPage','Service','BlogPosting','Blog','CreativeWork'].includes(type)){
+        if(entry.inLanguage!==expectedLang)
+          errors.push({route:routePath,width,error:'Incorrect '+type+' language '+entry.inLanguage+' expected '+expectedLang})
+        if(typeof entry.url==='string'){
+          const parsed=new URL(entry.url,domain)
+          const expectedPath=expectedPrefix+route
+          if(parsed.pathname.replace(/\/$/,'')!==expectedPath.replace(/\/$/,''))
+            errors.push({route:routePath,width,error:'Incorrect '+type+' URL '+entry.url})
+        }
+      }
+      if(type==='BreadcrumbList'&&entry.itemListElement?.length){
+        const root=entry.itemListElement[0]
+        if(root.name!==(locale==='en'?'Home':'Početna')||new URL(root.item,domain).pathname!==(locale==='en'?'/en/':'/'))
+          errors.push({route:routePath,width,error:'Incorrect breadcrumb root '+JSON.stringify(root)})
+      }
+    }
+
     if(screenshotPages.has(route)&&width!==768){
      const name=(route==='/'?'home':route.replace(/^\/|\/$/g,'').replaceAll('/','-'))
      await page.screenshot({path:path.join(screenshotDir,name+'-'+locale+'-'+width+'.png'),animations:'disabled',fullPage:false})
@@ -112,6 +153,75 @@ try {
   }
   await context.close()
  }
+  // Interactive smoke tests complement the static-page comparison above.
+  // They do not send a live enquiry or contact an external service.
+  for(const width of [390,1440]){
+    for(const locale of ['sr','en']){
+      const context=await browser.newContext({viewport:{width,height:850},serviceWorkers:'block'})
+      await context.route('**/*',route=>route.request().url().startsWith(origin)?route.continue():route.abort())
+      const page=await context.newPage()
+      const base=locale==='en'?'/en':''
+      const mark=(name,error)=>errors.push({route:base+'/functional-smoke/',width,error:name+': '+error})
+      try{
+        await page.goto(origin+base+'/',{waitUntil:'load'})
+        const banner=page.locator('.cookie-banner')
+        await banner.waitFor({state:'visible',timeout:7000})
+        await banner.locator('button').first().click()
+        const choice=await page.evaluate(()=>JSON.parse(localStorage.getItem('sindikat_cookie_consent')||'{}').choice)
+        if(choice!=='rejected')mark('Cookie choice','Essential-only option was not stored')
+        await page.locator('button.footer-link-button').click()
+        await banner.waitFor({state:'visible',timeout:4000})
+        await banner.locator('button').nth(1).click()
+        const updated=await page.evaluate(()=>JSON.parse(localStorage.getItem('sindikat_cookie_consent')||'{}').choice)
+        if(updated!=='analytics')mark('Cookie settings','Updated analytics-only choice was not stored')
+        if(width===390){
+          const menu=page.locator('#mobile-navigation')
+          await page.locator('button.menu-toggle').click()
+          if(!(await menu.isVisible()))mark('Mobile menu','Menu did not open')
+          await page.keyboard.press('Escape')
+          if(await menu.isVisible())mark('Mobile menu','Menu did not close on Escape')
+        }
+        await page.goto(origin+base+'/cijene/',{waitUntil:'load'})
+        await page.locator('button.language-switcher-button').click()
+        const target=locale==='en'?'/cijene/':'/en/cijene/'
+        await page.locator('#language-menu a[href="'+target+'"]').click()
+        await page.waitForURL(url=>url.pathname===target,{timeout:10000})
+        const pathNow=new URL(page.url()).pathname
+        if(pathNow!==target)mark('Language switch','Expected '+target+' got '+pathNow)
+        await page.goto(origin+base+'/usluge/',{waitUntil:'load'})
+        await page.locator('button.sales-category-tab').nth(1).click()
+        const optionNames=await page.locator('a.sales-item-link strong').allTextContents()
+        const expectedService=locale==='en'?'Landing page':'Odredišna stranica'
+        if(!optionNames.some(name=>name.trim()===expectedService))
+          mark('Interactive service categories','Expected localized '+expectedService+' among '+optionNames.join(' / '))
+        await page.locator('.sales-chooser-step').nth(0).locator('button').first().click()
+        await page.locator('.sales-chooser-step').nth(1).locator('button').first().click()
+        await page.locator('.sales-chooser-step').nth(2).locator('button').first().click()
+        const recommendation=await page.locator('.sales-recommendation-copy strong').textContent()
+        if(!recommendation||!recommendation.trim())mark('Service recommendation','Missing computed recommendation')
+        await page.goto(origin+base+'/kontakt/',{waitUntil:'load'})
+        await page.locator('input[name="email"]').fill('invalid-email')
+        await page.locator('button[type="submit"]').click()
+        await page.locator('.form-status').filter({hasText:locale==='en'?'required fields':'obavezna polja'}).waitFor({state:'visible',timeout:6000})
+        // Mock the external Apps Script endpoint so no real lead is sent.
+        let capturedLead=null
+        await context.route('https://script.google.com/**',async route=>{
+          try{capturedLead=JSON.parse(route.request().postData()||'{}')}catch{capturedLead=null}
+          await route.fulfill({status:200,contentType:'application/json',headers:{'access-control-allow-origin':'*'},body:'{"ok":true}'})
+        })
+        await page.locator('input[name="name"]').fill('QA Test Studio83')
+        await page.locator('input[name="email"]').fill('qa@example.invalid')
+        await page.locator('select[name="goal"]').selectOption({index:1})
+        await page.locator('textarea[name="message"]').fill('Automated validation of the contact form without a real lead submission.')
+        await page.locator('button[type="submit"]').click()
+        await page.waitForURL(url=>url.pathname===base+'/hvala/',{timeout:9000})
+        if(!capturedLead||capturedLead.email!=='qa@example.invalid'||!capturedLead.goal)
+          mark('Contact form','Missing or incorrect outbound lead payload')
+
+      }catch(error){mark('Interactive smoke',String(error).slice(0,650))}
+      finally{await context.close()}
+    }
+  }
 }finally{
  await browser.close()
  await new Promise(resolve=>server.close(resolve))

@@ -18,7 +18,7 @@ export function ServicesPageContent({locale='sr'}:{locale?:SiteLocale}) {
   const t=(sr:string,en:string)=>translate(locale,sr,en)
   const href=(value:string)=>localeHref(locale,value)
   const english=locale==='en'
-  const crumbs = [{ label: t('Usluge','Services'), href: '/usluge/' }]
+  const crumbs = [{ label: t('Usluge','Services'), href: href('/usluge/') }]
   return <>
     <JsonLd data={[
       breadcrumbSchema(crumbs),
