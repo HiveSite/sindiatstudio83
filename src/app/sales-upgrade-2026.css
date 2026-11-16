@@ -30,3 +30,12 @@
  .pricing-trust-note{padding:19px}
 }
 @media(max-width:370px){.demo-hero-copy h1{font-size:clamp(29px,7.5vw,38px)}}
+
+.about-real-work .home-sales-heading{margin-bottom:30px}
+.about-work-gallery{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.about-work-gallery a{display:flex;flex-direction:column;min-width:0;background:#fff;border:1px solid rgba(20,19,24,.15);border-radius:18px;overflow:hidden;padding-bottom:20px}
+.about-work-gallery a:hover{transform:translateY(-2px)}
+.about-work-gallery img{width:100%;aspect-ratio:3/2;object-fit:cover}
+.about-work-gallery strong{padding:16px 18px 0;color:#17151a;font-size:21px}
+.about-work-gallery span{padding:4px 18px 0;color:#625e68;font-size:13px}
+@media(max-width:760px){.about-work-gallery{grid-template-columns:1fr}.about-work-gallery img{aspect-ratio:16/10}}
