@@ -130,6 +130,19 @@ for(const article of blog){
  const segments=[...article.body.matchAll(/>([^<>]+)</g)].map(m=>m[1].trim()).filter(v=>v&&/[A-Za-zÀ-ž]/.test(v))
  checkLength(segments,e.segments,article.slug+' paragraph/heading segments')
  for(let i=0;i<e.segments.length;i++)checkText(e.segments[i],article.slug+' paragraph '+i)
+ // Check numeric claims per corresponding source segment, not just segment counts.
+ // Numeric statements such as years, budgets, percentages and ordered steps must
+ // survive translation. We intentionally exclude numbers inside HTML attributes.
+ const srSegments=[...article.body.matchAll(/>([^<>]+)</g)]
+   .map(m=>m[1].trim()).filter(v=>v&&/[A-Za-zÀ-ž]/.test(v))
+ const numericFacts=text=>(text.match(/\d+(?:[.,]\d+)*/g)||[])
+   .map(token=>token.replace(/[.,]/g,'')).sort()
+ for(let i=0;i<Math.min(srSegments.length,e.segments.length);i++){
+   const sourceNumbers=numericFacts(srSegments[i])
+   const englishNumbers=numericFacts(e.segments[i])
+   check(JSON.stringify(sourceNumbers)===JSON.stringify(englishNumbers),
+     article.slug+' segment '+i+' numeric facts differ: SR '+sourceNumbers.join(',')+' / EN '+englishNumbers.join(','))
+ }
 }
 const result={...reports,totalContentUnits:Object.values(reports).reduce((a,b)=>a+b,0),issues}
 fs.mkdirSync('reports',{recursive:true})
