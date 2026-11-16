@@ -1,11 +1,13 @@
+import { enServiceParity } from '@/data/en-service-parity'
+
 // English marketing copy, kept separate from the original Serbian (ijekavian) pages.
 // Never pass unreviewed Serbian page bodies through an English-language route.
 export const enServices = [
-  {slug:'performance-marketing',title:'Meta & Google advertising',summary:'Campaign strategy, tracking and creative testing focused on enquiries, bookings and measurable business results.',benefits:['A clear offer and campaign plan','Conversion tracking and transparent reporting','Creative testing and ongoing optimization']},
-  {slug:'aktivacije-i-eventi',title:'Events & brand activations',summary:'Concept, teams, suppliers, locations and production coordinated by one accountable partner.',benefits:['Event concept and operating plan','On-site teams and supplier coordination','Photo and video documentation']},
-  {slug:'web-i-konverzije',title:'Websites & digital products',summary:'Mobile-first websites, landing pages and digital platforms that make it easy for customers to take the next step.',benefits:['Clear website structure and responsive design','Enquiry forms, integrations and analytics','Search-friendly foundations and maintainability']},
-  {slug:'sadrzaj-za-kampanje',title:'Content & creative production',summary:'Photography, video, campaign concepts and social content designed to communicate a real offer.',benefits:['Creative concepts and messaging','Photo and video production','Social media and advertising-ready assets']},
-  {slug:'recruitment-kampanje',title:'Recruitment campaigns',summary:'Job campaigns, application flows and communication that help employers reach suitable candidates.',benefits:['Clear job and employer messaging','Application and enquiry experiences','Distribution and campaign measurement']},
+  {slug:'performance-marketing', title:enServiceParity['performance-marketing'].shortTitle, summary:enServiceParity['performance-marketing'].summary, benefits:enServiceParity['performance-marketing'].outcomes},
+  {slug:'aktivacije-i-eventi', title:enServiceParity['aktivacije-i-eventi'].shortTitle, summary:enServiceParity['aktivacije-i-eventi'].summary, benefits:enServiceParity['aktivacije-i-eventi'].outcomes},
+  {slug:'web-i-konverzije', title:enServiceParity['web-i-konverzije'].shortTitle, summary:enServiceParity['web-i-konverzije'].summary, benefits:enServiceParity['web-i-konverzije'].outcomes},
+  {slug:'sadrzaj-za-kampanje', title:enServiceParity['sadrzaj-za-kampanje'].shortTitle, summary:enServiceParity['sadrzaj-za-kampanje'].summary, benefits:enServiceParity['sadrzaj-za-kampanje'].outcomes},
+  {slug:'recruitment-kampanje', title:enServiceParity['recruitment-kampanje'].shortTitle, summary:enServiceParity['recruitment-kampanje'].summary, benefits:enServiceParity['recruitment-kampanje'].outcomes},
 ] as const
 
 export const enIndustries = [
