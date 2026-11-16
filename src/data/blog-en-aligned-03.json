@@ -1,7 +1,7 @@
 [
   {
     "slug": "p21",
-    "title": "Remarketing: the low-cost second chance that drives sales",
+    "title": "Remarketing: when it makes sense to reach customers again",
     "segments": [
       "Why remarketing often delivers the best ROI",
       "People rarely buy or enquire at first contact. The first touchpoint checks relevance. The second builds trust: does this seem genuine? The third prompts a decision: is the next action easy? Remarketing supports these steps cost-effectively because it reaches people who already recognize your business.",
@@ -38,7 +38,7 @@
   },
   {
     "slug": "p22",
-    "title": "Ad creative: produce 10 variations without burning out",
+    "title": "Ad creative: how to come up with 10 variations without burning out",
     "segments": [
       "Why people burn out producing ad creatives",
       "People burn out because every ad is treated like a separate project. A day filming, a day editing, a day worrying, then starting again. Eventually nobody wants to film anything, while the campaign needs new material every week. That is understandable because the workflow is not sustainable.",
@@ -85,7 +85,7 @@
   },
   {
     "slug": "p23",
-    "title": "Cost per click vs cost per lead: what actually matters",
+    "title": "Cost per click or cost per enquiry: what really matters",
     "segments": [
       "Why CPC can be misleading",
       "CPC measures the cost of a click, not the user's intent. It is the price of entry, not the price of a result. An ad that attracts curiosity can generate cheap clicks and zero enquiries. One that attracts people genuinely looking for a service may cost more per click but produce meaningful enquiries.",
@@ -131,7 +131,7 @@
   },
   {
     "slug": "p24",
-    "title": "GA4/GTM basics: what to measure to make optimization meaningful",
+    "title": "GA4 and GTM: what to measure to understand results",
     "segments": [
       "Many businesses say they have analytics, but all they really track is page views. That is a visit counter, not useful analytics. If you fail to measure what matters to the business, campaigns learn from the wrong signals and decisions rely on misleading numbers. Then everyone wonders why Meta spends too much or Google seems expensive, without knowing which channel produces actual, qualified enquiries.",
       "GA4 and GTM are not there to create pretty dashboards. Their job is to answer one question: where do enquiries come from, and why? Without that, you optimize by instinct, which can be costly in marketing.",
@@ -172,7 +172,7 @@
   },
   {
     "slug": "p25",
-    "title": "SEO vs ads: when to choose each and when to combine them",
+    "title": "SEO or ads: when to use one and when to combine them",
     "segments": [
       "People often frame SEO versus advertising as a battle where you must choose only one. In Montenegro, the strongest outcomes often come from combining them. Paid ads provide fast signals and attract attention today. SEO builds a longer-term stream of enquiries without paying for every click. Together they offer speed and stability.",
       "The key is understanding each channel's role. Ads are a testing laboratory for messages, offers and conversion journeys. SEO is infrastructure that builds trust, authority and answers to questions people actually search for. Used intelligently, the same evidence and content can support both rather than doubling effort.",
@@ -215,7 +215,7 @@
   },
   {
     "slug": "p26",
-    "title": "Local SEO in Podgorica: appearing in Maps and search",
+    "title": "Local SEO in Podgorica: how to become more visible on Google",
     "segments": [
       "Local SEO can capture people who are already close to making a decision. When someone searches service + Podgorica or opens Google Maps looking for something nearby, they are not browsing general information. They need a service, price, contact or appointment. If your business is absent, you miss high-intent enquiries.",
       "Local SEO is not limited to a Google Business Profile. The profile provides discovery, the website validates the offer, reviews establish trust and photos and content demonstrate that the business is real and active. Together, they support visibility in both Maps and local search.",
@@ -262,7 +262,7 @@
   },
   {
     "slug": "p27",
-    "title": "Google Business Profile: what affects rankings and reviews",
+    "title": "Google Business Profile: basic information and reviews",
     "segments": [
       "Why a Google Business Profile acts like a mini website",
       "In local markets, many enquiries happen without a website visit. People open Google Maps, inspect a profile, photos and reviews, check opening hours and tap to call. At that moment, your Google Business Profile is effectively your landing page. If it looks empty, unclear or neglected, the enquiry may never happen even when you appear on the map.",
@@ -299,7 +299,7 @@
   },
   {
     "slug": "p28",
-    "title": "Common SEO mistakes on agency websites in Montenegro and how to fix them",
+    "title": "SEO mistakes on agency websites in Montenegro",
     "segments": [
       "Why an attractive website is not automatically good for SEO",
       "Design is rarely the whole problem. Many websites look modern but struggle to rank because their offer, structure and evidence are unclear to Google. A website should generate enquiries, not simply showcase a portfolio. If visitors say 'looks nice' but cannot tell what they will receive or how to enquire, the site is not doing its job.",
@@ -332,7 +332,7 @@
   },
   {
     "slug": "p29",
-    "title": "Service landing pages: why they outperform a blog alone",
+    "title": "Service pages: why a blog is not enough",
     "segments": [
       "Blog vs landing page: different roles",
       "Blog posts and service landing pages are not interchangeable. A blog is generally informational: how something works, why it matters, what it means or common mistakes. Readers arrive while researching and figuring out what they need. A service landing page is commercial: pricing, proposal, contact or booking. Visitors are closer to a decision.",
@@ -370,7 +370,7 @@
   },
   {
     "slug": "p30",
-    "title": "How to write a Services page that Google and people understand",
+    "title": "How to write a services page people understand",
     "segments": [
       "Why Services pages often fail",
       "They often read like a list claiming 'we do everything'. That helps neither visitors nor Google. People do not know what to click or what to ask for, and search engines see no clear intent. The result is a Services page that looks attractive but generates few enquiries.",
