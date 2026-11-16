@@ -58,7 +58,17 @@ const snapshotScript=()=>{
   if(value)textSegments.push(value)
  }
  const visibleText=main.innerText
- return {counts,seq,links,forms,documentOverflow,h1,language:document.documentElement.lang,text:visibleText.slice(0,4500),textSegmentCount:textSegments.length,serbianFragments:textSegments.filter(value=>/\b(?:Početna opcija|Sve usluge|Pogledaj|Pošalji|Zatraži|Prijava kandidata|Saznaj više|Nijesi siguran|Najčešći izbor)\b/i.test(value)).slice(0,8)}
+ const schema=[]
+ const schemaErrors=[]
+ for(const script of document.querySelectorAll('script[type="application/ld+json"]')){
+  try {
+   const json=JSON.parse(script.textContent||'{}')
+   schema.push(...(Array.isArray(json)?json:[json]))
+  } catch(e) {schemaErrors.push(String(e))}
+ }
+ const canonical=document.querySelector('link[rel="canonical"]')?.getAttribute('href')||''
+ const alternateLang=[...document.querySelectorAll('link[rel="alternate"][hreflang]')].map(x=>({language:x.getAttribute('hreflang'),href:x.getAttribute('href')}))
+ return {counts,seq,links,forms,documentOverflow,h1,language:document.documentElement.lang,text:visibleText.slice(0,4500),textSegmentCount:textSegments.length,serbianFragments:textSegments.filter(value=>/\b(?:Početna opcija|Sve usluge|Pogledaj|Pošalji|Zatraži|Prijava kandidata|Saznaj više|Nijesi siguran|Najčešći izbor)\b/i.test(value)).slice(0,8),schema,schemaErrors,canonical,alternateLang}
 }
 const browser=await chromium.launch({headless:true,args:['--no-sandbox']})
 let checked=0
@@ -85,6 +95,32 @@ try {
     if(snap.counts.h1!==1)errors.push({route:routePath,width,error:'Expected one H1, found '+snap.counts.h1})
     if(jsErrors.length)errors.push({route:routePath,width,error:'JS exception '+jsErrors.slice(0,2).join(' | ')})
     if(locale==='en'&&snap.language!=='en')errors.push({route:routePath,width,error:'HTML language '+snap.language})
+    if(snap.schemaErrors.length)errors.push({route:routePath,width,error:'Invalid JSON-LD '+snap.schemaErrors.join(' | ')})
+    const expectedPrefix=locale==='en'?'/en':''
+    const expectedLang=locale==='en'?'en':'sr-Latn-ME'
+    const domain='https://www.sindikatstudio83.me'
+    const expectedCanonical=domain+expectedPrefix+route
+    if(snap.canonical && snap.canonical.replace(/\/$/,'')!==expectedCanonical.replace(/\/$/,''))
+      errors.push({route:routePath,width,error:'Wrong canonical '+snap.canonical+' expected '+expectedCanonical})
+    for(const entry of snap.schema){
+      const type=entry['@type']
+      if(['WebPage','CollectionPage','AboutPage','ContactPage','Service','BlogPosting','Blog','CreativeWork'].includes(type)){
+        if(entry.inLanguage!==expectedLang)
+          errors.push({route:routePath,width,error:'Incorrect '+type+' language '+entry.inLanguage+' expected '+expectedLang})
+        if(typeof entry.url==='string'){
+          const parsed=new URL(entry.url,domain)
+          const expectedPath=expectedPrefix+route
+          if(parsed.pathname.replace(/\/$/,'')!==expectedPath.replace(/\/$/,''))
+            errors.push({route:routePath,width,error:'Incorrect '+type+' URL '+entry.url})
+        }
+      }
+      if(type==='BreadcrumbList'&&entry.itemListElement?.length){
+        const root=entry.itemListElement[0]
+        if(root.name!==(locale==='en'?'Home':'Početna')||new URL(root.item,domain).pathname!==(locale==='en'?'/en/':'/'))
+          errors.push({route:routePath,width,error:'Incorrect breadcrumb root '+JSON.stringify(root)})
+      }
+    }
+
     if(screenshotPages.has(route)&&width!==768){
      const name=(route==='/'?'home':route.replace(/^\/|\/$/g,'').replaceAll('/','-'))
      await page.screenshot({path:path.join(screenshotDir,name+'-'+locale+'-'+width+'.png'),animations:'disabled',fullPage:false})
