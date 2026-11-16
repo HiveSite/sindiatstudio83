@@ -3,7 +3,7 @@ export const focusedServicesEn:Record<string,FocusedServiceData>={
   "meta-ads": {
     "path": "/usluge/meta-ads/",
     "eyebrow": "Meta Ads",
-    "title": "Instagram and Facebook advertising for businesses in Montenegro",
+    "title": "Instagram and Facebook Ads Management in Montenegro",
     "description": "Meta Ads campaigns for businesses in Montenegro. Creative assets, audience targeting, conversion tracking and campaign management based in Podgorica.",
     "intro": "Have a good offer but your ads are not generating enough enquiries? We help the right audience find it on Instagram and Facebook. We prepare the ads, track what happens after a click and change what is not working.",
     "problems": [
