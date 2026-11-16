@@ -66,9 +66,12 @@ const snapshotScript=()=>{
    schema.push(...(Array.isArray(json)?json:[json]))
   } catch(e) {schemaErrors.push(String(e))}
  }
+ const brokenImages=[...document.querySelectorAll('img')].filter(img=>img.complete&&img.naturalWidth===0&&img.getBoundingClientRect().top<window.innerHeight+600).map(img=>img.getAttribute('src')).filter(Boolean).slice(0,5)
+ const idList=[...main.querySelectorAll('[id]')].map(el=>el.id).filter(Boolean)
+ const duplicateIds=[...new Set(idList.filter((v,i)=>idList.indexOf(v)!==i))]
  const canonical=document.querySelector('link[rel="canonical"]')?.getAttribute('href')||''
  const alternateLang=[...document.querySelectorAll('link[rel="alternate"][hreflang]')].map(x=>({language:x.getAttribute('hreflang'),href:x.getAttribute('href')}))
- return {counts,seq,links,forms,documentOverflow,h1,language:document.documentElement.lang,text:visibleText.slice(0,4500),textSegmentCount:textSegments.length,serbianFragments:textSegments.filter(value=>/\b(?:Početna opcija|Sve usluge|Pogledaj|Pošalji|Zatraži|Prijava kandidata|Saznaj više|Nijesi siguran|Najčešći izbor)\b/i.test(value)).slice(0,8),schema,schemaErrors,canonical,alternateLang}
+ return {counts,seq,links,forms,documentOverflow,h1,language:document.documentElement.lang,text:visibleText.slice(0,4500),textSegmentCount:textSegments.length,serbianFragments:textSegments.filter(value=>/\b(?:Početna opcija|Sve usluge|Pogledaj|Pošalji|Zatraži|Prijava kandidata|Saznaj više|Nijesi siguran|Najčešći izbor)\b/i.test(value)).slice(0,8),schema,schemaErrors,canonical,alternateLang,brokenImages,duplicateIds}
 }
 const browser=await chromium.launch({headless:true,args:['--no-sandbox']})
 let checked=0
@@ -96,6 +99,8 @@ try {
     if(jsErrors.length)errors.push({route:routePath,width,error:'JS exception '+jsErrors.slice(0,2).join(' | ')})
     if(locale==='en'&&snap.language!=='en')errors.push({route:routePath,width,error:'HTML language '+snap.language})
     if(snap.schemaErrors.length)errors.push({route:routePath,width,error:'Invalid JSON-LD '+snap.schemaErrors.join(' | ')})
+    if(snap.brokenImages.length)errors.push({route:routePath,width,error:'Broken visible images '+snap.brokenImages.join(' | ')})
+    if(snap.duplicateIds.length)errors.push({route:routePath,width,error:'Duplicate HTML IDs '+snap.duplicateIds.join(' | ')})
     const expectedPrefix=locale==='en'?'/en':''
     const expectedLang=locale==='en'?'en':'sr-Latn-ME'
     const domain='https://www.sindikatstudio83.me'
