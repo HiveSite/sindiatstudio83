@@ -11,7 +11,7 @@ permissions:
 jobs:
   bilingual:
     runs-on: ubuntu-24.04
-    timeout-minutes: 15
+    timeout-minutes: 25
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -26,3 +26,19 @@ jobs:
         run: npm run build
       - name: Verify rendered SR/EN section parity
         run: node scripts/audit-en-parity.mjs
+      - name: Prepare Chromium for full visual and functional bilingual QA
+        run: |
+          npm install --no-save --ignore-scripts playwright@1.56.1
+          npx playwright install --with-deps chromium
+      - name: Test SR and EN in real browser at three screen widths
+        run: node scripts/browser-parity.mjs
+      - name: Upload bilingual QA report and screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: sindikat-full-bilingual-browser-qa
+          path: |
+            reports/browser-parity.json
+            reports/bilingual-screenshots/
+          if-no-files-found: ignore
+          retention-days: 7
