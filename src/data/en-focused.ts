@@ -52,7 +52,7 @@ export const focusedServicesEn:Record<string,FocusedServiceData>={
   "google-ads": {
     "path": "/usluge/google-ads/",
     "eyebrow": "Google Ads",
-    "title": "Google Search advertising for businesses in Montenegro",
+    "title": "Google Ads Campaign Management in Montenegro",
     "description": "Google Ads campaign management in Podgorica and across Montenegro. Reach customers who are actively searching for the products and services you offer.",
     "intro": "When someone searches Google for what you sell, they should be able to find your offer. We choose relevant searches, prepare ads and direct visitors to pages where they can call, enquire or purchase without unnecessary steps.",
     "problems": [
