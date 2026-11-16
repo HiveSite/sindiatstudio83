@@ -5,7 +5,7 @@ const dist = path.resolve('out')
 if (!fs.existsSync(dist)) throw new Error('Missing Next.js static export: out/')
 const errors = []
 const pages = []
-const ignored = new Set(['en','404','comment-picker','studio83-media','team-building','sr-me'])
+const ignored = new Set(['en','404','comment-picker','studio83-media','team-building','sr-me','_not-found'])
 function walk(dir) {
   for (const item of fs.readdirSync(dir,{withFileTypes:true})) {
     const file=path.join(dir,item.name)
