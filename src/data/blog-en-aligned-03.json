@@ -139,7 +139,7 @@
       "A common scenario in Montenegro is GA4 installed without a single meaningful conversion. Form submissions are not tracked. Calls, WhatsApp clicks and Instagram DMs are not tracked. You cannot identify which campaigns produced enquiries, where the landing page creates friction or where people abandon the process. Decisions are then made using CTR and CPC, which are secondary metrics.",
       "Another scenario is incorrectly configured conversions: button clicks count as successful enquiries, page views count as results or events fire twice. Analytics shows 200 leads while the inbox has just 20 messages.",
       "The minimum setup you need",
-      "This covers most real scenarios for local services and events. With these events, optimization can be meaningful.",
+      "This minimum covers 80% of real-world cases for local services and the event sector. With these events, optimization can be meaningful.",
       "1) Conversion: lead submission",
       "For a website form, a confirmed submission is the primary conversion, not merely a click on the submit button. Ideally, trigger the event on the thank-you page or after a successful response so false clicks are excluded.",
       "2) CTA clicks",
