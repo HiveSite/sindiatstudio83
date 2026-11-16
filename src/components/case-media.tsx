@@ -248,7 +248,7 @@ function MediaFigure({
       <div className={styles.mediaFrame}>
         <img
           src={image.src}
-          alt={image.alt}
+          alt={altText || image.alt}
           width={image.width}
           height={image.height}
           loading="lazy"
@@ -261,7 +261,7 @@ function MediaFigure({
   )
 }
 
-export function CaseCoverPlaceholder({ item, large = false }: { item: CaseStudy; large?: boolean }) {
+export function CaseCoverPlaceholder({ item, large = false, altText }: { item: CaseStudy; large?: boolean; altText?: string }) {
   const candidate = item.coverImage || coverImageOverrides[item.slug]
   const [failedSrc, setFailedSrc] = useState<string | null>(null)
   const availableImage = candidate && candidate.src !== failedSrc ? candidate : undefined
@@ -313,12 +313,13 @@ export function CaseMediaPlaceholder({ item, displayLabel }: { item: CaseStudyMe
 
   const extras = extraMediaOverrides[item.label] || []
   const displayedItem = displayLabel ? { ...item, label: displayLabel } : item
+  const displayedImage = displayLabel ? { ...image, alt: displayLabel } : image
 
   return (
     <>
-      <MediaFigure item={displayedItem} image={image} onError={() => setFailedSrc(image.src)} />
+      <MediaFigure item={displayedItem} image={displayedImage} onError={() => setFailedSrc(image.src)} />
       {extras.map((extra, index) => (
-        <MediaFigure key={`${item.label}-${index}`} item={displayedItem} image={extra} aspect="portrait" />
+        <MediaFigure key={`${item.label}-${index}`} item={displayedItem} image={displayLabel ? { ...extra, alt: displayLabel+' - additional view '+(index+1) } : extra} aspect="portrait" />
       ))}
     </>
   )
