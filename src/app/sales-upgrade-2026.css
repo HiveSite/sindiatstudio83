@@ -1,0 +1,32 @@
+/* Client-first P0/P1/P2 enhancements - shared by SR and EN. */
+.pricing-trust-note{margin:18px 0 25px;border:1px solid rgba(20,19,24,.16);background:#fff;border-radius:18px;padding:22px 25px;max-width:920px}
+.pricing-trust-note strong{font-size:17px;color:#141318}
+.pricing-trust-note p{margin:9px 0 0;color:#57525b;font-size:14px;line-height:1.65}
+.proof-first-portfolio{display:flex;align-items:center;gap:25px;padding:25px 30px;border-radius:19px;border:1px solid rgba(255,255,255,.18)}
+.proof-first-portfolio strong{font-size:clamp(20px,2.4vw,30px);letter-spacing:-.04em;flex:0 0 32%}
+.proof-first-portfolio p{margin:0;font-size:15px;line-height:1.65}
+.lead-form-intro{margin:0 0 22px;font-size:15px;line-height:1.6;max-width:55ch;color:var(--muted)}
+.lead-form-advanced{min-width:0;margin:10px 0 4px;border:1px solid rgba(255,255,255,.22);border-radius:15px;padding:0 16px;overflow:visible}
+.lead-form-advanced summary{padding:17px 0;cursor:pointer;font-weight:800;color:#fff;list-style-position:inside}
+.lead-form-advanced[open] summary{border-bottom:1px solid rgba(255,255,255,.16)}
+.lead-form-advanced-fields{padding:18px 0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.lead-form-advanced-fields label{min-width:0}
+.lead-form-advanced-fields label.form-span{grid-column:1/-1}
+.article-next-step .container{display:flex;align-items:center;justify-content:space-between;gap:35px}
+.article-next-step .container>div:first-child{max-width:640px}
+.article-next-step h2{font-size:clamp(29px,3.5vw,46px);margin:15px 0 12px}
+.article-next-step .button-row{justify-content:flex-end;max-width:330px}
+.article-next-step .button-row .button{min-width:175px}
+.demo-hero-copy h1{font-size:clamp(45px,5.6vw,88px);line-height:.98;letter-spacing:-.068em;max-width:990px}
+.demo-hero-copy{width:min(100%,970px)}
+.demo-hero-copy h1 span{overflow-wrap:normal}
+@media(max-width:760px){
+ .demo-hero-copy h1{font-size:clamp(31px,7.2vw,55px);line-height:1.06;letter-spacing:-.057em;overflow-wrap:normal}
+ .proof-first-portfolio,.article-next-step .container{display:block}
+ .proof-first-portfolio strong{display:block;margin-bottom:10px}
+ .article-next-step .button-row{margin-top:24px;max-width:none;justify-content:stretch}
+ .article-next-step .button-row .button{min-width:0;flex:1 1 100%}
+ .lead-form-advanced-fields{grid-template-columns:1fr}
+ .pricing-trust-note{padding:19px}
+}
+@media(max-width:370px){.demo-hero-copy h1{font-size:clamp(29px,7.5vw,38px)}}
