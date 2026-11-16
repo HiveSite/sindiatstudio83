@@ -26,7 +26,7 @@ export function CaseStudyPageContent({slug,locale='sr'}:{slug:string;locale?:Sit
     ? { ...baseItem, gallery: caseGalleryOverrides[slug] }
     : baseItem
   const publicBase = getPublicCaseStudy(galleryItem)
-  const publicItem=en?{...publicBase,gallery:publicBase.gallery.map((media,i)=>({...media,label:baseItem.title+' - image '+(i+1),image:media.image?{...media.image,alt:baseItem.title+' - project view '+(i+1)}:undefined}))}:publicBase
+  const publicItem=en?{...publicBase,...baseItem,gallery:publicBase.gallery.map((media,i)=>({...media,label:baseItem.title+' - image '+(i+1),image:media.image?{...media.image,alt:baseItem.title+' - project view '+(i+1)}:undefined}))}:publicBase
   const managedCover = managedThumbnail(publicItem.slug, publicItem.coverImage)
   const item = managedCover === publicItem.coverImage ? publicItem : { ...publicItem, coverImage: managedCover }
   const path = href(`/radovi/${item.slug}/`)
