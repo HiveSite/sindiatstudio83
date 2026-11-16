@@ -13,8 +13,8 @@ import { localeHref,translate,type SiteLocale } from '@/lib/locale'
 import { breadcrumbSchema, itemListSchema, webPageSchema } from '@/lib/schema'
 import { createMetadata } from '@/lib/metadata'
 
-const seoTitle = 'Usluge digitalnog marketinga, weba, događaja i promo timova u Crnoj Gori'
-const seoDescription = 'Performance marketing, web i digitalni proizvodi, aktivacije, događaji, sadržaj i recruitment kampanje iz Podgorice za klijente širom Crne Gore.'
+const seoTitle = 'Marketing usluge u Podgorici - cijene i ponude za firme'
+const seoDescription = 'Uporedi ponude za vođenje društvenih mreža, Meta i Google Ads, izradu sajtova, video sadržaj i događaje u Crnoj Gori. Pogledaj obim i pošalji upit.'
 
 export const metadata: Metadata = createMetadata({
   title: seoTitle,
