@@ -59,9 +59,9 @@ export const enServiceParity: Record<string, {
   summary:'We connect the employer offer, job ad, landing page or application form, distribution and initial screening questions. The goal is not to collect as many CVs as possible, but to reach people who meet the requirements and make applications easier to review.',
   outcomes:['More relevant applications','A faster, more organized initial process','Clearer insight into candidate sources and quality'],
   engagements:[
-   {name:'Candidate profile and launch',text:'A clear job offer, tailored ad, application path and targeted distribution for an open position.'},
-   {name:'Seasonal recruitment campaign',text:'Coordinated job advertising and applications for multiple positions or seasonal hiring needs.'},
-   {name:'Ongoing recruitment system',text:'Regular job advertising, employer communication and organized candidate intake across relevant channels.'}
+   {name:'Single-position campaign',text:'Employer offer, job ad, application journey, distribution and initial measurement for a clearly defined candidate profile.'},
+   {name:'Seasonal recruitment',text:'Multiple positions, locations and creative approaches organized around hiring urgency and capacity to handle applications.'},
+   {name:'Ongoing candidate system',text:'Employer brand, content, candidate database, distribution and a regular process for attracting and tracking candidates.'}
   ]
  }
 }
