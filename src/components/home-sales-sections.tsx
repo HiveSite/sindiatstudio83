@@ -86,7 +86,7 @@ export function HomeServiceDirectory({locale='sr'}:{locale?:SiteLocale}) {
             </div>
             <div className="home-service-action">
               <span className="home-service-price">Početna opcija <strong>{product?.price || t('Po ponudi','On request')}</strong></span>
-              <Link href={`/usluge/${item.slug}/`} aria-label={`${t('Pogledaj uslugu','View service')}: ${item.title}`}>Detalji i cijene <span aria-hidden="true">↗</span></Link>
+              <Link href={localeHref(locale,`/usluge/${item.slug}/`)} aria-label={`${t('Pogledaj uslugu','View service')}: ${item.title}`}>{t("Detalji i cijene","Details and pricing")} <span aria-hidden="true">↗</span></Link>
               <Link className="home-service-opis projekta" href={localeHref(locale,`/kontakt/?usluga=${encodeURIComponent(item.slug)}&izvor=home-service`)}>{t("Zatraži ponudu","Request a proposal")}</Link>
             </div>
           </article>
@@ -113,7 +113,7 @@ export function HomeProjectHighlights({locale='sr'}:{locale?:SiteLocale}) {
               <span className="home-project-image-number">0{index+1}</span>
             </Link>
             <div className="home-project-text"><span>{item.category}</span><h3>{item.title}</h3><p>{item.description}</p>
-              <div className="home-project-links"><Link href={`/radovi/${item.slug}/`}>{t("Pogledaj projekat ↗","View project ↗")}</Link><Link href={localeHref(locale,`/usluge/${item.service}/`)}>{t("Povezana usluga","Related service")}</Link></div>
+              <div className="home-project-links"><Link href={localeHref(locale,`/radovi/${item.slug}/`)}>{t("Pogledaj projekat ↗","View project ↗")}</Link><Link href={localeHref(locale,`/usluge/${item.service}/`)}>{t("Povezana usluga","Related service")}</Link></div>
             </div>
           </article>)}
       </div>
