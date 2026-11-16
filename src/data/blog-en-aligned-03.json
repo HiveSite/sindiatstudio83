@@ -219,8 +219,8 @@
     "segments": [
       "Local SEO can capture people who are already close to making a decision. When someone searches service + Podgorica or opens Google Maps looking for something nearby, they are not browsing general information. They need a service, price, contact or appointment. If your business is absent, you miss high-intent enquiries.",
       "Local SEO is not limited to a Google Business Profile. The profile provides discovery, the website validates the offer, reviews establish trust and photos and content demonstrate that the business is real and active. Together, they support visibility in both Maps and local search.",
-      "Why local SEO can be particularly effective in Podgorica",
-      "Search intent is clear: people seek solutions, not definitions. Google considers relevance, distance and prominence. Distance is not always controllable, but a business can improve its relevance and visibility. Many Montenegrin profiles lack key details, have unclear websites or outdated reviews.",
+      "When local SEO makes the most sense",
+      "The intent is clear: people want a solution rather than a definition. Google considers relevance, distance and prominence. You cannot always control distance, but accurate information, relevant services and genuine reviews help customers make informed choices.",
       "1) Google Business Profile as a foundation",
       "The profile must be complete and accurate, not approximate. Use the correct business name, categories, phone number and operating hours. These details sound basic but frequently cause problems: wrong categories, outdated numbers, incorrect opening hours and descriptions that reveal little.",
       "Checklist of essentials:",
@@ -252,12 +252,12 @@
       "Day 7: ask five genuine clients for reviews and respond to them personally and specifically.",
       "FAQ",
       "Is a Google Business Profile enough?",
-      "No. A profile, website, reviews and consistent business information work together. A profile without supporting trust signals may struggle.",
-      "What is the number one factor?",
-      "Relevance and trust. Relevance comes from categories, services and content; trust comes from reviews, evidence and a clear website offer.",
+      "A profile is a good foundation, but a clear website, accurate contact details and genuine reviews help customers decide. None of these elements alone guarantees a search ranking.",
+      "What determines local results?",
+      "Google identifies relevance, distance and prominence as the main groups of local ranking factors. Accurate details, reviews and a clear service description are also important to prospective customers.",
       "references:",
-      "Google Search Central - local relevance and page quality -",
-      "developers.google.com/search"
+      "Google Business Profile Help -",
+      "How local ranking works"
     ]
   },
   {
@@ -293,18 +293,18 @@
       "Should I post every day?",
       "Not necessarily. One or two useful updates each month can be better than daily posts with little value. Activity should be authentic proof of work, not a gimmick.",
       "references:",
-      "Google Search Central - trust and reputation -",
-      "developers.google.com/search"
+      "Google Business Profile Help -",
+      "Relevance, distance and prominence"
     ]
   },
   {
     "slug": "p28",
     "title": "Common SEO mistakes on agency websites in Montenegro and how to fix them",
     "segments": [
-      "Why most agency websites do not rank",
+      "Why an attractive website is not automatically good for SEO",
       "Design is rarely the whole problem. Many websites look modern but struggle to rank because their offer, structure and evidence are unclear to Google. A website should generate enquiries, not simply showcase a portfolio. If visitors say 'looks nice' but cannot tell what they will receive or how to enquire, the site is not doing its job.",
       "Agency websites often make the same mistake: talking about themselves instead of answering search intent. Google tries to rank pages that address users' questions. People search for service + city, price + service, best + service or contact + service. If those pages are missing or vague, visibility suffers.",
-      "Mistake 1: missing service landing pages",
+      "Mistake 1: no clear pages for individual services",
       "With only a homepage and an About page, ranking for service + city searches is difficult. Google has no dedicated page matching that intent, and visitors lack a clear enquiry route. The solution is focused service pages, one per service, plus event and activation pages where relevant.",
       "Each service page needs a clear H1, a one-sentence offer, one CTA, proof above the fold, a three-step process, FAQ explaining price and timing, and an easy contact method. This structure serves conversion as well as SEO.",
       "Mistake 2: duplicate URLs and inconsistent canonical signals",
@@ -321,13 +321,13 @@
       "Put the CTA high on the page, shorten forms, optimize images, use readable paragraphs and make essential information accessible without excessive scrolling. On mobile, a three-second delay can feel significant.",
       "The best-ranking website is not necessarily the prettiest. It is one that clearly answers users' needs.",
       "FAQ",
-      "What is the fastest SEO fix?",
-      "Build focused service landing pages with a clear offer and FAQ. That creates structure and matches local intent.",
+      "What should you fix first?",
+      "Start with pages people already visit: check the title, clear offer, contact details and links to related services. SEO results also depend on competition, content quality and site authority.",
       "Can a blog help without service pages?",
       "Yes, but it may convert less effectively. Articles should guide readers towards relevant services. Without service pages, blog traffic lacks a clear route to enquiry.",
       "references:",
-      "Google Search Central - SEO basics and page quality -",
-      "developers.google.com/search"
+      "Google Search Central -",
+      "Creating helpful, people-first content"
     ]
   },
   {
@@ -338,7 +338,7 @@
       "Blog posts and service landing pages are not interchangeable. A blog is generally informational: how something works, why it matters, what it means or common mistakes. Readers arrive while researching and figuring out what they need. A service landing page is commercial: pricing, proposal, contact or booking. Visitors are closer to a decision.",
       "That is why expecting blog posts alone to generate enquiries is a mistake if they provide no clear route to action. Blogs attract attention. Landing pages turn that attention into enquiries. Together, they can produce both traffic and conversions.",
       "Why service pages can rank better",
-      "Service pages often have advantages for three reasons:",
+      "Service pages can respond more directly to commercial searches for several reasons:",
       "First, stronger commercial intent: people search for a service, not a definition. Second, a clearer CTA. Third, closer relevance between the title, headings, FAQ and the words the searcher uses.",
       "Google values pages that respond to search intent. For someone searching event organization Montenegro or promotional teams Podgorica, a dedicated service page may match that query more directly than a broad general article.",
       "Making a blog function like a service landing page",
@@ -359,13 +359,13 @@
       "The most common mistake",
       "A blog without a CTA or service link educates without helping visitors act. They finish reading and leave because no next step is offered. Another mistake is placing the only CTA at the bottom of a huge article. Introduce the next step earlier, naturally and logically.",
       "FAQ",
-      "Should I have both a blog and landing pages?",
-      "Yes. Blogs attract and warm the audience; landing pages convert. Together, articles can rank and inform while dedicated pages capture enquiries when readers are ready.",
+      "Do blogs and service pages both make sense?",
+      "Yes, when each does its job. A blog explains the subject, while a service page shows what you offer and how someone can request a proposal.",
       "How long should a service page be?",
       "Long enough to answer objections about price, timing, inclusions, evidence and process. Length is not the goal; clarity is.",
       "references:",
-      "Google Search Central - relevance and intent -",
-      "developers.google.com/search"
+      "Google Search Central -",
+      "Helpful, reliable content"
     ]
   },
   {
@@ -378,14 +378,14 @@
       "A structure that works",
       "1) Hero: a one-sentence offer",
       "The hero is not the place for philosophy. It should feature a memorable sentence. A useful formula: audience, benefit, timeframe and CTA. People buy outcomes, not a catalogue of services, so lead with the outcome.",
-      "For example: for local companies, we build systems that generate enquiries within 30 days, with one clear contact step. No extraordinary promises are required, just clarity.",
+      "A clear example: we help local companies improve their advertising and the path to enquiries, with agreed steps and a way to measure progress. You cannot promise results or deadlines without an assessment. Clarity matters more than extraordinary promises.",
       "2) Services grouped into a few categories",
       "A common mistake is listing fifteen unrelated items, making it seem as though the business does everything without focus. Three clear categories may be easier to understand:",
       "Performance, Meta and Google. SEO and web. Events and activations.",
       "This helps both visitors and Google. Readers navigate more easily, and search engines can understand the site's structure and themes.",
       "3) For each service: inclusions and ideal customer",
       "Be specific but concise. List three to six inclusions and one sentence explaining who the service is ideal for. That sentence helps visitors recognize whether the offer is relevant.",
-      "For example: campaign setup, tracking, creative, optimization and reporting. Ideal for companies seeking more enquiries and transparent deliverables.",
+      "For example: campaign setup, performance measurement, creative production, optimization and reporting. Ideal for companies that want more enquiries and clarity about exactly what they are paying for.",
       "4) Process in three to five steps",
       "A visible process creates reassurance. People want to know what to expect: brief, plan, delivery, measurement and optimization. Without a process, the service can feel improvised, which increases perceived risk.",
       "5) Proof",
@@ -400,11 +400,11 @@
       "FAQ",
       "Is it better to have one Services page or multiple pages?",
       "Use one main Services page as a clear overview, supported by dedicated pages for important services. Individual pages match specific search intent while the overview helps people navigate the offer.",
-      "Does Google prefer long content?",
-      "Google values helpful, clear content. Length matters less than a strong structure and a direct response to search intent.",
+      "How long should the content be?",
+      "Long enough for someone to understand the service, a price or starting range, the process and how to get in touch. Length alone does not guarantee better rankings.",
       "references:",
-      "Google Search Central - content structure and indexing -",
-      "developers.google.com/search"
+      "Google Search Central -",
+      "Writing helpful and reliable content"
     ]
   }
 ]
