@@ -39,7 +39,7 @@ export function BlogExplorer({ initialPosts, locale='sr' }: { initialPosts: Blog
       <div className="blog-grid">
         {filtered.map((post) => <article className="blog-card blog-card-editorial" key={post.slug}>
           <Link className="blog-card-media" href={localeHref(locale,`/blog/${post.slug}/`)} aria-label={en ? `Read: ${post.title}` : `Pročitaj: ${post.title}`}>
-            <Image src={post.cover} width={1000} height={1000} loading="lazy" sizes="(max-width: 620px) 100vw, (max-width: 1080px) 50vw, 33vw" alt={post.coverAlt} />
+            <Image src={post.cover} width={1200} height={675} loading="lazy" sizes="(max-width: 620px) 100vw, (max-width: 1080px) 50vw, 33vw" alt={post.coverAlt} />
           </Link>
           <div className="blog-card-copy"><span>{en?englishCategories[post.category]||post.category:categoryLabels[post.category]||post.category}</span><h2><Link href={localeHref(locale,`/blog/${post.slug}/`)}>{post.title}</Link></h2><p>{post.excerpt}</p><Link className="blog-card-read" href={localeHref(locale,`/blog/${post.slug}/`)}>{en?'Read the guide ↗':'Pročitaj vodič ↗'}</Link></div>
         </article>)}
