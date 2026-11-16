@@ -1,4 +1,5 @@
 import { enServiceParity } from '@/data/en-service-parity'
+import { enCaseParity } from '@/data/en-case-parity'
 
 // English marketing copy, kept separate from the original Serbian (ijekavian) pages.
 // Never pass unreviewed Serbian page bodies through an English-language route.
@@ -19,15 +20,15 @@ export const enIndustries = [
 ] as const
 
 export const enCaseSummaries = [
-  {slug:'imaposla-digitalni-proizvod',title:'ImaPosla.me - a jobs and services platform',summary:'A digital product connecting employers, candidates, short-term assignments and local services. Our work covered product positioning, journeys, site development and distribution.'},
-  {slug:'battlebots-arena',title:'BattleBots Arena - a multi-stage education event',summary:'A programme bringing together registrations, workshops, mentors, competition logistics and the final arena event.'},
-  {slug:'sistem-za-terenske-angazmane',title:'Field team coordination system',summary:'Planning people, shifts, briefings, locations, transport and reporting for promotional and event projects.'},
-  {slug:'aktivacije-regulisanih-brendova',title:'Jägermeister and Jack Daniel’s brand activations',summary:'Organizing adult promotional teams, preparing messaging and branded setups, coordinating with hospitality venues and documenting the execution.'},
-  {slug:'privatni-i-korporativni-dogadjaji',title:'Private & corporate events',summary:'A single operational partner for programmes, suppliers, venues, people and production.'},
-  {slug:'mini-sajtovi-i-digitalni-alati',title:'Microsites & digital tools',summary:'Practical websites and online tools for creative partners, events, performers and local businesses.'},
-  {slug:'hive-agency-platforma',title:'Hive Agency - a team-building catalogue',summary:'An online catalogue helping companies explore programmes and request a tailored group experience.'},
-  {slug:'student-connect-mini-festival',title:'Student Connect - a student festival',summary:'A two-day event bringing together students, partners, programming and production.'},
-  {slug:'kucica-na-podgorickom-pazaru',title:'Sindikat at the Podgorica market',summary:'A seasonal venue concept involving planning, daily operations, content and an on-site team.'},
+  {slug:'imaposla-digitalni-proizvod',title:enCaseParity['imaposla-digitalni-proizvod'].title,summary:enCaseParity['imaposla-digitalni-proizvod'].summary},
+  {slug:'battlebots-arena',title:enCaseParity['battlebots-arena'].title,summary:enCaseParity['battlebots-arena'].summary},
+  {slug:'sistem-za-terenske-angazmane',title:enCaseParity['sistem-za-terenske-angazmane'].title,summary:enCaseParity['sistem-za-terenske-angazmane'].summary},
+  {slug:'aktivacije-regulisanih-brendova',title:enCaseParity['aktivacije-regulisanih-brendova'].title,summary:enCaseParity['aktivacije-regulisanih-brendova'].summary},
+  {slug:'privatni-i-korporativni-dogadjaji',title:enCaseParity['privatni-i-korporativni-dogadjaji'].title,summary:enCaseParity['privatni-i-korporativni-dogadjaji'].summary},
+  {slug:'mini-sajtovi-i-digitalni-alati',title:enCaseParity['mini-sajtovi-i-digitalni-alati'].title,summary:enCaseParity['mini-sajtovi-i-digitalni-alati'].summary},
+  {slug:'hive-agency-platforma',title:enCaseParity['hive-agency-platforma'].title,summary:enCaseParity['hive-agency-platforma'].summary},
+  {slug:'student-connect-mini-festival',title:enCaseParity['student-connect-mini-festival'].title,summary:enCaseParity['student-connect-mini-festival'].summary},
+  {slug:'kucica-na-podgorickom-pazaru',title:enCaseParity['kucica-na-podgorickom-pazaru'].title,summary:enCaseParity['kucica-na-podgorickom-pazaru'].summary},
 ] as const
 
 export const enNavigation = [
