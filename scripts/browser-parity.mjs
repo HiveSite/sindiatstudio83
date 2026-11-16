@@ -49,7 +49,16 @@ const snapshotScript=()=>{
  const forms=[...main.querySelectorAll('input,select,textarea')].map(e=>({tag:e.tagName,name:e.getAttribute('name'),type:e.getAttribute('type'),required:e.hasAttribute('required')}))
  const documentOverflow=Math.max(document.documentElement.scrollWidth,document.body.scrollWidth)-window.innerWidth
  const h1=main.querySelector('h1')?.textContent?.trim()||''
- return {counts,seq,links,forms,documentOverflow,h1,language:document.documentElement.lang,text:main.innerText.slice(0,4500)}
+ const walker=document.createTreeWalker(main,NodeFilter.SHOW_TEXT)
+ const textSegments=[]
+ while(walker.nextNode()){
+  const el=walker.currentNode.parentElement
+  if(!el||el.closest('script,style,noscript,template'))continue
+  const value=(walker.currentNode.nodeValue||'').replace(/\s+/g,' ').trim()
+  if(value)textSegments.push(value)
+ }
+ const visibleText=main.innerText
+ return {counts,seq,links,forms,documentOverflow,h1,language:document.documentElement.lang,text:visibleText.slice(0,4500),textSegmentCount:textSegments.length,serbianFragments:textSegments.filter(value=>/\b(?:Početna opcija|Sve usluge|Pogledaj|Pošalji|Zatraži|Prijava kandidata|Saznaj više|Nijesi siguran|Najčešći izbor)\b/i.test(value)).slice(0,8)}
 }
 const browser=await chromium.launch({headless:true,args:['--no-sandbox']})
 let checked=0
@@ -86,6 +95,9 @@ try {
    for(const tag of Object.keys(sr.counts))if(sr.counts[tag]!==en.counts[tag])errors.push({route,width,error:tag+' DOM count SR '+sr.counts[tag]+' EN '+en.counts[tag]})
    if(sr.seq.join('|')!==en.seq.join('|'))errors.push({route,width,error:'Element sequence differs'})
    if(JSON.stringify(sr.forms)!==JSON.stringify(en.forms))errors.push({route,width,error:'Form field structure differs'})
+   if(sr.textSegmentCount!==en.textSegmentCount)errors.push({route,width,error:'Visible text-node count differs '+sr.textSegmentCount+' SR / '+en.textSegmentCount+' EN'})
+   if(en.serbianFragments.length)errors.push({route,width,error:'Untranslated EN labels: '+en.serbianFragments.join(' | ')})
+
    if(sr.links.length!==en.links.length)errors.push({route,width,error:'Link count differs '+sr.links.length+'/'+en.links.length})
    else {
     let exceptions=0

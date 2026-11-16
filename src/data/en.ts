@@ -1,31 +1,34 @@
+import { enServiceParity } from '@/data/en-service-parity'
+import { enCaseParity } from '@/data/en-case-parity'
+
 // English marketing copy, kept separate from the original Serbian (ijekavian) pages.
 // Never pass unreviewed Serbian page bodies through an English-language route.
 export const enServices = [
-  {slug:'performance-marketing',title:'Meta & Google advertising',summary:'Campaign strategy, tracking and creative testing focused on enquiries, bookings and measurable business results.',benefits:['A clear offer and campaign plan','Conversion tracking and transparent reporting','Creative testing and ongoing optimization']},
-  {slug:'aktivacije-i-eventi',title:'Events & brand activations',summary:'Concept, teams, suppliers, locations and production coordinated by one accountable partner.',benefits:['Event concept and operating plan','On-site teams and supplier coordination','Photo and video documentation']},
-  {slug:'web-i-konverzije',title:'Websites & digital products',summary:'Mobile-first websites, landing pages and digital platforms that make it easy for customers to take the next step.',benefits:['Clear website structure and responsive design','Enquiry forms, integrations and analytics','Search-friendly foundations and maintainability']},
-  {slug:'sadrzaj-za-kampanje',title:'Content & creative production',summary:'Photography, video, campaign concepts and social content designed to communicate a real offer.',benefits:['Creative concepts and messaging','Photo and video production','Social media and advertising-ready assets']},
-  {slug:'recruitment-kampanje',title:'Recruitment campaigns',summary:'Job campaigns, application flows and communication that help employers reach suitable candidates.',benefits:['Clear job and employer messaging','Application and enquiry experiences','Distribution and campaign measurement']},
+  {slug:'performance-marketing', title:enServiceParity['performance-marketing'].shortTitle, summary:enServiceParity['performance-marketing'].summary, benefits:enServiceParity['performance-marketing'].outcomes},
+  {slug:'aktivacije-i-eventi', title:enServiceParity['aktivacije-i-eventi'].shortTitle, summary:enServiceParity['aktivacije-i-eventi'].summary, benefits:enServiceParity['aktivacije-i-eventi'].outcomes},
+  {slug:'web-i-konverzije', title:enServiceParity['web-i-konverzije'].shortTitle, summary:enServiceParity['web-i-konverzije'].summary, benefits:enServiceParity['web-i-konverzije'].outcomes},
+  {slug:'sadrzaj-za-kampanje', title:enServiceParity['sadrzaj-za-kampanje'].shortTitle, summary:enServiceParity['sadrzaj-za-kampanje'].summary, benefits:enServiceParity['sadrzaj-za-kampanje'].outcomes},
+  {slug:'recruitment-kampanje', title:enServiceParity['recruitment-kampanje'].shortTitle, summary:enServiceParity['recruitment-kampanje'].summary, benefits:enServiceParity['recruitment-kampanje'].outcomes},
 ] as const
 
 export const enIndustries = [
-  {slug:'ugostiteljstvo-i-turizam',title:'Hospitality & tourism',summary:'Seasonal campaigns, direct enquiries, location content and digital support for hotels, venues, restaurants and travel experiences.'},
-  {slug:'retail-i-fmcg',title:'Retail & consumer brands',summary:'In-store promotions, coordinated teams, multiple locations and creative distribution for product launches and campaigns.'},
-  {slug:'eventi-i-venue',title:'Events & venues',summary:'Production, ticketing or registration journeys, event staff and communications for corporate and community events.'},
-  {slug:'nekretnine-i-premium-usluge',title:'Property & premium services',summary:'Presentation websites, targeted campaigns and content that make sophisticated offers easier to understand.'},
-  {slug:'poslodavci-i-zaposljavanje',title:'Employers & recruitment',summary:'Employer campaigns, job listings, applicant journeys and hiring communications.'},
+  {slug:'ugostiteljstvo-i-turizam',title:'Hospitality and tourism',summary:'Campaigns, direct enquiries, seasonal planning, content, local visibility and operational support for hotels, restaurants, beach bars, accommodation and tourism programmes.'},
+  {slug:'retail-i-fmcg',title:'Retail and FMCG',summary:'Product launches, point-of-sale promotions, promotional teams, multi-location logistics, content and digital follow-up to campaigns.'},
+  {slug:'eventi-i-venue',title:'Events and venues',summary:'Concept, promotion, registrations or ticket sales, production, staff, guest flow and content for private, corporate, educational and community events.'},
+  {slug:'nekretnine-i-premium-usluge',title:'Real estate and premium services',summary:'Clear digital presentation, campaigns for qualified enquiries, screening questions and contact tracking for offers with longer decision-making journeys.'},
+  {slug:'poslodavci-i-zaposljavanje',title:'Employers and recruitment',summary:'Employer offers, campaigns, easy applications, ImaPosla distribution and organization of the initial recruitment journey for seasonal, operational and other positions.'},
 ] as const
 
 export const enCaseSummaries = [
-  {slug:'imaposla-digitalni-proizvod',title:'ImaPosla.me - a jobs and services platform',summary:'A digital product connecting employers, candidates, short-term assignments and local services. Our work covered product positioning, journeys, site development and distribution.'},
-  {slug:'battlebots-arena',title:'BattleBots Arena - a multi-stage education event',summary:'A programme bringing together registrations, workshops, mentors, competition logistics and the final arena event.'},
-  {slug:'sistem-za-terenske-angazmane',title:'Field team coordination system',summary:'Planning people, shifts, briefings, locations, transport and reporting for promotional and event projects.'},
-  {slug:'aktivacije-regulisanih-brendova',title:'Professional brand activations',summary:'Coordinating adult promotional teams, briefings, schedules, venue requirements and documented operational standards for regulated-brand activations.'},
-  {slug:'privatni-i-korporativni-dogadjaji',title:'Private & corporate events',summary:'A single operational partner for programmes, suppliers, venues, people and production.'},
-  {slug:'mini-sajtovi-i-digitalni-alati',title:'Microsites & digital tools',summary:'Practical websites and online tools for creative partners, events, performers and local businesses.'},
-  {slug:'hive-agency-platforma',title:'Hive Agency - a team-building catalogue',summary:'An online catalogue helping companies explore programmes and request a tailored group experience.'},
-  {slug:'student-connect-mini-festival',title:'Student Connect - a student festival',summary:'A two-day event bringing together students, partners, programming and production.'},
-  {slug:'kucica-na-podgorickom-pazaru',title:'Sindikat at the Podgorica market',summary:'A seasonal venue concept involving planning, daily operations, content and an on-site team.'},
+  {slug:'imaposla-digitalni-proizvod',title:enCaseParity['imaposla-digitalni-proizvod'].title,summary:enCaseParity['imaposla-digitalni-proizvod'].summary},
+  {slug:'battlebots-arena',title:enCaseParity['battlebots-arena'].title,summary:enCaseParity['battlebots-arena'].summary},
+  {slug:'sistem-za-terenske-angazmane',title:enCaseParity['sistem-za-terenske-angazmane'].title,summary:enCaseParity['sistem-za-terenske-angazmane'].summary},
+  {slug:'aktivacije-regulisanih-brendova',title:enCaseParity['aktivacije-regulisanih-brendova'].title,summary:enCaseParity['aktivacije-regulisanih-brendova'].summary},
+  {slug:'privatni-i-korporativni-dogadjaji',title:enCaseParity['privatni-i-korporativni-dogadjaji'].title,summary:enCaseParity['privatni-i-korporativni-dogadjaji'].summary},
+  {slug:'mini-sajtovi-i-digitalni-alati',title:enCaseParity['mini-sajtovi-i-digitalni-alati'].title,summary:enCaseParity['mini-sajtovi-i-digitalni-alati'].summary},
+  {slug:'hive-agency-platforma',title:enCaseParity['hive-agency-platforma'].title,summary:enCaseParity['hive-agency-platforma'].summary},
+  {slug:'student-connect-mini-festival',title:enCaseParity['student-connect-mini-festival'].title,summary:enCaseParity['student-connect-mini-festival'].summary},
+  {slug:'kucica-na-podgorickom-pazaru',title:enCaseParity['kucica-na-podgorickom-pazaru'].title,summary:enCaseParity['kucica-na-podgorickom-pazaru'].summary},
 ] as const
 
 export const enNavigation = [

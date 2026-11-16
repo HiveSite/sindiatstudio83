@@ -1,3 +1,5 @@
+import { site } from './site'
+
 export const enLegalPages = {
   privatnost: {
     title:'Privacy Policy',
@@ -7,7 +9,7 @@ export const enLegalPages = {
       {title:'Information we collect',text:'We may process your name, company, email address, phone number, project goal and status, budget range, message, application details, the page URL, referring page and campaign parameters.'},
       {title:'Purpose of processing',text:'We use these details to reply to enquiries, arrange projects or applications, keep communication records, understand website performance and help prevent form abuse.'},
       {title:'Third-party services',text:'The website uses Google Analytics, Google Tag Manager and Google Apps Script endpoints for contact forms and engagements. Processing by those providers is subject to their relevant policies.'},
-      {title:'Retention and your rights',text:'We keep information only as long as necessary for the purpose for which it was submitted and applicable requirements. You can request access, correction or deletion by emailing the contact address on this website.'},
+      {title:'Retention and your rights',text:`We keep information only as long as necessary for the purpose for which it was submitted and applicable requirements. To request access, correction or deletion, email ${site.email}.`},
       {title:'Security',text:'We use reasonable technical and organizational safeguards, but no internet transmission or storage method can be guaranteed to be entirely risk-free.'},
     ]
   },
@@ -32,7 +34,7 @@ export const enLegalPages = {
       {title:'Applications and engagements',text:'Submitting an application does not guarantee an engagement. Compensation, location, responsibilities and terms are agreed separately for each project.'},
       {title:'Website content',text:'Articles and guides are not legal, tax or financial advice. Visitors should assess decisions in light of their own circumstances.'},
       {title:'Availability',text:'We aim to keep content accurate, but cannot guarantee uninterrupted availability of every external service, form or link.'},
-      {title:'Contact',text:'For any questions, please use the email address listed on the contact page.'},
+      {title:'Contact',text:`For questions, write to ${site.email}.`},
     ]
   }
 } as const

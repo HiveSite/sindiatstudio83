@@ -1,7 +1,16 @@
 import type { CaseStudy } from '@/types/content'
 import { cases,caseBySlug } from '@/data/cases'
-import { enCaseSummaries,enCaseDetails } from '@/data/en'
+import { enCaseParity } from '@/data/en-case-parity'
 import type { SiteLocale } from '@/lib/locale'
+
+const translatedExternalCaseLinks:Record<string,string> = {
+ 'Pogledaj ImaPosla.me':'View ImaPosla.me',
+ 'Pogledaj BattleBotsArena.me':'View BattleBotsArena.me',
+ 'Pogledaj HiveAgency.me':'View HiveAgency.me',
+ 'Pogledaj Sindikat Events':'View Sindikat Events',
+ 'Stan na dan':'Short-stay apartment',
+ 'Grafičke mape':'Graphical maps'
+}
 
 type CaseTranslation={
  type:string;role:string;coverLabel:string;scope:string[];
@@ -117,12 +126,12 @@ export const caseTranslations:Record<string,CaseTranslation> = {
     ],
     "subprojects": [
       [
-        "Hospitality venue promotions",
-        "Promotional staffing, preparation and branded venue execution for adult audiences under agreed professional standards."
+        "Jägermeister activations",
+        "Promotional teams, preparation and branded execution at hospitality venues for adult audiences, following pre-agreed presentation standards."
       ],
       [
-        "Multi-location brand activations",
-        "Coordination of promotional teams, venue setup, communication and documentation under consistent standards across locations."
+        "Jack Daniel’s activations",
+        "Coordinating an adult promotional team, venue setup, location communication and documentation under the same operating process."
       ]
     ]
   },
@@ -221,8 +230,8 @@ export const caseTranslations:Record<string,CaseTranslation> = {
   }
 }
 export const translatedCases:CaseStudy[]=cases.map(item=>{
- const en=enCaseSummaries.find(value=>value.slug===item.slug)
- const detail=enCaseDetails[item.slug]
+ const en=enCaseParity[item.slug]
+ const detail=enCaseParity[item.slug]
  const extra=caseTranslations[item.slug]
  if(!en||!detail||!extra)throw new Error('Case study missing English localization: '+item.slug)
  if(extra.scope.length!==item.scope.length)throw new Error('Case study scope count differs: '+item.slug)
@@ -230,6 +239,7 @@ export const translatedCases:CaseStudy[]=cases.map(item=>{
  if((extra.subprojects?.length||0)!==(item.subprojects?.length||0))throw new Error('Case study subproject count differs: '+item.slug)
  return {
   ...item,type:extra.type,title:en.title,summary:en.summary,role:extra.role,
+  links:item.links?.map(link=>({...link,label:translatedExternalCaseLinks[link.label]||link.label})),
   challenge:detail.challenge,solution:detail.solution,result:detail.result,
   coverLabel:extra.coverLabel,scope:[...extra.scope],
   metrics:extra.metrics,

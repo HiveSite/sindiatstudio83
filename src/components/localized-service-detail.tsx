@@ -114,7 +114,7 @@ export function ServicePageContent({ slug, locale='sr' }: { slug: string; locale
     <section className="section"><div className="container faq-layout"><div><span className="eyebrow">{t("Pitanja","Questions")}</span><h2>{t("Najčešće prije kupovine.","Common questions before starting.")}</h2><p>{t("Ne treba nam duga dokumentacija da bismo razumjeli tvoj cilj. Dovoljni su rok, okvir, ono što već postoji i nekoliko ključnih informacija.","A long specification is not needed. A timeline, approximate budget, existing materials and a few key details are enough.")}</p></div><FaqList items={service.faq} /></div></section>
 
     <section className="section section-dark"><div className="container">
-      <div className="service-rail-head"><div><span className="eyebrow">{t("Ostale usluge","Other services")}</span><h2>{t("Pogledaj i druge usluge.","Explore related services.")}</h2></div><Link className="text-link" href={href("/usluge/")}>Sve usluge <span>↗</span></Link></div>
+      <div className="service-rail-head"><div><span className="eyebrow">{t("Ostale usluge","Other services")}</span><h2>{t("Pogledaj i druge usluge.","Explore related services.")}</h2></div><Link className="text-link" href={href("/usluge/")}>{t("Sve usluge","All services")} <span>↗</span></Link></div>
       <div className="service-rail" role="region" aria-label={t('Povezane usluge','Related services')} tabIndex={0}>{relatedServices.map((item) => <Link className="service-rail-card" key={item.slug} href={href(`/usluge/${item.slug}/`)}><span>{item.eyebrow}</span><h3>{item.shortTitle}</h3><p>{item.summary}</p><b>{t("Pogledaj uslugu ↗","View service ↗")}</b></Link>)}</div>
     </div></section>
 
