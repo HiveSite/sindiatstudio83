@@ -4,80 +4,43 @@ import { industries } from '@/data/industries'
 import { cases } from '@/data/cases'
 import { blogPosts } from '@/data/blog'
 import { site } from '@/data/site'
-import { enServices, enIndustries, enCaseSummaries } from '@/data/en'
+import { enServices,enIndustries,enCaseSummaries } from '@/data/en'
 import { englishBlogPosts } from '@/data/en-blog'
 
 export const dynamic = 'force-static'
-
-const absoluteUrl = (path: string) => new URL(path, site.domain).toString()
-// Avoid claiming that every route changed on the same unverified date.
-
-export default function sitemap(): MetadataRoute.Sitemap {
-  const staticRoutes: MetadataRoute.Sitemap = [
-    { url: absoluteUrl('/'), images: [absoluteUrl('/images/brand/og-cover.png')] },
-    { url: absoluteUrl('/usluge/') },
-    { url: absoluteUrl('/cijene/') },
-    { url: absoluteUrl('/usluge/meta-ads/') },
-    { url: absoluteUrl('/usluge/google-ads/') },
-    { url: absoluteUrl('/industrije/') },
-    { url: absoluteUrl('/radovi/') },
-    { url: absoluteUrl('/o-nama/') },
-    { url: absoluteUrl('/blog/') },
-    { url: absoluteUrl('/kontakt/') },
-  ]
-
-  const localizedPublicPaths = ['/', '/usluge/', '/cijene/', '/industrije/', '/radovi/', '/o-nama/', '/blog/', '/kontakt/']
-  const englishRoutes: MetadataRoute.Sitemap = localizedPublicPaths.map((pagePath) => ({
-    url: absoluteUrl('/en' + pagePath),
-    alternates: {languages: {
-      'en': absoluteUrl('/en' + pagePath),
-      'sr-Latn-ME': absoluteUrl(pagePath),
-    }},
-  }))
-
-  const englishDetailRoutes: MetadataRoute.Sitemap = [
-    '/usluge/meta-ads/', '/usluge/google-ads/',
-    ...enServices.map((item) => `/usluge/${item.slug}/`),
-    ...enIndustries.map((item) => `/industrije/${item.slug}/`),
-    ...enCaseSummaries.map((item) => `/radovi/${item.slug}/`),
-    ...englishBlogPosts.map((item) => `/blog/${item.slug}/`),
-  ].map((pagePath) => ({
-    url: absoluteUrl('/en' + pagePath),
-    alternates: { languages: {
-      'en': absoluteUrl('/en' + pagePath),
-      'sr-Latn-ME': absoluteUrl(pagePath),
-    } },
-  }))
-
-  const serviceRoutes: MetadataRoute.Sitemap = services.map((item) => ({
-    url: absoluteUrl(`/usluge/${item.slug}/`),
-  }))
-
-  const industryRoutes: MetadataRoute.Sitemap = industries.map((item) => ({
-    url: absoluteUrl(`/industrije/${item.slug}/`),
-  }))
-
-  const caseRoutes: MetadataRoute.Sitemap = cases.map((item) => {
-    const image = item.socialImage?.src || item.coverImage?.src
-    return {
-      url: absoluteUrl(`/radovi/${item.slug}/`),
-      images: image ? [absoluteUrl(image)] : undefined,
-    }
-  })
-
-  const blogRoutes: MetadataRoute.Sitemap = blogPosts.map((item) => ({
-    url: absoluteUrl(`/blog/${item.slug}/`),
-    lastModified: item.date ? new Date(`${item.date}T00:00:00.000Z`) : undefined,
-    images: item.cover ? [absoluteUrl(item.cover)] : undefined,
-  }))
-
-  return [
-    ...staticRoutes,
-    ...englishRoutes,
-    ...englishDetailRoutes,
-    ...serviceRoutes,
-    ...industryRoutes,
-    ...caseRoutes,
-    ...blogRoutes,
-  ]
+const absoluteUrl=(route:string)=>new URL(route,site.domain).toString()
+const alternates=(route:string)=>({languages:{
+ 'sr-Latn-ME':absoluteUrl(route),
+ 'en':absoluteUrl('/en'+route),
+ 'x-default':absoluteUrl(route)
+}})
+const pair=(route:string,other?:{images?:string[],date?:Date}):MetadataRoute.Sitemap => [
+ {url:absoluteUrl(route),alternates:alternates(route), images:other?.images?.map(absoluteUrl),lastModified:other?.date},
+ {url:absoluteUrl('/en'+route),alternates:alternates(route),images:other?.images?.map(absoluteUrl),lastModified:other?.date}
+]
+export default function sitemap():MetadataRoute.Sitemap{
+ const staticRoutes:MetadataRoute.Sitemap=[
+  ...pair('/',{images:['/images/brand/og-cover.png']}),
+  ...['/usluge/','/cijene/','/usluge/meta-ads/','/usluge/google-ads/','/industrije/','/radovi/','/o-nama/','/blog/','/kontakt/'].flatMap(route=>pair(route))
+ ]
+ // Both languages contain identical, independently indexable public routes.
+ const serviceRoutes=services.map(item=>({slug:item.slug,path:'/usluge/'+item.slug+'/'}))
+ const industryRoutes=industries.map(item=>({slug:item.slug,path:'/industrije/'+item.slug+'/'}))
+ const caseRoutes=cases.map(item=>({slug:item.slug,path:'/radovi/'+item.slug+'/',image:item.socialImage?.src||item.coverImage?.src}))
+ const blogRoutes=blogPosts.map(item=>({slug:item.slug,path:'/blog/'+item.slug+'/',image:item.cover,date:item.date}))
+ const assertSame=(label:string,src:string[],en:string[])=>{
+  const missing=src.filter(slug=>!en.includes(slug)),extra=en.filter(slug=>!src.includes(slug))
+  if(missing.length||extra.length)throw new Error(label+' EN/SR routes mismatch: missing '+missing.join(',')+' extra '+extra.join(','))
+ }
+ assertSame('services',serviceRoutes.map(x=>x.slug),enServices.map(x=>x.slug))
+ assertSame('industries',industryRoutes.map(x=>x.slug),enIndustries.map(x=>x.slug))
+ assertSame('case studies',caseRoutes.map(x=>x.slug),enCaseSummaries.map(x=>x.slug))
+ assertSame('blog',blogRoutes.map(x=>x.slug),englishBlogPosts.map(x=>x.slug))
+ return [
+  ...staticRoutes,
+  ...serviceRoutes.flatMap(x=>pair(x.path)),
+  ...industryRoutes.flatMap(x=>pair(x.path)),
+  ...caseRoutes.flatMap(x=>pair(x.path,{images:x.image?[x.image]:undefined})),
+  ...blogRoutes.flatMap(x=>pair(x.path,{images:x.image?[x.image]:undefined,date:x.date?new Date(x.date+'T00:00:00.000Z'):undefined}))
+ ]
 }

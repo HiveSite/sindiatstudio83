@@ -99,3 +99,32 @@ export function createMetadata({
     },
   }
 }
+
+export function createEnglishMetadata({
+  title,description,path,image='/images/brand/og-cover.png',imageAlt=site.name,
+  type='website',noIndex=false,publishedTime,modifiedTime,tags=[]
+}:MetadataInput):Metadata{
+  const originalPath=path.startsWith('/en/')?path.slice(3):path
+  const englishPath='/en'+originalPath
+  const result=createMetadata({title,description,path:englishPath,image,imageAlt,type,noIndex,publishedTime,modifiedTime,tags})
+  const canonical=new URL(englishPath,site.domain).toString()
+  const srCanonical=new URL(originalPath,site.domain).toString()
+  const imageUrl=new URL(image,site.domain).toString()
+  const imageData={url:imageUrl,width:1200,height:630,alt:imageAlt}
+  const openGraph:Metadata['openGraph']=type==='article'?{
+    type:'article',locale:'en_GB',siteName:site.name,title,description,url:canonical,
+    images:[imageData],publishedTime,modifiedTime:modifiedTime||publishedTime,
+    authors:[site.domain],tags
+  }:{
+    type:'website',locale:'en_GB',siteName:site.name,title,description,url:canonical,images:[imageData]
+  }
+  return {
+    ...result,
+    alternates:{canonical,languages:{
+      en:canonical,'sr-Latn-ME':srCanonical,'x-default':srCanonical
+    }},
+    openGraph,
+    twitter:{card:'summary_large_image',title,description,images:[imageUrl]}
+
+  }
+}

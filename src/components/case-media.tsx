@@ -261,7 +261,7 @@ function MediaFigure({
   )
 }
 
-export function CaseCoverPlaceholder({ item, large = false }: { item: CaseStudy; large?: boolean }) {
+export function CaseCoverPlaceholder({ item, large = false, altText }: { item: CaseStudy; large?: boolean; altText?: string }) {
   const candidate = item.coverImage || coverImageOverrides[item.slug]
   const [failedSrc, setFailedSrc] = useState<string | null>(null)
   const availableImage = candidate && candidate.src !== failedSrc ? candidate : undefined
@@ -278,7 +278,7 @@ export function CaseCoverPlaceholder({ item, large = false }: { item: CaseStudy;
         <img
           className={`${styles.coverImage}${large ? ` ${styles.fullCoverImage}` : ''}`}
           src={image.src}
-          alt={image.alt}
+          alt={altText || image.alt}
           width={image.width}
           height={image.height}
           loading={large ? 'eager' : 'lazy'}
@@ -305,19 +305,21 @@ export function CaseCoverPlaceholder({ item, large = false }: { item: CaseStudy;
   )
 }
 
-export function CaseMediaPlaceholder({ item }: { item: CaseStudyMedia }) {
+export function CaseMediaPlaceholder({ item, displayLabel }: { item: CaseStudyMedia; displayLabel?: string }) {
   const candidate = item.image || mediaImageOverrides[item.label]
   const [failedSrc, setFailedSrc] = useState<string | null>(null)
   const image = candidate && candidate.src !== failedSrc ? candidate : undefined
   if (!image) return null
 
   const extras = extraMediaOverrides[item.label] || []
+  const displayedItem = displayLabel ? { ...item, label: displayLabel } : item
+  const displayedImage = displayLabel ? { ...image, alt: displayLabel } : image
 
   return (
     <>
-      <MediaFigure item={item} image={image} onError={() => setFailedSrc(image.src)} />
+      <MediaFigure item={displayedItem} image={displayedImage} onError={() => setFailedSrc(image.src)} />
       {extras.map((extra, index) => (
-        <MediaFigure key={`${item.label}-${index}`} item={item} image={extra} aspect="portrait" />
+        <MediaFigure key={`${item.label}-${index}`} item={displayedItem} image={displayLabel ? { ...extra, alt: displayLabel+' - additional view '+(index+1) } : extra} aspect="portrait" />
       ))}
     </>
   )

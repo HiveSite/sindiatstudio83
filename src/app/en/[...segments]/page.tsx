@@ -8,10 +8,28 @@ import { enProducts } from '@/data/en-products'
 import { enServiceDetails } from '@/data/en-service-details'
 import { enIndustryDetails } from '@/data/en-industry-details'
 import { cases } from '@/data/cases'
+import { serviceBySlug as canonicalServiceBySlug } from '@/data/services'
 import { blogPosts } from '@/data/blog'
-import { englishBlogBySlug, englishBlogPosts, plainEnglishExcerpt } from '@/data/en-blog'
+import { englishBlogPosts } from '@/data/en-blog'
 import { site } from '@/data/site'
 import { enLegalPages } from '@/data/en-legal'
+import { ServicesPageContent } from '@/components/localized-services-page'
+import { PricingPageContent } from '@/components/localized-pricing-page'
+import { ServicePageContent } from '@/components/localized-service-detail'
+import { IndustryPageContent } from '@/components/localized-industry-detail'
+import { IndustriesPageContent } from '@/components/localized-industries-page'
+import { AboutPageContent } from '@/components/localized-about-page'
+import { ContactPageContent } from '@/components/localized-contact-page'
+import { BlogPageContent } from '@/components/localized-blog-page'
+import { ArticlePageContent } from '@/components/localized-blog-article'
+import { WorksPageContent } from '@/components/localized-works-page'
+import { CaseStudyPageContent } from '@/components/localized-case-detail'
+import { FocusedServiceLanding } from '@/components/focused-service-landing'
+import { focusedServicesEn } from '@/data/en-focused'
+import { LegalPageContent } from '@/components/localized-legal-page'
+import { ThankYouPageContent } from '@/components/localized-thank-you'
+import { createEnglishMetadata } from '@/lib/metadata'
+import { enBlogFullBySlug } from '@/data/localized-blog'
 
 const enAdServices: Record<string,{title:string;summary:string;benefits:string[]}> = {
  'meta-ads':{title:'Instagram & Facebook advertising',summary:'Reach relevant people with Meta Ads. We connect the offer, creative assets, audience targeting and measurement instead of focusing only on views.',benefits:['Campaign planning and audience research','Photo, video and ad copy variations','Tracking, testing and reporting']},
@@ -61,14 +79,21 @@ export async function generateMetadata({params}:{params:Promise<{segments:string
   if(kind==='usluge'&&slug){const x=serviceBySlug[slug]||enAdServices[slug];if(!x)return {};title=x.title;description=x.summary}
   else if(kind==='radovi'&&slug){const x=caseCopyBySlug[slug];if(!x)return {};title=x.title;description=x.summary}
   else if(kind==='industrije'&&slug){const x=industryBySlug[slug];if(!x)return {};title=x.title;description=x.summary}
-  else if(kind==='blog'&&slug){const article=englishBlogBySlug[slug];title=article?.title||'Practical guide';description=article?plainEnglishExcerpt(article):'A practical guide from Sindikat Studio 83.'}
+  else if(kind==='blog'&&slug){const article=enBlogFullBySlug[slug];title=article?.title||'Practical guide';description=article?.description||'A practical guide from Sindikat Studio 83.'}
   else {const x=top.find(row=>row[0]===kind);if(x){title=x[1];description=x[2]}}
-  return {
-    title:`${title} | Sindikat Studio 83`,description,
-    alternates:{canonical:path(segments),languages:{'en':path(segments),'sr-Latn-ME':`/${segments.join('/')}/`}},
-    robots:['privatnost','kolacici','uslovi-koriscenja','hvala'].includes(kind)?{index:false,follow:true}:undefined,
-    openGraph:{locale:'en_GB',title,description},
-  }
+  const article=kind==='blog'&&slug?enBlogFullBySlug[slug]:undefined
+  const caseImage=kind==='radovi'&&slug?caseBySlug[slug]?.socialImage?.src||caseBySlug[slug]?.coverImage?.src:undefined
+  return createEnglishMetadata({
+    title,description,
+    path:'/'+segments.join('/')+'/',
+    image:article?.cover||caseImage,
+    imageAlt:article?.coverAlt||title,
+    type:article?'article':'website',
+    noIndex:['privatnost','kolacici','uslovi-koriscenja','hvala'].includes(kind),
+    publishedTime:article?.date||undefined,
+    modifiedTime:article?.date||undefined,
+    tags:article?.tags||[]
+  })
 }
 function Head({eyebrow,title,description}:{eyebrow:string;title:string;description:string}){
  return <section className="page-hero"><div className="container"><span className="eyebrow">{eyebrow}</span><h1>{title}</h1><p className="lead">{description}</p></div></section>
@@ -84,61 +109,20 @@ export default async function EnglishPages({params}:{params:Promise<{segments:st
   const industry=industryBySlug[slug]
   const project=caseCopyBySlug[slug]
   const original=caseBySlug[slug]
-  if(kind==='usluge'&&slug&&service){
-    const products=enProducts[slug]||enProducts['performance-marketing']
-    const detail=enServiceDetails[slug] || enServiceDetails['performance-marketing']
-    return <div lang="en"><Head eyebrow="OUR SERVICES / MONTENEGRO" title={service.title} description={service.summary}/>
-      <section className="section section-dark"><div className="container"><h2>What we can deliver</h2>
-      <div className="home-process-grid">{service.benefits.map((x,i)=><article className="home-process-step" key={x}><span>{String(i+1).padStart(2,'0')}</span><h3>{x}</h3></article>)}</div>
-      <h2>Best suited for</h2><ul>{detail.bestFor.map(x=><li key={x}>{x}</li>)}</ul>
-      <h2>What we need from you</h2><ul>{detail.needFromYou.map(x=><li key={x}>{x}</li>)}</ul>
-      <h2>What's included</h2><ul>{detail.includes.map(x=><li key={x}>{x}</li>)}</ul>
-      <h2>How we work</h2><div className="home-process-grid">{detail.process.map((step,i)=><article className="home-process-step" key={step.name}><span>{String(i+1).padStart(2,'0')}</span><h3>{step.name}</h3><p>{step.text}</p></article>)}</div>
-      <h2>What progress looks like</h2><ul>{detail.successSignals.map(x=><li key={x}>{x}</li>)}</ul>
-      <p style={{marginTop:28}}>Every project starts with a clear scope, timeline and responsibilities. We work with local and international teams.</p><Buttons slug={slug}/></div></section>
-      <section className="section section-light"><div className="container"><h2>Starting options</h2><p>Prices below are indicative starting points, not fixed quotes. Media spend and external supplier costs are agreed separately.</p>
-      <div className="home-process-grid">{products.map(x=><article key={x.name} className="home-process-step" style={{background:'#fff',color:'#15151b'}}><h3>{x.name} - {x.price}</h3><p style={{color:'#444'}}>{x.description}</p><ul>{x.includes.map(part=><li key={part}>{part}</li>)}</ul><Link href={`/en/kontakt/?usluga=${slug}`}>Discuss this option ↗</Link></article>)}</div></div></section>
-      <section className="section section-dark"><div className="container"><h2>Frequently asked questions</h2>{detail.faq.map(item=><div key={item.question} style={{marginBottom:28}}><h3>{item.question}</h3><p>{item.answer}</p></div>)}<Buttons slug={slug}/></div></section>
-    </div>
-  }
-  if(kind==='usluge'&&!slug) return <div lang="en"><Head eyebrow="OUR SERVICES" title="One team for strategy and execution" description="Advertising, content, websites, events and recruitment campaigns in one coordinated offering."/><section className="section section-dark"><div className="container home-service-list">{enServices.map(s=><article className="home-service-row" key={s.slug}><span className="home-service-number">+</span><div className="home-service-main"><h3><Link href={path(['usluge',s.slug])}>{s.title}</Link></h3><p>{s.summary}</p></div><div className="home-service-action"><Link href={path(['usluge',s.slug])}>Explore ↗</Link></div></article>)}</div></section></div>
-  if(kind==='industrije'&&slug&&industry) {
-    const detail=enIndustryDetails[slug]
-    return <div lang="en"><Head eyebrow="INDUSTRIES" title={industry.title} description={industry.summary}/>
-      <section className="section section-dark"><div className="container"><h2>Common challenges</h2><ul>{detail.problems.map(x=><li key={x}>{x}</li>)}</ul>
-      <h2>What we deliver</h2><ul>{detail.solutions.map(x=><li key={x}>{x}</li>)}</ul>
-      <h2>Who this is for</h2><ul>{detail.bestFor.map(x=><li key={x}>{x}</li>)}</ul>
-      <h2>What success looks like</h2><ul>{detail.signals.map(x=><li key={x}>{x}</li>)}</ul>
-      <h2>When to start</h2><p>{detail.timing}</p>
-      <Buttons slug={slug}/></div></section>
-    </div>
-  }
-  if(kind==='industrije'&&!slug)return <div lang="en"><Head eyebrow="INDUSTRIES" title="Different industries. Practical solutions." description="We adapt the project scope, messaging, people and timeline to each industry."/><section className="section v7-industries-home"><div className="container v7-industries-grid">{enIndustries.map(s=><Link key={s.slug} href={path(['industrije',s.slug])} className="v7-industry"><h3>{s.title}</h3><p>{s.summary}</p><strong>Read more ↗</strong></Link>)}</div></section></div>
-  if(kind==='radovi'&&slug&&project)return <div lang="en"><Head eyebrow="SELECTED PROJECT" title={project.title} description={project.summary}/><section className="section section-dark"><div className="container">{original?.coverImage?.src?<Image src={original.coverImage.src} alt={project.title} width={1000} height={600} style={{width:'100%',height:'auto',objectFit:'contain',borderRadius:20}}/>:null}<div style={{marginTop:30}}><h2>The challenge</h2><p>{enCaseDetails[slug]?.challenge || project.summary}</p><h2>What we did</h2><p>{enCaseDetails[slug]?.solution || project.summary}</p><h2>The outcome</h2><p>{enCaseDetails[slug]?.result || project.summary}</p><Link href="/en/kontakt/" className="button button-primary">Discuss a similar project ↗</Link></div></div></section></div>
-  if(kind==='radovi'&&!slug)return <div lang="en"><Head eyebrow="OUR WORK" title="Real projects. Real execution." description="A selection of digital products, events, content and field projects from our studio."/><section className="section section-dark"><div className="container home-project-grid">{enCaseSummaries.map(s=><article className="home-project-card" key={s.slug}><div className="home-project-text"><h3>{s.title}</h3><p>{s.summary}</p><Link href={path(['radovi',s.slug])}>Explore project ↗</Link></div></article>)}</div></section></div>
-  if(kind==='cijene')return <div lang="en"><Head eyebrow="PRICING & COLLABORATION" title="A clear starting point. A tailored proposal." description="Choose a service area and explore the starting prices. Final scope, timeline and costs are agreed before work begins."/><section className="section section-dark"><div className="container">{enServices.map(s=><section key={s.slug} style={{marginBottom:48}}><h2>{s.title}</h2><div className="home-process-grid">{(enProducts[s.slug]||[]).map(product=><article key={product.name} className="home-process-step"><span>STARTING AT</span><h3>{product.name} - {product.price}</h3><p>{product.description}</p><ul>{product.includes.map(part=><li key={part}>{part}</li>)}</ul><Link href={`/en/kontakt/?usluga=${s.slug}`}>Request an estimate ↗</Link></article>)}</div></section>)}</div></section></div>
-  if(kind==='o-nama')return <div lang="en"><Head eyebrow="ABOUT SINDIKAT" title="An independent studio built for real-world execution." description="We combine digital work, creative production, teams and coordination so businesses can move from a plan to a finished project."/><section className="section section-dark"><div className="container"><h2>One team, multiple disciplines</h2><p>Our work spans campaigns, digital products, content, events and field activation. We believe a good idea matters only when people can turn it into clear deliverables.</p><p>Based in Podgorica, we work on projects across Montenegro and collaborate with trusted partners when a project needs additional expertise.</p><Link href="/en/kontakt/" className="button button-primary">Talk to our studio ↗</Link></div></section></div>
-  if(kind==='kontakt')return <div lang="en"><Head eyebrow="CONTACT" title="Tell us about your project." description="Share your goal, timeline and a few details. We will get back to you with a realistic next step."/><section className="section section-dark"><div className="container"><LeadForm source="en-contact-page" locale="en"/><p style={{marginTop:24}}>You can also email us directly at <a href={`mailto:${site.email}`}>{site.email}</a>.</p></div></section></div>
-  if(kind==='hvala')return <div lang="en"><Head eyebrow="THANK YOU" title="Your enquiry has been received." description="We will review your message and get back to you as soon as we can."/><section className="section"><div className="container"><Link className="button button-primary" href="/en/">Back to homepage ↗</Link></div></section></div>
-  if(kind==='blog'&&!slug)return <div lang="en"><Head eyebrow="RESOURCES" title="Practical guides from the studio." description="Explore campaign planning, websites, local search and event production."/><section className="section section-dark"><div className="container home-project-grid">{englishBlogPosts.map(post=><article key={post.slug} className="home-project-card"><div className="home-project-text"><h3>{post.title}</h3><p>{plainEnglishExcerpt(post)}</p><Link href={path(['blog',post.slug])}>Read article ↗</Link></div></article>)}</div></section></div>
-  if(kind==='blog'&&slug&&englishBlogBySlug[slug]){
-    const article=englishBlogBySlug[slug]
-    return <div lang="en"><Head eyebrow="FROM THE STUDIO / RESOURCES" title={article.title} description={plainEnglishExcerpt(article)}/>
-      <section className="section section-dark"><div className="container"><div className="blog-article-body" dangerouslySetInnerHTML={{__html:article.body}} />
-        <div className="button-row" style={{marginTop:40}}><Link href="/en/usluge/" className="button button-primary">Explore our services ↗</Link><Link href="/en/blog/" className="button button-ghost">More articles ↗</Link></div>
-      </div></section>
-    </div>
-  }
-  if(kind==='privatnost'||kind==='kolacici'||kind==='uslovi-koriscenja'){
-    const legal=enLegalPages[kind]
-    return <div lang="en"><Head eyebrow="LEGAL INFORMATION" title={legal.title} description={legal.description}/>
-      <section className="section section-dark"><div className="container legal">
-        {legal.sections.map(section=><div key={section.title} style={{marginBottom:30}}><h2>{section.title}</h2><p>{section.text}</p></div>)}
-        <p>Last updated: November 12, 2026.</p>
-        <p>Questions? Email <a href={`mailto:${site.email}`}>{site.email}</a>.</p>
-      </div></section>
-    </div>
-  }
+  if(kind==='usluge'&&slug&&canonicalServiceBySlug[slug]) return <div lang="en"><ServicePageContent slug={slug} locale="en" /></div>
+  if(kind==='usluge'&&slug&&focusedServicesEn[slug])return <div lang="en"><FocusedServiceLanding data={focusedServicesEn[slug]} locale="en" /></div>
+  if(kind==='usluge'&&!slug) return <div lang="en"><ServicesPageContent locale="en" /></div>
+  if(kind==='industrije'&&slug&&industry) return <div lang="en"><IndustryPageContent slug={slug} locale="en" /></div>
+  if(kind==='industrije'&&!slug) return <div lang="en"><IndustriesPageContent locale="en" /></div>
+  if(kind==='radovi'&&slug&&project)return <div lang="en"><CaseStudyPageContent slug={slug} locale="en" /></div>
+  if(kind==='radovi'&&!slug)return <div lang="en"><WorksPageContent locale="en" /></div>
+  if(kind==='cijene') return <div lang="en"><PricingPageContent locale="en" /></div>
+  if(kind==='o-nama')return <div lang="en"><AboutPageContent locale="en" /></div>
+  if(kind==='kontakt')return <div lang="en"><ContactPageContent locale="en" /></div>
+  if(kind==='hvala')return <div lang="en"><ThankYouPageContent locale="en" /></div>
+  if(kind==='blog'&&!slug)return <div lang="en"><BlogPageContent locale="en" /></div>
+  if(kind==='blog'&&slug&&enBlogFullBySlug[slug])return <div lang="en"><ArticlePageContent slug={slug} locale="en" /></div>
+  if(kind==='privatnost'||kind==='kolacici'||kind==='uslovi-koriscenja')return <div lang="en"><LegalPageContent slug={kind} locale="en" /></div>
 
   notFound()
 }

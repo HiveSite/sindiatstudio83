@@ -175,7 +175,7 @@ export function Header() {
             {visibleNavigation.map((item) => <Link key={item.href} href={item.href} aria-current={activeHref === item.href ? 'page' : undefined}>{item.label}</Link>)}
             <a href={site.imaposla} data-track="imaposla_team_click">{english ? "Join the team" : "Postani dio tima"}</a>
           </nav>
-          <Link className="button button-primary" href={english ? "/en/kontakt/?izvor=mobile-menu" : "/kontakt/?izvor=mobile-menu"} data-track="mobile_menu_lead">Pošalji upit</Link>
+          <Link className="button button-primary" href={english ? "/en/kontakt/?izvor=mobile-menu" : "/kontakt/?izvor=mobile-menu"} data-track="mobile_menu_lead">{english ? "Send enquiry" : "Pošalji upit"}</Link>
         </div>
       </header>
       <button className="mobile-menu-scrim" type="button" aria-label={english ? "Close menu" : "Zatvori meni"} tabIndex={-1} hidden={!open} onClick={() => closeMenu(true)} />

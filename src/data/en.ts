@@ -20,6 +20,7 @@ export const enCaseSummaries = [
   {slug:'imaposla-digitalni-proizvod',title:'ImaPosla.me - a jobs and services platform',summary:'A digital product connecting employers, candidates, short-term assignments and local services. Our work covered product positioning, journeys, site development and distribution.'},
   {slug:'battlebots-arena',title:'BattleBots Arena - a multi-stage education event',summary:'A programme bringing together registrations, workshops, mentors, competition logistics and the final arena event.'},
   {slug:'sistem-za-terenske-angazmane',title:'Field team coordination system',summary:'Planning people, shifts, briefings, locations, transport and reporting for promotional and event projects.'},
+  {slug:'aktivacije-regulisanih-brendova',title:'Professional brand activations',summary:'Coordinating adult promotional teams, briefings, schedules, venue requirements and documented operational standards for regulated-brand activations.'},
   {slug:'privatni-i-korporativni-dogadjaji',title:'Private & corporate events',summary:'A single operational partner for programmes, suppliers, venues, people and production.'},
   {slug:'mini-sajtovi-i-digitalni-alati',title:'Microsites & digital tools',summary:'Practical websites and online tools for creative partners, events, performers and local businesses.'},
   {slug:'hive-agency-platforma',title:'Hive Agency - a team-building catalogue',summary:'An online catalogue helping companies explore programmes and request a tailored group experience.'},
@@ -37,7 +38,14 @@ export const enNavigation = [
   {label:'Contact',href:'/en/kontakt/'},
 ] as const
 
-export const enCaseDetails: Record<string,{challenge:string;solution:string;result:string}> = {
+export const enCaseDetails: Record<string,{
+challenge:string;solution:string;result:string}> = {
+  'aktivacije-regulisanih-brendova': {
+    challenge:'Brand activations in regulated categories require clear staff instructions, reliable coordination with venues and consistent operational standards. Every team member needs to understand their responsibilities and the agreed requirements before a shift starts.',
+    solution:'Sindikat organizes adult promotional staff, briefings, schedules, venue communication, supervision and documentation. We define the process in advance and monitor execution against the agreed standards.',
+    result:'The project has a clear operational point of responsibility, properly prepared teams and consistent documentation of what was delivered at each location.'
+  },
+
   'imaposla-digitalni-proizvod':{
     challenge:'Jobs and recruitment information were scattered across social networks, messages, groups and disconnected listings. Candidates needed a reliable way to browse and apply, while employers needed simpler management of vacancies, candidates and promotions. The product had to support several user groups without making the first step complicated.',
     solution:'We structured a modular platform with separate journeys for job vacancies, short-term assignments and local services. The work includes city and category pages, employer and candidate profiles, applications, administrative controls, search-friendly content and community distribution. Mobile use is a central design priority.',

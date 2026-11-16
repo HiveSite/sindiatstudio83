@@ -4,11 +4,14 @@ import { useMemo, useState } from 'react'
 import { trackEvent } from '@/lib/tracking'
 import { CaseCard } from '@/components/cards'
 import { caseCategories } from '@/data/cases'
+import type { SiteLocale } from '@/lib/locale'
 import type { CaseCategory, CaseStudy } from '@/types/content'
 
 type FilterValue = 'sve' | CaseCategory
 
-export function WorkFilter({ items }: { items: CaseStudy[] }) {
+export function WorkFilter({ items,locale='sr' }: { items: CaseStudy[];locale?:SiteLocale }) {
+  const en=locale==='en'
+  const categoryEn:Record<string,string>={sve:'All', 'digitalni-proizvodi':'Digital products','web-i-mini-sajtovi':'Websites and microsites','aktivacije-i-promo-timovi':'Activations and promo teams','dogadjaji-i-produkcija':'Events and production','edukacija-i-community':'Education and community'}
   const [active, setActive] = useState<FilterValue>('sve')
   const selectCategory = (category: FilterValue) => {
     setActive(category)
@@ -24,7 +27,7 @@ export function WorkFilter({ items }: { items: CaseStudy[] }) {
 
   return (
     <div className="work-explorer" id="projekti">
-      <div className="work-filter" role="group" aria-label="Filtriraj projekte po temi">
+      <div className="work-filter" role="group" aria-label={en?"Filter projects by topic":"Filtriraj projekte po temi"}>
         <div className="work-filter-scroll">
           {caseCategories.map((category) => (
             <button
@@ -35,16 +38,16 @@ export function WorkFilter({ items }: { items: CaseStudy[] }) {
               aria-controls="work-results"
               onClick={() => selectCategory(category.slug)}
             >
-              {category.label}
+              {en?categoryEn[category.slug]||category.label:category.label}
             </button>
           ))}
         </div>
         <span className="work-result-count" aria-live="polite">
-          {visibleItems.length} {countLabel}
+          {visibleItems.length} {en ? (visibleItems.length===1?'project':'projects') : countLabel}
         </span>
       </div>
       <div className="case-grid" id="work-results">
-        {visibleItems.map((item) => <CaseCard key={item.slug} item={item} />)}
+        {visibleItems.map((item) => <CaseCard key={item.slug} item={item} locale={locale} />)}
       </div>
     </div>
   )
