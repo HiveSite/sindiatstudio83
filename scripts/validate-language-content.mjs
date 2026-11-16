@@ -130,6 +130,36 @@ for(const article of blog){
  const segments=[...article.body.matchAll(/>([^<>]+)</g)].map(m=>m[1].trim()).filter(v=>v&&/[A-Za-zÀ-ž]/.test(v))
  checkLength(segments,e.segments,article.slug+' paragraph/heading segments')
  for(let i=0;i<e.segments.length;i++)checkText(e.segments[i],article.slug+' paragraph '+i)
+ // Check numeric claims per corresponding source segment, not just segment counts.
+ // Numeric statements such as years, budgets, percentages and ordered steps must
+ // survive translation. We intentionally exclude numbers inside HTML attributes.
+ const srSegments=[...article.body.matchAll(/>([^<>]+)</g)]
+   .map(m=>m[1].trim()).filter(v=>v&&/[A-Za-zÀ-ž]/.test(v))
+ const smallNumbers=['zero','one','two','three','four','five','six','seven','eight','nine','ten','eleven','twelve','thirteen','fourteen','fifteen','sixteen','seventeen','eighteen','nineteen']
+ const tens=['','','twenty','thirty','forty','fifty','sixty','seventy','eighty','ninety']
+ const numberName=n=>{
+   if(n<20)return smallNumbers[n]
+   if(n<100)return tens[Math.floor(n/10)]+(n%10?' '+smallNumbers[n%10]:'')
+   if(n<1000)return smallNumbers[Math.floor(n/100)]+' hundred'+(n%100?' '+numberName(n%100):'')
+   return ''
+ }
+ // English may spell a number out (e.g. "eight to ten"), and a 24-hour
+ // Serbian time may use the equivalent 12-hour form (19h -> 7pm).
+ const numericClaimPresent=(n,english)=>{
+   const text=english.toLowerCase()
+   if(new RegExp('(^|\\D)'+n+'(?=\\D|$)').test(text))return true
+   const spoken=numberName(n)
+   if(spoken&&new RegExp('\\b'+spoken.replace(/ /g,'[ -]')+'\\b').test(text))return true
+   if(n===100&&/\ba hundred\b/.test(text))return true
+   if(n>=13&&n<=23&&new RegExp('\\b'+(n-12)+'\\s*(?:pm|p\\.m\\.)\\b').test(text))return true
+   return false
+ }
+ for(let i=0;i<Math.min(srSegments.length,e.segments.length);i++){
+   const numbers=[...new Set((srSegments[i].match(/\d+(?:[.,]\d+)*/g)||[]).map(v=>Number(v.replace(/[.,]/g,''))))]
+   for(const n of numbers)
+     check(numericClaimPresent(n,e.segments[i]),
+       article.slug+' segment '+i+' missing source numeric claim '+n+' in EN')
+ }
 }
 const result={...reports,totalContentUnits:Object.values(reports).reduce((a,b)=>a+b,0),issues}
 fs.mkdirSync('reports',{recursive:true})
