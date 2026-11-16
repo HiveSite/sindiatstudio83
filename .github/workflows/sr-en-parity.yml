@@ -3,7 +3,7 @@ on:
   pull_request:
     branches: [main]
   push:
-    branches: [fix/full-en-sr-parity-2026-11-14]
+    branches: [main, fix/full-en-sr-parity-2026-11-14]
 
 permissions:
   contents: read
