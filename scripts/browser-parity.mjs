@@ -27,7 +27,7 @@ const routes=[]
 function walk(dir){
  for(const e of fs.readdirSync(dir,{withFileTypes:true})){
   const dest=path.join(dir,e.name),relative=path.relative(dist,dest).split(path.sep)
-  if(e.isDirectory()&&['en','_not-found','404','comment-picker','sr-me'].includes(e.name))continue
+  if(e.isDirectory()&&['en','_not-found','404','comment-picker','sr-me','studio83-media','team-building'].includes(e.name))continue
   if(e.isDirectory())walk(dest)
   else if(e.name==='index.html'){
    const r=path.relative(dist,dest).replaceAll(path.sep,'/')
