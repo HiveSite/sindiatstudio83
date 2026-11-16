@@ -187,6 +187,21 @@ try {
         await page.locator('input[name="email"]').fill('invalid-email')
         await page.locator('button[type="submit"]').click()
         await page.locator('.form-status').filter({hasText:locale==='en'?'required fields':'obavezna polja'}).waitFor({state:'visible',timeout:6000})
+        // Mock the external Apps Script endpoint so no real lead is sent.
+        let capturedLead=null
+        await context.route('https://script.google.com/**',async route=>{
+          try{capturedLead=JSON.parse(route.request().postData()||'{}')}catch{capturedLead=null}
+          await route.fulfill({status:200,contentType:'application/json',headers:{'access-control-allow-origin':'*'},body:'{"ok":true}'})
+        })
+        await page.locator('input[name="name"]').fill('QA Test Studio83')
+        await page.locator('input[name="email"]').fill('qa@example.invalid')
+        await page.locator('select[name="goal"]').selectOption({index:1})
+        await page.locator('textarea[name="message"]').fill('Automated validation of the contact form without a real lead submission.')
+        await page.locator('button[type="submit"]').click()
+        await page.waitForURL(url=>url.pathname===base+'/hvala/',{timeout:9000})
+        if(!capturedLead||capturedLead.email!=='qa@example.invalid'||!capturedLead.goal)
+          mark('Contact form','Missing or incorrect outbound lead payload')
+
       }catch(error){mark('Interactive smoke',String(error).slice(0,650))}
       finally{await context.close()}
     }
