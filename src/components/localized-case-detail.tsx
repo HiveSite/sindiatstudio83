@@ -75,7 +75,7 @@ export function CaseStudyPageContent({slug,locale='sr'}:{slug:string;locale?:Sit
               {item.links.map((link) => <a key={link.href} className="button button-ghost button-small" href={link.href} target="_blank" rel="noreferrer" data-track="case_external_project">{link.label} ↗</a>)}
             </div> : null}
           </div>
-          <CaseCoverPlaceholder item={item} large />
+          <CaseCoverPlaceholder item={item} large altText={en ? item.title+' - project cover' : undefined} />
         </div>
       </div>
     </section>
