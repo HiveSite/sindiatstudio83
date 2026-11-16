@@ -54,11 +54,11 @@ const snapshotScript=()=>{
  while(walker.nextNode()){
   const el=walker.currentNode.parentElement
   if(!el||el.closest('script,style,noscript,template'))continue
-  const value=(walker.currentNode.nodeValue||'').replace(/\\s+/g,' ').trim()
+  const value=(walker.currentNode.nodeValue||'').replace(/\s+/g,' ').trim()
   if(value)textSegments.push(value)
  }
  const visibleText=main.innerText
- return {counts,seq,links,forms,documentOverflow,h1,language:document.documentElement.lang,text:visibleText.slice(0,4500),textSegmentCount:textSegments.length,serbianFragments:textSegments.filter(value=>/\\b(?:Početna opcija|Sve usluge|Pogledaj|Pošalji|Zatraži|Prijava kandidata|Saznaj više|Nijesi siguran|Najčešći izbor)\\b/i.test(value)).slice(0,8)}
+ return {counts,seq,links,forms,documentOverflow,h1,language:document.documentElement.lang,text:visibleText.slice(0,4500),textSegmentCount:textSegments.length,serbianFragments:textSegments.filter(value=>/\b(?:Početna opcija|Sve usluge|Pogledaj|Pošalji|Zatraži|Prijava kandidata|Saznaj više|Nijesi siguran|Najčešći izbor)\b/i.test(value)).slice(0,8)}
 }
 const browser=await chromium.launch({headless:true,args:['--no-sandbox']})
 let checked=0
