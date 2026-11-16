@@ -30,9 +30,9 @@ export const site = {
     ),
   },
   proof: [
-    { value: '9', label: 'projekata predstavljenih u portfoliju' },
-    { value: '20+', label: 'partnera i saradnika' },
-    { value: '150+', label: 'ljudi u mreži za angažmane i događaje' },
+    { value: '9', label: 'projekata u portfoliju' },
+    { value: '20+', label: 'saradnika i partnera' },
+    { value: '150+', label: 'ljudi u našoj mreži' },
   ],
 } as const
 
