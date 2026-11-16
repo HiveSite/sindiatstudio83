@@ -248,7 +248,7 @@ function MediaFigure({
       <div className={styles.mediaFrame}>
         <img
           src={image.src}
-          alt={altText || image.alt}
+          alt={image.alt}
           width={image.width}
           height={image.height}
           loading="lazy"
@@ -278,7 +278,7 @@ export function CaseCoverPlaceholder({ item, large = false, altText }: { item: C
         <img
           className={`${styles.coverImage}${large ? ` ${styles.fullCoverImage}` : ''}`}
           src={image.src}
-          alt={image.alt}
+          alt={altText || image.alt}
           width={image.width}
           height={image.height}
           loading={large ? 'eager' : 'lazy'}
