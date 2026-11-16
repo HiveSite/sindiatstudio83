@@ -27,7 +27,7 @@ const highlighted = [
     image: '/images/cases/promo-timovi/tim.webp',
     category: 'PROMO TIMOVI',
     title: 'Ljudi koji realizuju plan',
-    description: 'Izbor tima, opis projektaing, rasporedi, logistika i kontrola realizacije na terenu.',
+    description: 'Izbor tima, briefing, rasporedi, logistika i kontrola realizacije na terenu.',
     service: 'aktivacije-i-eventi',
   },
 ] as const
