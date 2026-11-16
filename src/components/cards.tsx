@@ -30,7 +30,7 @@ export function CaseCard({ item,locale='sr' }: { item: CaseStudy; locale?:SiteLo
 }
 
 export function CasePreviewCard({ item,locale='sr' }: { item: CaseStudy; locale?:SiteLocale }) {
-  const publicItem = withManagedThumbnail(getPublicCaseStudy(item))
+  const publicItem = withManagedThumbnail(locale==='en'?{...getPublicCaseStudy(item),...item}:getPublicCaseStudy(item))
   return (
     <article className="case-preview-card">
       <CaseCoverPlaceholder item={publicItem} />
