@@ -11,11 +11,11 @@ export const enServices = [
 ] as const
 
 export const enIndustries = [
-  {slug:'ugostiteljstvo-i-turizam',title:'Hospitality & tourism',summary:'Seasonal campaigns, direct enquiries, location content and digital support for hotels, venues, restaurants and travel experiences.'},
-  {slug:'retail-i-fmcg',title:'Retail & consumer brands',summary:'In-store promotions, coordinated teams, multiple locations and creative distribution for product launches and campaigns.'},
-  {slug:'eventi-i-venue',title:'Events & venues',summary:'Production, ticketing or registration journeys, event staff and communications for corporate and community events.'},
-  {slug:'nekretnine-i-premium-usluge',title:'Property & premium services',summary:'Presentation websites, targeted campaigns and content that make sophisticated offers easier to understand.'},
-  {slug:'poslodavci-i-zaposljavanje',title:'Employers & recruitment',summary:'Employer campaigns, job listings, applicant journeys and hiring communications.'},
+  {slug:'ugostiteljstvo-i-turizam',title:'Hospitality and tourism',summary:'Campaigns, direct enquiries, seasonal planning, content, local visibility and operational support for hotels, restaurants, beach bars, accommodation and tourism programmes.'},
+  {slug:'retail-i-fmcg',title:'Retail and FMCG',summary:'Product launches, point-of-sale promotions, promotional teams, multi-location logistics, content and digital follow-up to campaigns.'},
+  {slug:'eventi-i-venue',title:'Events and venues',summary:'Concept, promotion, registrations or ticket sales, production, staff, guest flow and content for private, corporate, educational and community events.'},
+  {slug:'nekretnine-i-premium-usluge',title:'Real estate and premium services',summary:'Clear digital presentation, campaigns for qualified enquiries, screening questions and contact tracking for offers with longer decision-making journeys.'},
+  {slug:'poslodavci-i-zaposljavanje',title:'Employers and recruitment',summary:'Employer offers, campaigns, easy applications, ImaPosla distribution and organization of the initial recruitment journey for seasonal, operational and other positions.'},
 ] as const
 
 export const enCaseSummaries = [
