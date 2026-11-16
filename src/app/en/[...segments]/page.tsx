@@ -10,7 +10,7 @@ import { enIndustryDetails } from '@/data/en-industry-details'
 import { cases } from '@/data/cases'
 import { serviceBySlug as canonicalServiceBySlug } from '@/data/services'
 import { blogPosts } from '@/data/blog'
-import { englishBlogBySlug, englishBlogPosts, plainEnglishExcerpt } from '@/data/en-blog'
+import { englishBlogPosts } from '@/data/en-blog'
 import { site } from '@/data/site'
 import { enLegalPages } from '@/data/en-legal'
 import { ServicesPageContent } from '@/components/localized-services-page'
@@ -79,7 +79,7 @@ export async function generateMetadata({params}:{params:Promise<{segments:string
   if(kind==='usluge'&&slug){const x=serviceBySlug[slug]||enAdServices[slug];if(!x)return {};title=x.title;description=x.summary}
   else if(kind==='radovi'&&slug){const x=caseCopyBySlug[slug];if(!x)return {};title=x.title;description=x.summary}
   else if(kind==='industrije'&&slug){const x=industryBySlug[slug];if(!x)return {};title=x.title;description=x.summary}
-  else if(kind==='blog'&&slug){const article=englishBlogBySlug[slug];title=article?.title||'Practical guide';description=article?plainEnglishExcerpt(article):'A practical guide from Sindikat Studio 83.'}
+  else if(kind==='blog'&&slug){const article=enBlogFullBySlug[slug];title=article?.title||'Practical guide';description=article?.description||'A practical guide from Sindikat Studio 83.'}
   else {const x=top.find(row=>row[0]===kind);if(x){title=x[1];description=x[2]}}
   const article=kind==='blog'&&slug?enBlogFullBySlug[slug]:undefined
   const caseImage=kind==='radovi'&&slug?caseBySlug[slug]?.socialImage?.src||caseBySlug[slug]?.coverImage?.src:undefined
@@ -121,7 +121,7 @@ export default async function EnglishPages({params}:{params:Promise<{segments:st
   if(kind==='kontakt')return <div lang="en"><ContactPageContent locale="en" /></div>
   if(kind==='hvala')return <div lang="en"><ThankYouPageContent locale="en" /></div>
   if(kind==='blog'&&!slug)return <div lang="en"><BlogPageContent locale="en" /></div>
-  if(kind==='blog'&&slug&&englishBlogBySlug[slug])return <div lang="en"><ArticlePageContent slug={slug} locale="en" /></div>
+  if(kind==='blog'&&slug&&enBlogFullBySlug[slug])return <div lang="en"><ArticlePageContent slug={slug} locale="en" /></div>
   if(kind==='privatnost'||kind==='kolacici'||kind==='uslovi-koriscenja')return <div lang="en"><LegalPageContent slug={kind} locale="en" /></div>
 
   notFound()
