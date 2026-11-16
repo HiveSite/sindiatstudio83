@@ -14,6 +14,7 @@ import { enProducts } from '@/data/en-products'
 
 import { localeHref,translate,type SiteLocale } from '@/lib/locale'
 import { createMetadata } from '@/lib/metadata'
+import { buyerSeo } from '@/data/buyer-seo'
 import { breadcrumbSchema, itemListSchema, serviceSchema, webPageSchema } from '@/lib/schema'
 
 export const dynamicParams = false
@@ -46,7 +47,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const { slug } = await params
   const service = serviceBySlug[slug]
   if (!service) return {}
-  const seo = serviceSeo[slug]
+  const seo = buyerSeo[slug]?.sr || serviceSeo[slug]
   return createMetadata({
     title: seo?.title || `${service.shortTitle} u Crnoj Gori - usluge i cijene`,
     description: seo?.description || service.summary,
