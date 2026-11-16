@@ -28,7 +28,7 @@ export function IndustryPageContent({slug,locale='sr'}:{slug:string;locale?:Site
       ? ['aktivacije-i-eventi', 'sadrzaj-za-kampanje', 'performance-marketing']
       : ['performance-marketing', 'web-i-konverzije', 'sadrzaj-za-kampanje']
   const relatedServices = relatedSlugs.map((value) => localizedService(value,locale)).filter((service): service is NonNullable<typeof service> => service !== undefined)
-  const relatedCases = item.caseSlugs.map((value) => localizedCase(value,locale)).filter(Boolean)
+  const relatedCases = item.caseSlugs.map((value) => localizedCase(value,locale)).filter((project):project is NonNullable<typeof project> => project !== undefined)
 
   return <>
     <JsonLd data={[
