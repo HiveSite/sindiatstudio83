@@ -3,6 +3,15 @@ import { cases,caseBySlug } from '@/data/cases'
 import { enCaseParity } from '@/data/en-case-parity'
 import type { SiteLocale } from '@/lib/locale'
 
+const translatedExternalCaseLinks:Record<string,string> = {
+ 'Pogledaj ImaPosla.me':'View ImaPosla.me',
+ 'Pogledaj BattleBotsArena.me':'View BattleBotsArena.me',
+ 'Pogledaj HiveAgency.me':'View HiveAgency.me',
+ 'Pogledaj Sindikat Events':'View Sindikat Events',
+ 'Stan na dan':'Short-stay apartment',
+ 'Grafičke mape':'Graphical maps'
+}
+
 type CaseTranslation={
  type:string;role:string;coverLabel:string;scope:string[];
  metrics?:string[][];subprojects?:[string,string][]
@@ -230,6 +239,7 @@ export const translatedCases:CaseStudy[]=cases.map(item=>{
  if((extra.subprojects?.length||0)!==(item.subprojects?.length||0))throw new Error('Case study subproject count differs: '+item.slug)
  return {
   ...item,type:extra.type,title:en.title,summary:en.summary,role:extra.role,
+  links:item.links?.map(link=>({...link,label:translatedExternalCaseLinks[link.label]||link.label})),
   challenge:detail.challenge,solution:detail.solution,result:detail.result,
   coverLabel:extra.coverLabel,scope:[...extra.scope],
   metrics:extra.metrics,
