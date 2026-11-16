@@ -5,20 +5,22 @@ import { enServiceDetails } from '@/data/en-service-details'
 import { enIndustryDetails } from '@/data/en-industry-details'
 import { industries, industryBySlug } from '@/data/industries'
 import { enProducts } from '@/data/en-products'
+import { enServiceParity } from '@/data/en-service-parity'
 import type { SiteLocale } from '@/lib/locale'
 
 export function localizedService(slug:string,locale:SiteLocale):Service|undefined {
  const original=serviceBySlug[slug]
  if(!original || locale==='sr')return original
  const basic=enServices.find(item=>item.slug===slug)
+ const translated=enServiceParity[slug]
  const detail=enServiceDetails[slug]
  const product=enProducts[slug]
- if(!basic||!detail||!product)throw new Error('Missing English service translation for '+slug)
+ if(!basic||!detail||!product||!translated)throw new Error('Missing English service translation for '+slug)
  const needed={
-  outcomes:basic.benefits, bestFor:detail.bestFor,
+  outcomes:translated.outcomes, bestFor:detail.bestFor,
   clientInputs:detail.needFromYou, successSignals:detail.successSignals,
   includes:detail.includes, process:detail.process,
-  engagements:product, faq:detail.faq
+  engagements:translated.engagements, faq:detail.faq
  }
  const expected={
   outcomes:original.outcomes, bestFor:original.bestFor,
@@ -30,12 +32,12 @@ export function localizedService(slug:string,locale:SiteLocale):Service|undefine
   if(needed[key].length!==expected[key].length)throw new Error('EN service content mismatch: '+slug+' '+key+' SR='+expected[key].length+' EN='+needed[key].length)
  }
  return {
-  ...original,eyebrow:'OUR SERVICES',title:basic.title,shortTitle:basic.title,summary:basic.summary,
-  outcomes:[...basic.benefits],
+  ...original,eyebrow:translated.eyebrow,title:translated.title,shortTitle:translated.shortTitle,summary:translated.summary,
+  outcomes:[...translated.outcomes],
   bestFor:[...detail.bestFor],clientInputs:[...detail.needFromYou],
   successSignals:[...detail.successSignals],includes:[...detail.includes],
   process:detail.process.map(step=>[step.name,step.text]),
-  engagements:product.map(entry=>({name:entry.name,text:entry.description})),
+  engagements:[...translated.engagements],
   faq:detail.faq.map(entry=>[entry.question,entry.answer])
  }
 }
