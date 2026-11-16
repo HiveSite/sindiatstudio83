@@ -26,8 +26,8 @@ export function PricingPageContent({locale='sr'}:{locale?:SiteLocale}) {
     <section className="page-hero demo-pricing-hero"><div className="container">
       <Breadcrumbs items={crumbs} locale={locale}/>
       <span className="eyebrow">{t("Jasno od početka","Clear from the start")}</span>
-      <h1>{t("Pogledaj cijene. Izaberi kako da sarađujemo.","Explore prices. Choose how we can work together.")}</h1>
-      <p className="lead">{t("Pogledaj početne cijene za kampanje, sadržaj, sajtove i događaje. Prije početka dogovaramo tačno šta radiš sa nama, koliko traje i šta dobijaš.","Explore starting prices for campaigns, content, websites and events. Before work begins, we agree exactly what we will deliver, how long it will take and what is included.")}</p>
+      <h1>{t("Jasne početne cijene. Tačno dogovoren obim.","Clear starting prices. Agreed deliverables.")}</h1>
+      <p className="lead">{t("Pronađi okvirnu cijenu, uporedi uključene stavke i pošalji upit. Ne nudimo neograničeni rad po fiksnoj početnoj cijeni - svaka saradnja ima definisane isporuke, rok i odgovornosti.","Find a starting price, compare included deliverables and send an enquiry. A starting price does not mean unlimited work - every engagement has agreed deliverables, deadlines and responsibilities.")}</p>
       <div className="button-row"><Link className="button button-primary" href={href('/kontakt/?izvor=cijene-hero')}>{t("Zatraži ponudu","Request a proposal")}</Link><a className="button button-ghost" href="#pregled-cijena">{t("Pregledaj opcije","Browse options")}</a></div>
     </div></section>
 
@@ -44,7 +44,7 @@ export function PricingPageContent({locale='sr'}:{locale?:SiteLocale}) {
           </article>)}</div>
         </section>
       })}
-      <p className="demo-pricing-fineprint">{t("Navedene cijene predstavljaju početne okvire iz aktuelnog kataloga, ne konačnu obavezujuću ponudu. Troškovi oglašavanja, spoljašnjih dobavljača, transporta i dodatne produkcije definišu se zasebno kada su primjenjivi.","The listed amounts are starting prices from the current service catalogue, not binding quotations. Advertising spend, external suppliers, transport and additional production are quoted separately where applicable.")}</p>
+      <div className="pricing-trust-note"><strong>{t('Kako čitati ove cijene','How to read these prices')}</strong><p>{t('Početna cijena odnosi se na opisani osnovni obim. Tačan broj materijala, revizija, rokovi i eventualni dodatni troškovi potvrđuju se pisanom ponudom prije početka rada. Ako ti treba širi obim, ne moraš kupovati više malih paketa - pripremićemo jednu objedinjenu ponudu.','Each starting price covers the basic scope described. Exact asset quantities, revisions, deadlines and additional costs are confirmed in a written proposal before work begins. For broader needs, we can prepare one consolidated proposal instead of several small packages.')}</p></div><p className="demo-pricing-fineprint">{t("Navedene cijene predstavljaju početne okvire iz aktuelnog kataloga, ne konačnu obavezujuću ponudu. Troškovi oglašavanja, spoljašnjih dobavljača, transporta i dodatne produkcije definišu se zasebno kada su primjenjivi.","The listed amounts are starting prices from the current service catalogue, not binding quotations. Advertising spend, external suppliers, transport and additional production are quoted separately where applicable.")}</p>
     </div></section>
     <section className="section section-dark"><div className="container demo-pricing-models"><div><span className="eyebrow">{t("Kako se dogovaramo","Working together")}</span><h2>{t("Tri načina da krenemo.","Three ways to get started.")}</h2></div><div className="demo-pricing-model-grid">
       <div><span>01</span><h3>{t("Jedan zadatak","One assignment")}</h3><p>{t("Jasno definisana isporuka sa konkretnim rokom.","A clearly defined deliverable with a firm deadline.")}</p></div>
