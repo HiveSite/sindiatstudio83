@@ -117,12 +117,12 @@ export const caseTranslations:Record<string,CaseTranslation> = {
     ],
     "subprojects": [
       [
-        "Hospitality venue promotions",
-        "Promotional staffing, preparation and branded venue execution for adult audiences under agreed professional standards."
+        "Jägermeister activations",
+        "Promotional teams, preparation and branded execution at hospitality venues for adult audiences, following pre-agreed presentation standards."
       ],
       [
-        "Multi-location brand activations",
-        "Coordination of promotional teams, venue setup, communication and documentation under consistent standards across locations."
+        "Jack Daniel’s activations",
+        "Coordinating an adult promotional team, venue setup, location communication and documentation under the same operating process."
       ]
     ]
   },
