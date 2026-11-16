@@ -135,13 +135,30 @@ for(const article of blog){
  // survive translation. We intentionally exclude numbers inside HTML attributes.
  const srSegments=[...article.body.matchAll(/>([^<>]+)</g)]
    .map(m=>m[1].trim()).filter(v=>v&&/[A-Za-zÀ-ž]/.test(v))
- const numericFacts=text=>(text.match(/\d+(?:[.,]\d+)*/g)||[])
-   .map(token=>token.replace(/[.,]/g,'')).sort()
+ const smallNumbers=['zero','one','two','three','four','five','six','seven','eight','nine','ten','eleven','twelve','thirteen','fourteen','fifteen','sixteen','seventeen','eighteen','nineteen']
+ const tens=['','','twenty','thirty','forty','fifty','sixty','seventy','eighty','ninety']
+ const numberName=n=>{
+   if(n<20)return smallNumbers[n]
+   if(n<100)return tens[Math.floor(n/10)]+(n%10?' '+smallNumbers[n%10]:'')
+   if(n<1000)return smallNumbers[Math.floor(n/100)]+' hundred'+(n%100?' '+numberName(n%100):'')
+   return ''
+ }
+ // English may spell a number out (e.g. "eight to ten"), and a 24-hour
+ // Serbian time may use the equivalent 12-hour form (19h -> 7pm).
+ const numericClaimPresent=(n,english)=>{
+   const text=english.toLowerCase()
+   if(new RegExp('(^|\\D)'+n+'(?=\\D|$)').test(text))return true
+   const spoken=numberName(n)
+   if(spoken&&new RegExp('\\b'+spoken.replace(/ /g,'[ -]')+'\\b').test(text))return true
+   if(n===100&&/\ba hundred\b/.test(text))return true
+   if(n>=13&&n<=23&&new RegExp('\\b'+(n-12)+'\\s*(?:pm|p\\.m\\.)\\b').test(text))return true
+   return false
+ }
  for(let i=0;i<Math.min(srSegments.length,e.segments.length);i++){
-   const sourceNumbers=numericFacts(srSegments[i])
-   const englishNumbers=numericFacts(e.segments[i])
-   check(JSON.stringify(sourceNumbers)===JSON.stringify(englishNumbers),
-     article.slug+' segment '+i+' numeric facts differ: SR '+sourceNumbers.join(',')+' / EN '+englishNumbers.join(','))
+   const numbers=[...new Set((srSegments[i].match(/\d+(?:[.,]\d+)*/g)||[]).map(v=>Number(v.replace(/[.,]/g,''))))]
+   for(const n of numbers)
+     check(numericClaimPresent(n,e.segments[i]),
+       article.slug+' segment '+i+' missing source numeric claim '+n+' in EN')
  }
 }
 const result={...reports,totalContentUnits:Object.values(reports).reduce((a,b)=>a+b,0),issues}
