@@ -1,6 +1,6 @@
 import type { CaseStudy } from '@/types/content'
 import { cases,caseBySlug } from '@/data/cases'
-import { enCaseSummaries,enCaseDetails } from '@/data/en'
+import { enCaseParity } from '@/data/en-case-parity'
 import type { SiteLocale } from '@/lib/locale'
 
 type CaseTranslation={
@@ -221,8 +221,8 @@ export const caseTranslations:Record<string,CaseTranslation> = {
   }
 }
 export const translatedCases:CaseStudy[]=cases.map(item=>{
- const en=enCaseSummaries.find(value=>value.slug===item.slug)
- const detail=enCaseDetails[item.slug]
+ const en=enCaseParity[item.slug]
+ const detail=enCaseParity[item.slug]
  const extra=caseTranslations[item.slug]
  if(!en||!detail||!extra)throw new Error('Case study missing English localization: '+item.slug)
  if(extra.scope.length!==item.scope.length)throw new Error('Case study scope count differs: '+item.slug)
