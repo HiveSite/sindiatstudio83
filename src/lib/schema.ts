@@ -56,7 +56,7 @@ export function websiteSchema(): JsonLdValue {
     alternateName: site.shortName,
     url: site.domain,
     description: 'Digitalni marketing, web, aktivacije, događaji, sadržaj i operativni timovi u Crnoj Gori.',
-    inLanguage: site.locale,
+    inLanguage: [site.locale, 'en'],
     publisher: { '@id': `${site.domain}/#organization` },
   }
 }
