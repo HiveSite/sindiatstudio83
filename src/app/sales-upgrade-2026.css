@@ -39,3 +39,12 @@
 .about-work-gallery strong{padding:16px 18px 0;color:#17151a;font-size:21px}
 .about-work-gallery span{padding:4px 18px 0;color:#625e68;font-size:13px}
 @media(max-width:760px){.about-work-gallery{grid-template-columns:1fr}.about-work-gallery img{aspect-ratio:16/10}}
+
+.local-service-links{background:#101017}
+.local-service-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.local-service-grid>a{display:flex;flex-direction:column;min-width:0;padding:26px;border:1px solid rgba(255,255,255,.16);border-radius:19px;background:rgba(255,255,255,.035)}
+.local-service-grid>a:hover{border-color:rgba(255,255,255,.4)}
+.local-service-grid h3{font-size:clamp(19px,2vw,26px);margin:0 0 12px}
+.local-service-grid p{font-size:14px;line-height:1.6}
+.local-service-grid span{font-weight:800;color:#fff;font-size:13px;margin-top:auto}
+@media(max-width:760px){.local-service-grid{grid-template-columns:1fr}.local-service-grid>a{padding:21px}}
