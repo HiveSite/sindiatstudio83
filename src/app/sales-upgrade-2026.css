@@ -1,0 +1,50 @@
+/* Client-first P0/P1/P2 enhancements - shared by SR and EN. */
+.pricing-trust-note{margin:18px 0 25px;border:1px solid rgba(20,19,24,.16);background:#fff;border-radius:18px;padding:22px 25px;max-width:920px}
+.pricing-trust-note strong{font-size:17px;color:#141318}
+.pricing-trust-note p{margin:9px 0 0;color:#57525b;font-size:14px;line-height:1.65}
+.proof-first-portfolio{display:flex;align-items:center;gap:25px;padding:25px 30px;border-radius:19px;border:1px solid rgba(255,255,255,.18)}
+.proof-first-portfolio strong{font-size:clamp(20px,2.4vw,30px);letter-spacing:-.04em;flex:0 0 32%}
+.proof-first-portfolio p{margin:0;font-size:15px;line-height:1.65}
+.lead-form-intro{margin:0 0 22px;font-size:15px;line-height:1.6;max-width:55ch;color:var(--muted)}
+.lead-form-advanced{min-width:0;margin:10px 0 4px;border:1px solid rgba(255,255,255,.22);border-radius:15px;padding:0 16px;overflow:visible}
+.lead-form-advanced summary{padding:17px 0;cursor:pointer;font-weight:800;color:#fff;list-style-position:inside}
+.lead-form-advanced[open] summary{border-bottom:1px solid rgba(255,255,255,.16)}
+.lead-form-advanced-fields{padding:18px 0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.lead-form-advanced-fields label{min-width:0}
+.lead-form-advanced-fields label.form-span{grid-column:1/-1}
+.article-next-step .container{display:flex;align-items:center;justify-content:space-between;gap:35px}
+.article-next-step .container>div:first-child{max-width:640px}
+.article-next-step h2{font-size:clamp(29px,3.5vw,46px);margin:15px 0 12px}
+.article-next-step .button-row{justify-content:flex-end;max-width:330px}
+.article-next-step .button-row .button{min-width:175px}
+.demo-hero-copy h1{font-size:clamp(45px,5.6vw,88px);line-height:.98;letter-spacing:-.068em;max-width:990px}
+.demo-hero-copy{width:min(100%,970px)}
+.demo-hero-copy h1 span{overflow-wrap:normal}
+@media(max-width:760px){
+ .demo-hero-copy h1{font-size:clamp(31px,7.2vw,55px);line-height:1.06;letter-spacing:-.057em;overflow-wrap:normal}
+ .proof-first-portfolio,.article-next-step .container{display:block}
+ .proof-first-portfolio strong{display:block;margin-bottom:10px}
+ .article-next-step .button-row{margin-top:24px;max-width:none;justify-content:stretch}
+ .article-next-step .button-row .button{min-width:0;flex:1 1 100%}
+ .lead-form-advanced-fields{grid-template-columns:1fr}
+ .pricing-trust-note{padding:19px}
+}
+@media(max-width:370px){.demo-hero-copy h1{font-size:clamp(29px,7.5vw,38px)}}
+
+.about-real-work .home-sales-heading{margin-bottom:30px}
+.about-work-gallery{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.about-work-gallery a{display:flex;flex-direction:column;min-width:0;background:#fff;border:1px solid rgba(20,19,24,.15);border-radius:18px;overflow:hidden;padding-bottom:20px}
+.about-work-gallery a:hover{transform:translateY(-2px)}
+.about-work-gallery img{width:100%;aspect-ratio:3/2;object-fit:cover}
+.about-work-gallery strong{padding:16px 18px 0;color:#17151a;font-size:21px}
+.about-work-gallery span{padding:4px 18px 0;color:#625e68;font-size:13px}
+@media(max-width:760px){.about-work-gallery{grid-template-columns:1fr}.about-work-gallery img{aspect-ratio:16/10}}
+
+.local-service-links{background:#101017}
+.local-service-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.local-service-grid>a{display:flex;flex-direction:column;min-width:0;padding:26px;border:1px solid rgba(255,255,255,.16);border-radius:19px;background:rgba(255,255,255,.035)}
+.local-service-grid>a:hover{border-color:rgba(255,255,255,.4)}
+.local-service-grid h3{font-size:clamp(19px,2vw,26px);margin:0 0 12px}
+.local-service-grid p{font-size:14px;line-height:1.6}
+.local-service-grid span{font-weight:800;color:#fff;font-size:13px;margin-top:auto}
+@media(max-width:760px){.local-service-grid{grid-template-columns:1fr}.local-service-grid>a{padding:21px}}

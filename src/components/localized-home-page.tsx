@@ -36,10 +36,10 @@ export function HomePageContent({locale = 'sr'}: {locale?: SiteLocale}) {
         <div className="container demo-hero-content">
           <div className="demo-hero-copy">
             <span className="eyebrow">{t('Nezavisni kreativni i produkcijski studio / Podgorica','Independent creative and production studio / Podgorica')}</span>
-            <h1><span>{t('IDEJE.','IDEAS.')}</span><span>{t('LJUDI.','PEOPLE.')}</span><span className="demo-hero-accent">{t('REALIZACIJA.','EXECUTION.')}</span></h1>
-            <p className="lead">{t('Vodimo kampanje, snimamo sadržaj, pravimo sajtove i organizujemo događaje. Od prve ideje do posljednjeg detalja - sve drži jedan tim.','We run campaigns, produce content, build websites and organize events. From the first idea to the final detail, one team takes responsibility for delivery.')}</p>
+            <h1><span>{t('OD IDEJE','FROM AN IDEA')}</span><span>{t('DO KAMPANJE','TO A CAMPAIGN')}</span><span className="demo-hero-accent">{t('KOJA RADI.','THAT WORKS.')}</span></h1>
+            <p className="lead">{t('Marketing, web, sadržaj i događaji - planiramo, kreiramo i realizujemo ono što tvom biznisu stvarno treba. Jedan tim, jasna odgovornost i konkretan dogovor.','Marketing, websites, content and events - we plan, create and deliver what your business actually needs. One team, clear ownership and a concrete plan.')}</p>
             <div className="button-row demo-hero-actions">
-              <Link className="button button-primary" href={href("/kontakt/?izvor=hero")} data-track="hero_contact">{t('Hajde da radimo ↗','Let’s work together ↗')}</Link>
+              <Link className="button button-primary" href={href("/kontakt/?izvor=hero")} data-track="hero_contact">{t('Zatraži ponudu ↗','Request a proposal ↗')}</Link>
               <Link className="button button-ghost" href={href("/radovi/")} data-track="hero_work">{t('Pogledaj naše radove ↗','Explore our work ↗')}</Link>
             </div>
             <div className="demo-hero-subline">{t('Podgorica · cijela Crna Gora / Jedan tim, više disciplina.','Podgorica · all of Montenegro / One team, multiple disciplines.')}</div>
@@ -47,13 +47,13 @@ export function HomePageContent({locale = 'sr'}: {locale?: SiteLocale}) {
         </div>
       </section>
 
-      <section className="proof-strip"><div className="container proof-grid"><div className="proof-intro">{t('Ne ostajemo na lijepoj prezentaciji.','More than just a presentation.')}</div>{site.proof.map((item,i) => <div className="proof-stat" key={item.value}><strong>{item.value}</strong><span>{english ? ['projects showcased in our portfolio','partners and collaborators','people in our event and field network'][i] || item.label : item.label}</span></div>)}</div></section>
+      <section className="proof-strip"><div className="container proof-grid"><div className="proof-intro">{t('Iza svake usluge stoje stvarni projekti.','Real projects behind our services.')}</div>{site.proof.map((item,i) => <div className="proof-stat" key={item.value}><strong>{item.value}</strong><span>{english ? ['projects showcased in our portfolio','partners and collaborators','people in our event and field network'][i] || item.label : item.label}</span></div>)}</div></section>
+
+      <HomeProjectHighlights locale={locale} />
 
       <HomeQuickChoices locale={locale} />
 
       <HomeServiceDirectory locale={locale} />
-
-      <HomeProjectHighlights locale={locale} />
 
       <OfferChooser locale={locale} />
 
