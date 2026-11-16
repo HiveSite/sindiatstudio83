@@ -52,7 +52,13 @@ const sharedPageSources = {
   'src/app/cijene/page.tsx': 'src/components/localized-pricing-page.tsx',
   'src/app/industrije/page.tsx': 'src/components/localized-industries-page.tsx',
   'src/app/usluge/[slug]/page.tsx': 'src/components/localized-service-detail.tsx',
-  'src/app/industrije/[slug]/page.tsx': 'src/components/localized-industry-detail.tsx'
+  'src/app/industrije/[slug]/page.tsx': 'src/components/localized-industry-detail.tsx',
+  'src/app/radovi/page.tsx': 'src/components/localized-works-page.tsx',
+  'src/app/blog/page.tsx': 'src/components/localized-blog-page.tsx',
+  'src/app/o-nama/page.tsx': 'src/components/localized-about-page.tsx',
+  'src/app/kontakt/page.tsx': 'src/components/localized-contact-page.tsx',
+  'src/app/radovi/[slug]/page.tsx': 'src/components/localized-case-detail.tsx',
+  'src/app/blog/[slug]/page.tsx': 'src/components/localized-blog-article.tsx'
 }
 const fullPageSource = file => read(file)+(sharedPageSources[file] ? '\n'+read(sharedPageSources[file]) : '')
 
@@ -66,7 +72,7 @@ for (const file of hubPages) {
 }
 
 for (const file of ['src/app/o-nama/page.tsx', 'src/app/kontakt/page.tsx']) {
-  const text = read(file)
+  const text = fullPageSource(file)
   if (!text.includes('webPageSchema')) fail(`${file} must expose page-specific structured data`)
   const h1Count = (text.match(/<h1\b/g) || []).length
   if (h1Count !== 1) fail(`${file} should contain exactly one explicit H1, found ${h1Count}`)
@@ -84,8 +90,8 @@ for (const file of detailPages) {
   if (!text.includes('webPageSchema')) fail(`${file} is missing WebPage structured data`)
 }
 if (!fullPageSource('src/app/usluge/[slug]/page.tsx').includes('serviceSchema')) fail('Service detail pages are missing Service structured data')
-if (!read('src/app/blog/[slug]/page.tsx').includes("'@type': 'BlogPosting'")) fail('Blog articles must use BlogPosting structured data')
-if (!read('src/app/radovi/[slug]/page.tsx').includes('href={`/usluge/${service.slug}/`}')) fail('Case studies must link disciplines to service pages')
+if (!fullPageSource('src/app/blog/[slug]/page.tsx').includes("'@type': 'BlogPosting'")) fail('Blog articles must use BlogPosting structured data')
+if (!fullPageSource('src/app/radovi/[slug]/page.tsx').includes('href={href(`/usluge/${service.slug}/`)}')) fail('Case studies must link disciplines to service pages')
 
 const posts = JSON.parse(read('src/data/blog-posts.json'))
 const titles = new Set()
