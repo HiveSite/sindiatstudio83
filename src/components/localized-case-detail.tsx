@@ -32,7 +32,7 @@ export function CaseStudyPageContent({slug,locale='sr'}:{slug:string;locale?:Sit
   const path = href(`/radovi/${item.slug}/`)
   const crumbs = [{ label: t('Radovi','Projects'), href: href('/radovi/') }, { label: item.title, href: path }]
   const metrics = item.metrics || []
-  const linkedServices = item.serviceSlugs.map((serviceSlug) => localizedService(serviceSlug,locale)).filter(Boolean)
+  const linkedServices = item.serviceSlugs.map((serviceSlug) => localizedService(serviceSlug,locale)).filter((service): service is NonNullable<typeof service> => service !== undefined)
 
   return <>
     <JsonLd data={[
