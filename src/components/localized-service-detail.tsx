@@ -8,6 +8,7 @@ import { SectionHeading } from '@/components/section-heading'
 import { cases } from '@/data/cases'
 import { serviceBySlug, services } from '@/data/services'
 import { serviceProducts } from '@/data/service-products'
+import { localizedCase } from '@/data/localized-cases'
 import { enProducts } from '@/data/en-products'
 import { localizedService } from '@/lib/localized-data'
 import { localeHref,translate,type SiteLocale } from '@/lib/locale'
@@ -25,7 +26,7 @@ export function ServicePageContent({ slug, locale='sr' }: { slug: string; locale
   const path = href(`/usluge/${service.slug}/`)
   const crumbs = [{ label: t('Usluge','Services'), href: href('/usluge/') }, { label: service.shortTitle, href: path }]
   const relatedServices = services.filter((item) => item.slug !== service.slug).slice(0, 4).map(item=>localizedService(item.slug,locale)!).filter(Boolean)
-  const relatedCases = cases.filter((item) => item.serviceSlugs.includes(service.slug)).slice(0, 2)
+  const relatedCases = cases.filter((item) => item.serviceSlugs.includes(service.slug)).slice(0, 2).map(item=>localizedCase(item.slug,locale)!).filter(Boolean)
   const schemas = [
     breadcrumbSchema(crumbs),
     webPageSchema({
@@ -80,10 +81,10 @@ export function ServicePageContent({ slug, locale='sr' }: { slug: string; locale
     <section className="section section-light" id="proizvodi"><div className="container">
       <SectionHeading eyebrow={t("Proizvodi i cijene","Products and prices")} title={t("Izaberite konkretan obim, ne apstraktan paket.","Choose a specific scope, not a vague package.")} text={t("Svaki proizvod ima jasan početni okvir i definisanu namjenu. Ako projekat prelazi standardni obim, cijenu formiramo nakon kratkog briefa.","Each product has a defined purpose and starting price. We quote custom work following a short brief.")} />
       <div className="product-pricing-grid">
-        {products.map((product) => <article className={`product-price-card${product.featured ? ' is-featured' : ''}`} key={product.name}>
-          <div className="product-price-top"><span>{product.featured ? 'Najčešći izbor' : 'Proizvod'}</span><h2>{product.name}</h2><strong>{product.price}</strong><p>{product.description}</p></div>
+        {products.map((product,index) => <article className={`product-price-card${product.featured ? ' is-featured' : ''}`} key={product.name}>
+          <div className="product-price-top"><span>{product.featured ? t('Najčešći izbor','Most popular') : t('Proizvod','Product')}</span><h2>{product.name}</h2><strong>{product.price}</strong><p>{product.description}</p></div>
           <ul>{product.includes.map((item) => <li key={item}>{item}</li>)}</ul>
-          <Link className={`button ${product.featured ? 'button-primary' : 'button-dark'}`} href={href(`/kontakt/?usluga=${service.slug}&proizvod=${encodeURIComponent(product.name)}`)}>{t("Zatraži ovaj proizvod","Request this product")}</Link>
+          <Link className={`button ${product.featured ? 'button-primary' : 'button-dark'}`} href={href(`/kontakt/?usluga=${service.slug}&proizvod=${encodeURIComponent(serviceProducts[service.slug]?.[index]?.name || product.name)}`)}>{t("Zatraži ovaj proizvod","Request this product")}</Link>
         </article>)}
       </div>
     </div></section>
@@ -107,7 +108,7 @@ export function ServicePageContent({ slug, locale='sr' }: { slug: string; locale
 
     {relatedCases.length ? <section className="section section-light"><div className="container">
       <SectionHeading eyebrow={t("Dokaz u praksi","Evidence in practice")} title={t("Pogledaj kako smo ovu uslugu koristili na stvarnim projektima.","See how this service has worked in real projects.")} text={t("Case study je važniji od dodatnog obećanja. Prikazujemo kontekst, našu ulogu i konkretan obim.","Practical case studies demonstrate the context, our role and the scope better than additional promises.")} />
-      <div className="case-preview-grid">{relatedCases.map((item) => <CasePreviewCard key={item.slug} item={item} />)}</div>
+      <div className="case-preview-grid">{relatedCases.map((item) => <CasePreviewCard key={item.slug} item={item} locale={locale} />)}</div>
     </div></section> : null}
 
     <section className="section"><div className="container faq-layout"><div><span className="eyebrow">{t("Pitanja","Questions")}</span><h2>{t("Najčešće prije kupovine.","Common questions before starting.")}</h2><p>{t("Ne treba nam duga dokumentacija da bismo razumjeli tvoj cilj. Dovoljni su rok, okvir, ono što već postoji i nekoliko ključnih informacija.","A long specification is not needed. A timeline, approximate budget, existing materials and a few key details are enough.")}</p></div><FaqList items={service.faq} /></div></section>
