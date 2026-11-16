@@ -20,6 +20,7 @@ import './demo-pricing.css'
 import './demo-home-choices.css'
 import './demo-hero.css'
 import './responsive-browser-qa.css'
+import './sales-upgrade-2026.css'
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.domain),
