@@ -20,7 +20,7 @@ export const enCaseSummaries = [
   {slug:'imaposla-digitalni-proizvod',title:'ImaPosla.me - a jobs and services platform',summary:'A digital product connecting employers, candidates, short-term assignments and local services. Our work covered product positioning, journeys, site development and distribution.'},
   {slug:'battlebots-arena',title:'BattleBots Arena - a multi-stage education event',summary:'A programme bringing together registrations, workshops, mentors, competition logistics and the final arena event.'},
   {slug:'sistem-za-terenske-angazmane',title:'Field team coordination system',summary:'Planning people, shifts, briefings, locations, transport and reporting for promotional and event projects.'},
-  {slug:'aktivacije-regulisanih-brendova',title:'Professional brand activations',summary:'Coordinating adult promotional teams, briefings, schedules, venue requirements and documented operational standards for regulated-brand activations.'},
+  {slug:'aktivacije-regulisanih-brendova',title:'Jägermeister and Jack Daniel’s brand activations',summary:'Organizing adult promotional teams, preparing messaging and branded setups, coordinating with hospitality venues and documenting the execution.'},
   {slug:'privatni-i-korporativni-dogadjaji',title:'Private & corporate events',summary:'A single operational partner for programmes, suppliers, venues, people and production.'},
   {slug:'mini-sajtovi-i-digitalni-alati',title:'Microsites & digital tools',summary:'Practical websites and online tools for creative partners, events, performers and local businesses.'},
   {slug:'hive-agency-platforma',title:'Hive Agency - a team-building catalogue',summary:'An online catalogue helping companies explore programmes and request a tailored group experience.'},
