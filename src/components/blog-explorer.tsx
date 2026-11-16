@@ -37,9 +37,11 @@ export function BlogExplorer({ initialPosts, locale='sr' }: { initialPosts: Blog
       </div>
       <p className="result-count" aria-live="polite">{en?"Showing":"Prikazano:"} {filtered.length} {en?"of":"od"} {initialPosts.length} {en?"articles.":"tekstova."}</p>
       <div className="blog-grid">
-        {filtered.map((post) => <article className="blog-card" key={post.slug}>
-          <Image src={post.cover} width={1280} height={720} loading="lazy" sizes="(max-width: 620px) 100vw, (max-width: 1080px) 50vw, 33vw" alt={post.coverAlt} />
-          <div className="blog-card-copy"><span>{en?englishCategories[post.category]||post.category:categoryLabels[post.category]||post.category}</span><h2>{post.title}</h2><p>{post.excerpt}</p><Link href={localeHref(locale,`/blog/${post.slug}/`)}>{en?'Read article ↗':'Pročitaj tekst ↗'}</Link></div>
+        {filtered.map((post) => <article className="blog-card blog-card-editorial" key={post.slug}>
+          <Link className="blog-card-media" href={localeHref(locale,`/blog/${post.slug}/`)} aria-label={en ? `Read: ${post.title}` : `Pročitaj: ${post.title}`}>
+            <Image src={post.cover} width={1000} height={1000} loading="lazy" sizes="(max-width: 620px) 100vw, (max-width: 1080px) 50vw, 33vw" alt={post.coverAlt} />
+          </Link>
+          <div className="blog-card-copy"><span>{en?englishCategories[post.category]||post.category:categoryLabels[post.category]||post.category}</span><h2><Link href={localeHref(locale,`/blog/${post.slug}/`)}>{post.title}</Link></h2><p>{post.excerpt}</p><Link className="blog-card-read" href={localeHref(locale,`/blog/${post.slug}/`)}>{en?'Read the guide ↗':'Pročitaj vodič ↗'}</Link></div>
         </article>)}
       </div>
       {!filtered.length ? <div className="empty-state"><h2 >{en?'No results':'Nema rezultata'}</h2><p>{en?'Try another term or reset the filter to All.':'Probaj drugu riječ ili vrati filter na Sve.'}</p></div> : null}
