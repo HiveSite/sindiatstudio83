@@ -24,7 +24,7 @@ export function HomeQuickChoices({locale='sr'}:{locale?:SiteLocale}) {
     <div className="container">
       <div className="home-sales-heading"><div><span className="eyebrow">{t('BRZI IZBOR / 20 SEKUNDI','QUICK CHOICE / 20 SECONDS')}</span><h2 id="quick-choice-title">{t('Šta treba da uradimo za tvoj biznis?','What do you need for your business?')}</h2></div><p>{t('Ne moraš znati naziv usluge. Izaberi rezultat koji želiš - odmah ćemo te odvesti do relevantne ponude.','You do not need to know the service name. Choose the outcome you want and we will show you the relevant offer.')}</p></div>
       <div className="v7-quick-list">{goals.map((goal,i)=><Link href={localeHref(locale,goal.href)} className="v7-quick-card" key={locale === "en" ? enGoals[i].title : goal.title}>
-        <span>{String(i+1).padStart(2,'0')}</span><div><h3>{goal.title}</h3><p>{locale === "en" ? enGoals[i].desc : goal.desc}</p></div><b aria-hidden="true">↗</b>
+        <span>{String(i+1).padStart(2,'0')}</span><div><h3>{locale === 'en' ? enGoals[i].title : goal.title}</h3><p>{locale === "en" ? enGoals[i].desc : goal.desc}</p></div><b aria-hidden="true">↗</b>
       </Link>)}</div>
     </div>
   </section>
