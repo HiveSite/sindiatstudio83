@@ -78,6 +78,7 @@ export async function generateMetadata({params}:{params:Promise<{segments:string
   let title='Sindikat Studio 83'
   let description='Creative production, websites and advertising for businesses in Montenegro.'
   if(kind==='usluge'&&slug){const x=serviceBySlug[slug]||enAdServices[slug];if(!x)return {};title=buyerSeo[slug]?.en.title||x.title;description=buyerSeo[slug]?.en.description||x.summary}
+  else if(kind==='usluge'&&!slug){title='Marketing Services in Podgorica - Pricing and Proposals';description='Compare social media management, Meta and Google Ads, website development, video production and events in Montenegro. Explore services and request a quote.'}
   else if(kind==='radovi'&&slug){const x=caseCopyBySlug[slug];if(!x)return {};title=x.title;description=x.summary}
   else if(kind==='industrije'&&slug){const x=industryBySlug[slug];if(!x)return {};title=x.title;description=x.summary}
   else if(kind==='blog'&&slug){const article=enBlogFullBySlug[slug];title=article?.title||'Practical guide';description=article?.description||'A practical guide from Sindikat Studio 83.'}
