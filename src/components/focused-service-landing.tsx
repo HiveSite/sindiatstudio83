@@ -34,7 +34,7 @@ export function FocusedServiceLanding({ data,locale='sr' }: { data: FocusedServi
     <JsonLd data={[
       breadcrumbSchema(crumbs),
       webPageSchema({ name: data.title, description: data.description, path: href(data.path) }),
-      serviceSchema({ name: data.title, description: data.description, path: data.path, serviceType: data.eyebrow }),
+      serviceSchema({ name: data.title, description: data.description, path: href(data.path), serviceType: data.eyebrow }),
     ]} />
     <section className="page-hero"><div className="container">
       <Breadcrumbs items={crumbs} locale={locale}/>
