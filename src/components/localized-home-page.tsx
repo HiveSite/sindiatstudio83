@@ -47,7 +47,7 @@ export function HomePageContent({locale = 'sr'}: {locale?: SiteLocale}) {
         </div>
       </section>
 
-      <section className="proof-strip"><div className="container proof-grid"><div className="proof-intro">{t('Iza svake usluge stoje stvarni projekti.','Real projects behind our services.')}</div>{site.proof.map((item,i) => <div className="proof-stat" key={item.value}><strong>{item.value}</strong><span>{english ? ['projects showcased in our portfolio','partners and collaborators','people in our event and field network'][i] || item.label : item.label}</span></div>)}</div></section>
+      <section className="proof-strip"><div className="container proof-grid"><div className="proof-intro">{t('Ideje koje smo pretvorili u konkretan posao.','Ideas put into action.')}</div>{site.proof.map((item,i) => <div className="proof-stat" key={item.value}><strong>{item.value}</strong><span>{english ? ['projects in our portfolio','collaborators and partners','people in our network'][i] || item.label : item.label}</span></div>)}</div></section>
 
       <HomeProjectHighlights locale={locale} />
 
