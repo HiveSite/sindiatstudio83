@@ -102,8 +102,8 @@ export function HomeProjectHighlights({locale='sr'}:{locale?:SiteLocale}) {
   return <section className="section home-project-highlights" aria-labelledby="home-project-title">
     <div className="container">
       <div className="home-sales-heading">
-        <div><span className="eyebrow">{t("Pravi projekti, pravi materijali","Real projects, real work")}</span><h2 id="home-project-title">{t("Ne ostajemo na ideji.","We go beyond the idea.")}</h2></div>
-        <p>{t("Umjesto generičkih vizuala, ovdje su projekti koji pokazuju kako spajamo digital, produkciju i organizaciju.","These projects show how we connect digital work, production and coordination rather than relying on generic visuals.")}</p>
+        <div><span className="eyebrow">{t("Izdvojeni radovi","Selected work")}</span><h2 id="home-project-title">{t("Ne ostajemo na ideji.","We go beyond the idea.")}</h2></div>
+        <p>{t("Pogledaj neke od projekata koje smo realizovali - od digitalnih platformi do događaja i timova na terenu.","Explore some of our work, from digital platforms to events and on-site teams.")}</p>
       </div>
       <div className="home-project-grid">
         {displayHighlighted.filter(item => cases.some(project => project.slug === item.slug)).map((item, index) =>
@@ -117,7 +117,7 @@ export function HomeProjectHighlights({locale='sr'}:{locale?:SiteLocale}) {
             </div>
           </article>)}
       </div>
-      <div className="home-all-projects"><Link className="button button-ghost" href={localeHref(locale,"/radovi/")}>{t("Svi projekti i studije slučaja ↗","All projects and case studies ↗")}</Link></div>
+      <div className="home-all-projects"><Link className="button button-ghost" href={localeHref(locale,"/radovi/")}>{t("Pogledaj sve radove ↗","Explore all work ↗")}</Link></div>
     </div>
   </section>
 }
