@@ -21,11 +21,13 @@ for (const job of targets) {
     await page.locator('h1').first().waitFor({ state: 'visible', timeout: 22000 })
     await page.evaluate(() => document.fonts.ready)
     await page.waitForTimeout(1600)
+    await page.getByRole('button', { name: /Samo neophodni/i }).click({ timeout: 1200 }).catch(() => {})
+    await page.waitForTimeout(250)
     const info = await page.evaluate(() => ({ text: (document.body?.innerText || '').slice(0, 6500), images: [...document.images].filter(i=>i.complete && i.naturalWidth>0).length }))
     if (!info.text.includes(job.minText) || info.text.length < 160) throw new Error('Unexpected page or empty content: ' + info.text.slice(0,200))
-    const dest = path.resolve('public/images/cases', job.dir, job.name + '.png')
+    const dest = path.resolve('public/images/cases', job.dir, job.name + '.jpg')
     await mkdir(path.dirname(dest), { recursive: true })
-    await page.screenshot({ path: dest, fullPage: false, animations: 'disabled', caret: 'hide' })
+    await page.screenshot({ path: dest, type: 'jpeg', quality: 87, fullPage: false, animations: 'disabled', caret: 'hide' })
     console.log('CAPTURED ' + job.name + ' | ' + response.status() + ' | loaded images=' + info.images + ' | h1=' + (await page.locator('h1').first().innerText()).slice(0, 95))
   } catch (err) {
     failures++
