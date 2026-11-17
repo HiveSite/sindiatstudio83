@@ -245,7 +245,7 @@ function MediaFigure({
       data-aspect={resolvedAspect}
       aria-label={item.label}
     >
-      <div className={styles.mediaFrame}>
+      <a className={styles.mediaFrame} href={image.src} target="_blank" rel="noopener noreferrer" aria-label={`Otvori sliku u punoj rezoluciji: ${item.label}`}>
         <img
           src={image.src}
           alt={image.alt}
@@ -253,10 +253,12 @@ function MediaFigure({
           height={image.height}
           loading="lazy"
           decoding="async"
-          style={imageStyle(image)}
+          style={imageStyle({ ...image, fit: image.fit || (item.kind === 'Screenshot' ? 'contain' : resolvedAspect === 'portrait' ? 'contain' : 'cover') })}
           onError={onError}
         />
-      </div>
+        <span className={styles.mediaZoom} aria-hidden="true">↗</span>
+      </a>
+      <figcaption className={styles.mediaCaption}><span>{item.kind === 'Screenshot' ? 'WEB / UI' : 'PROJEKAT'}</span><strong>{item.label}</strong></figcaption>
     </figure>
   )
 }
