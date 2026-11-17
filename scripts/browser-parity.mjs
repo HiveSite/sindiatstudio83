@@ -182,9 +182,8 @@ try {
           if(await menu.isVisible())mark('Mobile menu','Menu did not close on Escape')
         }
         await page.goto(origin+base+'/cijene/',{waitUntil:'load'})
-        await page.locator('button.language-switcher-button').click()
         const target=locale==='en'?'/cijene/':'/en/cijene/'
-        await page.locator('#language-menu a[href="'+target+'"]').click()
+        await page.locator('.simple-language-nav a[href="'+target+'"]').click()
         await page.waitForURL(url=>url.pathname===target,{timeout:10000})
         const pathNow=new URL(page.url()).pathname
         if(pathNow!==target)mark('Language switch','Expected '+target+' got '+pathNow)

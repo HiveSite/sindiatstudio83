@@ -49,11 +49,24 @@
   .page-hero h1{overflow-wrap:break-word}
 }
 
-/* Some third-party language widgets insert a floating EN chip over the menu.
-   On mobile the built-in language control remains available in the header. */
-@media(max-width:1040px){
-  #lang-widget, #lang-mini{display:none!important;pointer-events:none!important}
+/* Hide third-party translation widgets at all widths. Native SR/EN pages
+   are available through the plain-language links in the header. */
+#lang-widget, #lang-mini,
+#google_translate_element, .goog-te-gadget, .goog-te-banner-frame,
+iframe.goog-te-menu-frame, .goog-te-balloon-frame,
+body > .skiptranslate, body > .goog-te-spinner-pos {
+  display:none!important;
+  visibility:hidden!important;
+  pointer-events:none!important;
 }
+html.translated-ltr body, html.translated-rtl body{top:0!important}
+.simple-language-nav{display:inline-flex;align-items:center;justify-content:center;gap:6px;flex-shrink:0;white-space:nowrap;font-size:12px;font-weight:850}
+.simple-language-nav>a{display:inline-flex;align-items:center;justify-content:center;min-width:32px;min-height:42px;border-radius:7px;color:#aaa8b3;text-decoration:none;transition:color .2s ease,background .2s ease}
+.simple-language-nav>a.is-current{color:#fff;background:rgba(255,255,255,.09)}
+.simple-language-nav>a:hover{color:#fff;background:rgba(255,255,255,.08)}
+.simple-language-nav>span{color:#66636e}
+@media(max-width:390px){.simple-language-nav{gap:2px;font-size:11px}.simple-language-nav>a{min-width:27px}}
+
 
 /* Mobile performance: keep photographic contrast, avoid costly full-screen fixed noise and blur repaints. */
 @media(max-width:760px){
