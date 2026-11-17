@@ -273,3 +273,11 @@
 /* Image viewer remains a button to keep bilingual navigation links identical. */
 button.mediaFrame{appearance:none;border:0;cursor:zoom-in;color:inherit;outline-offset:3px}
 button.mediaFrame:hover{filter:brightness(1.025)}
+
+/* Tall phone captures: use the real 430:932 aspect, not a generic 3:4 portrait box. */
+.mediaItem[data-aspect="portrait"].screenshot .mediaFrame{
+  aspect-ratio:430/932;padding:clamp(8px,1vw,13px)
+}
+button.mediaFrame{padding:0}
+.screenshot button.mediaFrame{padding:clamp(12px,2vw,28px)}
+.mediaItem[data-aspect="portrait"].screenshot button.mediaFrame{padding:clamp(8px,1vw,13px)}
