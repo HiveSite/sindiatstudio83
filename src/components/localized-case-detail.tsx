@@ -17,6 +17,22 @@ import { localizedCase } from '@/data/localized-cases'
 import { enCaseGalleryCaptions } from '@/data/en-case-media'
 import { localizedService } from '@/lib/localized-data'
 import { localeHref,translate,type SiteLocale } from '@/lib/locale'
+const galleryCaptionOverrides: Record<string, {sr:string;en:string}> = {
+  'Početna stranica - stvarni desktop prikaz u visokoj rezoluciji': {sr:'ImaPosla.me - početna stranica na desktopu',en:'ImaPosla.me - live desktop homepage'},
+  'Oglasi za posao - filteri i aktivne pozicije': {sr:'Lista oglasa, filteri i otvorene pozicije',en:'Job listings, filters and open positions'},
+  'Mobilna pretraga i najnoviji oglasi': {sr:'Mobilna početna, pretraga i aktuelni oglasi',en:'Mobile homepage, search and current listings'},
+  'Mobilna lista oglasa i prijava': {sr:'Mobilni prikaz oglasa i pretrage poslova',en:'Mobile job listings and search'},
+  'Kompanije i poslodavci na platformi': {sr:'Stranica firmi i poslodavaca',en:'Company and employer directory'},
+  'Hive Agency - stvarna početna stranica na desktopu': {sr:'Početna stranica Hive Agency sajta',en:'Hive Agency desktop homepage'},
+  'Hive Agency - pregled programa i kartica aktivnosti': {sr:'Katalog programa i izbor aktivnosti',en:'Programme catalogue and activity selection'},
+  'Hive Agency - mobilna početna stranica': {sr:'Hive Agency - mobilna početna stranica',en:'Hive Agency mobile homepage'},
+  'Briefing, priprema i podjela odgovornosti': {sr:'Promo štand i interakcija sa posjetiocima',en:'Promotional stand and audience engagement'},
+  'Radionica, predavanje ili interaktivni sadržaj': {sr:'Fotografisanje i dokumentovanje događaja',en:'Event photography and documentation'},
+  'Organizacioni tim i realizacija iza scene': {sr:'Atmosfera i posjetioci na događaju',en:'Event atmosphere and attendees'},
+  'Kompletna kućica i vizuelna postavka u prostoru Pazara': {sr:'Sindikat brending i zastava na Podgoričkom pazaru',en:'Sindikat branding and flag at the Podgorica market'},
+  'Atmosfera, tok gostiju i ključni momenti': {sr:'Produkcijska ekipa i postavka događaja na terenu',en:'Production crew and outdoor event setup'},
+}
+
 export function CaseStudyPageContent({slug,locale='sr'}:{slug:string;locale?:SiteLocale}) {
   const en=locale==='en'
   const t=(sr:string,english:string)=>translate(locale,sr,english)
@@ -34,6 +50,15 @@ export function CaseStudyPageContent({slug,locale='sr'}:{slug:string;locale?:Sit
   const crumbs = [{ label: t('Radovi','Projects'), href: href('/radovi/') }, { label: item.title, href: path }]
   const metrics = item.metrics || []
   const linkedServices = item.serviceSlugs.map((serviceSlug) => localizedService(serviceSlug,locale)).filter((service): service is NonNullable<typeof service> => service !== undefined)
+  const sourceGallery = cases.find((source) => source.slug === slug)?.gallery || []
+  const displayGalleryCaption = (media: typeof item.gallery[number]) => {
+    const curated = galleryCaptionOverrides[media.label]
+    if (curated) return en ? curated.en : curated.sr
+    if (!en) return media.label
+    const sourceIndex = sourceGallery.findIndex((source) => source.label === media.label)
+    return sourceIndex >= 0 ? (enCaseGalleryCaptions[slug]?.[sourceIndex] || media.label) : media.label
+  }
+
 
   return <>
     <JsonLd data={[
@@ -89,7 +114,7 @@ export function CaseStudyPageContent({slug,locale='sr'}:{slug:string;locale?:Sit
 
     {item.subprojects?.length ? <section className="section"><div className="container"><div className="section-heading"><div><span className="eyebrow">{t("Primjene i podprojekti","Applications and subprojects")}</span><h2>{t("Jedan operativni princip, više konkretnih realizacija.","One operating principle applied across different projects.")}</h2></div><p>{t("Tim, komunikacija, funkcionalnosti i tok prilagođavaju se svakoj situaciji, dok standard odgovornosti ostaje isti.","Teams, communication, functions and workflows adapt to each situation while accountability remains consistent.")}</p></div><div className="case-subproject-grid">{item.subprojects.map((subproject) => <article key={subproject.title}><span className="case-subproject-mark" /><h3>{subproject.title}</h3><p>{subproject.summary}</p>{subproject.link ? <a href={subproject.link.href} target="_blank" rel="noreferrer" data-track="case_subproject_click">{subproject.link.label} ↗</a> : null}</article>)}</div></div></section> : null}
 
-    <section className="section section-dark"><div className="container"><div className="section-heading"><div><span className="eyebrow">{t("Vizuelni pregled","Visual gallery")}</span><h2>{t("Ključni momenti, ekrani i detalji koji najbolje objašnjavaju projekat.","The key moments, screens and details that best explain the project.")}</h2></div><p>{t("Galerija prikazuje sve dostavljene materijale za projekat, uz SEO nazive, optimizovane formate i jasan opis uloge svakog kadra ili ekrana.","The gallery shows available project materials with descriptive image labels, optimized formats and context for each photograph or screen.")}</p></div><div className="case-media-grid">{item.gallery.map((media,index) => <CaseMediaPlaceholder key={`${media.kind}-${media.label}`} item={media} displayLabel={en ? (enCaseGalleryCaptions[item.slug]?.[index] || `${item.title} - additional project image ${index+1}`) : undefined} />)}</div></div></section>
+    <section className="section section-dark"><div className="container"><div className="section-heading"><div><span className="eyebrow">{t("Vizuelni pregled","Visual gallery")}</span><h2>{t("Ključni momenti, ekrani i detalji koji najbolje objašnjavaju projekat.","The key moments, screens and details that best explain the project.")}</h2></div><p>{t("Pogledaj odabrane fotografije i ekrane projekta. Klikni na sliku za prikaz u punoj rezoluciji.","Explore selected project photos and real screens. Open any image to see its full resolution.")}</p></div><div className={`case-media-grid case-media-grid-${item.slug}`}>{item.gallery.map((media) => <CaseMediaPlaceholder key={`${media.kind}-${media.label}`} item={media} displayLabel={displayGalleryCaption(media)} />)}</div></div></section>
 
     <section className="section"><div className="container"><span className="eyebrow">{t("Obuhvaćene discipline","Services involved")}</span><h2>{t("Više vrsta rada, ali jedna odgovorna cjelina.","Multiple disciplines, one accountable team.")}</h2><p className="lead">{t("Oznake ispod pokazuju usluge koje su u projektu morale biti međusobno usklađene.","The services below had to work together during delivery.")}</p><div className="case-service-tags">{linkedServices.map((service) => <Link href={href(`/usluge/${service.slug}/`)} key={service.slug}>{service.shortTitle}</Link>)}</div><div className="button-row" style={{ marginTop: 30 }}><Link className="button button-dark" href={href("/radovi/")}>{t("Pogledaj sve projekte","View all projects")}</Link></div></div></section>
 
