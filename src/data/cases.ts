@@ -37,6 +37,7 @@ export const cases: CaseStudy[] = [
     ],
     coverMark: 'IP',
     coverLabel: 'Platforma za poslove, angažmane i usluge u Crnoj Gori',
+    coverImage: { src: '/images/cases/imaposla/imaposla-live-home-desktop.jpg', alt: 'Stvarni prikaz početne stranice ImaPosla.me na desktopu', width: 1440, height: 1000, fit: 'contain' },
     links: [{ label: 'Pogledaj ImaPosla.me', href: 'https://www.imaposla.me/' }],
     gallery: [
       { label: 'Naslovna stranica, pretraga i glavni korisnički izbori', kind: 'Screenshot', aspect: 'wide' },
@@ -489,11 +490,12 @@ export const cases: CaseStudy[] = [
     coverMark: 'HIVE',
     coverLabel: 'Team building programi organizovani kroz jasan digitalni tok',
     coverImage: {
-      src: '/images/cases/hive-agency/hive-team-building-avanturisticki-park.webp',
-      alt: 'Grupa učesnika na team building aktivnosti u avanturističkom parku',
-      width: 1147,
-      height: 768,
+      src: '/images/cases/hive-agency/hive-live-home-desktop.jpg',
+      alt: 'Stvarni desktop prikaz naslovne stranice Hive Agency web platforme',
+      width: 1440,
+      height: 1000,
       position: 'center',
+      fit: 'contain',
     },
     socialImage: {
       src: '/images/cases/hive-agency/hive-agency-og.webp',

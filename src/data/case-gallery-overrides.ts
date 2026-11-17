@@ -3,27 +3,62 @@ import { cases } from '@/data/cases'
 import { managedExtraGallery, managedGalleryImage } from '@/lib/studio83-media'
 
 const fixedOverrides: Record<string, CaseStudyMedia[]> = {
-  'imaposla-digitalni-proizvod': [
+  'hive-agency-platforma': [
     {
-      label: 'Početna stranica platforme i pregled glavnih tokova',
+      label: 'Hive Agency - stvarna početna stranica na desktopu',
+      kind: 'Screenshot',
+      aspect: 'wide',
+      image: { src: '/images/cases/hive-agency/hive-live-home-desktop.jpg', alt: 'Stvarna desktop početna stranica Hive Agency platforme', width: 1440, height: 1000, fit: 'contain' },
+    },
+    {
+      label: 'Hive Agency - pregled programa i kartica aktivnosti',
       kind: 'Screenshot',
       aspect: 'landscape',
+      image: { src: '/images/cases/hive-agency/hive-live-programs-desktop.jpg', alt: 'Stvarna stranica programa Hive Agency platforme', width: 1440, height: 1000, fit: 'contain' },
+    },
+    {
+      label: 'Hive Agency - mobilna početna stranica',
+      kind: 'Screenshot',
+      aspect: 'portrait',
+      image: { src: '/images/cases/hive-agency/hive-live-home-mobile.jpg', alt: 'Stvarna mobilna početna stranica Hive Agency platforme', width: 390, height: 844, fit: 'contain' },
+    },
+    ...cases.find((item) => item.slug === 'hive-agency-platforma')!.gallery,
+  ],
+  'imaposla-digitalni-proizvod': [
+    {
+      label: 'ImaPosla.me - stvarna desktop početna stranica',
+      kind: 'Screenshot',
+      aspect: 'wide',
       image: {
-        src: '/images/cases/imaposla/imaposla-pocetna-platforma-poslovi.webp',
-        alt: 'ImaPosla.me desktop prikaz platforme za poslove i angažmane',
-        width: 360,
-        height: 260,
+        src: '/images/cases/imaposla/imaposla-live-home-desktop.jpg',
+        alt: 'Stvarna desktop početna stranica ImaPosla.me',
+        width: 1440,
+        height: 1000,
+        fit: 'contain',
       },
     },
     {
-      label: 'Oglasi i tok pronalaska posla',
+      label: 'ImaPosla.me - stvarna lista oglasa i filteri',
+      kind: 'Screenshot',
+      aspect: 'landscape',
+      image: {
+        src: '/images/cases/imaposla/imaposla-live-jobs-desktop.jpg',
+        alt: 'Stvarna stranica oglasa za posao ImaPosla.me',
+        width: 1440,
+        height: 1000,
+        fit: 'contain',
+      },
+    },
+    {
+      label: 'ImaPosla.me - stvarna mobilna početna stranica',
       kind: 'Screenshot',
       aspect: 'portrait',
       image: {
-        src: '/images/cases/imaposla/imaposla-oglasi-za-posao.webp',
-        alt: 'ImaPosla.me prikaz oglasa i pronalaska posla',
-        width: 270,
-        height: 360,
+        src: '/images/cases/imaposla/imaposla-live-home-mobile.jpg',
+        alt: 'Stvarna mobilna stranica ImaPosla.me sa pretragom i najnovijim poslovima',
+        width: 390,
+        height: 844,
+        fit: 'contain',
       },
     },
     {
