@@ -37,7 +37,7 @@ export const cases: CaseStudy[] = [
     ],
     coverMark: 'IP',
     coverLabel: 'Platforma za poslove, angažmane i usluge u Crnoj Gori',
-    coverImage: { src: '/images/cases/imaposla/imaposla-live-home-desktop.jpg', alt: 'Stvarni prikaz početne stranice ImaPosla.me na desktopu', width: 1440, height: 1000, fit: 'contain' },
+    coverImage: { src: '/images/cases/imaposla/imaposla-hq-home-desktop.jpg', alt: 'Autentični prikaz početne stranice ImaPosla.me snimljen sa produkcije u visokoj rezoluciji', width: 3456, height: 2120, fit: 'contain' },
     links: [{ label: 'Pogledaj ImaPosla.me', href: 'https://www.imaposla.me/' }],
     gallery: [
       { label: 'Naslovna stranica, pretraga i glavni korisnički izbori', kind: 'Screenshot', aspect: 'wide' },
