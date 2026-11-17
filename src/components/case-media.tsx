@@ -258,7 +258,6 @@ function MediaFigure({
         />
         <span className={styles.mediaZoom} aria-hidden="true">↗</span>
       </a>
-      <figcaption className={styles.mediaCaption}><span>{item.kind === 'Screenshot' ? 'WEB / UI' : 'PROJEKAT'}</span><strong>{item.label}</strong></figcaption>
     </figure>
   )
 }
