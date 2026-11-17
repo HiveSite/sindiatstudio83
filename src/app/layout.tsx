@@ -32,6 +32,7 @@ export const metadata: Metadata = {
   creator: site.name,
   publisher: site.name,
   category: 'marketing',
+  other: { google: 'notranslate' },
   icons: { icon: '/favicon.png', apple: '/icons/icon-192.png' },
   manifest: '/manifest.webmanifest',
   formatDetection: { telephone: true, email: true, address: false },
