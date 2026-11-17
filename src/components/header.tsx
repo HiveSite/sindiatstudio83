@@ -21,8 +21,6 @@ export function Header() {
   const toEn = english ? pathname : !hasEnglishCase ? '/en/radovi/' : supportedEnglish ? '/en' + (pathname === '/' ? '/' : pathname) : '/en/'
   const normalizedPath = pathname.endsWith('/') ? pathname : `${pathname}/`
   const [open, setOpen] = useState(false)
-  const [languageOpen, setLanguageOpen] = useState(false)
-  const languageRef = useRef<HTMLDivElement | null>(null)
   const toggleRef = useRef<HTMLButtonElement | null>(null)
   const panelRef = useRef<HTMLDivElement | null>(null)
 
@@ -38,7 +36,6 @@ export function Header() {
 
   useEffect(() => {
     closeMenu(false)
-    setLanguageOpen(false)
     document.documentElement.lang = english ? 'en' : 'sr-Latn-ME'
   }, [pathname, english])
 
@@ -88,26 +85,7 @@ export function Header() {
     }
   }, [open])
 
-  useEffect(() => {
-    if (!languageOpen) return
-
-    const closeLanguageMenu = (event: MouseEvent) => {
-      if (!languageRef.current?.contains(event.target as Node)) setLanguageOpen(false)
-    }
-    const closeLanguageMenuOnEscape = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') setLanguageOpen(false)
-    }
-
-    document.addEventListener('mousedown', closeLanguageMenu)
-    window.addEventListener('keydown', closeLanguageMenuOnEscape)
-    return () => {
-      document.removeEventListener('mousedown', closeLanguageMenu)
-      window.removeEventListener('keydown', closeLanguageMenuOnEscape)
-    }
-  }, [languageOpen])
-
   const toggleMenu = () => {
-    setLanguageOpen(false)
     setOpen((current) => !current)
   }
 
@@ -126,36 +104,11 @@ export function Header() {
             })}
           </nav>
           <div className="nav-actions">
-            <div ref={languageRef} className={`language-switcher${languageOpen ? ' is-open' : ''}`}>
-              <button
-                className="language-switcher-button"
-                type="button"
-                aria-label={english ? "Choose language" : "Izaberi jezik"}
-                aria-haspopup="menu"
-                aria-expanded={languageOpen}
-                aria-controls="language-menu"
-                onClick={() => setLanguageOpen((current) => !current)}
-              >
-                <svg className="language-switcher-icon" viewBox="0 0 24 24" aria-hidden="true">
-                  <circle cx="12" cy="12" r="9" />
-                  <path d="M3.5 12h17M12 3c2.4 2.4 3.6 5.4 3.6 9S14.4 18.6 12 21M12 3C9.6 5.4 8.4 8.4 8.4 12s1.2 6.6 3.6 9" />
-                </svg>
-                <span className="language-switcher-code">{english ? "EN" : "ME"}</span>
-                <span className="language-switcher-chevron" aria-hidden="true" />
-              </button>
-              <div id="language-menu" className="language-switcher-menu" role="menu" hidden={!languageOpen}>
-                <Link href={toMe} className={english ? 'language-option' : 'language-option is-active'} role="menuitem" aria-current={!english ? 'page' : undefined} onClick={() => setLanguageOpen(false)}>
-                  <span className="language-option-code">ME</span>
-                  <span><strong>Srpski - ijekavica</strong><small>{english ? 'Serbian, Ijekavian' : 'Aktivni jezik'}</small></span>
-                  {!english ? <span className="language-option-check" aria-hidden="true">✓</span> : null}
-                </Link>
-                <Link href={toEn} className={english ? 'language-option is-active' : 'language-option'} role="menuitem" aria-current={english ? 'page' : undefined} onClick={() => setLanguageOpen(false)}>
-                  <span className="language-option-code">EN</span>
-                  <span><strong>English</strong><small>{english ? 'Current language' : 'English version'}</small></span>
-                  {english ? <span className="language-option-check" aria-hidden="true">✓</span> : null}
-                </Link>
-              </div>
-            </div>
+            <nav className="simple-language-nav" aria-label={english ? 'Site language' : 'Jezik sajta'}>
+              <Link href={toMe} className={!english ? 'is-current' : ''} aria-current={!english ? 'page' : undefined} aria-label={english ? 'Serbian version' : 'Srpska verzija'}>ME</Link>
+              <span aria-hidden="true">/</span>
+              <Link href={toEn} className={english ? 'is-current' : ''} aria-current={english ? 'page' : undefined} aria-label={english ? 'English version' : 'Engleska verzija'}>EN</Link>
+            </nav>
             <Link className="button button-primary button-small" href={english ? "/en/kontakt/?izvor=header" : "/kontakt/?izvor=header"} data-track="header_lead">{english ? "Request a proposal" : "Pošalji upit"}</Link>
             <button ref={toggleRef} className="menu-toggle" type="button" aria-label={open ? (english ? 'Close menu' : 'Zatvori meni') : (english ? 'Open menu' : 'Otvori meni')} aria-expanded={open} aria-controls="mobile-navigation" onClick={toggleMenu}>
               <span /><span /><span />
