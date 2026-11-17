@@ -491,10 +491,11 @@ export const cases: CaseStudy[] = [
     coverLabel: 'Team building programi organizovani kroz jasan digitalni tok',
     coverImage: {
       src: '/images/cases/hive-agency/hive-live-home-desktop.jpg',
-      alt: 'Grupa učesnika na team building aktivnosti u avanturističkom parku',
-      width: 1147,
-      height: 768,
+      alt: 'Stvarni desktop prikaz naslovne stranice Hive Agency web platforme',
+      width: 1440,
+      height: 1000,
       position: 'center',
+      fit: 'contain',
     },
     socialImage: {
       src: '/images/cases/hive-agency/hive-agency-og.webp',
