@@ -108,9 +108,39 @@ const fixedOverrides: Record<string, CaseStudyMedia[]> = {
   ],
 }
 
+// Order is editorial, not alphabetical: lead with the clearest outcome, then show
+// detail, people and behind-the-scenes footage. Keep source labels intact for fallbacks.
+const projectImageOrder: Record<string, number[]> = {
+  'battlebots-arena': [0, 2, 5, 6, 1, 4, 7, 3],
+  'sistem-za-terenske-angazmane': [0, 2, 1, 3],
+  'aktivacije-regulisanih-brendova': [1, 2, 0, 3],
+  'privatni-i-korporativni-dogadjaji': [1, 2, 0, 3],
+  'mini-sajtovi-i-digitalni-alati': [2, 0, 1, 6, 3, 4, 5, 7, 8, 9],
+  'student-connect-mini-festival': [0, 2, 1, 3],
+  'kucica-na-podgorickom-pazaru': [2, 0, 1, 3],
+}
+
+// Hero-sized editorial image followed by balanced frames; portrait screenshots
+// remain contain-fit to preserve every pixel of the actual interface.
+function presentGallery(slug: string, source: CaseStudyMedia[]): CaseStudyMedia[] {
+  const order = projectImageOrder[slug]
+  const sorted = order ? [
+    ...order.map(index => source[index]).filter((item): item is CaseStudyMedia => Boolean(item)),
+    ...source.filter((_, index) => !order.includes(index)),
+  ] : [...source]
+  return sorted.map((media, index) => {
+    const isHero = index === 0 && media.aspect !== 'portrait'
+    const aspect = isHero ? 'wide' : media.aspect
+    const image = media.image
+      ? { ...media.image, fit: media.image.fit || (media.kind === 'Screenshot' || aspect === 'portrait' ? 'contain' as const : 'cover' as const) }
+      : undefined
+    return { ...media, aspect, ...(image ? { image } : {}) }
+  })
+}
+
 export const caseGalleryOverrides: Record<string, CaseStudyMedia[]> = Object.fromEntries(
   cases.map((item) => {
-    const base = fixedOverrides[item.slug] || item.gallery
+    const base = presentGallery(item.slug, fixedOverrides[item.slug] || item.gallery)
     return [
       item.slug,
       [
