@@ -288,6 +288,7 @@ export const cases: CaseStudy[] = [
       'Foto i video dokumentovanje i završni pregled realizacije',
     ],
     coverMark: 'EVT',
+    coverImage: { src: '/images/cases/dogadjaji/selected-event-01.webp', alt: 'Ilustrativni prikaz korporativnog koktel događaja sa gostima, AI-generisani vizual', width: 1448, height: 1086, fit: 'cover' },
     coverLabel: 'Privatne proslave, korporativni događaji i posebni formati',
     links: [{ label: 'Pogledaj Sindikat Events', href: 'https://sindikatevents.me/' }],
     gallery: [
