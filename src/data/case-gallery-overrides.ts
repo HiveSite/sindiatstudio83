@@ -4,11 +4,11 @@ import { managedExtraGallery, managedGalleryImage } from '@/lib/studio83-media'
 
 const fixedOverrides: Record<string, CaseStudyMedia[]> = {
   'privatni-i-korporativni-dogadjaji': [
-    { label: 'Korporativni koktel - atmosfera među gostima', kind: 'Fotografija', aspect: 'wide', image: { src: '/images/cases/dogadjaji/selected-event-01.webp', alt: 'AI-generisani ilustrativni prikaz: korporativni koktel - atmosfera među gostima', width: 1408, height: 1056, fit: 'cover' } },
-    { label: 'Večernji događaj - spontani kadar gostiju', kind: 'Fotografija', aspect: 'landscape', image: { src: '/images/cases/dogadjaji/selected-event-02.webp', alt: 'AI-generisani ilustrativni prikaz: večernji događaj - spontani kadar gostiju', width: 1408, height: 1056, fit: 'cover' } },
-    { label: 'Večernji prijem - prostor i osvjetljenje', kind: 'Fotografija', aspect: 'landscape', image: { src: '/images/cases/dogadjaji/selected-event-03.webp', alt: 'AI-generisani ilustrativni prikaz: večernji prijem - prostor i osvjetljenje', width: 1408, height: 1056, fit: 'cover' } },
-    { label: 'Korporativni prijem - razgovor i druženje', kind: 'Fotografija', aspect: 'landscape', image: { src: '/images/cases/dogadjaji/selected-event-04.webp', alt: 'AI-generisani ilustrativni prikaz: korporativni prijem - razgovor i druženje', width: 1408, height: 1056, fit: 'cover' } },
-    { label: 'Atmosfera koktel događaja - lounge prostor', kind: 'Fotografija', aspect: 'landscape', image: { src: '/images/cases/dogadjaji/selected-event-05.webp', alt: 'AI-generisani ilustrativni prikaz: atmosfera koktel događaja - lounge prostor', width: 1408, height: 1056, fit: 'cover' } },
+    { label: 'Korporativni koktel - atmosfera među gostima', kind: 'Fotografija', aspect: 'wide', image: { src: '/images/cases/dogadjaji/selected-event-01.webp', alt: 'AI-generisani ilustrativni prikaz: korporativni koktel - atmosfera među gostima', width: 1448, height: 1086, fit: 'cover' } },
+    { label: 'Večernji događaj - spontani kadar gostiju', kind: 'Fotografija', aspect: 'landscape', image: { src: '/images/cases/dogadjaji/selected-event-02.webp', alt: 'AI-generisani ilustrativni prikaz: večernji događaj - spontani kadar gostiju', width: 1448, height: 1086, fit: 'cover' } },
+    { label: 'Večernji prijem - prostor i osvjetljenje', kind: 'Fotografija', aspect: 'landscape', image: { src: '/images/cases/dogadjaji/selected-event-03.webp', alt: 'AI-generisani ilustrativni prikaz: večernji prijem - prostor i osvjetljenje', width: 1448, height: 1086, fit: 'cover' } },
+    { label: 'Korporativni prijem - razgovor i druženje', kind: 'Fotografija', aspect: 'landscape', image: { src: '/images/cases/dogadjaji/selected-event-04.webp', alt: 'AI-generisani ilustrativni prikaz: korporativni prijem - razgovor i druženje', width: 1448, height: 1086, fit: 'cover' } },
+    { label: 'Atmosfera koktel događaja - lounge prostor', kind: 'Fotografija', aspect: 'landscape', image: { src: '/images/cases/dogadjaji/selected-event-05.webp', alt: 'AI-generisani ilustrativni prikaz: atmosfera koktel događaja - lounge prostor', width: 1448, height: 1086, fit: 'cover' } },
   ],
   'hive-agency-platforma': [
     {
