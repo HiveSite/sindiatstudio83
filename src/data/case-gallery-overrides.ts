@@ -3,6 +3,13 @@ import { cases } from '@/data/cases'
 import { managedExtraGallery, managedGalleryImage } from '@/lib/studio83-media'
 
 const fixedOverrides: Record<string, CaseStudyMedia[]> = {
+  'privatni-i-korporativni-dogadjaji': [
+    { label: 'Korporativni koktel - atmosfera među gostima', kind: 'Fotografija', aspect: 'wide', image: { src: '/images/cases/dogadjaji/selected-event-01.webp', alt: 'AI-generisani ilustrativni prikaz: korporativni koktel - atmosfera među gostima', width: 1448, height: 1086, fit: 'cover' } },
+    { label: 'Večernji događaj - spontani kadar gostiju', kind: 'Fotografija', aspect: 'landscape', image: { src: '/images/cases/dogadjaji/selected-event-02.webp', alt: 'AI-generisani ilustrativni prikaz: večernji događaj - spontani kadar gostiju', width: 1448, height: 1086, fit: 'cover' } },
+    { label: 'Večernji prijem - prostor i osvjetljenje', kind: 'Fotografija', aspect: 'landscape', image: { src: '/images/cases/dogadjaji/selected-event-03.webp', alt: 'AI-generisani ilustrativni prikaz: večernji prijem - prostor i osvjetljenje', width: 1448, height: 1086, fit: 'cover' } },
+    { label: 'Korporativni prijem - razgovor i druženje', kind: 'Fotografija', aspect: 'landscape', image: { src: '/images/cases/dogadjaji/selected-event-04.webp', alt: 'AI-generisani ilustrativni prikaz: korporativni prijem - razgovor i druženje', width: 1448, height: 1086, fit: 'cover' } },
+    { label: 'Atmosfera koktel događaja - lounge prostor', kind: 'Fotografija', aspect: 'landscape', image: { src: '/images/cases/dogadjaji/selected-event-05.webp', alt: 'AI-generisani ilustrativni prikaz: atmosfera koktel događaja - lounge prostor', width: 1448, height: 1086, fit: 'cover' } },
+  ],
   'hive-agency-platforma': [
     {
       label: 'Hive Agency - stvarna početna stranica na desktopu',
@@ -58,7 +65,7 @@ const projectImageOrder: Record<string, number[]> = {
   'battlebots-arena': [0, 2, 5, 6, 1, 4, 7, 3],
   'sistem-za-terenske-angazmane': [0, 2, 1, 3],
   'aktivacije-regulisanih-brendova': [1, 2, 0, 3],
-  'privatni-i-korporativni-dogadjaji': [1, 2, 0, 3],
+  'privatni-i-korporativni-dogadjaji': [0, 1, 2, 3, 4],
   'mini-sajtovi-i-digitalni-alati': [2, 0, 1, 6, 3, 4, 5, 7, 8, 9],
   'student-connect-mini-festival': [0, 2, 1, 3],
   'kucica-na-podgorickom-pazaru': [2, 0, 1, 3],
